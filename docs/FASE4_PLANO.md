@@ -19,7 +19,7 @@ Cada etapa termina com algo jogável para você testar.
 |---|---|---|
 | 4.1 | **Mundo e viagem** | 3 mapas (vila, floresta, mina) ligados entre si; teleporte nas Pedras de Passagem; pontos de descanso; árvores ficam transparentes quando escondem o herói |
 | 4.2 | **Conversa e missões** (feito) | NPCs com diálogo em balões, "fala" em bipes, retratos; missão principal do Ato 1 e 2 missões secundárias; marcador de objetivo |
-| 4.3 | **Inimigos e chefe** | Orc, bandido arqueiro, esqueleto mineiro e Golem de pedra com modelos; Gorvan com 2 formas; drop de ouro e materiais |
+| 4.3 | **Inimigos e chefe** (feito) | Orc, bandido arqueiro, esqueleto mineiro e Golem de pedra com modelos; Gorvan com 2 formas; drop de ouro e materiais |
 | 4.4 | **Áudio** | Sistema de som com volumes; efeitos de combate, das 8 skills, passos, interface; música da vila, da floresta, da mina e do chefe |
 | 4.5 | **Prólogo e save** | Prólogo em ilustrações; tela inicial; salvar e continuar (save local, já criptografado) |
 
@@ -51,6 +51,42 @@ Inventário, equipamentos, ferreiro e loja ficam para a **Fase 5**, como no road
 | **Teto da fase** | | **~1.300** (de 2.354 disponíveis até 04/12) |
 
 Vou gerar **por etapa**, sempre te mostrando antes de seguir, como na Fase 3.
+
+## Etapa 4.3 — Inimigos e chefe (plano detalhado, 11/11/2026)
+
+### Como fica a luta
+- **Bandido arqueiro:** mantém distância (6 a 9 m) e atira flechas. Uma linha vermelha no chão avisa o tiro; dá para rolar para fugir.
+- **Orc:** golpe pesado de clava com aviso em círculo no chão (o mesmo de hoje, agora com modelo).
+- **Esqueleto mineiro:** só na mina; golpe de picareta para a frente, mais rápido que o do bandido.
+- **Golem de pedra:** guardião do portão no fundo da mina (mini-chefe, barra de vida no topo da tela). Soco duplo à frente e pancada no chão em volta dele. Antes de lutar, bate no peito (aviso).
+- **Gorvan, o Arauto da Colheita:** luta no **Celeiro do Tributo**, um salão novo atrás do portão da mina, cheio da comida roubada (feito com peças que já temos). A entrada fecha durante a luta.
+  - **Forma 1 (mordomo com foice):** golpe de foice em arco, giro com a foice, e chama 2 bandidos uma vez.
+  - **Metade da vida:** ele se transforma no **Espantalho Colossal** (pausa curta com clarão e troca de modelo).
+  - **Forma 2:** maior e mais lento; giro com foice gigante, três pancadas seguidas no chão onde o Lio está, e corvos de palha (projéteis) quando o Lio fica longe.
+- **Drops:** moedas de ouro saltam do inimigo e vêm até o Lio; materiais (couro de orc, osso velho, fragmento de pedra, palha dourada) somam num contador e aparecem num aviso. Eles serão usados no ferreiro da Fase 5.
+
+### Missão e final do Ato 1
+- **"O Arauto da Colheita"** (principal, começa depois de explorar a mina): derrotar o Golem → entrar no celeiro → derrotar o Gorvan → voltar para a Marta.
+- Depois da vitória: a vila muda (mais comida nas barracas, NPCs com falas novas) e uma conversa final com Bram e Bento em que o Lio decide partir ("Se tem mais cinco desses, alguém precisa dar um jeito").
+- O prólogo e a tela inicial continuam na 4.5.
+
+### O que gerar no Meshy
+| Asset | Passos | Créditos |
+|---|---|---|
+| Orc | imagem (3) + 3D (15) + esqueleto (5) + parado, golpe pesado, levar dano, morrer (12) + clava (15) | 50 |
+| Bandido arqueiro | nova textura do bandido (10) + esqueleto (5) + parado, tiro com arco, levar dano com arco, morrer (12) + arco (15) | 42 |
+| Esqueleto mineiro | imagem (3) + 3D (15) + esqueleto (5) + parado, golpe de machado, levar dano, morrer (12) + picareta (15) | 50 |
+| Golem de pedra | imagem (3) + 3D (15) + esqueleto (5) + parado, soco duplo, pancada no chão, bater no peito, levar dano, morrer (18) | 41 |
+| Gorvan, forma 1 | imagem (3) + 3D (15) + esqueleto (5) + parado, foice em arco, giro, golpe pesado, levar dano, bater no peito (18) + foice (15) | 56 |
+| Gorvan, forma 2 (Espantalho Colossal) | imagem (3) + 3D (15) + esqueleto (5) + parado, foice em arco, giro, pancada no chão, morrer (15); usa a mesma foice, maior | 38 |
+| **Total** | | **277** |
+
+Margem para refazer (~20%): ~55. Com isso a Fase 4 fica em ~1.250 dos ~1.300 previstos, sobrando ~50 para o prólogo (4.5).
+
+### Ordem
+1. Código primeiro (sem créditos): ataques variados por inimigo, arqueiro, chefe com fases, barra do chefe, drops, celeiro, missão e testes, com bonecos provisórios.
+2. Meshy na ordem: imagens dos 5 personagens → te mostro → modelos 3D, esqueletos, animações e armas.
+3. Fotos e o robô de testes lutando contra o Gorvan; você aprova e eu envio.
 
 ## Áudio: precisa de uma decisão sua
 O plano é usar a **ElevenLabs** (IA de efeitos e música, com conector para o Claude). Para vender o jogo, os sons precisam ser gerados num **plano pago** da ElevenLabs. Opções:

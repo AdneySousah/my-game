@@ -71,7 +71,7 @@ func objective_text(id: String) -> String:
 	var t: String = tr(str(step.get("text", "")))
 	match str(step.get("type", "")):
 		"kill":
-			return t % [int(Session.quests[id]["count"]), int(step.get("count", 1))]
+			return t % [int(Session.quests[id]["count"]), int(step.get("count", 1))] if t.contains("%d") else t
 		"collect":
 			return t % [int(Session.quests[id]["count"]), (step.get("points", []) as Array).size()] if t.contains("%d") else t
 	return t
@@ -98,6 +98,7 @@ func start(id: String) -> void:
 		return
 	Session.quests[id] = {"step": 0, "count": 0, "picked": [], "done": false}
 	quest_started.emit(id)
+	_skip_done_steps(id)
 	changed.emit()
 
 
@@ -242,7 +243,15 @@ func _advance(id: String) -> void:
 		_complete(id)
 	else:
 		quest_updated.emit(id)
+		_skip_done_steps(id)
 		changed.emit()
+
+
+## Steps already achieved (e.g. a boss beaten before the quest asked for it).
+func _skip_done_steps(id: String) -> void:
+	var step: Dictionary = current_step(id)
+	if step.has("skip_if_flag") and Session.has_flag(str(step["skip_if_flag"])):
+		_advance(id)
 
 
 func _complete(id: String) -> void:

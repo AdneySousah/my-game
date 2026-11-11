@@ -37,6 +37,13 @@
     { "points": [[0, 4], [-2, 16], [-6, 30]], "width": 2.6, "color": "#d1ad73" }
   ],
   "props": [
+    {"id": "prp_caixa", "pos": [-6.6, 10.6], "if_flag": "gorvan_defeated"},
+    {"id": "prp_caixa", "pos": [-3.4, 10.8], "if_flag": "gorvan_defeated"},
+    {"id": "prp_barril", "pos": [6.6, 11.2], "if_flag": "gorvan_defeated"},
+    {"id": "prp_barril", "pos": [3.4, 11], "if_flag": "gorvan_defeated"},
+    {"id": "prp_feno", "pos": [-8.6, 16], "if_flag": "gorvan_defeated"},
+    {"id": "prp_feno", "pos": [10.5, 14.2], "if_flag": "gorvan_defeated"},
+    {"id": "prp_carroca", "pos": [-11, 14], "rot": 30, "if_flag": "gorvan_defeated"},
     { "id": "env_casa_pequena", "pos": [-10, -7], "rot": 20},
     { "id": "env_casa_media", "pos": [10, -8], "rot": -20},
     { "id": "env_casa_pequena", "pos": [-15, 12], "rot": 75},

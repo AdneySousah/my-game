@@ -14,6 +14,10 @@
       "portrait": "ui_retrato_marta",
       "talk": [
         {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "marta_idle_fed"
+        },
+        {
           "if_flag": "bento_joined",
           "dialogue": "marta_idle_bento"
         },
@@ -33,6 +37,10 @@
       "voice": 0.72,
       "portrait": "ui_retrato_bram",
       "talk": [
+        {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "bram_idle_fed"
+        },
         {
           "dialogue": "bram_idle"
         }
@@ -70,6 +78,10 @@
       "portrait": "ui_retrato_celeste",
       "talk": [
         {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "celeste_idle_fed"
+        },
+        {
           "dialogue": "celeste_idle"
         }
       ],
@@ -85,6 +97,10 @@
       "portrait": "ui_retrato_tobias",
       "talk": [
         {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "tobias_idle_fed"
+        },
+        {
           "dialogue": "tobias_idle"
         }
       ],
@@ -99,6 +115,10 @@
       "voice": 1.5,
       "portrait": "ui_retrato_nina",
       "talk": [
+        {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "nina_idle_fed"
+        },
         {
           "if_flag": "nina_helped",
           "dialogue": "nina_idle_happy"
@@ -120,6 +140,10 @@
       "portrait": "ui_retrato_juca",
       "talk": [
         {
+          "if_flag": "gorvan_defeated",
+          "dialogue": "juca_idle_fed"
+        },
+        {
           "dialogue": "juca_idle"
         }
       ],
@@ -128,6 +152,12 @@
         "BARK_JUCA_2"
       ],
       "model": "npc_juca"
+    },
+    "gorvan": {
+      "name": "ENEMY_GORVAN",
+      "color": "#2f6b3a",
+      "voice": 0.95,
+      "portrait": "ui_retrato_gorvan"
     }
   }
 }

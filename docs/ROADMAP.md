@@ -25,3 +25,4 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] 4.1c Muralhas e portais + 4.2a Interface com a cara do jogo (aprovado, 210 créditos)
   - [x] 4.2b HUD com retrato: vida e XP em anel em volta do retrato do Lio, fôlego no rodapé, alerta "!" no retrato abrindo o menu do personagem (aprovado, 9 créditos)
   - [x] 4.2 Conversa e missões: código pronto (diálogo com retrato e bipes, balões, marcadores "!"/"?", rastreador, diário, estrela no minimapa, 4 missões principais e 2 secundárias, 7 NPCs do Meshy com retrato, parado e falando; 218 créditos), aprovado
+  - [x] 4.3 Inimigos e chefe: arqueiro, orc, esqueleto mineiro, Golem guardião, Gorvan com 2 formas no Celeiro do Tributo, drops, final do Ato 1 (Meshy: 310 créditos), aprovado

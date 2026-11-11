@@ -1,5 +1,5 @@
 {
-  "_comment": "Missões. type: main (principal) ou side (secundária). giver = NPC que oferece (offer = diálogo da oferta); auto = começa sozinha quando liberada. requires = missões que precisam estar concluídas; min_level = nível mínimo. Passos: talk {npc, dialogue}, kill {enemy, count, map, pos}, collect {map, item, points [[x,z]...]}, reach {map, pos, radius}. 'text' = chave do objetivo (%d/%d para contagem). 'set_flag' no passo ou na missão marca a história; 'end_note' = texto grande ao concluir. Recompensas em XP e ouro.",
+  "_comment": "Missões. type: main (principal) ou side (secundária). giver = NPC que oferece (offer = diálogo da oferta); auto = começa sozinha quando liberada. requires = missões que precisam estar concluídas; min_level = nível mínimo. Passos: talk {npc, dialogue}, kill {enemy, count, map, pos}, collect {map, item, points [[x,z]...]}, reach {map, pos, radius}. 'text' = chave do objetivo (%d/%d para contagem). 'set_flag' no passo ou na missão marca a história; 'end_note' = texto grande ao concluir. 'skip_if_flag' no passo = já cumprido se a marca existe (ex.: chefe vencido antes). Recompensas em XP e ouro.",
   "quests": [
     {
       "id": "main_01", "type": "main", "name": "QUEST_MAIN_01", "auto": true,
@@ -37,8 +37,28 @@
         { "type": "reach", "map": "mina", "pos": [0, 30], "radius": 6, "text": "OBJ_REACH_MINE" },
         { "type": "reach", "map": "mina", "pos": [0, -34], "radius": 6, "text": "OBJ_MINE_DEEP" }
       ],
-      "set_flag": "mine_explored", "end_note": "QUEST_MORE_SOON",
+      "set_flag": "mine_explored",
       "rewards": { "xp": 520, "gold": 80 }
+    },
+    {
+      "id": "main_05", "type": "main", "name": "QUEST_MAIN_05", "auto": true,
+      "requires": ["main_04"],
+      "steps": [
+        { "type": "kill", "enemy": "golem", "count": 1, "map": "mina", "pos": [0, -35], "text": "OBJ_KILL_GOLEM", "skip_if_flag": "golem_defeated" },
+        { "type": "kill", "enemy": "gorvan", "count": 1, "map": "celeiro", "pos": [0, -6], "text": "OBJ_KILL_GORVAN", "skip_if_flag": "gorvan_defeated" },
+        { "type": "talk", "npc": "marta", "dialogue": "main_05_marta", "text": "OBJ_RETURN_VILLAGE" }
+      ],
+      "rewards": { "xp": 1500, "gold": 300 }
+    },
+    {
+      "id": "main_06", "type": "main", "name": "QUEST_MAIN_06", "auto": true,
+      "requires": ["main_05"],
+      "steps": [
+        { "type": "talk", "npc": "bram", "dialogue": "act1_end_bram", "text": "OBJ_TALK_BRAM_END" },
+        { "type": "talk", "npc": "bento", "dialogue": "act1_end_bento", "text": "OBJ_TALK_BENTO_END" }
+      ],
+      "set_flag": "act1_done", "end_note": "QUEST_MORE_SOON",
+      "rewards": { "xp": 300, "gold": 100 }
     },
     {
       "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",

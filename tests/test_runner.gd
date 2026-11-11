@@ -18,6 +18,7 @@ func _ready() -> void:
 	await _bot_test()
 	await _world_test()
 	await _quest_test()
+	await _boss_test()
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
 	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
 	get_tree().quit(1 if _failures > 0 else 0)
@@ -436,6 +437,117 @@ func _quest_test() -> void:
 	check(q.is_done("main_04") and Session.has_flag("mine_explored"), "exploring the mine depths ends the Act 1 quests for now")
 	main.queue_free()
 	await _frames(2)
+
+
+## Archer, mine gate, golem, Gorvan's two forms, loot and the end of Act 1 (stage 4.3).
+func _boss_test() -> void:
+	Session.reset()
+	Main.start_map = "arena"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var q: QuestLog = main.quests
+	while main.player.stats.level < 12:
+		main.player.stats.add_xp(main.player.stats.xp_needed() - main.player.stats.xp)
+
+	# Archer keeps its distance and shoots arrows.
+	var archer: Enemy = main.spawn_enemy("arqueiro", main.player.global_position + Vector3(7, 0, 0))
+	var saw_arrow: bool = false
+	for i: int in 240:
+		await get_tree().physics_frame
+		if not get_tree().get_nodes_in_group("enemies").is_empty() and _has_projectile(main.map):
+			saw_arrow = true
+			break
+	check(saw_arrow, "bandit archer shoots arrows")
+	check(archer.global_position.distance_to(main.player.global_position) > 3.0, "archer keeps its distance")
+	archer.take_damage(100000, false)
+
+	# Mine: the gate to the granary stays shut until the golem falls.
+	for id: String in ["main_01", "main_02", "main_03", "main_04"]:
+		Session.quests[id] = {"step": 99, "count": 0, "picked": [], "done": true}
+	Session.set_flag("bento_joined")
+	Session.set_flag("mine_explored")
+	q.start_auto_quests()
+	check(q.is_active("main_05"), "the Herald quest starts after exploring the mine")
+	main.load_map("mina", "from_floresta")
+	await _wait_map(main, "mina")
+	await _frames(3)
+	check(main.map.find_children("*", "MapExit", true, false).size() == 1, "granary gate is locked before the golem")
+	var golem: Enemy = _find_boss("golem")
+	check(golem != null and golem.is_boss, "the stone golem guards the mine depths")
+	if golem:
+		main.player.global_position = golem.global_position + Vector3(0, 0, 6)
+		await _frames(10)
+		check(main.hud.boss_bar_visible(), "boss bar shows when the golem fights")
+		golem.take_damage(1000000, false)
+		await _frames(5)
+		check(Session.has_flag("golem_defeated"), "golem defeat is remembered")
+		check(int(Session.materials.get("MAT_FRAGMENTO_PEDRA", 0)) == 3, "golem drops 3 stone shards")
+		check(main.map.find_children("*", "MapExit", true, false).size() == 2, "the granary gate opens")
+		check(str(q.current_step("main_05").get("enemy", "")) == "gorvan", "quest moves on to Gorvan")
+
+	# Granary: Gorvan locks the arena, changes form at half health, and falls.
+	main.load_map("celeiro", "from_mina")
+	await _wait_map(main, "celeiro")
+	await _frames(3)
+	var gorvan: Enemy = _find_boss("gorvan")
+	check(gorvan != null, "Gorvan waits in the granary")
+	if gorvan:
+		main.player.global_position = gorvan.global_position + Vector3(0, 0, 6)
+		await _frames(5)
+		check(main.hud.is_in_dialogue(), "Gorvan talks when the fight starts")
+		await _finish_dialogue(main)
+		check(main.map.arena_closed(), "the arena closes during the fight")
+		# Falling in the arena resets the boss and reopens the entrance.
+		main.player.receive_attack(1_000_000.0)
+		for i: int in 400:
+			await get_tree().physics_frame
+			if not main.player.is_dead() and i > 10:
+				break
+		await _frames(5)
+		gorvan = _find_boss("gorvan")
+		check(gorvan != null and is_equal_approx(gorvan.hp, gorvan.max_hp) and not main.map.arena_closed(), "dying resets the boss and opens the arena")
+		main.player.global_position = gorvan.global_position + Vector3(0, 0, 6)
+		await _frames(5)
+		check(not main.hud.is_in_dialogue() and main.map.arena_closed(), "second try skips the opening talk")
+		gorvan.take_damage(roundi(gorvan.max_hp * 0.55), false)
+		check(gorvan.invulnerable, "Gorvan is untouchable while transforming")
+		for i: int in 160:
+			await get_tree().physics_frame
+		await _finish_dialogue(main)
+		check(gorvan.enemy_id == "espantalho" and gorvan.base_id == "gorvan", "Gorvan becomes the Colossal Scarecrow")
+		gorvan.take_damage(1000000, false)
+		await _frames(5)
+		check(Session.has_flag("gorvan_defeated") and not main.map.arena_closed(), "victory opens the arena")
+		check(str(q.current_step("main_05").get("npc", "")) == "marta", "after the boss, back to Marta")
+
+	# Village after the victory: more food, new lines, then the end of Act 1.
+	main.load_map("pradoluz", "start")
+	await _wait_map(main, "pradoluz")
+	await _frames(3)
+	await _talk(main, "marta")
+	check(q.is_done("main_05") and q.is_active("main_06"), "Herald quest done; farewell quest starts")
+	await _talk(main, "bram")
+	await _talk(main, "bento")
+	check(q.is_done("main_06") and Session.has_flag("act1_done"), "Act 1 ends")
+	check(str(q.talk_plan("marta").get("dialogue", "")) == "marta_idle_fed", "Marta has new lines after the victory")
+	main.queue_free()
+	await _frames(2)
+
+
+func _find_boss(id: String) -> Enemy:
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		var e := n as Enemy
+		if e and e.base_id == id:
+			return e
+	return null
+
+
+func _has_projectile(root: Node) -> bool:
+	for n: Node in root.get_children():
+		if n is Projectile:
+			return true
+	return false
 
 
 ## Puts the hero next to an NPC, talks and clicks through the dialogue.

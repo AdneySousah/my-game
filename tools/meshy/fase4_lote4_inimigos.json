@@ -1,0 +1,105 @@
+{
+  "_comment": "Fase 4.3: inimigos e chefe. Imagem conceito (nano-banana, A-pose) -> image-to-3d meshy-t2.5 + meshy-n1 -> rig -> animações; armas por text-to-3d meshy-t2. Arqueiro = retexture do bandido.",
+  "enm_orc": {
+    "image": "01a1cb4b-e552-72ce-9de3-b30cea58b4ab",
+    "model": "01a1cb6b-f0b3-7075-9cb7-7cc95e15baa5",
+    "rig": "01a1cb6d-659c-75e6-aef9-b1392365c6fc",
+    "anims": "01a1cb6e-0806-733b-825e-73539401cca6",
+    "actions": [
+      0,
+      128,
+      178,
+      8
+    ]
+  },
+  "enm_esqueleto": {
+    "image": "01a1cb4b-e8b0-7777-8bfc-019a924f415e",
+    "model": "01a1cb6b-f4c4-711e-8470-a25ec585e665",
+    "rig": "01a1cb6d-736a-7166-ba4a-5090ee2fb852",
+    "anims": "01a1cb6e-099f-70c1-bb47-0cb174056e0c",
+    "actions": [
+      0,
+      237,
+      178,
+      8
+    ]
+  },
+  "enm_golem": {
+    "image": "01a1cb4b-ebe9-765e-8201-3adaa1c39f44",
+    "model": "01a1cb6b-f8d3-7536-a42d-1375c706df7a",
+    "rig": "01a1cb6d-803d-773f-a246-d83115bf3d4b",
+    "anims": "01a1cb6e-0b1e-7430-a846-c71a5f034475",
+    "actions": [
+      0,
+      214,
+      127,
+      88,
+      178,
+      8
+    ]
+  },
+  "boss_gorvan": {
+    "image": "01a1cb4b-ef32-700d-a181-22add3d733db",
+    "model": "01a1cb6b-fc8f-74fe-b85a-b466f535d9b7",
+    "rig": "01a1cb6d-8d7f-7777-9c97-37476bba0dd8",
+    "anims": "01a1cb6e-0cbf-76eb-b44f-00836473593d",
+    "actions": [
+      0,
+      99,
+      238,
+      128,
+      178,
+      88
+    ]
+  },
+  "boss_espantalho": {
+    "image": "01a1cb4b-f2e9-7665-b9c8-bd56276b960a",
+    "model": "01a1cb6c-00cc-737c-ae0d-415b8a17772c",
+    "rig": "01a1cb6d-9aff-76e3-8745-af43e6073cee",
+    "anims": "01a1cb6e-0ed8-77f0-b1a1-c39c99e76d4f",
+    "actions": [
+      0,
+      99,
+      238,
+      127,
+      8
+    ]
+  },
+  "enm_arqueiro": {
+    "retexture": "01a1cb6c-0510-7588-b823-cd237cb22158",
+    "from": "enm_bandido 01a1cadb-771c-732f-8327-3adf9815a905",
+    "rig": "01a1cb6d-a9e7-729f-8643-ea09fd286789",
+    "anims": "01a1cb6e-1093-746a-a469-7910cf687035",
+    "actions": [
+      0,
+      224,
+      103,
+      150,
+      8
+    ]
+  },
+  "wpn_clava_orc": {
+    "preview": "01a1cb72-f0bc-726d-a3ab-0f68ce73ac7c",
+    "refine": "01a1cb74-668a-739f-95a3-64960b5e3d67",
+    "rejected": {
+      "preview": "01a1cb6c-0d4f-75ee-83ae-7c596b54cf2a",
+      "refine": "01a1cb6c-8b64-71db-b7e0-0ff31726cae6"
+    }
+  },
+  "wpn_picareta": {
+    "preview": "01a1cb6c-172d-75ad-a400-56c70bda534b",
+    "refine": "01a1cb6c-9493-7060-9748-96023a54b820"
+  },
+  "wpn_arco": {
+    "preview": "01a1cb72-fc06-714d-958d-4a73360d44e4",
+    "refine": "01a1cb74-7385-7205-9c65-f7325ee00898",
+    "rejected": {
+      "preview": "01a1cb6c-2026-7276-8eea-e0b89686126a",
+      "refine": "01a1cb6c-9f4e-707f-8035-7631b3b8d20c"
+    }
+  },
+  "wpn_foice_gorvan": {
+    "preview": "01a1cb6c-296d-75da-88ad-8c28140b6ec9",
+    "refine": "01a1cb6c-ac43-7692-8757-75e6a83be2fe"
+  }
+}

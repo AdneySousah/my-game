@@ -96,6 +96,8 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	add_child(map)
 	move_child(map, 0)
 	map.enemy_killed.connect(_on_enemy_killed)
+	map.boss_spawned.connect(hud.track_boss)
+	map.boss_spawned.connect(_on_boss_spawned)
 	map.exit_used.connect(func(to: String, sp: String) -> void: load_map(to, sp))
 	Session.current_map = map_id
 	_refresh_quest_world()
@@ -194,9 +196,10 @@ func xp_for_kill(e: Enemy) -> int:
 
 func _on_enemy_killed(e: Enemy) -> void:
 	kills += 1
-	quests.on_enemy_killed(e.enemy_id, Session.current_map)
+	quests.on_enemy_killed(e.base_id, Session.current_map)
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(e.gold_reward)
+	_drop_loot(e)
 
 
 func _on_rest_reached(point: RestPoint) -> void:
@@ -209,6 +212,8 @@ func _on_rest_reached(point: RestPoint) -> void:
 func _on_player_died(gold_lost: int, xp_lost: int) -> void:
 	hud.toast(tr("HUD_YOU_DIED") % [gold_lost, xp_lost], 2.5)
 	await get_tree().create_timer(RESPAWN_DELAY, false).timeout
+	if is_instance_valid(map):
+		map.reset_bosses()
 	var target_map: String = Session.current_map
 	var spawn: String = "start"
 	if not Session.last_rest.is_empty():
@@ -255,6 +260,45 @@ func _update_quest_contacts() -> void:
 func _refresh_quest_world() -> void:
 	if map == null or quests == null:
 		return
+	map.refresh_locks()
 	for npc: Npc in map.npcs.values():
 		npc.set_marker(quests.npc_marker(npc.npc_id))
 	map.sync_pickups(quests.pickups_in(map.map_id))
+
+
+## Coins fly from the enemy into the hero; materials roll their chance (data "drops").
+func _drop_loot(e: Enemy) -> void:
+	if e.gold_reward > 0 and is_instance_valid(map):
+		var burst := CoinBurst.new()
+		burst.target = player
+		burst.count = clampi(e.gold_reward / 3, 2, 12)
+		map.add_child(burst)
+		burst.global_position = e.global_position
+	var base: Dictionary = Data.enemies.get(e.base_id, {})
+	for d: Dictionary in base.get("drops", []):
+		if randf() <= float(d.get("chance", 1.0)):
+			var n: int = int(d.get("count", 1))
+			Session.add_material(str(d["item"]), n)
+			hud.toast(tr("HUD_MATERIAL_GOT") % [n, tr(str(d["item"]))], 1.4)
+
+
+## Boss lines: a short talk when the fight starts and when it changes form.
+func _on_boss_spawned(e: Enemy) -> void:
+	var intro: String = str(e.get_meta("intro", ""))
+	# The opening talk plays once; retries after dying go straight to the fight.
+	if intro != "" and not Session.has_flag("seen_" + intro):
+		e.engaged.connect(func(_b: Enemy) -> void:
+			Session.set_flag("seen_" + intro)
+			_boss_line(intro), CONNECT_ONE_SHOT)
+	var line: String = str(e.get_meta("transform_line", ""))
+	if line != "":
+		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(line), CONNECT_ONE_SHOT)
+
+
+func _boss_line(dialogue_id: String) -> void:
+	var dlg: Dictionary = Data.dialogues.get(dialogue_id, {})
+	if dlg.is_empty() or _talking or player.is_dead():
+		return
+	_talking = true
+	await hud.play_dialogue(dlg.get("lines", []))
+	_talking = false

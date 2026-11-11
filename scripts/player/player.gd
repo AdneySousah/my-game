@@ -188,6 +188,11 @@ func lock(seconds: float) -> void:
 	_queued_attack = false
 
 
+## Rolling or respawning: attacks pass through.
+func is_invulnerable() -> bool:
+	return _invulnerable > 0.0
+
+
 func set_invulnerable(seconds: float) -> void:
 	_invulnerable = maxf(_invulnerable, seconds)
 

@@ -9,6 +9,7 @@ signal choose(what: String)
 var _title: Label
 var _attr_btn: Button
 var _skills_btn: Button
+var _materials: Label
 
 
 func _ready() -> void:
@@ -26,6 +27,12 @@ func _ready() -> void:
 	_skills_btn = _item(box, "skills")
 	_item(box, "quests").text = tr("HUD_QUESTS")
 	_item(box, "map").text = tr("HUD_MAP")
+	_materials = Label.new()
+	_materials.add_theme_font_size_override("font_size", 17)
+	_materials.add_theme_color_override("font_color", Color("#e8d6a8"))
+	_materials.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_materials.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	box.add_child(_materials)
 	var close := Button.new()
 	close.text = tr("PANEL_CLOSE")
 	close.focus_mode = Control.FOCUS_NONE
@@ -41,6 +48,11 @@ func open_with(level: int, points: int, new_skills: bool) -> void:
 	_title.text = "Lio · " + tr("HUD_LEVEL") % level
 	_attr_btn.text = tr("HUD_ATTRIBUTES") + ("   (+%d)" % points if points > 0 else "")
 	_skills_btn.text = tr("HUD_SKILLS") + ("   (!)" if new_skills else "")
+	var parts: PackedStringArray = []
+	for key: String in Session.materials:
+		parts.append("%s ×%d" % [tr(key), int(Session.materials[key])])
+	_materials.text = (tr("HUD_MATERIALS") + ": " + ", ".join(parts)) if not parts.is_empty() else ""
+	_materials.visible = not parts.is_empty()
 	show()
 	reset_size()
 	position = ((get_viewport_rect().size - size) * 0.5).floor()

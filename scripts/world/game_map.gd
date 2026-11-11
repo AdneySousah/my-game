@@ -5,6 +5,8 @@ extends Node3D
 
 signal enemy_killed(enemy: Enemy)
 signal exit_used(to_map: String, to_spawn: String)
+## A boss appeared (the HUD shows its bar).
+signal boss_spawned(boss: Enemy)
 
 var map_id: String = ""
 var data: Dictionary = {}
@@ -12,6 +14,9 @@ var player: Player
 var rest_points: Dictionary = {}
 ## npc_id -> Npc placed in this map.
 var npcs: Dictionary = {}
+## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
+var _locked_exits: Dictionary = {}
+var _arena_gate: Node3D
 
 static var _data_cache: Dictionary = {}
 
@@ -99,12 +104,15 @@ func _ready() -> void:
 	_build_scatter()
 	_build_exits()
 	_build_enemy_zones()
+	_build_bosses.call_deferred()
 
 
 ## Spawn position and facing (degrees) for a named spawn point.
 func spawn_transform(spawn_id: String) -> Array:
 	var spawns: Dictionary = data.get("spawns", {})
-	var s: Array = spawns.get(spawn_id, spawns.get("start", [0, 0, 0]))
+	# Unknown spawn: "start", else the map's first spawn (never the middle of a boss room).
+	var fallback: Array = spawns.get("start", spawns.values()[0] if not spawns.is_empty() else [0, 0, 0])
+	var s: Array = spawns.get(spawn_id, fallback)
 	return [Vector3(float(s[0]), 0, float(s[1])), float(s[2]) if s.size() > 2 else 0.0]
 
 
@@ -357,7 +365,7 @@ func _build_lines() -> void:
 
 
 ## Blocks the hero along a segment (used behind rows of rocks so no gap lets him out).
-func _invisible_wall(a: Vector3, b: Vector3, thickness: float) -> void:
+func _invisible_wall(a: Vector3, b: Vector3, thickness: float) -> StaticBody3D:
 	var body := StaticBody3D.new()
 	body.collision_layer = Game.LAYER_WORLD
 	var shape := CollisionShape3D.new()
@@ -369,6 +377,7 @@ func _invisible_wall(a: Vector3, b: Vector3, thickness: float) -> void:
 	body.position = (a + b) * 0.5
 	body.rotation.y = atan2(b.x - a.x, b.z - a.z)
 	add_child(body)
+	return body
 
 
 ## Tiles wall pieces along segments: {"id": wall prop, "from": [x,z], "to": [x,z]}.
@@ -392,6 +401,8 @@ func _build_walls() -> void:
 
 func _build_props() -> void:
 	for item: Dictionary in data.get("props", []):
+		if item.has("if_flag") and not Session.has_flag(str(item["if_flag"])):
+			continue
 		var pos: Vector3 = _v(item["pos"])
 		PropFactory.spawn(self, str(item["id"]), pos, float(item.get("rot", 0)), float(item.get("scale", 1.0)))
 		_clear_spots.append(pos)
@@ -445,21 +456,44 @@ func _dist_to_segment(p: Vector3, a: Vector3, b: Vector3) -> float:
 
 
 func _build_exits() -> void:
-	for e: Dictionary in data.get("exits", []):
-		var ex := MapExit.new()
-		ex.to_map = str(e["to"])
-		ex.to_spawn = str(e.get("spawn", "start"))
-		var sz: Array = e.get("size", [6, 2])
-		ex.size = Vector2(float(sz[0]), float(sz[1]))
-		ex.label_key = str(e.get("label", ""))
-		add_child(ex)
-		ex.position = _v(e["pos"])
-		ex.rotation_degrees.y = float(e.get("rot", 0))
-		# Optional model at the exit: a magic portal or a city gate.
+	var exits: Array = data.get("exits", [])
+	for i: int in exits.size():
+		var e: Dictionary = exits[i]
+		# Optional model at the exit: a magic portal, a city gate or a mine gate.
 		if e.has("model"):
 			var model_pos: Array = e.get("model_pos", e["pos"])
 			PropFactory.spawn(self, str(e["model"]), _v(model_pos), float(e.get("model_rot", 0)))
-		ex.used.connect(func(to: String, sp: String) -> void: exit_used.emit(to, sp))
+		if e.has("if_flag") and not Session.has_flag(str(e["if_flag"])):
+			var sz: Array = e.get("size", [6, 2])
+			var rot: float = deg_to_rad(float(e.get("rot", 0)))
+			var half := Vector3(cos(rot), 0, -sin(rot)) * float(sz[0]) * 0.5
+			_locked_exits[i] = _invisible_wall(_v(e["pos"]) - half, _v(e["pos"]) + half, 1.5)
+			continue
+		_open_exit(e)
+
+
+## Opens exits whose story flag is now set (e.g. the mine gate after the golem).
+func refresh_locks() -> void:
+	var exits: Array = data.get("exits", [])
+	for i: int in _locked_exits.keys():
+		var e: Dictionary = exits[i]
+		if Session.has_flag(str(e["if_flag"])):
+			(_locked_exits[i] as Node).queue_free()
+			_locked_exits.erase(i)
+			_open_exit(e)
+
+
+func _open_exit(e: Dictionary) -> void:
+	var ex := MapExit.new()
+	ex.to_map = str(e["to"])
+	ex.to_spawn = str(e.get("spawn", "start"))
+	var sz: Array = e.get("size", [6, 2])
+	ex.size = Vector2(float(sz[0]), float(sz[1]))
+	ex.label_key = str(e.get("label", ""))
+	add_child(ex)
+	ex.position = _v(e["pos"])
+	ex.rotation_degrees.y = float(e.get("rot", 0))
+	ex.used.connect(func(to: String, sp: String) -> void: exit_used.emit(to, sp))
 
 
 func _build_enemy_zones() -> void:
@@ -477,3 +511,72 @@ func _build_enemy_zones() -> void:
 		zone.enemy_spawned.connect(func(e: Enemy) -> void:
 			e.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead)))
 		add_child(zone)
+
+
+## Bosses and guardians: {"id", "pos", "level", "yaw", "unless_flag", "flag_on_death",
+## "intro" (dialogue when the fight starts), "transform_line" (dialogue when it changes form)}.
+## With "arena": {"gate": [[x,z], [x,z]]} the entrance closes while the boss fights.
+func _build_bosses() -> void:
+	for b: Dictionary in data.get("bosses", []):
+		if b.has("unless_flag") and Session.has_flag(str(b["unless_flag"])):
+			continue
+		var e := Enemy.new()
+		e.setup(str(b["id"]), int(b.get("level", 1)), player)
+		e.position = _v(b["pos"])
+		e.rotation_degrees.y = float(b.get("yaw", 0))
+		e.set_meta("intro", str(b.get("intro", "")))
+		e.set_meta("transform_line", str(b.get("transform_line", "")))
+		add_child(e)
+		var flag: String = str(b.get("flag_on_death", ""))
+		e.died.connect(func(dead: Enemy) -> void:
+			if flag != "":
+				Session.set_flag(flag)
+			_open_arena()
+			enemy_killed.emit(dead))
+		e.summoned.connect(func(add: Enemy) -> void:
+			add.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead)))
+		if data.has("arena"):
+			e.engaged.connect(func(_e: Enemy) -> void: _close_arena())
+		boss_spawned.emit(e)
+
+
+## The hero fell: bosses go back to full health and their first form, the arena opens.
+func reset_bosses() -> void:
+	var any: bool = false
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if is_ancestor_of(n):
+			n.remove_from_group("bosses")
+			n.queue_free()
+			any = true
+	_open_arena()
+	if any:
+		_build_bosses.call_deferred()
+
+
+func _close_arena() -> void:
+	if is_instance_valid(_arena_gate):
+		return
+	var g: Array = (data["arena"] as Dictionary).get("gate", [])
+	var a: Vector3 = _v(g[0])
+	var b: Vector3 = _v(g[1])
+	_arena_gate = _invisible_wall(a, b, 1.2)
+	# Visible barrier: a row of glowing straw-gold stakes.
+	var n: int = maxi(2, int(a.distance_to(b) / 0.9))
+	for i: int in n + 1:
+		var stake := MeshInstance3D.new()
+		var box := BoxMesh.new()
+		box.size = Vector3(0.25, 2.2, 0.25)
+		stake.mesh = box
+		stake.material_override = ProtoVisuals.material(Color("#ffb347"), true)
+		stake.position = _arena_gate.to_local(a.lerp(b, float(i) / n)) + Vector3(0, 1.1, 0)
+		_arena_gate.add_child(stake)
+
+
+func _open_arena() -> void:
+	if is_instance_valid(_arena_gate):
+		_arena_gate.queue_free()
+	_arena_gate = null
+
+
+func arena_closed() -> bool:
+	return is_instance_valid(_arena_gate)

@@ -1944,6 +1944,336 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "enm_orc",
+      "category": "enm",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/enm_orc/enm_orc.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb4b-e552-72ce-9de3-b30cea58b4ab",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb6b-f0b3-7075-9cb7-7cc95e15baa5",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-659c-75e6-aef9-b1392365c6fc",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 12,
+          "task_id": "01a1cb6e-0806-733b-825e-73539401cca6",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_esqueleto",
+      "category": "enm",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/enm_esqueleto/enm_esqueleto.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb4b-e8b0-7777-8bfc-019a924f415e",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb6b-f4c4-711e-8470-a25ec585e665",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-736a-7166-ba4a-5090ee2fb852",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 12,
+          "task_id": "01a1cb6e-099f-70c1-bb47-0cb174056e0c",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_golem",
+      "category": "enm",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/enm_golem/enm_golem.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb4b-ebe9-765e-8201-3adaa1c39f44",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb6b-f8d3-7536-a42d-1375c706df7a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-803d-773f-a246-d83115bf3d4b",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 18,
+          "task_id": "01a1cb6e-0b1e-7430-a846-c71a5f034475",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_gorvan",
+      "category": "boss",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/boss_gorvan/boss_gorvan.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb4b-ef32-700d-a181-22add3d733db",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb6b-fc8f-74fe-b85a-b466f535d9b7",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-8d7f-7777-9c97-37476bba0dd8",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 18,
+          "task_id": "01a1cb6e-0cbf-76eb-b44f-00836473593d",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_espantalho",
+      "category": "boss",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/boss_espantalho/boss_espantalho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb4b-f2e9-7665-b9c8-bd56276b960a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb6c-00cc-737c-ae0d-415b8a17772c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-9aff-76e3-8745-af43e6073cee",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 15,
+          "task_id": "01a1cb6e-0ed8-77f0-b1a1-c39c99e76d4f",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_arqueiro",
+      "category": "enm",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Bandido arqueiro: nova textura do bandido (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/enemies/enm_arqueiro/enm_arqueiro.glb",
+      "tasks": [
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1cb6c-0510-7588-b823-cd237cb22158",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb6d-a9e7-729f-8643-ea09fd286789",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 15,
+          "task_id": "01a1cb6e-1093-746a-a469-7910cf687035",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_clava_orc",
+      "category": "wpn",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Arma da Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/weapons/wpn_clava_orc/wpn_clava_orc.glb",
+      "tasks": [
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb6c-0d4f-75ee-83ae-7c596b54cf2a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb6c-8b64-71db-b7e0-0ff31726cae6",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb72-f0bc-726d-a3ab-0f68ce73ac7c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb74-668a-739f-95a3-64960b5e3d67",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_picareta",
+      "category": "wpn",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Arma da Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/weapons/wpn_picareta/wpn_picareta.glb",
+      "tasks": [
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb6c-172d-75ad-a400-56c70bda534b",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb6c-9493-7060-9748-96023a54b820",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_arco",
+      "category": "wpn",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Arma da Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/weapons/wpn_arco/wpn_arco.glb",
+      "tasks": [
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb6c-2026-7276-8eea-e0b89686126a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb6c-9f4e-707f-8035-7631b3b8d20c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb72-fc06-714d-958d-4a73360d44e4",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb74-7385-7205-9c65-f7325ee00898",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_foice_gorvan",
+      "category": "wpn",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Arma da Fase 4.3 (tools/meshy/fase4_lote4_inimigos.json)",
+      "file": "assets/weapons/wpn_foice_gorvan/wpn_foice_gorvan.glb",
+      "tasks": [
+        {
+          "type": "text-to-3d",
+          "credits": 5,
+          "task_id": "01a1cb6c-296d-75da-88ad-8c28140b6ec9",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "text-to-3d",
+          "credits": 10,
+          "task_id": "01a1cb6c-ac43-7692-8757-75e6a83be2fe",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
     }
   ]
 }

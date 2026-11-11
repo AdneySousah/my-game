@@ -31,6 +31,7 @@ const PORTRAITS: Dictionary = {
 	"ui_retrato_tobias": ["res://assets/_inbox/npcs/npc_tobias.png", Rect2i(198, 100, 500, 500)],
 	"ui_retrato_nina": ["res://assets/_inbox/npcs/npc_nina.png", Rect2i(198, 100, 500, 500)],
 	"ui_retrato_juca": ["res://assets/_inbox/npcs/npc_juca.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_gorvan": ["res://assets/_inbox/inimigos/boss_gorvan.png", Rect2i(186, 180, 500, 500)],
 }
 const PORTRAIT_SIZE: int = 192
 

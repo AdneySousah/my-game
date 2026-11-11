@@ -102,3 +102,11 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Missão seguida aparece embaixo do retrato; estrela laranja no minimapa e no mapa completo (ou seta para a saída certa, quando o objetivo está em outro mapa). Diário em Missões (tecla L ou menu do retrato).
 - Tipos de passo: falar, derrotar, coletar (itens que brilham no chão) e chegar a um lugar. Recompensa em XP e ouro (itens entram na Fase 5).
 - Ato 1 até a mina: 4 missões principais (Marta → Bram → bandidos → Bento na floresta → mina) e 2 secundárias (Nina e o trigo escondido; o ferro do Tobias). A luta com o Gorvan entra na 4.3.
+
+## Inimigos e chefe do Ato 1 (11/11/2026, etapa 4.3)
+- Cada inimigo tem uma lista de ataques nos dados, todos com aviso vermelho no chão: círculo à frente, área em volta, onde o herói está, linha, sequência de pancadas, flecha/corvo (dá para rolar através) e chamar ajuda.
+- Arqueiro mantém distância; esqueleto mineiro só na mina; Golem de pedra guarda a passagem para o Celeiro do Tributo.
+- Gorvan: fala ao começar a luta (uma vez só), a entrada fecha, chama 2 bandidos abaixo de 80% de vida e vira o Espantalho Colossal na metade. Se o herói morre, o chefe volta inteiro e a arena reabre.
+- Equilíbrio pensado para o nível 12 sem poções (robô de teste vence em ~45 s a 2 min; no nível 11 perde).
+- Drops: moedas que voam até o herói e materiais (couro de orc, osso velho, fragmento de pedra, palha dourada) guardados para o ferreiro da Fase 5.
+- Depois do Gorvan: a vila ganha comida (peças com if_flag), falas novas, e a despedida com Bram e Bento fecha o Ato 1.

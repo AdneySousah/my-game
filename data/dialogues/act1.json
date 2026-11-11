@@ -209,6 +209,90 @@
         ]
       ]
     },
+    "gorvan_intro": {
+      "lines": [
+        [
+          "gorvan",
+          "DLG_GORVAN_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_GORVAN_INTRO_2"
+        ],
+        [
+          "gorvan",
+          "DLG_GORVAN_INTRO_3"
+        ]
+      ]
+    },
+    "gorvan_transform": {
+      "lines": [
+        [
+          "gorvan",
+          "DLG_GORVAN_TRANSFORM_1"
+        ],
+        [
+          "lio",
+          "DLG_GORVAN_TRANSFORM_2"
+        ]
+      ]
+    },
+    "main_05_marta": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MAIN_05_MARTA_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_05_MARTA_2"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_05_MARTA_3"
+        ]
+      ]
+    },
+    "act1_end_bram": {
+      "lines": [
+        [
+          "bram",
+          "DLG_ACT1_END_BRAM_1"
+        ],
+        [
+          "lio",
+          "DLG_ACT1_END_BRAM_2"
+        ],
+        [
+          "bram",
+          "DLG_ACT1_END_BRAM_3"
+        ],
+        [
+          "lio",
+          "DLG_ACT1_END_BRAM_4"
+        ]
+      ]
+    },
+    "act1_end_bento": {
+      "lines": [
+        [
+          "bento",
+          "DLG_ACT1_END_BENTO_1"
+        ],
+        [
+          "lio",
+          "DLG_ACT1_END_BENTO_2"
+        ],
+        [
+          "bento",
+          "DLG_ACT1_END_BENTO_3"
+        ],
+        [
+          "lio",
+          "DLG_ACT1_END_BENTO_4"
+        ]
+      ]
+    },
     "side_trigo_offer": {
       "lines": [
         [
@@ -282,6 +366,54 @@
         [
           "lio",
           "DLG_SIDE_FERRO_DONE_3"
+        ]
+      ]
+    },
+    "marta_idle_fed": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MARTA_IDLE_FED_1"
+        ]
+      ]
+    },
+    "bram_idle_fed": {
+      "lines": [
+        [
+          "bram",
+          "DLG_BRAM_IDLE_FED_1"
+        ]
+      ]
+    },
+    "celeste_idle_fed": {
+      "lines": [
+        [
+          "celeste",
+          "DLG_CELESTE_IDLE_FED_1"
+        ]
+      ]
+    },
+    "tobias_idle_fed": {
+      "lines": [
+        [
+          "tobias",
+          "DLG_TOBIAS_IDLE_FED_1"
+        ]
+      ]
+    },
+    "nina_idle_fed": {
+      "lines": [
+        [
+          "nina",
+          "DLG_NINA_IDLE_FED_1"
+        ]
+      ]
+    },
+    "juca_idle_fed": {
+      "lines": [
+        [
+          "juca",
+          "DLG_JUCA_IDLE_FED_1"
         ]
       ]
     },

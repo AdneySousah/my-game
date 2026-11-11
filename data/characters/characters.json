@@ -132,5 +132,134 @@
       "idle": { "anim": "Idle", "loop": true },
       "talk": { "anim": "Talk_with_Left_Hand_Raised", "loop": true }
     }
+  },
+  "enm_orc": {
+    "scene": "res://assets/enemies/enm_orc/enm_orc.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/enm_orc/enm_orc_anims.glb" },
+      { "path": "res://assets/enemies/enm_orc/enm_orc_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/enm_orc/enm_orc_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {"scene": "res://assets/weapons/wpn_clava_orc/wpn_clava_orc.glb", "bone": "RightHand", "length": 1.15, "grip": 0.38, "rotation_deg": [0, 0, -90], "offset": [0, 0.07, 0.02]},
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "attack": { "anim": "Heavy_Hammer_Swing", "strike": 1.3, "end": 1.83, "speed": 1.0 }
+    }
+  },
+  "enm_esqueleto": {
+    "scene": "res://assets/enemies/enm_esqueleto/enm_esqueleto.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/enm_esqueleto/enm_esqueleto_anims.glb" },
+      { "path": "res://assets/enemies/enm_esqueleto/enm_esqueleto_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/enm_esqueleto/enm_esqueleto_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {"scene": "res://assets/weapons/wpn_picareta/wpn_picareta.glb", "bone": "RightHand", "length": 0.75, "grip": 0.38, "rotation_deg": [0, 0, -90], "offset": [0, 0.07, 0.02]},
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "attack": { "anim": "Charged_Axe_Chop", "strike": 4.4, "end": 5.2, "speed": 1.0 }
+    }
+  },
+  "enm_arqueiro": {
+    "scene": "res://assets/enemies/enm_arqueiro/enm_arqueiro.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_anims.glb" },
+      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {"scene": "res://assets/weapons/wpn_arco/wpn_arco.glb", "bone": "LeftHand", "length": 0.9, "grip": 0.38, "rotation_deg": [0, 0, 90], "offset": [0, 0.07, 0.02]},
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction_with_Bow", "start": 0.0, "end": 0.8, "speed": 1.4 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "shoot": { "anim": "Archery_Shot", "strike": 1.17, "end": 1.9, "speed": 1.0 },
+      "attack": { "anim": "Simple_Kick", "strike": 0.6, "end": 1.3, "speed": 1.0 }
+    }
+  },
+  "enm_golem": {
+    "scene": "res://assets/enemies/enm_golem/enm_golem.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/enm_golem/enm_golem_anims.glb" },
+      { "path": "res://assets/enemies/enm_golem/enm_golem_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/enm_golem/enm_golem_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "attack": { "anim": "Punch_Forward_with_Both_Fists", "strike": 0.9, "end": 1.8, "speed": 1.0 },
+      "slam": { "anim": "Charged_Ground_Slam", "strike": 1.63, "end": 2.6, "speed": 1.0 },
+      "taunt": { "anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5 }
+    }
+  },
+  "boss_gorvan": {
+    "scene": "res://assets/enemies/boss_gorvan/boss_gorvan.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/boss_gorvan/boss_gorvan_anims.glb" },
+      { "path": "res://assets/enemies/boss_gorvan/boss_gorvan_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/boss_gorvan/boss_gorvan_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {"scene": "res://assets/weapons/wpn_foice_gorvan/wpn_foice_gorvan.glb", "bone": "RightHand", "length": 1.3, "model_rotation_deg": [0, 0, 55], "hold_point": [-0.29, -0.18, 0], "rotation_deg": [0, 0, -90], "offset": [0, 0.07, 0.02]},
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "attack": { "anim": "Reaping_Swing", "strike": 2.57, "end": 3.3, "speed": 1.0 },
+      "reap": { "anim": "Reaping_Swing", "strike": 2.57, "end": 3.3, "speed": 1.0 },
+      "spin": { "anim": "Axe_Spin_Attack", "strike": 0.9, "end": 2.0, "speed": 1.0 },
+      "heavy": { "anim": "Heavy_Hammer_Swing", "strike": 1.3, "end": 1.83, "speed": 1.0 },
+      "taunt": { "anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5 }
+    }
+  },
+  "boss_espantalho": {
+    "scene": "res://assets/enemies/boss_espantalho/boss_espantalho.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/boss_espantalho/boss_espantalho_anims.glb" },
+      { "path": "res://assets/enemies/boss_espantalho/boss_espantalho_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/boss_espantalho/boss_espantalho_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {"scene": "res://assets/weapons/wpn_foice_gorvan/wpn_foice_gorvan.glb", "bone": "RightHand", "length": 1.4, "model_rotation_deg": [0, 0, 55], "hold_point": [-0.29, -0.18, 0], "rotation_deg": [0, 0, -90], "offset": [0, 0.07, 0.02]},
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "attack": { "anim": "Reaping_Swing", "strike": 2.57, "end": 3.3, "speed": 1.0 },
+      "reap": { "anim": "Reaping_Swing", "strike": 2.57, "end": 3.3, "speed": 1.0 },
+      "spin": { "anim": "Axe_Spin_Attack", "strike": 0.9, "end": 2.0, "speed": 1.0 },
+      "slam": { "anim": "Charged_Ground_Slam", "strike": 1.63, "end": 2.6, "speed": 1.0 }
+    }
   }
 }

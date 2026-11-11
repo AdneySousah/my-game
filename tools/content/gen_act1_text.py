@@ -70,15 +70,43 @@ DIALOGUES = {
     # --- Missão 4: Os corvos da mina ---
     "main_04_offer": [
         ("bento", "Lio, aquilo que eu ouvi na capital: as carroças do tributo não vão para o castelo.", "Lio, about what I heard in the capital: the tribute carts don't go to the castle."),
-        ("bento", "Elas somem na Mina dos Corvos, ao norte da floresta. A comida da sua vila está lá dentro!", "They vanish into the Crows' Mine, north of the forest. Your village's food is in there!"),
+        ("bento", "Elas somem na Mina dos Corvos, ao norte da floresta. A comida da sua vila está lá dentro!", "They vanish into the Crow Mine, north of the forest. Your village's food is in there!"),
         ("lio", "Então é para lá que a gente vai.", "Then that's where we're going."),
         ("bento", "A gente? Eu... eu fico guardando a vila. Alguém precisa. Fala com o Bram antes, tá?", "We? I... I'll guard the village. Someone has to. Talk to Bram first, okay?"),
     ],
     "main_04_bram": [
-        ("bram", "A Mina dos Corvos... fechou há anos. Se o Gorvan esconde comida lá, deve ter gente armada vigiando.", "The Crows' Mine... it closed years ago. If Gorvan hides food there, there'll be armed men guarding it."),
+        ("bram", "A Mina dos Corvos... fechou há anos. Se o Gorvan esconde comida lá, deve ter gente armada vigiando.", "The Crow Mine... it closed years ago. If Gorvan hides food there, there'll be armed men guarding it."),
         ("bram", "Siga a trilha da floresta para o norte. Descanse nas fogueiras. E não entre sem fôlego.", "Follow the forest trail north. Rest at the campfires. And don't go in out of breath."),
         ("lio", "Relaxa, mestre. Eu volto antes do jantar do Bento.", "Relax, master. I'll be back before Bento's dinner."),
         ("bram", "É disso que eu tenho medo.", "That's what I'm afraid of."),
+    ],
+    # --- Missão 5: O Arauto da Colheita ---
+    "gorvan_intro": [
+        ("gorvan", "Ora, ora! Um ratinho de Pradoluz no meu celeiro. Veio catar as migalhas?", "Well, well! A little Pradoluz mouse in my granary. Came for the crumbs?"),
+        ("lio", "Vim buscar a comida da minha vila. Toda. Pode embrulhar pra viagem?", "I came for my village's food. All of it. Could you wrap it to go?"),
+        ("gorvan", "Hohoho! O tributo pertence ao Soberano Alado. E quem mexe no que é do céu... vira adubo!", "Hohoho! The tribute belongs to the Winged Sovereign. And whoever touches what is heaven's... becomes fertilizer!"),
+    ],
+    "gorvan_transform": [
+        ("gorvan", "Chega de brincadeira! Vamos ver se você corta palha tão bem quanto corta piada!", "Enough games! Let's see if you cut straw as well as you crack jokes!"),
+        ("lio", "Ele virou um espantalho gigante?! Isso não estava no treino do Bram!", "He turned into a giant scarecrow?! That was not in Bram's training!"),
+    ],
+    "main_05_marta": [
+        ("marta", "Lio! As carroças voltaram cheias! A vila inteira está na praça!", "Lio! The carts came back full! The whole village is in the square!"),
+        ("lio", "Eu disse que voltava antes do jantar. Bom... de algum jantar.", "I said I'd be back before dinner. Well... some dinner."),
+        ("marta", "Todo arranhado... e eu nunca tive tanto orgulho de você. Vem, hoje tem pão de verdade.", "All scratched up... and I've never been so proud of you. Come, there's real bread today."),
+    ],
+    # --- Missão 6: Mais cinco desses (fim do Ato 1) ---
+    "act1_end_bram": [
+        ("bram", "Gorvan era só um dos cinco Arautos. Os outros fazem o mesmo nas cidades deles.", "Gorvan was only one of the five Heralds. The others do the same in their cities."),
+        ("lio", "Então tem gente passando fome lá também. Ou sede. Ou frio.", "So people are starving there too. Or thirsty. Or freezing."),
+        ("bram", "O mundo é grande, moleque. E cruel. Não é lugar pra quem só sabe fazer piada.", "The world is big, kid. And cruel. It's no place for someone who only knows how to joke."),
+        ("lio", "Então eu levo a espada também.", "Then I'll bring the sword too."),
+    ],
+    "act1_end_bento": [
+        ("bento", "Você vai embora, né? Dá pra ver na sua cara de herói.", "You're leaving, aren't you? I can see it on your hero face."),
+        ("lio", "Se tem mais cinco desses, alguém precisa dar um jeito.", "If there are five more like him, someone has to deal with them."),
+        ("bento", "Então eu vou junto! Alguém tem que cozinhar pro herói. E correr na frente... quer dizer, atrás dele.", "Then I'm coming! Someone has to cook for the hero. And run ahead... I mean, behind him."),
+        ("lio", "Sócio é sócio.", "Partners are partners."),
     ],
     # --- Secundária: Trigo escondido ---
     "side_trigo_offer": [
@@ -106,6 +134,24 @@ DIALOGUES = {
         ("lio", "Nada de colher de pau, então!", "No more wooden spoon, then!"),
     ],
     # --- Conversas fora de missão ---
+    "marta_idle_fed": [
+        ("marta", "A despensa está cheia pela primeira vez em anos. Come mais um pedaço!", "The pantry is full for the first time in years. Have another slice!"),
+    ],
+    "bram_idle_fed": [
+        ("bram", "Não fique se achando. Mas... bom trabalho, moleque.", "Don't get cocky. But... good work, kid."),
+    ],
+    "celeste_idle_fed": [
+        ("celeste", "Prateleiras cheias de novo! Logo, logo eu reabro o armazém, querido.", "Full shelves again! Very soon I'll reopen the store, dear."),
+    ],
+    "tobias_idle_fed": [
+        ("tobias", "A f-forja voltou a esquentar! Obrigado, Lio.", "The f-forge is warm again! Thank you, Lio."),
+    ],
+    "nina_idle_fed": [
+        ("nina", "A vó fez bolo de trigo! Guardei um pedaço pra você.", "Grandma made a wheat cake! I saved you a piece."),
+    ],
+    "juca_idle_fed": [
+        ("juca", "No meu tempo não tinha herói. Agora tem. Mudou pra melhor.", "Back in my day there were no heroes. Now there is one. Changed for the better."),
+    ],
     "marta_idle": [
         ("marta", "Coma alguma coisa antes de sair. Mesmo que seja só pão duro.", "Eat something before you go. Even if it's just stale bread."),
     ],
@@ -164,6 +210,14 @@ TEXTS = {
     "QUEST_MAIN_02": ("A lição do caolho", "The One-Eyed Lesson"),
     "QUEST_MAIN_03": ("Um cozinheiro na floresta", "A Cook in the Woods"),
     "QUEST_MAIN_04": ("Os corvos da mina", "The Crows of the Mine"),
+    "QUEST_MAIN_05": ("O Arauto da Colheita", "The Herald of the Harvest"),
+    "QUEST_MAIN_06": ("Mais cinco desses", "Five More Like Him"),
+    "QUEST_MORE_SOON": ("Fim do Ato 1 — a jornada continua na próxima versão", "End of Act 1 — the journey continues in the next version"),
+    "OBJ_KILL_GOLEM": ("Derrote o Golem de pedra no fundo da mina", "Defeat the stone golem in the depths of the mine"),
+    "OBJ_KILL_GORVAN": ("Derrote Gorvan no Celeiro do Tributo", "Defeat Gorvan in the Tribute Granary"),
+    "OBJ_RETURN_VILLAGE": ("Volte para a Marta em Pradoluz", "Return to Marta in Pradoluz"),
+    "OBJ_TALK_BRAM_END": ("Converse com o Bram", "Talk to Bram"),
+    "OBJ_TALK_BENTO_END": ("Converse com o Bento", "Talk to Bento"),
     "QUEST_SIDE_TRIGO": ("Trigo escondido", "Hidden Wheat"),
     "QUEST_SIDE_FERRO": ("O ferro do Tobias", "Tobias's Iron"),
     "OBJ_TALK_MARTA": ("Fale com a Marta", "Talk to Marta"),
@@ -175,7 +229,7 @@ TEXTS = {
     "OBJ_TALK_BENTO": ("Fale com o Bento", "Talk to Bento"),
     "OBJ_BENTO_TO_MARTA": ("Leve o Bento até a Marta", "Bring Bento to Marta"),
     "OBJ_ASK_BRAM_MINE": ("Pergunte ao Bram sobre a mina", "Ask Bram about the mine"),
-    "OBJ_REACH_MINE": ("Chegue à Mina dos Corvos", "Reach the Crows' Mine"),
+    "OBJ_REACH_MINE": ("Chegue à Mina dos Corvos", "Reach the Crow Mine"),
     "OBJ_MINE_DEEP": ("Explore o fundo da mina", "Explore the depths of the mine"),
     "OBJ_COLLECT_HERBS": ("Colha erva-de-orvalho na floresta: %d/%d", "Gather dewleaf in the forest: %d/%d"),
     "OBJ_RETURN_NINA": ("Leve as ervas para a Nina", "Bring the herbs to Nina"),

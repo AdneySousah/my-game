@@ -16,6 +16,8 @@ var quests: Dictionary = {}
 var flags: Dictionary = {}
 ## Quest shown in the HUD tracker.
 var tracked_quest: String = ""
+## Crafting materials dropped by enemies (used by the blacksmith in Phase 5): key -> count.
+var materials: Dictionary = {}
 
 
 func reset() -> void:
@@ -25,6 +27,7 @@ func reset() -> void:
 	quests.clear()
 	flags.clear()
 	tracked_quest = ""
+	materials.clear()
 
 
 func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
@@ -46,3 +49,7 @@ func has_flag(flag: String) -> bool:
 
 func set_flag(flag: String) -> void:
 	flags[flag] = true
+
+
+func add_material(key: String, amount: int = 1) -> void:
+	materials[key] = int(materials.get(key, 0)) + amount

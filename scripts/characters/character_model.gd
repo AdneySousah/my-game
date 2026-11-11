@@ -246,8 +246,16 @@ func _mount_weapon(w: Dictionary, bone: String, rot: Array, off: Array) -> Node3
 	var weapon: Node3D = (load(str(w["scene"])) as PackedScene).instantiate()
 	var length: float = float(w.get("length", 0.8))
 	weapon.scale = Vector3.ONE * length
-	# Sword GLBs are 1 m tall and centred: move it so the grip sits at the pivot.
-	weapon.position = Vector3(0, float(w.get("grip", 0.38)) * length, 0)
+	if w.has("hold_point"):
+		# Weapons that are not upright in their file (e.g. a diagonal scythe): turn the model
+		# so its handle points up, and put the point where the hand holds it on the pivot.
+		var mr: Array = w.get("model_rotation_deg", [0, 0, 0])
+		weapon.rotation_degrees = Vector3(float(mr[0]), float(mr[1]), float(mr[2]))
+		var hp: Array = w["hold_point"]
+		weapon.position = -(weapon.basis * Vector3(float(hp[0]), float(hp[1]), float(hp[2])))
+	else:
+		# Sword GLBs are 1 m tall and centred: move it so the grip sits at the pivot.
+		weapon.position = Vector3(0, float(w.get("grip", 0.38)) * length, 0)
 	pivot.add_child(weapon)
 	ToonStyle.apply(weapon)
 	return pivot

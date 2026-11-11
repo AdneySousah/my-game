@@ -43,6 +43,9 @@ var _talk_btn: Button
 var _tracker_title: Label
 var _tracker_goal: Label
 var _tracker_bg: TrackerBackdrop
+var _boss_bar: FramedBar
+var _boss_name: Label
+var _boss: Enemy
 
 
 func _ready() -> void:
@@ -124,6 +127,21 @@ func _ready() -> void:
 	root.add_child(_full_map)
 	_full_map.closed.connect(_on_panel_closed)
 
+	_boss_name = Label.new()
+	_boss_name.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	_boss_name.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_boss_name.position.y = 12
+	_boss_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_boss_name.add_theme_font_size_override("font_size", 24)
+	_boss_name.add_theme_color_override("font_color", Color("#ffcf6b"))
+	_boss_name.hide()
+	root.add_child(_boss_name)
+	_boss_bar = FramedBar.new()
+	_boss_bar.fill_color = Color("#d83a2e")
+	_boss_bar.size = Vector2(560, 46)
+	_boss_bar.hide()
+	root.add_child(_boss_bar)
+
 	_dialogue = DialogueBox.new()
 	root.add_child(_dialogue)
 	_dialogue.finished.connect(_on_panel_closed)
@@ -186,6 +204,37 @@ func set_quests(q: QuestLog) -> void:
 		toast(tr("HUD_QUEST_DONE") % tr(str(Data.quest(id).get("name", id))) + "
 " 			+ tr("HUD_QUEST_REWARD") % [int(r.get("xp", 0)), int(r.get("gold", 0))], 3.0))
 	_refresh_tracker()
+
+
+## Follows a boss: its bar appears at the top once it starts fighting.
+func track_boss(e: Enemy) -> void:
+	_boss = e
+	e.engaged.connect(func(_b: Enemy) -> void: _show_boss_bar(true))
+	e.hp_changed.connect(func(_b: Enemy) -> void: _update_boss_bar())
+	e.transformed.connect(func(_b: Enemy) -> void: _update_boss_bar())
+	e.died.connect(func(_b: Enemy) -> void: _show_boss_bar(false))
+	e.tree_exiting.connect(func() -> void: _show_boss_bar(false))
+
+
+func boss_bar_visible() -> bool:
+	return _boss_bar.visible
+
+
+func _show_boss_bar(on: bool) -> void:
+	_boss_bar.visible = on
+	_boss_name.visible = on
+	if on:
+		_update_boss_bar()
+		_layout()
+
+
+func _update_boss_bar() -> void:
+	if not is_instance_valid(_boss):
+		return
+	_boss_name.text = _boss.display_name()
+	_boss_bar.max_value = _boss.max_hp
+	_boss_bar.value = maxf(_boss.hp, 0.0)
+	_boss_bar.text = "%d%%" % roundi(maxf(_boss.hp_ratio(), 0.0) * 100.0)
 
 
 ## "" hides the button; "talk" or "pick" shows it with that text.
@@ -360,6 +409,8 @@ func _layout() -> void:
 		_skill_btns[i].set_center(attack_c + Vector2(cos(a), sin(a)) * 165.0)
 	_dodge_btn.set_center(attack_c + Vector2(-270, 40))
 	_sprint_btn.set_center(attack_c + Vector2(-275, -60))
+	if _boss_bar:
+		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 44)
 	if _stamina_bar:
 		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:

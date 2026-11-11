@@ -1,5 +1,5 @@
 extends Control
-## First scene. For now it only proves the project boots on every platform.
+## First scene: shows the version, then opens the prototype arena.
 
 @onready var _info: Label = %Info
 
@@ -10,3 +10,5 @@ func _ready() -> void:
 		Game.version(), platform, Engine.get_version_info().string
 	]
 	print("BOOT_OK version=%s platform=%s" % [Game.version(), platform])
+	await get_tree().create_timer(0.6).timeout
+	get_tree().change_scene_to_file(Game.ARENA_SCENE)

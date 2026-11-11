@@ -1,0 +1,47 @@
+keys,pt_BR,en
+HUD_LEVEL,Nv. %d,Lv. %d
+HUD_GOLD,%d de ouro,%d gold
+HUD_DEFEATED,Derrotado: -5%% (%ds),Defeated: -5%% (%ds)
+HUD_ATTACK,Atacar,Attack
+HUD_DODGE,Esquiva,Dodge
+HUD_ATTRIBUTES,Atributos (C),Attributes (C)
+HUD_SKILLS,Skills (K),Skills (K)
+HUD_DEBUG_LEVEL,+1 nível (F1),+1 level (F1)
+HUD_LEVEL_UP,Subiu para o nível %d!,Reached level %d!
+HUD_SKILL_UNLOCKED,Nova skill: %s,New skill: %s
+HUD_YOU_DIED,Você foi derrotado... -%d de ouro e -%d de XP,You were defeated... -%d gold and -%d XP
+HUD_LOCKED,Nv. %d,Lv. %d
+HUD_EVADED,Esquivou!,Evaded!
+HUD_SKILL_EQUIPPED,Botão %d,Button %d
+PANEL_ATTRIBUTES,Atributos,Attributes
+PANEL_POINTS,Pontos livres: %d,Free points: %d
+PANEL_CLOSE,Fechar,Close
+PANEL_SKILLS,Skills — escolha o botão de cada uma,Skills — pick a button for each
+ATTR_STR,Força,Strength
+ATTR_VIT,Vitalidade,Vitality
+ATTR_AGI,Agilidade,Agility
+ATTR_FOC,Foco,Focus
+ATTR_STR_DESC,+2 de ataque e +0.3% de dano crítico,+2 attack and +0.3% critical damage
+ATTR_VIT_DESC,+15 de vida e +1 de defesa,+15 health and +1 defense
+ATTR_AGI_DESC,"+0.3% de velocidade de ataque, +0.1% de crítico e de esquiva","+0.3% attack speed, +0.1% critical and evade chance"
+ATTR_FOC_DESC,-0.15% de recarga das skills e +0.2% de dano delas,-0.15% skill cooldown and +0.2% skill damage
+STAT_SUMMARY,Vida %d · Ataque %d · Defesa %d · Crítico %.1f%%,Health %d · Attack %d · Defense %d · Crit %.1f%%
+SKILL_CORTE_GIRATORIO,Corte Giratório,Whirling Slash
+SKILL_CORTE_GIRATORIO_DESC,Gira a espada e acerta tudo ao redor duas vezes.,Spins the sword and hits everything around twice.
+SKILL_INVESTIDA,Investida,Charge
+SKILL_INVESTIDA_DESC,Avança e atordoa os inimigos no caminho.,Dashes forward and stuns enemies in the way.
+SKILL_GOLPE_SISMICO,Golpe Sísmico,Seismic Strike
+SKILL_GOLPE_SISMICO_DESC,Bate no chão: dano em cone e lentidão.,Strikes the ground: cone damage and slow.
+SKILL_QUEBRA_GUARDA,Quebra-Guarda,Guard Breaker
+SKILL_QUEBRA_GUARDA_DESC,Golpe pesado que reduz a defesa em 30%.,Heavy blow that lowers defense by 30%.
+SKILL_BRADO_DE_GUERRA,Brado de Guerra,War Cry
+SKILL_BRADO_DE_GUERRA_DESC,+25% de ataque; inimigos próximos causam -15% de dano.,+25% attack; nearby enemies deal -15% damage.
+SKILL_ONDA_DE_CORTE,Onda de Corte,Slash Wave
+SKILL_ONDA_DE_CORTE_DESC,Lança uma onda em linha que atordoa.,Sends a wave in a line that stuns.
+SKILL_SALTO_DEVASTADOR,Salto Devastador,Devastating Leap
+SKILL_SALTO_DEVASTADOR_DESC,Salta sobre os inimigos e atordoa todos na área.,Leaps onto enemies and stuns everyone in the area.
+SKILL_JULGAMENTO,Julgamento,Judgment
+SKILL_JULGAMENTO_DESC,Dano enorme em um alvo; mais forte em alvos com pouca vida.,Huge single-target damage; stronger on low-health targets.
+ENEMY_BANDIDO,Bandido,Bandit
+ENEMY_ORC,Orc,Orc
+CHECKPOINT,Ponto de descanso,Rest point

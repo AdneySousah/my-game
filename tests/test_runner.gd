@@ -1,0 +1,198 @@
+extends Node
+## Automated checks. Run headless:
+##   godot --headless --path . --fixed-fps 60 res://tests/test_runner.tscn
+## 1) unit checks for XP, attributes, damage and data;
+## 2) a bot that plays the arena for a while, using every skill, dying once,
+##    and opening the panels. Exit code 0 = all good.
+
+const BOT_SECONDS: float = 75.0
+
+var _failures: int = 0
+var _checks: int = 0
+
+
+func _ready() -> void:
+	TranslationServer.set_locale("pt_BR")
+	_unit_tests()
+	await _bot_test()
+	print("TESTS: %d checks, %d failures" % [_checks, _failures])
+	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
+	get_tree().quit(1 if _failures > 0 else 0)
+
+
+func check(cond: bool, what: String) -> void:
+	_checks += 1
+	if not cond:
+		_failures += 1
+		printerr("FAIL: " + what)
+
+
+# --- Unit tests -----------------------------------------------------------------
+
+func _unit_tests() -> void:
+	# XP table
+	check(Data.xp_to_next.size() == 99, "xp table has 99 levels")
+	check(Data.xp_needed(1) == 240, "level 1 needs 240 XP")
+	var increasing: bool = true
+	for i: int in range(1, Data.xp_to_next.size()):
+		if int(Data.xp_to_next[i]) < int(Data.xp_to_next[i - 1]):
+			increasing = false
+	check(increasing, "xp table never decreases")
+
+	# Base stats at level 1 with 5 points in each attribute
+	var s := Stats.new()
+	check(is_equal_approx(s.get_stat("atk"), 30.0), "atk L1 = 20 + 5*2 = 30 (got %s)" % s.get_stat("atk"))
+	check(is_equal_approx(s.get_stat("max_hp"), 275.0), "hp L1 = 200 + 5*15 = 275")
+	check(is_equal_approx(s.get_stat("def"), 15.0), "def L1 = 10 + 5 = 15")
+
+	# Level up gives 5 points and stats grow
+	s.add_xp(240)
+	check(s.level == 2 and s.xp == 0, "240 XP -> level 2")
+	check(s.unspent_points == 5, "level up gives 5 points")
+	check(is_equal_approx(s.get_stat("atk"), 32.0), "atk grows +2 per level")
+	check(s.spend_point("str") and s.attributes["str"] == 6, "spend point in strength")
+	check(is_equal_approx(s.get_stat("atk"), 34.0), "strength adds +2 atk")
+
+	# Death penalty
+	s.add_xp(100)
+	var lost: int = s.lose_xp_fraction(0.05)
+	check(lost == int(Data.xp_needed(2) * 0.05), "death loses 5%% of the level's XP (lost %d)" % lost)
+	var atk_before: float = s.get_stat("atk")
+	s.set_defeated(300.0)
+	check(is_equal_approx(s.get_stat("atk"), atk_before * 0.95), "Derrotado = -5%")
+	s.tick(301.0)
+	check(is_equal_approx(s.get_stat("atk"), atk_before), "Derrotado wears off")
+
+	# Level cap
+	var big := Stats.new()
+	big.add_xp(100_000_000)
+	check(big.level == 100 and big.xp == 0, "XP stops at level 100")
+	check(big.unspent_points == 99 * 5, "99 level-ups = 495 points")
+
+	# Caps
+	var agile := Stats.new()
+	agile.attributes["foc"] = 10_000
+	check(is_equal_approx(agile.get_stat("cdr"), 0.3), "cooldown reduction capped at 30%")
+
+	# Damage
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 1
+	var d: Dictionary = Damage.compute(100.0, 1.0, 0.0, 0.0, 1.5, rng)
+	check(d["amount"] >= 90 and d["amount"] <= 110, "100 atk vs 0 def ~ 100")
+	d = Damage.compute(100.0, 1.0, 100.0, 0.0, 1.5, rng)
+	check(d["amount"] >= 45 and d["amount"] <= 55, "100 def halves damage")
+	d = Damage.compute(100.0, 1.0, 0.0, 1.0, 2.0, rng)
+	check(d["crit"] and d["amount"] >= 180, "crit doubles with 2.0 multiplier")
+
+	# Skills data matches the GDD
+	var unlocks: Array[int] = []
+	for sk: Dictionary in Data.skills:
+		unlocks.append(int(sk["unlock_level"]))
+	check(unlocks == [1, 4, 8, 12, 16, 20, 25, 30], "skill unlock levels follow the GDD")
+
+	# Translations
+	check(tr("HUD_ATTACK") == "Atacar", "Portuguese text loads (got '%s')" % tr("HUD_ATTACK"))
+
+
+# --- Bot ------------------------------------------------------------------------
+
+func _bot_test() -> void:
+	var arena: Node = load(Game.ARENA_SCENE).instantiate()
+	add_child(arena)
+	await get_tree().physics_frame
+	var player: Player = arena.get("player")
+	var hud: Hud = arena.get("hud")
+	check(player != null, "arena creates the player")
+
+	# Reach level 30 so every skill unlocks.
+	while player.stats.level < 30:
+		player.stats.add_xp(player.stats.xp_needed() - player.stats.xp)
+	var unlocked: int = 0
+	for sk: Dictionary in Data.skills:
+		if player.skills.is_unlocked(sk["id"]):
+			unlocked += 1
+	check(unlocked == 8, "all 8 skills unlocked at level 30")
+	check(not player.skills.equipped.has(""), "4 skill buttons filled")
+
+	# Panels open, spend a point, close.
+	hud.open_attributes()
+	check(get_tree().paused, "panel pauses the game")
+	player.stats.spend_point("vit")
+	hud.get("_attributes_panel").hide()
+	hud.call("_on_panel_closed")
+	check(not get_tree().paused, "closing panel resumes")
+	hud.open_skills()
+	player.skills.equip(0, "julgamento")
+	hud.get("_skills_panel").hide()
+	hud.call("_on_panel_closed")
+	check(player.skills.equipped[0] == "julgamento", "equip skill into slot 1")
+
+	# Play: chase enemies, combo, rotate through all 8 skills.
+	var skill_ids: Array[String] = []
+	for sk: Dictionary in Data.skills:
+		skill_ids.append(sk["id"])
+	var used: Dictionary = {}
+	var skill_index: int = 0
+	var next_try: int = 0
+	var frames: int = int(BOT_SECONDS * 60)
+	var died_once: bool = false
+	var gold_start: int = player.gold
+	for f: int in frames:
+		if player.is_dead():
+			died_once = true
+			_release_all()
+			await get_tree().physics_frame
+			continue
+		var target: Enemy = player.nearest_enemy(40.0)
+		_release_all()
+		if target:
+			var to: Vector3 = target.global_position - player.global_position
+			if to.length() > 2.0:
+				_press_towards(to, player.camera_rig.rotation.y)
+			elif f % 8 == 0:
+				Input.action_press("attack")
+		# Every 45 frames try the next skill; if the hero is busy, retry next frame.
+		if f >= next_try:
+			var next: String = skill_ids[skill_index % skill_ids.size()]
+			player.skills.equip(1, next)
+			if player.skills.use_slot(1):
+				used[next] = true
+				skill_index += 1
+				next_try = f + 45
+		# Halfway through, force a death to test the penalty and respawn.
+		if f == frames / 2 and not died_once:
+			player.receive_attack(1_000_000.0)
+		await get_tree().physics_frame
+	_release_all()
+	# If the hero died in the last seconds, give the respawn time to happen.
+	for i: int in 240:
+		if not player.is_dead():
+			break
+		await get_tree().physics_frame
+	var kills: int = arena.get("kills")
+	print("BOT: level=%d kills=%d gold=%d skills_used=%d/8 died=%s" % [
+		player.stats.level, kills, player.gold, used.size(), died_once])
+	check(kills >= 10, "bot killed at least 10 enemies (got %d)" % kills)
+	check(used.size() == 8, "bot used all 8 skills (used %s)" % str(used.keys()))
+	check(died_once, "player death happened")
+	check(not player.is_dead(), "player respawned")
+	check(player.stats.defeated_time_left > 0.0, "Derrotado active after death")
+	check(player.gold != gold_start, "gold changed during play")
+	arena.queue_free()
+
+
+func _press_towards(world_dir: Vector3, cam_yaw: float) -> void:
+	var local: Vector3 = Basis(Vector3.UP, -cam_yaw) * world_dir.normalized()
+	if local.x > 0.2:
+		Input.action_press("move_right", minf(local.x, 1.0))
+	elif local.x < -0.2:
+		Input.action_press("move_left", minf(-local.x, 1.0))
+	if local.z > 0.2:
+		Input.action_press("move_down", minf(local.z, 1.0))
+	elif local.z < -0.2:
+		Input.action_press("move_up", minf(-local.z, 1.0))
+
+
+func _release_all() -> void:
+	for a: String in ["move_left", "move_right", "move_up", "move_down", "attack"]:
+		Input.action_release(a)

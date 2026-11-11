@@ -17,4 +17,4 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 ## Status
 - [x] Fase 0 — concluída (11/11/2026)
 - [x] Fase 1 — concluída (11/11/2026): GDD 1.0 (`docs/design/GDD.md`), guia de estilo (`docs/ESTILO.md`) e 6 imagens de referência aprovadas (`docs/design/referencias/`, 39 créditos).
-- [ ] Fase 2 — protótipo cinza (sem créditos)
+- [ ] Fase 2 — protótipo cinza (sem créditos). Primeira versão jogável em 11/11/2026: arena, combo, esquiva, 8 skills, 2 inimigos, XP/nível, atributos, morte com penalidade, controles de toque e testes automáticos. Falta: o dono testar e aprovar a sensação do combate.

@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="My Game"
-config/version="0.0.1"
+config/name="Herdeiro dos Céus"
+config/version="0.1.0"
 run/main_scene="res://scenes/boot/boot.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
 config/icon="res://icon.svg"
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 Game="*res://scripts/autoload/game.gd"
+Data="*res://scripts/autoload/data.gd"
 
 [debug]
 
@@ -39,6 +40,7 @@ pointing/emulate_touch_from_mouse=true
 [internationalization]
 
 locale/fallback="pt_BR"
+locale/translations=PackedStringArray("res://data/i18n/strings.pt_BR.translation", "res://data/i18n/strings.en.translation")
 
 [rendering]
 

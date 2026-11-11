@@ -11,6 +11,12 @@ Leia também: [docs/DECISOES.md](docs/DECISOES.md) (o que já foi decidido), [do
 - Importar/checar o projeto: `"/c/Godot/Godot_v4.7.2-stable_win64_console.exe" --headless --path . --import`
 - Rodar a cena inicial e sair: `"/c/Godot/Godot_v4.7.2-stable_win64_console.exe" --headless --path . --quit-after 5`
 - Créditos e status dos assets: `python tools/meshy/ledger.py report`
+- **Testes (rodar antes de todo commit de código):** `"/c/Godot/Godot_v4.7.2-stable_win64_console.exe" --headless --path . --fixed-fps 60 res://tests/test_runner.tscn` → precisa terminar com `TESTS_RESULT=PASS`. Inclui um robô que joga a arena por 75 s usando as 8 skills.
+- **Fotos do jogo rodando (abre uma janela):** `"/c/Godot/Godot_v4.7.2-stable_win64_console.exe" --path . --fixed-fps 60 --resolution 1280x720 res://tests/capture.tscn -- <pasta de saída>`. Usar uma pasta nova a cada vez, porque os arquivos são sobrescritos.
+- Tabela de XP: editar as constantes em `tools/balance/gen_xp.py` e rodar `python -X utf8 tools/balance/gen_xp.py` (nunca editar `xp_table.json` à mão).
+- Textos do jogo: adicionar a chave em `data/i18n/strings.csv` (colunas `keys,pt_BR,en`) e usar `tr("CHAVE")`. Em textos que passam por `%`, escrever `%%` para mostrar o símbolo de porcentagem.
+- Para o dono testar: `Jogar.bat` (abre o jogo) e `Editor.bat` (abre o editor).
+- Na exportação (Fase 7), incluir `*.json` no filtro de arquivos, porque `data/` é lido com `FileAccess`.
 
 ## Git
 - Os commits vão para a conta **pessoal** do GitHub (AdneySousah). O nome, o e-mail e a chave SSH estão fixados no `.git/config` local. Nunca altere isso e nunca use a configuração global.

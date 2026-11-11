@@ -83,6 +83,7 @@ func use_slot(slot: int) -> bool:
 
 
 func _execute(s: Dictionary) -> void:
+	player.play_skill_anim(str(s.get("id", "")))
 	match str(s.get("type", "")):
 		"spin":
 			_spin(s)

@@ -69,3 +69,9 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 
 ## Áudio (11/11/2026)
 - Trilha, passos, sons das skills e "fala" dos NPCs entram na Fase 4. Plano em [AUDIO.md](AUDIO.md): ElevenLabs (IA com conector; uso comercial só no plano pago), bibliotecas CC0 como complemento e "fala" dos NPCs gerada pelo próprio Godot.
+
+## Fase 3 (11/11/2026)
+- Gerados: Lio (modelo, esqueleto, 14 animações), espada de aprendiz, bandido (modelo, esqueleto, 4 animações) e 10 peças de Pradoluz. Custo da fase: 298 créditos (teto era 320).
+- Objetos passaram a ser feitos pelo caminho imagem → 3D (mais controle; +3 créditos por peça).
+- Visual estilo desenho feito com os modos toon nativos do Godot (sem shader próprio).
+- Personagens em escala 1,2 e câmera mais próxima, para leitura no celular.

@@ -18,4 +18,4 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 - [x] Fase 0 — concluída (11/11/2026)
 - [x] Fase 1 — concluída (11/11/2026): GDD 1.0 (`docs/design/GDD.md`), guia de estilo (`docs/ESTILO.md`) e 6 imagens de referência aprovadas (`docs/design/referencias/`, 39 créditos).
 - [x] Fase 2 — concluída (11/11/2026): protótipo cinza aprovado pelo dono, com fôlego (esquiva, corrida e skills).
-- [ ] Fase 3 — teste do Meshy: plano e gastos em `docs/FASE3_PLANO.md`, aguardando aprovação.
+- [ ] Fase 3 — teste do Meshy: tudo gerado (298 créditos) e funcionando no jogo; aguardando o dono jogar e aprovar o visual.

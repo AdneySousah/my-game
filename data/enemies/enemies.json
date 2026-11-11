@@ -3,7 +3,7 @@
   "scaling_per_level": { "hp": 0.25, "atk": 0.20, "def": 0.15, "gold": 0.10 },
   "enemies": {
     "bandido": {
-      "name": "ENEMY_BANDIDO",
+      "name": "ENEMY_BANDIDO", "model": "enm_bandido",
       "hp": 60, "atk": 9, "def": 4, "speed": 3.4,
       "aggro_range": 14.0, "attack_range": 1.8,
       "attack_shape": "front", "attack_radius": 1.3, "windup": 0.6, "attack_cooldown": 1.6,

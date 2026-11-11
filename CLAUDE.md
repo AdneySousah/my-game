@@ -16,6 +16,12 @@ Leia também: [docs/DECISOES.md](docs/DECISOES.md) (o que já foi decidido), [do
 - Tabela de XP: editar as constantes em `tools/balance/gen_xp.py` e rodar `python -X utf8 tools/balance/gen_xp.py` (nunca editar `xp_table.json` à mão).
 - Textos do jogo: adicionar a chave em `data/i18n/strings.csv` (colunas `keys,pt_BR,en`) e usar `tr("CHAVE")`. Em textos que passam por `%`, escrever `%%` para mostrar o símbolo de porcentagem.
 - Para o dono testar: `Jogar.bat` (abre o jogo) e `Editor.bat` (abre o editor).
+- **Ferramentas para assets do Meshy (todas abrem com `--path .`):**
+  - `res://tests/model_preview.tscn -- <a.glb> <out.png>`: modelo de 4 ângulos (precisa de janela).
+  - `res://tests/lineup.tscn -- <out.png> <a.glb> ...`: vários modelos lado a lado em tamanho real.
+  - `res://tests/character_preview.tscn -- <id> <out.png> [rx,ry,rz] [ação:tempo ...]`: personagem do jogo em ações; o 3º argumento testa ângulos da arma.
+  - `--headless --script res://tests/anim_analyze.gd -- <rigged.glb> <anims.glb>`: momento dos golpes (picos da mão) e deslocamento do quadril de cada animação.
+  - `--headless --script res://tests/inspect_glb.gd -- <a.glb> ...`: animações, ossos e malhas.
 - Na exportação (Fase 7), incluir `*.json` no filtro de arquivos, porque `data/` é lido com `FileAccess`.
 
 ## Git

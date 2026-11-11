@@ -2,7 +2,7 @@ class_name CameraRig
 extends Node3D
 ## Isometric follow camera (45° yaw, looking down). Supports small screen shakes.
 
-const OFFSET: Vector3 = Vector3(0, 13, 11)
+const OFFSET: Vector3 = Vector3(0, 10.5, 9)
 const FOLLOW_SPEED: float = 8.0
 const YAW_DEG: float = 45.0
 

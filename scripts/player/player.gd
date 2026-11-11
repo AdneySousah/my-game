@@ -49,6 +49,9 @@ var _no_stamina_cd: float = 0.0
 var _last_hp_max: float = 0.0
 var _last_stamina_max: float = 0.0
 var _visual: Node3D
+## The Meshy model (null while the grey-box capsule is used).
+var model: CharacterModel
+var _combat_time: float = 0.0
 var _sword_pivot: Node3D
 var _body_mat: StandardMaterial3D
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -67,18 +70,13 @@ func _ready() -> void:
 	shape.position.y = 0.9
 	add_child(shape)
 
-	_visual = ProtoVisuals.humanoid(BODY_COLOR)
-	add_child(_visual)
-	_body_mat = (_visual.get_node("Body") as MeshInstance3D).material_override
-	_sword_pivot = Node3D.new()
-	_sword_pivot.position.y = 1.0
-	_sword_pivot.rotation.y = deg_to_rad(110)
-	_visual.add_child(_sword_pivot)
-	var blade := BoxMesh.new()
-	blade.size = Vector3(0.1, 0.06, 1.3)
-	var blade_mi: MeshInstance3D = ProtoVisuals.mesh_instance(blade, Color("#dfe6f0"))
-	blade_mi.position = Vector3(0, 0, -0.95)
-	_sword_pivot.add_child(blade_mi)
+	model = CharacterModel.create("hero_lio")
+	if model:
+		add_child(model)
+		_visual = model
+		_body_mat = ProtoVisuals.material(BODY_COLOR)
+	else:
+		_build_proto_visual()
 
 	stats = Stats.new()
 	stats.leveled_up.connect(_on_leveled_up)
@@ -100,6 +98,7 @@ func _physics_process(delta: float) -> void:
 	_invulnerable -= delta
 	_combo_timer -= delta
 	_lock -= delta
+	_combat_time -= delta
 	_tick_buff(delta)
 	_tick_stamina(delta)
 	if _dead or _scripted:
@@ -141,12 +140,21 @@ func _physics_process(delta: float) -> void:
 	velocity.y = 0.0
 	move_and_slide()
 	global_position.y = 0.0
+	if model and _lock <= 0.0:
+		model.update_locomotion(velocity.length(), _combat_time > 0.0)
 
 
 # --- Public API used by skills, enemies and the HUD ---------------------------
 
 func is_dead() -> bool:
 	return _dead
+
+
+## Plays the animation of a skill (no-op for the grey-box capsule).
+func play_skill_anim(skill_id: String) -> void:
+	_combat_time = 3.0
+	if model:
+		model.play_action(skill_id)
 
 
 func max_hp() -> float:
@@ -225,6 +233,8 @@ func apply_atk_buff(amount: float, seconds: float) -> void:
 	stats.atk_buff = amount
 	_buff_time = seconds
 	_body_mat.albedo_color = Color("#FF8C42")
+	if model:
+		model.set_tint(Color("#FF8C42"), 0.25)
 	stats.stats_changed.emit()
 
 
@@ -286,8 +296,14 @@ func receive_attack(atk_value: float) -> void:
 	var res: Dictionary = Damage.compute(atk_value, 1.0, stats.get_stat("def"), 0.0, 1.0, _rng)
 	hp -= res["amount"]
 	ProtoVisuals.damage_number(get_parent(), global_position, str(res["amount"]), Color("#ff5a5a"))
-	_body_mat.albedo_color = Color("#ff5a5a")
-	create_tween().tween_property(_body_mat, "albedo_color", _body_color(), 0.2)
+	_combat_time = 3.0
+	if model:
+		model.flash(Color("#ff5a5a"))
+		if _lock <= 0.0 and _forced_time <= 0.0 and not model.is_busy():
+			model.play_action("hit")
+	else:
+		_body_mat.albedo_color = Color("#ff5a5a")
+		create_tween().tween_property(_body_mat, "albedo_color", _body_color(), 0.2)
 	if camera_rig:
 		camera_rig.shake(0.15, 0.15)
 	hp_changed.emit(hp, max_hp())
@@ -302,7 +318,10 @@ func add_gold(amount: int) -> void:
 
 func respawn() -> void:
 	_dead = false
-	_visual.rotation = Vector3.ZERO
+	if model:
+		model.play_loop("idle")
+	else:
+		_visual.rotation = Vector3.ZERO
 	global_position = respawn_point
 	hp = max_hp()
 	stamina = max_stamina()
@@ -314,6 +333,8 @@ func respawn() -> void:
 
 ## Swing visual for basic attacks and cone skills.
 func swing_sword(seconds: float, from_deg: float = 80.0, to_deg: float = -80.0) -> void:
+	if model:
+		return
 	_sword_pivot.rotation.y = deg_to_rad(from_deg)
 	var tw := create_tween()
 	tw.tween_property(_sword_pivot, "rotation:y", deg_to_rad(to_deg), seconds * 0.5)
@@ -322,6 +343,21 @@ func swing_sword(seconds: float, from_deg: float = 80.0, to_deg: float = -80.0) 
 
 
 # --- Internals ----------------------------------------------------------------
+
+func _build_proto_visual() -> void:
+	_visual = ProtoVisuals.humanoid(BODY_COLOR)
+	add_child(_visual)
+	_body_mat = (_visual.get_node("Body") as MeshInstance3D).material_override
+	_sword_pivot = Node3D.new()
+	_sword_pivot.position.y = 1.0
+	_sword_pivot.rotation.y = deg_to_rad(110)
+	_visual.add_child(_sword_pivot)
+	var blade := BoxMesh.new()
+	blade.size = Vector3(0.1, 0.06, 1.3)
+	var blade_mi: MeshInstance3D = ProtoVisuals.mesh_instance(blade, Color("#dfe6f0"))
+	blade_mi.position = Vector3(0, 0, -0.95)
+	_sword_pivot.add_child(blade_mi)
+
 
 func _camera_relative(input: Vector2) -> Vector3:
 	var v := Vector3(input.x, 0.0, input.y)
@@ -343,6 +379,9 @@ func _try_dodge(dir: Vector3) -> void:
 	_dodge_cd = DODGE_COOLDOWN
 	set_invulnerable(DODGE_TIME + 0.05)
 	start_forced_move(d * DODGE_SPEED, DODGE_TIME)
+	if model:
+		model.play_action("dodge")
+		return
 	var tw := create_tween()
 	tw.tween_property(_visual, "scale", Vector3(1.15, 0.6, 1.15), DODGE_TIME * 0.4)
 	tw.tween_property(_visual, "scale", Vector3.ONE, DODGE_TIME * 0.6)
@@ -359,7 +398,10 @@ func _do_attack() -> void:
 	_combo_step = (_combo_step + 1) % COMBO_MULTS.size()
 	_lock = t
 	_combo_timer = t + COMBO_RESET
-	if step == 1:
+	_combat_time = 3.0
+	if model:
+		model.play_action("attack_%d" % step, stats.attack_speed_mult())
+	elif step == 1:
 		swing_sword(t, -80.0, 80.0)
 	else:
 		swing_sword(t)
@@ -382,7 +424,10 @@ func _die() -> void:
 	gold_changed.emit(gold)
 	var xp_lost: int = stats.lose_xp_fraction(float(death.get("xp_loss", 0.05)))
 	stats.set_defeated(float(death.get("defeated_seconds", 300)))
-	create_tween().tween_property(_visual, "rotation:x", deg_to_rad(-90), 0.4)
+	if model:
+		model.play_action("dead")
+	else:
+		create_tween().tween_property(_visual, "rotation:x", deg_to_rad(-90), 0.4)
 	died.emit(gold_lost, xp_lost)
 
 
@@ -435,6 +480,8 @@ func _tick_buff(delta: float) -> void:
 	if _buff_time <= 0.0:
 		stats.atk_buff = 0.0
 		_body_mat.albedo_color = _body_color()
+		if model:
+			model.set_tint(Color("#FF8C42"), 0.0)
 		stats.stats_changed.emit()
 
 

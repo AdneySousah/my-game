@@ -157,6 +157,9 @@ func _build_ground() -> void:
 
 
 func _scatter_props() -> void:
+	if PropFactory.available("prp_arvore"):
+		_place_meshy_props()
+		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 7
 	for i: int in 40:
@@ -168,6 +171,30 @@ func _scatter_props() -> void:
 		else:
 			_add_rock(pos, rng.randf_range(0.6, 1.4))
 	# Flat patches so movement is easy to read on the plain ground.
+	for i: int in 60:
+		var p := Vector3(rng.randf_range(-ARENA_HALF, ARENA_HALF), 0.01, rng.randf_range(-ARENA_HALF, ARENA_HALF))
+		var patch: MeshInstance3D = ProtoVisuals.ground_disc(rng.randf_range(0.6, 1.8), Color("#68b543"))
+		patch.material_override = ProtoVisuals.material(Color("#68b543"))
+		patch.position = p
+		add_child(patch)
+
+
+## Phase 3: a small Pradoluz corner (houses, well, cart...) plus trees, rocks and bushes.
+func _place_meshy_props() -> void:
+	var d: Dictionary = PropFactory.data()
+	for item: Dictionary in d.get("arena_village", []):
+		var pos: Array = item["pos"]
+		PropFactory.spawn(self, str(item["id"]), Vector3(float(pos[0]), float(pos[1]), float(pos[2])), float(item.get("rot", 0)))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	var scatter: Dictionary = d.get("arena_scatter", {})
+	for id: String in scatter:
+		for i: int in int(scatter[id]):
+			var pos := Vector3(rng.randf_range(-ARENA_HALF + 3, ARENA_HALF - 3), 0, rng.randf_range(-ARENA_HALF + 3, ARENA_HALF - 3))
+			# Keep the rest point and the village clear.
+			if pos.length() < 7.0 or (pos.x < -2.0 and pos.x > -20.0 and pos.z < 2.0 and pos.z > -16.0):
+				continue
+			PropFactory.spawn(self, id, pos, rng.randf_range(0, 360), rng.randf_range(0.85, 1.15))
 	for i: int in 60:
 		var p := Vector3(rng.randf_range(-ARENA_HALF, ARENA_HALF), 0.01, rng.randf_range(-ARENA_HALF, ARENA_HALF))
 		var patch: MeshInstance3D = ProtoVisuals.ground_disc(rng.randf_range(0.6, 1.8), Color("#68b543"))

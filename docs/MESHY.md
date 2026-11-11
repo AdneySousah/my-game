@@ -87,3 +87,13 @@ DEPOIS DE GERAR:
 EXPORTAR: GLB
 SALVAR EM: assets/_inbox/<id>/<id>.glb
 ```
+
+## Lições da Fase 3 (como fazer no Godot)
+- **Objetos e armas:** imagem conceito barata (`nano-banana`, 3 créditos) → Image to 3D `meshy-t2` + `meshy-n1` (15). Não usar Text to 3D + refine com os modelos de topologia inteligente.
+- **Tamanho:** `auto_size` acerta a ordem de grandeza, mas vale conferir com `tests/lineup.tscn`. A correção fica em `data/world/props.json` (`scale`).
+- **Personagens:** rig pede `height_meters` 1,6; no jogo eles ficam com escala 1,2 (`data/characters/characters.json`), para aparecer bem no celular.
+- **Animações:** pedir em pacotes de até 10 (`action_ids`), num arquivo só. Os arquivos que só têm animação são importados como **biblioteca de animações**, sem textura: no `.glb.import`, `importer="animation_library"` e `gltf/embedded_image_handling=0`.
+- O deslocamento do quadril nas animações (rolamento anda 2 m!) é removido no `CharacterModel`; quem move o personagem é o jogo.
+- Os clipes do Meshy são longos (2 a 6 s). O trecho usado de cada um (`start`, `end`, `speed`) fica em `data/characters/characters.json`; os tempos vêm de `tests/anim_analyze.gd`.
+- **Arma na mão:** osso `RightHand`, rotação `[0, 0, -90]`, empunhadura a 38% da altura da espada.
+- Personagens do Meshy olham para +Z; o `CharacterModel` vira 180° (o jogo usa −Z como frente).

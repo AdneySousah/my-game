@@ -130,10 +130,35 @@
       "category": "hero",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Image to 3D a partir de ref_lio (tarefa 01a1cab5-eeca-76aa-be1c-9b53fc5f0f35); rig; 14 animações (docs/FASE3_PLANO.md)",
       "file": "assets/characters/hero_lio/hero_lio.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cad5-b29d-7376-b1d8-7d1f729c7a8d",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cad8-7580-76b4-bbc7-40b2a5997d6b",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 30,
+          "task_id": "01a1cad8-d4ba-73af-97de-1593bac466d3",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 12,
+          "task_id": "01a1cad8-d628-717c-bbf2-6f7dc6c67a34",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -141,10 +166,23 @@
       "category": "wpn",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Espada simples de aprendiz (docs/FASE3_PLANO.md)",
       "file": "assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cad9-139e-7233-8d84-3cf6414991df",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cadb-73cd-7545-940c-c0e7253d9d17",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -152,10 +190,35 @@
       "category": "enm",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Bandido de Pradoluz; imagem conceito + Image to 3D; rig; 4 animações",
       "file": "assets/enemies/enm_bandido/enm_bandido.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cad9-147f-704c-98e4-cd2b2038f8af",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cadb-771c-732f-8327-3adf9815a905",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cade-f9bf-7252-870f-b410ff3c2b70",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 12,
+          "task_id": "01a1cadf-7a16-75ea-9981-9692235f142a",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -163,10 +226,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_arvore/prp_arvore.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-7bb1-750a-94ef-6e3dc5cc5b57",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-6a57-729a-82bd-628ee56fb92f",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -174,10 +250,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_arbusto/prp_arbusto.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-7ca4-7569-a574-859d014113d4",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-6e1f-7581-9705-a872c9aa246f",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -185,10 +274,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_pedra/prp_pedra.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-7d8c-714c-ab1b-74e1f6916c86",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-70f3-7083-a59f-1e79ed62958b",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -196,10 +298,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_cerca/prp_cerca.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-7e6b-7595-910b-1a1e1439a043",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-73d1-7229-a74e-cde90b920da1",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -207,10 +322,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_barril/prp_barril.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-7f4f-715b-b8b9-50a889231266",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-7773-76b6-8dd1-e4dfeb55327a",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -218,10 +346,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_caixa/prp_caixa.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-8036-74d3-8bc0-a96bf3585d9d",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-7b47-74a2-8003-aa90fe8ac73d",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -229,10 +370,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_feno/prp_feno.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-8128-7397-aeef-f75a8020c9e5",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-7e96-70be-afa2-dfc4e1027fed",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -240,10 +394,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_carroca/prp_carroca.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-8217-7074-bf8d-81521b071bb2",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-8268-7460-88c0-f3cfc393e74d",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -251,10 +418,23 @@
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_poco/prp_poco.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-82f3-7141-9d4b-d9cf5ab32d10",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-8586-74c1-a29f-dd3c1b8023f6",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     },
     {
@@ -262,10 +442,23 @@
       "category": "env",
       "phase": 3,
       "method": "mcp",
-      "status": "planned",
+      "status": "generating",
       "prompt": "Casa pequena de madeira, telhado laranja (docs/FASE3_PLANO.md)",
       "file": "assets/environment/env_casa_pequena/env_casa_pequena.glb",
-      "tasks": [],
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cadb-83dc-7672-8d61-0289def71b1e",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cade-8893-77b7-bafd-c81da1ee3d85",
+          "date": "2026-11-11"
+        }
+      ],
       "notes": []
     }
   ]

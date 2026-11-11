@@ -32,6 +32,8 @@ var _telegraph: Node3D
 var _body_mat: StandardMaterial3D
 var _base_color: Color = Color.WHITE
 var _bar: HealthBar3D
+## Meshy model (null = grey-box capsule).
+var model: CharacterModel
 
 
 func setup(id: String, lvl: int, player: Player) -> void:
@@ -65,10 +67,16 @@ func _ready() -> void:
 	add_child(shape)
 
 	_base_color = Color(str(data.get("color", "#cc3333")))
-	var visual: Node3D = ProtoVisuals.humanoid(_base_color, 1.8 * s)
-	add_child(visual)
-	var body: MeshInstance3D = visual.get_node("Body")
-	_body_mat = body.material_override
+	model = CharacterModel.create(str(data.get("model", "")))
+	if model:
+		model.scale = Vector3.ONE * s
+		add_child(model)
+		_body_mat = ProtoVisuals.material(_base_color)
+	else:
+		var visual: Node3D = ProtoVisuals.humanoid(_base_color, 1.8 * s)
+		add_child(visual)
+		var body: MeshInstance3D = visual.get_node("Body")
+		_body_mat = body.material_override
 
 	status = StatusEffects.new()
 	add_child(status)
@@ -100,6 +108,8 @@ func take_damage(amount: int, crit: bool, knockback: Vector3 = Vector3.ZERO) -> 
 	ProtoVisuals.damage_number(get_parent(), global_position, str(amount),
 		Color("#ffd23f") if crit else Color.WHITE, crit)
 	_flash()
+	if model and _state != State.WINDUP and not model.is_busy():
+		model.play_action("hit")
 	if _state == State.IDLE:
 		_state = State.CHASE
 	if hp <= 0.0:
@@ -150,6 +160,8 @@ func _physics_process(delta: float) -> void:
 	_knockback = _knockback.move_toward(Vector3.ZERO, 25.0 * delta)
 	move_and_slide()
 	global_position.y = 0.0
+	if model and _state != State.WINDUP and not stunned:
+		model.update_locomotion(move.length(), _state != State.IDLE)
 
 
 func _target_alive() -> bool:
@@ -160,6 +172,8 @@ func _start_attack() -> void:
 	_state = State.WINDUP
 	var windup: float = float(data.get("windup", 0.6))
 	_timer = windup
+	if model:
+		model.play_strike("attack", windup)
 	var radius: float = float(data.get("attack_radius", 1.2))
 	if str(data.get("attack_shape", "front")) == "ground_target":
 		_attack_center = target.global_position
@@ -210,7 +224,12 @@ func _die() -> void:
 	_bar.visible = false
 	died.emit(self)
 	var tw := create_tween()
-	tw.tween_property(self, "scale", Vector3(1.2, 0.05, 1.2), 0.25)
+	if model:
+		var lying: float = model.play_action("dead")
+		tw.tween_interval(lying + 0.6)
+		tw.tween_property(self, "position:y", -1.2, 0.6)
+	else:
+		tw.tween_property(self, "scale", Vector3(1.2, 0.05, 1.2), 0.25)
 	tw.tween_callback(queue_free)
 
 
@@ -224,6 +243,9 @@ func _face(dir: Vector3) -> void:
 
 
 func _flash() -> void:
+	if model:
+		model.flash()
+		return
 	_body_mat.albedo_color = Color.WHITE
 	create_tween().tween_property(_body_mat, "albedo_color", _status_color(), 0.15)
 
@@ -239,5 +261,10 @@ func _status_color() -> Color:
 
 
 func _on_status_changed() -> void:
-	if not is_dead():
-		_body_mat.albedo_color = _status_color()
+	if is_dead():
+		return
+	if model:
+		var c: Color = _status_color()
+		model.set_tint(c, 0.0 if c == _base_color else 0.35)
+		return
+	_body_mat.albedo_color = _status_color()

@@ -1,4 +1,4 @@
-class_name VirtualJoystick
+class_name TouchJoystick
 extends Control
 ## Floating joystick: touch anywhere in its area and drag. Feeds the move_* actions,
 ## so the player code reads keyboard, gamepad and touch the same way.

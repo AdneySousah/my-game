@@ -1,0 +1,69 @@
+{
+  "_comment": "Modelos 3D dos personagens (Fase 3). 'actions' liga cada ação do jogo a um trecho de animação do Meshy: start/end em segundos do clipe, speed = velocidade. 'strike' = momento do golpe no clipe (usado para sincronizar o aviso dos inimigos). Tempos medidos com tests/anim_analyze.gd.",
+  "hero_lio": {
+    "scene": "res://assets/characters/hero/hero_lio/hero_lio.glb",
+    "anim_sources": [
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_anims_a.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_anims_b.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {
+      "scene": "res://assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb",
+      "bone": "RightHand",
+      "length": 0.85,
+      "grip": 0.38,
+      "rotation_deg": [0, 0, -90],
+      "offset": [0, 0.07, 0.02]
+    },
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Combat_Stance", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "attack_0": { "anim": "Triple_Combo_Attack", "start": 0.45, "end": 1.15, "speed": 2.2 },
+      "attack_1": { "anim": "Triple_Combo_Attack", "start": 1.2, "end": 1.9, "speed": 2.2 },
+      "attack_2": { "anim": "Triple_Combo_Attack", "start": 1.9, "end": 3.0, "speed": 2.2 },
+      "dodge": { "anim": "Roll_Dodge", "start": 0.15, "end": 1.6, "speed": 3.6 },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
+      "corte_giratorio": { "anim": "Axe_Spin_Attack", "start": 0.55, "end": 1.8, "speed": 2.0 },
+      "investida": { "anim": "Thrust_Slash", "start": 0.45, "end": 1.7, "speed": 2.0 },
+      "golpe_sismico": { "anim": "Charged_Ground_Slam", "start": 1.0, "end": 2.3, "speed": 2.5 },
+      "quebra_guarda": { "anim": "Charged_Slash", "start": 0.45, "end": 1.8, "speed": 2.5 },
+      "brado_de_guerra": { "anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 2.4 },
+      "onda_de_corte": { "anim": "Charged_Upward_Slash", "start": 0.85, "end": 2.0, "speed": 2.0 },
+      "salto_devastador": { "anim": "Basic_Jump", "start": 1.2, "end": 3.2, "speed": 2.67 },
+      "julgamento": { "anim": "Sword_Judgment", "start": 0.36, "end": 2.2, "speed": 1.6 }
+    }
+  },
+  "enm_bandido": {
+    "scene": "res://assets/enemies/enm_bandido/enm_bandido.glb",
+    "anim_sources": [
+      { "path": "res://assets/enemies/enm_bandido/enm_bandido_anims.glb" },
+      { "path": "res://assets/enemies/enm_bandido/enm_bandido_walk.glb", "rename": "Walk" },
+      { "path": "res://assets/enemies/enm_bandido/enm_bandido_run.glb", "rename": "Run" }
+    ],
+    "scale": 1.2,
+    "move_anim_speed": { "walk": 1.6, "run": 6.0 },
+    "weapon": {
+      "scene": "res://assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb",
+      "bone": "RightHand",
+      "length": 0.55,
+      "grip": 0.38,
+      "rotation_deg": [0, 0, -90],
+      "offset": [0, 0.07, 0.02]
+    },
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "combat_idle": { "anim": "Idle", "loop": true },
+      "walk": { "anim": "Walk", "loop": true },
+      "run": { "anim": "Run", "loop": true },
+      "attack": { "anim": "Left_Slash", "strike": 0.8, "end": 1.7, "speed": 1.0 },
+      "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
+      "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 }
+    }
+  }
+}

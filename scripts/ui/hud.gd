@@ -20,7 +20,7 @@ var _defeated_label: Label
 var _toast: Label
 var _toast_tween: Tween
 var _controls: Control
-var _joystick: VirtualJoystick
+var _joystick: TouchJoystick
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
@@ -178,7 +178,7 @@ func _build_controls(root: Control) -> void:
 	_controls.set_anchors_preset(Control.PRESET_FULL_RECT)
 	_controls.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	root.add_child(_controls)
-	_joystick = VirtualJoystick.new()
+	_joystick = TouchJoystick.new()
 	_controls.add_child(_joystick)
 	_attack_btn = _touch("attack", ATTACK_RADIUS, tr("HUD_ATTACK"), Color(0.85, 0.3, 0.25, 0.55))
 	_dodge_btn = _touch("dodge", DODGE_RADIUS, tr("HUD_DODGE"), Color(0.3, 0.6, 0.9, 0.5))

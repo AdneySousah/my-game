@@ -1,0 +1,33 @@
+{
+  "_comment": "Peças de cenário do Meshy. 'scale' corrige o tamanho que o Meshy estimou (personagens têm ~1,6 m). 'collision': cylinder (raio em metros) ou box (caixa calculada do modelo); null = sem colisão.",
+  "props": {
+    "prp_arvore": { "scene": "res://assets/props/prp_arvore/prp_arvore.glb", "scale": 0.55, "collision": { "type": "cylinder", "radius": 0.45 } },
+    "prp_arbusto": { "scene": "res://assets/props/prp_arbusto/prp_arbusto.glb", "scale": 3.0, "collision": null },
+    "prp_pedra": { "scene": "res://assets/props/prp_pedra/prp_pedra.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.6 } },
+    "prp_cerca": { "scene": "res://assets/props/prp_cerca/prp_cerca.glb", "scale": 1.0, "collision": { "type": "box" } },
+    "prp_barril": { "scene": "res://assets/props/prp_barril/prp_barril.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.42 } },
+    "prp_caixa": { "scene": "res://assets/props/prp_caixa/prp_caixa.glb", "scale": 1.0, "collision": { "type": "box" } },
+    "prp_feno": { "scene": "res://assets/props/prp_feno/prp_feno.glb", "scale": 2.5, "collision": { "type": "box" } },
+    "prp_carroca": { "scene": "res://assets/props/prp_carroca/prp_carroca.glb", "scale": 1.15, "collision": { "type": "box" } },
+    "prp_poco": { "scene": "res://assets/props/prp_poco/prp_poco.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 1.0 } },
+    "env_casa_pequena": { "scene": "res://assets/environment/env_casa_pequena/env_casa_pequena.glb", "scale": 0.7, "collision": { "type": "box" } }
+  },
+  "arena_village": [
+    { "id": "env_casa_pequena", "pos": [-11, 0, -9], "rot": 35 },
+    { "id": "env_casa_pequena", "pos": [-17, 0, -1], "rot": 70 },
+    { "id": "prp_poco", "pos": [-6, 0, -6], "rot": 0 },
+    { "id": "prp_carroca", "pos": [-13, 0, -3], "rot": 120 },
+    { "id": "prp_barril", "pos": [-8, 0, -11], "rot": 0 },
+    { "id": "prp_barril", "pos": [-7.1, 0, -11.6], "rot": 40 },
+    { "id": "prp_caixa", "pos": [-9.2, 0, -12.2], "rot": 15 },
+    { "id": "prp_feno", "pos": [-14, 0, -7], "rot": 30 },
+    { "id": "prp_feno", "pos": [-15, 0, -8.2], "rot": 75 },
+    { "id": "prp_cerca", "pos": [-4, 0, -14], "rot": 0 },
+    { "id": "prp_cerca", "pos": [-2.1, 0, -14], "rot": 0 },
+    { "id": "prp_cerca", "pos": [-0.2, 0, -14], "rot": 0 },
+    { "id": "prp_cerca", "pos": [1.7, 0, -14], "rot": 0 },
+    { "id": "prp_arbusto", "pos": [-5, 0, -9], "rot": 0 },
+    { "id": "prp_arbusto", "pos": [-10, 0, -5], "rot": 60 }
+  ],
+  "arena_scatter": { "prp_arvore": 18, "prp_pedra": 10, "prp_arbusto": 22, "prp_barril": 3, "prp_caixa": 3 }
+}

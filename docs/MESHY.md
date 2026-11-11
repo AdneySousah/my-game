@@ -48,6 +48,19 @@ Status possíveis: `planned`, `generating`, `review`, `approved`, `rejected`, `i
 - Formato: **GLB**. Textura 2K (reduzida para 1K no celular).
 - Peças modulares precisam encaixar: muros e pisos com medidas redondas (1 m, 2 m, 4 m).
 
+### Modelos e custos da API (preços de out/2026)
+| Uso | Modelo | Créditos |
+|---|---|---|
+| Imagem conceito | `nano-banana-2` | 6 |
+| Personagem (Image to 3D) | `meshy-t2.5` + textura `meshy-n1` | 15 |
+| Objeto (Image to 3D ou Text to 3D) | `meshy-t2` + textura `meshy-n1` | 15 (text: 5 preview + 10 refine) |
+| Rig (já inclui andar e correr) | — | 5 |
+| Animação extra | — | 3 cada |
+| Retexture (variação) | — | 10 |
+| Remesh / UV | — | 5 |
+
+Animações da biblioteca escolhidas para o herói (ids do Meshy): ataque básico `105` Triple Combo Attack, `92` Double Combo Attack, skills `91` `238` `240` `127` `88` `242` `221` `102` `86`, esquiva `158` Roll Dodge, guarda `89` Combat Idle, dano `178` Hit Reaction, morte `8` Dead.
+
 ### Economia de créditos
 - Use as imagens conceito (grátis) para acertar o visual antes de gerar o 3D.
 - Variações (ex.: goblin → goblin chefe) com Retexture em vez de um modelo novo.

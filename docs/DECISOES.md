@@ -36,6 +36,20 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Godot 4.7.2 (versão padrão, GDScript) em `C:\Godot`.
 - Repositório na conta pessoal do GitHub, envio por SSH, binários no Git LFS.
 
+## Meshy (11/11/2026)
+- Os créditos mensais renovam todo **dia 4**. Saldo em 11/11: 3.269 (2.919 mensais + 350 permanentes).
+- Modelos: personagens com `meshy-t2.5` + textura `meshy-n1`; objetos com `meshy-t2` + `meshy-n1`.
+- Personagem animado ≈ 40 créditos (modelo 15 + rig 5 + ~5 animações × 3 + imagem conceito ~6).
+
+## Design (11/11/2026, versão 0.1, aguardando aprovação)
+- Fantasia medieval clássica, sem magia para o jogador, com ruínas antigas. Tom equilibrado e com humor. Visual chibi vibrante.
+- 5 cidades: fazenda (terra natal), deserto, fortaleza na neve, cidade élfica, capital.
+- O deus é o pai do herói. O final é aberto para continuação.
+- Nível 100 em ~30 h; história termina perto do 65.
+- 8 skills, 4 equipadas; pontos de atributo; fortalecimento até +20; gemas e até 3 encaixes; desmontagem no lugar da fusão; conjuntos de armadura, armas e acessórios.
+- Missões diárias (5 por dia), calendário de login, títulos por conquistas, dificuldade escolhida no início, Modo Infernal nas dungeons.
+- Pets e montarias: pós-lançamento.
+- Documentos: [design/GDD.md](design/GDD.md) e [ESTILO.md](ESTILO.md).
+
 ## Em aberto
-- Nome do jogo (Fase 1).
-- Data de renovação dos créditos do Meshy (o controle usa o dia 1 de cada mês até sabermos).
+- As decisões pendentes no fim do [GDD](design/GDD.md).

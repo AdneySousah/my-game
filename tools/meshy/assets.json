@@ -2,7 +2,7 @@
   "budget": {
     "monthly_credits": 3000,
     "reserve": 300,
-    "cycle_start_day": 1
+    "cycle_start_day": 4
   },
   "assets": []
 }

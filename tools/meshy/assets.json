@@ -4,5 +4,72 @@
     "reserve": 300,
     "cycle_start_day": 4
   },
-  "assets": []
+  "assets": [
+    {
+      "id": "ref_lio",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Lio, corpo inteiro A-pose (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_lio/ref_lio.png",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "ref_pradoluz",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Clima de pradoluz (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_pradoluz/ref_pradoluz.png",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "ref_qaressa",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Clima de qaressa (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_qaressa/ref_qaressa.png",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "ref_hrimvald",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Clima de hrimvald (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_hrimvald/ref_hrimvald.png",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "ref_lysthael",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Clima de lysthael (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_lysthael/ref_lysthael.png",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "ref_altarea",
+      "category": "ref",
+      "phase": 1,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Clima de altarea (ver docs/design/referencias/PLANO.md)",
+      "file": "docs/design/referencias/ref_altarea/ref_altarea.png",
+      "tasks": [],
+      "notes": []
+    }
+  ]
 }

@@ -29,6 +29,7 @@ Status possíveis: `planned`, `generating`, `review`, `approved`, `rejected`, `i
 | NPC | `npc_` | `assets/npcs/` |
 | Objeto / peça de cenário | `prp_` | `assets/props/` |
 | Peça de ambiente (muro, casa, ponte) | `env_` | `assets/environment/` |
+| Imagem de referência (PNG) | `ref_` | `docs/design/referencias/` |
 
 ## Especificações técnicas
 

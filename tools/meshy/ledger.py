@@ -32,7 +32,10 @@ CATEGORIES = {
     "npc": "assets/npcs",
     "prp": "assets/props",
     "env": "assets/environment",
+    "ref": "docs/design/referencias",
 }
+# 2D reference/cutscene images are PNG; everything else is a 3D model.
+EXTENSIONS = {"ref": "png"}
 
 
 def load() -> dict:
@@ -113,7 +116,7 @@ def cmd_add(db: dict, args: argparse.Namespace) -> None:
         "method": args.method,
         "status": "planned",
         "prompt": args.prompt,
-        "file": f"{CATEGORIES[args.category]}/{args.id}/{args.id}.glb",
+        "file": f"{CATEGORIES[args.category]}/{args.id}/{args.id}.{EXTENSIONS.get(args.category, 'glb')}",
         "tasks": [],
         "notes": [],
     })

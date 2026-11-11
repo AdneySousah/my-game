@@ -57,5 +57,8 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Trevo de Fortificação e Broca de Engaste em duas versões: comum (ouro/login/drops, chance de falhar nos níveis altos; Trevo comum 100% até +11, 75% no +12...) e Real (dinheiro real, 100% de sucesso).
 - Penalidade "Derrotado": −5% em todos os atributos por 5 minutos.
 
+## GDD aprovado (11/11/2026)
+- GDD 1.0 aprovado. Ordem das cidades fixa, nomes aprovados (Herdeiro dos Céus, Lio...), botão de esquiva incluído.
+
 ## Em aberto
-- As decisões pendentes no fim do [GDD](design/GDD.md).
+- Aprovação do gasto da arte de referência (39 créditos), conforme [design/referencias/PLANO.md](design/referencias/PLANO.md).

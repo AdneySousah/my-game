@@ -1,8 +1,6 @@
-# Documento de Design (GDD) — versão 0.1
+# Documento de Design (GDD) — versão 1.0 (aprovada em 11/11/2026)
 
-Base: as suas respostas em [BRIEFING.md](BRIEFING.md). O que foi ideia minha está marcado com **✱**. Pode trocar qualquer coisa.
-
-As perguntas que ainda dependem de você estão no fim, em **"Decisões pendentes"**.
+Base: as suas respostas em [BRIEFING.md](BRIEFING.md). O que foi ideia minha está marcado com **✱**. Mudanças futuras entram como nova versão, registradas em [DECISOES.md](../DECISOES.md).
 
 ---
 
@@ -415,16 +413,12 @@ Com os preços reais da API, cada personagem sai mais barato do que eu tinha est
 
 ---
 
-# Decisões pendentes (preciso de você)
+# Decisões fechadas na aprovação (11/11/2026)
 
-**Já respondidas:**
-- Teleporte em todas as cidades, mais pontos de descanso nas áreas de aventura.
+- Teleporte em todas as cidades, mais pontos de descanso nas áreas de aventura e nas dungeons.
 - Todas as skills liberadas até o nível 30.
 - Trevo e Broca em versão comum e Real.
 - Penalidade de morte de −5%.
-
-**Ainda abertas:**
-
-5. **Ordem das cidades.** Proposta ✱: a ordem principal é fixa (Pradoluz → Qaressa → Hrimvald → Lys'Thaël → Altaréa), porque a história depende dela (o Bento morre em Hrimvald). A liberdade vem das áreas e dungeons opcionais de cada região. Pode ser?
-6. **Nomes.** Aprova **Herdeiro dos Céus**, **Lio**, as cidades e os personagens? Pode trocar qualquer um.
-7. **Botão de esquiva** (rolamento). Entra?
+- Ordem principal fixa: Pradoluz → Qaressa → Hrimvald → Lys'Thaël → Altaréa, com áreas e dungeons opcionais em cada região.
+- Nomes aprovados: **Herdeiro dos Céus** (*Skyborn Heir*), **Lio**, as cidades e os personagens deste documento. O nome do jogo ainda será checado na Play Store antes do lançamento.
+- Botão de esquiva (rolamento) entra no combate.

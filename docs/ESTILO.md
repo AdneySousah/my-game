@@ -57,8 +57,17 @@ Peças modulares (muros, pisos, casas) recebem também: `modular game piece, str
 - **Severin:** `serious young knight, neat dark hair, heavy dark-blue plate armor with gold trim, stern expression`
 - **Marta:** `kind farmer mother, brown hair in a bun, simple green dress, apron`
 
-## Imagem de referência
-Antes de gerar qualquer modelo 3D, geramos a **arte de referência do Lio** e **1 imagem de clima por região** com a geração de imagens do Meshy. Elas viram a "verdade visual" do jogo. Custo estimado: 6 imagens × 6 créditos ≈ **36 créditos**. As imagens aprovadas ficam em `docs/design/referencias/`.
+## Imagens de referência (aprovadas)
+São a "verdade visual" do jogo. Todo asset novo é comparado com elas.
+
+| Imagem | Arquivo |
+|---|---|
+| Lio | [ref_lio.png](design/referencias/ref_lio/ref_lio.png) |
+| Pradoluz | [ref_pradoluz.png](design/referencias/ref_pradoluz/ref_pradoluz.png) |
+| Qaressa | [ref_qaressa.png](design/referencias/ref_qaressa/ref_qaressa.png) |
+| Hrimvald | [ref_hrimvald.png](design/referencias/ref_hrimvald/ref_hrimvald.png) |
+| Lys'Thaël | [ref_lysthael.png](design/referencias/ref_lysthael/ref_lysthael.png) |
+| Altaréa | [ref_altarea.png](design/referencias/ref_altarea/ref_altarea.png) |
 
 ## Shader e iluminação no Godot
 - **Shader estilo desenho (toon):** 2 a 3 faixas de luz, borda de luz suave (rim light) e cores sem perder a saturação.

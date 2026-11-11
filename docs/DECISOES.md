@@ -60,5 +60,5 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 ## GDD aprovado (11/11/2026)
 - GDD 1.0 aprovado. Ordem das cidades fixa, nomes aprovados (Herdeiro dos Céus, Lio...), botão de esquiva incluído.
 
-## Em aberto
-- Aprovação do gasto da arte de referência (39 créditos), conforme [design/referencias/PLANO.md](design/referencias/PLANO.md).
+## Arte de referência (11/11/2026)
+- As 6 imagens foram aprovadas e são a referência visual oficial: [design/referencias/](design/referencias/). A do Lio (`ref_lio`, tarefa Meshy `01a1cab5-eeca-76aa-be1c-9b53fc5f0f35`) será a base do modelo 3D dele na Fase 3.

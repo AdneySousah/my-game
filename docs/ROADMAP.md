@@ -16,4 +16,5 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 
 ## Status
 - [x] Fase 0 — concluída (11/11/2026)
-- [ ] Fase 1 — em andamento: GDD 1.0 aprovado (`docs/design/GDD.md`), guia de estilo em `docs/ESTILO.md`. Falta a arte de referência (39 créditos, `docs/design/referencias/PLANO.md`).
+- [x] Fase 1 — concluída (11/11/2026): GDD 1.0 (`docs/design/GDD.md`), guia de estilo (`docs/ESTILO.md`) e 6 imagens de referência aprovadas (`docs/design/referencias/`, 39 créditos).
+- [ ] Fase 2 — protótipo cinza (sem créditos)

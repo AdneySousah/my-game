@@ -10,66 +10,120 @@
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Lio, corpo inteiro A-pose (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_lio/ref_lio.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 9,
+          "task_id": "01a1cab5-eeca-76aa-be1c-9b53fc5f0f35",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "ref_pradoluz",
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Clima de pradoluz (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_pradoluz/ref_pradoluz.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cab5-f195-7763-bac3-2ac2c43e7316",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "ref_qaressa",
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Clima de qaressa (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_qaressa/ref_qaressa.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cab5-f288-76f4-982c-8e2333480d37",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "ref_hrimvald",
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Clima de hrimvald (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_hrimvald/ref_hrimvald.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cab5-f372-705b-9445-4345060bc2f9",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "ref_lysthael",
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Clima de lysthael (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_lysthael/ref_lysthael.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cab5-f44e-7642-8188-2fb6d502a13a",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "ref_altarea",
       "category": "ref",
       "phase": 1,
       "method": "mcp",
-      "status": "planned",
+      "status": "approved",
       "prompt": "Clima de altarea (ver docs/design/referencias/PLANO.md)",
       "file": "docs/design/referencias/ref_altarea/ref_altarea.png",
-      "tasks": [],
-      "notes": []
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1cab5-f52e-7593-9f26-bd96aa74e006",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     }
   ]
 }

@@ -228,8 +228,8 @@ A cada nível, o jogador ganha **5 pontos** para distribuir em 4 atributos ✱. 
 | Atributo | O que faz (por ponto) |
 |---|---|
 | **Força** | +2 de ataque; +0,3% de dano crítico |
-| **Vitalidade** | +15 de vida; +1 de defesa |
-| **Agilidade** | +0,3% de velocidade de ataque; +0,1% de chance de crítico; +0,1% de esquiva |
+| **Vitalidade** | +15 de vida; +1 de defesa; +1 de fôlego máximo |
+| **Agilidade** | +0,3% de velocidade de ataque; +0,1% de chance de crítico; +0,1% de esquiva; +0,1/s de recuperação de fôlego |
 | **Foco** | −0,15% de tempo de recarga das skills (máximo −30%); +0,2% de dano das skills |
 
 - **Por que 5 pontos:** chegam a ~495 pontos no nível 100. É o bastante para criar estilos diferentes, como o "tanque" (Vitalidade), o "crítico" (Agilidade + Força) e o "skills" (Foco).
@@ -265,6 +265,23 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 | 30 | Julgamento | A mais forte em um alvo só, para os chefes da metade do jogo |
 - **Evolução:** **1 ponto de skill por nível** (+ recompensas de missões). Cada skill vai até o **nível 15**. Nos níveis **5, 10 e 15**, ganha um efeito extra. Exemplo do Corte Giratório: nível 5 gira 2 vezes; nível 10 puxa os inimigos; nível 15 deixa um rastro que causa dano.
 - Até o fim da história (~65), dá para evoluir bem umas 5 skills. No nível 100, quase todas. As escolhas pesam durante a história, e no pós-jogo dá para testar combinações.
+
+## 6.3.1 Fôlego (adicionado em 11/11/2026, depois do 1º teste)
+Barra de **fôlego** abaixo da vida. O ataque básico não gasta fôlego. Gastam:
+
+| Ação | Custo |
+|---|---|
+| Esquiva (rolamento) | 25 |
+| Correr (segurar o botão **Correr**: +60% de velocidade) | 18 por segundo; precisa de pelo menos 15 para começar |
+| Corte Giratório / Onda de Corte | 20 |
+| Investida / Golpe Sísmico / Quebra-Guarda | 25 |
+| Brado de Guerra | 30 |
+| Salto Devastador | 35 |
+| Julgamento | 40 |
+
+- **Fôlego máximo:** 100 + 1 por nível + 1 por ponto de **Vitalidade**.
+- **Recuperação:** 18 por segundo + 0,1 por ponto de **Agilidade**. Ela começa 0,8 s depois do último gasto.
+- Sem fôlego, a ação não acontece, aparece "Sem fôlego!" e o botão fica escuro.
 
 ## 6.4 Equipamentos
 

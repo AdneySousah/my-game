@@ -56,6 +56,12 @@ func cooldown_left(slot: int) -> float:
 	return float(_cooldowns.get(equipped[slot], 0.0))
 
 
+## True when the hero has enough fôlego for the skill in `slot`.
+func affordable(slot: int) -> bool:
+	var id: String = equipped[slot]
+	return id == "" or player.stamina >= float(Data.skill(id).get("stamina_cost", 0))
+
+
 func cooldown_ratio(slot: int) -> float:
 	var id: String = equipped[slot]
 	if id == "":
@@ -69,6 +75,8 @@ func use_slot(slot: int) -> bool:
 	if id == "" or cooldown_left(slot) > 0.0 or not player.can_act():
 		return false
 	var s: Dictionary = Data.skill(id)
+	if not player.spend_stamina(float(s.get("stamina_cost", 0))):
+		return false
 	_cooldowns[id] = float(s.get("cooldown", 1.0)) * player.stats.cooldown_mult()
 	_execute(s)
 	return true

@@ -44,6 +44,8 @@ func _unit_tests() -> void:
 	check(is_equal_approx(s.get_stat("atk"), 30.0), "atk L1 = 20 + 5*2 = 30 (got %s)" % s.get_stat("atk"))
 	check(is_equal_approx(s.get_stat("max_hp"), 275.0), "hp L1 = 200 + 5*15 = 275")
 	check(is_equal_approx(s.get_stat("def"), 15.0), "def L1 = 10 + 5 = 15")
+	check(is_equal_approx(s.get_stat("max_stamina"), 105.0), "fôlego L1 = 100 + 5 de vitalidade = 105")
+	check(is_equal_approx(s.get_stat("stamina_regen"), 18.5), "recuperação L1 = 18 + 5*0.1 = 18.5/s")
 
 	# Level up gives 5 points and stats grow
 	s.add_xp(240)
@@ -126,6 +128,11 @@ func _bot_test() -> void:
 	hud.get("_skills_panel").hide()
 	hud.call("_on_panel_closed")
 	check(player.skills.equipped[0] == "julgamento", "equip skill into slot 1")
+	var st_before: float = player.stamina
+	player.stats.spend_point("vit")
+	check(is_equal_approx(player.stamina, st_before + 1.0), "vitality point also raises current fôlego")
+
+	await _stamina_tests(player)
 
 	# Play: chase enemies, combo, rotate through all 8 skills.
 	var skill_ids: Array[String] = []
@@ -179,6 +186,61 @@ func _bot_test() -> void:
 	check(player.stats.defeated_time_left > 0.0, "Derrotado active after death")
 	check(player.gold != gold_start, "gold changed during play")
 	arena.queue_free()
+
+
+## Fôlego: dodge, skills and running spend it; it refills over time.
+func _stamina_tests(player: Player) -> void:
+	var rules: Dictionary = Data.progression.get("stamina", {})
+	check(is_equal_approx(player.stamina, player.max_stamina()), "starts with full fôlego")
+
+	# Dodge costs fôlego.
+	var before: float = player.stamina
+	Input.action_press("dodge")
+	await get_tree().physics_frame
+	Input.action_release("dodge")
+	await get_tree().physics_frame
+	check(absf(before - player.stamina - float(rules["dodge_cost"])) < 0.5,
+		"dodge spends %s fôlego (%.1f -> %.1f)" % [rules["dodge_cost"], before, player.stamina])
+	for i: int in 30:
+		await get_tree().physics_frame
+
+	# Not enough fôlego: no dodge, no skill.
+	player.stamina = 5.0
+	var pos: Vector3 = player.global_position
+	Input.action_press("dodge")
+	await get_tree().physics_frame
+	Input.action_release("dodge")
+	for i: int in 10:
+		await get_tree().physics_frame
+	check(player.global_position.distance_to(pos) < 0.5, "no dodge without fôlego")
+	player.stamina = 5.0
+	check(not player.skills.use_slot(0), "no skill without fôlego")
+
+	# Running is faster and drains fôlego; regen brings it back.
+	player.stamina = player.max_stamina()
+	for i: int in 60:
+		await get_tree().physics_frame
+	var start: Vector3 = player.global_position
+	Input.action_press("move_right")
+	for i: int in 30:
+		await get_tree().physics_frame
+	var walk: float = player.global_position.distance_to(start)
+	start = player.global_position
+	var full: float = player.stamina
+	Input.action_press("sprint")
+	for i: int in 30:
+		await get_tree().physics_frame
+	var run: float = player.global_position.distance_to(start)
+	check(player.is_sprinting(), "holding run + moving = sprinting")
+	Input.action_release("sprint")
+	Input.action_release("move_right")
+	check(run > walk * 1.4, "running is faster (walk %.2f m, run %.2f m)" % [walk, run])
+	check(player.stamina < full - 5.0, "running drains fôlego (%.1f -> %.1f)" % [full, player.stamina])
+	player.stamina = 20.0
+	for i: int in 120:
+		await get_tree().physics_frame
+	check(player.stamina > 35.0, "fôlego refills (20 -> %.1f in 2 s)" % player.stamina)
+	player.stamina = player.max_stamina()
 
 
 func _press_towards(world_dir: Vector3, cam_yaw: float) -> void:

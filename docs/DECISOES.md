@@ -62,3 +62,7 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 
 ## Arte de referência (11/11/2026)
 - As 6 imagens foram aprovadas e são a referência visual oficial: [design/referencias/](design/referencias/). A do Lio (`ref_lio`, tarefa Meshy `01a1cab5-eeca-76aa-be1c-9b53fc5f0f35`) será a base do modelo 3D dele na Fase 3.
+
+## Primeiro teste do protótipo (11/11/2026)
+- O dono aprovou a velocidade do personagem, o ataque, o equilíbrio dos inimigos e as skills. Nada travou.
+- Pedido: **fôlego**. A esquiva, a corrida (botão novo) e as skills gastam fôlego; o ataque básico não. Detalhes no GDD 6.3.1.

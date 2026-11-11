@@ -71,7 +71,8 @@ func _rebuild() -> void:
 		name_label.add_theme_color_override("font_color", Color(str(s.get("color", "#ffffff"))) if unlocked else Color(0.5, 0.5, 0.55))
 		info.add_child(name_label)
 		var desc := Label.new()
-		desc.text = tr(str(s["desc"]))
+		desc.text = tr(str(s["desc"])) + "
+" + tr("SKILL_COST") % [int(s.get("stamina_cost", 0)), int(s.get("cooldown", 0))]
 		desc.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 		desc.add_theme_font_size_override("font_size", 14)
 		desc.add_theme_color_override("font_color", Color(0.75, 0.78, 0.85))

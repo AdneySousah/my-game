@@ -10,6 +10,7 @@
 | Andar | W A S D ou setas | Analógico esquerdo |
 | Atacar (combo de 3 golpes) | J | X |
 | Esquiva (rolamento, fica invulnerável) | Espaço | A |
+| Correr (segurar; gasta fôlego) | Shift | Apertar o analógico esquerdo |
 | Skills 1 a 4 | 1 2 3 4 (ou U I O P) | Y, B, LB, RB |
 | Painel de atributos | C | Back |
 | Painel de skills | K | — |
@@ -32,7 +33,8 @@ Tudo ainda é forma simples. O amarelo é o Lio, o vermelho é o bandido e o rox
    - Salto Devastador: pula em cima dos inimigos.
    - Julgamento: golpe enorme em um alvo.
 4. **Atributos:** no painel **C**, coloque pontos e veja a vida, o ataque e a defesa mudarem.
-5. **Morte:** deixe os inimigos te derrotarem. Você perde 10% do ouro e 5% do XP do nível, volta no Ponto de descanso e fica com "Derrotado: −5%" por 5 minutos.
+5. **Fôlego:** a barra verde-clara abaixo da vida. Esquiva, corrida e skills gastam; o ataque básico não. Sem fôlego o botão fica escuro e aparece "Sem fôlego!".
+6. **Morte:** deixe os inimigos te derrotarem. Você perde 10% do ouro e 5% do XP do nível, volta no Ponto de descanso e fica com "Derrotado: −5%" por 5 minutos.
 
 Anote o que achou: rápido, lento, fácil, difícil, confuso. Os números ficam todos em `data/` e são fáceis de ajustar.
 

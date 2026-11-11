@@ -1,8 +1,13 @@
 {
-  "_comment": "Regras de progressão do herói (GDD 6.1, 6.2, 6.9). Valores de protótipo; ajustar nos testes.",
+  "_comment": "Regras de progressão do herói (GDD 6.1, 6.2, 6.9, 6.13). Valores de protótipo; ajustar nos testes.",
   "level_cap": 100,
   "points_per_level": 5,
-  "start_attributes": { "str": 5, "vit": 5, "agi": 5, "foc": 5 },
+  "start_attributes": {
+    "str": 5,
+    "vit": 5,
+    "agi": 5,
+    "foc": 5
+  },
   "base_stats": {
     "max_hp": 200,
     "atk": 20,
@@ -12,22 +17,56 @@
     "crit_dmg": 0.5,
     "evade": 0.0,
     "cdr": 0.0,
-    "skill_dmg": 0.0
+    "skill_dmg": 0.0,
+    "max_stamina": 100,
+    "stamina_regen": 18.0
   },
-  "growth_per_level": { "max_hp": 20, "atk": 2, "def": 1 },
+  "growth_per_level": {
+    "max_hp": 20,
+    "atk": 2,
+    "def": 1,
+    "max_stamina": 1
+  },
   "attribute_effects": {
-    "str": { "atk": 2, "crit_dmg": 0.003 },
-    "vit": { "max_hp": 15, "def": 1 },
-    "agi": { "atk_speed": 0.003, "crit_chance": 0.001, "evade": 0.001 },
-    "foc": { "cdr": 0.0015, "skill_dmg": 0.002 }
+    "str": {
+      "atk": 2,
+      "crit_dmg": 0.003
+    },
+    "vit": {
+      "max_hp": 15,
+      "def": 1,
+      "max_stamina": 1
+    },
+    "agi": {
+      "atk_speed": 0.003,
+      "crit_chance": 0.001,
+      "evade": 0.001,
+      "stamina_regen": 0.1
+    },
+    "foc": {
+      "cdr": 0.0015,
+      "skill_dmg": 0.002
+    }
   },
-  "stat_caps": { "cdr": 0.3, "evade": 0.4, "crit_chance": 0.75 },
+  "stat_caps": {
+    "cdr": 0.3,
+    "evade": 0.4,
+    "crit_chance": 0.75
+  },
   "death": {
-    "gold_loss": 0.10,
+    "gold_loss": 0.1,
     "xp_loss": 0.05,
     "defeated_seconds": 300,
     "defeated_mult": 0.95
   },
-  "xp_level_diff_penalty": 0.10,
-  "xp_min_mult": 0.10
+  "xp_level_diff_penalty": 0.1,
+  "xp_min_mult": 0.1,
+  "stamina": {
+    "_comment": "Fôlego (pedido do dono em 11/11/2026). Ataque básico não gasta.",
+    "dodge_cost": 25,
+    "sprint_cost_per_sec": 18,
+    "sprint_speed_mult": 1.6,
+    "sprint_min_to_start": 15,
+    "regen_delay": 0.8
+  }
 }

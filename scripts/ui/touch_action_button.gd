@@ -11,6 +11,8 @@ var sub_text: String = ""
 var color: Color = Color(1, 1, 1, 0.35)
 var cooldown_ratio: float = 0.0
 var disabled: bool = false
+## Drawn darker when the action cannot be paid for (e.g. not enough fôlego).
+var dimmed: bool = false
 
 var _touch_index: int = -1
 
@@ -57,6 +59,8 @@ func _draw() -> void:
 	var fill: Color = color.darkened(0.3) if pressed else color
 	if disabled:
 		fill = Color(0.3, 0.3, 0.35, 0.35)
+	elif dimmed:
+		fill = fill.darkened(0.55)
 	draw_circle(c, radius, fill)
 	draw_arc(c, radius - 1.5, 0.0, TAU, 48, Color(1, 1, 1, 0.6), 3.0, true)
 	if cooldown_ratio > 0.0:

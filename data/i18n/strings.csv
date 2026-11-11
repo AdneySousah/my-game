@@ -4,6 +4,9 @@ HUD_GOLD,%d de ouro,%d gold
 HUD_DEFEATED,Derrotado: -5%% (%ds),Defeated: -5%% (%ds)
 HUD_ATTACK,Atacar,Attack
 HUD_DODGE,Esquiva,Dodge
+HUD_SPRINT,Correr,Run
+HUD_NO_STAMINA,Sem fôlego!,Out of stamina!
+SKILL_COST,%d de fôlego · recarga %ds,%d stamina · %ds cooldown
 HUD_ATTRIBUTES,Atributos (C),Attributes (C)
 HUD_SKILLS,Skills (K),Skills (K)
 HUD_DEBUG_LEVEL,+1 nível (F1),+1 level (F1)
@@ -22,8 +25,8 @@ ATTR_VIT,Vitalidade,Vitality
 ATTR_AGI,Agilidade,Agility
 ATTR_FOC,Foco,Focus
 ATTR_STR_DESC,+2 de ataque e +0.3% de dano crítico,+2 attack and +0.3% critical damage
-ATTR_VIT_DESC,+15 de vida e +1 de defesa,+15 health and +1 defense
-ATTR_AGI_DESC,"+0.3% de velocidade de ataque, +0.1% de crítico e de esquiva","+0.3% attack speed, +0.1% critical and evade chance"
+ATTR_VIT_DESC,"+15 de vida, +1 de defesa e +1 de fôlego máximo","+15 health, +1 defense and +1 max stamina"
+ATTR_AGI_DESC,"+0.3% de velocidade de ataque, +0.1% de crítico e de esquiva, +0.1/s de fôlego","+0.3% attack speed, +0.1% critical and evade chance, +0.1/s stamina"
 ATTR_FOC_DESC,-0.15% de recarga das skills e +0.2% de dano delas,-0.15% skill cooldown and +0.2% skill damage
 STAT_SUMMARY,Vida %d · Ataque %d · Defesa %d · Crítico %.1f%%,Health %d · Attack %d · Defense %d · Crit %.1f%%
 SKILL_CORTE_GIRATORIO,Corte Giratório,Whirling Slash

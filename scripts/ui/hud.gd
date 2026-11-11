@@ -12,6 +12,8 @@ var player: Player
 var _level_label: Label
 var _hp_bar: ProgressBar
 var _hp_text: Label
+var _stamina_bar: ProgressBar
+var _stamina_text: Label
 var _xp_bar: ProgressBar
 var _gold_label: Label
 var _defeated_label: Label
@@ -21,6 +23,7 @@ var _controls: Control
 var _joystick: VirtualJoystick
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
+var _sprint_btn: TouchActionButton
 var _skill_btns: Array[TouchActionButton] = []
 var _attributes_panel: AttributesPanel
 var _skills_panel: SkillsPanel
@@ -107,8 +110,14 @@ func _input(event: InputEvent) -> void:
 func _process(_delta: float) -> void:
 	if player == null:
 		return
+	_stamina_bar.max_value = player.max_stamina()
+	_stamina_bar.value = player.stamina
+	_stamina_text.text = "%d / %d" % [floori(player.stamina), roundi(player.max_stamina())]
+	_dodge_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("dodge_cost", 25))
+	_sprint_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("sprint_min_to_start", 15)) and not player.is_sprinting()
 	for i: int in _skill_btns.size():
 		var btn: TouchActionButton = _skill_btns[i]
+		btn.dimmed = not player.skills.affordable(i)
 		btn.cooldown_ratio = player.skills.cooldown_ratio(i)
 		var left: float = player.skills.cooldown_left(i)
 		btn.sub_text = "%.0f" % ceilf(left) if left > 0.0 else ""
@@ -135,6 +144,13 @@ func _build_status(root: Control) -> void:
 	_hp_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_hp_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 	_hp_bar.add_child(_hp_text)
+	_stamina_bar = _bar(Color("#c6e04a"), 14)
+	box.add_child(_stamina_bar)
+	_stamina_text = _label(12)
+	_stamina_text.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_stamina_text.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_stamina_text.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	_stamina_bar.add_child(_stamina_text)
 	_xp_bar = _bar(Color("#7fd1ff"), 10)
 	box.add_child(_xp_bar)
 	_gold_label = _label(18)
@@ -166,6 +182,7 @@ func _build_controls(root: Control) -> void:
 	_controls.add_child(_joystick)
 	_attack_btn = _touch("attack", ATTACK_RADIUS, tr("HUD_ATTACK"), Color(0.85, 0.3, 0.25, 0.55))
 	_dodge_btn = _touch("dodge", DODGE_RADIUS, tr("HUD_DODGE"), Color(0.3, 0.6, 0.9, 0.5))
+	_sprint_btn = _touch("sprint", DODGE_RADIUS, tr("HUD_SPRINT"), Color(0.55, 0.75, 0.2, 0.5))
 	for i: int in Game.SKILL_SLOTS:
 		_skill_btns.append(_touch("skill_%d" % (i + 1), SKILL_RADIUS, "", Color(1, 1, 1, 0.3)))
 
@@ -182,6 +199,7 @@ func _layout() -> void:
 		var a: float = deg_to_rad(angles[i])
 		_skill_btns[i].set_center(attack_c + Vector2(cos(a), sin(a)) * 165.0)
 	_dodge_btn.set_center(attack_c + Vector2(-270, 40))
+	_sprint_btn.set_center(attack_c + Vector2(-275, -60))
 
 
 func _label(font_size: int) -> Label:

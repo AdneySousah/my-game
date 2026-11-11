@@ -42,6 +42,12 @@ var _forced_step: Callable = Callable()
 var _scripted: bool = false
 var _dead: bool = false
 var _buff_time: float = 0.0
+var stamina: float = 0.0
+var _regen_pause: float = 0.0
+var _sprinting: bool = false
+var _no_stamina_cd: float = 0.0
+var _last_hp_max: float = 0.0
+var _last_stamina_max: float = 0.0
 var _visual: Node3D
 var _sword_pivot: Node3D
 var _body_mat: StandardMaterial3D
@@ -83,6 +89,9 @@ func _ready() -> void:
 	skills.player = self
 	add_child(skills)
 	hp = max_hp()
+	stamina = max_stamina()
+	_last_hp_max = hp
+	_last_stamina_max = stamina
 
 
 func _physics_process(delta: float) -> void:
@@ -92,6 +101,7 @@ func _physics_process(delta: float) -> void:
 	_combo_timer -= delta
 	_lock -= delta
 	_tick_buff(delta)
+	_tick_stamina(delta)
 	if _dead or _scripted:
 		return
 	if _forced_time > 0.0:
@@ -120,10 +130,13 @@ func _physics_process(delta: float) -> void:
 			_do_attack()
 			velocity = Vector3.ZERO
 		else:
-			velocity = dir * MOVE_SPEED
+			_update_sprint(dir, delta)
+			var speed: float = MOVE_SPEED * (float(_stamina_rules().get("sprint_speed_mult", 1.6)) if _sprinting else 1.0)
+			velocity = dir * speed
 			if dir.length_squared() > 0.01:
 				face_direction(dir)
 	else:
+		_sprinting = false
 		velocity = Vector3.ZERO
 	velocity.y = 0.0
 	move_and_slide()
@@ -138,6 +151,24 @@ func is_dead() -> bool:
 
 func max_hp() -> float:
 	return stats.get_stat("max_hp")
+
+
+func max_stamina() -> float:
+	return stats.get_stat("max_stamina")
+
+
+func is_sprinting() -> bool:
+	return _sprinting
+
+
+## Spends fôlego if there is enough. Shows "Sem fôlego!" when there is not.
+func spend_stamina(cost: float) -> bool:
+	if stamina < cost:
+		_warn_no_stamina()
+		return false
+	stamina -= cost
+	_regen_pause = float(_stamina_rules().get("regen_delay", 0.8))
+	return true
 
 
 func can_act() -> bool:
@@ -274,6 +305,7 @@ func respawn() -> void:
 	_visual.rotation = Vector3.ZERO
 	global_position = respawn_point
 	hp = max_hp()
+	stamina = max_stamina()
 	status.clear()
 	set_invulnerable(2.0)
 	hp_changed.emit(hp, max_hp())
@@ -300,6 +332,8 @@ func _camera_relative(input: Vector2) -> Vector3:
 
 func _try_dodge(dir: Vector3) -> void:
 	if _dodge_cd > 0.0:
+		return
+	if not spend_stamina(float(_stamina_rules().get("dodge_cost", 25))):
 		return
 	var d: Vector3 = dir if dir.length_squared() > 0.01 else forward()
 	d = d.normalized()
@@ -352,6 +386,48 @@ func _die() -> void:
 	died.emit(gold_lost, xp_lost)
 
 
+func _stamina_rules() -> Dictionary:
+	return Data.progression.get("stamina", {})
+
+
+func _tick_stamina(delta: float) -> void:
+	_no_stamina_cd -= delta
+	if _dead:
+		return
+	if _regen_pause > 0.0:
+		_regen_pause -= delta
+		return
+	stamina = minf(max_stamina(), stamina + stats.get_stat("stamina_regen") * delta)
+
+
+## Hold "sprint" while moving. Stops when fôlego runs out; needs a minimum to start again.
+func _update_sprint(dir: Vector3, delta: float) -> void:
+	var rules: Dictionary = _stamina_rules()
+	var wants: bool = Input.is_action_pressed("sprint") and dir.length_squared() > 0.01
+	if not wants:
+		_sprinting = false
+		return
+	if not _sprinting:
+		if stamina < float(rules.get("sprint_min_to_start", 15)):
+			if Input.is_action_just_pressed("sprint"):
+				_warn_no_stamina()
+			return
+		_sprinting = true
+	stamina -= float(rules.get("sprint_cost_per_sec", 18)) * delta
+	_regen_pause = float(rules.get("regen_delay", 0.8))
+	if stamina <= 0.0:
+		stamina = 0.0
+		_sprinting = false
+		_warn_no_stamina()
+
+
+func _warn_no_stamina() -> void:
+	if _no_stamina_cd > 0.0:
+		return
+	_no_stamina_cd = 1.0
+	ProtoVisuals.damage_number(get_parent(), global_position, tr("HUD_NO_STAMINA"), Color("#c6e04a"))
+
+
 func _tick_buff(delta: float) -> void:
 	if _buff_time <= 0.0:
 		return
@@ -368,11 +444,23 @@ func _body_color() -> Color:
 
 func _on_leveled_up(new_level: int) -> void:
 	hp = max_hp()
+	stamina = max_stamina()
 	hp_changed.emit(hp, max_hp())
 	message.emit(tr("HUD_LEVEL_UP") % new_level)
 	skills.refresh_unlocks()
 
 
+## When a maximum grows (attribute point, buff ending...), the current value grows by
+## the same amount; when it shrinks (Derrotado), the current value is clamped.
 func _on_stats_changed() -> void:
-	hp = minf(hp, max_hp())
-	hp_changed.emit(hp, max_hp())
+	var new_hp_max: float = max_hp()
+	var new_st_max: float = max_stamina()
+	if _last_hp_max > 0.0 and new_hp_max > _last_hp_max and not _dead:
+		hp += new_hp_max - _last_hp_max
+	if _last_stamina_max > 0.0 and new_st_max > _last_stamina_max:
+		stamina += new_st_max - _last_stamina_max
+	_last_hp_max = new_hp_max
+	_last_stamina_max = new_st_max
+	hp = minf(hp, new_hp_max)
+	stamina = minf(stamina, new_st_max)
+	hp_changed.emit(hp, new_hp_max)

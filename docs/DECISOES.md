@@ -51,5 +51,11 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Pets e montarias: pós-lançamento.
 - Documentos: [design/GDD.md](design/GDD.md) e [ESTILO.md](ESTILO.md).
 
+## Design — respostas de 11/11/2026
+- Teleporte em todas as cidades (volta para qualquer cidade já visitada) e pontos de descanso nas áreas de aventura e nas dungeons, que servem para teleporte e para voltar depois de morrer.
+- As 8 skills são liberadas até o nível 30: níveis 1, 4, 8, 12, 16, 20, 25 e 30.
+- Trevo de Fortificação e Broca de Engaste em duas versões: comum (ouro/login/drops, chance de falhar nos níveis altos; Trevo comum 100% até +11, 75% no +12...) e Real (dinheiro real, 100% de sucesso).
+- Penalidade "Derrotado": −5% em todos os atributos por 5 minutos.
+
 ## Em aberto
 - As decisões pendentes no fim do [GDD](design/GDD.md).

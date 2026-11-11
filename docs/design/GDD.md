@@ -123,8 +123,11 @@ Como você pediu, os Arautos são pessoas comuns com poderes diferentes, e são 
 
 ## Viagem e mapa
 Mundo semiaberto. As cidades são ligadas por estradas e áreas de exploração. A ordem principal segue a história, mas cada região tem áreas e dungeons opcionais.
-- **Pedras de Passagem ✱:** pontos de teleporte que você ativa ao descobrir cada lugar.
-- Veja a **pergunta 1** em "Decisões pendentes", sobre a regra de voltar por teleporte.
+- **Pedras de Passagem (teleporte):** todas as cidades têm uma. Depois de visitada, dá para voltar a qualquer cidade pelo teleporte.
+- **Pontos de descanso nas áreas de aventura:** cada campo e cada área com monstros tem pontos de descanso (checkpoints) a cada trecho, para a caminhada nunca ficar longa demais. Eles servem para:
+  - voltar a jogar dali depois de morrer;
+  - teleportar para lá também, depois de ativados.
+- **Dungeons:** um ponto na entrada e outro no meio (antes do chefe) ✱.
 
 ---
 
@@ -250,7 +253,18 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 
 - **Ataque básico:** combo de 3 golpes (Triple Combo Attack). Com duas espadas: Double Combo Attack.
 - **Esquiva ✱:** um botão extra de rolamento (Roll Dodge), com recarga curta. Recomendo muito: é o que dá "sensação" ao combate no celular.
-- **Liberação:** veja a **pergunta 2** em "Decisões pendentes".
+- **Liberação:** todas as 8 skills estão liberadas até o **nível 30**:
+
+| Nível | Skill liberada | Por que nessa ordem ✱ |
+|---|---|---|
+| 1 | Corte Giratório | Primeira skill: dano em área, ótima para aprender |
+| 4 | Investida | Primeiro controle (stun) e mobilidade |
+| 8 | Golpe Sísmico | Primeira lentidão |
+| 12 | Quebra-Guarda | Chega junto com os inimigos com mais defesa do deserto. Os 4 botões ficam cheios |
+| 16 | Brado de Guerra | Primeira skill de reforço; o jogador começa a escolher o que equipar |
+| 20 | Onda de Corte | Primeiro ataque à distância |
+| 25 | Salto Devastador | Stun em área, para grupos grandes |
+| 30 | Julgamento | A mais forte em um alvo só, para os chefes da metade do jogo |
 - **Evolução:** **1 ponto de skill por nível** (+ recompensas de missões). Cada skill vai até o **nível 15**. Nos níveis **5, 10 e 15**, ganha um efeito extra. Exemplo do Corte Giratório: nível 5 gira 2 vezes; nível 10 puxa os inimigos; nível 15 deixa um rastro que causa dano.
 - Até o fim da história (~65), dá para evoluir bem umas 5 skills. No nível 100, quase todas. As escolhas pesam durante a história, e no pós-jogo dá para testar combinações.
 
@@ -292,7 +306,15 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 | 3 | 5% |
 
 - Um Lendário pode sair sem encaixe, como você pediu.
-- A **Broca de Engaste** abre um encaixe, até o limite de 3. Vem do login (6º dia) e da loja.
+- A **Broca de Engaste** tenta abrir um encaixe, até o limite de 3. Há duas versões:
+
+| Encaixe a abrir | Broca comum (loja de ouro, login, drops) | Broca Real (loja com dinheiro real) |
+|---|---|---|
+| 1º | 100% | 100% |
+| 2º | 50% ✱ | 100% |
+| 3º | 25% ✱ | 100% |
+
+  Se a Broca comum falhar, ela é gasta e o equipamento não muda.
 - **Gemas ✱:** Rubi (ataque), Safira (vida), Esmeralda (crítico), Topázio (recarga), Ametista (defesa). Têm 5 níveis de qualidade.
 
 **Fortalecimento de +1 a +20:**
@@ -303,8 +325,24 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 | +11 a +15 | 50% → 30% | O equipamento **quebra**: não pode ser usado até ser **restaurado** no ferreiro (ouro + material) |
 | +16 a +20 | 25% → 5% | O equipamento **some**, a não ser que esteja usando o **Amuleto de Proteção** |
 
-- **Pedra da Sorte:** +10% de chance na tentativa.
-- **Amuleto de Proteção:** impede o equipamento de sumir. Vem do login (7º dia) e da loja.
+- **Trevo de Fortificação:** usado na tentativa, troca a chance normal pela chance do trevo. Há duas versões:
+
+| Fortalecer para | Sem trevo | Trevo comum (loja de ouro, login, drops) | Trevo Real (loja com dinheiro real) |
+|---|---|---|---|
+| +1 a +10 | 100% → 55% | 100% | 100% |
+| +11 | 50% | 100% | 100% |
+| +12 | 45% | 75% | 100% |
+| +13 | 40% | 60% ✱ | 100% |
+| +14 | 35% | 50% ✱ | 100% |
+| +15 | 30% | 45% ✱ | 100% |
+| +16 | 25% | 35% ✱ | 100% |
+| +17 | 20% | 30% ✱ | 100% |
+| +18 | 15% | 25% ✱ | 100% |
+| +19 | 10% | 20% ✱ | 100% |
+| +20 | 5% | 15% ✱ | 100% |
+
+  Os valores de +11 e +12 são os seus. Do +13 em diante segui a mesma queda, sempre acima da chance normal.
+- **Amuleto de Proteção:** se a tentativa falhar, o equipamento não quebra nem some. Vem do login (7º dia), da loja de ouro e da loja com dinheiro real.
 - **Bônus de cada nível:** +4% nos atributos da peça (de +1 a +10), +6% (de +11 a +15) e +10% (de +16 a +20). Uma peça +20 tem **+120%** nos atributos.
 
 **Desmontagem (no lugar da fusão):**
@@ -313,15 +351,17 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 
 ## 6.6 Economia e lojas
 
-**Loja de ouro (comerciante de cada cidade):** equipamentos Comuns e Raros (sem conjunto), kits de poção, materiais de fortalecimento, Pedra da Sorte e itens de proteção para personagens de nível mais baixo. Veja a **pergunta 3**.
+**Loja de ouro (comerciante de cada cidade):** equipamentos Comuns e Raros (sem conjunto), kits de poção, materiais de fortalecimento, **Trevo comum**, **Broca comum** e **Amuleto de Proteção**.
 
-**Loja com dinheiro real (Google Play):** pacotes de ouro, pacotes de EXP (ex.: +50% de XP por 1 hora), pacotes de poções, Brocas de Engaste e Amuletos de Proteção. As fantasias entram depois. Os preços serão definidos na Fase 5.
+**Loja com dinheiro real (Google Play):** pacotes de ouro, pacotes de EXP (ex.: +50% de XP por 1 hora), pacotes de poções, **Trevo Real** (sucesso garantido no fortalecimento), **Broca Real** (encaixe garantido) e Amuleto de Proteção. As fantasias entram depois. Os preços serão definidos na Fase 5.
 
-**Regra de ouro ✱:** todo item da loja com dinheiro real também pode ser conseguido jogando (login, missões, drops ou loja de ouro), só que mais devagar. O jogo inteiro é jogável sem pagar.
+**Regra:** as versões comuns (Trevo e Broca) podem ser conseguidas jogando, mas têm chance de falhar nos níveis altos. As versões Reais garantem o sucesso. O jogo inteiro continua jogável sem pagar.
+
+**Amostra grátis ✱:** o 28º dia do calendário de login dá **1 Trevo Real**, para o jogador sentir a diferença.
 
 ## 6.7 Missões diárias e login
 - **5 missões diárias**, sorteadas de acordo com o seu nível (ex.: "derrote 30 homens-lagarto", "entregue 5 cristais", "vença uma dungeon"). Dão XP, ouro e materiais de criação.
-- **Calendário de login de 28 dias ✱:** 6º, 13º, 20º e 27º dias → **Broca de Engaste**. 7º, 14º, 21º e 28º dias → **Amuleto de Proteção**. O 28º dia ainda dá um prêmio grande.
+- **Calendário de login de 28 dias ✱:** 6º, 13º, 20º e 27º dias → **Broca comum**. 7º, 14º, 21º e 28º dias → **Amuleto de Proteção**. O 28º dia ainda dá **1 Trevo Real** e um prêmio grande.
 - **Funcionamento offline ✱:** o jogo usa o relógio do aparelho e bloqueia ganhos se detectar que a data foi voltada.
 
 ## 6.8 Conquistas e títulos
@@ -330,8 +370,8 @@ Sem escudo, como você pediu. Todas usam animações que **existem na biblioteca
 
 ## 6.9 Morte
 - **Perde 10% do ouro** que carrega e **5% do XP** do nível atual. Nunca perde nível.
-- Ganha o status **"Derrotado"** por 5 minutos. Veja a **pergunta 4**, sobre o tamanho da penalidade.
-- Volta para a última Pedra de Passagem ou para a entrada da dungeon.
+- Ganha o status **"Derrotado"**: **−5% em todos os atributos** por 5 minutos.
+- Volta para o último ponto de descanso ativado (no campo ou na dungeon) ou para a última cidade.
 
 ## 6.10 Dificuldade
 - Escolhida no início do jogo: **Fácil** (inimigos −25% de vida e dano; penalidade de morte pela metade), **Normal** e **Difícil** (inimigos +40%; +25% de XP e de drops).
@@ -377,18 +417,14 @@ Com os preços reais da API, cada personagem sai mais barato do que eu tinha est
 
 # Decisões pendentes (preciso de você)
 
-1. **Teleporte.** Você escreveu que o jogo "te impede de voltar ao mesmo lugar por meio de um teletransporte". Não entendi se você quer:
-   - **(a)** poder voltar a qualquer cidade já visitada por teleporte (o que eu recomendo, para farmar e fazer as diárias); ou
-   - **(b)** não ter teleporte nenhum (só a pé); ou
-   - **(c)** outra coisa (explique).
-2. **Liberação das skills.** "Uma a cada nível" liberaria as 8 skills até o nível 8. Opções:
-   - **(a)** do jeito que você escreveu: níveis 1 a 8;
-   - **(b) ✱ recomendado:** as 4 primeiras nos níveis 2, 4, 6 e 8 (para preencher os 4 botões rápido) e as outras 4 nos níveis 12, 18, 25 e 32. Assim sempre tem novidade chegando até o meio do jogo.
-3. **Loja de ouro x dinheiro real.** Você escreveu que os itens da loja de dinheiro "vão ser 100% loja do jogo, uma porcentagem que vai diminuindo de acordo com o nível". Entendi assim:
-   - Brocas e Amuletos para equipamentos de nível baixo podem ser comprados 100% com ouro.
-   - Conforme o nível do equipamento sobe, a parte vendida por ouro diminui (ex.: limite semanal menor), e o resto vem do login, de drops ou do dinheiro real.
-   - Está certo?
-4. **Penalidade "Derrotado".** −5 pontos fixos em cada atributo pesa muito no começo (ex.: nível 5) e quase nada no nível 90. Proposta ✱: **−5% em todos os atributos** por 5 minutos. Pode ser?
+**Já respondidas:**
+- Teleporte em todas as cidades, mais pontos de descanso nas áreas de aventura.
+- Todas as skills liberadas até o nível 30.
+- Trevo e Broca em versão comum e Real.
+- Penalidade de morte de −5%.
+
+**Ainda abertas:**
+
 5. **Ordem das cidades.** Proposta ✱: a ordem principal é fixa (Pradoluz → Qaressa → Hrimvald → Lys'Thaël → Altaréa), porque a história depende dela (o Bento morre em Hrimvald). A liberdade vem das áreas e dungeons opcionais de cada região. Pode ser?
 6. **Nomes.** Aprova **Herdeiro dos Céus**, **Lio**, as cidades e os personagens? Pode trocar qualquer um.
 7. **Botão de esquiva** (rolamento). Entra?

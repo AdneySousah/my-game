@@ -13,7 +13,9 @@ static var _cache: Dictionary = {}
 
 static func texture(id: String) -> Texture2D:
 	if not _cache.has(id):
-		var path: String = "res://assets/ui/items/%s.png" % id
+		# An item may borrow another's picture ("icon" in items.json).
+		var pic: String = str(Data.item(id).get("icon", id))
+		var path: String = "res://assets/ui/items/%s.png" % pic
 		_cache[id] = load(path) if ResourceLoader.exists(path) else null
 	return _cache[id]
 
@@ -26,7 +28,9 @@ static func rarity_color(id: String) -> Color:
 static func draw(ci: CanvasItem, id: String, rect: Rect2) -> void:
 	var tex: Texture2D = texture(id)
 	if tex:
-		ci.draw_texture_rect(tex, rect, false)
+		# Keep the picture square, centred in the space given.
+		var side: float = minf(rect.size.x, rect.size.y)
+		ci.draw_texture_rect(tex, Rect2(rect.get_center() - Vector2(side, side) * 0.5, Vector2(side, side)), false)
 		return
 	var item: Dictionary = Data.item(id)
 	var c: Vector2 = rect.get_center()

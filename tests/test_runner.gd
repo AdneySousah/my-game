@@ -22,8 +22,12 @@ func _ready() -> void:
 	await _save_test()
 	await _audio_test()
 	await _items_test()
+	await _gear_test()
 	# Let any navigation bake still running on a thread finish before quitting
-	# (tests run faster than real time, so wait real milliseconds).
+	# (tests run faster than real time, so wait real milliseconds). Music stops first
+	# so the audio thread lets go of it in the meantime.
+	Audio.silence()
+	await _frames(2)
 	OS.delay_msec(1500)
 	await _frames(2)
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
@@ -785,6 +789,101 @@ func _items_test() -> void:
 	var saved: Dictionary = Session.to_dict()
 	Session.from_dict(saved)
 	check(Session.inventory.count("pot_folego_p") >= 2 and Session.has_flag("chest:" + chest.chest_id), "bag and opened chests survive the save")
+	main.queue_free()
+	await _frames(2)
+
+
+func _gear_test() -> void:
+	# Gear pieces are unique in the bag, with random sockets.
+	var inv := Inventory.new()
+	check(inv.add("eq_elmo_comum", 3) == 0 and inv.slots.size() == 3, "gear never stacks")
+	var uids: Array = []
+	var sockets_ok: bool = true
+	for s: Dictionary in inv.slots:
+		uids.append(int(s["uid"]))
+		sockets_ok = sockets_ok and int(s["sockets"]) >= 0 and int(s["sockets"]) <= 3
+	check(uids[0] != uids[1] and uids[1] != uids[2], "each piece has its own id")
+	check(sockets_ok, "pieces get 0 to 3 sockets")
+	check(is_equal_approx(Equipment.plus_mult(10), 1.4) and is_equal_approx(Equipment.plus_mult(20), 2.2), "+10 gives +40%, +20 gives +120% (GDD 6.5)")
+
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	check(Session.gear.get_piece("weapon").get("id", "") == "eq_espada_aprendiz", "a new hero holds the apprentice sword")
+	var atk0: float = p.stats.get_stat("atk")
+
+	# Wearing a sword raises attack; the old one goes back to the bag.
+	Session.add_item("eq_espada_comum", 1)
+	var sword: int = int(Session.inventory.slots.back()["uid"])
+	check(Session.gear.equip(Session.inventory, sword, p.stats.level) == "", "equips a sword from the bag")
+	check(is_equal_approx(p.stats.get_stat("atk"), atk0 - 4.0 + 8.0), "attack follows the sword (%.0f -> %.0f)" % [atk0, p.stats.get_stat("atk")])
+	check(Session.inventory.count("eq_espada_aprendiz") == 1, "the old sword goes back to the bag")
+	check(bool(Session.gear.get_piece("weapon").get("worn", false)), "a worn piece is marked as used")
+
+	# Level requirement.
+	Session.add_item("eq_peitoral_raro", 1)
+	var chest_uid: int = int(Session.inventory.slots.back()["uid"])
+	check(Session.gear.equip(Session.inventory, chest_uid, 1) == "EQ_NEED_LEVEL", "level 1 cannot wear level 4 armour")
+	var hp0: float = p.max_hp()
+	var def0: float = p.stats.get_stat("def")
+	check(Session.gear.equip(Session.inventory, chest_uid, 4) == "", "level 4 can")
+	check(is_equal_approx(p.max_hp(), hp0 + 90.0) and is_equal_approx(p.stats.get_stat("def"), def0 + 12.0), "armour adds health and defence")
+
+	# Two bracelets fit side by side.
+	Session.add_item("eq_pulseira_comum", 2)
+	var n: int = Session.inventory.slots.size()
+	Session.gear.equip(Session.inventory, int(Session.inventory.slots[n - 2]["uid"]), 1)
+	Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), 1)
+	check(not Session.gear.get_piece("bracelet_1").is_empty() and not Session.gear.get_piece("bracelet_2").is_empty(), "both bracelet slots are used")
+
+	# New pieces light the "!" until the equipment screen is opened.
+	Session.add_item("eq_luvas_comum", 1)
+	check(Session.inventory.has_new_gear(p.stats.level), "a new wearable piece lights the alert")
+	main.hud.open_equipment()
+	await _frames(2)
+	check(not Session.inventory.has_new_gear(p.stats.level), "opening the equipment screen clears it")
+	main.hud.equipment_panel().hide()
+	main.hud.call("_on_panel_closed")
+
+	# Taking the sword off leaves the hand empty.
+	check(Session.gear.unequip(Session.inventory, "weapon") and bool(Session.gear.weapon_model().get("none", false)), "no sword = empty hands")
+	Session.gear.equip(Session.inventory, sword, p.stats.level)
+
+	# Taking off.
+	check(Session.gear.unequip(Session.inventory, "chest") and Session.gear.get_piece("chest").is_empty(), "taking armour off")
+	check(is_equal_approx(p.max_hp(), hp0), "health goes back down")
+
+	# Set bonus: 3 pieces of the Winged Sun set.
+	var gear := Equipment.new()
+	var bag := Inventory.new()
+	for id: String in ["eq_elmo_lendario", "eq_peitoral_lendario", "eq_luvas_lendario"]:
+		bag.add(id, 1)
+		gear.equip(bag, int(bag.slots.back()["uid"]), 20)
+	check(is_equal_approx(float(gear.bonuses().get("max_hp", 0.0)), 110.0 + 220.0 + 150.0), "3 set pieces add the set bonus")
+
+	# Save keeps worn gear and the bag pieces with their ids.
+	var saved: Dictionary = Session.to_dict()
+	var worn_uid: int = int(Session.gear.get_piece("weapon")["uid"])
+	Session.from_dict(saved)
+	check(int(Session.gear.get_piece("weapon").get("uid", 0)) == worn_uid, "worn gear survives the save")
+	check(Session.inventory.count("eq_peitoral_raro") == 1 and Session.inventory.next_uid > worn_uid, "bag gear survives and new ids stay unique")
+	var old_save: Dictionary = saved.duplicate(true)
+	old_save.erase("gear")
+	(old_save["flags"] as Dictionary).erase("starter_gear")
+	Session.from_dict(old_save)
+	check(Session.gear.get_piece("weapon").get("id", "") == "eq_espada_aprendiz", "old saves get the apprentice sword")
+
+	# Equipment screen opens and shows the slots.
+	main.hud.open_equipment()
+	await _frames(3)
+	var panel: EquipmentPanel = main.hud.equipment_panel()
+	check(panel.visible and get_tree().paused, "the equipment screen opens and pauses")
+	panel.hide()
+	main.hud.call("_on_panel_closed")
 	main.queue_free()
 	await _frames(2)
 

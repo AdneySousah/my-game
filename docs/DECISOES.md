@@ -139,7 +139,7 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 
 ## Itens, mochila e poções (11/11/2026, etapas 5.1 e 5.2)
 - Itens ficam em `data/items/items.json` (nome, descrição, tipo, raridade, pilha, preço, efeito). Raridades: comum (branco), raro (azul), épico (roxo), lendário (dourado).
-- Mochila de 60 espaços; itens iguais se empilham. Abre pelo menu do retrato ou pela tecla I. Os 4 materiais antigos viraram itens (saves antigos são convertidos).
+- Mochila de 60 espaços; itens iguais se empilham. Abre pelo menu do retrato ou pela tecla B (era I, que também é a skill 2). Os 4 materiais antigos viraram itens (saves antigos são convertidos).
 - Poções de vida (30/50/80% em 2 s) e de fôlego (40/70/100% em 1,5 s), em tamanhos pequena, média e grande. Tônicos de força (+20% ataque), pedra (+25% defesa) e vento (+15% velocidade) por 90 s.
 - Três atalhos na tela, acima da barra de fôlego: vida, fôlego e reforço. Mostram quantas sobram e a recarga de 8 s (cada atalho tem a sua). No PC: teclas 5, 6 e 7 (ou Z, X e V). Se a poção escolhida acabar, o atalho usa outra do mesmo tipo. Na mochila, "Pôr no atalho" escolhe qual poção vai em cada atalho.
 - Baús nos mapas (2 na floresta, 2 na mina, 1 no celeiro): abrem uma vez por save, dão ouro e itens. Cubo provisório até o modelo do Meshy.
@@ -147,3 +147,22 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Ícones: 4 folhas de 4x4 do Meshy (64 ícones: poções e itens especiais, gemas e materiais, equipamentos em 4 raridades), recortadas no Godot. Aprovados pelo dono (54 créditos com o baú).
 - Baú: modelo do Meshy em uma peça; o jogo corta na linha da tampa para ela abrir.
 - Chefes reequilibrados para a luta com poções: Golem 2500 de vida, Gorvan 3700 (Espantalho 3700). Sem poções, o Gorvan só cai no nível 12–13 por pouco; com as poções que o jogo dá até ali, a luta fica confortável no nível 11.
+
+## Equipamentos (11/11/2026, etapa 5.3)
+- 9 espaços: espada, elmo, peitoral, luvas, calça, botas, 2 pulseiras e cinto. Tela "Equipamento" (tecla G, menu do retrato ou botão na mochila) com o Lio em 3D (arrastar gira), os espaços em volta, detalhes da peça e as peças da mochila que servem naquele espaço.
+- Cada peça é única na mochila: guarda +nível, encaixes (sorteados ao ganhar: 0 a 3, chances do GDD 6.5), gemas e se já foi usada (para a desmontagem da 5.4).
+- 33 peças do Ato 1 em `data/items/items.json`: espada de aprendiz (todo herói novo começa com ela) e 8 peças em cada raridade. Nível mínimo: comum 1, raro 4, épico 8, lendário 11.
+- Bônus por espaço: espada = ataque; elmo, peitoral e calça = defesa e vida; luvas = defesa e velocidade de ataque; botas = defesa e esquiva; pulseiras = ataque e crítico; cinto = vida e fôlego.
+- O +nível já vale nas contas (+4% por nível até +10, +6% até +15, +10% até +20); o fortalecimento em si vem na 5.4.
+- Conjunto do Sol Alado (5 peças de armadura lendárias): 3 peças = +150 de vida, 4 = +25 de defesa, 5 = +25% de dano crítico. Peças de conjunto não caem de inimigos; vêm do ferreiro (5.4).
+- Onde se ganha: baús (peças comuns; o do celeiro dá uma pulseira rara), missões (espada de ferro, colete, calça, pulseira, cinto raro; o Tobias dá a espada de aço), inimigos comuns (3 a 4% de chance de peça comum), Golem (1 peça rara) e Gorvan (2 peças raras).
+- Equilíbrio: com as peças que o jogo dá até lá, a luta contra o Gorvan no nível 11 fica um pouco mais fácil (vida mínima 37% → 46%, 44 s → 37 s). Mantido assim: é a recompensa de explorar.
+- Espadas do Meshy (72 créditos, feitas a partir dos ícones aprovados): ferro (comum), aço azul (rara), rúnica (épica) e Sol Alado (lendária). Cada uma aparece na mão quando equipada; as peças de armadura não mudam o visual (só os conjuntos, na Fase 6).
+
+## Ajustes depois do teste da 5.3 (11/11/2026)
+- Sem espada equipada, a mão fica vazia (antes continuava aparecendo a de aprendiz).
+- Mão na espada: o esqueleto do Meshy não tem ossos dos dedos (24 ossos, a mão é uma peça só), então nenhuma animação fecha a mão. O cabo agora passa pelo meio dos dedos (e não pela palma), e assim os dedos cobrem o cabo como numa mão fechada. Para dedos que fecham de verdade, o Lio teria que ser refeito no Meshy com as mãos fechadas (~70 créditos); fica como opção para quando fizermos os visuais de conjunto (Fase 6).
+- Menu do retrato: cada item que pede atenção ganha um "!" vermelho (atributos para distribuir, skill nova, peça nova que dá para usar). A peça deixa de ser "nova" ao abrir a tela de Equipamento.
+- Teclas: Mochila B (era I, que também é a skill 2), Equipamento G (era K, igual a Skills).
+- Créditos em Opções: o texto rola dentro de uma caixa; o painel não passa mais da tela.
+- Molduras: o conteúdo dos painéis começa dentro da moldura entalhada (margem 60). Todo painel é centralizado e, se a janela for pequena, encolhe para caber inteiro.

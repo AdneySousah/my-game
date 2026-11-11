@@ -11,8 +11,14 @@ signal changed
 var capacity: int:
 	get:
 		return int(Data.items_config.get("bag_size", 60)) if not Data.items_config.is_empty() else 60
-## Each slot: {"id": String, "count": int}. Empty slots are not stored.
+## Each slot: {"id": String, "count": int}. Empty slots are not stored. Equipment is
+## never stacked: each piece is its own slot with "uid", "plus", "sockets", "gems", "worn".
 var slots: Array[Dictionary] = []
+## Next id for a new gear piece (saved, so ids stay unique).
+var next_uid: int = 1
+
+## Chance of 0, 1, 2 or 3 sockets on a new piece (GDD 6.5).
+const SOCKET_CHANCES: Array[float] = [0.40, 0.35, 0.20, 0.05]
 
 
 func count(id: String) -> int:
@@ -31,6 +37,14 @@ func has(id: String, amount: int = 1) -> bool:
 func add(id: String, amount: int = 1) -> int:
 	if amount <= 0 or Data.item(id).is_empty():
 		return amount
+	if is_gear(id):
+		var put: int = 0
+		while put < amount and slots.size() < capacity:
+			slots.append(new_piece(id))
+			put += 1
+		if put > 0:
+			changed.emit()
+		return amount - put
 	var stack: int = int(Data.item(id).get("stack", 1))
 	var left: int = amount
 	for s: Dictionary in slots:
@@ -69,19 +83,93 @@ func remove(id: String, amount: int = 1) -> bool:
 	return true
 
 
+static func is_gear(id: String) -> bool:
+	return str(Data.item(id).get("type", "")) == "equipment"
+
+
+## A fresh gear piece with random sockets (0 to 3).
+func new_piece(id: String) -> Dictionary:
+	var roll: float = randf()
+	var sockets: int = 0
+	var acc: float = 0.0
+	for i: int in SOCKET_CHANCES.size():
+		acc += SOCKET_CHANCES[i]
+		if roll < acc:
+			sockets = i
+			break
+	var piece: Dictionary = {"id": id, "count": 1, "uid": next_uid, "plus": 0, "sockets": sockets,
+		"gems": [], "worn": false, "new": true}
+	next_uid += 1
+	return piece
+
+
+func find_uid(uid: int) -> Dictionary:
+	for s: Dictionary in slots:
+		if int(s.get("uid", 0)) == uid:
+			return s
+	return {}
+
+
+## Takes a gear piece out of the bag (empty dictionary if it is not there).
+func take_uid(uid: int) -> Dictionary:
+	for i: int in slots.size():
+		if int(slots[i].get("uid", 0)) == uid:
+			var piece: Dictionary = slots[i]
+			slots.remove_at(i)
+			changed.emit()
+			return piece
+	return {}
+
+
+## Puts a gear piece (e.g. one taken off) back in the bag, even if it is full.
+func put_back(piece: Dictionary) -> void:
+	slots.append(piece)
+	changed.emit()
+
+
+## Only the known fields of a saved gear piece, with the right types.
+static func clean_piece(v: Dictionary) -> Dictionary:
+	var gems: Array = []
+	for g: Variant in v.get("gems", []):
+		gems.append(str(g))
+	var piece: Dictionary = {"id": str(v.get("id", "")), "count": 1, "uid": int(v.get("uid", 0)),
+		"plus": int(v.get("plus", 0)), "sockets": int(v.get("sockets", 0)), "gems": gems,
+		"worn": bool(v.get("worn", false))}
+	if bool(v.get("broken", false)):
+		piece["broken"] = true
+	if bool(v.get("new", false)):
+		piece["new"] = true
+	return piece
+
+
+## True when the bag has a piece the hero got recently and can wear (drives the "!").
+func has_new_gear(hero_level: int) -> bool:
+	for s: Dictionary in slots:
+		if bool(s.get("new", false)) and Equipment.block_reason(s, hero_level) == "":
+			return true
+	return false
+
+
+## The equipment screen was seen: no piece is "new" anymore.
+func mark_gear_seen() -> void:
+	for s: Dictionary in slots:
+		s.erase("new")
+
+
 func free_slots() -> int:
 	return capacity - slots.size()
 
 
 func clear() -> void:
 	slots.clear()
+	next_uid = 1
 	changed.emit()
 
 
 func to_array() -> Array:
 	var out: Array = []
 	for s: Dictionary in slots:
-		out.append({"id": s["id"], "count": s["count"]})
+		out.append(s.duplicate(true) if s.has("uid") else {"id": s["id"], "count": s["count"]})
 	return out
 
 
@@ -89,5 +177,13 @@ func from_array(arr: Array) -> void:
 	slots.clear()
 	for v: Variant in arr:
 		if v is Dictionary and not Data.item(str((v as Dictionary).get("id", ""))).is_empty():
-			slots.append({"id": str(v["id"]), "count": int(v.get("count", 1))})
+			var d: Dictionary = v
+			if is_gear(str(d["id"])):
+				var piece: Dictionary = clean_piece(d)
+				if int(piece["uid"]) <= 0:
+					piece["uid"] = next_uid
+				next_uid = maxi(next_uid, int(piece["uid"]) + 1)
+				slots.append(piece)
+			else:
+				slots.append({"id": str(d["id"]), "count": int(d.get("count", 1))})
 	changed.emit()

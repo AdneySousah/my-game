@@ -32,3 +32,4 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 - [ ] Fase 5 — sistemas (plano em `docs/FASE5_PLANO.md`, aprovado em 11/11/2026, sem visual de conjunto de armadura)
   - [x] 5.1 Itens e inventário: mochila de 60 espaços, raridade, detalhes, drops de itens, baús nos mapas, recompensas de missão em itens. Aprovado
   - [x] 5.2 Poções: 3 atalhos na tela (vida, fôlego, reforço) com quantidade e recarga, poções P/M/G e tônicos; chefes reequilibrados. Aprovado
+  - [x] 5.3 Equipamentos: 9 espaços (espada, 5 de armadura, 2 pulseiras, cinto), 33 peças em 4 raridades, tela com o Lio em 3D, comparação, conjunto do Sol Alado, peças em baús, missões e chefes. Ajustes do 1º teste feitos (mão vazia sem espada, pegada, "!" no menu, teclas, créditos, molduras) e 4 espadas do Meshy na mão (Meshy: 72 créditos). Aprovado

@@ -5,7 +5,7 @@ extends PanelContainer
 
 signal closed
 
-var _credits: Label
+var _credits: ScrollContainer
 
 
 func _ready() -> void:
@@ -26,16 +26,21 @@ func _ready() -> void:
 	credits_btn.focus_mode = Control.FOCUS_NONE
 	credits_btn.custom_minimum_size = Vector2(0, 44)
 	box.add_child(credits_btn)
-	_credits = Label.new()
-	# The CSV keeps line breaks as the two characters "\n".
-	_credits.text = tr("OPT_CREDITS_TEXT").replace("\\n", "\n")
-	_credits.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_credits.add_theme_font_size_override("font_size", 15)
+	# Credits scroll inside a fixed box, so the panel never grows past the screen.
+	_credits = ScrollContainer.new()
+	_credits.custom_minimum_size = Vector2(540, 240)
+	_credits.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	_credits.hide()
 	box.add_child(_credits)
+	var text := Label.new()
+	# The CSV keeps line breaks as the two characters "\n".
+	text.text = tr("OPT_CREDITS_TEXT").replace("\\n", "\n")
+	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	text.custom_minimum_size = Vector2(520, 0)
+	text.add_theme_font_size_override("font_size", 15)
+	_credits.add_child(text)
 	credits_btn.pressed.connect(func() -> void:
 		_credits.visible = not _credits.visible
-		reset_size()
 		_center())
 	var close := Button.new()
 	close.text = tr("PANEL_CLOSE")
@@ -55,7 +60,7 @@ func open() -> void:
 
 
 func _center() -> void:
-	position = ((get_viewport_rect().size - size) * 0.5).floor()
+	GameTheme.place_center(self)
 
 
 func _slider_row(bus: String) -> HBoxContainer:

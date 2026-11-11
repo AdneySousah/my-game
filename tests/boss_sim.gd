@@ -1,9 +1,10 @@
 extends Node
 ## Balance check: a bot at level L (default 12) fights a boss with attacks, skills,
 ## potions-free, and dodges attacks it can see coming. Prints how it went.
-##   godot --headless --path . --fixed-fps 60 res://tests/boss_sim.tscn -- [boss] [level] [dodge 0/1] [potions 0/1]
+##   godot --headless --path . --fixed-fps 60 res://tests/boss_sim.tscn -- [boss] [level] [dodge 0/1] [potions 0/1] [gear 0/1]
 ## With potions the bot carries what a player has by then (quests, chests, a few drops)
-## and drinks at 40% health.
+## and drinks at 40% health. With gear it wears what quests and chests give by then
+## (common pieces; before Gorvan also the smith's steel sword and the Golem's rare drop).
 
 const LIMIT_SECONDS: float = 300.0
 
@@ -14,6 +15,7 @@ func _ready() -> void:
 	var lvl: int = int(args[1]) if args.size() > 1 else 12
 	var dodge: bool = args.size() <= 2 or args[2] != "0"
 	var potions: bool = args.size() > 3 and args[3] == "1"
+	var with_gear: bool = args.size() > 4 and args[4] == "1"
 	Session.reset()
 	Session.set_flag("golem_defeated")
 	Main.start_map = "celeiro" if boss_id == "gorvan" else "mina"
@@ -38,6 +40,16 @@ func _ready() -> void:
 		Session.add_item("pot_vida_m", 3)
 		Session.add_item("pot_folego_p", 3)
 		Session.add_item("pot_forca", 1)
+	if with_gear:
+		var pieces: Array[String] = ["eq_espada_comum", "eq_elmo_comum", "eq_peitoral_comum", "eq_luvas_comum",
+			"eq_calca_comum", "eq_botas_comum", "eq_cinto_comum", "eq_pulseira_comum"]
+		if boss_id == "gorvan":
+			pieces[0] = "eq_espada_raro"
+			pieces[2] = "eq_peitoral_raro"
+		for id: String in pieces:
+			Session.add_item(id, 1)
+			Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), player.stats.level)
+		player.rest()
 	var boss: Enemy = null
 	for b: Node in get_tree().get_nodes_in_group("bosses"):
 		boss = b as Enemy

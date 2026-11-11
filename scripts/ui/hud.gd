@@ -41,6 +41,7 @@ var quests: QuestLog
 var _quest_panel: QuestPanel
 var _options_panel: OptionsPanel
 var _bag_panel: InventoryPanel
+var _equip_panel: EquipmentPanel
 var _potion_btns: Array[TouchActionButton] = []
 var _dialogue: DialogueBox
 var _talk_btn: Button
@@ -97,6 +98,10 @@ func _ready() -> void:
 	_bag_panel = InventoryPanel.new()
 	root.add_child(_bag_panel)
 	_bag_panel.closed.connect(_on_panel_closed)
+	_bag_panel.open_equipment.connect(open_equipment)
+	_equip_panel = EquipmentPanel.new()
+	root.add_child(_equip_panel)
+	_equip_panel.closed.connect(_on_panel_closed)
 	_options_panel = OptionsPanel.new()
 	root.add_child(_options_panel)
 	_options_panel.closed.connect(_on_panel_closed)
@@ -184,6 +189,8 @@ func bind(p: Player) -> void:
 	_attributes_panel.player = player
 	_skills_panel.player = player
 	_bag_panel.player = player
+	_equip_panel.player = player
+	Session.inventory.changed.connect(_refresh)
 	_refresh()
 	_refresh_skill_buttons()
 
@@ -290,6 +297,21 @@ func open_bag() -> void:
 	_open_panel(_bag_panel)
 
 
+func open_equipment() -> void:
+	_open_panel(_equip_panel)
+	Session.inventory.mark_gear_seen()
+	_refresh()
+
+
+## A piece the hero can wear arrived since the equipment screen was last opened.
+func _new_gear() -> bool:
+	return player != null and Session.inventory.has_new_gear(player.stats.level)
+
+
+func equipment_panel() -> EquipmentPanel:
+	return _equip_panel
+
+
 ## Drinks the potion chosen for quick slot `i` (vida, fôlego, reforço). If the chosen
 ## one ran out, any other potion of the same kind is used.
 func use_quick_potion(i: int) -> bool:
@@ -362,6 +384,11 @@ func _input(event: InputEvent) -> void:
 		_toggle(_quest_panel)
 	elif event.is_action_pressed("toggle_bag"):
 		_toggle(_bag_panel)
+	elif event.is_action_pressed("toggle_equipment"):
+		if _equip_panel.visible:
+			_toggle(_equip_panel)
+		else:
+			open_equipment()
 
 	elif event.is_action_pressed("interact") and _talk_btn.visible and not get_tree().paused:
 		get_viewport().set_input_as_handled()
@@ -518,7 +545,7 @@ func _refresh() -> void:
 	_status.xp_max = maxi(1, s.xp_needed())
 	_status.xp = s.xp
 	_status.gold = player.gold
-	_status.alert = s.unspent_points > 0 or _new_skills
+	_status.alert = s.unspent_points > 0 or _new_skills or _new_gear()
 
 
 func _refresh_skill_buttons() -> void:
@@ -569,11 +596,12 @@ func _open_panel(panel: Control) -> void:
 	_quest_panel.hide()
 	_options_panel.hide()
 	_bag_panel.hide()
+	_equip_panel.hide()
 	_talk_btn.hide()
 	if panel != _dialogue:
 		Audio.play_sfx("ui_open")
 	if panel == _character_menu:
-		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills)
+		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills, _new_gear())
 	elif panel != _dialogue:
 		panel.call("open")
 	_controls.hide()
@@ -581,7 +609,7 @@ func _open_panel(panel: Control) -> void:
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible and not _equip_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -592,6 +620,7 @@ func _on_character_choice(what: String) -> void:
 		"skills": open_skills()
 		"quests": open_quests()
 		"bag": open_bag()
+		"equipment": open_equipment()
 		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
 

@@ -17,6 +17,8 @@ var attributes: Dictionary = {}
 var atk_buff: float = 0.0
 ## Seconds left on the "Derrotado" debuff.
 var defeated_time_left: float = 0.0
+## Flat bonuses of the equipment worn (stat -> amount), set by the Player.
+var gear: Dictionary = {}
 ## Potion buffs: stat ("atk", "def", "speed") -> {"amount": fraction, "time": seconds left}.
 var buffs: Dictionary = {}
 
@@ -92,6 +94,7 @@ func get_stat(stat: String) -> float:
 	var effects: Dictionary = p.get("attribute_effects", {})
 	for a: String in ATTRIBUTES:
 		value += float(effects.get(a, {}).get(stat, 0.0)) * attributes[a]
+	value += float(gear.get(stat, 0.0))
 	if stat == "atk":
 		value *= 1.0 + atk_buff + buff("atk")
 	elif stat == "def":

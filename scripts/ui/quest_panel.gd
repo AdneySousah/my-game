@@ -37,7 +37,7 @@ func open() -> void:
 	_rebuild()
 	show()
 	reset_size()
-	position = ((get_viewport_rect().size - size) * 0.5).floor()
+	GameTheme.place_center(self)
 
 
 func _rebuild() -> void:

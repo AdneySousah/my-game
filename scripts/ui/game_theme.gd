@@ -40,7 +40,8 @@ static func _build() -> Theme:
 	var panel := StyleBoxTexture.new()
 	panel.texture = tex("ui_painel")
 	panel.set_texture_margin_all(62)
-	panel.set_content_margin_all(40)
+	# The carved frame is ~60 px thick: content starts inside it, never on top of it.
+	panel.set_content_margin_all(60)
 	t.set_stylebox("panel", "PanelContainer", panel)
 
 	# Buttons: wooden plank with gold border (280x110 texture).
@@ -79,3 +80,14 @@ static func _button_box(tint: Color) -> StyleBoxTexture:
 	b.content_margin_bottom = 12
 	b.modulate_color = tint
 	return b
+
+
+## Centres a panel on the screen and shrinks it if it would not fit (small or odd-shaped
+## windows), so its frame and its buttons are always fully visible.
+static func place_center(panel: Control, margin: float = 12.0) -> void:
+	panel.scale = Vector2.ONE
+	panel.reset_size()
+	var vp: Vector2 = panel.get_viewport_rect().size
+	var k: float = minf(1.0, minf((vp.x - margin * 2.0) / panel.size.x, (vp.y - margin * 2.0) / panel.size.y))
+	panel.scale = Vector2(k, k)
+	panel.position = ((vp - panel.size * k) * 0.5).floor()

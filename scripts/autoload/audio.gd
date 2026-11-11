@@ -60,7 +60,13 @@ func _ready() -> void:
 
 
 func _exit_tree() -> void:
-	# Stop and drop every stream so nothing is still playing when the game closes.
+	silence()
+
+
+## Stops and drops every stream (when the game closes). Call it a moment before quitting
+## so the audio thread can let go of the music too.
+func silence() -> void:
+	_music_id = ""
 	for p: Node in [_music_a, _music_b] + _pool2d + _pool3d:
 		p.call("stop")
 		p.set("stream", null)

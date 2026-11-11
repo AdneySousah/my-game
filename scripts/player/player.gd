@@ -88,6 +88,10 @@ func _ready() -> void:
 	stats = Stats.new()
 	stats.leveled_up.connect(_on_leveled_up)
 	stats.stats_changed.connect(_on_stats_changed)
+	stats.gear = Session.gear.bonuses()
+	Session.gear.changed.connect(_on_gear_changed)
+	if model:
+		model.set_weapon(Session.gear.weapon_model())
 	status = StatusEffects.new()
 	add_child(status)
 	skills = SkillRunner.new()
@@ -608,6 +612,14 @@ func _on_leveled_up(new_level: int) -> void:
 
 ## When a maximum grows (attribute point, buff ending...), the current value grows by
 ## the same amount; when it shrinks (Derrotado), the current value is clamped.
+## Equipment changed: new bonuses and the sword in hand.
+func _on_gear_changed() -> void:
+	stats.gear = Session.gear.bonuses()
+	stats.stats_changed.emit()
+	if model:
+		model.set_weapon(Session.gear.weapon_model())
+
+
 func _on_stats_changed() -> void:
 	var new_hp_max: float = max_hp()
 	var new_st_max: float = max_stamina()

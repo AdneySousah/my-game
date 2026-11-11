@@ -35,9 +35,10 @@ Tudo ainda é forma simples. O amarelo é o Lio, o vermelho é o bandido e o rox
 4. **Atributos:** no painel **C**, coloque pontos e veja a vida, o ataque e a defesa mudarem.
 5. **Fôlego:** a barra verde-clara abaixo da vida. Esquiva, corrida e skills gastam; o ataque básico não. Sem fôlego o botão fica escuro e aparece "Sem fôlego!".
 6. **Morte:** deixe os inimigos te derrotarem. Você perde 10% do ouro e 5% do XP do nível, volta no Ponto de descanso e fica com "Derrotado: −5%" por 5 minutos.
-7. **Mochila:** tecla **I** (ou retrato > Mochila). Toque num item para ver os detalhes. Em poções: "Usar" e "Pôr no atalho".
+7. **Mochila:** tecla **B** (ou retrato > Mochila). Toque num item para ver os detalhes. Em poções: "Usar" e "Pôr no atalho".
 8. **Poções:** os 3 botões redondos acima da barra de fôlego (vida, fôlego, reforço), ou teclas **5, 6 e 7**. O número pequeno é quanto sobra; depois de beber, o botão escurece por 8 s.
 9. **Baús:** há 2 na floresta, 2 na mina e 1 no celeiro. Chegue perto e aperte **E** ("Abrir"). Cada baú abre uma vez só.
+10. **Equipamento:** tecla **G** (ou retrato > Equipamento). Toque num espaço, escolha uma peça da mochila embaixo e veja quanto muda (verde = melhor). "Equipar" troca; "Tirar" devolve para a mochila. Arraste o Lio para girar. Peças de nível alto ficam com fundo vermelho.
 
 Anote o que achou: rápido, lento, fácil, difícil, confuso. Os números ficam todos em `data/` e são fáceis de ajustar.
 

@@ -93,8 +93,62 @@ HUD_MATERIALS,Materiais,Materials
 HUD_RESTING,Descansando...,Resting...
 HUD_REST_WAIT,Este ponto volta a curar em %s,This point heals again in %s
 HUD_IN_MAP,em %s,in %s
-HUD_BAG,Mochila (I),Bag (I)
+HUD_BAG,Mochila (B),Bag (B)
 HUD_BAG_FULL,Mochila cheia!,Bag full!
+BAG_TITLE,Mochila  %d/%d   ·   %d de ouro,Bag  %d/%d   ·   %d gold
+BAG_USE,Usar,Use
+BAG_QUICK,Pôr no atalho,Put on shortcut
+BAG_QUICK_ON,No atalho,On shortcut
+BAG_PICK,Toque num item,Tap an item
+BAG_OWNED,Você tem: %d,You have: %d
+RARITY_COMMON,Comum,Common
+RARITY_RARE,Raro,Rare
+RARITY_EPIC,Épico,Epic
+RARITY_LEGENDARY,Lendário,Legendary
+ITEMTYPE_POTION,Poção,Potion
+ITEMTYPE_MATERIAL,Material,Material
+ITEMTYPE_CONSUMABLE,Item especial,Special item
+ITEMTYPE_EQUIPMENT,Equipamento,Equipment
+HUD_OPEN,Abrir (E),Open (E)
+HUD_GOLD_GOT,+%d de ouro,+%d gold
+HUD_EQUIPMENT,Equipamento (G),Equipment (G)
+EQ_TITLE,Equipamento,Equipment
+EQ_SLOT_WEAPON,Espada,Sword
+EQ_SLOT_HELMET,Elmo,Helmet
+EQ_SLOT_CHEST,Peitoral,Chest
+EQ_SLOT_GLOVES,Luvas,Gloves
+EQ_SLOT_PANTS,Calça,Trousers
+EQ_SLOT_BOOTS,Botas,Boots
+EQ_SLOT_BRACELET_1,Pulseira,Bracelet
+EQ_SLOT_BRACELET_2,Pulseira,Bracelet
+EQ_SLOT_BELT,Cinto,Belt
+EQ_EQUIP,Equipar,Equip
+EQ_UNEQUIP,Tirar,Take off
+EQ_WORN,Equipado,Equipped
+EQ_LEVEL,Nível %d,Level %d
+EQ_SOCKETS,Encaixes: %d,Sockets: %d
+EQ_NEED_LEVEL,Seu nível ainda é baixo para esta peça.,Your level is too low for this piece.
+EQ_BROKEN,Peça quebrada: leve ao ferreiro.,Broken piece: take it to the smith.
+EQ_NOT_GEAR,Isso não é um equipamento.,That is not gear.
+EQ_WRONG_SLOT,Essa peça não vai neste espaço.,That piece does not go in this slot.
+EQ_IN_BAG,Na mochila,In the bag
+EQ_NONE_IN_BAG,Nenhuma peça para este espaço na mochila.,No piece for this slot in the bag.
+EQ_PICK,Toque num espaço do equipamento.,Tap an equipment slot.
+EQ_SET,%s (%d/%d),%s (%d/%d)
+EQ_SET_BONUS,%d peças: %s,%d pieces: %s
+EQ_COMPARE,Comparando com o que está usando:,Compared with what you wear:
+SET_SOL_ALADO,Conjunto do Sol Alado,Winged Sun Set
+STAT_ATK,Ataque,Attack
+STAT_DEF,Defesa,Defense
+STAT_MAX_HP,Vida,Health
+STAT_MAX_STAMINA,Fôlego,Stamina
+STAT_CRIT_CHANCE,Chance de crítico,Crit chance
+STAT_CRIT_DMG,Dano crítico,Crit damage
+STAT_ATK_SPEED,Velocidade de ataque,Attack speed
+STAT_EVADE,Esquiva,Evasion
+STAT_CDR,Recarga das skills,Skill cooldown
+STAT_SKILL_DMG,Dano das skills,Skill damage
+STAT_STAMINA_REGEN,Recuperação de fôlego,Stamina recovery
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -197,6 +251,44 @@ ITEM_AMULETO,Amuleto de Proteção,Protection Amulet
 ITEM_AMULETO_DESC,"Se o fortalecimento falhar, o equipamento não quebra nem some.","If strengthening fails, the gear neither breaks nor vanishes."
 ITEM_ERVA_ORVALHO,Erva-de-orvalho,Dewleaf
 ITEM_CAIXOTE_FERRO,Caixote de ferro,Iron crate
+ITEM_EQ_ESPADA_APRENDIZ,Espada de aprendiz,Apprentice sword
+ITEM_EQ_ESPADA_COMUM,Espada de ferro,Iron sword
+ITEM_EQ_ELMO_COMUM,Elmo de ferro,Iron helmet
+ITEM_EQ_PEITORAL_COMUM,Colete de couro,Leather vest
+ITEM_EQ_LUVAS_COMUM,Luvas de couro,Leather gloves
+ITEM_EQ_CALCA_COMUM,Calça reforçada,Padded trousers
+ITEM_EQ_BOTAS_COMUM,Botas de couro,Leather boots
+ITEM_EQ_PULSEIRA_COMUM,Pulseira de couro,Leather bracelet
+ITEM_EQ_CINTO_COMUM,Cinto de couro,Leather belt
+ITEM_EQ_ESPADA_RARO,Espada de aço,Steel sword
+ITEM_EQ_ELMO_RARO,Elmo de aço,Steel helmet
+ITEM_EQ_PEITORAL_RARO,Peitoral de aço,Steel breastplate
+ITEM_EQ_LUVAS_RARO,Manoplas de aço,Steel gauntlets
+ITEM_EQ_CALCA_RARO,Calça de placas,Plated trousers
+ITEM_EQ_BOTAS_RARO,Botas de aço,Steel boots
+ITEM_EQ_PULSEIRA_RARO,Pulseira de aço,Steel bracelet
+ITEM_EQ_CINTO_RARO,Cinto de placas,Plated belt
+ITEM_EQ_ESPADA_EPICO,Espada rúnica,Runic sword
+ITEM_EQ_ELMO_EPICO,Elmo rúnico,Runic helmet
+ITEM_EQ_PEITORAL_EPICO,Peitoral rúnico,Runic breastplate
+ITEM_EQ_LUVAS_EPICO,Garras rúnicas,Runic claws
+ITEM_EQ_CALCA_EPICO,Calça rúnica,Runic trousers
+ITEM_EQ_BOTAS_EPICO,Botas rúnicas,Runic boots
+ITEM_EQ_PULSEIRA_EPICO,Pulseira rúnica,Runic bracelet
+ITEM_EQ_CINTO_EPICO,Cinto rúnico,Runic belt
+ITEM_EQ_ESPADA_LENDARIO,Espada do Sol Alado,Winged Sun Sword
+ITEM_EQ_ELMO_LENDARIO,Elmo do Sol Alado,Winged Sun Helmet
+ITEM_EQ_PEITORAL_LENDARIO,Peitoral do Sol Alado,Winged Sun Breastplate
+ITEM_EQ_LUVAS_LENDARIO,Manoplas do Sol Alado,Winged Sun Gauntlets
+ITEM_EQ_CALCA_LENDARIO,Calça do Sol Alado,Winged Sun Trousers
+ITEM_EQ_BOTAS_LENDARIO,Botas do Sol Alado,Winged Sun Boots
+ITEM_EQ_PULSEIRA_LENDARIO,Pulseira do Sol Alado,Winged Sun Bracelet
+ITEM_EQ_CINTO_LENDARIO,Cinto do Sol Alado,Winged Sun Belt
+ITEM_EQ_ESPADA_APRENDIZ_DESC,A espada de treino que o Mestre Bram te deu.,The training sword Master Bram gave you.
+ITEM_EQ_COMUM_DESC,"Peça simples, feita por qualquer ferreiro.",A simple piece any smith can make.
+ITEM_EQ_RARO_DESC,"Aço bem trabalhado, com detalhes azuis.",Well-worked steel with blue trims.
+ITEM_EQ_EPICO_DESC,Runas antigas brilham no metal escuro.,Ancient runes glow on the dark metal.
+ITEM_EQ_LENDARIO_DESC,Dizem que foi forjada com a luz do céu.,They say it was forged with the light of the sky.
 DLG_MAIN_01_MARTA_1,Lio! O sol já está alto e você ainda com cara de travesseiro.,Lio! The sun is up and you still look like a pillow.
 DLG_MAIN_01_MARTA_2,"Bom dia, mãe. Sonhei que eu era o herói mais forte do mundo.","Morning, Mom. I dreamed I was the strongest hero in the world."
 DLG_MAIN_01_MARTA_3,Pois o herói mais forte do mundo está atrasado para o treino. O Bram já passou aqui resmungando.,"Well, the strongest hero in the world is late for training. Bram already came by, grumbling."
@@ -287,19 +379,3 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-BAG_TITLE,Mochila  %d/%d   ·   %d de ouro,Bag  %d/%d   ·   %d gold
-BAG_USE,Usar,Use
-BAG_QUICK,Pôr no atalho,Put on shortcut
-BAG_QUICK_ON,No atalho,On shortcut
-BAG_PICK,Toque num item,Tap an item
-BAG_OWNED,Você tem: %d,You have: %d
-RARITY_COMMON,Comum,Common
-RARITY_RARE,Raro,Rare
-RARITY_EPIC,Épico,Epic
-RARITY_LEGENDARY,Lendário,Legendary
-ITEMTYPE_POTION,Poção,Potion
-ITEMTYPE_MATERIAL,Material,Material
-ITEMTYPE_CONSUMABLE,Item especial,Special item
-ITEMTYPE_EQUIPMENT,Equipamento,Equipment
-HUD_OPEN,Abrir (E),Open (E)
-HUD_GOLD_GOT,+%d de ouro,+%d gold

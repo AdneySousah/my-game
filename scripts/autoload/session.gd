@@ -20,6 +20,10 @@ var tracked_quest: String = ""
 var rest_ready_at: Dictionary = {}
 ## The hero's bag (potions, materials, items).
 var inventory: Inventory = Inventory.new()
+## What the hero is wearing (sword, armour, accessories).
+var gear: Equipment = Equipment.new()
+## Sword every new hero starts with.
+const STARTER_WEAPON: String = "eq_espada_aprendiz"
 ## Potion chosen for each quick slot on the screen (data/items "quick_slots").
 var quick_slots: Dictionary = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 
@@ -32,6 +36,7 @@ func reset() -> void:
 	flags.clear()
 	tracked_quest = ""
 	inventory.clear()
+	gear.clear()
 	quick_slots = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 	rest_ready_at.clear()
 
@@ -57,6 +62,21 @@ func set_flag(flag: String) -> void:
 	flags[flag] = true
 
 
+## A new hero holds the apprentice sword (once per playthrough).
+func give_starter_gear() -> void:
+	if has_flag("starter_gear") or Data.item(STARTER_WEAPON).is_empty():
+		return
+	set_flag("starter_gear")
+	if not gear.get_piece("weapon").is_empty():
+		return
+	var piece: Dictionary = inventory.new_piece(STARTER_WEAPON)
+	piece["sockets"] = 0
+	piece["worn"] = true
+	piece.erase("new")
+	gear.slots["weapon"] = piece
+	gear.changed.emit()
+
+
 ## Puts items in the bag; returns how many did not fit.
 func add_item(id: String, amount: int = 1) -> int:
 	return inventory.add(id, amount)
@@ -67,7 +87,8 @@ func to_dict() -> Dictionary:
 	return {
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
 		"quests": quests, "flags": flags, "tracked_quest": tracked_quest,
-		"inventory": inventory.to_array(), "quick_slots": quick_slots, "rest_ready_at": rest_ready_at,
+		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
+		"quick_slots": quick_slots, "rest_ready_at": rest_ready_at,
 	}.duplicate(true)
 
 
@@ -83,6 +104,14 @@ func from_dict(d: Dictionary) -> void:
 	# Saves from before the bag (4.x) kept materials apart: move them in.
 	for key: String in (d.get("materials", {}) as Dictionary):
 		inventory.add(key.to_lower(), int(d["materials"][key]))
+	gear.from_dict(d.get("gear", {}))
+	var top: int = int(d.get("next_uid", 1))
+	for slot: String in gear.slots:
+		top = maxi(top, int(gear.slots[slot]["uid"]) + 1)
+	inventory.next_uid = maxi(inventory.next_uid, top)
+	# Saves from before equipment (5.2 and older) get the apprentice sword.
+	if not d.has("gear"):
+		give_starter_gear()
 	quick_slots.merge(d.get("quick_slots", {}), true)
 	rest_ready_at = d.get("rest_ready_at", {})
 	# JSON brings numbers back as floats; quest counters are ints.

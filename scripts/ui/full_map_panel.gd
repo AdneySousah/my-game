@@ -39,7 +39,7 @@ func open() -> void:
 	_title.text = tr(str(main.map.data.get("name", ""))) if main and main.map else ""
 	show()
 	reset_size()
-	position = ((get_viewport_rect().size - size) * 0.5).floor()
+	GameTheme.place_center(self)
 	_canvas.queue_redraw()
 
 

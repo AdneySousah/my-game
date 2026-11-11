@@ -90,6 +90,7 @@ func _ready() -> void:
 		if pos.size() >= 2:
 			spawn = "pos:%s:%s:%s" % [pos[0], pos[1], st.get("yaw", 0)]
 		SaveGame.pending = {}
+	Session.give_starter_gear()
 	await load_map(map_id, spawn, false)
 	quests.start_auto_quests()
 
@@ -341,8 +342,25 @@ func _drop_loot(e: Enemy) -> void:
 		burst.global_position = e.global_position
 	var base: Dictionary = Data.enemies.get(e.base_id, {})
 	for d: Dictionary in base.get("drops", []):
-		if randf() <= float(d.get("chance", 1.0)):
+		if randf() > float(d.get("chance", 1.0)):
+			continue
+		if d.has("gear"):
+			for i: int in int(d.get("count", 1)):
+				var id: String = random_gear(str(d["gear"]))
+				if id != "":
+					give_item(id, 1)
+		else:
 			give_item(str(d["item"]), int(d.get("count", 1)))
+
+
+## A random gear piece of this rarity (not part of a set; sets come from the smith).
+static func random_gear(rarity: String) -> String:
+	var pool: Array[String] = []
+	for id: String in Data.items:
+		var it: Dictionary = Data.items[id]
+		if str(it.get("type", "")) == "equipment" and str(it.get("rarity", "")) == rarity 				and str(it.get("set", "")) == "" and id != Session.STARTER_WEAPON:
+			pool.append(id)
+	return pool.pick_random() if not pool.is_empty() else ""
 
 
 ## Puts items in the bag with a short message ("+2 Poção de vida" or "Mochila cheia").

@@ -34,8 +34,8 @@
     {"id": "bento", "pos": [-21, 10], "yaw": -120, "unless_flag": "bento_joined"}
   ],
   "chests": [
-    {"id": "floresta_bau_1", "pos": [30, -30], "yaw": -30, "gold": 60, "items": {"pot_vida_p": 3, "pot_folego_p": 2}},
-    {"id": "floresta_bau_2", "pos": [-36, 6], "yaw": 90, "gold": 90, "items": {"pot_forca": 1, "broca": 1}}
+    {"id": "floresta_bau_1", "pos": [30, -30], "yaw": -30, "gold": 60, "items": {"pot_vida_p": 3, "pot_folego_p": 2, "eq_botas_comum": 1}},
+    {"id": "floresta_bau_2", "pos": [-36, 6], "yaw": 90, "gold": 90, "items": {"pot_forca": 1, "broca": 1, "eq_luvas_comum": 1}}
   ],
   "rest_points": [
     { "id": "floresta_entrada", "name": "REST_FLORESTA_ENTRADA", "pos": [5, 44], "kind": "fogueira" },

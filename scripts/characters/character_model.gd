@@ -19,6 +19,9 @@ var _overlay: StandardMaterial3D
 var _meshes: Array[MeshInstance3D] = []
 var _hand_weapon: Node3D
 var _back_weapon: Node3D
+## Weapon settings now in use (characters.json "weapon" + the equipped sword's own).
+var _weapon_cfg: Dictionary = {}
+var _weapon_set: bool = false
 var _drawn: bool = true
 
 static var _libraries: Dictionary = {}
@@ -219,14 +222,35 @@ static func _strip_root_motion(clip: Animation) -> void:
 
 
 func _attach_weapon() -> void:
-	var w: Dictionary = config.get("weapon", {})
-	if w.is_empty() or not ResourceLoader.exists(str(w.get("scene", ""))):
+	var w: Dictionary = config.get("weapon", {}).duplicate()
+	w.merge(_weapon_cfg, true)
+	if w.is_empty() or bool(w.get("none", false)) or not ResourceLoader.exists(str(w.get("scene", ""))):
 		return
 	_hand_weapon = _mount_weapon(w, str(w.get("bone", "RightHand")), w.get("rotation_deg", [0, 0, 0]), w.get("offset", [0, 0, 0]))
 	var sheath: Dictionary = w.get("sheath", {})
 	if not sheath.is_empty():
 		_back_weapon = _mount_weapon(w, str(sheath.get("bone", "Spine")), sheath.get("rotation_deg", [0, 0, 0]), sheath.get("offset", [0, 0, 0]))
-		_back_weapon.visible = false
+		_back_weapon.visible = not _drawn
+
+
+## Swaps the weapon model: `override` replaces keys of the character's "weapon" config
+## (e.g. {"scene": ..., "length": 0.95}); {} = the default weapon; {"none": true} = no weapon.
+func set_weapon(override: Dictionary) -> void:
+	if _weapon_set and override == _weapon_cfg:
+		return
+	_weapon_set = true
+	_weapon_cfg = override.duplicate(true)
+	if skeleton == null:
+		return
+	var drawn: bool = _drawn
+	for w: Node3D in [_hand_weapon, _back_weapon]:
+		if w and is_instance_valid(w):
+			w.get_parent().queue_free()
+	_hand_weapon = null
+	_back_weapon = null
+	_attach_weapon()
+	if _hand_weapon:
+		_hand_weapon.visible = drawn or _back_weapon == null
 
 
 ## Puts a copy of the weapon on `bone`. Rotation in degrees, offset in metres (bone space).

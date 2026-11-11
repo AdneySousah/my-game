@@ -2530,6 +2530,114 @@
       "notes": [
         "2026-11-11: 2026-11-11: aprovado pelo dono; tampa separada no código (chest.gd)"
       ]
+    },
+    {
+      "id": "wpn_espada_comum",
+      "category": "wpn",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Espadas do Ato 1 a partir dos ícones (tools/meshy/fase5_lote2_espadas.json)",
+      "file": "assets/weapons/wpn_espada_comum/wpn_espada_comum.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1cc1c-7345-755f-9c02-2c4c2b0dee33",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cc1d-9f18-7106-9780-caa1cc3a6e54",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: imagem aprovada pelo dono; modelo no jogo esperando o teste",
+        "2026-11-11: 2026-11-11: modelo aprovado pelo dono no jogo"
+      ]
+    },
+    {
+      "id": "wpn_espada_raro",
+      "category": "wpn",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Espadas do Ato 1 a partir dos ícones (tools/meshy/fase5_lote2_espadas.json)",
+      "file": "assets/weapons/wpn_espada_raro/wpn_espada_raro.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1cc1c-76b8-72c0-a6a0-14d2d9c22735",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cc1d-a2cc-7770-bc99-7f599a482d94",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: imagem aprovada pelo dono; modelo no jogo esperando o teste",
+        "2026-11-11: 2026-11-11: modelo aprovado pelo dono no jogo"
+      ]
+    },
+    {
+      "id": "wpn_espada_epico",
+      "category": "wpn",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Espadas do Ato 1 a partir dos ícones (tools/meshy/fase5_lote2_espadas.json)",
+      "file": "assets/weapons/wpn_espada_epico/wpn_espada_epico.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1cc1c-791d-73ce-aae0-38087d3da3d5",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cc1d-a610-7510-aea3-4fa4f947fec1",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: imagem aprovada pelo dono; modelo no jogo esperando o teste",
+        "2026-11-11: 2026-11-11: modelo aprovado pelo dono no jogo"
+      ]
+    },
+    {
+      "id": "wpn_espada_lendario",
+      "category": "wpn",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Espadas do Ato 1 a partir dos ícones (tools/meshy/fase5_lote2_espadas.json)",
+      "file": "assets/weapons/wpn_espada_lendario/wpn_espada_lendario.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1cc1c-7b62-732f-8d02-de9b866d26cb",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cc1d-a96a-77e9-8895-e57a9919d699",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: imagem aprovada pelo dono; modelo no jogo esperando o teste",
+        "2026-11-11: 2026-11-11: modelo aprovado pelo dono no jogo"
+      ]
     }
   ]
 }

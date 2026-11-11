@@ -130,9 +130,9 @@
       "category": "hero",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Image to 3D a partir de ref_lio (tarefa 01a1cab5-eeca-76aa-be1c-9b53fc5f0f35); rig; 14 animações (docs/FASE3_PLANO.md)",
-      "file": "assets/characters/hero_lio/hero_lio.glb",
+      "file": "assets/characters/hero/hero_lio/hero_lio.glb",
       "tasks": [
         {
           "type": "image-to-3d",
@@ -165,14 +165,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "wpn_espada_aprendiz",
       "category": "wpn",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Espada simples de aprendiz (docs/FASE3_PLANO.md)",
       "file": "assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb",
       "tasks": [
@@ -189,14 +191,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "enm_bandido",
       "category": "enm",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Bandido de Pradoluz; imagem conceito + Image to 3D; rig; 4 animações",
       "file": "assets/enemies/enm_bandido/enm_bandido.glb",
       "tasks": [
@@ -225,14 +229,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_arvore",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_arvore/prp_arvore.glb",
       "tasks": [
@@ -249,14 +255,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_arbusto",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_arbusto/prp_arbusto.glb",
       "tasks": [
@@ -273,14 +281,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_pedra",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_pedra/prp_pedra.glb",
       "tasks": [
@@ -297,14 +307,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_cerca",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_cerca/prp_cerca.glb",
       "tasks": [
@@ -321,14 +333,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_barril",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_barril/prp_barril.glb",
       "tasks": [
@@ -345,14 +359,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_caixa",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_caixa/prp_caixa.glb",
       "tasks": [
@@ -369,14 +385,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_feno",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_feno/prp_feno.glb",
       "tasks": [
@@ -393,14 +411,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_carroca",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_carroca/prp_carroca.glb",
       "tasks": [
@@ -417,14 +437,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_poco",
       "category": "prp",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
       "file": "assets/props/prp_poco/prp_poco.glb",
       "tasks": [
@@ -441,14 +463,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_casa_pequena",
       "category": "env",
       "phase": 3,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Casa pequena de madeira, telhado laranja (docs/FASE3_PLANO.md)",
       "file": "assets/environment/env_casa_pequena/env_casa_pequena.glb",
       "tasks": [
@@ -465,7 +489,9 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     }
   ]
 }

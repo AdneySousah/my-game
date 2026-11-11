@@ -23,6 +23,7 @@ Leia também: [docs/DECISOES.md](docs/DECISOES.md) (o que já foi decidido), [do
   - `--headless --script res://tests/anim_analyze.gd -- <rigged.glb> <anims.glb>`: momento dos golpes (picos da mão) e deslocamento do quadril de cada animação.
   - `--headless --script res://tests/inspect_glb.gd -- <a.glb> ...`: animações, ossos e malhas.
 - **Mapas:** cada mapa é um JSON em `data/maps/` (chão, trilhas, paredes, peças, espalhamento, pontos de descanso, saídas, zonas de inimigos). Fotos dos mapas (vista aérea + pontos de jogo): `--path . --resolution 1280x720 res://tests/map_tour.tscn -- <pasta> [mapa ...]`.
+- **Interface:** o tema vem de `GameTheme` (texturas em `assets/ui`, feitas a partir das imagens do Meshy com `--headless --script res://scripts/tools/ui_prepare.gd`). Botões, painéis e barras usam o tema automaticamente; não colocar `StyleBoxFlat` por cima. Texturas usadas em `_draw()` precisam ser carregadas antes (em `_ready`) com `GameTheme.tex()`: carregadas pela primeira vez dentro do desenho, aparecem como um quadrado branco.
 - O jogo roda em `scenes/main/main.tscn` (`Main`): herói, câmera e HUD ficam; os mapas trocam. Progresso do mundo em `Session` (autoload).
 - Na exportação (Fase 7), incluir `*.json` no filtro de arquivos, porque `data/` é lido com `FileAccess`.
 

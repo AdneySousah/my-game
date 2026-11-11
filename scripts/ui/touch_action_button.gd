@@ -9,16 +9,20 @@ var radius: float = 50.0
 var text: String = ""
 var sub_text: String = ""
 var color: Color = Color(1, 1, 1, 0.35)
+## Skill picture drawn inside the golden ring (null = show `text`).
+var icon: Texture2D
 var cooldown_ratio: float = 0.0
 var disabled: bool = false
 ## Drawn darker when the action cannot be paid for (e.g. not enough fôlego).
 var dimmed: bool = false
 
 var _touch_index: int = -1
+var _frame: Texture2D
 
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_frame = GameTheme.tex("ui_botao_redondo")
 	custom_minimum_size = Vector2(radius, radius) * 2.0
 	size = custom_minimum_size
 
@@ -56,24 +60,36 @@ func _process(_delta: float) -> void:
 func _draw() -> void:
 	var c := Vector2(radius, radius)
 	var pressed: bool = _touch_index != -1
-	var fill: Color = color.darkened(0.3) if pressed else color
+	var r: float = radius * (0.94 if pressed else 1.0)
+	var tint := Color.WHITE
 	if disabled:
-		fill = Color(0.3, 0.3, 0.35, 0.35)
+		tint = Color(0.45, 0.45, 0.5, 0.75)
 	elif dimmed:
-		fill = fill.darkened(0.55)
-	draw_circle(c, radius, fill)
-	draw_arc(c, radius - 1.5, 0.0, TAU, 48, Color(1, 1, 1, 0.6), 3.0, true)
+		tint = Color(0.5, 0.5, 0.55, 1.0)
+	draw_texture_rect(_frame, Rect2(c - Vector2(r, r), Vector2(r, r) * 2.0), false, tint)
+	# Inner glass area of the frame is ~72% of its radius.
+	var inner: float = r * 0.72
+	if icon:
+		draw_texture_rect(icon, Rect2(c - Vector2(inner, inner), Vector2(inner, inner) * 2.0), false, tint)
+	elif color.a > 0.0:
+		draw_circle(c, inner, Color(color, 0.35 * tint.a))
 	if cooldown_ratio > 0.0:
 		var pts := PackedVector2Array([c])
 		var steps: int = 32
 		var start: float = -PI * 0.5
 		for i: int in steps + 1:
 			var a: float = start + TAU * cooldown_ratio * float(i) / steps
-			pts.append(c + Vector2(cos(a), sin(a)) * radius)
-		draw_colored_polygon(pts, Color(0, 0, 0, 0.55))
+			pts.append(c + Vector2(cos(a), sin(a)) * inner)
+		draw_colored_polygon(pts, Color(0, 0, 0, 0.6))
 	var font: Font = ThemeDB.fallback_font
-	var fs: int = int(clampf(radius * 0.32, 13, 26))
+	var fs: int = int(clampf(radius * 0.3, 12, 24))
 	var w: float = radius * 2.0
-	draw_string(font, Vector2(0, radius + fs * 0.35), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, Color.WHITE)
+	if text != "" and icon == null:
+		var y: float = radius + fs * 0.35
+		draw_string_outline(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, 5, Color(0, 0, 0, 0.85))
+		draw_string(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, Color(1, 0.96, 0.85) * tint)
 	if sub_text != "":
-		draw_string(font, Vector2(0, radius + fs * 1.4), sub_text, HORIZONTAL_ALIGNMENT_CENTER, w, int(fs * 0.8), Color(1, 1, 0.8))
+		var big: int = int(fs * 1.4)
+		var y2: float = radius + big * 0.35
+		draw_string_outline(font, Vector2(0, y2), sub_text, HORIZONTAL_ALIGNMENT_CENTER, w, big, 6, Color.BLACK)
+		draw_string(font, Vector2(0, y2), sub_text, HORIZONTAL_ALIGNMENT_CENTER, w, big, Color.WHITE)

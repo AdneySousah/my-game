@@ -214,6 +214,26 @@ func _build_rivers() -> void:
 			body.rotation.y = yaw
 			add_child(body)
 			_path_segments.append([a, b, width + 1.5])
+			_river_banks(r, a, b, width)
+
+
+## Plants along both banks of a river segment: "bank_ids" + optional "bank_spacing".
+func _river_banks(r: Dictionary, a: Vector3, b: Vector3, width: float) -> void:
+	var ids: Array = r.get("bank_ids", [])
+	if ids.is_empty():
+		return
+	var spacing: float = float(r.get("bank_spacing", 3.0))
+	var dir: Vector3 = (b - a).normalized()
+	var side := Vector3(-dir.z, 0, dir.x)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(a.x * 13.0 + a.z * 7.0)
+	var n: int = maxi(1, int(a.distance_to(b) / spacing))
+	for k: int in n:
+		for s: float in [-1.0, 1.0]:
+			if rng.randf() < 0.35:
+				continue
+			var pos: Vector3 = a + dir * spacing * (k + rng.randf()) + side * s * (width * 0.5 + rng.randf_range(0.3, 1.2))
+			PropFactory.spawn(self, str(ids[rng.randi() % ids.size()]), pos, rng.randf_range(0, 360), rng.randf_range(0.8, 1.2))
 
 
 ## Rows of props along a polyline (rock cliffs, fences, tree walls):
@@ -232,6 +252,8 @@ func _build_lines() -> void:
 			var a: Vector3 = _v(pts[i])
 			var b: Vector3 = _v(pts[i + 1])
 			var dir: Vector3 = (b - a).normalized()
+			if bool(l.get("solid", false)):
+				_invisible_wall(a, b, 2.0)
 			var n: int = maxi(1, int(a.distance_to(b) / spacing))
 			for k: int in n:
 				var pos: Vector3 = a + dir * spacing * (k + 0.5)
@@ -239,6 +261,21 @@ func _build_lines() -> void:
 				var rot: float = rad_to_deg(atan2(-dir.z, dir.x)) if align else rng.randf_range(0, 360)
 				PropFactory.spawn(self, str(ids[rng.randi() % ids.size()]), pos, rot, rng.randf_range(float(sc[0]), float(sc[1])))
 				_clear_spots.append(pos)
+
+
+## Blocks the hero along a segment (used behind rows of rocks so no gap lets him out).
+func _invisible_wall(a: Vector3, b: Vector3, thickness: float) -> void:
+	var body := StaticBody3D.new()
+	body.collision_layer = Game.LAYER_WORLD
+	var shape := CollisionShape3D.new()
+	var box := BoxShape3D.new()
+	box.size = Vector3(thickness, 4, a.distance_to(b) + thickness)
+	shape.shape = box
+	shape.position.y = 2
+	body.add_child(shape)
+	body.position = (a + b) * 0.5
+	body.rotation.y = atan2(b.x - a.x, b.z - a.z)
+	add_child(body)
 
 
 ## Tiles wall pieces along segments: {"id": wall prop, "from": [x,z], "to": [x,z]}.
@@ -325,6 +362,10 @@ func _build_exits() -> void:
 		add_child(ex)
 		ex.position = _v(e["pos"])
 		ex.rotation_degrees.y = float(e.get("rot", 0))
+		# Optional model at the exit: a magic portal or a city gate.
+		if e.has("model"):
+			var model_pos: Array = e.get("model_pos", e["pos"])
+			PropFactory.spawn(self, str(e["model"]), _v(model_pos), float(e.get("model_rot", 0)))
 		ex.used.connect(func(to: String, sp: String) -> void: exit_used.emit(to, sp))
 
 

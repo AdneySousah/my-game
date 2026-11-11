@@ -83,3 +83,14 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Árvores, casas e paredes ficam transparentes quando escondem o herói.
 - A entrada da mina veio com uma placa escrita "OLD DIGGINGS" (em inglês). Fica assim por enquanto; refazer custa 15 créditos se o dono preferir.
 - Os inimigos da floresta e da mina são provisórios (bandido e orc) até a etapa 4.3.
+
+## Interface, muralhas e portais (11/11/2026, pedido do dono)
+- Interface com texturas do Meshy: janelas de madeira com cantos dourados, botões de tábua com borda de ouro, barras com moldura, aro dourado nos botões de toque, moldura ornamentada no minimapa e ícones pintados para as 8 skills.
+- Cidades cercadas por muralha (pedra + paliçada) com torres nos cantos e portão nas saídas. Mapas de batalha fechados por elementos do ambiente: na floresta, rios com juncos nas margens e paredões de rochedos (com barreira invisível atrás). Neve, deserto e pântano ganham as suas bordas na Fase 6.
+- Saídas de mapas de batalha marcadas por um portal de pedra com luz mágica.
+
+## HUD com retrato e mapas de transição (11/11/2026, pedido do dono)
+- HUD compacto: retrato do Lio num círculo dourado. Metade de cima do anel = vida (vermelho), metade de baixo = XP (azul). Nível no selo embaixo, vida em números e ouro ao lado. Fôlego numa barra centralizada no rodapé.
+- Os botões Atributos e Skills saíram da tela. Quando há pontos para distribuir ou skill nova, aparece um "!" pulsando no retrato; tocar no retrato abre o menu do personagem (Atributos, Skills, Mapa). Teclas C, K e M continuam no PC.
+- O botão "+1 nível" só existe na versão de teste (some no jogo exportado).
+- Cada região terá 3 a 4 mapas de campo, com o bioma mudando aos poucos até o da próxima região (ex.: floresta → floresta rala → começando a congelar → inverno → gelo). Neve, folhas secas e musgo por shader nas peças existentes; o Meshy só para o que o shader não resolve. Detalhes no GDD, Parte 2.

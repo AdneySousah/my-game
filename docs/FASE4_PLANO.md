@@ -27,8 +27,11 @@ Cada etapa termina com algo jogável para você testar.
 | # | Etapa | O que fica pronto |
 |---|---|---|
 | 4.1b | **Bordas e navegação** (feito, sem créditos) | Minimapa redondo girado como a câmera, com setas para as saídas; mapa completo (tecla M ou toque no minimapa); rios animados e paredões de rocha fechando a floresta; cerca provisória em volta da vila |
-| 4.1c | **Muralhas e portais** (Meshy) | Muralha de pedra, torre de canto e portão da cidade para cercar as cidades; portal de pedra com luz mágica nas saídas; juncos e rochedos para as margens |
-| 4.2a | **Interface com a cara do jogo** (Meshy) | Moldura de janela, caixa de diálogo, botão, botão redondo (ataque/skills), moldura das barras, moldura do minimapa e os 8 ícones das skills, no estilo das imagens de referência |
+| 4.1c | **Muralhas e portais** (Meshy, feito) | Muralha de pedra, torre de canto e portão da cidade para cercar as cidades; portal de pedra com luz mágica nas saídas; juncos e rochedos para as margens |
+| 4.2a | **Interface com a cara do jogo** (Meshy, feito) | Moldura de janela, caixa de diálogo, botão, botão redondo (ataque/skills), moldura das barras, moldura do minimapa e os 8 ícones das skills, no estilo das imagens de referência |
+| 4.2b | **HUD com retrato** (feito) | Retrato do Lio num círculo: metade de cima do anel = vida, metade de baixo = XP; nível e ouro ao lado; fôlego numa barra no rodapé, centralizada; Atributos e Skills saem da tela e viram um alerta "!" no retrato (pontos para distribuir ou skill nova), que abre o menu do personagem; o botão "+1 nível" só aparece na versão de teste |
+
+Os 3 a 4 mapas de campo por região, com transição gradual de bioma (pedido do dono), ficam para a **Fase 6** (GDD, Parte 2); a fatia vertical segue com a Floresta Sussurrante.
 
 Inventário, equipamentos, ferreiro e loja ficam para a **Fase 5**, como no roadmap. Nesta fase os drops só somam ouro e materiais.
 

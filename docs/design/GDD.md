@@ -127,6 +127,24 @@ Mundo semiaberto. As cidades são ligadas por estradas e áreas de exploração.
   - teleportar para lá também, depois de ativados.
 - **Dungeons:** um ponto na entrada e outro no meio (antes do chefe) ✱.
 
+## Mapas de campo e transição de bioma (adicionado em 11/11/2026, pedido do dono)
+Cada região tem **3 a 4 mapas de campo** com monstros, ligados em sequência. Os mapas do fim de uma região já começam a mudar para o bioma da próxima, para a viagem parecer contínua em vez de "trocar de cenário" de uma vez.
+
+Exemplo do dono (floresta → gelo): floresta cheia → floresta com menos folhas → floresta começando a congelar → floresta de inverno sem folhas → gelo.
+
+| Trecho | Mapas (do início ao fim) |
+|---|---|
+| Pradoluz → Qaressa | Campos de Pradoluz · Floresta Sussurrante · Bosque seco (folhas amarelas, grama rala) · Estepe de pedra e arbustos secos → **Dunas de Ossos** |
+| Qaressa → Hrimvald | Dunas de Ossos · Deserto rochoso · Planalto frio (pedra, capim, primeiras manchas de neve) · Pinheiral com neve → **Picos Uivantes** |
+| Hrimvald → Lys'Thaël | Picos Uivantes · Vale do degelo (neve derretendo, riachos) · Mata úmida (musgo, névoa) · Bordas do pântano → **Pântano das Raízes** |
+| Lys'Thaël → Altaréa | Pântano das Raízes · Floresta élfica murcha · Campos cultivados vigiados · Estrada fortificada → **Arredores da Capital** |
+
+Como fazer sem gastar créditos demais:
+- O chão, as trilhas, a cor das manchas, a névoa e a luz são feitos no Godot (sem créditos). A mudança de cor do chão é gradual entre os mapas do trecho.
+- **Neve, folhas secas e musgo por shader** nas peças que já existem (uma camada de cor por cima das faces viradas para cima). Assim a mesma árvore serve para "cheia", "começando a congelar" e "com neve".
+- Só gera no Meshy o que o shader não resolve: variações sem folhas, pinheiro nevado, arbustos secos, pedras de deserto etc. Estimativa: **6 a 8 peças por trecho** (~90 a 120 créditos por trecho; ~450 no total), dentro da verba da Fase 6.
+- Cada mapa novo segue as regras dos atuais: fechado por bordas naturais do bioma (rio, paredão, neve funda, dunas), pontos de descanso a cada trecho, saídas com portal.
+
 ---
 
 # Parte 5 — História

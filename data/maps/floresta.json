@@ -16,9 +16,19 @@
       "spawn": "from_floresta",
       "pos": [0, 55],
       "size": [10, 2],
-      "label": "MAP_PRADOLUZ"
+      "label": "MAP_PRADOLUZ",
+      "model": "prp_portal",
+      "model_pos": [0, 56.5]
     },
-    { "to": "mina", "spawn": "from_floresta", "pos": [0, -55], "size": [10, 2], "label": "MAP_MINA" }
+    {
+      "to": "mina",
+      "spawn": "from_floresta",
+      "pos": [0, -55],
+      "size": [10, 2],
+      "label": "MAP_MINA",
+      "model": "prp_portal",
+      "model_pos": [0, -56.5]
+    }
   ],
   "rest_points": [
     { "id": "floresta_entrada", "name": "REST_FLORESTA_ENTRADA", "pos": [5, 44], "kind": "fogueira" },
@@ -108,41 +118,55 @@
     }
   ],
   "rivers": [
-    { "points": [[-46, -58], [-44, -20], [-47, 15], [-44, 58]], "width": 7},
-    { "points": [[46, -58], [44, -15], [47, 20], [44, 58]], "width": 7}
+    {
+      "points": [[-46, -58], [-44, -20], [-47, 15], [-44, 58]],
+      "width": 7,
+      "bank_ids": ["prp_junco", "prp_junco", "prp_pedrinhas", "prp_flores"],
+      "bank_spacing": 3.5
+    },
+    {
+      "points": [[46, -58], [44, -15], [47, 20], [44, 58]],
+      "width": 7,
+      "bank_ids": ["prp_junco", "prp_junco", "prp_pedrinhas", "prp_flores"],
+      "bank_spacing": 3.5
+    }
   ],
   "lines": [
     {
-      "ids": ["prp_pedra"],
-      "spacing": 2.4,
-      "scale": [2.0, 3.0],
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
       "jitter": 0.5,
       "points": [[-42, -52], [-6, -52]],
-      "seed": 11
+      "seed": 11,
+      "solid": true
     },
     {
-      "ids": ["prp_pedra"],
-      "spacing": 2.4,
-      "scale": [2.0, 3.0],
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
       "jitter": 0.5,
       "points": [[6, -52], [42, -52]],
-      "seed": 12
+      "seed": 12,
+      "solid": true
     },
     {
-      "ids": ["prp_pedra"],
-      "spacing": 2.4,
-      "scale": [2.0, 3.0],
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
       "jitter": 0.5,
       "points": [[-42, 52], [-6, 52]],
-      "seed": 13
+      "seed": 13,
+      "solid": true
     },
     {
-      "ids": ["prp_pedra"],
-      "spacing": 2.4,
-      "scale": [2.0, 3.0],
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
       "jitter": 0.5,
       "points": [[6, 52], [42, 52]],
-      "seed": 14
+      "seed": 14,
+      "solid": true
     }
   ]
 }

@@ -13,11 +13,6 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
 	custom_minimum_size = Vector2(860, 600)
-	var style := StyleBoxFlat.new()
-	style.bg_color = Color(0.08, 0.09, 0.13, 0.94)
-	style.set_corner_radius_all(12)
-	style.set_content_margin_all(20)
-	add_theme_stylebox_override("panel", style)
 
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)

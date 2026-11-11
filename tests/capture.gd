@@ -41,7 +41,7 @@ func _ready() -> void:
 		if f in [200, 310, 400]:
 			player.skills.use_slot({200: 0, 310: 1, 400: 2}[f])
 		if f == 500:
-			hud.open_attributes()
+			hud.open_character_menu()
 		if f == 580:
 			hud.open_skills()
 		await get_tree().process_frame
@@ -49,6 +49,8 @@ func _ready() -> void:
 			shot += 1
 			await RenderingServer.frame_post_draw
 			var img: Image = get_viewport().get_texture().get_image()
+			# Drop alpha: the window ignores it, but PNG viewers would show see-through UI.
+			img.convert(Image.FORMAT_RGB8)
 			img.save_png("%s/shot_%d.png" % [out_dir, shot])
 	print("CAPTURE_OK %d shots -> %s" % [shot, out_dir])
 	get_tree().quit()

@@ -62,4 +62,6 @@ func _frames(n: int) -> void:
 
 func _shot(path: String) -> void:
 	await RenderingServer.frame_post_draw
-	get_viewport().get_texture().get_image().save_png(path)
+	var img: Image = get_viewport().get_texture().get_image()
+	img.convert(Image.FORMAT_RGB8)
+	img.save_png(path)

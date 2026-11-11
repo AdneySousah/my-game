@@ -119,6 +119,17 @@ func _bot_test() -> void:
 	check(unlocked == 8, "all 8 skills unlocked at level 30")
 	check(not player.skills.equipped.has(""), "4 skill buttons filled")
 
+	# Portrait alert: unspent points / new skills -> "!" until handled.
+	var status: PortraitStatus = hud.get("_status")
+	check(status.alert, "portrait alert on with points to spend and new skills")
+	hud.open_character_menu()
+	check(get_tree().paused and (hud.get("_character_menu") as Control).visible, "portrait opens the character menu")
+	(hud.get("_character_menu") as CharacterMenu).choose.emit("skills")
+	check((hud.get("_skills_panel") as Control).visible, "character menu opens the skills panel")
+	hud.get("_skills_panel").hide()
+	hud.call("_on_panel_closed")
+	check(not get_tree().paused, "closing the panel resumes")
+
 	# Panels open, spend a point, close.
 	hud.open_attributes()
 	check(get_tree().paused, "panel pauses the game")
@@ -134,6 +145,9 @@ func _bot_test() -> void:
 	var st_before: float = player.stamina
 	player.stats.spend_point("vit")
 	check(is_equal_approx(player.stamina, st_before + 1.0), "vitality point also raises current fôlego")
+	while player.stats.unspent_points > 0:
+		player.stats.spend_point("str")
+	check(not status.alert, "portrait alert off once points are spent and skills seen")
 
 	await _stamina_tests(player)
 

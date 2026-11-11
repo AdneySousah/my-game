@@ -5,7 +5,9 @@ extends Control
 
 signal tapped
 
-const RADIUS_PX: float = 95.0
+## Radius of the visible map; the ornate frame (hole = 25% of its width) is drawn around it.
+const RADIUS_PX: float = 62.0
+const FRAME_SIZE: float = 260.0
 const WORLD_RADIUS: float = 34.0
 
 var main: Main
@@ -15,18 +17,20 @@ var _mask: Control
 var _content: Control
 var _overlay: Control
 var _touch: int = -1
+var _frame: Texture2D
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(RADIUS_PX, RADIUS_PX) * 2.0
+	custom_minimum_size = Vector2(FRAME_SIZE, FRAME_SIZE)
 	size = custom_minimum_size
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_frame = GameTheme.tex("ui_moldura_minimapa")
 	# The mask draws the circle and clips the map drawn by its child.
 	_mask = Control.new()
 	_mask.size = size
 	_mask.clip_children = CanvasItem.CLIP_CHILDREN_ONLY
 	_mask.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	_mask.draw.connect(func() -> void: _mask.draw_circle(Vector2(RADIUS_PX, RADIUS_PX), RADIUS_PX, Color.WHITE))
+	_mask.draw.connect(func() -> void: _mask.draw_circle(_center(), RADIUS_PX + 4.0, Color.WHITE))
 	add_child(_mask)
 	_content = Control.new()
 	_content.size = size
@@ -46,7 +50,7 @@ func _process(_delta: float) -> void:
 	_drawer.map = main.map
 	_drawer.center = main.player.global_position
 	_drawer.scale = RADIUS_PX / WORLD_RADIUS
-	_drawer.origin = Vector2(RADIUS_PX, RADIUS_PX)
+	_drawer.origin = _center()
 	_drawer.set_camera_yaw(main.camera_rig.rotation.y)
 	_content.queue_redraw()
 	_overlay.queue_redraw()
@@ -57,7 +61,7 @@ func _input(event: InputEvent) -> void:
 		return
 	var t := event as InputEventScreenTouch
 	var c: Vector2 = get_global_rect().get_center()
-	if t.pressed and t.position.distance_to(c) <= RADIUS_PX:
+	if t.pressed and t.position.distance_to(c) <= RADIUS_PX * 1.6:
 		_touch = t.index
 		get_viewport().set_input_as_handled()
 	elif not t.pressed and t.index == _touch:
@@ -65,17 +69,20 @@ func _input(event: InputEvent) -> void:
 		tapped.emit()
 
 
+func _center() -> Vector2:
+	return Vector2(FRAME_SIZE, FRAME_SIZE) * 0.5
+
+
 func _draw_content() -> void:
-	_content.draw_circle(Vector2(RADIUS_PX, RADIUS_PX), RADIUS_PX, MapDrawer.COL_GROUND)
+	_content.draw_circle(_center(), RADIUS_PX + 4.0, MapDrawer.COL_GROUND)
 	_drawer.draw_world(_content, false)
 
 
 func _draw_overlay() -> void:
 	if main == null or main.map == null:
 		return
-	var c := Vector2(RADIUS_PX, RADIUS_PX)
-	_overlay.draw_arc(c, RADIUS_PX - 2, 0, TAU, 64, Color("#e6b325"), 4.0, true)
-	_overlay.draw_arc(c, RADIUS_PX + 1, 0, TAU, 64, Color(0, 0, 0, 0.7), 2.0, true)
+	var c: Vector2 = _center()
+	_overlay.draw_texture_rect(_frame, Rect2(c - Vector2(FRAME_SIZE, FRAME_SIZE) * 0.5, Vector2(FRAME_SIZE, FRAME_SIZE)), false)
 	# Exits outside the circle: arrow on the edge pointing at them.
 	for e: Dictionary in main.map.data.get("exits", []):
 		var p: Vector2 = _drawer.to_px(_drawer.v(e["pos"]))

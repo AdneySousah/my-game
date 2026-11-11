@@ -1,5 +1,5 @@
 {
-  "_comment": "Pradoluz, vila natal do Lio (Ato 1). Zona segura, cercada (a cerca vira muralha quando o modelo for gerado). Norte: saída para a Floresta Sussurrante.",
+  "_comment": "Pradoluz, vila natal do Lio (Ato 1). Zona segura, cercada por muralha com torres; portão ao norte leva à Floresta Sussurrante.",
   "id": "pradoluz",
   "name": "MAP_PRADOLUZ",
   "safe": true,
@@ -14,7 +14,9 @@
       "spawn": "from_pradoluz",
       "pos": [0, -34],
       "size": [8, 2],
-      "label": "MAP_FLORESTA"
+      "label": "MAP_FLORESTA",
+      "model": "env_portao_cidade",
+      "model_pos": [0, -30]
     }
   ],
   "rest_points": [
@@ -72,7 +74,11 @@
     { "id": "prp_trigo", "pos": [22.2, -18] },
     { "id": "prp_trigo", "pos": [20, -20.2] },
     { "id": "prp_trigo", "pos": [22.2, -20.2] },
-    { "id": "prp_espantalho", "pos": [24.2, -19], "rot": -40}
+    { "id": "prp_espantalho", "pos": [24.2, -19], "rot": -40},
+    { "id": "env_muralha_torre", "pos": [-30, -30] },
+    { "id": "env_muralha_torre", "pos": [30, -30] },
+    { "id": "env_muralha_torre", "pos": [30, 30] },
+    { "id": "env_muralha_torre", "pos": [-30, 30] }
   ],
   "scatter": [
     {
@@ -90,41 +96,11 @@
       "seed": 22
     }
   ],
-  "lines": [
-    {
-      "ids": ["prp_cerca"],
-      "spacing": 1.9,
-      "align": true,
-      "seed": 3,
-      "points": [[-30, -30], [-4.5, -30]]
-    },
-    {
-      "ids": ["prp_cerca"],
-      "spacing": 1.9,
-      "align": true,
-      "seed": 3,
-      "points": [[4.5, -30], [30, -30]]
-    },
-    {
-      "ids": ["prp_cerca"],
-      "spacing": 1.9,
-      "align": true,
-      "seed": 3,
-      "points": [[30, -30], [30, 30]]
-    },
-    {
-      "ids": ["prp_cerca"],
-      "spacing": 1.9,
-      "align": true,
-      "seed": 3,
-      "points": [[30, 30], [-30, 30]]
-    },
-    {
-      "ids": ["prp_cerca"],
-      "spacing": 1.9,
-      "align": true,
-      "seed": 3,
-      "points": [[-30, 30], [-30, -30]]
-    }
+  "walls": [
+    { "id": "env_muralha", "from": [-28, -30], "to": [-3.6, -30] },
+    { "id": "env_muralha", "from": [3.6, -30], "to": [28, -30] },
+    { "id": "env_muralha", "from": [30, -28], "to": [30, 28] },
+    { "id": "env_muralha", "from": [28, 30], "to": [-28, 30] },
+    { "id": "env_muralha", "from": [-30, 28], "to": [-30, -28] }
   ]
 }

@@ -1,0 +1,26 @@
+{
+  "3d": {
+    "env_muralha": ["01a1cb18-67f9-7236-bf88-a6fc3f096afd", "01a1cb19-0ffe-77aa-ad3e-2b0b8be2fad8"],
+    "env_muralha_torre": ["01a1cb18-6906-7767-9527-ef99eaf09901", "01a1cb19-12f4-7381-86dc-eb5f53f4017f"],
+    "env_portao_cidade": ["01a1cb18-69ee-7751-ad84-6f642e4af008", "01a1cb19-15ed-7104-a2a0-0de729bbe0e8"],
+    "prp_portal": ["01a1cb18-6ae5-7603-80f5-9e9b185cbbbd", "01a1cb19-19bf-7178-92f6-b2454686fdc6"],
+    "prp_junco": ["01a1cb18-6bc7-7046-a99a-88161bfc824a", "01a1cb19-1d23-72f4-8568-56344f79de9b"],
+    "prp_rochedo": ["01a1cb18-6cb1-737e-acb1-445504c9cc1c", "01a1cb19-1fd6-777e-a53f-e9e64df80bd3"]
+  },
+  "ui": {
+    "ui_painel": ["01a1cb18-6d9c-70c7-8091-5145c437b86b", 9],
+    "ui_dialogo": ["01a1cb18-6e7b-7611-aca6-c8d73e04a2bb", 9],
+    "ui_botao": ["01a1cb18-6f57-757d-80fd-48d33319b7bd", 9],
+    "ui_botao_redondo": ["01a1cb18-703b-741a-8812-5cd55b01109a", 9],
+    "ui_barra": ["01a1cb18-7127-711d-9bd6-e1f8bb75313d", 9],
+    "ui_moldura_minimapa": ["01a1cb18-71fe-7572-96c4-80393f4d16a6", 9],
+    "ui_icon_corte_giratorio": ["01a1cb18-ae93-734a-9f58-87a6c5f241ae", 6],
+    "ui_icon_investida": ["01a1cb18-af8c-7794-ad6c-92167c1c9212", 6],
+    "ui_icon_golpe_sismico": ["01a1cb18-b06e-74c3-98a7-28c35ee318b6", 6],
+    "ui_icon_quebra_guarda": ["01a1cb18-b154-7277-8c14-34862e84edf3", 6],
+    "ui_icon_brado_de_guerra": ["01a1cb18-b22e-7237-beab-7aef1aaa75a8", 6],
+    "ui_icon_onda_de_corte": ["01a1cb18-b32d-761c-a16a-adeb5c542024", 6],
+    "ui_icon_salto_devastador": ["01a1cb18-b412-76cc-8f56-1f43b76a4a84", 6],
+    "ui_icon_julgamento": ["01a1cb18-b4f0-7326-9d00-0799a58f8201", 6]
+  }
+}

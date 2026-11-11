@@ -2424,6 +2424,112 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "ui_itens_consumiveis",
+      "category": "ui",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 5 folha de ícones 4x4 (tools/meshy/fase5_lote1_icones.json)",
+      "file": "assets/ui/items/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 9,
+          "task_id": "01a1cbcd-da0a-75ce-8847-0d7b0d69daad",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: aprovado pelo dono; recortado com scripts/tools/icons_prepare.gd"
+      ]
+    },
+    {
+      "id": "ui_itens_materiais",
+      "category": "ui",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 5 folha de ícones 4x4 (tools/meshy/fase5_lote1_icones.json)",
+      "file": "assets/ui/items/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 9,
+          "task_id": "01a1cbcd-db20-726e-b041-11766439a1b8",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: aprovado pelo dono; recortado com scripts/tools/icons_prepare.gd"
+      ]
+    },
+    {
+      "id": "ui_itens_equip_1",
+      "category": "ui",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 5 folha de ícones 4x4 (tools/meshy/fase5_lote1_icones.json)",
+      "file": "assets/ui/items/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 9,
+          "task_id": "01a1cbcd-dc18-773d-a7a3-3d815dd219a1",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: aprovado pelo dono; recortado com scripts/tools/icons_prepare.gd"
+      ]
+    },
+    {
+      "id": "ui_itens_equip_2",
+      "category": "ui",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 5 folha de ícones 4x4 (tools/meshy/fase5_lote1_icones.json)",
+      "file": "assets/ui/items/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 9,
+          "task_id": "01a1cbcd-dd37-76f4-a1e0-16b274f92ad6",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: aprovado pelo dono; recortado com scripts/tools/icons_prepare.gd"
+      ]
+    },
+    {
+      "id": "prp_bau",
+      "category": "prp",
+      "phase": 5,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Baú dos mapas (tools/meshy/fase5_lote1_icones.json)",
+      "file": "assets/props/prp_bau/prp_bau.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cbcd-de45-7377-a57e-860a67d7122a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cbcf-9390-7776-b633-bfe209db8068",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": [
+        "2026-11-11: 2026-11-11: aprovado pelo dono; tampa separada no código (chest.gd)"
+      ]
     }
   ]
 }

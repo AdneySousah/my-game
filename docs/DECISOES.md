@@ -144,5 +144,6 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Três atalhos na tela, acima da barra de fôlego: vida, fôlego e reforço. Mostram quantas sobram e a recarga de 8 s (cada atalho tem a sua). No PC: teclas 5, 6 e 7 (ou Z, X e V). Se a poção escolhida acabar, o atalho usa outra do mesmo tipo. Na mochila, "Pôr no atalho" escolhe qual poção vai em cada atalho.
 - Baús nos mapas (2 na floresta, 2 na mina, 1 no celeiro): abrem uma vez por save, dão ouro e itens. Cubo provisório até o modelo do Meshy.
 - Inimigos deixam poções e materiais; Golem deixa Broca, Gorvan deixa Trevo. Missões dão poções como recompensa (a missão final dá um Amuleto).
-- Ícones provisórios (círculo colorido com letra) até as folhas de ícones do Meshy.
+- Ícones: 4 folhas de 4x4 do Meshy (64 ícones: poções e itens especiais, gemas e materiais, equipamentos em 4 raridades), recortadas no Godot. Aprovados pelo dono (54 créditos com o baú).
+- Baú: modelo do Meshy em uma peça; o jogo corta na linha da tampa para ela abrir.
 - Chefes reequilibrados para a luta com poções: Golem 2500 de vida, Gorvan 3700 (Espantalho 3700). Sem poções, o Gorvan só cai no nível 12–13 por pouco; com as poções que o jogo dá até ali, a luta fica confortável no nível 11.

@@ -382,6 +382,15 @@ Barra de **fôlego** abaixo da vida. O ataque básico não gasta fôlego. Gastam
 - Item **nunca equipado:** devolve **100%** dos materiais.
 - Item **que já foi equipado:** devolve **50%**.
 
+## 6.5.1 Poções (adicionado em 11/11/2026, pedido do dono)
+- **Atalhos na tela:** 3 botões redondos perto do ataque, cada um com a quantidade: **vida**, **fôlego** e **reforço** (o jogador escolhe qual reforço fica no atalho).
+- **Vida:** cura uma parte da vida em poucos segundos (pequena, média e grande, por nível).
+- **Fôlego:** é a "poção de MP" do jogo, porque as skills gastam fôlego (não existe mana). Recupera o fôlego aos poucos.
+- **Reforço (status):** força (+ataque), pedra (+defesa) e vento (+velocidade de movimento e de ataque), por 60 a 120 s. Só um reforço ativo de cada tipo.
+- **Recarga entre usos** (ex.: 8 a 10 s por tipo), para a luta contra chefes continuar exigindo desvio e não virar "beber poção sem parar".
+- **De onde vêm:** loja de ouro de cada cidade, drops raros, recompensas de missões e diárias, e os pacotes da loja com dinheiro real (já previstos).
+- Ao entrarem as poções, **rever o equilíbrio dos chefes** (hoje calculado sem poções).
+
 ## 6.6 Economia e lojas
 
 **Loja de ouro (comerciante de cada cidade):** equipamentos Comuns e Raros (sem conjunto), kits de poção, materiais de fortalecimento, **Trevo comum**, **Broca comum** e **Amuleto de Proteção**.

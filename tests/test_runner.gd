@@ -20,6 +20,11 @@ func _ready() -> void:
 	await _quest_test()
 	await _boss_test()
 	await _save_test()
+	await _audio_test()
+	# Let any navigation bake still running on a thread finish before quitting
+	# (tests run faster than real time, so wait real milliseconds).
+	OS.delay_msec(1500)
+	await _frames(2)
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
 	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
 	get_tree().quit(1 if _failures > 0 else 0)
@@ -296,10 +301,49 @@ func _world_test() -> void:
 	check(Session.is_activated("floresta_entrada"), "forest camp activated")
 	check(Session.last_rest.get("point", "") == "floresta_entrada", "forest camp is the respawn point")
 
+	# Resting heals over a few seconds, then the point needs a long wait.
+	var camp: Vector3 = main.map.rest_points["floresta_clareira"].global_position
+	main.player.global_position = camp + Vector3(8, 0, 0)
+	await _frames(3)
+	main.player.hp = main.player.max_hp() * 0.4
+	main.player.global_position = camp + Vector3(0.5, 0, 0.5)
+	await _frames(6)
+	check(main.player.hp < main.player.max_hp() * 0.7, "rest heals gradually, not at once")
+	await _frames(200)
+	check(is_equal_approx(main.player.hp, main.player.max_hp()), "after a few seconds the hero is healed")
+	check(Session.rest_seconds_left("floresta_clareira") > 500.0, "the camp needs ~10 minutes before healing again")
+	main.player.global_position = camp + Vector3(8, 0, 0)
+	await _frames(3)
+	main.player.hp = main.player.max_hp() * 0.4
+	main.player.global_position = camp + Vector3(0.5, 0, 0.5)
+	await _frames(220)
+	check(main.player.hp < main.player.max_hp() * 0.5, "a camp on cooldown does not heal")
+	main.player.rest()
+
 	# Teleport back to the village waystone.
 	main.travel_to_point("pradoluz_pedra")
 	await _wait_map(main, "pradoluz")
 	check(main.map.map_id == "pradoluz", "teleport to Pradoluz works")
+
+	# Enemies walk around obstacles: a bandit behind a house reaches the hero.
+	main.travel_to_point("pradoluz_pedra")
+	await _wait_map(main, "pradoluz")
+	for i: int in 60:
+		if main.map.nav_ready:
+			break
+		await _frames(1)
+	check(main.map.nav_ready, "the map bakes its walkable area")
+	main.player.global_position = Vector3(10, 0, -1.5)
+	var thug: Enemy = main.spawn_enemy("bandido", Vector3(10, 0, -14.5))
+	var reached: bool = false
+	for i: int in 600:
+		await get_tree().physics_frame
+		if thug.global_position.distance_to(main.player.global_position) < 2.6:
+			reached = true
+			break
+	check(reached, "an enemy behind a house walks around it to reach the hero")
+	thug.queue_free()
+	main.player.rest()
 
 	# Mine loads and has walls and lights.
 	main.load_map("mina", "from_floresta")
@@ -366,6 +410,12 @@ func _quest_test() -> void:
 	check(str(q.current_step("main_01").get("npc", "")) == "bram", "after Marta the quest points to Bram")
 	var target: Variant = main.quest_target()
 	check(target is Vector3 and (target as Vector3).distance_to(main.map.npcs["bram"].global_position) < 0.1, "quest marker points at Bram")
+	await _frames(2)
+	var arrow: QuestArrow = main.find_children("*", "QuestArrow", false, false)[0]
+	var to_bram: Vector3 = (main.map.npcs["bram"].global_position - main.player.global_position).normalized()
+	var arrow_dir: Vector3 = (arrow.global_position - main.player.global_position)
+	arrow_dir.y = 0.0
+	check(arrow.visible and arrow_dir.normalized().dot(Vector3(to_bram.x, 0, to_bram.z).normalized()) > 0.95, "the ground arrow points to Bram")
 
 	# Bram ends quest 1 (reward) and offers quest 2.
 	var gold_before: int = main.player.gold
@@ -396,6 +446,7 @@ func _quest_test() -> void:
 	await _frames(1)
 	check(q.npc_marker("nina") == "side_offer", "Nina offers her quest at level 2+")
 	await _talk(main, "nina")
+	check(Session.tracked_quest == "side_trigo", "a quest just taken becomes the tracked one")
 	await _talk(main, "bram")
 	check(q.is_active("side_trigo") and q.is_active("main_03"), "side quest and quest 3 active")
 
@@ -607,6 +658,56 @@ func _save_test() -> void:
 	SaveGame.active = false
 	SaveGame.pending = {}
 	SaveGame.path = real_path
+	await _frames(2)
+
+
+## Sound: files, volume channels, music per map and for the boss (stage 4.4).
+func _audio_test() -> void:
+	var missing: Array[String] = []
+	for id: String in Audio.data.get("sfx", {}):
+		for f: Variant in Audio.data["sfx"][id].get("files", []):
+			if not ResourceLoader.exists(Audio.SFX_DIR + str(f)):
+				missing.append(str(f))
+	for id: String in Audio.data.get("music", {}):
+		if not ResourceLoader.exists(Audio.MUSIC_DIR + str(Audio.data["music"][id])):
+			missing.append(str(Audio.data["music"][id]))
+	check(missing.is_empty(), "every sound and music file exists (missing: %s)" % [missing])
+	for b: String in ["Music", "SFX", "Voice"]:
+		check(AudioServer.get_bus_index(b) != -1, "audio channel %s exists" % b)
+	var before: float = Audio.get_volume("Music")
+	Audio.set_volume("Music", 0.25)
+	check(is_equal_approx(Audio.get_volume("Music"), 0.25), "music volume can be changed")
+	Audio.set_volume("Music", before)
+	Audio.play_sfx("hit", Vector3.ZERO)
+	Audio.play_sfx("ui_click")
+
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	check(Audio.current_music() == "vila", "Pradoluz plays the village music (%s)" % Audio.current_music())
+	Session.set_flag("golem_defeated")
+	main.load_map("celeiro", "from_mina")
+	await _wait_map(main, "celeiro")
+	await _frames(3)
+	check(Audio.current_music() == "mina", "the granary starts with the mine music")
+	var g: Enemy = _find_boss("gorvan")
+	if g:
+		main.player.global_position = g.global_position + Vector3(0, 0, 6)
+		await _frames(5)
+		await _finish_dialogue(main)
+		check(Audio.current_music() == "chefe", "boss music when Gorvan fights")
+		g.take_damage(100000000, false)
+		check(not g.is_dead() and g.invulnerable, "a huge hit does not skip the Scarecrow form")
+		await _frames(160)
+		await _finish_dialogue(main)
+		g.take_damage(100000000, false)
+		await _frames(3)
+		check(Audio.current_music() == "vitoria", "victory music after the boss")
+	main.queue_free()
+	Audio.stop_music(0.1)
 	await _frames(2)
 
 

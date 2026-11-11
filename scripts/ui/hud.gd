@@ -38,11 +38,14 @@ var _skills_panel: SkillsPanel
 var _debug_btn: Button
 var quests: QuestLog
 var _quest_panel: QuestPanel
+var _options_panel: OptionsPanel
 var _dialogue: DialogueBox
 var _talk_btn: Button
 var _tracker_title: Label
 var _tracker_goal: Label
 var _tracker_bg: TrackerBackdrop
+var _main: Main
+var _tracker_timer: float = 0.0
 var _boss_bar: FramedBar
 var _boss_name: Label
 var _boss: Enemy
@@ -88,6 +91,9 @@ func _ready() -> void:
 	_quest_panel = QuestPanel.new()
 	root.add_child(_quest_panel)
 	_quest_panel.closed.connect(_on_panel_closed)
+	_options_panel = OptionsPanel.new()
+	root.add_child(_options_panel)
+	_options_panel.closed.connect(_on_panel_closed)
 
 	_talk_btn = _button(tr("HUD_TALK"), func() -> void: interact_pressed.emit())
 	_talk_btn.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
@@ -187,6 +193,7 @@ func toast(text: String, seconds: float = 1.8) -> void:
 
 ## Gives the minimap and the full map access to the running game.
 func set_main(m: Main) -> void:
+	_main = m
 	_minimap.main = m
 	_full_map.main = m
 
@@ -323,9 +330,13 @@ func _input(event: InputEvent) -> void:
 		_debug_level_up()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if player == null:
 		return
+	_tracker_timer -= delta
+	if _tracker_timer <= 0.0:
+		_tracker_timer = 0.5
+		_refresh_tracker()
 	_stamina_bar.max_value = player.max_stamina()
 	_stamina_bar.value = player.stamina
 	_stamina_bar.text = "%d / %d" % [floori(player.stamina), roundi(player.max_stamina())]
@@ -365,6 +376,14 @@ func _build_status(root: Control) -> void:
 	_tracker_goal = Label.new()
 	_tracker_goal.add_theme_font_size_override("font_size", 17)
 	tracker.add_child(_tracker_goal)
+	# Tapping the tracker opens the quest journal (to pick which quest to follow).
+	var tracker_tap := Button.new()
+	tracker_tap.flat = true
+	tracker_tap.focus_mode = Control.FOCUS_NONE
+	tracker_tap.position = Vector2(0, 172)
+	tracker_tap.size = Vector2(380, 60)
+	tracker_tap.pressed.connect(open_quests)
+	root.add_child(tracker_tap)
 	# Stamina ("fôlego") centered at the bottom of the screen.
 	_stamina_bar = FramedBar.new()
 	_stamina_bar.fill_color = Color("#c6e04a")
@@ -494,7 +513,10 @@ func _open_panel(panel: Control) -> void:
 	_full_map.hide()
 	_character_menu.hide()
 	_quest_panel.hide()
+	_options_panel.hide()
 	_talk_btn.hide()
+	if panel != _dialogue:
+		Audio.play_sfx("ui_open")
 	if panel == _character_menu:
 		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills)
 	elif panel != _dialogue:
@@ -504,7 +526,7 @@ func _open_panel(panel: Control) -> void:
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -514,13 +536,14 @@ func _on_character_choice(what: String) -> void:
 		"attributes": open_attributes()
 		"skills": open_skills()
 		"quests": open_quests()
+		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
 
 
 func _refresh_tracker() -> void:
 	var id: String = quests.tracked() if quests else ""
 	_tracker_title.text = tr(str(Data.quest(id).get("name", id))) if id != "" else ""
-	_tracker_goal.text = ("› " + quests.objective_text(id)) if id != "" else ""
+	_tracker_goal.text = ("› " + quests.objective_text(id) + _tracker_where(id)) if id != "" else ""
 	_tracker_bg.visible = id != ""
 	if id != "":
 		_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD if str(Data.quest(id).get("type", "")) == "main" else Color("#7fd1ff"))
@@ -529,3 +552,16 @@ func _refresh_tracker() -> void:
 func _debug_level_up() -> void:
 	if player and not player.stats.is_max_level():
 		player.stats.add_xp(player.stats.xp_needed() - player.stats.xp)
+
+
+## " · 34 m", or " · in <map>" when the goal is in another map.
+func _tracker_where(id: String) -> String:
+	if _main == null or _main.map == null:
+		return ""
+	var t: Dictionary = quests.target_of(id, player.global_position, _main.map.map_id)
+	if t.is_empty():
+		return ""
+	if str(t["map"]) != _main.map.map_id:
+		return "  ·  " + tr("HUD_IN_MAP") % tr(str(GameMap.load_data(str(t["map"])).get("name", t["map"])))
+	var d: float = player.global_position.distance_to(t["pos"])
+	return "  ·  %d m" % roundi(d)

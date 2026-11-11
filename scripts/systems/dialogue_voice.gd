@@ -20,6 +20,7 @@ func _ready() -> void:
 	gen.buffer_length = 0.25
 	stream = gen
 	volume_db = -14.0
+	bus = "Voice"
 	play()
 
 

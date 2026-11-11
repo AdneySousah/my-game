@@ -253,13 +253,32 @@ TEXTS = {
     "TITLE_QUIT": ("Sair", "Quit"),
     "TITLE_SAVE_INFO": ("Lio · Nv. %d · %s", "Lio · Lv. %d · %s"),
     "TITLE_CONFIRM_NEW": ("Começar de novo apaga o jogo salvo. Tem certeza?", "Starting over erases your saved game. Are you sure?"),
+    "TITLE_OPTIONS": ("Opções", "Options"),
+    "OPT_TITLE": ("Opções", "Options"),
+    "OPT_MUSIC": ("Música", "Music"),
+    "OPT_SFX": ("Efeitos", "Effects"),
+    "OPT_VOICE": ("Vozes", "Voices"),
+    "OPT_CREDITS": ("Créditos", "Credits"),
+    "OPT_MENU": ("Opções", "Options"),
+    "OPT_CREDITS_TEXT": (
+        "Música (CC-BY 3.0), série RPG Orchestral Essentials: \"A Dream of First Flight\", \"Visions of Freedom\", "
+        "\"Morning Frost\", \"The World At Your Door\", \"A Bitter Hope\", \"A Slave To No One\" e \"Can't Stop Winning\" "
+        "Composed by Jonathan Shaw (www.jshaw.co.uk).\n"
+        "Efeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\n"
+        "Modelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).",
+        "Music (CC-BY 3.0), RPG Orchestral Essentials series: \"A Dream of First Flight\", \"Visions of Freedom\", "
+        "\"Morning Frost\", \"The World At Your Door\", \"A Bitter Hope\", \"A Slave To No One\" and \"Can't Stop Winning\" "
+        "Composed by Jonathan Shaw (www.jshaw.co.uk).\n"
+        "Sound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\n"
+        "Models, interface and illustrations made with Meshy. Font: Open Sans (OFL).",
+    ),
     "TITLE_YES": ("Sim, começar de novo", "Yes, start over"),
     "TITLE_NO": ("Voltar", "Back"),
     "ITEM_ERVA_ORVALHO": ("Erva-de-orvalho", "Dewleaf"),
     "ITEM_CAIXOTE_FERRO": ("Caixote de ferro", "Iron crate"),
 }
 
-PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_", "PRO_", "TITLE_")
+PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_", "PRO_", "TITLE_", "OPT_")
 
 
 def main() -> None:
@@ -282,7 +301,8 @@ def main() -> None:
     rows = list(csv.reader(io.StringIO(cpath.read_text(encoding="utf-8"))))
     header, body = rows[0], [r for r in rows[1:] if r and not r[0].startswith(PREFIXES)]
     for key, (pt, en) in texts.items():
-        body.append([key, pt, en])
+        # Line breaks go in the CSV as the two characters \n (the game turns them back).
+        body.append([key, pt.replace("\n", "\\n"), en.replace("\n", "\\n")])
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator="\n")
     w.writerow(header)

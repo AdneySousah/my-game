@@ -97,6 +97,8 @@ func start(id: String) -> void:
 	if Session.quests.has(id):
 		return
 	Session.quests[id] = {"step": 0, "count": 0, "picked": [], "done": false}
+	# The quest just taken is the one the arrow and tracker follow.
+	Session.tracked_quest = id
 	quest_started.emit(id)
 	_skip_done_steps(id)
 	changed.emit()

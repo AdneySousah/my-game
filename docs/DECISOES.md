@@ -117,3 +117,17 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Save local criptografado (AES do Godot) com verificação SHA-256 e cópia de segurança (o save anterior). Arquivo adulterado ou danificado é ignorado e o jogo usa a cópia.
 - A chave é do jogo, não do aparelho: quem troca de celular e restaura o backup do Android mantém o progresso.
 - Salva ao trocar de mapa, ao descansar, ao concluir missão, ao subir de nível, a cada 30 s e quando o app vai para o fundo ou fecha. Guarda mapa, posição, missões, marcas da história, materiais, nível, atributos, ouro, skills equipadas.
+
+## Áudio provisório (11/11/2026, etapa 4.4)
+- O dono escolheu começar com sons gratuitos e migrar para a ElevenLabs depois (prioridade da troca: as músicas e os sons das skills e do Gorvan).
+- Efeitos CC0: RPG Sound Pack (artisticdude), 80 CC0 RPG SFX (rubberduck), sons RPG e de interface da Kenney.
+- Músicas orquestrais CC-BY 3.0 de Jonathan Shaw (RPG Orchestral Essentials): título, prólogo, vila, floresta, mina, chefe e vitória. O crédito aparece em Opções > Créditos e em docs/CREDITOS.md.
+- Sons tocados por id (data/audio/audio.json): trocar por arquivos da ElevenLabs não mexe no código.
+- Opções (menu do retrato e tela inicial): volume de música, efeitos e vozes, salvo no aparelho.
+
+## Ajustes depois do teste do dono (11/11/2026, etapa 4.6)
+- Pontos de descanso: curam aos poucos (3 s parado neles) e depois esperam 10 minutos (tempo real, salvo no save) para curar de novo. Ativação, teleporte e renascer continuam iguais. A espera aparece sobre a fogueira/pedra. Motivo: não dava para ficar indo curar durante o chefe.
+- Inimigos andam pelo caminho livre (malha de navegação gerada quando o mapa carrega) e contornam casas, árvores, pedras e rios.
+- Missões: seta laranja no chão ao redor do herói aponta para o objetivo (ou para a saída do mapa certo); o rastreador mostra a distância ou "em <mapa>"; tocar no rastreador abre o diário; a missão recém-aceita vira a seguida.
+- Chefes não morrem antes da próxima forma (um golpe forte perto da metade faz o Gorvan virar Espantalho, não pular a forma).
+- Poções (vida, fôlego, reforço) com atalhos na tela entram na Fase 5 (GDD 6.5.1). "MP" no nosso jogo é o fôlego.

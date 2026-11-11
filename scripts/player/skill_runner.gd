@@ -84,6 +84,7 @@ func use_slot(slot: int) -> bool:
 
 func _execute(s: Dictionary) -> void:
 	player.play_skill_anim(str(s.get("id", "")))
+	Audio.play_sfx(Audio.skill_sfx(str(s.get("id", ""))), player.global_position)
 	match str(s.get("type", "")):
 		"spin":
 			_spin(s)

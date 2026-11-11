@@ -27,6 +27,7 @@ func _ready() -> void:
 	_skills_btn = _item(box, "skills")
 	_item(box, "quests").text = tr("HUD_QUESTS")
 	_item(box, "map").text = tr("HUD_MAP")
+	_item(box, "options").text = tr("OPT_MENU")
 	_materials = Label.new()
 	_materials.add_theme_font_size_override("font_size", 17)
 	_materials.add_theme_color_override("font_color", Color("#e8d6a8"))

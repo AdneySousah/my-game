@@ -16,6 +16,8 @@ var quests: Dictionary = {}
 var flags: Dictionary = {}
 ## Quest shown in the HUD tracker.
 var tracked_quest: String = ""
+## Rest point id -> unix time when it heals again (real time, so it also counts offline).
+var rest_ready_at: Dictionary = {}
 ## Crafting materials dropped by enemies (used by the blacksmith in Phase 5): key -> count.
 var materials: Dictionary = {}
 
@@ -28,6 +30,7 @@ func reset() -> void:
 	flags.clear()
 	tracked_quest = ""
 	materials.clear()
+	rest_ready_at.clear()
 
 
 func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
@@ -60,6 +63,7 @@ func to_dict() -> Dictionary:
 	return {
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
 		"quests": quests, "flags": flags, "tracked_quest": tracked_quest, "materials": materials,
+		"rest_ready_at": rest_ready_at,
 	}
 
 
@@ -72,6 +76,7 @@ func from_dict(d: Dictionary) -> void:
 	flags = d.get("flags", {})
 	tracked_quest = str(d.get("tracked_quest", ""))
 	materials = d.get("materials", {})
+	rest_ready_at = d.get("rest_ready_at", {})
 	# JSON brings numbers back as floats; quest counters are ints.
 	for id: String in quests:
 		var q: Dictionary = quests[id]
@@ -83,3 +88,12 @@ func from_dict(d: Dictionary) -> void:
 		q["picked"] = picked
 	for k: String in materials:
 		materials[k] = int(materials[k])
+
+
+## Seconds until a rest point heals again (0 = ready).
+func rest_seconds_left(point_id: String) -> float:
+	return maxf(0.0, float(rest_ready_at.get(point_id, 0.0)) - Time.get_unix_time_from_system())
+
+
+func start_rest_cooldown(point_id: String, seconds: float) -> void:
+	rest_ready_at[point_id] = Time.get_unix_time_from_system() + seconds

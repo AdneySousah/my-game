@@ -155,6 +155,14 @@ TITLE_NEW,Novo jogo,New game
 TITLE_QUIT,Sair,Quit
 TITLE_SAVE_INFO,Lio · Nv. %d · %s,Lio · Lv. %d · %s
 TITLE_CONFIRM_NEW,Começar de novo apaga o jogo salvo. Tem certeza?,Starting over erases your saved game. Are you sure?
+TITLE_OPTIONS,Opções,Options
+OPT_TITLE,Opções,Options
+OPT_MUSIC,Música,Music
+OPT_SFX,Efeitos,Effects
+OPT_VOICE,Vozes,Voices
+OPT_CREDITS,Créditos,Credits
+OPT_MENU,Opções,Options
+OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
 ITEM_ERVA_ORVALHO,Erva-de-orvalho,Dewleaf
@@ -249,3 +257,6 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+HUD_RESTING,Descansando...,Resting...
+HUD_REST_WAIT,Este ponto volta a curar em %s,This point heals again in %s
+HUD_IN_MAP,em %s,in %s

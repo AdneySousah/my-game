@@ -24,6 +24,9 @@ var _changing: bool = false
 var _at_point: RestPoint
 var _near_npc: Npc
 var _autosave_timer: float = 0.0
+## Seconds of healing left at the current rest point.
+var _healing: float = 0.0
+var _rest_ui_timer: float = 0.0
 var _talking: bool = false
 
 
@@ -56,9 +59,17 @@ func _ready() -> void:
 		if note != "":
 			hud.banner(tr(note)))
 	player.stats.leveled_up.connect(func(_l: int) -> void:
+		Audio.play_sfx("level_up")
 		_refresh_quest_world()
 		save_now())
-	quests.quest_completed.connect(func(_id: String) -> void: save_now.call_deferred())
+	quests.quest_started.connect(func(_id: String) -> void: Audio.play_sfx("page"))
+	quests.quest_completed.connect(func(_id: String) -> void:
+		Audio.play_sfx("quest")
+		save_now.call_deferred())
+
+	var arrow := QuestArrow.new()
+	arrow.main = self
+	add_child(arrow)
 
 	_fader = OcclusionFader.new()
 	add_child(_fader)
@@ -87,6 +98,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 		return
 	_changing = true
 	if with_fade:
+		Audio.play_sfx("door")
 		await hud.fade(true)
 	if map:
 		map.queue_free()
@@ -121,6 +133,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	map.exit_used.connect(func(to: String, sp: String) -> void: load_map(to, sp))
 	Session.current_map = map_id
 	_refresh_quest_world()
+	Audio.play_music(Audio.music_for_map(map_id))
 	camera_rig.snap_to_target()
 	hud.banner(tr(str(map.data.get("name", map_id))))
 	if with_fade:
@@ -139,6 +152,7 @@ func _physics_process(delta: float) -> void:
 	if _autosave_timer >= 30.0:
 		save_now()
 	_update_quest_contacts()
+	_tick_rest(delta)
 	var inside: RestPoint = null
 	for p: RestPoint in map.rest_points.values():
 		if p.contains(player.global_position):
@@ -150,6 +164,7 @@ func _physics_process(delta: float) -> void:
 	if inside:
 		_on_rest_reached(inside)
 	else:
+		_healing = 0.0
 		hud.show_travel_button(false)
 
 
@@ -194,6 +209,7 @@ func travel_to_point(point_id: String) -> void:
 	var info: Dictionary = Session.activated.get(point_id, {})
 	if info.is_empty():
 		return
+	Audio.play_sfx("travel")
 	load_map(str(info["map"]), "point:" + point_id)
 
 
@@ -228,8 +244,18 @@ func _on_enemy_killed(e: Enemy) -> void:
 
 func _on_rest_reached(point: RestPoint) -> void:
 	var first: bool = Session.activate_point(point.point_id, point.map_id, point.name_key)
-	player.rest()
-	hud.toast(tr("HUD_REST_ACTIVATED") % tr(point.name_key) if first else tr("HUD_RESTED"))
+	var rules: Dictionary = Data.progression.get("rest", {})
+	var wait: float = Session.rest_seconds_left(point.point_id)
+	if wait <= 0.0:
+		# Heal over a few seconds; the point then rests for a while (no healing mid-boss).
+		_healing = float(rules.get("heal_seconds", 3.0))
+		Session.start_rest_cooldown(point.point_id, float(rules.get("cooldown_seconds", 600)))
+		Audio.play_sfx("rest")
+		hud.toast(tr("HUD_REST_ACTIVATED") % tr(point.name_key) if first else tr("HUD_RESTING"))
+	else:
+		var s: int = ceili(wait)
+		hud.toast((tr("HUD_REST_ACTIVATED") % tr(point.name_key) + "
+" if first else "") + tr("HUD_REST_WAIT") % ("%d:%02d" % [s / 60, s % 60]), 2.2)
 	hud.show_travel_button(Session.activated.size() > 1)
 	save_now()
 
@@ -239,6 +265,7 @@ func _on_player_died(gold_lost: int, xp_lost: int) -> void:
 	await get_tree().create_timer(RESPAWN_DELAY, false).timeout
 	if is_instance_valid(map):
 		map.reset_bosses()
+		Audio.play_music(Audio.music_for_map(map.map_id))
 	var target_map: String = Session.current_map
 	var spawn: String = "start"
 	if not Session.last_rest.is_empty():
@@ -269,6 +296,7 @@ func _update_quest_contacts() -> void:
 			var got: int = int(Session.quests[qp.quest_id]["count"]) + 1
 			hud.toast(tr("HUD_QUEST_PICKED") % [tr(qp.item_key), got, total])
 			qp.queue_free()
+			Audio.play_sfx("pickup")
 			quests.on_picked(qp.quest_id, qp.index)
 	var nearest: Npc = null
 	for npc: Npc in map.npcs.values():
@@ -294,6 +322,7 @@ func _refresh_quest_world() -> void:
 ## Coins fly from the enemy into the hero; materials roll their chance (data "drops").
 func _drop_loot(e: Enemy) -> void:
 	if e.gold_reward > 0 and is_instance_valid(map):
+		Audio.play_sfx("coins", e.global_position)
 		var burst := CoinBurst.new()
 		burst.target = player
 		burst.count = clampi(e.gold_reward / 3, 2, 12)
@@ -309,6 +338,9 @@ func _drop_loot(e: Enemy) -> void:
 
 ## Boss lines: a short talk when the fight starts and when it changes form.
 func _on_boss_spawned(e: Enemy) -> void:
+	# Boss music while it fights; a short victory theme when it falls.
+	e.engaged.connect(func(_b: Enemy) -> void: Audio.play_music("chefe", 0.6))
+	e.died.connect(func(_b: Enemy) -> void: _victory_music())
 	var intro: String = str(e.get_meta("intro", ""))
 	# The opening talk plays once; retries after dying go straight to the fight.
 	if intro != "" and not Session.has_flag("seen_" + intro):
@@ -346,3 +378,26 @@ func save_now() -> void:
 func _notification(what: int) -> void:
 	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_APPLICATION_FOCUS_OUT]:
 		save_now()
+
+
+func _victory_music() -> void:
+	Audio.play_music("vitoria", 0.4)
+	await get_tree().create_timer(9.0, false).timeout
+	if is_instance_valid(map) and Audio.current_music() == "vitoria":
+		Audio.play_music(Audio.music_for_map(map.map_id), 2.0)
+
+
+## Gradual healing while standing at a rest point, and the wait shown above each point.
+func _tick_rest(delta: float) -> void:
+	if _healing > 0.0 and _at_point != null:
+		var total: float = float(Data.progression.get("rest", {}).get("heal_seconds", 3.0))
+		var step: float = minf(delta, _healing)
+		_healing -= step
+		player.heal_fraction(step / maxf(total, 0.01))
+		if _healing <= 0.0:
+			hud.toast(tr("HUD_RESTED"))
+	_rest_ui_timer -= delta
+	if _rest_ui_timer <= 0.0:
+		_rest_ui_timer = 0.5
+		for p: RestPoint in map.rest_points.values():
+			p.show_cooldown(Session.rest_seconds_left(p.point_id))

@@ -61,6 +61,7 @@ func _ready() -> void:
 	get_viewport().size_changed.connect(_layout)
 	_layout()
 	_layout.call_deferred()
+	Audio.play_music("prologo", 1.5)
 	_next()
 
 

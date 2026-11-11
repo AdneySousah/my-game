@@ -1,0 +1,45 @@
+{
+  "_comment": "Sons do jogo. sfx: id -> arquivos (sorteia um), volume em dB e faixa de tom (pitch). music: id -> arquivo. map_music: música de cada mapa. Fontes e licenças em docs/CREDITOS.md. Para trocar por sons da ElevenLabs depois, basta apontar os mesmos ids para os arquivos novos.",
+  "sfx": {
+    "swing": { "files": ["swing_1.wav", "swing_2.wav", "swing_3.wav"], "volume_db": -8, "pitch": [0.95, 1.1] },
+    "hit": { "files": ["hit_1.ogg", "hit_2.ogg", "hit_3.ogg"], "volume_db": -6, "pitch": [0.9, 1.1] },
+    "crit": { "files": ["crit_1.ogg"], "volume_db": -4, "pitch": [1.0, 1.1] },
+    "hurt": { "files": ["hurt_1.ogg", "hurt_2.ogg"], "volume_db": -4, "pitch": [0.9, 1.0] },
+    "dodge": { "files": ["dodge_1.ogg", "dodge_2.ogg"], "volume_db": -6, "pitch": [0.9, 1.1] },
+    "enemy_hurt": { "files": ["enemy_hurt_1.ogg", "enemy_hurt_2.ogg"], "volume_db": -10, "pitch": [0.9, 1.15] },
+    "enemy_die": { "files": ["enemy_die_1.ogg"], "volume_db": -8, "pitch": [0.85, 1.1] },
+    "orc": { "files": ["orc_1.wav", "orc_2.wav"], "volume_db": -8, "pitch": [0.9, 1.05] },
+    "giant": { "files": ["giant_1.wav", "giant_2.wav"], "volume_db": -4, "pitch": [0.8, 0.95] },
+    "roar": { "files": ["roar_1.ogg", "roar_2.ogg"], "volume_db": -2, "pitch": [0.85, 0.95] },
+    "slam": { "files": ["slam_1.ogg", "slam_2.ogg"], "volume_db": -4, "pitch": [0.8, 1.0] },
+    "bones": { "files": ["bones_1.ogg", "bones_2.ogg"], "volume_db": -8, "pitch": [1.1, 1.3] },
+    "skill": { "files": ["magic_1.wav", "spell_1.wav"], "volume_db": -6, "pitch": [0.95, 1.1] },
+    "skill_big": { "files": ["spell_2.ogg", "spell_3.ogg"], "volume_db": -4, "pitch": [0.9, 1.0] },
+    "skill_fire": { "files": ["fire_1.ogg"], "volume_db": -4, "pitch": [0.95, 1.05] },
+    "metal": { "files": ["metal_1.ogg", "metal_2.ogg"], "volume_db": -6, "pitch": [0.95, 1.1] },
+    "shoot": { "files": ["swing_1.wav"], "volume_db": -10, "pitch": [1.5, 1.7] },
+    "coins": { "files": ["coins_1.ogg", "coins_2.ogg", "coin_1.wav"], "volume_db": -8, "pitch": [0.95, 1.1] },
+    "pickup": { "files": ["gem_1.ogg"], "volume_db": -6, "pitch": [1.0, 1.1] },
+    "level_up": { "files": ["spell_3.ogg"], "volume_db": -2, "pitch": [1.2, 1.2] },
+    "quest": { "files": ["gem_2.ogg"], "volume_db": -2, "pitch": [1.0, 1.0] },
+    "rest": { "files": ["spell_2.ogg"], "volume_db": -8, "pitch": [1.2, 1.3] },
+    "travel": { "files": ["spell_3.ogg"], "volume_db": -6, "pitch": [0.9, 0.9] },
+    "door": { "files": ["door_1.ogg"], "volume_db": -6, "pitch": [0.95, 1.05] },
+    "step": { "files": ["step_1.ogg", "step_2.ogg", "step_3.ogg", "step_4.ogg", "step_5.ogg", "step_6.ogg"], "volume_db": -18, "pitch": [0.9, 1.1] },
+    "unsheathe": { "files": ["unsheathe_1.wav"], "volume_db": -10, "pitch": [1.0, 1.1] },
+    "ui_click": { "files": ["ui_click.wav"], "volume_db": -6, "pitch": [1.0, 1.0] },
+    "ui_open": { "files": ["ui_open.wav"], "volume_db": -8, "pitch": [1.0, 1.0] },
+    "ui_close": { "files": ["ui_close.wav"], "volume_db": -8, "pitch": [1.0, 1.0] },
+    "page": { "files": ["page_1.ogg"], "volume_db": -8, "pitch": [1.0, 1.1] }
+  },
+  "music": {
+    "titulo": "titulo.mp3", "prologo": "prologo.mp3", "vila": "vila.mp3", "floresta": "floresta.mp3",
+    "mina": "mina.mp3", "chefe": "chefe.mp3", "vitoria": "vitoria.mp3"
+  },
+  "map_music": { "pradoluz": "vila", "floresta": "floresta", "mina": "mina", "celeiro": "mina", "arena": "floresta" },
+  "skill_sfx": {
+    "corte_giratorio": "swing", "investida": "dodge", "golpe_sismico": "slam", "quebra_guarda": "metal",
+    "brado_de_guerra": "skill_big", "onda_de_corte": "skill", "salto_devastador": "slam", "julgamento": "skill_fire"
+  },
+  "enemy_sfx": { "orc": "orc", "golem": "giant", "espantalho": "giant", "esqueleto": "bones" }
+}

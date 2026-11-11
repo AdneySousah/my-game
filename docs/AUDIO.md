@@ -36,3 +36,6 @@ Como muitos jogos fazem, a "voz" dos NPCs pode ser feita **pelo próprio Godot**
 - **Fase 4:** sistema de áudio, efeitos do combate e das 8 skills, passos na grama e na terra, interface, música de Pradoluz e da primeira dungeon, "fala" dos NPCs.
 - **Fase 6:** música e ambiente das outras regiões, passos em areia e neve.
 - **Fase 7:** mixagem final (volumes, música mudando entre exploração e combate).
+
+## Estado atual (11/11/2026)
+Sistema de som pronto (ver `scripts/autoload/audio.gd` e `data/audio/audio.json`). Sons provisórios gratuitos; créditos em `docs/CREDITOS.md`. Próximo passo: trocar músicas e sons de skills/chefe por gerações da ElevenLabs, mantendo os mesmos ids.

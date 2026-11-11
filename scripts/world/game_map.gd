@@ -16,6 +16,11 @@ var rest_points: Dictionary = {}
 var npcs: Dictionary = {}
 ## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
 var _locked_exits: Dictionary = {}
+## True once the walkable area is baked (enemies then walk around obstacles).
+var nav_ready: bool = false
+var _nav_mesh: NavigationMesh
+var _nav_source: NavigationMeshSourceGeometryData3D
+var _nav_region: RID
 var _arena_gate: Node3D
 
 static var _data_cache: Dictionary = {}
@@ -105,6 +110,7 @@ func _ready() -> void:
 	_build_exits()
 	_build_enemy_zones()
 	_build_bosses.call_deferred()
+	_bake_navigation.call_deferred()
 
 
 ## Spawn position and facing (degrees) for a named spawn point.
@@ -580,3 +586,49 @@ func _open_arena() -> void:
 
 func arena_closed() -> bool:
 	return is_instance_valid(_arena_gate)
+
+
+# --- Navigation (enemies walk around trees, houses, rocks and rivers) ---------------
+
+## Bakes the walkable area from the map's collision shapes, on a thread.
+func _bake_navigation() -> void:
+	_nav_mesh = NavigationMesh.new()
+	_nav_mesh.agent_radius = 0.5
+	_nav_mesh.agent_height = 2.0
+	_nav_mesh.agent_max_climb = 0.25
+	_nav_mesh.cell_size = 0.25
+	_nav_mesh.cell_height = 0.25
+	_nav_mesh.geometry_parsed_geometry_type = NavigationMesh.PARSED_GEOMETRY_STATIC_COLLIDERS
+	_nav_mesh.geometry_collision_mask = Game.LAYER_WORLD
+	_nav_source = NavigationMeshSourceGeometryData3D.new()
+	NavigationServer3D.parse_source_geometry_data(_nav_mesh, _nav_source, self, _on_nav_parsed)
+
+
+func _on_nav_parsed() -> void:
+	if not is_inside_tree():
+		return
+	NavigationServer3D.bake_from_source_geometry_data_async(_nav_mesh, _nav_source, _on_nav_baked)
+
+
+func _on_nav_baked() -> void:
+	if not is_inside_tree():
+		return
+	_nav_region = NavigationServer3D.region_create()
+	NavigationServer3D.region_set_map(_nav_region, get_world_3d().navigation_map)
+	NavigationServer3D.region_set_navigation_mesh(_nav_region, _nav_mesh)
+	NavigationServer3D.region_set_enabled(_nav_region, true)
+	nav_ready = true
+
+
+## Walkable path from `from` to `to` (empty until the bake is done).
+func nav_path(from: Vector3, to: Vector3) -> PackedVector3Array:
+	if not nav_ready:
+		return PackedVector3Array()
+	return NavigationServer3D.map_get_path(get_world_3d().navigation_map, from, to, true)
+
+
+func _exit_tree() -> void:
+	if _nav_region.is_valid():
+		NavigationServer3D.free_rid(_nav_region)
+		_nav_region = RID()
+	nav_ready = false

@@ -63,6 +63,8 @@ var _bar: HealthBar3D
 var _shape: CollisionShape3D
 var _visual: Node3D
 var _rng := RandomNumberGenerator.new()
+var _path: PackedVector3Array = PackedVector3Array()
+var _path_timer: float = 0.0
 ## Meshy model (null = grey-box capsule).
 var model: CharacterModel
 
@@ -133,10 +135,15 @@ func take_damage(amount: int, crit: bool, knockback: Vector3 = Vector3.ZERO) -> 
 	ProtoVisuals.damage_number(get_parent(), global_position, str(amount),
 		Color("#ffd23f") if crit else Color.WHITE, crit)
 	_flash()
+	if _rng.randf() < 0.35:
+		Audio.play_sfx(Audio.enemy_sfx(base_id), global_position)
 	if model and _state != State.WINDUP and not model.is_busy() and not bool(data.get("no_flinch", false)):
 		model.play_action("hit")
 	if _state == State.IDLE:
 		_notice()
+	# A boss with a form still to come does not die before changing.
+	if hp <= 0.0 and _has_pending_phase():
+		hp = 1.0
 	hp_changed.emit(self)
 	if hp <= 0.0:
 		_die()
@@ -204,6 +211,8 @@ func _notice() -> void:
 	_state = State.CHASE
 	if not _engaged:
 		_engaged = true
+		if is_boss:
+			Audio.play_sfx("roar", global_position)
 		engaged.emit(self)
 
 
@@ -215,11 +224,35 @@ func _chase_move(to: Vector3, dist: float) -> Vector3:
 		if dist < float(band[0]):
 			return -to.normalized() * speed * 0.8 * slow
 		if dist > float(band[1]):
-			return to.normalized() * speed * slow
+			return _steer_to(target.global_position, to) * speed * slow
 		return Vector3.ZERO
 	if dist > _approach_range():
-		return to.normalized() * speed * slow
+		return _steer_to(target.global_position, to) * speed * slow
 	return Vector3.ZERO
+
+
+## Direction towards `goal`, following the map's walkable path around obstacles
+## (straight line until the map has baked its navigation, or when close and in view).
+func _steer_to(goal: Vector3, straight: Vector3) -> Vector3:
+	var gm := get_parent() as GameMap
+	if gm == null or not gm.nav_ready:
+		return straight.normalized()
+	_path_timer -= get_physics_process_delta_time()
+	if _path_timer <= 0.0 or _path.is_empty():
+		_path_timer = 0.3
+		_path = gm.nav_path(global_position, goal)
+	# Next waypoint that is not right under our feet.
+	while _path.size() > 1:
+		var d: Vector3 = _path[0] - global_position
+		d.y = 0.0
+		if d.length() > 0.4:
+			break
+		_path.remove_at(0)
+	if _path.is_empty():
+		return straight.normalized()
+	var to_wp: Vector3 = _path[0] - global_position
+	to_wp.y = 0.0
+	return to_wp.normalized() if to_wp.length() > 0.05 else straight.normalized()
 
 
 func _approach_range() -> float:
@@ -314,6 +347,7 @@ func _resolve_attack() -> void:
 			if Telegraph.in_line(p, _attack_center, _attack_dir, float(a.get("length", 4.0)), float(a.get("width", 1.0)) + PLAYER_RADIUS * 2.0):
 				target.receive_attack(dmg)
 		"projectile":
+			Audio.play_sfx("shoot", global_position)
 			var pr := Projectile.new()
 			pr.setup(target, _attack_dir, float(a.get("speed", 14.0)), float(a.get("range", 10.0)), dmg, str(a.get("look", "arrow")))
 			get_parent().add_child(pr)
@@ -324,6 +358,7 @@ func _resolve_attack() -> void:
 			if p.distance_to(_attack_center) <= float(a.get("radius", 1.2)) + PLAYER_RADIUS:
 				target.receive_attack(dmg)
 			if float(a.get("radius", 1.2)) >= 2.0:
+				Audio.play_sfx("slam", _attack_center)
 				ProtoVisuals.flash_disc(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(1, 0.6, 0.3, 0.5))
 	_clear_telegraph()
 	if _barrage_left > 0 and _target_alive():
@@ -362,6 +397,14 @@ func _clear_telegraph() -> void:
 
 # --- Boss phases --------------------------------------------------------------------
 
+func _has_pending_phase() -> bool:
+	var phases: Array = data.get("phases", [])
+	for i: int in phases.size():
+		if not _phase_done.has(i):
+			return true
+	return false
+
+
 func _check_phases() -> void:
 	var phases: Array = data.get("phases", [])
 	for i: int in phases.size():
@@ -383,6 +426,7 @@ func _start_transform(new_id: String) -> void:
 	set_meta("next_form", new_id)
 	if model:
 		model.play_action("taunt")
+	Audio.play_sfx("roar", global_position)
 	var tw := create_tween().set_loops(5)
 	tw.tween_callback(_flash)
 	tw.tween_interval(0.35)
@@ -448,6 +492,7 @@ func _die() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	_bar.visible = false
+	Audio.play_sfx("enemy_die", global_position, 0.8 if is_boss else 1.0)
 	died.emit(self)
 	var tw := create_tween()
 	if model:

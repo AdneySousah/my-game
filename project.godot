@@ -22,6 +22,7 @@ Game="*res://scripts/autoload/game.gd"
 Data="*res://scripts/autoload/data.gd"
 Session="*res://scripts/autoload/session.gd"
 SaveGame="*res://scripts/autoload/save_game.gd"
+Audio="*res://scripts/autoload/audio.gd"
 
 [debug]
 

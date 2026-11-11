@@ -7,6 +7,7 @@ const BACKGROUND: String = "res://assets/story/pro_08_torre.webp"
 
 var _buttons: VBoxContainer
 var _confirm: PanelContainer
+var _options: OptionsPanel
 
 
 func _ready() -> void:
@@ -51,6 +52,9 @@ func _ready() -> void:
 		info.add_theme_font_size_override("font_size", 18)
 		_buttons.add_child(info)
 	_buttons.add_child(_button(tr("TITLE_NEW"), _on_new))
+	_buttons.add_child(_button(tr("TITLE_OPTIONS"), func() -> void:
+		_buttons.hide()
+		_options.open()))
 	if not Game.is_mobile():
 		_buttons.add_child(_button(tr("TITLE_QUIT"), func() -> void: get_tree().quit()))
 
@@ -60,8 +64,12 @@ func _ready() -> void:
 	add_child(version)
 	version.set_anchors_and_offsets_preset(Control.PRESET_BOTTOM_RIGHT, Control.PRESET_MODE_MINSIZE, 14)
 
+	Audio.play_music("titulo", 1.5)
 	_confirm = _build_confirm()
 	add_child(_confirm)
+	_options = OptionsPanel.new()
+	add_child(_options)
+	_options.closed.connect(func() -> void: _buttons.show())
 	get_viewport().size_changed.connect(_layout)
 	_layout.call_deferred()
 

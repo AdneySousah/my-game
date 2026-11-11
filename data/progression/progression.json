@@ -1,4 +1,5 @@
 {
+  "rest": { "_comment": "Pontos de descanso: cura aos poucos e só volta a curar depois da espera (segundos de tempo real).", "heal_seconds": 3.0, "cooldown_seconds": 600 },
   "_comment": "Regras de progressão do herói (GDD 6.1, 6.2, 6.9, 6.13). Valores de protótipo; ajustar nos testes.",
   "level_cap": 100,
   "points_per_level": 5,

@@ -34,10 +34,12 @@ func _physics_process(_delta: float) -> void:
 		if not _faded.has(body):
 			_set_alpha(body as Node, FADED)
 			_faded[body] = true
-	for body: Object in _faded.keys():
-		if not hit_now.has(body):
-			if is_instance_valid(body):
-				_set_alpha(body as Node, 0.0)
+	# Untyped on purpose: props from the previous map may already be freed.
+	for body: Variant in _faded.keys():
+		if not is_instance_valid(body):
+			_faded.erase(body)
+		elif not hit_now.has(body):
+			_set_alpha(body as Node, 0.0)
 			_faded.erase(body)
 
 

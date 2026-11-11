@@ -52,6 +52,7 @@ var _visual: Node3D
 ## The Meshy model (null while the grey-box capsule is used).
 var model: CharacterModel
 var _combat_time: float = 0.0
+var _step_timer: float = 0.0
 var _sword_pivot: Node3D
 var _body_mat: StandardMaterial3D
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -142,6 +143,15 @@ func _physics_process(delta: float) -> void:
 	global_position.y = 0.0
 	if model and _lock <= 0.0:
 		model.update_locomotion(velocity.length(), _combat_time > 0.0)
+	# Footsteps: faster when running.
+	var spd: float = velocity.length()
+	if spd > 0.5:
+		_step_timer -= delta * spd
+		if _step_timer <= 0.0:
+			_step_timer = 1.9
+			Audio.play_sfx("step", global_position)
+	else:
+		_step_timer = 0.4
 
 
 # --- Public API used by skills, enemies and the HUD ---------------------------
@@ -288,6 +298,7 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var push: Vector3 = enemy.global_position - global_position
 	push.y = 0.0
 	enemy.take_damage(res["amount"], res["crit"], push.normalized() * knockback)
+	Audio.play_sfx("crit" if res["crit"] else "hit", enemy.global_position)
 	return res["amount"]
 
 
@@ -300,6 +311,7 @@ func receive_attack(atk_value: float) -> void:
 		return
 	var res: Dictionary = Damage.compute(atk_value, 1.0, stats.get_stat("def"), 0.0, 1.0, _rng)
 	hp -= res["amount"]
+	Audio.play_sfx("hurt", global_position)
 	ProtoVisuals.damage_number(get_parent(), global_position, str(res["amount"]), Color("#ff5a5a"))
 	_combat_time = 3.0
 	if model:
@@ -337,7 +349,14 @@ func load_state(d: Dictionary) -> void:
 	gold_changed.emit(gold)
 
 
-## Rest point: full health and stamina.
+## Gradual healing (rest points): fractions of the maximum health and stamina.
+func heal_fraction(f: float) -> void:
+	hp = minf(max_hp(), hp + max_hp() * f)
+	stamina = minf(max_stamina(), stamina + max_stamina() * f)
+	hp_changed.emit(hp, max_hp())
+
+
+## Full health and stamina at once (tests and tools).
 func rest() -> void:
 	hp = max_hp()
 	stamina = max_stamina()
@@ -412,6 +431,7 @@ func _try_dodge(dir: Vector3) -> void:
 	_dodge_cd = DODGE_COOLDOWN
 	set_invulnerable(DODGE_TIME + 0.05)
 	start_forced_move(d * DODGE_SPEED, DODGE_TIME)
+	Audio.play_sfx("dodge", global_position)
 	if model:
 		model.play_action("dodge")
 		return
@@ -432,6 +452,7 @@ func _do_attack() -> void:
 	_lock = t
 	_combo_timer = t + COMBO_RESET
 	_combat_time = 3.0
+	Audio.play_sfx("swing", global_position, 1.0 + step * 0.06)
 	if model:
 		model.play_action("attack_%d" % step, stats.attack_speed_mult())
 	elif step == 1:

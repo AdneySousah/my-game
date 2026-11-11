@@ -35,7 +35,9 @@ func _ready() -> void:
 	_build_ground()
 	_build_paths()
 	_build_rest_points()
+	_build_rivers()
 	_build_walls()
+	_build_lines()
 	_build_props()
 	_build_scatter()
 	_build_exits()
@@ -175,6 +177,68 @@ func _build_rest_points() -> void:
 		label.pixel_size = 0.01
 		label.position = point.position + Vector3(0, 3.2, 0)
 		add_child(label)
+
+
+## Water you cannot cross: {"points": [[x,z], ...], "width": metres}.
+func _build_rivers() -> void:
+	var shader: Shader = load("res://assets/shaders/water.gdshader")
+	for r: Dictionary in data.get("rivers", []):
+		var pts: Array = r.get("points", [])
+		var width: float = float(r.get("width", 6.0))
+		var mat := ShaderMaterial.new()
+		mat.shader = shader
+		for i: int in range(pts.size() - 1):
+			var a: Vector3 = _v(pts[i])
+			var b: Vector3 = _v(pts[i + 1])
+			var length: float = a.distance_to(b) + width * 0.5
+			var mid: Vector3 = (a + b) * 0.5
+			var yaw: float = atan2(b.x - a.x, b.z - a.z)
+			var water := MeshInstance3D.new()
+			var plane := PlaneMesh.new()
+			plane.size = Vector2(width, length)
+			water.mesh = plane
+			water.material_override = mat
+			water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+			water.position = mid + Vector3(0, 0.05, 0)
+			water.rotation.y = yaw
+			add_child(water)
+			var body := StaticBody3D.new()
+			body.collision_layer = Game.LAYER_WORLD
+			var shape := CollisionShape3D.new()
+			var box := BoxShape3D.new()
+			box.size = Vector3(width, 3, length)
+			shape.shape = box
+			shape.position.y = 1.5
+			body.add_child(shape)
+			body.position = mid
+			body.rotation.y = yaw
+			add_child(body)
+			_path_segments.append([a, b, width + 1.5])
+
+
+## Rows of props along a polyline (rock cliffs, fences, tree walls):
+## {"ids": [...], "points": [[x,z], ...], "spacing": m, "scale": [min, max], "align": bool, "jitter": m}.
+func _build_lines() -> void:
+	for l: Dictionary in data.get("lines", []):
+		var ids: Array = l.get("ids", [])
+		var pts: Array = l.get("points", [])
+		var spacing: float = float(l.get("spacing", 2.0))
+		var sc: Array = l.get("scale", [1.0, 1.0])
+		var jitter: float = float(l.get("jitter", 0.0))
+		var align: bool = bool(l.get("align", false))
+		var rng := RandomNumberGenerator.new()
+		rng.seed = int(l.get("seed", 5))
+		for i: int in range(pts.size() - 1):
+			var a: Vector3 = _v(pts[i])
+			var b: Vector3 = _v(pts[i + 1])
+			var dir: Vector3 = (b - a).normalized()
+			var n: int = maxi(1, int(a.distance_to(b) / spacing))
+			for k: int in n:
+				var pos: Vector3 = a + dir * spacing * (k + 0.5)
+				pos += Vector3(rng.randf_range(-jitter, jitter), 0, rng.randf_range(-jitter, jitter))
+				var rot: float = rad_to_deg(atan2(-dir.z, dir.x)) if align else rng.randf_range(0, 360)
+				PropFactory.spawn(self, str(ids[rng.randi() % ids.size()]), pos, rot, rng.randf_range(float(sc[0]), float(sc[1])))
+				_clear_spots.append(pos)
 
 
 ## Tiles wall pieces along segments: {"id": wall prop, "from": [x,z], "to": [x,z]}.

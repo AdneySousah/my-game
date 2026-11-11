@@ -15,6 +15,8 @@ var _travel_panel: TravelPanel
 var _banner: Label
 var _banner_tween: Tween
 var _fade: ColorRect
+var _minimap: Minimap
+var _full_map: FullMapPanel
 
 var _level_label: Label
 var _hp_bar: ProgressBar
@@ -93,6 +95,13 @@ func _ready() -> void:
 	_banner.modulate.a = 0.0
 	root.add_child(_banner)
 
+	_minimap = Minimap.new()
+	root.add_child(_minimap)
+	_minimap.tapped.connect(func() -> void: _open_panel(_full_map))
+	_full_map = FullMapPanel.new()
+	root.add_child(_full_map)
+	_full_map.closed.connect(_on_panel_closed)
+
 	_fade = ColorRect.new()
 	_fade.color = Color.BLACK
 	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -128,6 +137,12 @@ func toast(text: String, seconds: float = 1.8) -> void:
 	_toast_tween = create_tween()
 	_toast_tween.tween_interval(seconds)
 	_toast_tween.tween_property(_toast, "modulate:a", 0.0, 0.4)
+
+
+## Gives the minimap and the full map access to the running game.
+func set_main(m: Main) -> void:
+	_minimap.main = m
+	_full_map.main = m
 
 
 ## Shows the "Viajar" button while the hero stands at an activated rest point.
@@ -167,6 +182,8 @@ func _input(event: InputEvent) -> void:
 		_toggle(_attributes_panel)
 	elif event.is_action_pressed("toggle_skills"):
 		_toggle(_skills_panel)
+	elif event.is_action_pressed("toggle_map"):
+		_toggle(_full_map)
 	elif event.is_action_pressed("debug_level_up"):
 		_debug_level_up()
 
@@ -255,6 +272,8 @@ func _layout() -> void:
 	var vp: Vector2 = get_viewport().get_visible_rect().size
 	_joystick.position = Vector2(0, vp.y * 0.35)
 	_joystick.size = Vector2(vp.x * 0.45, vp.y * 0.65)
+	if _minimap:
+		_minimap.position = Vector2(vp.x - Minimap.RADIUS_PX * 2.0 - 20, 72)
 	var attack_c := Vector2(vp.x - 130, vp.y - 120)
 	_attack_btn.set_center(attack_c)
 	# Skills in an arc around the attack button, spaced so circles never overlap.
@@ -362,13 +381,14 @@ func _open_panel(panel: Control) -> void:
 	_attributes_panel.hide()
 	_skills_panel.hide()
 	_travel_panel.hide()
+	_full_map.hide()
 	panel.call("open")
 	_controls.hide()
 	get_tree().paused = true
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible and not _full_map.visible:
 		_controls.show()
 		get_tree().paused = false
 

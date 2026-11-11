@@ -5,27 +5,49 @@
   "size": [76, 76],
   "seed": 7,
   "ground": "#7BC950",
-  "patches": { "color": "#68b543", "count": 60 },
+  "patches": { "color": "#68b543", "count": 60},
   "spawns": { "start": [0, 3, 0] },
-  "rest_points": [ { "id": "arena_descanso", "name": "REST_ARENA", "pos": [0, -1], "kind": "fogueira" } ],
+  "rest_points": [
+    { "id": "arena_descanso", "name": "REST_ARENA", "pos": [0, -1], "kind": "fogueira" }
+  ],
   "props": [
-    { "id": "env_casa_pequena", "pos": [-11, -9], "rot": 35 },
-    { "id": "env_casa_pequena", "pos": [-17, -1], "rot": 70 },
+    { "id": "env_casa_pequena", "pos": [-11, -9], "rot": 35},
+    { "id": "env_casa_pequena", "pos": [-17, -1], "rot": 70},
     { "id": "prp_poco", "pos": [-6, -6] },
-    { "id": "prp_carroca", "pos": [-13, -3], "rot": 120 },
+    { "id": "prp_carroca", "pos": [-13, -3], "rot": 120},
     { "id": "prp_barril", "pos": [-8, -11] },
-    { "id": "prp_barril", "pos": [-7.1, -11.6], "rot": 40 },
-    { "id": "prp_caixa", "pos": [-9.2, -12.2], "rot": 15 },
-    { "id": "prp_feno", "pos": [-14, -7], "rot": 30 },
+    { "id": "prp_barril", "pos": [-7.1, -11.6], "rot": 40},
+    { "id": "prp_caixa", "pos": [-9.2, -12.2], "rot": 15},
+    { "id": "prp_feno", "pos": [-14, -7], "rot": 30},
     { "id": "prp_cerca", "pos": [-4, -14] },
     { "id": "prp_cerca", "pos": [-2.1, -14] },
     { "id": "prp_cerca", "pos": [-0.2, -14] }
   ],
   "scatter": [
-    { "ids": ["prp_arvore", "prp_arvore_torta"], "count": 18, "rect": [-34, -34, 34, 34], "spacing": 6, "seed": 7 },
-    { "ids": ["prp_pedra", "prp_arbusto", "prp_flores"], "count": 30, "rect": [-34, -34, 34, 34], "spacing": 3, "seed": 8 }
+    {
+      "ids": ["prp_arvore", "prp_arvore_torta"],
+      "count": 18,
+      "rect": [-34, -34, 34, 34],
+      "spacing": 6,
+      "seed": 7
+    },
+    {
+      "ids": ["prp_pedra", "prp_arbusto", "prp_flores"],
+      "count": 30,
+      "rect": [-34, -34, 34, 34],
+      "spacing": 3,
+      "seed": 8
+    }
   ],
   "enemy_zones": [
-    { "pos": [0, 0], "radius": 30, "max": 6, "types": { "bandido": 3, "orc": 1 }, "level": [1, 1], "respawn": 1.5, "follow_player": true }
+    {
+      "pos": [0, 0],
+      "radius": 30,
+      "max": 6,
+      "types": { "bandido": 3, "orc": 1},
+      "level": [1, 1],
+      "respawn": 1.5,
+      "follow_player": true
+    }
   ]
 }

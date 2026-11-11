@@ -23,6 +23,13 @@ Cada etapa termina com algo jogável para você testar.
 | 4.4 | **Áudio** | Sistema de som com volumes; efeitos de combate, das 8 skills, passos, interface; música da vila, da floresta, da mina e do chefe |
 | 4.5 | **Prólogo e save** | Prólogo em ilustrações; tela inicial; salvar e continuar (save local, já criptografado) |
 
+### Pedidos do dono após a 4.1 (11/11/2026)
+| # | Etapa | O que fica pronto |
+|---|---|---|
+| 4.1b | **Bordas e navegação** (feito, sem créditos) | Minimapa redondo girado como a câmera, com setas para as saídas; mapa completo (tecla M ou toque no minimapa); rios animados e paredões de rocha fechando a floresta; cerca provisória em volta da vila |
+| 4.1c | **Muralhas e portais** (Meshy) | Muralha de pedra, torre de canto e portão da cidade para cercar as cidades; portal de pedra com luz mágica nas saídas; juncos e rochedos para as margens |
+| 4.2a | **Interface com a cara do jogo** (Meshy) | Moldura de janela, caixa de diálogo, botão, botão redondo (ataque/skills), moldura das barras, moldura do minimapa e os 8 ícones das skills, no estilo das imagens de referência |
+
 Inventário, equipamentos, ferreiro e loja ficam para a **Fase 5**, como no roadmap. Nesta fase os drops só somam ouro e materiais.
 
 ## O que vamos gerar no Meshy

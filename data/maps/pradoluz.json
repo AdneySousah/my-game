@@ -1,18 +1,21 @@
 {
-  "_comment": "Pradoluz, vila natal do Lio (Ato 1). Zona segura. Norte: saída para a Floresta Sussurrante.",
+  "_comment": "Pradoluz, vila natal do Lio (Ato 1). Zona segura, cercada (a cerca vira muralha quando o modelo for gerado). Norte: saída para a Floresta Sussurrante.",
   "id": "pradoluz",
   "name": "MAP_PRADOLUZ",
   "safe": true,
   "size": [72, 72],
   "seed": 11,
   "ground": "#7BC950",
-  "patches": { "color": "#6cbc45", "count": 70 },
-  "spawns": {
-    "start": [-7, -3, 200],
-    "from_floresta": [0, -28, 180]
-  },
+  "patches": { "color": "#6cbc45", "count": 70},
+  "spawns": { "start": [-7, -3, 200], "from_floresta": [0, -28, 180] },
   "exits": [
-    { "to": "floresta", "spawn": "from_pradoluz", "pos": [0, -34], "size": [8, 2], "label": "MAP_FLORESTA" }
+    {
+      "to": "floresta",
+      "spawn": "from_pradoluz",
+      "pos": [0, -34],
+      "size": [8, 2],
+      "label": "MAP_FLORESTA"
+    }
   ],
   "rest_points": [
     { "id": "pradoluz_pedra", "name": "REST_PRADOLUZ_PEDRA", "pos": [0, -1], "kind": "pedra" }
@@ -23,42 +26,105 @@
     { "points": [[0, 4], [-2, 16], [-6, 30]], "width": 2.6, "color": "#d1ad73" }
   ],
   "props": [
-    { "id": "env_casa_pequena", "pos": [-10, -7], "rot": 20 },
-    { "id": "env_casa_media", "pos": [10, -8], "rot": -20 },
-    { "id": "env_casa_pequena", "pos": [-15, 12], "rot": 75 },
-    { "id": "env_casa_media", "pos": [14, 14], "rot": 200 },
-    { "id": "env_casa_pequena", "pos": [-4, 22], "rot": 160 },
-    { "id": "env_ferraria", "pos": [12, 0], "rot": -90 },
+    { "id": "env_casa_pequena", "pos": [-10, -7], "rot": 20},
+    { "id": "env_casa_media", "pos": [10, -8], "rot": -20},
+    { "id": "env_casa_pequena", "pos": [-15, 12], "rot": 75},
+    { "id": "env_casa_media", "pos": [14, 14], "rot": 200},
+    { "id": "env_casa_pequena", "pos": [-4, 22], "rot": 160},
+    { "id": "env_ferraria", "pos": [12, 0], "rot": -90},
     { "id": "prp_bigorna", "pos": [9.2, 1.6] },
     { "id": "prp_barril", "pos": [14.6, 2.8] },
-    { "id": "prp_caixa", "pos": [15.2, -2.6], "rot": 20 },
-    { "id": "prp_barraca_mercado", "pos": [-5, 8], "rot": 180 },
-    { "id": "prp_barraca_mercado", "pos": [5, 9], "rot": 200 },
-    { "id": "prp_caixa", "pos": [-7.4, 9.2], "rot": 10 },
+    { "id": "prp_caixa", "pos": [15.2, -2.6], "rot": 20},
+    { "id": "prp_barraca_mercado", "pos": [-5, 8], "rot": 180},
+    { "id": "prp_barraca_mercado", "pos": [5, 9], "rot": 200},
+    { "id": "prp_caixa", "pos": [-7.4, 9.2], "rot": 10},
     { "id": "prp_barril", "pos": [7.4, 10.6] },
     { "id": "prp_poco", "pos": [-5, -2] },
-    { "id": "prp_banco", "pos": [5, -3], "rot": 90 },
-    { "id": "prp_banco", "pos": [-3, 2.5], "rot": 0 },
+    { "id": "prp_banco", "pos": [5, -3], "rot": 90},
+    { "id": "prp_banco", "pos": [-3, 2.5], "rot": 0},
     { "id": "prp_lampiao", "pos": [2.6, -8] },
     { "id": "prp_lampiao", "pos": [-2.6, -17] },
     { "id": "prp_lampiao", "pos": [-12, 7.2] },
     { "id": "prp_lampiao", "pos": [17, 3.6] },
     { "id": "prp_lampiao", "pos": [1.6, 14] },
-    { "id": "prp_placa", "pos": [3, -25], "rot": 180 },
-    { "id": "prp_carroca", "pos": [8, 17], "rot": 30 },
-    { "id": "env_moinho", "pos": [-23, -22], "rot": 30 },
-    { "id": "prp_feno", "pos": [-17, -25], "rot": 20 },
-    { "id": "prp_feno", "pos": [-18.4, -26.6], "rot": 70 },
-    { "id": "prp_trigo", "pos": [-25, -12] }, { "id": "prp_trigo", "pos": [-22.8, -12] }, { "id": "prp_trigo", "pos": [-20.6, -12] }, { "id": "prp_trigo", "pos": [-18.4, -12] },
-    { "id": "prp_trigo", "pos": [-25, -9.8] }, { "id": "prp_trigo", "pos": [-22.8, -9.8] }, { "id": "prp_trigo", "pos": [-20.6, -9.8] }, { "id": "prp_trigo", "pos": [-18.4, -9.8] },
-    { "id": "prp_trigo", "pos": [-25, -7.6] }, { "id": "prp_trigo", "pos": [-22.8, -7.6] }, { "id": "prp_trigo", "pos": [-18.4, -7.6] },
-    { "id": "prp_espantalho", "pos": [-20.6, -7.6], "rot": 20 },
-    { "id": "prp_cerca", "pos": [-25.5, -5], "rot": 0 }, { "id": "prp_cerca", "pos": [-23.6, -5] }, { "id": "prp_cerca", "pos": [-21.7, -5] }, { "id": "prp_cerca", "pos": [-17.9, -5] },
-    { "id": "prp_trigo", "pos": [20, -18] }, { "id": "prp_trigo", "pos": [22.2, -18] }, { "id": "prp_trigo", "pos": [20, -20.2] }, { "id": "prp_trigo", "pos": [22.2, -20.2] },
-    { "id": "prp_espantalho", "pos": [24.2, -19], "rot": -40 }
+    { "id": "prp_placa", "pos": [3, -25], "rot": 180},
+    { "id": "prp_carroca", "pos": [8, 17], "rot": 30},
+    { "id": "env_moinho", "pos": [-23, -22], "rot": 30},
+    { "id": "prp_feno", "pos": [-17, -25], "rot": 20},
+    { "id": "prp_feno", "pos": [-18.4, -26.6], "rot": 70},
+    { "id": "prp_trigo", "pos": [-25, -12] },
+    { "id": "prp_trigo", "pos": [-22.8, -12] },
+    { "id": "prp_trigo", "pos": [-20.6, -12] },
+    { "id": "prp_trigo", "pos": [-18.4, -12] },
+    { "id": "prp_trigo", "pos": [-25, -9.8] },
+    { "id": "prp_trigo", "pos": [-22.8, -9.8] },
+    { "id": "prp_trigo", "pos": [-20.6, -9.8] },
+    { "id": "prp_trigo", "pos": [-18.4, -9.8] },
+    { "id": "prp_trigo", "pos": [-25, -7.6] },
+    { "id": "prp_trigo", "pos": [-22.8, -7.6] },
+    { "id": "prp_trigo", "pos": [-18.4, -7.6] },
+    { "id": "prp_espantalho", "pos": [-20.6, -7.6], "rot": 20},
+    { "id": "prp_cerca", "pos": [-25.5, -5], "rot": 0},
+    { "id": "prp_cerca", "pos": [-23.6, -5] },
+    { "id": "prp_cerca", "pos": [-21.7, -5] },
+    { "id": "prp_cerca", "pos": [-17.9, -5] },
+    { "id": "prp_trigo", "pos": [20, -18] },
+    { "id": "prp_trigo", "pos": [22.2, -18] },
+    { "id": "prp_trigo", "pos": [20, -20.2] },
+    { "id": "prp_trigo", "pos": [22.2, -20.2] },
+    { "id": "prp_espantalho", "pos": [24.2, -19], "rot": -40}
   ],
   "scatter": [
-    { "ids": ["prp_arvore", "prp_arvore", "prp_arvore_torta"], "count": 34, "rect": [-34, -34, 34, 34], "spacing": 7, "seed": 21 },
-    { "ids": ["prp_arbusto", "prp_flores", "prp_flores", "prp_pedrinhas"], "count": 45, "rect": [-34, -34, 34, 34], "spacing": 3, "seed": 22 }
+    {
+      "ids": ["prp_arvore", "prp_arvore", "prp_arvore_torta"],
+      "count": 34,
+      "rect": [-34, -34, 34, 34],
+      "spacing": 7,
+      "seed": 21
+    },
+    {
+      "ids": ["prp_arbusto", "prp_flores", "prp_flores", "prp_pedrinhas"],
+      "count": 45,
+      "rect": [-34, -34, 34, 34],
+      "spacing": 3,
+      "seed": 22
+    }
+  ],
+  "lines": [
+    {
+      "ids": ["prp_cerca"],
+      "spacing": 1.9,
+      "align": true,
+      "seed": 3,
+      "points": [[-30, -30], [-4.5, -30]]
+    },
+    {
+      "ids": ["prp_cerca"],
+      "spacing": 1.9,
+      "align": true,
+      "seed": 3,
+      "points": [[4.5, -30], [30, -30]]
+    },
+    {
+      "ids": ["prp_cerca"],
+      "spacing": 1.9,
+      "align": true,
+      "seed": 3,
+      "points": [[30, -30], [30, 30]]
+    },
+    {
+      "ids": ["prp_cerca"],
+      "spacing": 1.9,
+      "align": true,
+      "seed": 3,
+      "points": [[30, 30], [-30, 30]]
+    },
+    {
+      "ids": ["prp_cerca"],
+      "spacing": 1.9,
+      "align": true,
+      "seed": 3,
+      "points": [[-30, 30], [-30, -30]]
+    }
   ]
 }

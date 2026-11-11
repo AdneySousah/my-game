@@ -37,6 +37,7 @@ func _ready() -> void:
 	add_child(hud)
 	hud.bind(player)
 	hud.travel_requested.connect(travel_to_point)
+	hud.set_main(self)
 
 	_fader = OcclusionFader.new()
 	add_child(_fader)

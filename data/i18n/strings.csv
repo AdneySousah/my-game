@@ -90,6 +90,11 @@ HUD_MATERIAL_GOT,+%d %s,+%d %s
 MAP_CELEIRO,Celeiro do Tributo,Tribute Granary
 REST_CELEIRO_ENTRADA,Entrada do Celeiro,Granary Entrance
 HUD_MATERIALS,Materiais,Materials
+HUD_RESTING,Descansando...,Resting...
+HUD_REST_WAIT,Este ponto volta a curar em %s,This point heals again in %s
+HUD_IN_MAP,em %s,in %s
+HUD_BAG,Mochila (I),Bag (I)
+HUD_BAG_FULL,Mochila cheia!,Bag full!
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -165,6 +170,31 @@ OPT_MENU,Opções,Options
 OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
+ITEM_POT_VIDA_P,Poção de vida pequena,Small health potion
+ITEM_POT_VIDA_M,Poção de vida média,Medium health potion
+ITEM_POT_VIDA_G,Poção de vida grande,Large health potion
+ITEM_POT_VIDA_DESC,"Recupera vida aos poucos, em 2 segundos.",Restores health over 2 seconds.
+ITEM_POT_FOLEGO_P,Poção de fôlego pequena,Small stamina potion
+ITEM_POT_FOLEGO_M,Poção de fôlego média,Medium stamina potion
+ITEM_POT_FOLEGO_G,Poção de fôlego grande,Large stamina potion
+ITEM_POT_FOLEGO_DESC,Recupera o fôlego para esquivas e skills.,Restores stamina for dodges and skills.
+ITEM_POT_FORCA,Tônico da força,Tonic of strength
+ITEM_POT_FORCA_DESC,+20% de ataque por 90 segundos.,+20% attack for 90 seconds.
+ITEM_POT_PEDRA,Tônico da pedra,Tonic of stone
+ITEM_POT_PEDRA_DESC,+25% de defesa por 90 segundos.,+25% defense for 90 seconds.
+ITEM_POT_VENTO,Tônico do vento,Tonic of wind
+ITEM_POT_VENTO_DESC,+15% de velocidade de movimento e de ataque por 90 segundos.,+15% movement and attack speed for 90 seconds.
+ITEM_MAT_DESC,Material de criação. O ferreiro usa para forjar e fortalecer equipamentos.,Crafting material. The blacksmith uses it to forge and strengthen gear.
+ITEM_TREVO,Trevo de Fortificação,Fortification Clover
+ITEM_TREVO_DESC,Aumenta a chance de fortalecer um equipamento no ferreiro.,Raises the chance of strengthening gear at the blacksmith.
+ITEM_TREVO_REAL,Trevo Real,Royal Clover
+ITEM_TREVO_REAL_DESC,O fortalecimento dá certo sempre.,Strengthening always succeeds.
+ITEM_BROCA,Broca de Engaste,Socket Drill
+ITEM_BROCA_DESC,Tenta abrir um encaixe para gema num equipamento.,Tries to open a gem socket on a piece of gear.
+ITEM_BROCA_REAL,Broca Real,Royal Drill
+ITEM_BROCA_REAL_DESC,Abre um encaixe sempre (até 3).,Always opens a socket (up to 3).
+ITEM_AMULETO,Amuleto de Proteção,Protection Amulet
+ITEM_AMULETO_DESC,"Se o fortalecimento falhar, o equipamento não quebra nem some.","If strengthening fails, the gear neither breaks nor vanishes."
 ITEM_ERVA_ORVALHO,Erva-de-orvalho,Dewleaf
 ITEM_CAIXOTE_FERRO,Caixote de ferro,Iron crate
 DLG_MAIN_01_MARTA_1,Lio! O sol já está alto e você ainda com cara de travesseiro.,Lio! The sun is up and you still look like a pillow.
@@ -257,6 +287,19 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-HUD_RESTING,Descansando...,Resting...
-HUD_REST_WAIT,Este ponto volta a curar em %s,This point heals again in %s
-HUD_IN_MAP,em %s,in %s
+BAG_TITLE,Mochila  %d/%d   ·   %d de ouro,Bag  %d/%d   ·   %d gold
+BAG_USE,Usar,Use
+BAG_QUICK,Pôr no atalho,Put on shortcut
+BAG_QUICK_ON,No atalho,On shortcut
+BAG_PICK,Toque num item,Tap an item
+BAG_OWNED,Você tem: %d,You have: %d
+RARITY_COMMON,Comum,Common
+RARITY_RARE,Raro,Rare
+RARITY_EPIC,Épico,Epic
+RARITY_LEGENDARY,Lendário,Legendary
+ITEMTYPE_POTION,Poção,Potion
+ITEMTYPE_MATERIAL,Material,Material
+ITEMTYPE_CONSUMABLE,Item especial,Special item
+ITEMTYPE_EQUIPMENT,Equipamento,Equipment
+HUD_OPEN,Abrir (E),Open (E)
+HUD_GOLD_GOT,+%d de ouro,+%d gold

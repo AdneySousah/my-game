@@ -136,3 +136,13 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - O dono prefere manter a qualidade: texturas continuam em 2K, sem limite no jogo exportado.
 - Economia sem perda: animações novas vêm só com o esqueleto (≈90 KB por arquivo em vez de ≈3 MB). Os arquivos antigos ficam como estão (trocá-los não libera o espaço já usado no histórico).
 - Se o GitHub ficar sem espaço: comprar pacote de dados do Git LFS ou usar a ferramenta opcional `glb_shrink.gd`.
+
+## Itens, mochila e poções (11/11/2026, etapas 5.1 e 5.2)
+- Itens ficam em `data/items/items.json` (nome, descrição, tipo, raridade, pilha, preço, efeito). Raridades: comum (branco), raro (azul), épico (roxo), lendário (dourado).
+- Mochila de 60 espaços; itens iguais se empilham. Abre pelo menu do retrato ou pela tecla I. Os 4 materiais antigos viraram itens (saves antigos são convertidos).
+- Poções de vida (30/50/80% em 2 s) e de fôlego (40/70/100% em 1,5 s), em tamanhos pequena, média e grande. Tônicos de força (+20% ataque), pedra (+25% defesa) e vento (+15% velocidade) por 90 s.
+- Três atalhos na tela, acima da barra de fôlego: vida, fôlego e reforço. Mostram quantas sobram e a recarga de 8 s (cada atalho tem a sua). No PC: teclas 5, 6 e 7 (ou Z, X e V). Se a poção escolhida acabar, o atalho usa outra do mesmo tipo. Na mochila, "Pôr no atalho" escolhe qual poção vai em cada atalho.
+- Baús nos mapas (2 na floresta, 2 na mina, 1 no celeiro): abrem uma vez por save, dão ouro e itens. Cubo provisório até o modelo do Meshy.
+- Inimigos deixam poções e materiais; Golem deixa Broca, Gorvan deixa Trevo. Missões dão poções como recompensa (a missão final dá um Amuleto).
+- Ícones provisórios (círculo colorido com letra) até as folhas de ícones do Meshy.
+- Chefes reequilibrados para a luta com poções: Golem 2500 de vida, Gorvan 3700 (Espantalho 3700). Sem poções, o Gorvan só cai no nível 12–13 por pouco; com as poções que o jogo dá até ali, a luta fica confortável no nível 11.

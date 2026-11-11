@@ -79,5 +79,14 @@
       "intro": "gorvan_intro",
       "transform_line": "gorvan_transform"
     }
+  ],
+  "chests": [
+    {
+      "id": "celeiro_bau",
+      "pos": [0, -18],
+      "yaw": 0,
+      "gold": 300,
+      "items": {"pot_vida_m": 2, "pot_vento": 1, "amuleto": 1}
+    }
   ]
 }

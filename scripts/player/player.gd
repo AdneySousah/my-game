@@ -53,6 +53,12 @@ var _visual: Node3D
 var model: CharacterModel
 var _combat_time: float = 0.0
 var _step_timer: float = 0.0
+## Potions: healing over time, and the wait before each quick slot works again.
+var _heal_left: float = 0.0
+var _heal_rate: float = 0.0
+var _stamina_left: float = 0.0
+var _stamina_rate: float = 0.0
+var _potion_cd: Dictionary = {}
 var _sword_pivot: Node3D
 var _body_mat: StandardMaterial3D
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -101,6 +107,7 @@ func _physics_process(delta: float) -> void:
 	_lock -= delta
 	_combat_time -= delta
 	_tick_buff(delta)
+	_tick_potions(delta)
 	_tick_stamina(delta)
 	if _dead or _scripted:
 		return
@@ -131,7 +138,7 @@ func _physics_process(delta: float) -> void:
 			velocity = Vector3.ZERO
 		else:
 			_update_sprint(dir, delta)
-			var speed: float = MOVE_SPEED * (float(_stamina_rules().get("sprint_speed_mult", 1.6)) if _sprinting else 1.0)
+			var speed: float = MOVE_SPEED * (1.0 + stats.buff("speed")) * (float(_stamina_rules().get("sprint_speed_mult", 1.6)) if _sprinting else 1.0)
 			velocity = dir * speed
 			if dir.length_squared() > 0.01:
 				face_direction(dir)
@@ -347,6 +354,54 @@ func load_state(d: Dictionary) -> void:
 	stamina = clampf(float(d.get("stamina", max_stamina())), 0.0, max_stamina())
 	hp_changed.emit(hp, max_hp())
 	gold_changed.emit(gold)
+
+
+## Drinks a potion from the bag. False when there is none, it is cooling down or the
+## hero cannot drink now (dead). Effects come from data/items/items.json.
+func use_potion(item_id: String) -> bool:
+	var item: Dictionary = Data.item(item_id)
+	var slot: String = str(item.get("slot", ""))
+	if _dead or item.is_empty() or str(item.get("type", "")) != "potion":
+		return false
+	if potion_cooldown(slot) > 0.0 or not Session.inventory.remove(item_id, 1):
+		return false
+	_potion_cd[slot] = float(Data.items_config.get("potion_cooldown", 8.0))
+	var e: Dictionary = item.get("effect", {})
+	var seconds: float = maxf(float(e.get("seconds", 1.0)), 0.05)
+	match str(e.get("kind", "")):
+		"heal":
+			_heal_left = seconds
+			_heal_rate = max_hp() * float(e.get("amount", 0.3)) / seconds
+		"stamina":
+			_stamina_left = seconds
+			_stamina_rate = max_stamina() * float(e.get("amount", 0.4)) / seconds
+		"buff":
+			stats.add_buff(str(e.get("stat", "atk")), float(e.get("amount", 0.1)), seconds)
+	Audio.play_sfx("pickup", global_position, 0.8)
+	return true
+
+
+## Seconds before a quick slot ("vida", "folego", "reforco") can be used again.
+func potion_cooldown(slot: String) -> float:
+	return maxf(0.0, float(_potion_cd.get(slot, 0.0)))
+
+
+func _tick_potions(delta: float) -> void:
+	for k: String in _potion_cd.keys():
+		_potion_cd[k] = float(_potion_cd[k]) - delta
+	if _dead:
+		_heal_left = 0.0
+		_stamina_left = 0.0
+		return
+	if _heal_left > 0.0:
+		var step: float = minf(delta, _heal_left)
+		_heal_left -= step
+		hp = minf(max_hp(), hp + _heal_rate * step)
+		hp_changed.emit(hp, max_hp())
+	if _stamina_left > 0.0:
+		var step2: float = minf(delta, _stamina_left)
+		_stamina_left -= step2
+		stamina = minf(max_stamina(), stamina + _stamina_rate * step2)
 
 
 ## Gradual healing (rest points): fractions of the maximum health and stamina.

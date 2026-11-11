@@ -59,6 +59,14 @@ func _ready() -> void:
 	_load_settings()
 
 
+func _exit_tree() -> void:
+	# Stop and drop every stream so nothing is still playing when the game closes.
+	for p: Node in [_music_a, _music_b] + _pool2d + _pool3d:
+		p.call("stop")
+		p.set("stream", null)
+	_streams.clear()
+
+
 ## Plays a sound effect. `at` = world position (Vector3.INF for an interface sound).
 func play_sfx(id: String, at: Vector3 = Vector3.INF, pitch_mult: float = 1.0) -> void:
 	var def: Dictionary = (data.get("sfx", {}) as Dictionary).get(id, {})

@@ -121,5 +121,15 @@
       "unless_flag": "golem_defeated",
       "flag_on_death": "golem_defeated"
     }
+  ],
+  "chests": [
+    {"id": "mina_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 120, "items": {"pot_vida_m": 1, "pot_pedra": 1}},
+    {
+      "id": "mina_bau_2",
+      "pos": [16, -34],
+      "yaw": -90,
+      "gold": 150,
+      "items": {"trevo": 1, "mat_fragmento_pedra": 2}
+    }
   ]
 }

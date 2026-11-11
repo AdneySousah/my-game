@@ -17,6 +17,8 @@ var attributes: Dictionary = {}
 var atk_buff: float = 0.0
 ## Seconds left on the "Derrotado" debuff.
 var defeated_time_left: float = 0.0
+## Potion buffs: stat ("atk", "def", "speed") -> {"amount": fraction, "time": seconds left}.
+var buffs: Dictionary = {}
 
 
 func _init() -> void:
@@ -71,6 +73,11 @@ func set_defeated(seconds: float) -> void:
 
 
 func tick(delta: float) -> void:
+	for k: String in buffs.keys():
+		buffs[k]["time"] = float(buffs[k]["time"]) - delta
+		if float(buffs[k]["time"]) <= 0.0:
+			buffs.erase(k)
+			stats_changed.emit()
 	if defeated_time_left > 0.0:
 		defeated_time_left = maxf(0.0, defeated_time_left - delta)
 		if defeated_time_left == 0.0:
@@ -86,13 +93,28 @@ func get_stat(stat: String) -> float:
 	for a: String in ATTRIBUTES:
 		value += float(effects.get(a, {}).get(stat, 0.0)) * attributes[a]
 	if stat == "atk":
-		value *= 1.0 + atk_buff
+		value *= 1.0 + atk_buff + buff("atk")
+	elif stat == "def":
+		value *= 1.0 + buff("def")
+	elif stat == "atk_speed":
+		value += buff("speed")
 	var caps: Dictionary = p.get("stat_caps", {})
 	if caps.has(stat):
 		value = minf(value, float(caps[stat]))
 	if defeated_time_left > 0.0 and stat in ["max_hp", "atk", "def"]:
 		value *= float(p.get("death", {}).get("defeated_mult", 0.95))
 	return value
+
+
+## Active potion buff for a stat (0 if none).
+func buff(stat: String) -> float:
+	return float((buffs.get(stat, {}) as Dictionary).get("amount", 0.0))
+
+
+## A new buff of the same kind replaces the old one (no stacking).
+func add_buff(stat: String, amount: float, seconds: float) -> void:
+	buffs[stat] = {"amount": amount, "time": seconds}
+	stats_changed.emit()
 
 
 ## Attack speed as a multiplier (1.0 = normal).

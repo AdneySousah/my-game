@@ -29,3 +29,6 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] 4.4 Áudio: sistema de som (música, efeitos, vozes com volume), efeitos CC0 e músicas orquestrais CC-BY provisórias; troca pela ElevenLabs depois. Aprovado
   - [x] 4.6 Ajustes do teste do dono: descanso cura aos poucos e só de 10 em 10 min; inimigos contornam obstáculos; seta no chão até o objetivo da missão, distância no rastreador, toque no rastreador abre o diário. Aprovado
   - [x] 4.5 Prólogo e save: tela inicial, prólogo em 8 ilustrações com texto, save local criptografado com cópia de segurança (Meshy: 54 créditos), aprovado
+- [ ] Fase 5 — sistemas (plano em `docs/FASE5_PLANO.md`, aprovado em 11/11/2026, sem visual de conjunto de armadura)
+  - [x] 5.1 Itens e inventário: mochila de 60 espaços, raridade, detalhes, drops de itens, baús nos mapas, recompensas de missão em itens. Aprovado
+  - [x] 5.2 Poções: 3 atalhos na tela (vida, fôlego, reforço) com quantidade e recarga, poções P/M/G e tônicos; chefes reequilibrados. Aprovado

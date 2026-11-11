@@ -6,6 +6,7 @@ extends CanvasLayer
 const SKILL_RADIUS: float = 46.0
 const ATTACK_RADIUS: float = 72.0
 const DODGE_RADIUS: float = 40.0
+const POTION_RADIUS: float = 32.0
 
 signal travel_requested(point_id: String)
 ## The "Falar"/"Pegar" button (or E) was pressed.
@@ -39,6 +40,8 @@ var _debug_btn: Button
 var quests: QuestLog
 var _quest_panel: QuestPanel
 var _options_panel: OptionsPanel
+var _bag_panel: InventoryPanel
+var _potion_btns: Array[TouchActionButton] = []
 var _dialogue: DialogueBox
 var _talk_btn: Button
 var _tracker_title: Label
@@ -91,6 +94,9 @@ func _ready() -> void:
 	_quest_panel = QuestPanel.new()
 	root.add_child(_quest_panel)
 	_quest_panel.closed.connect(_on_panel_closed)
+	_bag_panel = InventoryPanel.new()
+	root.add_child(_bag_panel)
+	_bag_panel.closed.connect(_on_panel_closed)
 	_options_panel = OptionsPanel.new()
 	root.add_child(_options_panel)
 	_options_panel.closed.connect(_on_panel_closed)
@@ -177,6 +183,7 @@ func bind(p: Player) -> void:
 		toast(tr("HUD_SKILL_UNLOCKED") % tr(Data.skill(id).get("name", id))))
 	_attributes_panel.player = player
 	_skills_panel.player = player
+	_bag_panel.player = player
 	_refresh()
 	_refresh_skill_buttons()
 
@@ -208,8 +215,12 @@ func set_quests(q: QuestLog) -> void:
 		toast(tr("HUD_QUEST_NEW") % tr(str(Data.quest(id).get("name", id))), 2.4))
 	q.quest_completed.connect(func(id: String) -> void:
 		var r: Dictionary = Data.quest(id).get("rewards", {})
-		toast(tr("HUD_QUEST_DONE") % tr(str(Data.quest(id).get("name", id))) + "
-" 			+ tr("HUD_QUEST_REWARD") % [int(r.get("xp", 0)), int(r.get("gold", 0))], 3.0))
+		var text: String = tr("HUD_QUEST_DONE") % tr(str(Data.quest(id).get("name", id))) + "
+" 			+ tr("HUD_QUEST_REWARD") % [int(r.get("xp", 0)), int(r.get("gold", 0))]
+		var items: Dictionary = r.get("items", {})
+		for item_id: String in items:
+			text += "   +%d %s" % [int(items[item_id]), tr(str(Data.item(item_id).get("name", item_id)))]
+		toast(text, 3.5))
 	_refresh_tracker()
 
 
@@ -248,7 +259,7 @@ func _update_boss_bar() -> void:
 func show_interact_button(kind: String) -> void:
 	_talk_btn.visible = kind != ""
 	if kind != "":
-		_talk_btn.text = tr("HUD_TALK" if kind == "talk" else "HUD_PICK_UP")
+		_talk_btn.text = tr({"talk": "HUD_TALK", "open": "HUD_OPEN"}.get(kind, "HUD_PICK_UP"))
 
 
 func interact_button_visible() -> bool:
@@ -273,6 +284,32 @@ func is_in_dialogue() -> bool:
 
 func open_quests() -> void:
 	_open_panel(_quest_panel)
+
+
+func open_bag() -> void:
+	_open_panel(_bag_panel)
+
+
+## Drinks the potion chosen for quick slot `i` (vida, fôlego, reforço). If the chosen
+## one ran out, any other potion of the same kind is used.
+func use_quick_potion(i: int) -> bool:
+	if player == null:
+		return false
+	var id: String = quick_potion(i)
+	return id != "" and player.use_potion(id)
+
+
+## Potion that quick slot `i` would use now ("" when the bag has none of that kind).
+func quick_potion(i: int) -> String:
+	var kinds: Array = Data.items_config.get("quick_slots", ["vida", "folego", "reforco"])
+	var kind: String = str(kinds[i])
+	var chosen: String = str(Session.quick_slots.get(kind, ""))
+	if chosen != "" and Session.inventory.has(chosen):
+		return chosen
+	for s: Dictionary in Session.inventory.slots:
+		if str(Data.item(s["id"]).get("slot", "")) == kind:
+			return str(s["id"])
+	return chosen
 
 
 ## Shows the "Viajar" button while the hero stands at an activated rest point.
@@ -323,6 +360,9 @@ func _input(event: InputEvent) -> void:
 		_toggle(_full_map)
 	elif event.is_action_pressed("toggle_quests"):
 		_toggle(_quest_panel)
+	elif event.is_action_pressed("toggle_bag"):
+		_toggle(_bag_panel)
+
 	elif event.is_action_pressed("interact") and _talk_btn.visible and not get_tree().paused:
 		get_viewport().set_input_as_handled()
 		interact_pressed.emit()
@@ -348,6 +388,11 @@ func _process(delta: float) -> void:
 		btn.cooldown_ratio = player.skills.cooldown_ratio(i)
 		var left: float = player.skills.cooldown_left(i)
 		btn.sub_text = "%.0f" % ceilf(left) if left > 0.0 else ""
+	if not get_tree().paused:
+		for i: int in 3:
+			if Input.is_action_just_pressed("potion_%d" % (i + 1)):
+				use_quick_potion(i)
+	_update_potion_buttons()
 	var dt: float = player.stats.defeated_time_left
 	_status.defeated_text = tr("HUD_DEFEATED") % int(ceilf(dt)) if dt > 0.0 else ""
 
@@ -411,6 +456,8 @@ func _build_controls(root: Control) -> void:
 	_sprint_btn = _touch("sprint", DODGE_RADIUS, tr("HUD_SPRINT"), Color(0.55, 0.75, 0.2, 0.5))
 	for i: int in Game.SKILL_SLOTS:
 		_skill_btns.append(_touch("skill_%d" % (i + 1), SKILL_RADIUS, "", Color(1, 1, 1, 0.3)))
+	for i: int in 3:
+		_potion_btns.append(_touch("potion_%d" % (i + 1), POTION_RADIUS, "", Color(1, 1, 1, 0.3)))
 
 
 func _layout() -> void:
@@ -428,6 +475,9 @@ func _layout() -> void:
 		_skill_btns[i].set_center(attack_c + Vector2(cos(a), sin(a)) * 165.0)
 	_dodge_btn.set_center(attack_c + Vector2(-270, 40))
 	_sprint_btn.set_center(attack_c + Vector2(-275, -60))
+	# Potions: a row just above the stamina bar, in the middle of the screen.
+	for i: int in _potion_btns.size():
+		_potion_btns[i].set_center(Vector2(vp.x * 0.5 + (i - 1) * 84.0, vp.y - 98.0))
 	if _boss_bar:
 		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 44)
 	if _stamina_bar:
@@ -507,6 +557,10 @@ func _toggle(panel: Control) -> void:
 func _open_panel(panel: Control) -> void:
 	if player == null or player.is_dead():
 		return
+	# The map title must not sit on top of an open panel.
+	if _banner_tween:
+		_banner_tween.kill()
+	_banner.modulate.a = 0.0
 	_attributes_panel.hide()
 	_skills_panel.hide()
 	_travel_panel.hide()
@@ -514,6 +568,7 @@ func _open_panel(panel: Control) -> void:
 	_character_menu.hide()
 	_quest_panel.hide()
 	_options_panel.hide()
+	_bag_panel.hide()
 	_talk_btn.hide()
 	if panel != _dialogue:
 		Audio.play_sfx("ui_open")
@@ -526,7 +581,7 @@ func _open_panel(panel: Control) -> void:
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -536,6 +591,7 @@ func _on_character_choice(what: String) -> void:
 		"attributes": open_attributes()
 		"skills": open_skills()
 		"quests": open_quests()
+		"bag": open_bag()
 		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
 
@@ -565,3 +621,21 @@ func _tracker_where(id: String) -> String:
 		return "  ·  " + tr("HUD_IN_MAP") % tr(str(GameMap.load_data(str(t["map"])).get("name", t["map"])))
 	var d: float = player.global_position.distance_to(t["pos"])
 	return "  ·  %d m" % roundi(d)
+
+
+func _update_potion_buttons() -> void:
+	var kinds: Array = Data.items_config.get("quick_slots", ["vida", "folego", "reforco"])
+	var cd_total: float = float(Data.items_config.get("potion_cooldown", 8.0))
+	for i: int in _potion_btns.size():
+		var b: TouchActionButton = _potion_btns[i]
+		var id: String = quick_potion(i)
+		var n: int = Session.inventory.count(id) if id != "" else 0
+		var item: Dictionary = Data.item(id)
+		b.icon = ItemIcon.texture(id) if id != "" else null
+		b.text = str(item.get("glyph", "")) if b.icon == null else ""
+		b.color = Color(Color(str(item.get("color", "#777777"))), 0.9)
+		b.badge = str(n)
+		b.dimmed = n <= 0
+		var cd: float = player.potion_cooldown(str(kinds[i]))
+		b.cooldown_ratio = cd / cd_total if cd > 0.0 else 0.0
+		b.sub_text = "%.0f" % ceilf(cd) if cd > 0.0 else ""

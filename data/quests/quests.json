@@ -1,5 +1,5 @@
 {
-  "_comment": "Missões. type: main (principal) ou side (secundária). giver = NPC que oferece (offer = diálogo da oferta); auto = começa sozinha quando liberada. requires = missões que precisam estar concluídas; min_level = nível mínimo. Passos: talk {npc, dialogue}, kill {enemy, count, map, pos}, collect {map, item, points [[x,z]...]}, reach {map, pos, radius}. 'text' = chave do objetivo (%d/%d para contagem). 'set_flag' no passo ou na missão marca a história; 'end_note' = texto grande ao concluir. 'skip_if_flag' no passo = já cumprido se a marca existe (ex.: chefe vencido antes). Recompensas em XP e ouro.",
+  "_comment": "Missões. type: main (principal) ou side (secundária). giver = NPC que oferece (offer = diálogo da oferta); auto = começa sozinha quando liberada. requires = missões que precisam estar concluídas; min_level = nível mínimo. Passos: talk {npc, dialogue}, kill {enemy, count, map, pos}, collect {map, item, points [[x,z]...]}, reach {map, pos, radius}. 'text' = chave do objetivo (%d/%d para contagem). 'set_flag' no passo ou na missão marca a história; 'end_note' = texto grande ao concluir. 'skip_if_flag' no passo = já cumprido se a marca existe (ex.: chefe vencido antes). Recompensas: XP, ouro e itens (id -> quantidade).",
   "quests": [
     {
       "id": "main_01", "type": "main", "name": "QUEST_MAIN_01", "auto": true,
@@ -7,7 +7,7 @@
         { "type": "talk", "npc": "marta", "dialogue": "main_01_marta", "text": "OBJ_TALK_MARTA" },
         { "type": "talk", "npc": "bram", "dialogue": "main_01_bram", "text": "OBJ_TALK_BRAM" }
       ],
-      "rewards": { "xp": 60, "gold": 15 }
+      "rewards": { "xp": 60, "gold": 15, "items": { "pot_vida_p": 3, "pot_folego_p": 2 } }
     },
     {
       "id": "main_02", "type": "main", "name": "QUEST_MAIN_02", "giver": "bram", "offer": "main_02_offer",
@@ -16,7 +16,7 @@
         { "type": "kill", "enemy": "bandido", "count": 4, "map": "floresta", "pos": [-7, 30], "text": "OBJ_KILL_BANDIDOS" },
         { "type": "talk", "npc": "bram", "dialogue": "main_02_done", "text": "OBJ_RETURN_BRAM" }
       ],
-      "rewards": { "xp": 220, "gold": 40 }
+      "rewards": { "xp": 220, "gold": 40, "items": { "pot_vida_p": 2 } }
     },
     {
       "id": "main_03", "type": "main", "name": "QUEST_MAIN_03", "giver": "bram", "offer": "main_03_offer",
@@ -27,7 +27,7 @@
         { "type": "talk", "npc": "bento", "dialogue": "main_03_bento_join", "text": "OBJ_TALK_BENTO", "set_flag": "bento_joined" },
         { "type": "talk", "npc": "marta", "dialogue": "main_03_marta", "text": "OBJ_BENTO_TO_MARTA" }
       ],
-      "rewards": { "xp": 380, "gold": 60 }
+      "rewards": { "xp": 380, "gold": 60, "items": { "pot_forca": 1, "pot_vida_p": 2 } }
     },
     {
       "id": "main_04", "type": "main", "name": "QUEST_MAIN_04", "giver": "bento", "offer": "main_04_offer",
@@ -38,7 +38,7 @@
         { "type": "reach", "map": "mina", "pos": [0, -34], "radius": 6, "text": "OBJ_MINE_DEEP" }
       ],
       "set_flag": "mine_explored",
-      "rewards": { "xp": 520, "gold": 80 }
+      "rewards": { "xp": 520, "gold": 80, "items": { "pot_vida_m": 2 } }
     },
     {
       "id": "main_05", "type": "main", "name": "QUEST_MAIN_05", "auto": true,
@@ -48,7 +48,7 @@
         { "type": "kill", "enemy": "gorvan", "count": 1, "map": "celeiro", "pos": [0, -6], "text": "OBJ_KILL_GORVAN", "skip_if_flag": "gorvan_defeated" },
         { "type": "talk", "npc": "marta", "dialogue": "main_05_marta", "text": "OBJ_RETURN_VILLAGE" }
       ],
-      "rewards": { "xp": 1500, "gold": 300 }
+      "rewards": { "xp": 1500, "gold": 300, "items": { "amuleto": 1, "pot_vida_m": 3 } }
     },
     {
       "id": "main_06", "type": "main", "name": "QUEST_MAIN_06", "auto": true,
@@ -68,7 +68,7 @@
         { "type": "talk", "npc": "nina", "dialogue": "side_trigo_done", "text": "OBJ_RETURN_NINA" }
       ],
       "set_flag": "nina_helped",
-      "rewards": { "xp": 260, "gold": 50 }
+      "rewards": { "xp": 260, "gold": 50, "items": { "pot_vida_m": 2 } }
     },
     {
       "id": "side_ferro", "type": "side", "name": "QUEST_SIDE_FERRO", "giver": "tobias", "offer": "side_ferro_offer",
@@ -78,7 +78,7 @@
         { "type": "collect", "map": "floresta", "item": "ITEM_CAIXOTE_FERRO", "points": [[16, -42]], "text": "OBJ_FIND_IRON" },
         { "type": "talk", "npc": "tobias", "dialogue": "side_ferro_done", "text": "OBJ_RETURN_TOBIAS" }
       ],
-      "rewards": { "xp": 320, "gold": 70 }
+      "rewards": { "xp": 320, "gold": 70, "items": { "trevo": 1 } }
     }
   ]
 }

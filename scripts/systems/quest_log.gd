@@ -267,6 +267,9 @@ func _complete(id: String) -> void:
 	if player:
 		player.stats.add_xp(int(r.get("xp", 0)))
 		player.add_gold(int(r.get("gold", 0)))
+	var items: Dictionary = r.get("items", {})
+	for item_id: String in items:
+		Session.add_item(item_id, int(items[item_id]))
 	quest_completed.emit(id)
 	start_auto_quests()
 	changed.emit()

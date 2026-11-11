@@ -1,7 +1,9 @@
 extends Node
 ## Balance check: a bot at level L (default 12) fights a boss with attacks, skills,
 ## potions-free, and dodges attacks it can see coming. Prints how it went.
-##   godot --headless --path . --fixed-fps 60 res://tests/boss_sim.tscn -- [boss] [level] [dodge 0/1]
+##   godot --headless --path . --fixed-fps 60 res://tests/boss_sim.tscn -- [boss] [level] [dodge 0/1] [potions 0/1]
+## With potions the bot carries what a player has by then (quests, chests, a few drops)
+## and drinks at 40% health.
 
 const LIMIT_SECONDS: float = 300.0
 
@@ -11,6 +13,7 @@ func _ready() -> void:
 	var boss_id: String = args[0] if args.size() > 0 else "gorvan"
 	var lvl: int = int(args[1]) if args.size() > 1 else 12
 	var dodge: bool = args.size() <= 2 or args[2] != "0"
+	var potions: bool = args.size() > 3 and args[3] == "1"
 	Session.reset()
 	Session.set_flag("golem_defeated")
 	Main.start_map = "celeiro" if boss_id == "gorvan" else "mina"
@@ -30,6 +33,11 @@ func _ready() -> void:
 		player.stats.spend_point("str" if n % 5 < 3 else "vit")
 		n += 1
 	player.rest()
+	if potions:
+		Session.add_item("pot_vida_p", 6)
+		Session.add_item("pot_vida_m", 3)
+		Session.add_item("pot_folego_p", 3)
+		Session.add_item("pot_forca", 1)
 	var boss: Enemy = null
 	for b: Node in get_tree().get_nodes_in_group("bosses"):
 		boss = b as Enemy
@@ -57,6 +65,13 @@ func _ready() -> void:
 		else:
 			was_dead = false
 			min_hp = minf(min_hp, player.hp / player.max_hp())
+			if potions:
+				if player.hp < player.max_hp() * 0.4:
+					main.hud.use_quick_potion(0)
+				if player.stamina < 15.0:
+					main.hud.use_quick_potion(1)
+				if player.stats.buff("atk") <= 0.0:
+					main.hud.use_quick_potion(2)
 			var target: Enemy = player.nearest_enemy(60.0)
 			if target:
 				var to: Vector3 = target.global_position - player.global_position
@@ -79,8 +94,9 @@ func _ready() -> void:
 	var won: bool = Session.has_flag(flag)
 	for b: Node in get_tree().get_nodes_in_group("bosses"):
 		boss = b as Enemy
-	print("SIM: boss=%s level=%d dodge=%s won=%s time=%.0fs deaths=%d lowest_hp=%d%% boss_hp=%s" % [
-		boss_id, lvl, dodge, won, t, deaths, roundi(min_hp * 100.0),
+	var left: int = Session.inventory.count("pot_vida_p") + Session.inventory.count("pot_vida_m")
+	print("SIM: health_potions_left=%d/9 potions=%s boss=%s level=%d dodge=%s won=%s time=%.0fs deaths=%d lowest_hp=%d%% boss_hp=%s" % [
+		left, potions, boss_id, lvl, dodge, won, t, deaths, roundi(min_hp * 100.0),
 		"0" if won or not is_instance_valid(boss) else "%d%%" % roundi(boss.hp_ratio() * 100.0)])
 	get_tree().quit()
 

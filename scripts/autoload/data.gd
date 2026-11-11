@@ -13,6 +13,9 @@ var npcs: Dictionary = {}
 var quests: Array[Dictionary] = []
 ## Dialogue id -> {"lines": [[speaker, key], ...]} from every file in data/dialogues.
 var dialogues: Dictionary = {}
+## Item definitions (data/items/items.json): id -> {...}; items_config has the rest of the file.
+var items: Dictionary = {}
+var items_config: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -33,6 +36,8 @@ func _ready() -> void:
 	enemies = enemy_file.get("enemies", {})
 	enemy_scaling = enemy_file.get("scaling_per_level", {})
 
+	items_config = _load_json("res://data/items/items.json")
+	items = items_config.get("items", {})
 	npcs = _load_json("res://data/characters/npcs.json").get("npcs", {})
 	for q: Dictionary in _load_json("res://data/quests/quests.json").get("quests", []):
 		quests.append(q)
@@ -48,6 +53,10 @@ func skill(id: String) -> Dictionary:
 
 func quest(id: String) -> Dictionary:
 	return _quests_by_id.get(id, {})
+
+
+func item(id: String) -> Dictionary:
+	return items.get(id, {})
 
 
 func npc(id: String) -> Dictionary:

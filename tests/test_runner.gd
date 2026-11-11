@@ -21,6 +21,7 @@ func _ready() -> void:
 	await _boss_test()
 	await _save_test()
 	await _audio_test()
+	await _items_test()
 	# Let any navigation bake still running on a thread finish before quitting
 	# (tests run faster than real time, so wait real milliseconds).
 	OS.delay_msec(1500)
@@ -302,6 +303,11 @@ func _world_test() -> void:
 	check(Session.last_rest.get("point", "") == "floresta_entrada", "forest camp is the respawn point")
 
 	# Resting heals over a few seconds, then the point needs a long wait.
+	# (No enemies around: an arrow mid-rest would spoil the measurement.)
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	for z: Node in main.map.find_children("*", "EnemyZone", false, false):
+		z.process_mode = Node.PROCESS_MODE_DISABLED
 	var camp: Vector3 = main.map.rest_points["floresta_clareira"].global_position
 	main.player.global_position = camp + Vector3(8, 0, 0)
 	await _frames(3)
@@ -534,7 +540,7 @@ func _boss_test() -> void:
 		golem.take_damage(1000000, false)
 		await _frames(5)
 		check(Session.has_flag("golem_defeated"), "golem defeat is remembered")
-		check(int(Session.materials.get("MAT_FRAGMENTO_PEDRA", 0)) == 3, "golem drops 3 stone shards")
+		check(Session.inventory.count("mat_fragmento_pedra") == 3, "golem drops 3 stone shards")
 		check(main.map.find_children("*", "MapExit", true, false).size() == 2, "the granary gate opens")
 		check(str(q.current_step("main_05").get("enemy", "")) == "gorvan", "quest moves on to Gorvan")
 
@@ -608,7 +614,7 @@ func _save_test() -> void:
 	main.player.add_gold(345)
 	main.player.skills.equip(0, "investida")
 	Session.set_flag("bento_joined")
-	Session.add_material("MAT_COURO_ORC", 2)
+	Session.add_item("mat_couro_orc", 2)
 	main.player.global_position = Vector3(4.5, 0, -6.25)
 	main.save_now()
 	check(SaveGame.has_save(), "the game saves")
@@ -627,7 +633,7 @@ func _save_test() -> void:
 	var p: Player = main.player
 	check(p.stats.level == 7 and p.gold == gold_saved and int(p.stats.attributes["str"]) == str_saved, "level, gold and attributes come back")
 	check(p.skills.equipped[0] == "investida", "equipped skills come back")
-	check(Session.has_flag("bento_joined") and int(Session.materials.get("MAT_COURO_ORC", 0)) == 2, "story flags and materials come back")
+	check(Session.has_flag("bento_joined") and Session.inventory.count("mat_couro_orc") == 2, "story flags and bag items come back")
 	check(main.map.map_id == "pradoluz" and p.global_position.distance_to(Vector3(4.5, 0, -6.25)) < 0.1, "hero continues where he was")
 	check(Session.quests.has("main_01"), "quests come back")
 	main.save_now()
@@ -708,6 +714,78 @@ func _audio_test() -> void:
 		check(Audio.current_music() == "vitoria", "victory music after the boss")
 	main.queue_free()
 	Audio.stop_music(0.1)
+	await _frames(2)
+
+
+## Bag, potions, quick slots and chests (stage 5.1 / 5.2).
+func _items_test() -> void:
+	# Bag rules.
+	var inv := Inventory.new()
+	check(inv.add("pot_vida_p", 150) == 0 and inv.slots.size() == 2, "potions stack up to 99 per slot")
+	check(inv.count("pot_vida_p") == 150, "bag counts across stacks")
+	check(inv.remove("pot_vida_p", 100) and inv.count("pot_vida_p") == 50 and inv.slots.size() == 1, "removing empties stacks")
+	check(not inv.remove("pot_vida_p", 51), "cannot remove more than you have")
+	check(inv.add("nao_existe", 1) == 1, "unknown items are refused")
+	var full := Inventory.new()
+	for i: int in full.capacity:
+		full.add("mat_couro_orc", 999)
+	check(full.add("pot_vida_p", 1) == 1, "a full bag refuses new items")
+
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	var hud: Hud = main.hud
+
+	# Quest rewards give items (Marta and Bram's first quest: potions).
+	main.quests.finish_talk(main.quests.talk_plan("marta"))
+	main.quests.finish_talk(main.quests.talk_plan("bram"))
+	check(Session.inventory.count("pot_vida_p") == 3 and Session.inventory.count("pot_folego_p") == 2, "first quest rewards potions")
+
+	# Health potion heals over time, then the slot waits.
+	p.hp = p.max_hp() * 0.3
+	check(hud.use_quick_potion(0), "quick slot 1 drinks a health potion")
+	var right_after: float = p.hp
+	await _frames(150)
+	check(right_after < p.max_hp() * 0.35 and p.hp >= p.max_hp() * 0.59, "the potion heals over a couple of seconds (%.0f -> %.0f)" % [right_after, p.hp])
+	check(not hud.use_quick_potion(0), "the health slot waits before the next potion")
+	check(Session.inventory.count("pot_vida_p") == 2, "drinking uses one potion")
+	# Stamina potion.
+	p.stamina = 0.0
+	check(hud.use_quick_potion(1), "quick slot 2 drinks a stamina potion")
+	await _frames(120)
+	check(p.stamina >= p.max_stamina() * 0.35, "stamina potion refills fôlego")
+	# Buff potion: no tonic yet -> nothing; with one -> attack goes up.
+	check(not hud.use_quick_potion(2), "no tonic in the bag, nothing happens")
+	Session.add_item("pot_forca", 1)
+	var atk_before: float = p.stats.get_stat("atk")
+	check(hud.use_quick_potion(2), "quick slot 3 drinks a tonic")
+	check(p.stats.get_stat("atk") > atk_before * 1.15, "tonic of strength raises attack")
+	# Quick slot falls back to another potion of the same kind.
+	Session.inventory.remove("pot_vida_p", Session.inventory.count("pot_vida_p"))
+	Session.add_item("pot_vida_m", 1)
+	check(hud.quick_potion(0) == "pot_vida_m", "slot uses another health potion when the chosen one ran out")
+
+	# Chest in the forest: opens once, gives gold and items, remembered in the save.
+	main.load_map("floresta", "from_pradoluz")
+	await _wait_map(main, "floresta")
+	await _frames(3)
+	var chest: Chest = main.map.chests[0]
+	var gold_before: int = p.gold
+	p.global_position = chest.global_position + Vector3(0, 0, 1.6)
+	await _frames(4)
+	check(main.hud.interact_button_visible(), "an 'Abrir' button shows next to a chest")
+	main.talk_to_nearby()
+	await _frames(2)
+	check(chest.opened and p.gold == gold_before + chest.gold and Session.has_flag("chest:" + chest.chest_id), "the chest gives its gold and is marked open")
+	check(Session.inventory.count("pot_vida_p") >= 3, "the chest's potions go to the bag")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.inventory.count("pot_folego_p") >= 2 and Session.has_flag("chest:" + chest.chest_id), "bag and opened chests survive the save")
+	main.queue_free()
 	await _frames(2)
 
 

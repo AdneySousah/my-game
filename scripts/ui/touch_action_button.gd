@@ -8,6 +8,8 @@ var action: String = ""
 var radius: float = 50.0
 var text: String = ""
 var sub_text: String = ""
+## Small number in the bottom-right corner (e.g. how many potions are left).
+var badge: String = ""
 var color: Color = Color(1, 1, 1, 0.35)
 ## Skill picture drawn inside the golden ring (null = show `text`).
 var icon: Texture2D
@@ -88,6 +90,11 @@ func _draw() -> void:
 		var y: float = radius + fs * 0.35
 		draw_string_outline(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, 5, Color(0, 0, 0, 0.85))
 		draw_string(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, Color(1, 0.96, 0.85) * tint)
+	if badge != "":
+		var bs: int = int(clampf(radius * 0.42, 12, 22))
+		var bp := Vector2(radius * 1.15, radius * 1.95)
+		draw_string_outline(font, bp, badge, HORIZONTAL_ALIGNMENT_RIGHT, radius, bs, 5, Color.BLACK)
+		draw_string(font, bp, badge, HORIZONTAL_ALIGNMENT_RIGHT, radius, bs, Color("#fff3d6") * tint)
 	if sub_text != "":
 		var big: int = int(fs * 1.4)
 		var y2: float = radius + big * 0.35

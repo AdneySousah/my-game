@@ -14,6 +14,7 @@ var player: Player
 var rest_points: Dictionary = {}
 ## npc_id -> Npc placed in this map.
 var npcs: Dictionary = {}
+var chests: Array[Chest] = []
 ## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
 var _locked_exits: Dictionary = {}
 ## True once the walkable area is baked (enemies then walk around obstacles).
@@ -102,6 +103,7 @@ func _ready() -> void:
 	_build_paths()
 	_build_rest_points()
 	_build_npcs()
+	_build_chests()
 	_build_rivers()
 	_build_walls()
 	_build_lines()
@@ -261,6 +263,20 @@ func _build_npcs() -> void:
 		add_child(npc)
 		npcs[npc.npc_id] = npc
 		_clear_spots.append(npc.position)
+
+
+## Treasure chests: {"id", "pos", "yaw", "gold", "items": {id: n}}.
+func _build_chests() -> void:
+	for c: Dictionary in data.get("chests", []):
+		var chest := Chest.new()
+		chest.chest_id = str(c["id"])
+		chest.gold = int(c.get("gold", 0))
+		chest.items = c.get("items", {})
+		chest.position = _v(c["pos"])
+		chest.rotation_degrees.y = float(c.get("yaw", 0))
+		add_child(chest)
+		chests.append(chest)
+		_clear_spots.append(chest.position)
 
 
 ## Shows exactly the quest pickups in `list` (from QuestLog.pickups_in).

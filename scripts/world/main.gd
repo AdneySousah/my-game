@@ -23,6 +23,8 @@ var _fader: OcclusionFader
 var _changing: bool = false
 var _at_point: RestPoint
 var _near_npc: Npc
+var _near_chest: Chest
+var _interact_kind: String = ""
 var _autosave_timer: float = 0.0
 ## Seconds of healing left at the current rest point.
 var _healing: float = 0.0
@@ -168,8 +170,11 @@ func _physics_process(delta: float) -> void:
 		hud.show_travel_button(false)
 
 
-## Talks to the NPC in range (the "Falar" button / E).
+## Talks to the NPC in range, or opens the chest in range (the "Falar"/"Abrir" button / E).
 func talk_to_nearby() -> void:
+	if _near_chest and not _talking and not _changing:
+		_open_chest(_near_chest)
+		return
 	if _near_npc == null or _talking or _changing:
 		return
 	var npc: Npc = _near_npc
@@ -304,9 +309,15 @@ func _update_quest_contacts() -> void:
 			nearest = npc
 			break
 	_near_npc = nearest
-	var want: bool = nearest != null and not _talking
-	if want != hud.interact_button_visible():
-		hud.show_interact_button("talk" if want else "")
+	_near_chest = null
+	for c: Chest in map.chests:
+		if not c.opened and c.in_range(pos):
+			_near_chest = c
+			break
+	var kind: String = "" if _talking else ("open" if _near_chest else ("talk" if nearest else ""))
+	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
+		_interact_kind = kind
+		hud.show_interact_button(kind)
 
 
 ## Quest markers over NPCs and pickups on the ground.
@@ -331,9 +342,16 @@ func _drop_loot(e: Enemy) -> void:
 	var base: Dictionary = Data.enemies.get(e.base_id, {})
 	for d: Dictionary in base.get("drops", []):
 		if randf() <= float(d.get("chance", 1.0)):
-			var n: int = int(d.get("count", 1))
-			Session.add_material(str(d["item"]), n)
-			hud.toast(tr("HUD_MATERIAL_GOT") % [n, tr(str(d["item"]))], 1.4)
+			give_item(str(d["item"]), int(d.get("count", 1)))
+
+
+## Puts items in the bag with a short message ("+2 Poção de vida" or "Mochila cheia").
+func give_item(id: String, n: int = 1) -> void:
+	var left: int = Session.add_item(id, n)
+	if left < n:
+		hud.toast(tr("HUD_MATERIAL_GOT") % [n - left, tr(str(Data.item(id).get("name", id)))], 1.4)
+	if left > 0:
+		hud.toast(tr("HUD_BAG_FULL"), 1.8)
 
 
 ## Boss lines: a short talk when the fight starts and when it changes form.
@@ -401,3 +419,15 @@ func _tick_rest(delta: float) -> void:
 		_rest_ui_timer = 0.5
 		for p: RestPoint in map.rest_points.values():
 			p.show_cooldown(Session.rest_seconds_left(p.point_id))
+
+
+func _open_chest(c: Chest) -> void:
+	c.open()
+	Audio.play_sfx("coins", c.global_position)
+	if c.gold > 0:
+		player.add_gold(c.gold)
+		hud.toast(tr("HUD_GOLD_GOT") % c.gold, 1.4)
+	for id: String in c.items:
+		give_item(id, int(c.items[id]))
+	_near_chest = null
+	save_now()

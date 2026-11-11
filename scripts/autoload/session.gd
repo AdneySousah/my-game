@@ -18,8 +18,10 @@ var flags: Dictionary = {}
 var tracked_quest: String = ""
 ## Rest point id -> unix time when it heals again (real time, so it also counts offline).
 var rest_ready_at: Dictionary = {}
-## Crafting materials dropped by enemies (used by the blacksmith in Phase 5): key -> count.
-var materials: Dictionary = {}
+## The hero's bag (potions, materials, items).
+var inventory: Inventory = Inventory.new()
+## Potion chosen for each quick slot on the screen (data/items "quick_slots").
+var quick_slots: Dictionary = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 
 
 func reset() -> void:
@@ -29,7 +31,8 @@ func reset() -> void:
 	quests.clear()
 	flags.clear()
 	tracked_quest = ""
-	materials.clear()
+	inventory.clear()
+	quick_slots = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 	rest_ready_at.clear()
 
 
@@ -54,17 +57,18 @@ func set_flag(flag: String) -> void:
 	flags[flag] = true
 
 
-func add_material(key: String, amount: int = 1) -> void:
-	materials[key] = int(materials.get(key, 0)) + amount
+## Puts items in the bag; returns how many did not fit.
+func add_item(id: String, amount: int = 1) -> int:
+	return inventory.add(id, amount)
 
 
 ## Everything above, for the save file.
 func to_dict() -> Dictionary:
 	return {
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
-		"quests": quests, "flags": flags, "tracked_quest": tracked_quest, "materials": materials,
-		"rest_ready_at": rest_ready_at,
-	}
+		"quests": quests, "flags": flags, "tracked_quest": tracked_quest,
+		"inventory": inventory.to_array(), "quick_slots": quick_slots, "rest_ready_at": rest_ready_at,
+	}.duplicate(true)
 
 
 func from_dict(d: Dictionary) -> void:
@@ -75,7 +79,11 @@ func from_dict(d: Dictionary) -> void:
 	quests = d.get("quests", {})
 	flags = d.get("flags", {})
 	tracked_quest = str(d.get("tracked_quest", ""))
-	materials = d.get("materials", {})
+	inventory.from_array(d.get("inventory", []))
+	# Saves from before the bag (4.x) kept materials apart: move them in.
+	for key: String in (d.get("materials", {}) as Dictionary):
+		inventory.add(key.to_lower(), int(d["materials"][key]))
+	quick_slots.merge(d.get("quick_slots", {}), true)
 	rest_ready_at = d.get("rest_ready_at", {})
 	# JSON brings numbers back as floats; quest counters are ints.
 	for id: String in quests:
@@ -86,8 +94,6 @@ func from_dict(d: Dictionary) -> void:
 		for i: Variant in q.get("picked", []):
 			picked.append(int(i))
 		q["picked"] = picked
-	for k: String in materials:
-		materials[k] = int(materials[k])
 
 
 ## Seconds until a rest point heals again (0 = ready).

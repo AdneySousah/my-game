@@ -1,0 +1,27 @@
+# Godot
+.godot/
+.import/
+*.translation
+export_presets.cfg
+/android/
+/build/
+*.tmp
+
+# Signing (never commit)
+*.keystore
+*.jks
+keystore.properties
+
+# Raw Meshy downloads waiting for review (approved files move to assets/)
+assets/_inbox/*
+!assets/_inbox/.gdignore
+
+# Secrets
+.env
+*.env
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+__pycache__/

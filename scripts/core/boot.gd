@@ -1,0 +1,12 @@
+extends Control
+## First scene. For now it only proves the project boots on every platform.
+
+@onready var _info: Label = %Info
+
+
+func _ready() -> void:
+	var platform: String = "mobile" if Game.is_mobile() else "desktop"
+	_info.text = "v%s · %s · Godot %s" % [
+		Game.version(), platform, Engine.get_version_info().string
+	]
+	print("BOOT_OK version=%s platform=%s" % [Game.version(), platform])

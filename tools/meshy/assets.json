@@ -492,6 +492,726 @@
       "notes": [
         "2026-11-11: aprovado pelo dono"
       ]
+    },
+    {
+      "id": "env_casa_media",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_casa_media/env_casa_media.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-c6cd-722e-a98b-8339f4be75e3",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-5020-72ea-b98a-ba43d8a4c605",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_moinho",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_moinho/env_moinho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-c7d2-72d0-b18d-a901bc9b3b60",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-5428-77ca-b7ad-f77daa060a31",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_barraca_mercado",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_barraca_mercado/prp_barraca_mercado.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-c8c4-776b-bd80-738f595194c5",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-56ff-753f-9c2f-184fa59e4504",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_trigo",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_trigo/prp_trigo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-c9af-70d7-a89e-ac84942e2381",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-5a14-7134-ba10-a382d70d832c",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_placa",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_placa/prp_placa.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-caa4-7714-ac13-583a63fa4975",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-5e31-7031-a0dc-cb9b15a87fde",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_lampiao",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_lampiao/prp_lampiao.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-cb84-705b-ab55-aee6360e6346",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-615f-7454-aa7f-4c3e9844abba",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_banco",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_banco/prp_banco.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-cc61-7075-a09c-a9aef9e2206c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-64a6-7366-99e0-6a8974a00ece",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_pedra_passagem",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_pedra_passagem/prp_pedra_passagem.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-cd42-76b1-a185-032d339f1332",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-681d-72e0-85a6-73340310f6c6",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_fogueira",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_fogueira/prp_fogueira.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-ce1f-7762-8243-ab5d725fe810",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-6ae8-7653-8d55-5ded432aa9a7",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_espantalho",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_espantalho/prp_espantalho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf8-cefd-7407-a4aa-03f3458dd096",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-6dc8-711d-b0d5-5976d8dbd06a",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_ferraria",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_ferraria/env_ferraria.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-156f-729a-a6b6-452ea711d094",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-c0a5-7412-b2a7-774fa6dda0e7",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_bigorna",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_bigorna/prp_bigorna.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1656-74fd-a831-b0670338c610",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-c4b6-76ed-a96f-e087a1be078f",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_pinheiro",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_pinheiro/prp_pinheiro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1730-7609-ad54-8c73629b13c1",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-c7dc-763f-80f2-ba2ea7b2d691",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_arvore_torta",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_arvore_torta/prp_arvore_torta.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1812-7023-9b9b-af797ffc53eb",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-cab4-7691-8b65-e4bc20eda8a2",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_tronco_caido",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_tronco_caido/prp_tronco_caido.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-18f5-7383-aef9-7f5c35f90952",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-cf09-74be-99fa-33fee5650350",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_toco",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_toco/prp_toco.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-19cd-74ae-a08a-e176df3cf24d",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-d2a1-74c5-956d-1ee7e08b1073",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_cogumelos",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_cogumelos/prp_cogumelos.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1aa7-7651-a8ec-b3942c9b0f51",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-d658-716c-a3b7-7029cc8e8821",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_flores",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_flores/prp_flores.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1b81-713a-9a5c-97d1a5ce66bc",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-d92e-74ac-b1b1-003ac8351046",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_pedrinhas",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_pedrinhas/prp_pedrinhas.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1c5d-724d-aab7-87f3c26b6c78",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-dc27-7341-a49d-eddac27f5897",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_cerca_quebrada",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_cerca_quebrada/prp_cerca_quebrada.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-1d3a-777e-bfa6-5f5665b678f7",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafa-dee8-7648-8e18-48d71a8c32a2",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_entrada_mina",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_entrada_mina/env_entrada_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-648d-72cf-a0ee-68f7347e0bd5",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-39b8-70d5-bf65-185a5829c7f6",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_parede_mina",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_parede_mina/env_parede_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6590-76e0-b8f7-160dff354214",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-3d07-7391-846c-23f889eff69f",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_viga_mina",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_viga_mina/env_viga_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-66ab-72dd-ba80-2db53c385969",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-4024-70aa-b730-18a1a26b5f9b",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_trilho",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_trilho/prp_trilho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-67cd-7463-bec2-4acb7c56855a",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-42b9-7124-a645-1dd68da51552",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_carrinho_mina",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_carrinho_mina/prp_carrinho_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-68eb-70fd-9dc0-b1f11ccf3bbf",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-45ce-76f4-beec-52981afc6ba6",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_minerio",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_minerio/prp_minerio.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6a08-7352-9c31-94b72443eaf2",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-493b-7167-ac1e-5516494580bf",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_cristal",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_cristal/prp_cristal.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6af4-71b7-b423-0d67a05e7e92",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-4ce2-76da-9b68-289bd6439d3e",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_lampiao_mina",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_lampiao_mina/prp_lampiao_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6bda-76eb-b634-76416ef1a946",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-4fa2-7567-bd10-59b17d394bd3",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_barril_polvora",
+      "category": "prp",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/props/prp_barril_polvora/prp_barril_polvora.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6cb5-7357-9b98-a91838da43ed",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-529d-742e-beb0-7658802ab160",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_portao_mina",
+      "category": "env",
+      "phase": 4,
+      "method": "mcp",
+      "status": "review",
+      "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
+      "file": "assets/environment/env_portao_mina/env_portao_mina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1caf9-6d9f-73cb-8fd3-199bae55147c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cafb-5644-734e-aea5-a7ae758cb8d5",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
     }
   ]
 }

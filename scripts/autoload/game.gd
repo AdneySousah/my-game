@@ -9,7 +9,7 @@ const LAYER_WORLD: int = 1
 const LAYER_PLAYER: int = 2
 const LAYER_ENEMY: int = 4
 
-const ARENA_SCENE: String = "res://scenes/world/proto_arena.tscn"
+const MAIN_SCENE: String = "res://scenes/main/main.tscn"
 
 
 func _ready() -> void:

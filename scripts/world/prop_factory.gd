@@ -2,6 +2,9 @@ class_name PropFactory
 extends RefCounted
 ## Places Meshy scenery props (data/world/props.json) with toon look and collision.
 
+## Props taller than this fade out when they hide the hero.
+const OCCLUDER_HEIGHT: float = 2.2
+
 static var _data: Dictionary = {}
 
 
@@ -49,7 +52,25 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 			shape.shape = bs
 			shape.position = box.get_center()
 		body.add_child(shape)
+	var height: float = _aabb(model, body).size.y
+	if height > OCCLUDER_HEIGHT:
+		body.set_meta("occluder", true)
+	var light: Variant = p.get("light")
+	if light is Dictionary:
+		var omni := OmniLight3D.new()
+		omni.light_color = Color(str(light.get("color", "#ffd27a")))
+		omni.light_energy = float(light.get("energy", 1.0))
+		omni.omni_range = float(light.get("range", 5.0)) * extra_scale
+		omni.position.y = float(light.get("y", 1.0)) * extra_scale
+		omni.shadow_enabled = false
+		body.add_child(omni)
 	return body
+
+
+## Length of one wall piece along its X axis (for tiling walls), in metres.
+static func tile_length(id: String) -> float:
+	var p: Dictionary = data().get("props", {}).get(id, {})
+	return float(p.get("tile_length", 4.0))
 
 
 ## Bounds of the model in the body's local space.

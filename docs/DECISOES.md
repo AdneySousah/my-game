@@ -76,3 +76,10 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Visual estilo desenho feito com os modos toon nativos do Godot (sem shader próprio).
 - Personagens em escala 1,2 e câmera mais próxima, para leitura no celular.
 - Pedido do dono (corrida): fora de combate a espada fica nas costas (osso `Spine`); em combate (3 s após atacar, usar skill ou levar dano) volta para a mão. Corrida em combate com a espada para trás (`Standard Forward Charge`) e caminhada em guarda (`Walk Fight Forward`). +9 créditos (3 animações testadas).
+
+## Fase 4.1 (11/11/2026)
+- Mapas definidos em JSON (`data/maps/`), montados pelo `GameMap`. A arena de treino virou um mapa como os outros (usada pelos testes).
+- Pontos de descanso: o herói ativa ao chegar perto (cura, vira ponto de volta após a morte e destino de teleporte). O botão "Viajar" aparece quando há mais de um ponto ativado.
+- Árvores, casas e paredes ficam transparentes quando escondem o herói.
+- A entrada da mina veio com uma placa escrita "OLD DIGGINGS" (em inglês). Fica assim por enquanto; refazer custa 15 créditos se o dono preferir.
+- Os inimigos da floresta e da mina são provisórios (bandido e orc) até a etapa 4.3.

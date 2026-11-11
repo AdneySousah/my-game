@@ -311,6 +311,13 @@ func receive_attack(atk_value: float) -> void:
 		_die()
 
 
+## Rest point: full health and stamina.
+func rest() -> void:
+	hp = max_hp()
+	stamina = max_stamina()
+	hp_changed.emit(hp, max_hp())
+
+
 func add_gold(amount: int) -> void:
 	gold += amount
 	gold_changed.emit(gold)

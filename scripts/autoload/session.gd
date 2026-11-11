@@ -1,0 +1,31 @@
+extends Node
+## World progress of the current playthrough (what the save file will store in 4.5).
+## Autoloaded as `Session`.
+
+signal point_activated(point_id: String)
+
+## Map the hero is in.
+var current_map: String = ""
+## Rest points / waystones the hero has touched: point_id -> {"map": id, "name": key}.
+var activated: Dictionary = {}
+## Where the hero comes back after dying: {"map": id, "point": id}.
+var last_rest: Dictionary = {}
+
+
+func reset() -> void:
+	current_map = ""
+	activated.clear()
+	last_rest.clear()
+
+
+func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
+	last_rest = {"map": map_id, "point": point_id}
+	if activated.has(point_id):
+		return false
+	activated[point_id] = {"map": map_id, "name": name_key}
+	point_activated.emit(point_id)
+	return true
+
+
+func is_activated(point_id: String) -> bool:
+	return activated.has(point_id)

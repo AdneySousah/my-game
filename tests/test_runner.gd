@@ -15,6 +15,7 @@ func _ready() -> void:
 	TranslationServer.set_locale("pt_BR")
 	_unit_tests()
 	await _bot_test()
+	await _world_test()
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
 	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
 	get_tree().quit(1 if _failures > 0 else 0)
@@ -99,8 +100,10 @@ func _unit_tests() -> void:
 # --- Bot ------------------------------------------------------------------------
 
 func _bot_test() -> void:
-	var arena: Node = load(Game.ARENA_SCENE).instantiate()
+	Main.start_map = "arena"
+	var arena: Node = load(Game.MAIN_SCENE).instantiate()
 	add_child(arena)
+	await get_tree().physics_frame
 	await get_tree().physics_frame
 	var player: Player = arena.get("player")
 	var hud: Hud = arena.get("hud")
@@ -241,6 +244,70 @@ func _stamina_tests(player: Player) -> void:
 		await get_tree().physics_frame
 	check(player.stamina > 35.0, "fôlego refills (20 -> %.1f in 2 s)" % player.stamina)
 	player.stamina = player.max_stamina()
+
+
+## Maps, exits, rest points and teleport (stage 4.1).
+func _world_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	check(main.map != null and main.map.map_id == "pradoluz", "game starts in Pradoluz")
+	var enemies: int = get_tree().get_nodes_in_group("enemies").size()
+	check(enemies == 0, "Pradoluz is a safe zone (no enemies, got %d)" % enemies)
+	check(not Session.is_activated("pradoluz_pedra"), "waystone is not activated without touching it")
+
+	# Touch the waystone: activates it and becomes the respawn point.
+	main.player.global_position = main.map.rest_points["pradoluz_pedra"].global_position + Vector3(0.5, 0, 0.5)
+	await _frames(5)
+	check(Session.is_activated("pradoluz_pedra"), "touching the waystone activates it")
+
+	# Walk into the north exit -> Whispering Forest.
+	var exit_pos: Vector3 = Vector3(0, 0, -34)
+	main.player.global_position = exit_pos
+	await _wait_map(main, "floresta")
+	check(main.map.map_id == "floresta", "north exit leads to the forest")
+	await _frames(5)
+	check(get_tree().get_nodes_in_group("enemies").size() > 0, "forest has enemies")
+	check(main.player.global_position.distance_to(Vector3(0, 0, 49)) < 1.5, "hero arrives at the forest entrance")
+
+	# Rest point in the forest.
+	main.player.global_position = main.map.rest_points["floresta_entrada"].global_position + Vector3(0.5, 0, 0.5)
+	await _frames(5)
+	check(Session.is_activated("floresta_entrada"), "forest camp activated")
+	check(Session.last_rest.get("point", "") == "floresta_entrada", "forest camp is the respawn point")
+
+	# Teleport back to the village waystone.
+	main.travel_to_point("pradoluz_pedra")
+	await _wait_map(main, "pradoluz")
+	check(main.map.map_id == "pradoluz", "teleport to Pradoluz works")
+
+	# Mine loads and has walls and lights.
+	main.load_map("mina", "from_floresta")
+	await _wait_map(main, "mina")
+	check(main.map.map_id == "mina", "mine loads")
+	check(main.map.find_children("*", "OmniLight3D", true, false).size() >= 10, "mine is lit by lanterns and crystals")
+
+	# Death in the mine sends the hero back to the last rest point (forest camp).
+	Session.last_rest = {"map": "floresta", "point": "floresta_entrada"}
+	main.player.receive_attack(1_000_000.0)
+	await _wait_map(main, "floresta", 600)
+	check(main.map.map_id == "floresta" and not main.player.is_dead(), "after dying the hero returns to the last camp")
+	main.queue_free()
+	await _frames(2)
+
+
+func _frames(n: int) -> void:
+	for i: int in n:
+		await get_tree().physics_frame
+
+
+func _wait_map(main: Main, id: String, max_frames: int = 240) -> void:
+	for i: int in max_frames:
+		if main.map and main.map.map_id == id and not main.get("_changing"):
+			return
+		await get_tree().physics_frame
 
 
 func _press_towards(world_dir: Vector3, cam_yaw: float) -> void:

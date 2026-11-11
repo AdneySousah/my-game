@@ -19,4 +19,5 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 - [x] Fase 1 — concluída (11/11/2026): GDD 1.0 (`docs/design/GDD.md`), guia de estilo (`docs/ESTILO.md`) e 6 imagens de referência aprovadas (`docs/design/referencias/`, 39 créditos).
 - [x] Fase 2 — concluída (11/11/2026): protótipo cinza aprovado pelo dono, com fôlego (esquiva, corrida e skills).
 - [x] Fase 3 — concluída (11/11/2026): Lio, espada, bandido e 10 peças no jogo, aprovados pelo dono (307 créditos com o ajuste da corrida). Refinos visuais ficam para depois.
-- [ ] Fase 4 — fatia vertical: plano em `docs/FASE4_PLANO.md`, aguardando aprovação.
+- [ ] Fase 4 — fatia vertical (plano em `docs/FASE4_PLANO.md`, aprovado)
+  - [ ] 4.1 Mundo e viagem: pronto, aguardando o dono testar (Pradoluz, Floresta, Mina; teleporte; pontos de descanso; árvores transparentes; 540 créditos)

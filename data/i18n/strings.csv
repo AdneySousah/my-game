@@ -48,3 +48,17 @@ SKILL_JULGAMENTO_DESC,Dano enorme em um alvo; mais forte em alvos com pouca vida
 ENEMY_BANDIDO,Bandido,Bandit
 ENEMY_ORC,Orc,Orc
 CHECKPOINT,Ponto de descanso,Rest point
+HUD_TRAVEL,Viajar,Travel
+PANEL_TRAVEL,Viajar para…,Travel to…
+HUD_REST_ACTIVATED,Ponto de descanso ativado: %s,Rest point activated: %s
+HUD_RESTED,Vida e fôlego recuperados,Health and stamina restored
+MAP_ARENA,Arena de treino,Training arena
+MAP_PRADOLUZ,Pradoluz,Pradoluz
+MAP_FLORESTA,Floresta Sussurrante,Whispering Forest
+MAP_MINA,Mina dos Corvos,Crow Mine
+REST_ARENA,Ponto de descanso,Rest point
+REST_PRADOLUZ_PEDRA,Pedra de Passagem de Pradoluz,Pradoluz Waystone
+REST_FLORESTA_ENTRADA,Acampamento da Trilha,Trail Camp
+REST_FLORESTA_CLAREIRA,Clareira dos Cogumelos,Mushroom Glade
+REST_MINA_ENTRADA,Entrada da Mina,Mine Entrance
+REST_MINA_FUNDO,Galeria Profunda,Deep Gallery

@@ -1,6 +1,6 @@
 extends Node
 ## Takes screenshots of the arena while a bot plays (needs a window, not headless).
-##   godot --path . res://tests/capture.tscn -- <output_dir>
+##   godot --path . res://tests/capture.tscn -- <output_dir> [map]
 ## Saves shot_1.png ... into <output_dir> (default: user://captures).
 
 const SHOT_FRAMES: Array[int] = [90, 240, 330, 420, 560, 620]
@@ -10,8 +10,10 @@ func _ready() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	var out_dir: String = args[0] if args.size() > 0 else OS.get_user_data_dir() + "/captures"
 	DirAccess.make_dir_recursive_absolute(out_dir)
-	var arena: Node = load(Game.ARENA_SCENE).instantiate()
+	Main.start_map = args[1] if args.size() > 1 else "arena"
+	var arena: Node = load(Game.MAIN_SCENE).instantiate()
 	add_child(arena)
+	await get_tree().physics_frame
 	await get_tree().physics_frame
 	var player: Player = arena.get("player")
 	var hud: Hud = arena.get("hud")

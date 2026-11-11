@@ -7,7 +7,14 @@ const SKILL_RADIUS: float = 46.0
 const ATTACK_RADIUS: float = 72.0
 const DODGE_RADIUS: float = 40.0
 
+signal travel_requested(point_id: String)
+
 var player: Player
+var _travel_btn: Button
+var _travel_panel: TravelPanel
+var _banner: Label
+var _banner_tween: Tween
+var _fade: ColorRect
 
 var _level_label: Label
 var _hp_bar: ProgressBar
@@ -59,6 +66,39 @@ func _ready() -> void:
 	_skills_panel = SkillsPanel.new()
 	root.add_child(_skills_panel)
 	_skills_panel.closed.connect(_on_panel_closed)
+	_travel_panel = TravelPanel.new()
+	root.add_child(_travel_panel)
+	_travel_panel.closed.connect(_on_panel_closed)
+	_travel_panel.travel.connect(func(id: String) -> void: travel_requested.emit(id))
+
+	_travel_btn = _button(tr("HUD_TRAVEL"), func() -> void: _open_panel(_travel_panel))
+	_travel_btn.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_travel_btn.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_travel_btn.position.y = -150
+	_travel_btn.custom_minimum_size = Vector2(200, 56)
+	_travel_btn.add_theme_font_size_override("font_size", 22)
+	_travel_btn.hide()
+	root.add_child(_travel_btn)
+
+	_banner = Label.new()
+	_banner.set_anchors_preset(Control.PRESET_CENTER)
+	_banner.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_banner.grow_vertical = Control.GROW_DIRECTION_BOTH
+	_banner.position.y = -140
+	_banner.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_banner.add_theme_font_size_override("font_size", 46)
+	_banner.add_theme_color_override("font_color", Color("#fff3c4"))
+	_banner.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
+	_banner.add_theme_constant_override("outline_size", 12)
+	_banner.modulate.a = 0.0
+	root.add_child(_banner)
+
+	_fade = ColorRect.new()
+	_fade.color = Color.BLACK
+	_fade.set_anchors_preset(Control.PRESET_FULL_RECT)
+	_fade.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_fade.modulate.a = 0.0
+	root.add_child(_fade)
 
 	get_viewport().size_changed.connect(_layout)
 	_layout()
@@ -88,6 +128,30 @@ func toast(text: String, seconds: float = 1.8) -> void:
 	_toast_tween = create_tween()
 	_toast_tween.tween_interval(seconds)
 	_toast_tween.tween_property(_toast, "modulate:a", 0.0, 0.4)
+
+
+## Shows the "Viajar" button while the hero stands at an activated rest point.
+func show_travel_button(show_it: bool) -> void:
+	_travel_btn.visible = show_it
+
+
+## Big title when entering a map.
+func banner(text: String) -> void:
+	_banner.text = text
+	if _banner_tween:
+		_banner_tween.kill()
+	_banner.modulate.a = 0.0
+	_banner_tween = create_tween()
+	_banner_tween.tween_property(_banner, "modulate:a", 1.0, 0.4)
+	_banner_tween.tween_interval(1.6)
+	_banner_tween.tween_property(_banner, "modulate:a", 0.0, 0.6)
+
+
+## Fades the screen to black (to_black = true) or back. Await the returned signal.
+func fade(to_black: bool, seconds: float = 0.35) -> Signal:
+	var tw := create_tween()
+	tw.tween_property(_fade, "modulate:a", 1.0 if to_black else 0.0, seconds)
+	return tw.finished
 
 
 func open_attributes() -> void:
@@ -297,13 +361,14 @@ func _open_panel(panel: Control) -> void:
 		return
 	_attributes_panel.hide()
 	_skills_panel.hide()
+	_travel_panel.hide()
 	panel.call("open")
 	_controls.hide()
 	get_tree().paused = true
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 

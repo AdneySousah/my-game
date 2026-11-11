@@ -20,9 +20,17 @@ const ICONS: Array[String] = [
 	"brado_de_guerra", "onda_de_corte", "salto_devastador", "julgamento",
 ]
 const ICON_SIZE: int = 160
-## Portraits: square region around the face (in the 1024 px source) -> circle.
+## Portraits: [source image, square region around the face] -> circle.
+## NPC portraits come from their concept images (896x1200, assets/_inbox/npcs).
 const PORTRAITS: Dictionary = {
-	"ui_retrato_lio": Rect2i(190, 110, 680, 680),
+	"ui_retrato_lio": ["res://assets/_inbox/ui/ui_retrato_lio.png", Rect2i(190, 110, 680, 680)],
+	"ui_retrato_marta": ["res://assets/_inbox/npcs/npc_marta.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_bram": ["res://assets/_inbox/npcs/npc_bram.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_bento": ["res://assets/_inbox/npcs/npc_bento.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_celeste": ["res://assets/_inbox/npcs/npc_celeste.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_tobias": ["res://assets/_inbox/npcs/npc_tobias.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_nina": ["res://assets/_inbox/npcs/npc_nina.png", Rect2i(198, 100, 500, 500)],
+	"ui_retrato_juca": ["res://assets/_inbox/npcs/npc_juca.png", Rect2i(198, 100, 500, 500)],
 }
 const PORTRAIT_SIZE: int = 192
 
@@ -45,8 +53,9 @@ func _initialize() -> void:
 		img.save_png(ProjectSettings.globalize_path(DST + "icon_" + icon + ".png"))
 	print("icons -> %d x %dpx" % [ICONS.size(), ICON_SIZE])
 	for name: String in PORTRAITS:
-		var img: Image = _load(SRC + name + ".png")
-		img = img.get_region(PORTRAITS[name])
+		var entry: Array = PORTRAITS[name]
+		var img: Image = _load(str(entry[0]))
+		img = img.get_region(entry[1])
 		img.resize(PORTRAIT_SIZE, PORTRAIT_SIZE, Image.INTERPOLATE_LANCZOS)
 		_circle_mask(img, PORTRAIT_SIZE * 0.5 - 1.0)
 		img.save_png(ProjectSettings.globalize_path(DST + name + ".png"))

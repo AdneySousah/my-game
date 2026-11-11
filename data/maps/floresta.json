@@ -30,6 +30,9 @@
       "model_pos": [0, -56.5]
     }
   ],
+  "npcs": [
+    {"id": "bento", "pos": [-21, 10], "yaw": -120, "unless_flag": "bento_joined"}
+  ],
   "rest_points": [
     { "id": "floresta_entrada", "name": "REST_FLORESTA_ENTRADA", "pos": [5, 44], "kind": "fogueira" },
     {

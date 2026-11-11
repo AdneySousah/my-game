@@ -63,3 +63,129 @@ REST_FLORESTA_CLAREIRA,Clareira dos Cogumelos,Mushroom Glade
 REST_MINA_ENTRADA,Entrada da Mina,Mine Entrance
 REST_MINA_FUNDO,Galeria Profunda,Deep Gallery
 HUD_MAP,Mapa (M),Map (M)
+NPC_LIO,Lio,Lio
+NPC_MARTA,Marta,Marta
+NPC_BRAM,Mestre Bram,Master Bram
+NPC_BENTO,Bento,Bento
+NPC_CELESTE,Dona Celeste,Mrs. Celeste
+NPC_TOBIAS,Tobias,Tobias
+NPC_NINA,Nina,Nina
+NPC_JUCA,Velho Juca,Old Juca
+BARK_MARTA_1,"Cuidado na estrada, filho!","Careful on the road, son!"
+BARK_MARTA_2,Já comeu hoje?,Have you eaten today?
+BARK_BRAM_1,"Guarda alta, moleque!","Guard up, kid!"
+BARK_BRAM_2,Hmpf.,Hmph.
+BARK_BENTO_1,Isso foi um orc?!,Was that an orc?!
+BARK_BENTO_2,Alguém aí tem sal?,Anyone got salt?
+BARK_CELESTE_1,"Prateleiras vazias, coração cheio.","Empty shelves, full heart."
+BARK_TOBIAS_1,F-forja fria...,C-cold forge...
+BARK_NINA_1,Psiu!,Psst!
+BARK_JUCA_1,"Tributo, tributo...","Tribute, tribute..."
+BARK_JUCA_2,No meu tempo...,Back in my day...
+QUEST_MAIN_01,Mais um dia em Pradoluz,Another Day in Pradoluz
+QUEST_MAIN_02,A lição do caolho,The One-Eyed Lesson
+QUEST_MAIN_03,Um cozinheiro na floresta,A Cook in the Woods
+QUEST_MAIN_04,Os corvos da mina,The Crows of the Mine
+QUEST_SIDE_TRIGO,Trigo escondido,Hidden Wheat
+QUEST_SIDE_FERRO,O ferro do Tobias,Tobias's Iron
+OBJ_TALK_MARTA,Fale com a Marta,Talk to Marta
+OBJ_TALK_BRAM,Encontre o Mestre Bram no treino,Meet Master Bram at training
+OBJ_KILL_BANDIDOS,Derrote bandidos na floresta: %d/%d,Defeat bandits in the forest: %d/%d
+OBJ_RETURN_BRAM,Volte ao Mestre Bram,Return to Master Bram
+OBJ_FIND_BENTO,Encontre o homem na clareira da floresta,Find the man in the forest clearing
+OBJ_KILL_ORCS_BENTO,Derrote os orcs da clareira: %d/%d,Defeat the clearing orcs: %d/%d
+OBJ_TALK_BENTO,Fale com o Bento,Talk to Bento
+OBJ_BENTO_TO_MARTA,Leve o Bento até a Marta,Bring Bento to Marta
+OBJ_ASK_BRAM_MINE,Pergunte ao Bram sobre a mina,Ask Bram about the mine
+OBJ_REACH_MINE,Chegue à Mina dos Corvos,Reach the Crows' Mine
+OBJ_MINE_DEEP,Explore o fundo da mina,Explore the depths of the mine
+OBJ_COLLECT_HERBS,Colha erva-de-orvalho na floresta: %d/%d,Gather dewleaf in the forest: %d/%d
+OBJ_RETURN_NINA,Leve as ervas para a Nina,Bring the herbs to Nina
+OBJ_KILL_ORCS,Derrote orcs na floresta: %d/%d,Defeat orcs in the forest: %d/%d
+OBJ_FIND_IRON,Ache o caixote de ferro na trilha norte,Find the iron crate on the north trail
+OBJ_RETURN_TOBIAS,Devolva o ferro ao Tobias,Return the iron to Tobias
+ITEM_ERVA_ORVALHO,Erva-de-orvalho,Dewleaf
+ITEM_CAIXOTE_FERRO,Caixote de ferro,Iron crate
+DLG_MAIN_01_MARTA_1,Lio! O sol já está alto e você ainda com cara de travesseiro.,Lio! The sun is up and you still look like a pillow.
+DLG_MAIN_01_MARTA_2,"Bom dia, mãe. Sonhei que eu era o herói mais forte do mundo.","Morning, Mom. I dreamed I was the strongest hero in the world."
+DLG_MAIN_01_MARTA_3,Pois o herói mais forte do mundo está atrasado para o treino. O Bram já passou aqui resmungando.,"Well, the strongest hero in the world is late for training. Bram already came by, grumbling."
+DLG_MAIN_01_MARTA_4,Ele resmunga até dormindo.,He grumbles in his sleep.
+DLG_MAIN_01_MARTA_5,Vai logo. E não quebre nada... de novo.,Go on. And don't break anything... again.
+DLG_MAIN_01_BRAM_1,"Atrasado. Um olho só e eu ainda te vi chegando de longe, arrastando os pés.","Late. One eye and I still saw you coming a mile away, dragging your feet."
+DLG_MAIN_01_BRAM_2,Eu estava aquecendo. Andar devagar é um aquecimento avançado.,I was warming up. Walking slowly is an advanced warm-up.
+DLG_MAIN_01_BRAM_3,"Hmpf. A vila está passando fome por causa do tributo do Gorvan, e você fazendo piada.","Hmph. The village is starving because of Gorvan's tribute, and you're making jokes."
+DLG_MAIN_01_BRAM_4,Ataque com o botão grande. Role para fugir dos golpes. E fique de olho no fôlego.,Attack with the big button. Roll to dodge blows. And keep an eye on your stamina.
+DLG_MAIN_01_BRAM_5,"Atacar, rolar, respirar. Anotado, mestre.","Attack, roll, breathe. Noted, master."
+DLG_MAIN_02_OFFER_1,Treinar com espantalho não ensina nada. Bandidos estão assaltando as carroças na Floresta Sussurrante.,Training with scarecrows teaches nothing. Bandits are robbing the carts in the Whispering Forest.
+DLG_MAIN_02_OFFER_2,Bandidos de verdade? Finalmente uma aula interessante!,Real bandits? Finally an interesting lesson!
+DLG_MAIN_02_OFFER_3,"Derrube quatro deles e volte inteiro. Inteiro, ouviu? Sua mãe me mata.","Take down four of them and come back in one piece. One piece, you hear? Your mother would kill me."
+DLG_MAIN_02_DONE_1,"Quatro bandidos, nenhum arranhão. Bom, quase nenhum.","Four bandits, not a scratch. Well, almost none."
+DLG_MAIN_02_DONE_2,Não foi ruim. Mas você abaixa a guarda depois de cada golpe. Um dia isso vai te custar caro.,Not bad. But you drop your guard after every swing. One day that'll cost you.
+DLG_MAIN_02_DONE_3,Um dia. Hoje não!,One day. Not today!
+DLG_MAIN_03_OFFER_1,"Um caçador viu um sujeito gordinho escondido na clareira da floresta, gritando por socorro.","A hunter saw a chubby fellow hiding in the forest clearing, yelling for help."
+DLG_MAIN_03_OFFER_2,Diz que veio da capital. Gente da capital sabe das coisas do Gorvan. Traga ele aqui.,Says he came from the capital. Capital folk know things about Gorvan. Bring him here.
+DLG_MAIN_03_OFFER_3,Resgate de gordinho na floresta. Deixa comigo.,Rescuing a chubby guy in the forest. Leave it to me.
+DLG_MAIN_03_BENTO_MEET_1,"Não me come! Eu sou só pele, osso e... bom, um pouco de banha!","Don't eat me! I'm just skin, bones and... well, a little lard!"
+DLG_MAIN_03_BENTO_MEET_2,"Calma! Eu não como gente. Sou o Lio, de Pradoluz.","Easy! I don't eat people. I'm Lio, from Pradoluz."
+DLG_MAIN_03_BENTO_MEET_3,"Bento, ex-cozinheiro da cozinha real. Ex, porque queimei o pudim do Arauto. Longa história.","Bento, former cook of the royal kitchen. Former, because I burned the Herald's pudding. Long story."
+DLG_MAIN_03_BENTO_MEET_4,Tem dois orcs rondando a clareira. Eles sentiram o cheiro do meu sanduíche!,There are two orcs prowling the clearing. They smelled my sandwich!
+DLG_MAIN_03_BENTO_MEET_5,Fica aqui. E guarda esse sanduíche.,Stay here. And hide that sandwich.
+DLG_MAIN_03_BENTO_JOIN_1,Você derrubou os dois! Com uma espada que parece uma colher de pau!,You took them both down! With a sword that looks like a wooden spoon!
+DLG_MAIN_03_BENTO_JOIN_2,É uma espada de aprendiz. Ela tem potencial.,It's an apprentice sword. It has potential.
+DLG_MAIN_03_BENTO_JOIN_3,"Eu ouvi coisas na capital. Sobre o tributo, sobre o Gorvan. Me leva para a sua vila e eu conto tudo.","I heard things in the capital. About the tribute, about Gorvan. Take me to your village and I'll tell you everything."
+DLG_MAIN_03_BENTO_JOIN_4,"E eu cozinho! Sou medroso, mas cozinho muito bem.","And I cook! I'm a coward, but I cook really well."
+DLG_MAIN_03_BENTO_JOIN_5,"Fechado, sócio. Minha mãe vai adorar mais uma boca... talvez.","Deal, partner. My mom will love another mouth to feed... maybe."
+DLG_MAIN_03_MARTA_1,"Lio, quem é esse moço?","Lio, who is this young man?"
+DLG_MAIN_03_MARTA_2,"Bento, meu sócio. Ele cozinha.","Bento, my partner. He cooks."
+DLG_MAIN_03_MARTA_3,"Cozinhar o quê, filho? O Gorvan levou quase tudo. Sobrou farinha e saudade.","Cook what, son? Gorvan took nearly everything. All that's left is flour and longing."
+DLG_MAIN_03_MARTA_4,"Senhora, com farinha e saudade eu faço um pão que faz chorar. No bom sentido.","Ma'am, with flour and longing I make bread that'll make you cry. In a good way."
+DLG_MAIN_03_MARTA_5,Hm. Fica. Mas lava a louça.,Hm. Stay. But you wash the dishes.
+DLG_MAIN_04_OFFER_1,"Lio, aquilo que eu ouvi na capital: as carroças do tributo não vão para o castelo.","Lio, about what I heard in the capital: the tribute carts don't go to the castle."
+DLG_MAIN_04_OFFER_2,"Elas somem na Mina dos Corvos, ao norte da floresta. A comida da sua vila está lá dentro!","They vanish into the Crows' Mine, north of the forest. Your village's food is in there!"
+DLG_MAIN_04_OFFER_3,Então é para lá que a gente vai.,Then that's where we're going.
+DLG_MAIN_04_OFFER_4,"A gente? Eu... eu fico guardando a vila. Alguém precisa. Fala com o Bram antes, tá?","We? I... I'll guard the village. Someone has to. Talk to Bram first, okay?"
+DLG_MAIN_04_BRAM_1,"A Mina dos Corvos... fechou há anos. Se o Gorvan esconde comida lá, deve ter gente armada vigiando.","The Crows' Mine... it closed years ago. If Gorvan hides food there, there'll be armed men guarding it."
+DLG_MAIN_04_BRAM_2,Siga a trilha da floresta para o norte. Descanse nas fogueiras. E não entre sem fôlego.,Follow the forest trail north. Rest at the campfires. And don't go in out of breath.
+DLG_MAIN_04_BRAM_3,"Relaxa, mestre. Eu volto antes do jantar do Bento.","Relax, master. I'll be back before Bento's dinner."
+DLG_MAIN_04_BRAM_4,É disso que eu tenho medo.,That's what I'm afraid of.
+DLG_SIDE_TRIGO_OFFER_1,"Psiu! Você não viu nada. Esse trigo não é do tributo, tá? É da minha vó.","Psst! You didn't see anything. This wheat isn't for the tribute, okay? It's my grandma's."
+DLG_SIDE_TRIGO_OFFER_2,Segredo guardado. Sua vó está bem?,Secret's safe. Is your grandma all right?
+DLG_SIDE_TRIGO_OFFER_3,"Ela tosse muito. O curandeiro disse que a erva-de-orvalho ajuda, mas ela só cresce na floresta.","She coughs a lot. The healer said dewleaf helps, but it only grows in the forest."
+DLG_SIDE_TRIGO_OFFER_4,Erva-de-orvalho. Quantas?,Dewleaf. How many?
+DLG_SIDE_TRIGO_OFFER_5,"Três! As folhas brilham um pouquinho, igual sereno de manhã.","Three! The leaves glow a little, like morning dew."
+DLG_SIDE_TRIGO_DONE_1,"Três ervas-de-orvalho, fresquinhas. Brilhando e tudo.","Three dewleaves, fresh. Glowing and everything."
+DLG_SIDE_TRIGO_DONE_2,Você conseguiu! A vó vai fazer chá e parar de tossir!,You did it! Grandma will make tea and stop coughing!
+DLG_SIDE_TRIGO_DONE_3,"Toma, é tudo o que eu juntei. E quando o trigo crescer, o primeiro pão é seu!","Here, it's all I saved. And when the wheat grows, the first loaf is yours!"
+DLG_SIDE_FERRO_OFFER_1,L-l-lio! Os orcs... eles levaram o meu c-c-caixote de ferro da carroça!,L-l-lio! The orcs... they took my c-c-crate of iron from the cart!
+DLG_SIDE_FERRO_OFFER_2,"Respira, Tobias. Onde foi isso?","Breathe, Tobias. Where was that?"
+DLG_SIDE_FERRO_OFFER_3,Na trilha do norte da f-floresta. Sem f-ferro eu não conserto as enxadas da vila.,On the north trail of the f-forest. Without i-iron I can't fix the village's hoes.
+DLG_SIDE_FERRO_OFFER_4,Orcs ladrões de ferro. Vou trazer o seu caixote. E uns orcs a menos.,Iron-stealing orcs. I'll bring your crate back. And a few fewer orcs.
+DLG_SIDE_FERRO_DONE_1,"Um caixote de ferro, entregue em mãos. Pesado, hein?","One crate of iron, hand-delivered. Heavy, huh?"
+DLG_SIDE_FERRO_DONE_2,"O-obrigado! Quando eu voltar a f-forjar, a sua espada vai ser a p-primeira da fila.","Th-thank you! When I'm back at the f-forge, your sword will be f-first in line."
+DLG_SIDE_FERRO_DONE_3,"Nada de colher de pau, então!","No more wooden spoon, then!"
+DLG_MARTA_IDLE_1,Coma alguma coisa antes de sair. Mesmo que seja só pão duro.,Eat something before you go. Even if it's just stale bread.
+DLG_MARTA_IDLE_BENTO_1,O seu amigo lavou a louça e ainda fez sopa de quase nada. Gostei dele.,Your friend washed the dishes and made soup out of almost nothing. I like him.
+DLG_BRAM_IDLE_1,"Guarda alta, pés firmes. E pare de sorrir no meio da luta, distrai.","Guard up, feet steady. And stop grinning mid-fight, it's distracting."
+DLG_BENTO_IDLE_FLORESTA_1,Esse barulho foi um galho ou um orc? Diz que foi um galho.,Was that noise a branch or an orc? Tell me it was a branch.
+DLG_BENTO_IDLE_VILA_1,Sabia que pão de farinha com saudade leva uma pitada de esperança? Receita secreta.,Did you know flour-and-longing bread takes a pinch of hope? Secret recipe.
+DLG_CELESTE_IDLE_1,"O armazém está quase vazio, querido. O tributo leva tudo antes de chegar às prateleiras.","The store is nearly empty, dear. The tribute takes everything before it reaches the shelves."
+DLG_CELESTE_IDLE_2,"Quando a vila voltar a comer, eu volto a vender. Promessa.","When the village eats again, I'll sell again. Promise."
+DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com um m-martelo.,The f-forge is cold. A smith without fire is just a man with a h-hammer.
+DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
+DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
+DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+HUD_TALK,Falar (E),Talk (E)
+HUD_PICK_UP,Pegar (E),Pick up (E)
+HUD_QUESTS,Missões (L),Quests (L)
+HUD_QUEST_NEW,Nova missão: %s,New quest: %s
+HUD_QUEST_DONE,Missão concluída: %s,Quest complete: %s
+HUD_QUEST_REWARD,+%d XP   +%d de ouro,+%d XP   +%d gold
+HUD_QUEST_PICKED,%s (%d/%d),%s (%d/%d)
+PANEL_QUESTS_TITLE,Missões,Quests
+PANEL_QUESTS_MAIN,Principal,Main
+PANEL_QUESTS_SIDE,Secundária,Side
+PANEL_QUESTS_DONE,Concluídas,Completed
+PANEL_QUESTS_EMPTY,Nenhuma missão no momento.,No quests right now.
+PANEL_QUESTS_TRACK,Seguir,Track
+PANEL_QUESTS_TRACKING,Seguindo,Tracking
+QUEST_MORE_SOON,A história continua na próxima versão.,The story continues in the next version.

@@ -1,6 +1,6 @@
 class_name CharacterMenu
 extends PanelContainer
-## Opens when the portrait is tapped: Attributes, Skills and Map, with badges
+## Opens when the portrait is tapped: Attributes, Skills, Quests and Map, with badges
 ## showing what needs attention.
 
 signal closed
@@ -24,6 +24,7 @@ func _ready() -> void:
 	box.add_child(_title)
 	_attr_btn = _item(box, "attributes")
 	_skills_btn = _item(box, "skills")
+	_item(box, "quests").text = tr("HUD_QUESTS")
 	_item(box, "map").text = tr("HUD_MAP")
 	var close := Button.new()
 	close.text = tr("PANEL_CLOSE")

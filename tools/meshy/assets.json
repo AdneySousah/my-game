@@ -1686,6 +1686,264 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "npc_marta",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_marta/npc_marta.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-54cd-76e0-bbed-b49b3c77f908",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-8c43-766e-97bc-23aa1b30a22b",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-16ba-734d-97e0-e6f27a308861",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-1d63-774f-aeb8-a371ff6ceccc",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_bram",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_bram/npc_bram.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-584a-7637-a1a7-4be3cb5c0652",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-9059-756f-84f9-76f30e87a388",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-23b3-741d-8ceb-cbedc992a223",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-1ee9-761d-9e5e-38920d4fbf7d",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_bento",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_bento/npc_bento.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-5c74-760c-b64e-69371d34b6f6",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-9369-7497-8d8f-7e5899c2c9e1",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-3a17-7682-95d4-8d34b8526eae",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-20bf-71b5-9a41-3dae58505e7e",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_celeste",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_celeste/npc_celeste.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-609b-7110-90e4-e0f151f21670",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-96c1-744f-8c1f-3823fe1f2b0e",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-566d-727c-8230-3b77de2eaa9c",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-2273-75ba-898e-b5842c3601b8",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_tobias",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_tobias/npc_tobias.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-638c-718c-a85b-d6aa75046178",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-9a7e-773e-aa2b-9f7145c52c44",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-6341-7705-a70a-c89ef2595d3f",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-23f7-7540-a056-0816a59ddbfb",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_nina",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_nina/npc_nina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-66b7-7257-8a6e-8740ba64ed3f",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-9e85-74f8-8625-847aa9da58bc",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-706a-7110-85c0-a9af54b00617",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-25db-724a-bc17-0b396401a254",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_juca",
+      "category": "npc",
+      "phase": 4,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "NPC de Pradoluz (tools/meshy/fase4_lote3_npcs.json)",
+      "file": "assets/npcs/npc_juca/npc_juca.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1cb3e-6a6a-71cc-ba05-6923cd961af6",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb3f-a213-739d-b76c-e012d39201ef",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1cb41-120b-71c2-9844-17e22cbdf3b1",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1cb41-f3fd-7414-896e-7c32ebc79a94",
+          "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1cb42-3b8e-778a-9e3e-15735fd095cb",
+          "date": "2026-11-11"
+        }
+      ],
+      "notes": []
     }
   ]
 }

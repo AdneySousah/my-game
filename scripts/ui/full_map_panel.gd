@@ -57,4 +57,7 @@ func _draw_map() -> void:
 	_drawer.origin = area * 0.5
 	_canvas.draw_rect(Rect2(Vector2.ZERO, area), Color(0.05, 0.06, 0.08))
 	_drawer.draw_world(_canvas, true)
+	var target: Variant = main.quest_target()
+	if target is Vector3:
+		_drawer.draw_quest_star(_canvas, _drawer.to_px(target), 13.0)
 	_drawer.draw_player(_canvas, main.player, 12.0)

@@ -19,6 +19,15 @@
       "model_pos": [0, -30]
     }
   ],
+  "npcs": [
+    {"id": "marta", "pos": [-10, -3.4], "yaw": -60},
+    {"id": "bram", "pos": [-15, 2], "yaw": -90},
+    {"id": "celeste", "pos": [-5, 6.2], "yaw": 0},
+    {"id": "tobias", "pos": [8.4, 3.2], "yaw": 120},
+    {"id": "nina", "pos": [-15.5, -3.6], "yaw": -120},
+    {"id": "juca", "pos": [5.2, -1.8], "yaw": 30},
+    {"id": "bento", "pos": [-1.8, 3.6], "yaw": 20, "if_flag": "bento_joined"}
+  ],
   "rest_points": [
     { "id": "pradoluz_pedra", "name": "REST_PRADOLUZ_PEDRA", "pos": [0, -1], "kind": "pedra" }
   ],

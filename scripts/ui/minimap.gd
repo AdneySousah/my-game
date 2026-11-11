@@ -92,4 +92,19 @@ func _draw_overlay() -> void:
 			var tip: Vector2 = c + dir * (RADIUS_PX - 6)
 			var side := Vector2(-dir.y, dir.x)
 			_overlay.draw_colored_polygon(PackedVector2Array([tip, tip - dir * 14 + side * 8, tip - dir * 14 - side * 8]), MapDrawer.COL_EXIT)
+	# Tracked quest: star when inside the circle, orange arrow on the edge otherwise.
+	var target: Variant = main.quest_target()
+	if target is Vector3:
+		var tp: Vector2 = _drawer.to_px(target)
+		var toff: Vector2 = tp - c
+		if toff.length() <= RADIUS_PX - 10:
+			_drawer.draw_quest_star(_overlay, tp, 9.0)
+		else:
+			var tdir: Vector2 = toff.normalized()
+			var ttip: Vector2 = c + tdir * (RADIUS_PX + 2)
+			var tside := Vector2(-tdir.y, tdir.x)
+			var tri := PackedVector2Array([ttip, ttip - tdir * 18 + tside * 10, ttip - tdir * 18 - tside * 10])
+			_overlay.draw_colored_polygon(tri, MapDrawer.COL_QUEST)
+			tri.append(tri[0])
+			_overlay.draw_polyline(tri, Color.BLACK, 1.5, true)
 	_drawer.draw_player(_overlay, main.player, 9.0)

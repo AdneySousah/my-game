@@ -1,0 +1,133 @@
+{
+  "_comment": "NPCs. 'model' = id em characters.json (vazio = boneco provisório na cor 'color'). 'voice' = tom dos bipes da fala (1.0 = médio). 'portrait' = imagem em assets/ui (vazio = círculo com a inicial). 'height' = altura do modelo em metros (padrão 1,9), para o nome e os marcadores. 'talk' = conversas fora de missão, a primeira cuja condição vale (if_flag / unless_flag). 'barks' = frases curtas no balão quando o herói passa perto. Onde cada NPC fica: campo 'npcs' de cada mapa.",
+  "npcs": {
+    "lio": {
+      "name": "NPC_LIO",
+      "color": "#f2c14e",
+      "voice": 1.0,
+      "portrait": "ui_retrato_lio"
+    },
+    "marta": {
+      "name": "NPC_MARTA",
+      "color": "#c46a4a",
+      "voice": 1.25,
+      "portrait": "ui_retrato_marta",
+      "talk": [
+        {
+          "if_flag": "bento_joined",
+          "dialogue": "marta_idle_bento"
+        },
+        {
+          "dialogue": "marta_idle"
+        }
+      ],
+      "barks": [
+        "BARK_MARTA_1",
+        "BARK_MARTA_2"
+      ],
+      "model": "npc_marta"
+    },
+    "bram": {
+      "name": "NPC_BRAM",
+      "color": "#6d7a8c",
+      "voice": 0.72,
+      "portrait": "ui_retrato_bram",
+      "talk": [
+        {
+          "dialogue": "bram_idle"
+        }
+      ],
+      "barks": [
+        "BARK_BRAM_1",
+        "BARK_BRAM_2"
+      ],
+      "model": "npc_bram"
+    },
+    "bento": {
+      "name": "NPC_BENTO",
+      "color": "#e8b04a",
+      "voice": 0.9,
+      "portrait": "ui_retrato_bento",
+      "talk": [
+        {
+          "if_flag": "bento_joined",
+          "dialogue": "bento_idle_vila"
+        },
+        {
+          "dialogue": "bento_idle_floresta"
+        }
+      ],
+      "barks": [
+        "BARK_BENTO_1",
+        "BARK_BENTO_2"
+      ],
+      "model": "npc_bento"
+    },
+    "celeste": {
+      "name": "NPC_CELESTE",
+      "color": "#8e5fb0",
+      "voice": 1.15,
+      "portrait": "ui_retrato_celeste",
+      "talk": [
+        {
+          "dialogue": "celeste_idle"
+        }
+      ],
+      "barks": [
+        "BARK_CELESTE_1"
+      ],
+      "model": "npc_celeste"
+    },
+    "tobias": {
+      "name": "NPC_TOBIAS",
+      "color": "#8a4b2a",
+      "voice": 0.8,
+      "portrait": "ui_retrato_tobias",
+      "talk": [
+        {
+          "dialogue": "tobias_idle"
+        }
+      ],
+      "barks": [
+        "BARK_TOBIAS_1"
+      ],
+      "model": "npc_tobias"
+    },
+    "nina": {
+      "name": "NPC_NINA",
+      "color": "#e07ba0",
+      "voice": 1.5,
+      "portrait": "ui_retrato_nina",
+      "talk": [
+        {
+          "if_flag": "nina_helped",
+          "dialogue": "nina_idle_happy"
+        },
+        {
+          "dialogue": "nina_idle"
+        }
+      ],
+      "barks": [
+        "BARK_NINA_1"
+      ],
+      "model": "npc_nina",
+      "height": 1.5
+    },
+    "juca": {
+      "name": "NPC_JUCA",
+      "color": "#7a8a4a",
+      "voice": 0.85,
+      "portrait": "ui_retrato_juca",
+      "talk": [
+        {
+          "dialogue": "juca_idle"
+        }
+      ],
+      "barks": [
+        "BARK_JUCA_1",
+        "BARK_JUCA_2"
+      ],
+      "model": "npc_juca"
+    }
+  }
+}

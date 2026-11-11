@@ -8,6 +8,8 @@ const ATTACK_RADIUS: float = 72.0
 const DODGE_RADIUS: float = 40.0
 
 signal travel_requested(point_id: String)
+## The "Falar"/"Pegar" button (or E) was pressed.
+signal interact_pressed
 
 var player: Player
 var _travel_btn: Button
@@ -34,6 +36,13 @@ var _skill_btns: Array[TouchActionButton] = []
 var _attributes_panel: AttributesPanel
 var _skills_panel: SkillsPanel
 var _debug_btn: Button
+var quests: QuestLog
+var _quest_panel: QuestPanel
+var _dialogue: DialogueBox
+var _talk_btn: Button
+var _tracker_title: Label
+var _tracker_goal: Label
+var _tracker_bg: TrackerBackdrop
 
 
 func _ready() -> void:
@@ -73,6 +82,18 @@ func _ready() -> void:
 	root.add_child(_character_menu)
 	_character_menu.closed.connect(_on_panel_closed)
 	_character_menu.choose.connect(_on_character_choice)
+	_quest_panel = QuestPanel.new()
+	root.add_child(_quest_panel)
+	_quest_panel.closed.connect(_on_panel_closed)
+
+	_talk_btn = _button(tr("HUD_TALK"), func() -> void: interact_pressed.emit())
+	_talk_btn.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
+	_talk_btn.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	_talk_btn.position.y = -215
+	_talk_btn.custom_minimum_size = Vector2(220, 60)
+	_talk_btn.add_theme_font_size_override("font_size", 24)
+	_talk_btn.hide()
+	root.add_child(_talk_btn)
 
 	_travel_btn = _button(tr("HUD_TRAVEL"), func() -> void: _open_panel(_travel_panel))
 	_travel_btn.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
@@ -102,6 +123,10 @@ func _ready() -> void:
 	_full_map = FullMapPanel.new()
 	root.add_child(_full_map)
 	_full_map.closed.connect(_on_panel_closed)
+
+	_dialogue = DialogueBox.new()
+	root.add_child(_dialogue)
+	_dialogue.finished.connect(_on_panel_closed)
 
 	_fade = ColorRect.new()
 	_fade.color = Color.BLACK
@@ -146,6 +171,52 @@ func toast(text: String, seconds: float = 1.8) -> void:
 func set_main(m: Main) -> void:
 	_minimap.main = m
 	_full_map.main = m
+
+
+## Connects the quest log: tracker under the portrait, toasts, quest journal.
+func set_quests(q: QuestLog) -> void:
+	quests = q
+	_quest_panel.quests = q
+	q.changed.connect(_refresh_tracker)
+	q.quest_updated.connect(func(_id: String) -> void: _refresh_tracker())
+	q.quest_started.connect(func(id: String) -> void:
+		toast(tr("HUD_QUEST_NEW") % tr(str(Data.quest(id).get("name", id))), 2.4))
+	q.quest_completed.connect(func(id: String) -> void:
+		var r: Dictionary = Data.quest(id).get("rewards", {})
+		toast(tr("HUD_QUEST_DONE") % tr(str(Data.quest(id).get("name", id))) + "
+" 			+ tr("HUD_QUEST_REWARD") % [int(r.get("xp", 0)), int(r.get("gold", 0))], 3.0))
+	_refresh_tracker()
+
+
+## "" hides the button; "talk" or "pick" shows it with that text.
+func show_interact_button(kind: String) -> void:
+	_talk_btn.visible = kind != ""
+	if kind != "":
+		_talk_btn.text = tr("HUD_TALK" if kind == "talk" else "HUD_PICK_UP")
+
+
+func interact_button_visible() -> bool:
+	return _talk_btn.visible
+
+
+## Plays a conversation (pauses the game). Await the returned signal.
+func play_dialogue(lines: Array) -> Signal:
+	_open_panel(_dialogue)
+	_dialogue.play(lines)
+	return _dialogue.finished
+
+
+## The dialogue box (to follow who is speaking).
+func dialogue_box() -> DialogueBox:
+	return _dialogue
+
+
+func is_in_dialogue() -> bool:
+	return _dialogue.visible
+
+
+func open_quests() -> void:
+	_open_panel(_quest_panel)
 
 
 ## Shows the "Viajar" button while the hero stands at an activated rest point.
@@ -194,6 +265,11 @@ func _input(event: InputEvent) -> void:
 		_toggle(_skills_panel)
 	elif event.is_action_pressed("toggle_map"):
 		_toggle(_full_map)
+	elif event.is_action_pressed("toggle_quests"):
+		_toggle(_quest_panel)
+	elif event.is_action_pressed("interact") and _talk_btn.visible and not get_tree().paused:
+		get_viewport().set_input_as_handled()
+		interact_pressed.emit()
 	elif event.is_action_pressed("debug_level_up") and OS.is_debug_build():
 		_debug_level_up()
 
@@ -223,6 +299,23 @@ func _build_status(root: Control) -> void:
 	_status.position = Vector2(10, 8)
 	root.add_child(_status)
 	_status.tapped.connect(open_character_menu)
+	# Tracked quest: title and current objective under the portrait.
+	_tracker_bg = TrackerBackdrop.new()
+	_tracker_bg.position = Vector2(0, 172)
+	_tracker_bg.size = Vector2(380, 60)
+	root.add_child(_tracker_bg)
+	var tracker := VBoxContainer.new()
+	tracker.position = Vector2(18, 178)
+	tracker.add_theme_constant_override("separation", 0)
+	tracker.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	root.add_child(tracker)
+	_tracker_title = Label.new()
+	_tracker_title.add_theme_font_size_override("font_size", 19)
+	_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD)
+	tracker.add_child(_tracker_title)
+	_tracker_goal = Label.new()
+	_tracker_goal.add_theme_font_size_override("font_size", 17)
+	tracker.add_child(_tracker_goal)
 	# Stamina ("fôlego") centered at the bottom of the screen.
 	_stamina_bar = FramedBar.new()
 	_stamina_bar.fill_color = Color("#c6e04a")
@@ -349,16 +442,18 @@ func _open_panel(panel: Control) -> void:
 	_travel_panel.hide()
 	_full_map.hide()
 	_character_menu.hide()
+	_quest_panel.hide()
+	_talk_btn.hide()
 	if panel == _character_menu:
 		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills)
-	else:
+	elif panel != _dialogue:
 		panel.call("open")
 	_controls.hide()
 	get_tree().paused = true
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -367,7 +462,17 @@ func _on_character_choice(what: String) -> void:
 	match what:
 		"attributes": open_attributes()
 		"skills": open_skills()
+		"quests": open_quests()
 		"map": _open_panel(_full_map)
+
+
+func _refresh_tracker() -> void:
+	var id: String = quests.tracked() if quests else ""
+	_tracker_title.text = tr(str(Data.quest(id).get("name", id))) if id != "" else ""
+	_tracker_goal.text = ("› " + quests.objective_text(id)) if id != "" else ""
+	_tracker_bg.visible = id != ""
+	if id != "":
+		_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD if str(Data.quest(id).get("type", "")) == "main" else Color("#7fd1ff"))
 
 
 func _debug_level_up() -> void:

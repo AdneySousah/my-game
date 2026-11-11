@@ -1,0 +1,373 @@
+{
+  "_comment": "Gerado por tools/content/gen_act1_text.py. Não editar à mão.",
+  "dialogues": {
+    "main_01_marta": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MAIN_01_MARTA_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_01_MARTA_2"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_01_MARTA_3"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_01_MARTA_4"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_01_MARTA_5"
+        ]
+      ]
+    },
+    "main_01_bram": {
+      "lines": [
+        [
+          "bram",
+          "DLG_MAIN_01_BRAM_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_01_BRAM_2"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_01_BRAM_3"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_01_BRAM_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_01_BRAM_5"
+        ]
+      ]
+    },
+    "main_02_offer": {
+      "lines": [
+        [
+          "bram",
+          "DLG_MAIN_02_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_02_OFFER_2"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_02_OFFER_3"
+        ]
+      ]
+    },
+    "main_02_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_02_DONE_1"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_02_DONE_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_02_DONE_3"
+        ]
+      ]
+    },
+    "main_03_offer": {
+      "lines": [
+        [
+          "bram",
+          "DLG_MAIN_03_OFFER_1"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_03_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_OFFER_3"
+        ]
+      ]
+    },
+    "main_03_bento_meet": {
+      "lines": [
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_MEET_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_BENTO_MEET_2"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_MEET_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_MEET_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_BENTO_MEET_5"
+        ]
+      ]
+    },
+    "main_03_bento_join": {
+      "lines": [
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_JOIN_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_BENTO_JOIN_2"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_JOIN_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_03_BENTO_JOIN_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_BENTO_JOIN_5"
+        ]
+      ]
+    },
+    "main_03_marta": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MAIN_03_MARTA_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_03_MARTA_2"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_03_MARTA_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_03_MARTA_4"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_03_MARTA_5"
+        ]
+      ]
+    },
+    "main_04_offer": {
+      "lines": [
+        [
+          "bento",
+          "DLG_MAIN_04_OFFER_1"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_04_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_04_OFFER_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_04_OFFER_4"
+        ]
+      ]
+    },
+    "main_04_bram": {
+      "lines": [
+        [
+          "bram",
+          "DLG_MAIN_04_BRAM_1"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_04_BRAM_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_04_BRAM_3"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_04_BRAM_4"
+        ]
+      ]
+    },
+    "side_trigo_offer": {
+      "lines": [
+        [
+          "nina",
+          "DLG_SIDE_TRIGO_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_TRIGO_OFFER_2"
+        ],
+        [
+          "nina",
+          "DLG_SIDE_TRIGO_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_TRIGO_OFFER_4"
+        ],
+        [
+          "nina",
+          "DLG_SIDE_TRIGO_OFFER_5"
+        ]
+      ]
+    },
+    "side_trigo_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_TRIGO_DONE_1"
+        ],
+        [
+          "nina",
+          "DLG_SIDE_TRIGO_DONE_2"
+        ],
+        [
+          "nina",
+          "DLG_SIDE_TRIGO_DONE_3"
+        ]
+      ]
+    },
+    "side_ferro_offer": {
+      "lines": [
+        [
+          "tobias",
+          "DLG_SIDE_FERRO_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_FERRO_OFFER_2"
+        ],
+        [
+          "tobias",
+          "DLG_SIDE_FERRO_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_FERRO_OFFER_4"
+        ]
+      ]
+    },
+    "side_ferro_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_FERRO_DONE_1"
+        ],
+        [
+          "tobias",
+          "DLG_SIDE_FERRO_DONE_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_FERRO_DONE_3"
+        ]
+      ]
+    },
+    "marta_idle": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MARTA_IDLE_1"
+        ]
+      ]
+    },
+    "marta_idle_bento": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MARTA_IDLE_BENTO_1"
+        ]
+      ]
+    },
+    "bram_idle": {
+      "lines": [
+        [
+          "bram",
+          "DLG_BRAM_IDLE_1"
+        ]
+      ]
+    },
+    "bento_idle_floresta": {
+      "lines": [
+        [
+          "bento",
+          "DLG_BENTO_IDLE_FLORESTA_1"
+        ]
+      ]
+    },
+    "bento_idle_vila": {
+      "lines": [
+        [
+          "bento",
+          "DLG_BENTO_IDLE_VILA_1"
+        ]
+      ]
+    },
+    "celeste_idle": {
+      "lines": [
+        [
+          "celeste",
+          "DLG_CELESTE_IDLE_1"
+        ],
+        [
+          "celeste",
+          "DLG_CELESTE_IDLE_2"
+        ]
+      ]
+    },
+    "tobias_idle": {
+      "lines": [
+        [
+          "tobias",
+          "DLG_TOBIAS_IDLE_1"
+        ]
+      ]
+    },
+    "nina_idle": {
+      "lines": [
+        [
+          "nina",
+          "DLG_NINA_IDLE_1"
+        ]
+      ]
+    },
+    "nina_idle_happy": {
+      "lines": [
+        [
+          "nina",
+          "DLG_NINA_IDLE_HAPPY_1"
+        ]
+      ]
+    },
+    "juca_idle": {
+      "lines": [
+        [
+          "juca",
+          "DLG_JUCA_IDLE_1"
+        ]
+      ]
+    }
+  }
+}

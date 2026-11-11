@@ -10,12 +10,21 @@ var current_map: String = ""
 var activated: Dictionary = {}
 ## Where the hero comes back after dying: {"map": id, "point": id}.
 var last_rest: Dictionary = {}
+## Quest progress: quest_id -> {"step": int, "count": int, "picked": Array, "done": bool}.
+var quests: Dictionary = {}
+## Story flags set by quests and dialogues (e.g. "bento_joined").
+var flags: Dictionary = {}
+## Quest shown in the HUD tracker.
+var tracked_quest: String = ""
 
 
 func reset() -> void:
 	current_map = ""
 	activated.clear()
 	last_rest.clear()
+	quests.clear()
+	flags.clear()
+	tracked_quest = ""
 
 
 func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
@@ -29,3 +38,11 @@ func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
 
 func is_activated(point_id: String) -> bool:
 	return activated.has(point_id)
+
+
+func has_flag(flag: String) -> bool:
+	return flags.has(flag)
+
+
+func set_flag(flag: String) -> void:
+	flags[flag] = true

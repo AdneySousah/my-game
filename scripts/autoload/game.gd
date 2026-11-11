@@ -40,6 +40,8 @@ func _register_inputs() -> void:
 	_action("toggle_attributes", [KEY_C], [JOY_BUTTON_BACK])
 	_action("toggle_skills", [KEY_K], [])
 	_action("toggle_map", [KEY_M], [])
+	_action("toggle_quests", [KEY_L], [])
+	_action("interact", [KEY_E, KEY_F], [JOY_BUTTON_RIGHT_STICK])
 	_action("debug_level_up", [KEY_F1], [])
 
 

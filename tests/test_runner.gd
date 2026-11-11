@@ -3,7 +3,8 @@ extends Node
 ##   godot --headless --path . --fixed-fps 60 res://tests/test_runner.tscn
 ## 1) unit checks for XP, attributes, damage and data;
 ## 2) a bot that plays the arena for a while, using every skill, dying once,
-##    and opening the panels. Exit code 0 = all good.
+##    and opening the panels; 3) maps and travel; 4) NPCs, dialogue and quests.
+## Exit code 0 = all good.
 
 const BOT_SECONDS: float = 75.0
 
@@ -16,6 +17,7 @@ func _ready() -> void:
 	_unit_tests()
 	await _bot_test()
 	await _world_test()
+	await _quest_test()
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
 	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
 	get_tree().quit(1 if _failures > 0 else 0)
@@ -310,6 +312,152 @@ func _world_test() -> void:
 	check(main.map.map_id == "floresta" and not main.player.is_dead(), "after dying the hero returns to the last camp")
 	main.queue_free()
 	await _frames(2)
+
+
+## NPCs, dialogue and the Act 1 quests (stage 4.2).
+func _quest_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var q: QuestLog = main.quests
+
+	# Data: every dialogue a quest or NPC uses exists and is translated.
+	var missing: Array[String] = []
+	for quest: Dictionary in Data.quests:
+		var ids: Array = [quest.get("offer", "")]
+		for st: Dictionary in quest.get("steps", []):
+			ids.append(st.get("dialogue", ""))
+			if tr(str(st.get("text", ""))) == str(st.get("text", "")):
+				missing.append(str(st.get("text", "")))
+		for d: Variant in ids:
+			if str(d) != "" and not Data.dialogues.has(str(d)):
+				missing.append(str(d))
+	for npc_id: String in Data.npcs:
+		for t: Dictionary in Data.npc(npc_id).get("talk", []):
+			if not Data.dialogues.has(str(t["dialogue"])):
+				missing.append(str(t["dialogue"]))
+	for d: String in Data.dialogues:
+		for line: Array in Data.dialogues[d]["lines"]:
+			if tr(str(line[1])) == str(line[1]) or not Data.npcs.has(str(line[0])):
+				missing.append(str(line[1]))
+	check(missing.is_empty(), "quest dialogues and texts exist (missing: %s)" % [missing])
+
+	# Start: the first quest begins by itself and points at Marta.
+	check(q.is_active("main_01"), "first main quest starts by itself")
+	check(main.map.npcs.has("marta") and main.map.npcs.has("bram") and main.map.npcs.size() == 6, "Pradoluz has its 6 villagers (got %d)" % main.map.npcs.size())
+	check(not main.map.npcs.has("bento"), "Bento is not in the village yet")
+	check(q.npc_marker("marta") == "main_step", "Marta shows the quest marker")
+	check(q.npc_marker("juca") == "", "a villager without quests has no marker")
+
+	# Walk up to Marta, talk, click through the conversation.
+	var marta: Npc = main.map.npcs["marta"]
+	main.player.global_position = marta.global_position + Vector3(1.4, 0, 0)
+	await _frames(3)
+	check(main.hud.interact_button_visible(), "Falar button appears next to an NPC")
+	main.talk_to_nearby()
+	await _frames(2)
+	check(main.hud.is_in_dialogue() and get_tree().paused, "talking opens the dialogue and pauses the game")
+	await _finish_dialogue(main)
+	check(not get_tree().paused and not main.hud.is_in_dialogue(), "the game resumes after the dialogue")
+	check(str(q.current_step("main_01").get("npc", "")) == "bram", "after Marta the quest points to Bram")
+	var target: Variant = main.quest_target()
+	check(target is Vector3 and (target as Vector3).distance_to(main.map.npcs["bram"].global_position) < 0.1, "quest marker points at Bram")
+
+	# Bram ends quest 1 (reward) and offers quest 2.
+	var gold_before: int = main.player.gold
+	await _talk(main, "bram")
+	check(q.is_done("main_01") and main.player.gold == gold_before + 15, "quest 1 done with its gold reward")
+	check(q.npc_marker("bram") == "main_offer", "Bram offers the next quest")
+	await _talk(main, "bram")
+	check(q.is_active("main_02"), "quest 2 accepted from Bram")
+	target = main.quest_target()
+	check(target is Vector3 and (target as Vector3).distance_to(Vector3(0, 0, -34)) < 0.1, "marker points to the exit towards the forest")
+
+	# Kills only count in the right map and for the right enemy.
+	q.on_enemy_killed("bandido", "pradoluz")
+	q.on_enemy_killed("orc", "floresta")
+	check(int(Session.quests["main_02"]["count"]) == 0, "wrong map or enemy does not count")
+	for i: int in 3:
+		q.on_enemy_killed("bandido", "floresta")
+	check(q.objective_text("main_02").contains("3/4"), "objective shows 3/4 (%s)" % q.objective_text("main_02"))
+	q.on_enemy_killed("bandido", "floresta")
+	check(str(q.current_step("main_02").get("type", "")) == "talk", "4 bandits -> back to Bram")
+	await _talk(main, "bram")
+	check(q.is_done("main_02"), "quest 2 done")
+
+	# Side quest: Nina needs level 2; herbs are picked up in the forest.
+	check(q.npc_marker("nina") == "" or main.player.stats.level >= 2, "Nina waits for level 2")
+	while main.player.stats.level < 4:
+		main.player.stats.add_xp(main.player.stats.xp_needed() - main.player.stats.xp)
+	await _frames(1)
+	check(q.npc_marker("nina") == "side_offer", "Nina offers her quest at level 2+")
+	await _talk(main, "nina")
+	await _talk(main, "bram")
+	check(q.is_active("side_trigo") and q.is_active("main_03"), "side quest and quest 3 active")
+
+	main.load_map("floresta", "from_pradoluz")
+	await _wait_map(main, "floresta")
+	await _frames(2)
+	var pickups: Array[Node] = get_tree().get_nodes_in_group("quest_pickups")
+	check(pickups.size() == 3, "3 herbs glow in the forest (got %d)" % pickups.size())
+	if pickups.size() > 0:
+		main.player.global_position = (pickups[0] as Node3D).global_position
+		await _frames(3)
+		check(int(Session.quests["side_trigo"]["count"]) == 1, "walking over a herb picks it up")
+	check(main.map.npcs.has("bento"), "Bento waits in the forest clearing")
+	await _talk(main, "bento")
+	q.on_enemy_killed("orc", "floresta")
+	q.on_enemy_killed("orc", "floresta")
+	await _talk(main, "bento")
+	check(Session.has_flag("bento_joined"), "Bento joins Lio")
+	check(str(GameMap.find_npc("bento").get("map", "")) == "pradoluz", "Bento now lives in the village")
+	target = main.quest_target()
+	check(target is Vector3 and (target as Vector3).distance_to(Vector3(0, 0, 55)) < 0.1, "marker points back to the village exit")
+
+	main.load_map("pradoluz", "from_floresta")
+	await _wait_map(main, "pradoluz")
+	await _frames(2)
+	check(main.map.npcs.has("bento"), "Bento appears in Pradoluz")
+	await _talk(main, "marta")
+	check(q.is_done("main_03"), "quest 3 done")
+	await _talk(main, "bento")
+	await _talk(main, "bram")
+	check(str(q.current_step("main_04").get("type", "")) == "reach", "quest 4: go to the mine")
+	check(GameMap.exit_towards("pradoluz", "mina") == Vector3(0, 0, -34), "route to the mine goes through the forest exit")
+
+	main.load_map("mina", "from_floresta")
+	await _wait_map(main, "mina")
+	await _frames(3)
+	check(q.objective_text("main_04") == tr("OBJ_MINE_DEEP"), "arriving at the mine completes that step")
+	main.player.global_position = Vector3(0, 0, -34)
+	await _frames(3)
+	check(q.is_done("main_04") and Session.has_flag("mine_explored"), "exploring the mine depths ends the Act 1 quests for now")
+	main.queue_free()
+	await _frames(2)
+
+
+## Puts the hero next to an NPC, talks and clicks through the dialogue.
+func _talk(main: Main, npc_id: String) -> void:
+	var npc: Npc = main.map.npcs.get(npc_id)
+	if npc == null:
+		check(false, "NPC %s is in map %s" % [npc_id, main.map.map_id])
+		return
+	main.player.global_position = npc.global_position + Vector3(1.4, 0, 0)
+	await _frames(3)
+	main.talk_to_nearby()
+	await _frames(1)
+	await _finish_dialogue(main)
+
+
+func _finish_dialogue(main: Main) -> void:
+	for i: int in 60:
+		if not main.hud.is_in_dialogue():
+			break
+		main.hud.get("_dialogue").call("advance")
+		await _frames(1)
+	await _frames(1)
 
 
 func _frames(n: int) -> void:

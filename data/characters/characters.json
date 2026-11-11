@@ -69,5 +69,68 @@
       "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6 },
       "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 }
     }
+  },
+  "npc_marta": {
+    "scene": "res://assets/npcs/npc_marta/npc_marta.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_marta/npc_marta_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Hands_Open", "loop": true }
+    }
+  },
+  "npc_bram": {
+    "scene": "res://assets/npcs/npc_bram/npc_bram.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_bram/npc_bram_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Left_Hand_on_Hip", "loop": true }
+    }
+  },
+  "npc_bento": {
+    "scene": "res://assets/npcs/npc_bento/npc_bento.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_bento/npc_bento_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_Passionately", "loop": true }
+    }
+  },
+  "npc_celeste": {
+    "scene": "res://assets/npcs/npc_celeste/npc_celeste.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_celeste/npc_celeste_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Right_Hand_Open", "loop": true }
+    }
+  },
+  "npc_tobias": {
+    "scene": "res://assets/npcs/npc_tobias/npc_tobias.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_tobias/npc_tobias_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Right_Hand_Open", "loop": true }
+    }
+  },
+  "npc_nina": {
+    "scene": "res://assets/npcs/npc_nina/npc_nina.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_nina/npc_nina_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Hands_Open", "loop": true }
+    }
+  },
+  "npc_juca": {
+    "scene": "res://assets/npcs/npc_juca/npc_juca.glb",
+    "anim_sources": [{ "path": "res://assets/npcs/npc_juca/npc_juca_anims.glb" }],
+    "scale": 1.2,
+    "actions": {
+      "idle": { "anim": "Idle", "loop": true },
+      "talk": { "anim": "Talk_with_Left_Hand_Raised", "loop": true }
+    }
   }
 }

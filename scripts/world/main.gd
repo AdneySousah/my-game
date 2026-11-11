@@ -1,7 +1,8 @@
 class_name Main
 extends Node3D
 ## The running game: keeps the hero, camera and HUD alive and swaps maps under them.
-## Also hands out kill rewards and brings the hero back after dying.
+## Also hands out kill rewards, brings the hero back after dying, and connects the
+## world (NPCs, kills, pickups, places) to the quest log.
 
 signal map_loaded(map_id: String)
 
@@ -15,11 +16,14 @@ var player: Player
 var camera_rig: CameraRig
 var hud: Hud
 var map: GameMap
+var quests: QuestLog
 var kills: int = 0
 
 var _fader: OcclusionFader
 var _changing: bool = false
 var _at_point: RestPoint
+var _near_npc: Npc
+var _talking: bool = false
 
 
 func _ready() -> void:
@@ -39,12 +43,26 @@ func _ready() -> void:
 	hud.travel_requested.connect(travel_to_point)
 	hud.set_main(self)
 
+	quests = QuestLog.new()
+	quests.name = "QuestLog"
+	quests.player = player
+	add_child(quests)
+	hud.set_quests(quests)
+	hud.interact_pressed.connect(talk_to_nearby)
+	quests.changed.connect(_refresh_quest_world)
+	quests.quest_completed.connect(func(id: String) -> void:
+		var note: String = str(Data.quest(id).get("end_note", ""))
+		if note != "":
+			hud.banner(tr(note)))
+	player.stats.leveled_up.connect(func(_l: int) -> void: _refresh_quest_world())
+
 	_fader = OcclusionFader.new()
 	add_child(_fader)
 	_fader.camera = camera_rig.camera
 	_fader.target = player
 
-	load_map(start_map, start_spawn, false)
+	await load_map(start_map, start_spawn, false)
+	quests.start_auto_quests()
 
 
 ## Loads `map_id` and puts the hero at a spawn ("start", "from_x") or at "point:<id>".
@@ -58,7 +76,9 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 		map.queue_free()
 		remove_child(map)
 	_at_point = null
+	_near_npc = null
 	hud.show_travel_button(false)
+	hud.show_interact_button("")
 	map = GameMap.new()
 	map.setup(map_id, player)
 	# Place the hero before the map exists, so he never "touches" anything on the way.
@@ -78,6 +98,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	map.enemy_killed.connect(_on_enemy_killed)
 	map.exit_used.connect(func(to: String, sp: String) -> void: load_map(to, sp))
 	Session.current_map = map_id
+	_refresh_quest_world()
 	camera_rig.snap_to_target()
 	hud.banner(tr(str(map.data.get("name", map_id))))
 	if with_fade:
@@ -87,9 +108,11 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 
 
 ## Rest points: entering one activates it; leaving hides the travel button.
+## Also: NPC in talk range, quest pickups under the hero, "reach" objectives.
 func _physics_process(_delta: float) -> void:
 	if map == null or _changing or player.is_dead():
 		return
+	_update_quest_contacts()
 	var inside: RestPoint = null
 	for p: RestPoint in map.rest_points.values():
 		if p.contains(player.global_position):
@@ -102,6 +125,43 @@ func _physics_process(_delta: float) -> void:
 		_on_rest_reached(inside)
 	else:
 		hud.show_travel_button(false)
+
+
+## Talks to the NPC in range (the "Falar" button / E).
+func talk_to_nearby() -> void:
+	if _near_npc == null or _talking or _changing:
+		return
+	var npc: Npc = _near_npc
+	var plan: Dictionary = quests.talk_plan(npc.npc_id)
+	var dlg: Dictionary = Data.dialogues.get(str(plan.get("dialogue", "")), {})
+	if dlg.is_empty():
+		return
+	_talking = true
+	npc.face(player.global_position)
+	player.face_towards(npc.global_position)
+	var on_line := func(speaker: String) -> void: npc.set_talking(speaker == npc.npc_id)
+	hud.dialogue_box().line_started.connect(on_line)
+	await hud.play_dialogue(dlg.get("lines", []))
+	hud.dialogue_box().line_started.disconnect(on_line)
+	npc.set_talking(false)
+	quests.finish_talk(plan)
+	_refresh_quest_world()
+	_talking = false
+
+
+## Where the tracked quest points in this map (the target, or the exit towards it).
+func quest_target() -> Variant:
+	if map == null or quests == null:
+		return null
+	var id: String = quests.tracked()
+	if id == "":
+		return null
+	var t: Dictionary = quests.target_of(id, player.global_position, map.map_id)
+	if t.is_empty():
+		return null
+	if str(t["map"]) == map.map_id:
+		return t["pos"]
+	return GameMap.exit_towards(map.map_id, str(t["map"]))
 
 
 func travel_to_point(point_id: String) -> void:
@@ -134,6 +194,7 @@ func xp_for_kill(e: Enemy) -> int:
 
 func _on_enemy_killed(e: Enemy) -> void:
 	kills += 1
+	quests.on_enemy_killed(e.enemy_id, Session.current_map)
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(e.gold_reward)
 
@@ -165,3 +226,35 @@ func _on_player_died(gold_lost: int, xp_lost: int) -> void:
 	player.respawn_point = pos
 	player.respawn()
 	camera_rig.snap_to_target()
+
+
+func _update_quest_contacts() -> void:
+	var pos: Vector3 = player.global_position
+	quests.on_position(map.map_id, pos)
+	for n: Node in get_tree().get_nodes_in_group("quest_pickups"):
+		var qp := n as QuestPickup
+		if qp and qp.contains(pos):
+			qp.remove_from_group("quest_pickups")
+			var total: int = (quests.current_step(qp.quest_id).get("points", []) as Array).size()
+			var got: int = int(Session.quests[qp.quest_id]["count"]) + 1
+			hud.toast(tr("HUD_QUEST_PICKED") % [tr(qp.item_key), got, total])
+			qp.queue_free()
+			quests.on_picked(qp.quest_id, qp.index)
+	var nearest: Npc = null
+	for npc: Npc in map.npcs.values():
+		if npc.in_talk_range(pos):
+			nearest = npc
+			break
+	_near_npc = nearest
+	var want: bool = nearest != null and not _talking
+	if want != hud.interact_button_visible():
+		hud.show_interact_button("talk" if want else "")
+
+
+## Quest markers over NPCs and pickups on the ground.
+func _refresh_quest_world() -> void:
+	if map == null or quests == null:
+		return
+	for npc: Npc in map.npcs.values():
+		npc.set_marker(quests.npc_marker(npc.npc_id))
+	map.sync_pickups(quests.pickups_in(map.map_id))

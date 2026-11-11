@@ -1,0 +1,64 @@
+{
+  "_comment": "Missões. type: main (principal) ou side (secundária). giver = NPC que oferece (offer = diálogo da oferta); auto = começa sozinha quando liberada. requires = missões que precisam estar concluídas; min_level = nível mínimo. Passos: talk {npc, dialogue}, kill {enemy, count, map, pos}, collect {map, item, points [[x,z]...]}, reach {map, pos, radius}. 'text' = chave do objetivo (%d/%d para contagem). 'set_flag' no passo ou na missão marca a história; 'end_note' = texto grande ao concluir. Recompensas em XP e ouro.",
+  "quests": [
+    {
+      "id": "main_01", "type": "main", "name": "QUEST_MAIN_01", "auto": true,
+      "steps": [
+        { "type": "talk", "npc": "marta", "dialogue": "main_01_marta", "text": "OBJ_TALK_MARTA" },
+        { "type": "talk", "npc": "bram", "dialogue": "main_01_bram", "text": "OBJ_TALK_BRAM" }
+      ],
+      "rewards": { "xp": 60, "gold": 15 }
+    },
+    {
+      "id": "main_02", "type": "main", "name": "QUEST_MAIN_02", "giver": "bram", "offer": "main_02_offer",
+      "requires": ["main_01"],
+      "steps": [
+        { "type": "kill", "enemy": "bandido", "count": 4, "map": "floresta", "pos": [-7, 30], "text": "OBJ_KILL_BANDIDOS" },
+        { "type": "talk", "npc": "bram", "dialogue": "main_02_done", "text": "OBJ_RETURN_BRAM" }
+      ],
+      "rewards": { "xp": 220, "gold": 40 }
+    },
+    {
+      "id": "main_03", "type": "main", "name": "QUEST_MAIN_03", "giver": "bram", "offer": "main_03_offer",
+      "requires": ["main_02"],
+      "steps": [
+        { "type": "talk", "npc": "bento", "dialogue": "main_03_bento_meet", "text": "OBJ_FIND_BENTO" },
+        { "type": "kill", "enemy": "orc", "count": 2, "map": "floresta", "pos": [-2, 14], "text": "OBJ_KILL_ORCS_BENTO" },
+        { "type": "talk", "npc": "bento", "dialogue": "main_03_bento_join", "text": "OBJ_TALK_BENTO", "set_flag": "bento_joined" },
+        { "type": "talk", "npc": "marta", "dialogue": "main_03_marta", "text": "OBJ_BENTO_TO_MARTA" }
+      ],
+      "rewards": { "xp": 380, "gold": 60 }
+    },
+    {
+      "id": "main_04", "type": "main", "name": "QUEST_MAIN_04", "giver": "bento", "offer": "main_04_offer",
+      "requires": ["main_03"],
+      "steps": [
+        { "type": "talk", "npc": "bram", "dialogue": "main_04_bram", "text": "OBJ_ASK_BRAM_MINE" },
+        { "type": "reach", "map": "mina", "pos": [0, 30], "radius": 6, "text": "OBJ_REACH_MINE" },
+        { "type": "reach", "map": "mina", "pos": [0, -34], "radius": 6, "text": "OBJ_MINE_DEEP" }
+      ],
+      "set_flag": "mine_explored", "end_note": "QUEST_MORE_SOON",
+      "rewards": { "xp": 520, "gold": 80 }
+    },
+    {
+      "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",
+      "requires": ["main_01"], "min_level": 2,
+      "steps": [
+        { "type": "collect", "map": "floresta", "item": "ITEM_ERVA_ORVALHO", "points": [[-30, 28], [26, 30], [-32, -18]], "text": "OBJ_COLLECT_HERBS" },
+        { "type": "talk", "npc": "nina", "dialogue": "side_trigo_done", "text": "OBJ_RETURN_NINA" }
+      ],
+      "set_flag": "nina_helped",
+      "rewards": { "xp": 260, "gold": 50 }
+    },
+    {
+      "id": "side_ferro", "type": "side", "name": "QUEST_SIDE_FERRO", "giver": "tobias", "offer": "side_ferro_offer",
+      "requires": ["main_02"], "min_level": 4,
+      "steps": [
+        { "type": "kill", "enemy": "orc", "count": 3, "map": "floresta", "pos": [14, -12], "text": "OBJ_KILL_ORCS" },
+        { "type": "collect", "map": "floresta", "item": "ITEM_CAIXOTE_FERRO", "points": [[16, -42]], "text": "OBJ_FIND_IRON" },
+        { "type": "talk", "npc": "tobias", "dialogue": "side_ferro_done", "text": "OBJ_RETURN_TOBIAS" }
+      ],
+      "rewards": { "xp": 320, "gold": 70 }
+    }
+  ]
+}

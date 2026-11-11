@@ -94,3 +94,11 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Os botões Atributos e Skills saíram da tela. Quando há pontos para distribuir ou skill nova, aparece um "!" pulsando no retrato; tocar no retrato abre o menu do personagem (Atributos, Skills, Mapa). Teclas C, K e M continuam no PC.
 - O botão "+1 nível" só existe na versão de teste (some no jogo exportado).
 - Cada região terá 3 a 4 mapas de campo, com o bioma mudando aos poucos até o da próxima região (ex.: floresta → floresta rala → começando a congelar → inverno → gelo). Neve, folhas secas e musgo por shader nas peças existentes; o Meshy só para o que o shader não resolve. Detalhes no GDD, Parte 2.
+
+## Conversa e missões (11/11/2026, etapa 4.2)
+- Conversa numa caixa de pergaminho no rodapé, com o retrato de quem fala (NPCs à esquerda, Lio à direita), texto que se escreve sozinho e "voz" de bipes com tom próprio para cada personagem (sem arquivos de som). O jogo pausa durante a conversa.
+- Perto de um NPC aparece o botão "Falar" (tecla E). NPCs soltam frases curtas em balão quando o herói passa perto.
+- Marcadores sobre a cabeça: "!" = missão para pegar, "?" = próximo passo; dourado = principal, azul = secundária.
+- Missão seguida aparece embaixo do retrato; estrela laranja no minimapa e no mapa completo (ou seta para a saída certa, quando o objetivo está em outro mapa). Diário em Missões (tecla L ou menu do retrato).
+- Tipos de passo: falar, derrotar, coletar (itens que brilham no chão) e chegar a um lugar. Recompensa em XP e ouro (itens entram na Fase 5).
+- Ato 1 até a mina: 4 missões principais (Marta → Bram → bandidos → Bento na floresta → mina) e 2 secundárias (Nina e o trigo escondido; o ferro do Tobias). A luta com o Gorvan entra na 4.3.

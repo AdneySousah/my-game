@@ -10,6 +10,10 @@ var map_id: String = ""
 var data: Dictionary = {}
 var player: Player
 var rest_points: Dictionary = {}
+## npc_id -> Npc placed in this map.
+var npcs: Dictionary = {}
+
+static var _data_cache: Dictionary = {}
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _clear_spots: Array[Vector3] = []
@@ -17,8 +21,60 @@ var _path_segments: Array = []
 
 
 static func load_data(id: String) -> Dictionary:
-	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/maps/%s.json" % id))
-	return parsed if parsed is Dictionary else {}
+	if not _data_cache.has(id):
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/maps/%s.json" % id))
+		_data_cache[id] = parsed if parsed is Dictionary else {}
+	return _data_cache[id]
+
+
+## Every map id in data/maps.
+static func all_ids() -> Array[String]:
+	var out: Array[String] = []
+	for f: String in DirAccess.get_files_at("res://data/maps"):
+		if f.ends_with(".json"):
+			out.append(f.get_basename())
+	return out
+
+
+## True when a map's "npcs" entry applies now (if_flag / unless_flag).
+static func npc_entry_active(n: Dictionary) -> bool:
+	if n.has("if_flag") and not Session.has_flag(str(n["if_flag"])):
+		return false
+	if n.has("unless_flag") and Session.has_flag(str(n["unless_flag"])):
+		return false
+	return true
+
+
+## Where an NPC stands right now: {"map": id, "pos": Vector3} or {}.
+static func find_npc(npc_id: String) -> Dictionary:
+	for id: String in all_ids():
+		for n: Dictionary in load_data(id).get("npcs", []):
+			if str(n["id"]) == npc_id and npc_entry_active(n):
+				var p: Array = n["pos"]
+				return {"map": id, "pos": Vector3(float(p[0]), 0, float(p[1]))}
+	return {}
+
+
+## Position of the exit in `from_map` on the shortest way to `to_map` (BFS over exits).
+static func exit_towards(from_map: String, to_map: String) -> Variant:
+	if from_map == to_map:
+		return null
+	var first_exit: Dictionary = {}
+	var seen: Dictionary = {from_map: true}
+	var queue: Array[String] = [from_map]
+	while not queue.is_empty():
+		var m: String = queue.pop_front()
+		for e: Dictionary in load_data(m).get("exits", []):
+			var to: String = str(e["to"])
+			if seen.has(to):
+				continue
+			seen[to] = true
+			first_exit[to] = first_exit.get(m, e) if m != from_map else e
+			if to == to_map:
+				var p: Array = (first_exit[to] as Dictionary)["pos"]
+				return Vector3(float(p[0]), 0, float(p[1]))
+			queue.append(to)
+	return null
 
 
 ## Call before adding to the tree.
@@ -35,6 +91,7 @@ func _ready() -> void:
 	_build_ground()
 	_build_paths()
 	_build_rest_points()
+	_build_npcs()
 	_build_rivers()
 	_build_walls()
 	_build_lines()
@@ -177,6 +234,42 @@ func _build_rest_points() -> void:
 		label.pixel_size = 0.01
 		label.position = point.position + Vector3(0, 3.2, 0)
 		add_child(label)
+
+
+func _build_npcs() -> void:
+	for n: Dictionary in data.get("npcs", []):
+		if not npc_entry_active(n):
+			continue
+		var npc := Npc.new()
+		npc.setup(str(n["id"]), player)
+		npc.position = _v(n["pos"])
+		npc.rotation_degrees.y = float(n.get("yaw", 0))
+		add_child(npc)
+		npcs[npc.npc_id] = npc
+		_clear_spots.append(npc.position)
+
+
+## Shows exactly the quest pickups in `list` (from QuestLog.pickups_in).
+func sync_pickups(list: Array[Dictionary]) -> void:
+	var wanted: Dictionary = {}
+	for pk: Dictionary in list:
+		wanted["%s:%d" % [pk["quest"], pk["index"]]] = pk
+	for n: Node in get_children():
+		var qp := n as QuestPickup
+		if qp == null:
+			continue
+		var key: String = "%s:%d" % [qp.quest_id, qp.index]
+		if wanted.has(key):
+			wanted.erase(key)
+		else:
+			qp.queue_free()
+	for pk: Dictionary in wanted.values():
+		var qp := QuestPickup.new()
+		qp.quest_id = str(pk["quest"])
+		qp.index = int(pk["index"])
+		qp.item_key = str(pk["item"])
+		add_child(qp)
+		qp.position = pk["pos"]
 
 
 ## Water you cannot cross: {"points": [[x,z], ...], "width": metres}.

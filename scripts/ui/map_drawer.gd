@@ -12,6 +12,8 @@ const COL_EXIT: Color = Color("#ffe066")
 const COL_REST: Color = Color("#ff9a3c")
 const COL_STONE: Color = Color("#4fe3ff")
 const COL_ENEMY: Color = Color("#ff4d4d")
+const COL_NPC: Color = Color("#9cff8a")
+const COL_QUEST: Color = Color("#ff9d1a")
 
 var map: GameMap
 var center: Vector3 = Vector3.ZERO
@@ -68,6 +70,12 @@ func draw_world(ci: CanvasItem, show_labels: bool) -> void:
 		_diamond(ci, pos, 8.0, COL_EXIT)
 		if show_labels:
 			_label(ci, pos + Vector2(11, 5), "→ " + tr(str(e.get("label", ""))), COL_EXIT, 15)
+	for npc: Npc in map.npcs.values():
+		var np: Vector2 = to_px(npc.global_position)
+		ci.draw_circle(np, 4.5, COL_NPC)
+		ci.draw_arc(np, 4.5, 0, TAU, 12, Color.BLACK, 1.2, true)
+		if show_labels:
+			_label(ci, np + Vector2(7, 5), tr(str(npc.data.get("name", npc.npc_id))), COL_NPC, 13)
 	for n: Node in map.get_tree().get_nodes_in_group("enemies"):
 		var en := n as Enemy
 		if en and not en.is_dead() and map.is_ancestor_of(en):
@@ -82,6 +90,17 @@ func draw_player(ci: CanvasItem, player: Player, size_px: float) -> void:
 	var tri := PackedVector2Array([pos + dir * size_px, pos - dir * size_px * 0.6 + side * size_px * 0.7, pos - dir * size_px * 0.6 - side * size_px * 0.7])
 	ci.draw_colored_polygon(tri, Color.WHITE)
 	ci.draw_polyline(PackedVector2Array([tri[0], tri[1], tri[2], tri[0]]), Color.BLACK, 1.5, true)
+
+
+## Five-point star marking the tracked quest's objective.
+func draw_quest_star(ci: CanvasItem, pos: Vector2, r: float) -> void:
+	var pts := PackedVector2Array()
+	for i: int in 10:
+		var a: float = -PI * 0.5 + i * PI / 5.0
+		pts.append(pos + Vector2(cos(a), sin(a)) * (r if i % 2 == 0 else r * 0.45))
+	ci.draw_colored_polygon(pts, COL_QUEST)
+	pts.append(pts[0])
+	ci.draw_polyline(pts, Color.BLACK, 1.5, true)
 
 
 func _polyline(ci: CanvasItem, pts: Array, col: Color, width: float) -> void:

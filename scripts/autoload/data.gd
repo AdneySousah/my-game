@@ -7,8 +7,15 @@ var mob_xp: Array = []
 var skills: Array[Dictionary] = []
 var enemies: Dictionary = {}
 var enemy_scaling: Dictionary = {}
+## NPC definitions (data/characters/npcs.json): id -> {name, color, voice, ...}.
+var npcs: Dictionary = {}
+## Quests in the order they appear in data/quests/quests.json.
+var quests: Array[Dictionary] = []
+## Dialogue id -> {"lines": [[speaker, key], ...]} from every file in data/dialogues.
+var dialogues: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
+var _quests_by_id: Dictionary = {}
 
 
 func _ready() -> void:
@@ -26,9 +33,25 @@ func _ready() -> void:
 	enemies = enemy_file.get("enemies", {})
 	enemy_scaling = enemy_file.get("scaling_per_level", {})
 
+	npcs = _load_json("res://data/characters/npcs.json").get("npcs", {})
+	for q: Dictionary in _load_json("res://data/quests/quests.json").get("quests", []):
+		quests.append(q)
+		_quests_by_id[q["id"]] = q
+	for f: String in DirAccess.get_files_at("res://data/dialogues"):
+		if f.ends_with(".json"):
+			dialogues.merge(_load_json("res://data/dialogues/" + f).get("dialogues", {}))
+
 
 func skill(id: String) -> Dictionary:
 	return _skills_by_id.get(id, {})
+
+
+func quest(id: String) -> Dictionary:
+	return _quests_by_id.get(id, {})
+
+
+func npc(id: String) -> Dictionary:
+	return npcs.get(id, {})
 
 
 func level_cap() -> int:

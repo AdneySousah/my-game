@@ -15,4 +15,5 @@
 Os créditos são estimativas e serão revistos a cada fase. A regra é gerar só o que a fase atual precisa.
 
 ## Status
-- [x] Fase 0 — em andamento
+- [x] Fase 0 — concluída (11/11/2026)
+- [ ] Fase 1 — em andamento: briefing em `docs/design/BRIEFING.md`

@@ -27,6 +27,7 @@ Status possíveis: `planned`, `generating`, `review`, `approved`, `rejected`, `i
 | Inimigo | `enm_` | `assets/enemies/` |
 | Chefe | `boss_` | `assets/enemies/` |
 | NPC | `npc_` | `assets/npcs/` |
+| Arma | `wpn_` | `assets/weapons/` |
 | Objeto / peça de cenário | `prp_` | `assets/props/` |
 | Peça de ambiente (muro, casa, ponte) | `env_` | `assets/environment/` |
 | Imagem de referência (PNG) | `ref_` | `docs/design/referencias/` |

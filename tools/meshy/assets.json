@@ -124,6 +124,149 @@
       "notes": [
         "2026-11-11: aprovado pelo dono"
       ]
+    },
+    {
+      "id": "hero_lio",
+      "category": "hero",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Image to 3D a partir de ref_lio (tarefa 01a1cab5-eeca-76aa-be1c-9b53fc5f0f35); rig; 14 animações (docs/FASE3_PLANO.md)",
+      "file": "assets/characters/hero_lio/hero_lio.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "wpn_espada_aprendiz",
+      "category": "wpn",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Espada simples de aprendiz (docs/FASE3_PLANO.md)",
+      "file": "assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "enm_bandido",
+      "category": "enm",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Bandido de Pradoluz; imagem conceito + Image to 3D; rig; 4 animações",
+      "file": "assets/enemies/enm_bandido/enm_bandido.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_arvore",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_arvore/prp_arvore.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_arbusto",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_arbusto/prp_arbusto.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_pedra",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_pedra/prp_pedra.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_cerca",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_cerca/prp_cerca.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_barril",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_barril/prp_barril.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_caixa",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_caixa/prp_caixa.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_feno",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_feno/prp_feno.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_carroca",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_carroca/prp_carroca.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "prp_poco",
+      "category": "prp",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Peça de Pradoluz (docs/FASE3_PLANO.md)",
+      "file": "assets/props/prp_poco/prp_poco.glb",
+      "tasks": [],
+      "notes": []
+    },
+    {
+      "id": "env_casa_pequena",
+      "category": "env",
+      "phase": 3,
+      "method": "mcp",
+      "status": "planned",
+      "prompt": "Casa pequena de madeira, telhado laranja (docs/FASE3_PLANO.md)",
+      "file": "assets/environment/env_casa_pequena/env_casa_pequena.glb",
+      "tasks": [],
+      "notes": []
     }
   ]
 }

@@ -30,6 +30,7 @@ CATEGORIES = {
     "enm": "assets/enemies",
     "boss": "assets/enemies",
     "npc": "assets/npcs",
+    "wpn": "assets/weapons",
     "prp": "assets/props",
     "env": "assets/environment",
     "ref": "docs/design/referencias",

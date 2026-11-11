@@ -66,3 +66,6 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 ## Primeiro teste do protótipo (11/11/2026)
 - O dono aprovou a velocidade do personagem, o ataque, o equilíbrio dos inimigos e as skills. Nada travou.
 - Pedido: **fôlego**. A esquiva, a corrida (botão novo) e as skills gastam fôlego; o ataque básico não. Detalhes no GDD 6.3.1.
+
+## Áudio (11/11/2026)
+- Trilha, passos, sons das skills e "fala" dos NPCs entram na Fase 4. Plano em [AUDIO.md](AUDIO.md): ElevenLabs (IA com conector; uso comercial só no plano pago), bibliotecas CC0 como complemento e "fala" dos NPCs gerada pelo próprio Godot.

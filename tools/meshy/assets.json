@@ -498,7 +498,7 @@
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_casa_media/env_casa_media.glb",
       "tasks": [
@@ -515,14 +515,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_moinho",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_moinho/env_moinho.glb",
       "tasks": [
@@ -539,14 +541,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_barraca_mercado",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_barraca_mercado/prp_barraca_mercado.glb",
       "tasks": [
@@ -563,14 +567,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_trigo",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_trigo/prp_trigo.glb",
       "tasks": [
@@ -587,14 +593,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_placa",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_placa/prp_placa.glb",
       "tasks": [
@@ -611,14 +619,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_lampiao",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_lampiao/prp_lampiao.glb",
       "tasks": [
@@ -635,14 +645,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_banco",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_banco/prp_banco.glb",
       "tasks": [
@@ -659,14 +671,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_pedra_passagem",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_pedra_passagem/prp_pedra_passagem.glb",
       "tasks": [
@@ -683,14 +697,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_fogueira",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_fogueira/prp_fogueira.glb",
       "tasks": [
@@ -707,14 +723,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_espantalho",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_espantalho/prp_espantalho.glb",
       "tasks": [
@@ -731,14 +749,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_ferraria",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_ferraria/env_ferraria.glb",
       "tasks": [
@@ -755,14 +775,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_bigorna",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_bigorna/prp_bigorna.glb",
       "tasks": [
@@ -779,14 +801,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_pinheiro",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_pinheiro/prp_pinheiro.glb",
       "tasks": [
@@ -803,14 +827,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_arvore_torta",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_arvore_torta/prp_arvore_torta.glb",
       "tasks": [
@@ -827,14 +853,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_tronco_caido",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_tronco_caido/prp_tronco_caido.glb",
       "tasks": [
@@ -851,14 +879,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_toco",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_toco/prp_toco.glb",
       "tasks": [
@@ -875,14 +905,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_cogumelos",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_cogumelos/prp_cogumelos.glb",
       "tasks": [
@@ -899,14 +931,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_flores",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_flores/prp_flores.glb",
       "tasks": [
@@ -923,14 +957,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_pedrinhas",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_pedrinhas/prp_pedrinhas.glb",
       "tasks": [
@@ -947,14 +983,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_cerca_quebrada",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_cerca_quebrada/prp_cerca_quebrada.glb",
       "tasks": [
@@ -971,14 +1009,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_entrada_mina",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_entrada_mina/env_entrada_mina.glb",
       "tasks": [
@@ -995,14 +1035,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_parede_mina",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_parede_mina/env_parede_mina.glb",
       "tasks": [
@@ -1019,14 +1061,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_viga_mina",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_viga_mina/env_viga_mina.glb",
       "tasks": [
@@ -1043,14 +1087,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_trilho",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_trilho/prp_trilho.glb",
       "tasks": [
@@ -1067,14 +1113,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_carrinho_mina",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_carrinho_mina/prp_carrinho_mina.glb",
       "tasks": [
@@ -1091,14 +1139,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_minerio",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_minerio/prp_minerio.glb",
       "tasks": [
@@ -1115,14 +1165,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_cristal",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_cristal/prp_cristal.glb",
       "tasks": [
@@ -1139,14 +1191,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_lampiao_mina",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_lampiao_mina/prp_lampiao_mina.glb",
       "tasks": [
@@ -1163,14 +1217,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "prp_barril_polvora",
       "category": "prp",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/props/prp_barril_polvora/prp_barril_polvora.glb",
       "tasks": [
@@ -1187,14 +1243,16 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     },
     {
       "id": "env_portao_mina",
       "category": "env",
       "phase": 4,
       "method": "mcp",
-      "status": "review",
+      "status": "imported",
       "prompt": "Fase 4.1 (ver tools/meshy/fase4_lote1.json)",
       "file": "assets/environment/env_portao_mina/env_portao_mina.glb",
       "tasks": [
@@ -1211,7 +1269,9 @@
           "date": "2026-11-11"
         }
       ],
-      "notes": []
+      "notes": [
+        "2026-11-11: aprovado pelo dono"
+      ]
     }
   ]
 }

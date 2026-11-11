@@ -17,6 +17,9 @@ var _current: String = ""
 var _clock: float = 0.0
 var _overlay: StandardMaterial3D
 var _meshes: Array[MeshInstance3D] = []
+var _hand_weapon: Node3D
+var _back_weapon: Node3D
+var _drawn: bool = true
 
 static var _libraries: Dictionary = {}
 static var _configs: Dictionary = {}
@@ -102,12 +105,8 @@ func play_loop(action: String, speed: float = 1.0) -> void:
 	var a: Dictionary = _action(action)
 	if a.is_empty():
 		return
-	if _current != action:
-		anim.play(str(a["anim"]), MOVE_BLEND, speed)
-		_current = action
-	else:
-		anim.speed_scale = 1.0
-		anim.play(str(a["anim"]), MOVE_BLEND, speed)
+	anim.play(str(a["anim"]), MOVE_BLEND, speed)
+	_current = action
 
 
 ## Call every frame with the character's ground speed. Movement interrupts the tail
@@ -116,14 +115,34 @@ func update_locomotion(ground_speed: float, in_combat: bool = false) -> void:
 	var moving: bool = ground_speed > 0.2
 	if is_busy() and not moving:
 		return
+	set_weapon_drawn(in_combat)
 	var speeds: Dictionary = config.get("move_anim_speed", {})
+	# In combat, prefer the "combat_*" versions when the character has them.
+	var prefix: String = "combat_" if in_combat else ""
 	if not moving:
 		play_loop("combat_idle" if in_combat else "idle")
 	elif ground_speed < 3.0:
-		play_loop("walk", clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
+		play_loop(_pick(prefix + "walk", "walk"), clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
 	else:
-		play_loop("run", clampf(ground_speed / float(speeds.get("run", 6.0)), 0.7, 1.8))
+		play_loop(_pick(prefix + "run", "run"), clampf(ground_speed / float(speeds.get(_pick(prefix + "run", "run"), speeds.get("run", 6.0))), 0.7, 1.8))
 	_busy_until = 0.0
+
+
+## Weapon in the hand (true) or sheathed on the back (false). No-op without a back slot.
+func set_weapon_drawn(drawn: bool) -> void:
+	if _back_weapon == null or drawn == _drawn:
+		return
+	_drawn = drawn
+	_hand_weapon.visible = drawn
+	_back_weapon.visible = not drawn
+
+
+func is_weapon_drawn() -> bool:
+	return _drawn
+
+
+func _pick(preferred: String, fallback: String) -> String:
+	return preferred if not _action(preferred).is_empty() else fallback
 
 
 func is_busy() -> bool:
@@ -148,6 +167,8 @@ func _action(action: String) -> Dictionary:
 
 
 func _play_section(action: String, a: Dictionary, start: float, end: float, speed: float) -> float:
+	if not a.get("keep_weapon", false):
+		set_weapon_drawn(true)
 	var anim_name: String = str(a["anim"])
 	if not anim.has_animation(anim_name):
 		push_warning("CharacterModel %s: falta a animação %s" % [character_id, anim_name])
@@ -201,24 +222,32 @@ func _attach_weapon() -> void:
 	var w: Dictionary = config.get("weapon", {})
 	if w.is_empty() or not ResourceLoader.exists(str(w.get("scene", ""))):
 		return
+	_hand_weapon = _mount_weapon(w, str(w.get("bone", "RightHand")), w.get("rotation_deg", [0, 0, 0]), w.get("offset", [0, 0, 0]))
+	var sheath: Dictionary = w.get("sheath", {})
+	if not sheath.is_empty():
+		_back_weapon = _mount_weapon(w, str(sheath.get("bone", "Spine")), sheath.get("rotation_deg", [0, 0, 0]), sheath.get("offset", [0, 0, 0]))
+		_back_weapon.visible = false
+
+
+## Puts a copy of the weapon on `bone`. Rotation in degrees, offset in metres (bone space).
+func _mount_weapon(w: Dictionary, bone: String, rot: Array, off: Array) -> Node3D:
 	var attach := BoneAttachment3D.new()
-	attach.name = "WeaponAttach"
-	attach.bone_name = str(w.get("bone", "RightHand"))
+	attach.name = "Attach_" + bone
+	attach.bone_name = bone
 	skeleton.add_child(attach)
 	# Cancel the armature scale (Meshy rigs are in centimetres) so the weapon is sized in metres.
 	var pivot := Node3D.new()
 	pivot.name = "WeaponPivot"
 	attach.add_child(pivot)
-	var world_scale: float = skeleton.global_basis.get_scale().x
-	pivot.scale = Vector3.ONE / maxf(world_scale, 0.0001)
-	var rot: Array = w.get("rotation_deg", [0, 0, 0])
+	var world_scale: float = maxf(skeleton.global_basis.get_scale().x, 0.0001)
+	pivot.scale = Vector3.ONE / world_scale * float(config.get("scale", 1.0))
 	pivot.rotation_degrees = Vector3(float(rot[0]), float(rot[1]), float(rot[2]))
-	var off: Array = w.get("offset", [0, 0, 0])
-	pivot.position = Vector3(float(off[0]), float(off[1]), float(off[2])) / maxf(world_scale, 0.0001)
+	pivot.position = Vector3(float(off[0]), float(off[1]), float(off[2])) / world_scale * float(config.get("scale", 1.0))
 	var weapon: Node3D = (load(str(w["scene"])) as PackedScene).instantiate()
 	var length: float = float(w.get("length", 0.8))
 	weapon.scale = Vector3.ONE * length
-	# Sword GLBs are 1 m tall and centred: move it so the grip sits in the hand.
+	# Sword GLBs are 1 m tall and centred: move it so the grip sits at the pivot.
 	weapon.position = Vector3(0, float(w.get("grip", 0.38)) * length, 0)
 	pivot.add_child(weapon)
 	ToonStyle.apply(weapon)
+	return pivot

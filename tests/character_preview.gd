@@ -10,10 +10,18 @@ func _ready() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	var id: String = args[0]
 	var out: String = args[1]
-	if args.size() > 2 and args[2].count(",") == 2:
-		var r: PackedStringArray = args[2].split(",")
+	# 3rd arg: "rx,ry,rz" (hand angle) or "back:rx,ry,rz:ox,oy,oz" (sheath angle and offset).
+	if args.size() > 2 and args[2].count(",") >= 2:
 		var cfg: Dictionary = CharacterModel.config_for(id)
-		cfg["weapon"]["rotation_deg"] = [float(r[0]), float(r[1]), float(r[2])]
+		if args[2].begins_with("back:"):
+			var parts: PackedStringArray = args[2].split(":")
+			var r: PackedStringArray = parts[1].split(",")
+			var o: PackedStringArray = parts[2].split(",") if parts.size() > 2 else PackedStringArray(["0", "0", "0"])
+			cfg["weapon"]["sheath"]["rotation_deg"] = [float(r[0]), float(r[1]), float(r[2])]
+			cfg["weapon"]["sheath"]["offset"] = [float(o[0]), float(o[1]), float(o[2])]
+		else:
+			var r: PackedStringArray = args[2].split(",")
+			cfg["weapon"]["rotation_deg"] = [float(r[0]), float(r[1]), float(r[2])]
 	var shots: Array[String] = []
 	for i: int in range(3, args.size()):
 		shots.append(args[i])
@@ -41,9 +49,16 @@ func _ready() -> void:
 	var tiles: Array[Image] = []
 	for s: String in shots:
 		var parts: PackedStringArray = s.split(":")
-		var dur: float = model.play_action(parts[0]) if parts[0] != "idle" else 0.0
-		if parts[0] == "idle":
-			model.play_loop("idle")
+		var dur: float = 0.0
+		# "turn:deg" rotates the character (e.g. turn:180 shows the back), no picture.
+		if parts[0] == "turn":
+			model.rotation_degrees.y = float(parts[1])
+			continue
+		if model.config.get("actions", {}).get(parts[0], {}).get("loop", false):
+			model.set_weapon_drawn(parts[0].begins_with("combat"))
+			model.play_loop(parts[0])
+		else:
+			dur = model.play_action(parts[0])
 		var wait: float = float(parts[1]) if parts.size() > 1 else 0.2
 		var t: float = 0.0
 		while t < wait:

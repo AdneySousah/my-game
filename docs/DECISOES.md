@@ -75,3 +75,4 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Objetos passaram a ser feitos pelo caminho imagem → 3D (mais controle; +3 créditos por peça).
 - Visual estilo desenho feito com os modos toon nativos do Godot (sem shader próprio).
 - Personagens em escala 1,2 e câmera mais próxima, para leitura no celular.
+- Pedido do dono (corrida): fora de combate a espada fica nas costas (osso `Spine`); em combate (3 s após atacar, usar skill ou levar dano) volta para a mão. Corrida em combate com a espada para trás (`Standard Forward Charge`) e caminhada em guarda (`Walk Fight Forward`). +9 créditos (3 animações testadas).

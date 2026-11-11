@@ -157,6 +157,12 @@
           "credits": 12,
           "task_id": "01a1cad8-d628-717c-bbf2-6f7dc6c67a34",
           "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 9,
+          "task_id": "01a1caec-c012-755d-9229-78e20d0ed803",
+          "date": "2026-11-11"
         }
       ],
       "notes": []

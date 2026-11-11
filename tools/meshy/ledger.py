@@ -35,9 +35,10 @@ CATEGORIES = {
     "env": "assets/environment",
     "ref": "docs/design/referencias",
     "ui": "assets/ui",
+    "pro": "assets/story",
 }
 # 2D reference/cutscene images are PNG; everything else is a 3D model.
-EXTENSIONS = {"ref": "png", "ui": "png"}
+EXTENSIONS = {"ref": "png", "ui": "png", "pro": "png"}
 
 
 def load() -> dict:

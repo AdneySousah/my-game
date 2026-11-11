@@ -110,3 +110,10 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Equilíbrio pensado para o nível 12 sem poções (robô de teste vence em ~45 s a 2 min; no nível 11 perde).
 - Drops: moedas que voam até o herói e materiais (couro de orc, osso velho, fragmento de pedra, palha dourada) guardados para o ferreiro da Fase 5.
 - Depois do Gorvan: a vila ganha comida (peças com if_flag), falas novas, e a despedida com Bram e Bento fecha o Ato 1.
+
+## Prólogo, tela inicial e save (11/11/2026, etapa 4.5)
+- O jogo abre na tela inicial (Continuar, Novo jogo, Sair no PC). Novo jogo com save existente pede confirmação antes de apagar.
+- Prólogo "A noite do brilho" em 8 ilustrações com texto, câmera lenta e "Pular"; termina em "Dezenove anos depois..." e entra no jogo.
+- Save local criptografado (AES do Godot) com verificação SHA-256 e cópia de segurança (o save anterior). Arquivo adulterado ou danificado é ignorado e o jogo usa a cópia.
+- A chave é do jogo, não do aparelho: quem troca de celular e restaura o backup do Android mantém o progresso.
+- Salva ao trocar de mapa, ao descansar, ao concluir missão, ao subir de nível, a cada 30 s e quando o app vai para o fundo ou fecha. Guarda mapa, posição, missões, marcas da história, materiais, nível, atributos, ouro, skills equipadas.

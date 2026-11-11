@@ -1,5 +1,5 @@
 extends Control
-## First scene: shows the version, then opens the game.
+## First scene: shows the version, then opens the title screen.
 
 @onready var _info: Label = %Info
 
@@ -11,4 +11,4 @@ func _ready() -> void:
 	]
 	print("BOOT_OK version=%s platform=%s" % [Game.version(), platform])
 	await get_tree().create_timer(0.6).timeout
-	get_tree().change_scene_to_file(Game.MAIN_SCENE)
+	get_tree().change_scene_to_file(Game.TITLE_SCENE)

@@ -23,6 +23,7 @@ var _fader: OcclusionFader
 var _changing: bool = false
 var _at_point: RestPoint
 var _near_npc: Npc
+var _autosave_timer: float = 0.0
 var _talking: bool = false
 
 
@@ -54,14 +55,29 @@ func _ready() -> void:
 		var note: String = str(Data.quest(id).get("end_note", ""))
 		if note != "":
 			hud.banner(tr(note)))
-	player.stats.leveled_up.connect(func(_l: int) -> void: _refresh_quest_world())
+	player.stats.leveled_up.connect(func(_l: int) -> void:
+		_refresh_quest_world()
+		save_now())
+	quests.quest_completed.connect(func(_id: String) -> void: save_now.call_deferred())
 
 	_fader = OcclusionFader.new()
 	add_child(_fader)
 	_fader.camera = camera_rig.camera
 	_fader.target = player
 
-	await load_map(start_map, start_spawn, false)
+	# Continue: the title screen loaded a save into SaveGame.pending.
+	var map_id: String = start_map
+	var spawn: String = start_spawn
+	if SaveGame.active and not SaveGame.pending.is_empty():
+		var st: Dictionary = SaveGame.pending
+		Session.from_dict(st.get("session", {}))
+		player.load_state(st.get("player", {}))
+		map_id = str(st.get("map", map_id))
+		var pos: Array = st.get("pos", [])
+		if pos.size() >= 2:
+			spawn = "pos:%s:%s:%s" % [pos[0], pos[1], st.get("yaw", 0)]
+		SaveGame.pending = {}
+	await load_map(map_id, spawn, false)
 	quests.start_auto_quests()
 
 
@@ -86,6 +102,10 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	var yaw: float = 0.0
 	if spawn.begins_with("point:"):
 		pos = map.rest_point_position(spawn.trim_prefix("point:"))
+	elif spawn.begins_with("pos:"):
+		var parts: PackedStringArray = spawn.split(":")
+		pos = Vector3(float(parts[1]), 0, float(parts[2]))
+		yaw = float(parts[3]) if parts.size() > 3 else 0.0
 	else:
 		var t: Array = map.spawn_transform(spawn)
 		pos = t[0]
@@ -107,13 +127,17 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 		await hud.fade(false)
 	_changing = false
 	map_loaded.emit(map_id)
+	save_now()
 
 
 ## Rest points: entering one activates it; leaving hides the travel button.
 ## Also: NPC in talk range, quest pickups under the hero, "reach" objectives.
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	if map == null or _changing or player.is_dead():
 		return
+	_autosave_timer += delta
+	if _autosave_timer >= 30.0:
+		save_now()
 	_update_quest_contacts()
 	var inside: RestPoint = null
 	for p: RestPoint in map.rest_points.values():
@@ -207,6 +231,7 @@ func _on_rest_reached(point: RestPoint) -> void:
 	player.rest()
 	hud.toast(tr("HUD_REST_ACTIVATED") % tr(point.name_key) if first else tr("HUD_RESTED"))
 	hud.show_travel_button(Session.activated.size() > 1)
+	save_now()
 
 
 func _on_player_died(gold_lost: int, xp_lost: int) -> void:
@@ -302,3 +327,22 @@ func _boss_line(dialogue_id: String) -> void:
 	_talking = true
 	await hud.play_dialogue(dlg.get("lines", []))
 	_talking = false
+
+
+## Saves the game (only in a real game started from the title screen).
+func save_now() -> void:
+	_autosave_timer = 0.0
+	if not SaveGame.active or map == null or _changing or player.is_dead():
+		return
+	var p: Vector3 = player.global_position
+	SaveGame.save_game({
+		"session": Session.to_dict(), "player": player.save_state(),
+		"map": map.map_id, "pos": [snappedf(p.x, 0.01), snappedf(p.z, 0.01)],
+		"yaw": snappedf(player.rotation_degrees.y, 0.1),
+	})
+
+
+## Phones close apps from the background without warning: save when we lose focus.
+func _notification(what: int) -> void:
+	if what in [NOTIFICATION_WM_CLOSE_REQUEST, NOTIFICATION_APPLICATION_PAUSED, NOTIFICATION_APPLICATION_FOCUS_OUT]:
+		save_now()

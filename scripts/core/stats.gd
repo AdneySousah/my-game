@@ -106,3 +106,20 @@ func cooldown_mult() -> float:
 
 func crit_multiplier() -> float:
 	return 1.0 + get_stat("crit_dmg")
+
+
+func to_dict() -> Dictionary:
+	return {"level": level, "xp": xp, "unspent_points": unspent_points, "attributes": attributes,
+		"defeated_time_left": defeated_time_left}
+
+
+func from_dict(d: Dictionary) -> void:
+	level = clampi(int(d.get("level", 1)), 1, Data.level_cap())
+	xp = maxi(0, int(d.get("xp", 0)))
+	unspent_points = maxi(0, int(d.get("unspent_points", 0)))
+	var attrs: Dictionary = d.get("attributes", {})
+	for a: String in ATTRIBUTES:
+		attributes[a] = int(attrs.get(a, attributes.get(a, 0)))
+	defeated_time_left = float(d.get("defeated_time_left", 0.0))
+	stats_changed.emit()
+	xp_changed.emit(xp, xp_needed())

@@ -21,7 +21,7 @@ Cada etapa termina com algo jogável para você testar.
 | 4.2 | **Conversa e missões** (feito) | NPCs com diálogo em balões, "fala" em bipes, retratos; missão principal do Ato 1 e 2 missões secundárias; marcador de objetivo |
 | 4.3 | **Inimigos e chefe** (feito) | Orc, bandido arqueiro, esqueleto mineiro e Golem de pedra com modelos; Gorvan com 2 formas; drop de ouro e materiais |
 | 4.4 | **Áudio** | Sistema de som com volumes; efeitos de combate, das 8 skills, passos, interface; música da vila, da floresta, da mina e do chefe |
-| 4.5 | **Prólogo e save** | Prólogo em ilustrações; tela inicial; salvar e continuar (save local, já criptografado) |
+| 4.5 | **Prólogo e save** (feito) | Prólogo em ilustrações; tela inicial; salvar e continuar (save local, já criptografado) |
 
 ### Pedidos do dono após a 4.1 (11/11/2026)
 | # | Etapa | O que fica pronto |

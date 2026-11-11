@@ -316,6 +316,27 @@ func receive_attack(atk_value: float) -> void:
 		_die()
 
 
+## Hero progress for the save file (position is saved by Main).
+func save_state() -> Dictionary:
+	return {"stats": stats.to_dict(), "gold": gold, "hp": hp, "stamina": stamina,
+		"equipped": Array(skills.equipped)}
+
+
+func load_state(d: Dictionary) -> void:
+	stats.from_dict(d.get("stats", {}))
+	gold = maxi(0, int(d.get("gold", 0)))
+	skills.refresh_unlocks(false)
+	var eq: Array = d.get("equipped", [])
+	for i: int in mini(eq.size(), skills.equipped.size()):
+		var id: String = str(eq[i])
+		skills.equipped[i] = id if id == "" or skills.is_unlocked(id) else ""
+	skills.equipped_changed.emit()
+	hp = clampf(float(d.get("hp", max_hp())), 1.0, max_hp())
+	stamina = clampf(float(d.get("stamina", max_stamina())), 0.0, max_stamina())
+	hp_changed.emit(hp, max_hp())
+	gold_changed.emit(gold)
+
+
 ## Rest point: full health and stamina.
 func rest() -> void:
 	hp = max_hp()

@@ -10,6 +10,7 @@ const LAYER_PLAYER: int = 2
 const LAYER_ENEMY: int = 4
 
 const MAIN_SCENE: String = "res://scenes/main/main.tscn"
+const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 
 
 func _ready() -> void:

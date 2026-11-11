@@ -53,3 +53,33 @@ func set_flag(flag: String) -> void:
 
 func add_material(key: String, amount: int = 1) -> void:
 	materials[key] = int(materials.get(key, 0)) + amount
+
+
+## Everything above, for the save file.
+func to_dict() -> Dictionary:
+	return {
+		"current_map": current_map, "activated": activated, "last_rest": last_rest,
+		"quests": quests, "flags": flags, "tracked_quest": tracked_quest, "materials": materials,
+	}
+
+
+func from_dict(d: Dictionary) -> void:
+	reset()
+	current_map = str(d.get("current_map", ""))
+	activated = d.get("activated", {})
+	last_rest = d.get("last_rest", {})
+	quests = d.get("quests", {})
+	flags = d.get("flags", {})
+	tracked_quest = str(d.get("tracked_quest", ""))
+	materials = d.get("materials", {})
+	# JSON brings numbers back as floats; quest counters are ints.
+	for id: String in quests:
+		var q: Dictionary = quests[id]
+		q["step"] = int(q.get("step", 0))
+		q["count"] = int(q.get("count", 0))
+		var picked: Array = []
+		for i: Variant in q.get("picked", []):
+			picked.append(int(i))
+		q["picked"] = picked
+	for k: String in materials:
+		materials[k] = int(materials[k])

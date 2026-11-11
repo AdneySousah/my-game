@@ -2,7 +2,7 @@
 
 O texto dos diálogos fica aqui (pt_BR e en lado a lado). Para mudar uma fala, edite
 este arquivo e rode:  python -X utf8 tools/content/gen_act1_text.py
-As chaves geradas começam com DLG_, BARK_, NPC_, QUEST_, OBJ_ e ITEM_; as outras
+As chaves geradas começam com DLG_, BARK_, NPC_, QUEST_, OBJ_, ITEM_, PRO_ e TITLE_; as outras
 linhas do strings.csv não são tocadas.
 """
 import csv
@@ -236,11 +236,30 @@ TEXTS = {
     "OBJ_KILL_ORCS": ("Derrote orcs na floresta: %d/%d", "Defeat orcs in the forest: %d/%d"),
     "OBJ_FIND_IRON": ("Ache o caixote de ferro na trilha norte", "Find the iron crate on the north trail"),
     "OBJ_RETURN_TOBIAS": ("Devolva o ferro ao Tobias", "Return the iron to Tobias"),
+    # Prólogo (um texto por ilustração, na ordem) e tela inicial
+    "PRO_1": ("Há dezenove invernos, em Pradoluz, uma vila de fazendeiros esquecida pelo resto do mundo...", "Nineteen winters ago, in Pradoluz, a farming village the rest of the world had forgotten..."),
+    "PRO_2": ("...nasceu um menino. E ele brilhava.", "...a boy was born. And he shone."),
+    "PRO_3": ("A luz dourada iluminou a vila inteira, como se o sol tivesse nascido no meio da noite.", "The golden light lit up the whole village, as if the sun had risen in the middle of the night."),
+    "PRO_4": ("O pai, Doran, olhou para o filho, depois para a casa pobre... e fugiu pela neve.", "His father, Doran, looked at his son, then at their poor house... and ran into the snow."),
+    "PRO_5": ("Na manhã seguinte, só acharam pegadas de lobo e a luva dele, rasgada, com um dedo dentro. Disseram que os lobos o levaram.", "The next morning they found only wolf tracks and his torn glove, with a finger inside. They said the wolves had taken him."),
+    "PRO_6": ("Mas, no meio da tempestade, alguém sem rosto o esperava. \"Você nunca mais vai ter medo.\"", "But in the heart of the storm, someone without a face was waiting. \"You will never be afraid again.\""),
+    "PRO_7": ("Meses depois, um homem alado surgiu nos céus de Varenthia e se declarou deus. Cinco Arautos passaram a governar em seu nome.", "Months later, a winged man appeared in the skies of Varenthia and declared himself a god. Five Heralds began to rule in his name."),
+    "PRO_8": ("E, do alto de sua torre, o deus olhava para o sul. Para Pradoluz. Preocupado.", "And from the top of his tower, the god looked south. Toward Pradoluz. Worried."),
+    "PRO_LATER": ("Dezenove anos depois...", "Nineteen years later..."),
+    "PRO_SKIP": ("Pular", "Skip"),
+    "TITLE_GAME": ("Herdeiro dos Céus", "Heir of the Skies"),
+    "TITLE_CONTINUE": ("Continuar", "Continue"),
+    "TITLE_NEW": ("Novo jogo", "New game"),
+    "TITLE_QUIT": ("Sair", "Quit"),
+    "TITLE_SAVE_INFO": ("Lio · Nv. %d · %s", "Lio · Lv. %d · %s"),
+    "TITLE_CONFIRM_NEW": ("Começar de novo apaga o jogo salvo. Tem certeza?", "Starting over erases your saved game. Are you sure?"),
+    "TITLE_YES": ("Sim, começar de novo", "Yes, start over"),
+    "TITLE_NO": ("Voltar", "Back"),
     "ITEM_ERVA_ORVALHO": ("Erva-de-orvalho", "Dewleaf"),
     "ITEM_CAIXOTE_FERRO": ("Caixote de ferro", "Iron crate"),
 }
 
-PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_")
+PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_", "PRO_", "TITLE_")
 
 
 def main() -> None:

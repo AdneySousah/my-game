@@ -19,6 +19,7 @@ func _ready() -> void:
 	await _world_test()
 	await _quest_test()
 	await _boss_test()
+	await _save_test()
 	print("TESTS: %d checks, %d failures" % [_checks, _failures])
 	print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
 	get_tree().quit(1 if _failures > 0 else 0)
@@ -532,6 +533,80 @@ func _boss_test() -> void:
 	check(q.is_done("main_06") and Session.has_flag("act1_done"), "Act 1 ends")
 	check(str(q.talk_plan("marta").get("dialogue", "")) == "marta_idle_fed", "Marta has new lines after the victory")
 	main.queue_free()
+	await _frames(2)
+
+
+## Save file: round trip, tamper check, backup, and continuing a game (stage 4.5).
+func _save_test() -> void:
+	var real_path: String = SaveGame.path
+	SaveGame.path = "user://test_save.dat"
+	SaveGame.delete_save()
+	check(not SaveGame.has_save(), "no save at the start")
+
+	# Play a bit and save.
+	Session.reset()
+	SaveGame.active = true
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	while main.player.stats.level < 7:
+		main.player.stats.add_xp(main.player.stats.xp_needed() - main.player.stats.xp)
+	main.player.stats.spend_point("str")
+	main.player.add_gold(345)
+	main.player.skills.equip(0, "investida")
+	Session.set_flag("bento_joined")
+	Session.add_material("MAT_COURO_ORC", 2)
+	main.player.global_position = Vector3(4.5, 0, -6.25)
+	main.save_now()
+	check(SaveGame.has_save(), "the game saves")
+	var gold_saved: int = main.player.gold
+	var str_saved: int = int(main.player.stats.attributes["str"])
+	main.queue_free()
+	await _frames(2)
+
+	# Continue: a new game session reads it back.
+	Session.reset()
+	SaveGame.load_game()
+	check(not SaveGame.pending.is_empty(), "save loads")
+	main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	check(p.stats.level == 7 and p.gold == gold_saved and int(p.stats.attributes["str"]) == str_saved, "level, gold and attributes come back")
+	check(p.skills.equipped[0] == "investida", "equipped skills come back")
+	check(Session.has_flag("bento_joined") and int(Session.materials.get("MAT_COURO_ORC", 0)) == 2, "story flags and materials come back")
+	check(main.map.map_id == "pradoluz" and p.global_position.distance_to(Vector3(4.5, 0, -6.25)) < 0.1, "hero continues where he was")
+	check(Session.quests.has("main_01"), "quests come back")
+	main.save_now()
+	main.queue_free()
+	await _frames(2)
+
+	# Tampering: change the save -> it is rejected and the backup is used.
+	var f := FileAccess.open_encrypted_with_pass(SaveGame.path, FileAccess.WRITE, SaveGame.call("_key"))
+	f.store_string("{\"v\":1,\"payload\":\"{}\",\"hash\":\"bad\"}")
+	f.close()
+	var st: Dictionary = SaveGame.load_game()
+	check(not st.is_empty() and int((st.get("player", {}) as Dictionary).get("stats", {}).get("level", 0)) == 7, "a damaged save falls back to the backup")
+	SaveGame.delete_save()
+	check(not SaveGame.has_save(), "saves can be erased")
+
+	# Title screen and prologue load.
+	var title: Control = load(Game.TITLE_SCENE).instantiate()
+	add_child(title)
+	await _frames(2)
+	check(title.find_children("*", "Button", true, false).size() >= 1, "title screen shows its buttons")
+	title.queue_free()
+	var prologue: Control = load("res://scenes/ui/prologue.tscn").instantiate()
+	check((prologue.get("PANELS") as Array).size() == 8, "prologue has 8 panels")
+	for id: String in prologue.get("PANELS"):
+		check(ResourceLoader.exists("res://assets/story/%s.webp" % id), "panel %s exists" % id)
+	prologue.free()
+
+	SaveGame.active = false
+	SaveGame.pending = {}
+	SaveGame.path = real_path
 	await _frames(2)
 
 

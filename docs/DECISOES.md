@@ -131,3 +131,8 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Missões: seta laranja no chão ao redor do herói aponta para o objetivo (ou para a saída do mapa certo); o rastreador mostra a distância ou "em <mapa>"; tocar no rastreador abre o diário; a missão recém-aceita vira a seguida.
 - Chefes não morrem antes da próxima forma (um golpe forte perto da metade faz o Gorvan virar Espantalho, não pular a forma).
 - Poções (vida, fôlego, reforço) com atalhos na tela entram na Fase 5 (GDD 6.5.1). "MP" no nosso jogo é o fôlego.
+
+## Texturas e espaço no Git (11/11/2026)
+- O dono prefere manter a qualidade: texturas continuam em 2K, sem limite no jogo exportado.
+- Economia sem perda: animações novas vêm só com o esqueleto (≈90 KB por arquivo em vez de ≈3 MB). Os arquivos antigos ficam como estão (trocá-los não libera o espaço já usado no histórico).
+- Se o GitHub ficar sem espaço: comprar pacote de dados do Git LFS ou usar a ferramenta opcional `glb_shrink.gd`.

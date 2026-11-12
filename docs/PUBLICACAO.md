@@ -43,6 +43,10 @@ Se o Console pedir a versão em inglês, use: Bag of gold / Chest of gold / Scro
 1. **Gerenciar conta** (fora do app) → **Teste de licença** → adicione o seu e-mail → resposta **RESPOND_NORMALLY** → salvar.
 2. No celular, na hora de comprar, o Google mostra "Cartão de teste, sempre aprova". Nada é cobrado.
 
+## Avisos amarelos normais no envio (não impedem nada)
+- "Não há um arquivo de desofuscação": só serve para apps que usam R8/ProGuard; o jogo não usa.
+- "Código nativo sem símbolos de depuração": os símbolos só deixam os relatórios de travamento mais detalhados. Ver na Fase 7 se o Godot oferece os símbolos do motor para enviar junto.
+
 ## 5. Antes de publicar de verdade (mais para frente)
 - Conta pessoal: teste fechado com **12 testadores por 14 dias seguidos** antes de pedir a produção (confirmar a regra no painel na hora).
 - Ficha da loja: ícone 512×512, imagem de destaque 1024×500, fotos do jogo, descrição curta e completa (eu preparo).

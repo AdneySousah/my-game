@@ -12,9 +12,96 @@ const LAYER_ENEMY: int = 4
 const MAIN_SCENE: String = "res://scenes/main/main.tscn"
 const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 
+## Saved with the sound volumes (section "video").
+const SETTINGS: String = "user://settings.cfg"
+## Phones draw the 3D world at most this many pixels tall (the HUD stays sharp).
+const MOBILE_3D_HEIGHT: float = 1080.0
+
+## Frame limit on phones: 60 (default) or 30 (saves battery). The game logic runs at
+## 60 steps a second, so drawing faster (120 Hz screens) only made the hero stutter.
+var fps_limit: int = 60
+var show_fps: bool = false
+
+var _fps_layer: CanvasLayer
+var _fps_label: Label
+var _fps_timer: float = 0.0
+
 
 func _ready() -> void:
 	_register_inputs()
+	_load_video()
+	apply_video()
+	get_tree().root.size_changed.connect(_apply_3d_scale)
+
+
+func _process(delta: float) -> void:
+	if _fps_label == null or not _fps_label.visible:
+		return
+	_fps_timer -= delta
+	if _fps_timer <= 0.0:
+		_fps_timer = 0.5
+		_fps_label.text = "%d FPS" % roundi(Engine.get_frames_per_second())
+
+
+## Applies the frame limit, the 3D resolution and the FPS counter.
+func apply_video() -> void:
+	if is_mobile():
+		Engine.max_fps = fps_limit
+	_apply_3d_scale()
+	if show_fps and _fps_label == null:
+		_fps_layer = CanvasLayer.new()
+		_fps_layer.layer = 128
+		add_child(_fps_layer)
+		_fps_label = Label.new()
+		_fps_label.position = Vector2(8, 690)
+		_fps_label.add_theme_font_size_override("font_size", 18)
+		_fps_label.add_theme_color_override("font_color", Color("#c6ff8a"))
+		_fps_label.add_theme_color_override("font_outline_color", Color.BLACK)
+		_fps_label.add_theme_constant_override("outline_size", 6)
+		_fps_layer.add_child(_fps_label)
+	if _fps_label:
+		_fps_label.visible = show_fps
+
+
+func set_fps_limit(v: int) -> void:
+	fps_limit = v
+	apply_video()
+	_save_video()
+
+
+func set_show_fps(on: bool) -> void:
+	show_fps = on
+	apply_video()
+	_save_video()
+
+
+## Phone screens are very sharp (the Xiaomi 14 Pro is 1440 pixels tall): drawing the
+## 3D world at full size heats the phone and drops frames for no visible gain.
+func _apply_3d_scale() -> void:
+	if not is_mobile():
+		return
+	var root: Window = get_tree().root
+	var px: Vector2i = DisplayServer.window_get_size()
+	var short_side: float = float(mini(px.x, px.y))
+	root.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
+	root.scaling_3d_scale = clampf(MOBILE_3D_HEIGHT / short_side, 0.5, 1.0) if short_side > 0.0 else 1.0
+
+
+func _load_video() -> void:
+	var cfg := ConfigFile.new()
+	if cfg.load(SETTINGS) == OK:
+		fps_limit = int(cfg.get_value("video", "fps_limit", fps_limit))
+		show_fps = bool(cfg.get_value("video", "show_fps", show_fps))
+	if fps_limit != 30:
+		fps_limit = 60
+
+
+func _save_video() -> void:
+	var cfg := ConfigFile.new()
+	cfg.load(SETTINGS)
+	cfg.set_value("video", "fps_limit", fps_limit)
+	cfg.set_value("video", "show_fps", show_fps)
+	cfg.save(SETTINGS)
 
 
 func version() -> String:

@@ -17,6 +17,11 @@ var cooldown_ratio: float = 0.0
 var disabled: bool = false
 ## Drawn darker when the action cannot be paid for (e.g. not enough fôlego).
 var dimmed: bool = false
+## Shape picture from `UiGlyphs` (e.g. "talk"); wins over `icon` and `text` while set.
+var glyph: String = ""
+
+## Emitted when a finger lands on the button (even with no action, e.g. "talk").
+signal tapped
 
 var _touch_index: int = -1
 var _frame: Texture2D
@@ -27,6 +32,23 @@ func _ready() -> void:
 	_frame = GameTheme.tex("ui_botao_redondo")
 	custom_minimum_size = Vector2(radius, radius) * 2.0
 	size = custom_minimum_size
+
+
+## Changes the action; a finger already on the button lets go of the old one.
+func set_action(a: String) -> void:
+	if a == action:
+		return
+	if _touch_index != -1 and action != "":
+		Input.action_release(action)
+	action = a
+
+
+## Hidden while a finger is down (a panel opened): let go, or the button stays stuck.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED and not is_visible_in_tree() and _touch_index != -1:
+		if action != "":
+			Input.action_release(action)
+		_touch_index = -1
 
 
 func set_center(center: Vector2) -> void:
@@ -41,12 +63,15 @@ func _input(event: InputEvent) -> void:
 		if t.pressed and _touch_index == -1 and _contains(t.position):
 			_touch_index = t.index
 			if not disabled:
-				Input.action_press(action)
+				if action != "":
+					Input.action_press(action)
+				tapped.emit()
 			queue_redraw()
 			get_viewport().set_input_as_handled()
 		elif not t.pressed and t.index == _touch_index:
 			_touch_index = -1
-			Input.action_release(action)
+			if action != "":
+				Input.action_release(action)
 			queue_redraw()
 
 
@@ -71,7 +96,10 @@ func _draw() -> void:
 	draw_texture_rect(_frame, Rect2(c - Vector2(r, r), Vector2(r, r) * 2.0), false, tint)
 	# Inner glass area of the frame is ~72% of its radius.
 	var inner: float = r * 0.72
-	if icon:
+	if glyph != "":
+		draw_circle(c, inner, Color(0.12, 0.09, 0.06, 0.55))
+		UiGlyphs.draw(self, glyph, c, inner * 0.92, tint)
+	elif icon:
 		draw_texture_rect(icon, Rect2(c - Vector2(inner, inner), Vector2(inner, inner) * 2.0), false, tint)
 	elif color.a > 0.0:
 		draw_circle(c, inner, Color(color, 0.35 * tint.a))
@@ -86,7 +114,7 @@ func _draw() -> void:
 	var font: Font = ThemeDB.fallback_font
 	var fs: int = int(clampf(radius * 0.3, 12, 24))
 	var w: float = radius * 2.0
-	if text != "" and icon == null:
+	if text != "" and icon == null and glyph == "":
 		var y: float = radius + fs * 0.35
 		draw_string_outline(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, 5, Color(0, 0, 0, 0.85))
 		draw_string(font, Vector2(0, y), text, HORIZONTAL_ALIGNMENT_CENTER, w, fs, Color(1, 0.96, 0.85) * tint)

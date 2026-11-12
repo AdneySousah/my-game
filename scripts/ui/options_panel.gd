@@ -37,6 +37,14 @@ func _ready() -> void:
 	_diff_btn.custom_minimum_size = Vector2(0, 44)
 	_diff_btn.pressed.connect(_lower_difficulty)
 	diff_row.add_child(_diff_btn)
+	# Video: FPS counter (to check how smooth the game runs) and, on phones, 60 or 30.
+	_toggle_row(box, "OPT_SHOW_FPS", func() -> String:
+		return tr("OPT_ON") if Game.show_fps else tr("OPT_OFF"),
+		func() -> void: Game.set_show_fps(not Game.show_fps))
+	if Game.is_mobile():
+		_toggle_row(box, "OPT_FPS_LIMIT", func() -> String:
+			return str(Game.fps_limit),
+			func() -> void: Game.set_fps_limit(30 if Game.fps_limit == 60 else 60))
 	var credits_btn := Button.new()
 	credits_btn.text = tr("OPT_CREDITS")
 	credits_btn.focus_mode = Control.FOCUS_NONE
@@ -99,6 +107,27 @@ func _lower_difficulty() -> void:
 
 func _center() -> void:
 	GameTheme.place_center(self)
+
+
+## A label and a button that shows the current value; pressing it changes the value.
+func _toggle_row(box: VBoxContainer, key: String, value: Callable, change: Callable) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 14)
+	box.add_child(row)
+	var l := Label.new()
+	l.text = tr(key)
+	l.add_theme_font_size_override("font_size", 20)
+	l.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	row.add_child(l)
+	var b := Button.new()
+	b.focus_mode = Control.FOCUS_NONE
+	b.custom_minimum_size = Vector2(150, 44)
+	b.text = str(value.call())
+	b.pressed.connect(func() -> void:
+		change.call()
+		b.text = str(value.call())
+		Audio.play_sfx("ui_click"))
+	row.add_child(b)
 
 
 func _slider_row(bus: String) -> HBoxContainer:

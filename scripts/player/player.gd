@@ -196,6 +196,11 @@ func max_stamina() -> float:
 	return stats.get_stat("max_stamina")
 
 
+## Hit something or was hit in the last few seconds.
+func in_combat() -> bool:
+	return _combat_time > 0.0
+
+
 func is_sprinting() -> bool:
 	return _sprinting
 

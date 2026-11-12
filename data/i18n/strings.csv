@@ -558,3 +558,13 @@ DIFF_NOW,Dificuldade: %s,Difficulty: %s
 DIFF_LOWER,Mudar para %s,Change to %s
 DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town
 HUD_DEBUG_TIME_GOT,Teste: +3 horas (agora %.1f h).,Test: +3 hours (now %.1f h).
+HUD_MENU_STORE,Loja,Shop
+HUD_MENU_ROUTINE,Rotina,Routine
+HUD_MENU_BAG,Mochila,Bag
+HUD_MENU_QUESTS,Missões,Quests
+HUD_OPEN_TAP,Abrir,Open
+HUD_PICK_UP_TAP,Pegar,Pick up
+OPT_SHOW_FPS,Mostrar quadros por segundo,Show frames per second
+OPT_FPS_LIMIT,Limite de quadros,Frame limit
+OPT_ON,Ligado,On
+OPT_OFF,Desligado,Off

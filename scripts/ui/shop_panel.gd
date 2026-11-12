@@ -10,6 +10,9 @@ const SLOT_PX: float = 62.0
 
 var player: Player
 var merchant: String = "celeste"
+## Opened from the shortcut at the top of the screen: only the real-money tab.
+var store_only: bool = false
+var _was_store_only: bool = false
 var shop: Shop
 
 var _tab: String = "buy"
@@ -22,6 +25,7 @@ var _result_good: bool = true
 var _title: Label
 var _gold: Label
 var _tab_btns: Dictionary = {}
+var _tabs_row: HBoxContainer
 var _list_title: Label
 var _grid: GridContainer
 var _name: Label
@@ -53,6 +57,7 @@ func _ready() -> void:
 	var tabs := HBoxContainer.new()
 	tabs.add_theme_constant_override("separation", 8)
 	root.add_child(tabs)
+	_tabs_row = tabs
 	for t: String in ["buy", "sell", "special"]:
 		var b := _button(tr("SHOP_TAB_" + t.to_upper()), func() -> void:
 			_tab = t
@@ -135,6 +140,11 @@ func open() -> void:
 	if shop == null or shop.player != player:
 		shop = Shop.new(player)
 	_result = ""
+	if store_only:
+		_tab = "special"
+	elif _was_store_only or (_tab == "special" and not Store.available()):
+		_tab = "buy"
+	_was_store_only = store_only
 	_refresh()
 	show()
 	_center.call_deferred()
@@ -155,7 +165,8 @@ func select(tab: String, item_id: String = "", index: int = -1) -> void:
 
 
 func _refresh() -> void:
-	_title.text = tr(str((Data.shop.get("merchants", {}) as Dictionary).get(merchant, {}).get("name", "SHOP_TITLE")))
+	_title.text = tr("SHOP_TAB_SPECIAL") if store_only else tr(str((Data.shop.get("merchants", {}) as Dictionary).get(merchant, {}).get("name", "SHOP_TITLE")))
+	_tabs_row.visible = not store_only
 	_gold.text = tr("SMITH_GOLD") % (player.gold if player else 0)
 	(_tab_btns["special"] as Button).visible = Store.available()
 	if _tab == "special" and not Store.available():
@@ -282,7 +293,8 @@ func _show_sell() -> void:
 # --- Special (real money) ----------------------------------------------------------------
 
 func _show_special() -> void:
-	_name.text = tr("SHOP_TAB_SPECIAL")
+	# Opened from the top shortcut the panel title already says "Loja especial".
+	_name.text = "" if store_only else tr("SHOP_TAB_SPECIAL")
 	_name.add_theme_color_override("font_color", Color("#ffd23f"))
 	_kind.text = tr("STORE_TEST_NOTE") if Store.mode == "test" else tr("STORE_NOTE")
 	var left: float = Session.xp_boost_left()

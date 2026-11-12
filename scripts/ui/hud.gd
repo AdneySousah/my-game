@@ -50,6 +50,14 @@ var _routine_panel: RoutinePanel
 var _potion_btns: Array[TouchActionButton] = []
 var _dialogue: DialogueBox
 var _talk_btn: Button
+## What the hero can do nearby: "", "talk", "open" or "pick" (set by Main).
+var _interact_kind: String = ""
+var _interact_shown: bool = false
+## Near someone and out of a fight: the attack button turns into a speech balloon.
+var _talk_on_attack: bool = false
+## Shortcuts at the top of the screen: "store", "routine", "bag", "quests".
+var _menu_btns: Dictionary = {}
+var _top_menu: HBoxContainer
 var _tracker_title: Label
 var _tracker_goal: Label
 var _tracker_bg: TrackerBackdrop
@@ -74,7 +82,7 @@ func _ready() -> void:
 
 	_toast = Label.new()
 	_toast.set_anchors_preset(Control.PRESET_CENTER_TOP)
-	_toast.position.y = 90
+	_toast.position.y = 96
 	_toast.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_toast.add_theme_font_size_override("font_size", 30)
 	_toast.add_theme_color_override("font_outline_color", Color.BLACK)
@@ -165,6 +173,9 @@ func _ready() -> void:
 	root.add_child(_minimap)
 	_clock = DayClock.new()
 	root.add_child(_clock)
+	# Behind the panels (they open in the middle and may be wide).
+	root.move_child(_minimap, _status.get_index())
+	root.move_child(_clock, _status.get_index())
 	_minimap.tapped.connect(func() -> void: _open_panel(_full_map))
 	_full_map = FullMapPanel.new()
 	root.add_child(_full_map)
@@ -173,7 +184,7 @@ func _ready() -> void:
 	_boss_name = Label.new()
 	_boss_name.set_anchors_preset(Control.PRESET_CENTER_TOP)
 	_boss_name.grow_horizontal = Control.GROW_DIRECTION_BOTH
-	_boss_name.position.y = 12
+	_boss_name.position.y = 92
 	_boss_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_boss_name.add_theme_font_size_override("font_size", 24)
 	_boss_name.add_theme_color_override("font_color", Color("#ffcf6b"))
@@ -227,6 +238,8 @@ func bind(p: Player) -> void:
 
 func toast(text: String, seconds: float = 1.8) -> void:
 	_toast.text = text
+	# Under the top shortcuts; lower still while a boss bar is on screen.
+	_toast.position.y = 176.0 if _boss_bar.visible else 96.0
 	if _toast_tween:
 		_toast_tween.kill()
 	_toast.modulate.a = 1.0
@@ -292,15 +305,35 @@ func _update_boss_bar() -> void:
 	_boss_bar.text = "%d%%" % roundi(maxf(_boss.hp_ratio(), 0.0) * 100.0)
 
 
-## "" hides the button; "talk" or "pick" shows it with that text.
+## "" hides it. "talk" turns the attack button into a speech balloon (out of a fight);
+## "open" and "pick" show a button with that word.
 func show_interact_button(kind: String) -> void:
-	_talk_btn.visible = kind != ""
-	if kind != "":
-		_talk_btn.text = tr({"talk": "HUD_TALK", "open": "HUD_OPEN"}.get(kind, "HUD_PICK_UP"))
+	_interact_kind = kind
+	_interact_shown = kind != ""
+	_talk_btn.visible = kind != "" and kind != "talk"
+	if _talk_btn.visible:
+		var key: String = "HUD_OPEN" if kind == "open" else "HUD_PICK_UP"
+		# Phones have no E key: the button shows just the word.
+		_talk_btn.text = tr(key + "_TAP") if Game.is_mobile() else tr(key)
+	_update_talk_mode()
 
 
 func interact_button_visible() -> bool:
-	return _talk_btn.visible
+	return _interact_shown
+
+
+## The attack button is a speech balloon right now (near someone, out of a fight).
+func is_talk_on_attack() -> bool:
+	return _talk_on_attack
+
+
+func _update_talk_mode() -> void:
+	var want: bool = _interact_shown and _interact_kind == "talk" and player != null and not player.in_combat()
+	if want == _talk_on_attack:
+		return
+	_talk_on_attack = want
+	_attack_btn.glyph = "talk" if want else ""
+	_attack_btn.set_action("" if want else "attack")
 
 
 ## Plays a conversation (pauses the game). Await the returned signal.
@@ -363,6 +396,13 @@ func routine_panel() -> RoutinePanel:
 ## A merchant's shop (Dona Celeste in Pradoluz).
 func open_shop(merchant: String = "celeste") -> void:
 	_shop_panel.merchant = merchant
+	_shop_panel.store_only = false
+	_open_panel(_shop_panel)
+
+
+## The real-money shop alone, from the shortcut at the top (anywhere in the world).
+func open_store() -> void:
+	_shop_panel.store_only = true
 	_open_panel(_shop_panel)
 
 
@@ -450,7 +490,7 @@ func _input(event: InputEvent) -> void:
 		else:
 			open_equipment()
 
-	elif event.is_action_pressed("interact") and _talk_btn.visible and not get_tree().paused:
+	elif event.is_action_pressed("interact") and _interact_shown and not get_tree().paused:
 		get_viewport().set_input_as_handled()
 		interact_pressed.emit()
 	elif event.is_action_pressed("debug_level_up") and OS.is_debug_build():
@@ -465,6 +505,7 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	if player == null:
 		return
+	_update_talk_mode()
 	_tracker_timer -= delta
 	if _tracker_timer <= 0.0:
 		_tracker_timer = 0.5
@@ -553,6 +594,28 @@ func _build_controls(root: Control) -> void:
 		_skill_btns.append(_touch("skill_%d" % (i + 1), SKILL_RADIUS, "", Color(1, 1, 1, 0.3)))
 	for i: int in 3:
 		_potion_btns.append(_touch("potion_%d" % (i + 1), POTION_RADIUS, "", Color(1, 1, 1, 0.3)))
+	_attack_btn.tapped.connect(func() -> void:
+		if _talk_on_attack and not get_tree().paused:
+			interact_pressed.emit())
+	# Shortcuts at the top centre: special shop, routine, bag and quests.
+	_top_menu = HBoxContainer.new()
+	_top_menu.add_theme_constant_override("separation", 6)
+	_top_menu.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	_controls.add_child(_top_menu)
+	for id: String in ["store", "routine", "bag", "quests"]:
+		var b := MenuIconButton.new()
+		b.glyph = id
+		b.caption = tr("HUD_MENU_" + id.to_upper())
+		_top_menu.add_child(b)
+		_menu_btns[id] = b
+	(_menu_btns["store"] as MenuIconButton).pressed.connect(open_store)
+	(_menu_btns["routine"] as MenuIconButton).pressed.connect(open_routine)
+	(_menu_btns["bag"] as MenuIconButton).pressed.connect(open_bag)
+	(_menu_btns["quests"] as MenuIconButton).pressed.connect(open_quests)
+	(_menu_btns["store"] as MenuIconButton).visible = Store.available()
+	Store.changed.connect(func() -> void:
+		(_menu_btns["store"] as MenuIconButton).visible = Store.available()
+		_layout())
 
 
 func _layout() -> void:
@@ -576,8 +639,11 @@ func _layout() -> void:
 	# Potions: a row just above the stamina bar, in the middle of the screen.
 	for i: int in _potion_btns.size():
 		_potion_btns[i].set_center(Vector2(vp.x * 0.5 + (i - 1) * 84.0, vp.y - 98.0))
+	if _top_menu:
+		_top_menu.reset_size()
+		_top_menu.position = Vector2(((vp.x - _top_menu.size.x) * 0.5), 4)
 	if _boss_bar:
-		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 44)
+		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 122)
 	if _stamina_bar:
 		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:
@@ -619,6 +685,8 @@ func _refresh() -> void:
 	_status.xp = s.xp
 	_status.gold = player.gold
 	_status.alert = s.unspent_points > 0 or _new_skills or _new_gear() or Session.routine.has_reward()
+	(_menu_btns["routine"] as MenuIconButton).alert = Session.routine.has_reward()
+	(_menu_btns["bag"] as MenuIconButton).alert = _new_gear()
 
 
 func _refresh_skill_buttons() -> void:
@@ -674,6 +742,8 @@ func _open_panel(panel: Control) -> void:
 	_shop_panel.hide()
 	_routine_panel.hide()
 	_talk_btn.hide()
+	_interact_shown = false
+	_update_talk_mode()
 	if panel != _dialogue:
 		Audio.play_sfx("ui_open")
 	if panel == _character_menu:

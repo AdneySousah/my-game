@@ -417,6 +417,20 @@ func _quest_test() -> void:
 	main.player.global_position = marta.global_position + Vector3(1.4, 0, 0)
 	await _frames(3)
 	check(main.hud.interact_button_visible(), "Falar button appears next to an NPC")
+	check(main.hud.is_talk_on_attack(), "next to an NPC (no fight) the attack button is a speech balloon")
+	check(main.hud._attack_btn.action == "" and main.hud._attack_btn.glyph == "talk", "the balloon does not swing the sword")
+	# Shortcuts at the top: routine, bag, quests (and the special shop where there is a store).
+	for id: String in ["routine", "bag", "quests"]:
+		check((main.hud._menu_btns[id] as MenuIconButton).visible, "top shortcut '%s' is on screen" % id)
+	check((main.hud._menu_btns["store"] as MenuIconButton).visible == Store.available(), "top shop shortcut follows the store")
+	if Store.available():
+		main.hud.open_store()
+		await _frames(1)
+		check(main.hud.shop_panel().visible and main.hud.shop_panel()._tab == "special" and not main.hud.shop_panel()._tabs_row.visible, "the top shop shortcut opens only the special shop")
+		main.hud.shop_panel().hide()
+		main.hud.shop_panel().closed.emit()
+		await _frames(2)
+		check(not get_tree().paused, "closing the special shop resumes the game")
 	main.talk_to_nearby()
 	await _frames(2)
 	check(main.hud.is_in_dialogue() and get_tree().paused, "talking opens the dialogue and pauses the game")

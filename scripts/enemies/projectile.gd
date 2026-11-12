@@ -34,15 +34,22 @@ func _ready() -> void:
 		wing.size = Vector3(0.9, 0.05, 0.25)
 		add_child(ProtoVisuals.mesh_instance(wing, Color("#d9a441")))
 	else:
-		var shaft := BoxMesh.new()
-		shaft.size = Vector3(0.05, 0.05, 0.8)
-		add_child(ProtoVisuals.mesh_instance(shaft, Color("#8c5e3c")))
-		var tip := PrismMesh.new()
-		tip.size = Vector3(0.14, 0.18, 0.06)
-		var tip_mi: MeshInstance3D = ProtoVisuals.mesh_instance(tip, Color("#d8dde6"))
-		tip_mi.rotation.x = -PI * 0.5
-		tip_mi.position.z = -0.45
-		add_child(tip_mi)
+		add_child(arrow_mesh())
+
+
+## An arrow 0.8 m long pointing to -Z, centred on its middle (also used in the archer's hand).
+static func arrow_mesh() -> Node3D:
+	var root := Node3D.new()
+	var shaft := BoxMesh.new()
+	shaft.size = Vector3(0.05, 0.05, 0.8)
+	root.add_child(ProtoVisuals.mesh_instance(shaft, Color("#8c5e3c")))
+	var tip := PrismMesh.new()
+	tip.size = Vector3(0.14, 0.18, 0.06)
+	var tip_mi: MeshInstance3D = ProtoVisuals.mesh_instance(tip, Color("#d8dde6"))
+	tip_mi.rotation.x = -PI * 0.5
+	tip_mi.position.z = -0.45
+	root.add_child(tip_mi)
+	return root
 
 
 func _physics_process(delta: float) -> void:

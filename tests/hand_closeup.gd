@@ -3,7 +3,7 @@ extends Node3D
 ## Each variant is "rx,ry,rz|ox,oy,oz|grip[|res://...glb][|{grip pose JSON}]" (weapon rotation in degrees, offset in metres
 ## in the hand bone's space: +X runs along the sword, +Y along the fingers; grip fraction).
 ## Each gets front, side, back and palm-side pictures.
-##   godot --path . --resolution 800x800 res://tests/hand_closeup.tscn -- <out.png> [action] <variant> ...
+##   godot --path . --resolution 800x800 res://tests/hand_closeup.tscn -- [char=<id>] <out.png> [action] <variant> ...
 
 const TILE: int = 400
 ## Front, side, back and palm-side views around the hand.
@@ -12,6 +12,11 @@ const VIEWS: Array[Vector3] = [Vector3(0.1, 0.1, -0.55), Vector3(-0.55, 0.12, -0
 
 func _ready() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
+	# Optional first argument "char=<id>" (default hero_lio); the camera follows its weapon hand.
+	var char_id: String = "hero_lio"
+	if args[0].begins_with("char="):
+		char_id = args[0].substr(5)
+		args = args.slice(1)
 	var out: String = args[0]
 	var action: String = args[1]
 	var variants: PackedStringArray = args.slice(2)
@@ -25,7 +30,7 @@ func _ready() -> void:
 	var sun := DirectionalLight3D.new()
 	sun.rotation_degrees = Vector3(-45, -30, 0)
 	add_child(sun)
-	var model: CharacterModel = CharacterModel.create("hero_lio")
+	var model: CharacterModel = CharacterModel.create(char_id)
 	add_child(model)
 	var cam := Camera3D.new()
 	cam.fov = 30
@@ -51,9 +56,10 @@ func _ready() -> void:
 		for i: int in 20:
 			await get_tree().process_frame
 		var sk: Skeleton3D = model.skeleton
-		var hand: Vector3 = sk.global_transform * sk.get_bone_global_pose(sk.find_bone("RightHand")).origin
+		var hand_side: String = "Left" if str(model.config.get("weapon", {}).get("bone", "RightHand")).begins_with("Left") else "Right"
+		var hand: Vector3 = sk.global_transform * sk.get_bone_global_pose(sk.find_bone(hand_side + "Hand")).origin
 		# With finger bones, aim at the middle of the hand instead of the wrist.
-		var knuckle: int = sk.find_bone("RightMiddleProximal")
+		var knuckle: int = sk.find_bone(hand_side + "MiddleProximal")
 		if knuckle >= 0:
 			hand = hand.lerp(sk.global_transform * sk.get_bone_global_pose(knuckle).origin, 0.8)
 		for view: Vector3 in VIEWS:

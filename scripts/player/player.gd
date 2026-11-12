@@ -37,6 +37,9 @@ var _queued_attack: bool = false
 var _dodge_cd: float = 0.0
 var _invulnerable: float = 0.0
 var _forced_velocity: Vector3 = Vector3.ZERO
+var _rest_spot_set: bool = false
+var _rest_spot: Vector3 = Vector3.ZERO
+var _still_time: float = 0.0
 var _forced_time: float = 0.0
 var _forced_step: Callable = Callable()
 var _scripted: bool = false
@@ -154,6 +157,12 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	global_position.y = 0.0
 	if model and _lock <= 0.0:
+		# At a campfire, standing still for a moment: sit down facing the fire.
+		_still_time = _still_time + delta if velocity.length() < 0.2 and _combat_time <= 0.0 else 0.0
+		var sit: bool = _rest_spot_set and _still_time > 0.6
+		if sit and not model.is_sitting():
+			face_towards(_rest_spot)
+		model.set_sitting(sit)
 		model.update_locomotion(velocity.length(), _combat_time > 0.0)
 	# Footsteps: faster when running.
 	var spd: float = velocity.length()
@@ -226,6 +235,12 @@ func forward() -> Vector3:
 func face_direction(dir: Vector3) -> void:
 	if dir.length_squared() > 0.0001:
 		rotation.y = atan2(-dir.x, -dir.z)
+
+
+## Campfire the hero is standing at (he sits there when he stops); off = left it.
+func set_rest_spot(on: bool, spot: Vector3 = Vector3.ZERO) -> void:
+	_rest_spot_set = on
+	_rest_spot = spot
 
 
 func face_towards(point: Vector3) -> void:

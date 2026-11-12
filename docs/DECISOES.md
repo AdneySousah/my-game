@@ -201,3 +201,11 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - A espada agora passa por dentro do punho fechado, atravessando a palma, e a lâmina sai do lado do polegar, como numa pegada de verdade. Antes o cabo passava entre os dedos abertos. Com isso, o ângulo da lâmina nos golpes ficou mais fiel às animações (ex.: na estocada a lâmina aponta para a frente) e a lâmina fica mais baixa na guarda de combate.
 - Inimigos e NPCs não têm ossos nos dedos e não mudam.
 - Original (antes dos dedos) guardado no git; a versão nova também fica em `assets/_inbox/hero_lio_fingers/`.
+
+## Animações refeitas: corrida, fogueira, bandido e arqueiro (12/11/2026)
+- Meshy: 30 créditos (4 corridas e 3 de sentar para o Lio; 3 tiros de arco para o arqueiro). Ajustes feitos no Blender por script (`tools/blender/`).
+- **Corrida do Lio:** trocada pela "Run 03" do Meshy (cotovelos dobrados e braços balançando). As outras opções testadas: Run 02, Run Fast 3 e Run Fast (essa última inclinada demais, parece um sprint).
+- **Fogueira:** parado dentro do círculo de uma fogueira (fora de combate), o Lio senta no chão de pernas cruzadas virado para o fogo e levanta quando volta a andar. O Meshy não tem "sentar no chão" com transição (as transições são de cadeira), então a descida e a subida são uma mistura suave de 0,7 s entre ficar em pé e sentado. Na pedra de passagem ele não senta.
+- **Bandido de espada:** ganhou os ossos dos dedos e a mesma pegada do Lio (mão fechada, cabo atravessando a palma).
+- **Arqueiro:** o tiro antigo estava quebrado nesse personagem (curvado, olhando para o chão, arco para baixo). O novo junta duas animações do Meshy (puxar a flecha e soltar, 1,7 s) e foi girado 90° no Blender, porque o Meshy mira para o lado esquerdo. A mão esquerda fecha no arco, com a corda virada para o arqueiro; a direita fica na pose "draw" e segura uma flecha do momento em que pega até soltar. A flecha voa no momento em que ele solta (1,15 s do clipe).
+- A corda do arco não estica (ela faz parte do modelo do arco, que é uma peça só).

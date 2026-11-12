@@ -170,6 +170,7 @@ func _physics_process(delta: float) -> void:
 	if inside == _at_point:
 		return
 	_at_point = inside
+	player.set_rest_spot(inside != null and inside.kind == "fogueira", inside.global_position if inside else Vector3.ZERO)
 	if inside:
 		_on_rest_reached(inside)
 	else:

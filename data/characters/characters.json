@@ -7,7 +7,8 @@
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_anims_b.glb" },
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_anims_c.glb" },
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_walk.glb", "rename": "Walk" },
-      { "path": "res://assets/characters/hero/hero_lio/hero_lio_run.glb", "rename": "Run" }
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_run.glb", "rename": "Run" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_sit.glb" }
     ],
     "scale": 1.2,
     "move_anim_speed": { "walk": 1.6, "run": 6.0, "combat_walk": 1.6, "combat_run": 6.5 },
@@ -33,6 +34,7 @@
     },
     "actions": {
       "idle": { "anim": "Idle", "loop": true },
+      "sit": { "anim": "Sit_Floor", "loop": true, "blend": 0.7 },
       "combat_idle": { "anim": "Combat_Stance", "loop": true },
       "walk": { "anim": "Walk", "loop": true },
       "run": { "anim": "Run", "loop": true },
@@ -68,8 +70,18 @@
       "bone": "RightHand",
       "length": 0.55,
       "grip": 0.38,
-      "rotation_deg": [0, 0, -90],
-      "offset": [0, 0.07, 0.02]
+      "rotation_deg": [0, 63.3, 88.8],
+      "offset": [-0.014, 0.085, -0.008]
+    },
+    "hand_poses": {
+      "grip": {
+        "Index": [60, 80, 50], "Middle": [65, 85, 50], "Ring": [70, 85, 50], "Little": [75, 85, 50],
+        "Thumb": [[0, -20, 40], 40, 40]
+      },
+      "relaxed": {
+        "Index": [10, 15, 10], "Middle": [15, 20, 10], "Ring": [20, 20, 10], "Little": [25, 20, 10],
+        "Thumb": [0, 10, 10]
+      }
     },
     "actions": {
       "idle": { "anim": "Idle", "loop": true },
@@ -189,11 +201,26 @@
     "anim_sources": [
       { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_anims.glb" },
       { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_walk.glb", "rename": "Walk" },
-      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_run.glb", "rename": "Run" }
+      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_run.glb", "rename": "Run" },
+      { "path": "res://assets/enemies/enm_arqueiro/enm_arqueiro_shot.glb" }
     ],
     "scale": 1.2,
     "move_anim_speed": { "walk": 1.6, "run": 6.0 },
-    "weapon": {"scene": "res://assets/weapons/wpn_arco/wpn_arco.glb", "bone": "LeftHand", "length": 0.9, "grip": 0.38, "rotation_deg": [0, 0, 90], "offset": [0, 0.07, 0.02]},
+    "weapon": {"scene": "res://assets/weapons/wpn_arco/wpn_arco.glb", "bone": "LeftHand", "length": 0.9, "grip": 0.05, "rotation_deg": [0, -69.4, -78.3], "offset": [0.0113, 0.0896, -0.0196]},
+    "hand_poses": {
+      "grip": {
+        "Index": [60, 80, 50], "Middle": [65, 85, 50], "Ring": [70, 85, 50], "Little": [75, 85, 50],
+        "Thumb": [[0, -20, 40], 40, 40]
+      },
+      "relaxed": {
+        "Index": [10, 15, 10], "Middle": [15, 20, 10], "Ring": [20, 20, 10], "Little": [25, 20, 10],
+        "Thumb": [0, 10, 10]
+      },
+      "draw": {
+        "Index": [25, 45, 30], "Middle": [25, 50, 30], "Ring": [65, 80, 50], "Little": [70, 80, 50],
+        "Thumb": [[0, 0, 30], 30, 20]
+      }
+    },
     "actions": {
       "idle": { "anim": "Idle", "loop": true },
       "combat_idle": { "anim": "Idle", "loop": true },
@@ -201,7 +228,7 @@
       "run": { "anim": "Run", "loop": true },
       "hit": { "anim": "Hit_Reaction_with_Bow", "start": 0.0, "end": 0.8, "speed": 1.4 },
       "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3 },
-      "shoot": { "anim": "Archery_Shot", "strike": 1.17, "end": 1.9, "speed": 1.0 },
+      "shoot": { "anim": "Archer_Shot_Full", "strike": 1.15, "end": 1.7, "speed": 1.0, "hands": { "Right": "draw" }, "arrow": { "bone": "RightHand", "aim_bone": "LeftHand", "from": 0.3, "to": 1.15 } },
       "attack": { "anim": "Simple_Kick", "strike": 0.6, "end": 1.3, "speed": 1.0 }
     }
   },

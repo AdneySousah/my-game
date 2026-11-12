@@ -25,6 +25,13 @@ var _weapon_set: bool = false
 var _drawn: bool = true
 ## Finger poses (null when the model has no finger bones).
 var _hands: HandPose
+var _sitting: bool = false
+## Hand poses asked by the action now playing (cleared when it ends).
+var _action_hands: Dictionary = {}
+## Arrow shown in the hand while an action with "arrow" plays (archers).
+var _arrow: Node3D
+var _arrow_cfg: Dictionary = {}
+var _arrow_anim: String = ""
 
 static var _libraries: Dictionary = {}
 static var _configs: Dictionary = {}
@@ -84,6 +91,10 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_clock += delta
+	if not _action_hands.is_empty() and not is_busy():
+		_action_hands = {}
+		_update_hands()
+	_update_arrow()
 
 
 ## Plays a one-shot action (attack, skill, dodge...). `speed_mult` scales it (attack speed).
@@ -114,7 +125,11 @@ func play_loop(action: String, speed: float = 1.0) -> void:
 	var a: Dictionary = _action(action)
 	if a.is_empty():
 		return
-	anim.play(str(a["anim"]), MOVE_BLEND, speed)
+	# "blend" (seconds) per action; getting up from a slow pose (sitting) is slow too.
+	var blend: float = float(a.get("blend", MOVE_BLEND))
+	if _current != action:
+		blend = maxf(blend, float(_action(_current).get("blend", MOVE_BLEND)) * 0.7)
+	anim.play(str(a["anim"]), blend, speed)
 	_current = action
 
 
@@ -129,12 +144,24 @@ func update_locomotion(ground_speed: float, in_combat: bool = false) -> void:
 	# In combat, prefer the "combat_*" versions when the character has them.
 	var prefix: String = "combat_" if in_combat else ""
 	if not moving:
-		play_loop("combat_idle" if in_combat else "idle")
+		if _sitting and not in_combat and not _action("sit").is_empty():
+			play_loop("sit")
+		else:
+			play_loop("combat_idle" if in_combat else "idle")
 	elif ground_speed < 3.0:
 		play_loop(_pick(prefix + "walk", "walk"), clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
 	else:
 		play_loop(_pick(prefix + "run", "run"), clampf(ground_speed / float(speeds.get(_pick(prefix + "run", "run"), speeds.get("run", 6.0))), 0.7, 1.8))
 	_busy_until = 0.0
+
+
+## Sits on the ground (rest points) while standing still; the "sit" action must exist.
+func set_sitting(on: bool) -> void:
+	_sitting = on
+
+
+func is_sitting() -> bool:
+	return _sitting and _current == "sit"
 
 
 ## Weapon in the hand (true) or sheathed on the back (false). No-op without a back slot.
@@ -156,13 +183,47 @@ func hands() -> HandPose:
 	return _hands
 
 
-## Closes the right hand around the sword while it is in the hand; otherwise relaxed.
+## The hand holding the weapon closes around it ("grip"); the other one is relaxed. While an
+## action with "hands" (e.g. {"Right": "draw"}) plays, those poses win until it ends.
 func _update_hands() -> void:
 	if _hands == null:
 		return
 	var armed: bool = _hand_weapon != null and is_instance_valid(_hand_weapon) and _hand_weapon.visible
-	_hands.set_pose("Right", "grip" if armed else "relaxed")
-	_hands.set_pose("Left", "relaxed")
+	var weapon_side: String = "Left" if str(_weapon_bone()).begins_with("Left") else "Right"
+	for side: String in ["Right", "Left"]:
+		var pose: String = "grip" if armed and side == weapon_side else "relaxed"
+		if _action_hands.has(side):
+			pose = str(_action_hands[side])
+		_hands.set_pose(side, pose)
+
+
+func _weapon_bone() -> String:
+	var w: Dictionary = config.get("weapon", {})
+	return str(_weapon_cfg.get("bone", w.get("bone", "RightHand")))
+
+
+## "arrow": {"bone": "RightHand", "aim_bone": "LeftHand", "from": 0.3, "to": 1.15} (clip seconds):
+## the arrow sits in the drawing hand and points at the bow hand.
+func _update_arrow() -> void:
+	var show: bool = false
+	if not _arrow_cfg.is_empty() and anim.current_animation == _arrow_anim and is_busy():
+		var t: float = anim.current_animation_position
+		show = t >= float(_arrow_cfg.get("from", 0.0)) and t <= float(_arrow_cfg.get("to", 99.0))
+	if not show:
+		if _arrow:
+			_arrow.visible = false
+		return
+	if _arrow == null:
+		_arrow = Projectile.arrow_mesh()
+		_arrow.scale = Vector3.ONE * 0.8
+		add_child(_arrow)
+	var hand: Vector3 = skeleton.global_transform * skeleton.get_bone_global_pose(skeleton.find_bone(str(_arrow_cfg.get("bone", "RightHand")))).origin
+	var aim: Vector3 = skeleton.global_transform * skeleton.get_bone_global_pose(skeleton.find_bone(str(_arrow_cfg.get("aim_bone", "LeftHand")))).origin
+	if hand.distance_to(aim) < 0.01:
+		return
+	_arrow.visible = true
+	# Nock at the drawing hand, tip past the bow.
+	_arrow.look_at_from_position(hand + (aim - hand).normalized() * 0.32, aim + (aim - hand).normalized(), Vector3.UP)
 
 
 func _pick(preferred: String, fallback: String) -> String:
@@ -201,6 +262,10 @@ func _play_section(action: String, a: Dictionary, start: float, end: float, spee
 	var stop: float = length if end < 0.0 else minf(end, length)
 	anim.play_section(anim_name, start, stop, ACTION_BLEND, speed)
 	_current = action
+	_action_hands = a.get("hands", {})
+	_update_hands()
+	_arrow_cfg = a.get("arrow", {})
+	_arrow_anim = anim_name
 	var duration: float = (stop - start) / maxf(speed, 0.01)
 	_busy_until = _clock + duration
 	return duration

@@ -163,6 +163,12 @@
           "credits": 9,
           "task_id": "01a1caec-c012-755d-9229-78e20d0ed803",
           "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 21,
+          "task_id": "01a1cf8b-4ddd-73dd-a0b7-0146e79ec8a3",
+          "date": "2026-11-12"
         }
       ],
       "notes": [
@@ -2151,6 +2157,12 @@
           "credits": 15,
           "task_id": "01a1cb6e-1093-746a-a469-7910cf687035",
           "date": "2026-11-11"
+        },
+        {
+          "type": "animation",
+          "credits": 9,
+          "task_id": "01a1cf8b-4f99-7601-a390-30951ac3fbca",
+          "date": "2026-11-12"
         }
       ],
       "notes": []

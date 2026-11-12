@@ -23,6 +23,8 @@ var _back_weapon: Node3D
 var _weapon_cfg: Dictionary = {}
 var _weapon_set: bool = false
 var _drawn: bool = true
+## Finger poses (null when the model has no finger bones).
+var _hands: HandPose
 
 static var _libraries: Dictionary = {}
 static var _configs: Dictionary = {}
@@ -72,7 +74,11 @@ func _ready() -> void:
 	model.add_child(anim)
 	anim.root_node = anim.get_path_to(model)
 	anim.add_animation_library("", _library())
+	_hands = HandPose.create_for(skeleton, config.get("hand_poses", {}))
 	_attach_weapon()
+	_update_hands()
+	if _hands:
+		_hands.snap()
 	play_loop("idle")
 
 
@@ -138,10 +144,25 @@ func set_weapon_drawn(drawn: bool) -> void:
 	_drawn = drawn
 	_hand_weapon.visible = drawn
 	_back_weapon.visible = not drawn
+	_update_hands()
 
 
 func is_weapon_drawn() -> bool:
 	return _drawn
+
+
+## Finger poses of this model (null when it has no finger bones); for tuning tools.
+func hands() -> HandPose:
+	return _hands
+
+
+## Closes the right hand around the sword while it is in the hand; otherwise relaxed.
+func _update_hands() -> void:
+	if _hands == null:
+		return
+	var armed: bool = _hand_weapon != null and is_instance_valid(_hand_weapon) and _hand_weapon.visible
+	_hands.set_pose("Right", "grip" if armed else "relaxed")
+	_hands.set_pose("Left", "relaxed")
 
 
 func _pick(preferred: String, fallback: String) -> String:
@@ -251,6 +272,7 @@ func set_weapon(override: Dictionary) -> void:
 	_attach_weapon()
 	if _hand_weapon:
 		_hand_weapon.visible = drawn or _back_weapon == null
+	_update_hands()
 
 
 ## Puts a copy of the weapon on `bone`. Rotation in degrees, offset in metres (bone space).

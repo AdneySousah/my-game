@@ -194,3 +194,10 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Conquistas: 10 no Ato 1, cada uma libera um título com bônus (ex.: Caçador de Orcs +5 de ataque, Fim do Tributo +8 de ataque e +80 de vida). Um título em uso por vez; aparece no menu do retrato.
 - Dificuldade (GDD 6.10): escolhida no Novo jogo. Fácil = inimigos −25% de vida e dano, penalidade de morte pela metade; Difícil = inimigos +40%, +25% de XP e de chance de itens. Em Opções dá para diminuir, só numa cidade (Pradoluz), nunca aumentar. Saves antigos ficam no Normal.
 - O Modo Infernal das dungeons fica para a Fase 6, como no plano.
+
+## Dedos e pegada da espada (12/11/2026)
+- O Lio ganhou 30 ossos nos dedos (3 por dedo, nas duas mãos), colocados no Blender 4.5 sem gastar créditos do Meshy. Os 24 ossos originais ficaram iguais (conferido: mesma posição e mesma ligação com a malha), então todas as animações do Meshy continuam valendo. Os nomes seguem o padrão humanoide (`RightIndexProximal`...), o que permite usar animações de outras fontes (ex.: Mixamo) no futuro.
+- A mão fecha por código (`HandPose`): com a espada na mão, a direita fica na pose "grip"; sem espada ou com ela nas costas, as duas mãos ficam em "relaxed". As poses (graus por junta) ficam em `characters.json` → `hand_poses`.
+- A espada agora passa por dentro do punho fechado, atravessando a palma, e a lâmina sai do lado do polegar, como numa pegada de verdade. Antes o cabo passava entre os dedos abertos. Com isso, o ângulo da lâmina nos golpes ficou mais fiel às animações (ex.: na estocada a lâmina aponta para a frente) e a lâmina fica mais baixa na guarda de combate.
+- Inimigos e NPCs não têm ossos nos dedos e não mudam.
+- Original (antes dos dedos) guardado no git; a versão nova também fica em `assets/_inbox/hero_lio_fingers/`.

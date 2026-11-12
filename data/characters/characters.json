@@ -16,9 +16,20 @@
       "bone": "RightHand",
       "length": 0.85,
       "grip": 0.38,
-      "rotation_deg": [0, 0, -90],
-      "offset": [0, 0.1, 0.01],
+      "rotation_deg": [0, 76.6, 78.1],
+      "offset": [-0.016, 0.083, -0.018],
       "sheath": { "bone": "Spine", "rotation_deg": [20, 0, -140], "offset": [0, 0.12, -0.15] }
+    },
+    "hand_poses": {
+      "_comment": "Dedos (HandPose): cada dedo tem 3 juntas, da base à ponta. Número = dobra para a palma em graus; [x, y, z] = giro livre. 'grip' = mão direita com a espada; 'relaxed' = sem espada.",
+      "grip": {
+        "Index": [60, 80, 50], "Middle": [65, 85, 50], "Ring": [70, 85, 50], "Little": [75, 85, 50],
+        "Thumb": [[0, -20, 40], 40, 40]
+      },
+      "relaxed": {
+        "Index": [10, 15, 10], "Middle": [15, 20, 10], "Ring": [20, 20, 10], "Little": [25, 20, 10],
+        "Thumb": [0, 10, 10]
+      }
     },
     "actions": {
       "idle": { "anim": "Idle", "loop": true },

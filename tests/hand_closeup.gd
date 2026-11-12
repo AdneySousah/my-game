@@ -1,11 +1,13 @@
 extends Node3D
 ## Close-up of the hero's right hand holding the sword, for tuning the grip (needs a window).
-## Each variant is "rx,ry,rz|ox,oy,oz|grip[|res://...glb]" (weapon rotation in degrees, offset in metres
+## Each variant is "rx,ry,rz|ox,oy,oz|grip[|res://...glb][|{grip pose JSON}]" (weapon rotation in degrees, offset in metres
 ## in the hand bone's space: +X runs along the sword, +Y along the fingers; grip fraction).
-## Each gets a front and a side picture.
+## Each gets front, side, back and palm-side pictures.
 ##   godot --path . --resolution 800x800 res://tests/hand_closeup.tscn -- <out.png> [action] <variant> ...
 
-const TILE: int = 300
+const TILE: int = 400
+## Front, side, back and palm-side views around the hand.
+const VIEWS: Array[Vector3] = [Vector3(0.1, 0.1, -0.55), Vector3(-0.55, 0.12, -0.06), Vector3(-0.1, 0.1, 0.55), Vector3(0.55, 0.05, -0.05)]
 
 
 func _ready() -> void:
@@ -37,16 +39,24 @@ func _ready() -> void:
 		var o: PackedStringArray = p[1].split(",")
 		var cfg: Dictionary = {"rotation_deg": [float(r[0]), float(r[1]), float(r[2])],
 			"offset": [float(o[0]), float(o[1]), float(o[2])], "grip": float(p[2])}
-		# 4th part (optional): another sword model to try.
-		if p.size() > 3:
-			cfg["scene"] = p[3]
+		# Extra parts (optional): another sword model to try, and/or a "grip" finger pose (JSON).
+		for extra: String in p.slice(3):
+			if extra.begins_with("{"):
+				if model.hands():
+					model.hands().override_pose("grip", JSON.parse_string(extra))
+			elif not extra.is_empty():
+				cfg["scene"] = extra
 		model.set_weapon(cfg)
 		model.set_weapon_drawn(true)
 		for i: int in 20:
 			await get_tree().process_frame
 		var sk: Skeleton3D = model.skeleton
 		var hand: Vector3 = sk.global_transform * sk.get_bone_global_pose(sk.find_bone("RightHand")).origin
-		for view: Vector3 in [Vector3(0.15, 0.15, -0.9), Vector3(-0.9, 0.2, -0.1)]:
+		# With finger bones, aim at the middle of the hand instead of the wrist.
+		var knuckle: int = sk.find_bone("RightMiddleProximal")
+		if knuckle >= 0:
+			hand = hand.lerp(sk.global_transform * sk.get_bone_global_pose(knuckle).origin, 0.8)
+		for view: Vector3 in VIEWS:
 			cam.look_at_from_position(hand + view, hand)
 			await get_tree().process_frame
 			await RenderingServer.frame_post_draw
@@ -55,9 +65,9 @@ func _ready() -> void:
 			var crop: Image = img.get_region(Rect2i((img.get_width() - side) / 2, (img.get_height() - side) / 2, side, side))
 			crop.resize(TILE, TILE)
 			tiles.append(crop)
-	var sheet := Image.create(TILE * 2, TILE * variants.size(), false, tiles[0].get_format())
+	var sheet := Image.create(TILE * VIEWS.size(), TILE * variants.size(), false, tiles[0].get_format())
 	for i: int in tiles.size():
-		sheet.blit_rect(tiles[i], Rect2i(0, 0, TILE, TILE), Vector2i(TILE * (i % 2), TILE * (i / 2)))
+		sheet.blit_rect(tiles[i], Rect2i(0, 0, TILE, TILE), Vector2i(TILE * (i % VIEWS.size()), TILE * (i / VIEWS.size())))
 	sheet.save_png(out)
 	print("HAND_OK " + out)
 	get_tree().quit()

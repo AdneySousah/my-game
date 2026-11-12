@@ -35,7 +35,7 @@ Cada etapa termina com algo jogável para você testar.
 
 Créditos: a Fase 5 tinha ~500 previstos no roadmap; este plano usa ~140 (ou ~210 com o conjunto). Restam 1.013 no ciclo atual.
 
-## Preços da loja com dinheiro real (rascunho para você decidir)
+## Preços da loja com dinheiro real (aprovados pelo dono em 12/11/2026)
 O GDD diz que os preços são definidos nesta fase. Proposta inicial, em reais, para ajustar:
 
 | Produto | Conteúdo | Preço |

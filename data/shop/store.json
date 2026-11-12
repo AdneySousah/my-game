@@ -1,0 +1,64 @@
+{
+  "_comment": "Loja com dinheiro real (GDD 6.6). Os 'id' têm que ser iguais aos produtos criados no Google Play Console (Fase 7). price_brl = preço mostrado enquanto o Google Play não responde (no celular aparece o preço da loja). grants: o que o jogador recebe. Todos são consumíveis (dá para comprar de novo).",
+  "products": [
+    {
+      "id": "ouro_5000",
+      "name": "STORE_OURO_5000",
+      "desc": "STORE_OURO_5000_DESC",
+      "price_brl": 4.9,
+      "icon": "ouro",
+      "grants": {"gold": 5000}
+    },
+    {
+      "id": "ouro_30000",
+      "name": "STORE_OURO_30000",
+      "desc": "STORE_OURO_30000_DESC",
+      "price_brl": 24.9,
+      "icon": "ouro",
+      "grants": {"gold": 30000}
+    },
+    {
+      "id": "xp_boost_1h",
+      "name": "STORE_XP_BOOST",
+      "desc": "STORE_XP_BOOST_DESC",
+      "price_brl": 3.9,
+      "icon": "pergaminho_retorno",
+      "grants": {"xp_boost_seconds": 3600}
+    },
+    {
+      "id": "kit_pocoes",
+      "name": "STORE_KIT_POCOES",
+      "desc": "STORE_KIT_POCOES_DESC",
+      "price_brl": 4.9,
+      "icon": "pot_vida_m",
+      "grants": {
+        "items": {"pot_vida_m": 10, "pot_folego_m": 10, "pot_forca": 1, "pot_pedra": 1, "pot_vento": 1}
+      }
+    },
+    {
+      "id": "trevo_real",
+      "name": "ITEM_TREVO_REAL",
+      "desc": "ITEM_TREVO_REAL_DESC",
+      "price_brl": 6.9,
+      "icon": "trevo_real",
+      "grants": {"items": {"trevo_real": 1}}
+    },
+    {
+      "id": "broca_real",
+      "name": "ITEM_BROCA_REAL",
+      "desc": "ITEM_BROCA_REAL_DESC",
+      "price_brl": 4.9,
+      "icon": "broca_real",
+      "grants": {"items": {"broca_real": 1}}
+    },
+    {
+      "id": "amuleto",
+      "name": "ITEM_AMULETO",
+      "desc": "ITEM_AMULETO_DESC",
+      "price_brl": 3.9,
+      "icon": "amuleto",
+      "grants": {"items": {"amuleto": 1}}
+    }
+  ],
+  "xp_boost": 0.5
+}

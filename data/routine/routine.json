@@ -1,0 +1,137 @@
+{
+  "_comment": "Rotina (GDD 6.7, 6.8). daily: modelos de missão diária (kind kill = derrotar inimigos (target vazio = qualquer), gather = juntar o material, event = fazer algo: potion, enhance, buy, craft); min_level = nível mínimo; amount = quanto pede. Por dia saem 'per_day' missões, sorteadas pela data (iguais o dia todo). Recompensa: xp = fração do XP do nível, gold = base + por nível, 2 materiais. login: prêmio de cada dia do calendário (1 a 28; depois recomeça). achievements: conquistas (kind kill, level, plus = +nível mais alto, login = dias, daily = diárias feitas, flag = marca da história) e o título que dão (1 título equipado por vez; bonus soma nos atributos). clock_tolerance = quantos segundos o relógio pode voltar antes de bloquear os prêmios.",
+  "per_day": 5,
+  "clock_tolerance": 3600,
+  "daily_reward": {
+    "xp_fraction": 0.12,
+    "gold_base": 40,
+    "gold_per_level": 12,
+    "materials": ["mat_couro_orc", "mat_osso_velho", "mat_fragmento_pedra", "mat_lingote_aco"],
+    "material_count": 2
+  },
+  "daily": [
+    {"id": "kill_any", "kind": "kill", "target": "", "amount": 30, "min_level": 1},
+    {"id": "kill_bandido", "kind": "kill", "target": "bandido", "amount": 15, "min_level": 1},
+    {"id": "kill_arqueiro", "kind": "kill", "target": "arqueiro", "amount": 10, "min_level": 1},
+    {"id": "kill_orc", "kind": "kill", "target": "orc", "amount": 15, "min_level": 5},
+    {"id": "kill_esqueleto", "kind": "kill", "target": "esqueleto", "amount": 15, "min_level": 6},
+    {"id": "gather_couro", "kind": "gather", "target": "mat_couro_orc", "amount": 6, "min_level": 5},
+    {"id": "gather_osso", "kind": "gather", "target": "mat_osso_velho", "amount": 6, "min_level": 6},
+    {"id": "use_potions", "kind": "event", "target": "potion", "amount": 3, "min_level": 1},
+    {"id": "enhance_once", "kind": "event", "target": "enhance", "amount": 1, "min_level": 3},
+    {"id": "buy_once", "kind": "event", "target": "buy", "amount": 1, "min_level": 1},
+    {"id": "craft_once", "kind": "event", "target": "craft", "amount": 1, "min_level": 4}
+  ],
+  "login": [
+    {"gold": 200},
+    {"items": {"pot_vida_m": 3}},
+    {"items": {"mat_lingote_aco": 3}},
+    {"items": {"pot_folego_m": 3, "pot_forca": 1}},
+    {"items": {"gema_rubi_1": 2}},
+    {"items": {"broca": 1}},
+    {"items": {"amuleto": 1}},
+    {"gold": 250},
+    {"items": {"pot_vida_m": 3}},
+    {"items": {"mat_lingote_aco": 3}},
+    {"items": {"pot_folego_m": 3, "pot_forca": 1}},
+    {"items": {"gema_safira_1": 2}},
+    {"items": {"broca": 1}},
+    {"items": {"amuleto": 1}},
+    {"gold": 300},
+    {"items": {"pot_vida_m": 3}},
+    {"items": {"mat_lingote_aco": 3}},
+    {"items": {"pot_folego_m": 3, "pot_forca": 1}},
+    {"items": {"gema_esmeralda_1": 2}},
+    {"items": {"broca": 1}},
+    {"items": {"amuleto": 1}},
+    {"gold": 350},
+    {"items": {"pot_vida_m": 3}},
+    {"items": {"mat_lingote_aco": 3}},
+    {"items": {"pot_folego_m": 3, "pot_forca": 1}},
+    {"items": {"gema_topazio_1": 2}},
+    {"items": {"broca": 1}},
+    {"gold": 5000, "items": {"amuleto": 1, "trevo_real": 1, "pot_vida_g": 3}}
+  ],
+  "achievements": [
+    {
+      "id": "defensor",
+      "kind": "kill",
+      "target": "",
+      "amount": 100,
+      "title": "TITLE_DEFENSOR",
+      "bonus": {"max_hp": 50}
+    },
+    {
+      "id": "cacador_orcs",
+      "kind": "kill",
+      "target": "orc",
+      "amount": 50,
+      "title": "TITLE_CACADOR_ORCS",
+      "bonus": {"atk": 5}
+    },
+    {
+      "id": "quebra_ossos",
+      "kind": "kill",
+      "target": "esqueleto",
+      "amount": 50,
+      "title": "TITLE_QUEBRA_OSSOS",
+      "bonus": {"def": 5}
+    },
+    {
+      "id": "golem",
+      "kind": "flag",
+      "target": "golem_defeated",
+      "amount": 1,
+      "title": "TITLE_DESPERTA_PEDRAS",
+      "bonus": {"def": 8}
+    },
+    {
+      "id": "gorvan",
+      "kind": "flag",
+      "target": "gorvan_defeated",
+      "amount": 1,
+      "title": "TITLE_FIM_DO_TRIBUTO",
+      "bonus": {"atk": 8, "max_hp": 80}
+    },
+    {
+      "id": "nivel_12",
+      "kind": "level",
+      "target": "",
+      "amount": 12,
+      "title": "TITLE_APRENDIZ_HEROI",
+      "bonus": {"crit_chance": 0.01}
+    },
+    {
+      "id": "mais_10",
+      "kind": "plus",
+      "target": "",
+      "amount": 10,
+      "title": "TITLE_MAO_FERREIRO",
+      "bonus": {"crit_dmg": 0.05}
+    },
+    {
+      "id": "mais_15",
+      "kind": "plus",
+      "target": "",
+      "amount": 15,
+      "title": "TITLE_MESTRE_FORJA",
+      "bonus": {"crit_dmg": 0.1}
+    },
+    {
+      "id": "fiel",
+      "kind": "login",
+      "target": "",
+      "amount": 7,
+      "title": "TITLE_FIEL",
+      "bonus": {"max_stamina": 10}
+    },
+    {
+      "id": "trabalhador",
+      "kind": "daily",
+      "target": "",
+      "amount": 20,
+      "title": "TITLE_TRABALHADOR",
+      "bonus": {"atk": 4}
+    }
+  ]
+}

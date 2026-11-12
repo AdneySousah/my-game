@@ -289,6 +289,38 @@ ITEM_EQ_COMUM_DESC,"Peça simples, feita por qualquer ferreiro.",A simple piece 
 ITEM_EQ_RARO_DESC,"Aço bem trabalhado, com detalhes azuis.",Well-worked steel with blue trims.
 ITEM_EQ_EPICO_DESC,Runas antigas brilham no metal escuro.,Ancient runes glow on the dark metal.
 ITEM_EQ_LENDARIO_DESC,Dizem que foi forjada com a luz do céu.,They say it was forged with the light of the sky.
+ITEM_MAT_LINGOTE_ACO,Lingote de aço,Steel ingot
+ITEM_MAT_LINGOTE_ACO_DESC,O ferreiro usa para fortalecer e restaurar equipamentos.,The smith uses it to strengthen and restore gear.
+ITEM_GEMA_RUBI_1,Rubi I,Ruby I
+ITEM_GEMA_RUBI_2,Rubi II,Ruby II
+ITEM_GEMA_RUBI_3,Rubi III,Ruby III
+ITEM_GEMA_RUBI_4,Rubi IV,Ruby IV
+ITEM_GEMA_RUBI_5,Rubi V,Ruby V
+ITEM_GEMA_RUBI_DESC,"Num encaixe de equipamento, aumenta ataque. Três iguais viram uma do nível seguinte no ferreiro.","In a gear socket, raises attack. Three of a kind become one of the next tier at the smith."
+ITEM_GEMA_SAFIRA_1,Safira I,Sapphire I
+ITEM_GEMA_SAFIRA_2,Safira II,Sapphire II
+ITEM_GEMA_SAFIRA_3,Safira III,Sapphire III
+ITEM_GEMA_SAFIRA_4,Safira IV,Sapphire IV
+ITEM_GEMA_SAFIRA_5,Safira V,Sapphire V
+ITEM_GEMA_SAFIRA_DESC,"Num encaixe de equipamento, aumenta vida. Três iguais viram uma do nível seguinte no ferreiro.","In a gear socket, raises health. Three of a kind become one of the next tier at the smith."
+ITEM_GEMA_ESMERALDA_1,Esmeralda I,Emerald I
+ITEM_GEMA_ESMERALDA_2,Esmeralda II,Emerald II
+ITEM_GEMA_ESMERALDA_3,Esmeralda III,Emerald III
+ITEM_GEMA_ESMERALDA_4,Esmeralda IV,Emerald IV
+ITEM_GEMA_ESMERALDA_5,Esmeralda V,Emerald V
+ITEM_GEMA_ESMERALDA_DESC,"Num encaixe de equipamento, aumenta chance de crítico. Três iguais viram uma do nível seguinte no ferreiro.","In a gear socket, raises crit chance. Three of a kind become one of the next tier at the smith."
+ITEM_GEMA_TOPAZIO_1,Topázio I,Topaz I
+ITEM_GEMA_TOPAZIO_2,Topázio II,Topaz II
+ITEM_GEMA_TOPAZIO_3,Topázio III,Topaz III
+ITEM_GEMA_TOPAZIO_4,Topázio IV,Topaz IV
+ITEM_GEMA_TOPAZIO_5,Topázio V,Topaz V
+ITEM_GEMA_TOPAZIO_DESC,"Num encaixe de equipamento, aumenta recarga das skills. Três iguais viram uma do nível seguinte no ferreiro.","In a gear socket, raises skill cooldown. Three of a kind become one of the next tier at the smith."
+ITEM_GEMA_AMETISTA_1,Ametista I,Amethyst I
+ITEM_GEMA_AMETISTA_2,Ametista II,Amethyst II
+ITEM_GEMA_AMETISTA_3,Ametista III,Amethyst III
+ITEM_GEMA_AMETISTA_4,Ametista IV,Amethyst IV
+ITEM_GEMA_AMETISTA_5,Ametista V,Amethyst V
+ITEM_GEMA_AMETISTA_DESC,"Num encaixe de equipamento, aumenta defesa. Três iguais viram uma do nível seguinte no ferreiro.","In a gear socket, raises defense. Three of a kind become one of the next tier at the smith."
 DLG_MAIN_01_MARTA_1,Lio! O sol já está alto e você ainda com cara de travesseiro.,Lio! The sun is up and you still look like a pillow.
 DLG_MAIN_01_MARTA_2,"Bom dia, mãe. Sonhei que eu era o herói mais forte do mundo.","Morning, Mom. I dreamed I was the strongest hero in the world."
 DLG_MAIN_01_MARTA_3,Pois o herói mais forte do mundo está atrasado para o treino. O Bram já passou aqui resmungando.,"Well, the strongest hero in the world is late for training. Bram already came by, grumbling."
@@ -379,3 +411,149 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+SMITH_TITLE,Forja do Tobias,Tobias's Forge
+SMITH_GOLD,%d de ouro,%d gold
+SMITH_TAB_ENHANCE,Fortalecer,Strengthen
+SMITH_TAB_GEMS,Encaixes e gemas,Sockets and gems
+SMITH_TAB_CRAFT,Criar,Craft
+SMITH_TAB_DISASSEMBLE,Desmontar,Disassemble
+SMITH_PICK_PIECE,Suas peças (equipadas primeiro),Your pieces (worn first)
+SMITH_PICK_RECIPE,O que o Tobias sabe fazer,What Tobias can make
+SMITH_NO_PIECES,Você não tem equipamentos.,You have no gear.
+SMITH_NO_BAG_PIECES,Nenhuma peça na mochila para desmontar.,No piece in the bag to take apart.
+SMITH_BROKEN,Quebrada,Broken
+SMITH_BROKEN_INFO,Esta peça quebrou e não dá bônus. O Tobias consegue restaurar.,This piece broke and gives no bonus. Tobias can restore it.
+SMITH_RESTORE,Restaurar,Restore
+SMITH_MAX,Esta peça já está no +20.,This piece is already +20.
+SMITH_CHANCE,Chance de dar certo: %d%%,Chance of success: %d%%
+SMITH_RISK_BREAK,"Se falhar, a peça quebra (dá para restaurar).","If it fails, the piece breaks (it can be restored)."
+SMITH_RISK_VANISH,"Se falhar, a peça some para sempre!","If it fails, the piece is gone for good!"
+SMITH_USE,Usar %s (você tem %d),Use %s (you have %d)
+SMITH_ENHANCE,Fortalecer,Strengthen
+SMITH_COST,Custo:,Cost:
+SMITH_GOLD_COST,%d de ouro,%d gold
+SMITH_SOCKET_EMPTY,Vazio,Empty
+SMITH_SOCKET_LOCKED,Fechado,Closed
+SMITH_GEM_REMOVE,Toque numa gema encaixada para tirar (%d de ouro).,Tap a set gem to take it out (%d gold).
+SMITH_OPEN_SOCKET,Abrir encaixe: %s (você tem %d) · %d%%,Open socket: %s (you have %d) · %d%%
+SMITH_NEED_DRILL,"Para abrir encaixes, precisa de uma Broca de Engaste.",To open sockets you need a Socket Drill.
+SMITH_NO_GEMS,Você não tem gemas na mochila.,You have no gems in the bag.
+SMITH_GEM_SET_BTN,Encaixar gema,Set gem
+SMITH_GEM_MERGE,Juntar %d → 1 (%d de ouro),Merge %d → 1 (%d gold)
+SMITH_RANDOM_SOCKETS,Encaixes: sorteados ao criar (0 a 3).,Sockets: rolled when made (0 to 3).
+SMITH_CRAFT,Criar,Craft
+SMITH_FULL,Nunca foi usada: devolve todos os materiais.,Never worn: gives back all materials.
+SMITH_HALF,Já foi usada: devolve metade dos materiais.,Already worn: gives back half the materials.
+SMITH_RETURNS,Devolve: %s,Gives back: %s
+SMITH_GONE_WARN,A peça deixa de existir.,The piece will be gone.
+SMITH_DISASSEMBLE,Desmontar,Disassemble
+SMITH_CANT,Não dá para fazer isso.,That can't be done.
+SMITH_NO_GOLD,Ouro insuficiente.,Not enough gold.
+SMITH_NO_MATS,Faltam materiais.,Missing materials.
+SMITH_CRAFTED,Pronto! A peça nova está na mochila.,Done! The new piece is in your bag.
+SMITH_BROKEN_FIRST,Restaure a peça antes de fortalecer.,Restore the piece before strengthening it.
+SMITH_ENHANCE_OK,Deu certo! A peça ficou mais forte.,Success! The piece got stronger.
+SMITH_ENHANCE_FAIL,Não deu certo. A peça continua igual.,It failed. The piece is unchanged.
+SMITH_ENHANCE_BROKE,Falhou e a peça quebrou!,It failed and the piece broke!
+SMITH_ENHANCE_VANISHED,Falhou e a peça se desfez...,It failed and the piece crumbled...
+SMITH_ENHANCE_SAVED,"Falhou, mas o Amuleto protegeu a peça.","It failed, but the Amulet protected the piece."
+SMITH_RESTORED,Peça restaurada.,Piece restored.
+SMITH_SOCKETS_FULL,Esta peça já tem 3 encaixes.,This piece already has 3 sockets.
+SMITH_SOCKET_OK,Encaixe aberto!,Socket opened!
+SMITH_SOCKET_FAIL,A broca falhou e se quebrou.,The drill failed and broke.
+SMITH_NO_SOCKET,Não há encaixe livre.,No free socket.
+SMITH_GEM_SET,Gema encaixada.,Gem set.
+SMITH_GEM_REMOVED,Gema de volta na mochila.,Gem back in the bag.
+SMITH_GEM_TOP,Esta gema já está no nível máximo.,This gem is already at the top tier.
+SMITH_GEM_MERGED,As gemas viraram uma maior!,The gems became a bigger one!
+SMITH_TAKE_OFF_FIRST,Tire a peça antes de desmontar.,Take the piece off before taking it apart.
+SMITH_TAKEN_APART,Peça desmontada.,Piece taken apart.
+ITEMTYPE_GEM,Gema,Gem
+HUD_DEBUG_KIT,+kit forja (F2),+forge kit (F2)
+HUD_DEBUG_KIT_GOT,Kit de teste: ouro e materiais da forja.,Test kit: gold and forge materials.
+SHOP_TITLE,Loja,Shop
+SHOP_CELESTE,Armazém da Dona Celeste,Mrs. Celeste's Store
+SHOP_TAB_BUY,Comprar,Buy
+SHOP_TAB_SELL,Vender,Sell
+SHOP_TAB_SPECIAL,Loja especial,Special shop
+SHOP_GOODS,O que a Dona Celeste vende,What Mrs. Celeste sells
+SHOP_YOUR_BAG,Sua mochila (toque para vender),Your bag (tap to sell)
+SHOP_NOTHING_TO_SELL,Nada na mochila que dê para vender.,Nothing in the bag you can sell.
+SHOP_AMOUNT,Quantidade: %d,Amount: %d
+SHOP_BUY,Comprar,Buy
+SHOP_SELL,Vender,Sell
+SHOP_YOU_GET,Você recebe:,You get:
+SHOP_BOUGHT,Comprado! Está na mochila.,Bought! It is in your bag.
+SHOP_SOLD,Vendido.,Sold.
+SHOP_CANT_SELL,Isso não dá para vender.,That can't be sold.
+STORE_NOTE,Compras com dinheiro real pelo Google Play.,Real-money purchases through Google Play.
+STORE_TEST_NOTE,Loja de teste: nenhuma cobrança é feita.,Test shop: nothing is charged.
+STORE_XP_ACTIVE,Bônus de XP ativo: faltam %d min.,XP bonus active: %d min left.
+STORE_WAIT,Abrindo a compra...,Opening the purchase...
+STORE_THANKS,Obrigado! A compra já está com você.,Thank you! The purchase is yours.
+STORE_GOT,Compra recebida: %s,Purchase received: %s
+STORE_UNAVAILABLE,A loja especial não está disponível aqui.,The special shop is not available here.
+STORE_ERROR,Não foi possível concluir a compra.,The purchase could not be completed.
+STORE_CANCELED,Compra cancelada.,Purchase cancelled.
+STORE_PENDING,Pagamento pendente: o item chega quando o pagamento for aprovado.,Payment pending: the item arrives when the payment is approved.
+STORE_OURO_5000,Saco de ouro,Bag of gold
+STORE_OURO_5000_DESC,5.000 de ouro.,"5,000 gold."
+STORE_OURO_30000,Baú de ouro,Chest of gold
+STORE_OURO_30000_DESC,30.000 de ouro (20% a mais).,"30,000 gold (20% more)."
+STORE_XP_BOOST,Pergaminho do saber,Scroll of learning
+STORE_XP_BOOST_DESC,+50% de XP dos inimigos por 1 hora (o tempo corre mesmo com o jogo fechado).,+50% XP from enemies for 1 hour (time runs even with the game closed).
+STORE_KIT_POCOES,Kit de poções,Potion kit
+STORE_KIT_POCOES_DESC,"10 de vida média, 10 de fôlego médio e 3 tônicos.","10 medium health, 10 medium stamina and 3 tonics."
+HUD_ROUTINE,Rotina (R),Routine (R)
+ROUTINE_TITLE,Rotina,Routine
+ROUTINE_TAB_DAILY,Diárias,Dailies
+ROUTINE_TAB_LOGIN,Login,Login
+ROUTINE_TAB_ACHIEVEMENTS,Conquistas,Achievements
+ROUTINE_DAILY_NOTE,"5 missões por dia, sorteadas pelo seu nível. Renovam à meia-noite.","5 missions a day, drawn by your level. They renew at midnight."
+ROUTINE_PROGRESS,Progresso:,Progress:
+ROUTINE_CLAIM,Pegar prêmio,Collect
+ROUTINE_CLAIMED,Recebido,Collected
+ROUTINE_LOGIN_NOTE,Entre um dia por vez e ganhe um prêmio (%d de %d dias). Dias 6 e 7 de cada semana têm Broca e Amuleto; o 28º dá um Trevo Real.,Come back one day at a time for a prize (%d of %d days). Days 6 and 7 of each week give a Drill and an Amulet; day 28 gives a Royal Clover.
+ROUTINE_DAY,Dia %d,Day %d
+ROUTINE_LOGIN_CLAIM,Pegar o prêmio do dia %d,Collect the prize of day %d
+ROUTINE_LOGIN_TOMORROW,Volte amanhã para o próximo prêmio,Come back tomorrow for the next prize
+ROUTINE_TITLE_NOW,Título em uso: %s. Cada conquista libera um título; use um por vez.,Title in use: %s. Each achievement unlocks a title; wear one at a time.
+ROUTINE_NO_TITLE,nenhum,none
+ROUTINE_TITLE_USE,Usar título,Use title
+ROUTINE_TITLE_ON,Em uso,In use
+ROUTINE_CLOCK_BACK,O relógio do aparelho voltou no tempo. Os prêmios ficam bloqueados até a data voltar ao normal.,The device clock went back in time. Prizes stay locked until the date is right again.
+ROUTINE_ACH_GOT,Conquista! Novo título: %s,Achievement! New title: %s
+DAILY_KILL_ANY,Derrote %d inimigos,Defeat %d enemies
+DAILY_KILL,Derrote %d: %s,Defeat %d: %s
+DAILY_GATHER,Junte %d %s,Gather %d %s
+DAILY_EVENT_POTION,Beba %d poções,Drink %d potions
+DAILY_EVENT_ENHANCE,Fortaleça %d vez no ferreiro,Strengthen %d time at the smith
+DAILY_EVENT_BUY,Compre %d vez na loja,Buy %d time at the shop
+DAILY_EVENT_CRAFT,Crie %d peça no ferreiro,Craft %d piece at the smith
+ACH_LEVEL,Chegue ao nível %d,Reach level %d
+ACH_PLUS,Fortaleça uma peça até +%d,Strengthen a piece to +%d
+ACH_LOGIN,Entre no jogo em %d dias,Play on %d days
+ACH_DAILY,Complete %d missões diárias,Complete %d daily missions
+ACH_FLAG_GOLEM_DEFEATED,Derrote o Golem guardião da mina,Defeat the mine's guardian Golem
+ACH_FLAG_GORVAN_DEFEATED,"Derrote Gorvan, o Arauto da Colheita","Defeat Gorvan, Herald of the Harvest"
+TITLE_DEFENSOR,Defensor de Pradoluz,Defender of Pradoluz
+TITLE_CACADOR_ORCS,Caçador de Orcs,Orc Hunter
+TITLE_QUEBRA_OSSOS,Quebra-ossos,Bonebreaker
+TITLE_DESPERTA_PEDRAS,Desperta-pedras,Stonewaker
+TITLE_FIM_DO_TRIBUTO,Fim do Tributo,End of the Tribute
+TITLE_APRENDIZ_HEROI,Aprendiz de herói,Hero's Apprentice
+TITLE_MAO_FERREIRO,Mão de ferreiro,Smith's Hand
+TITLE_MESTRE_FORJA,Mestre da forja,Forge Master
+TITLE_FIEL,Fiel,Faithful
+TITLE_TRABALHADOR,Trabalhador,Hard Worker
+DIFF_CHOOSE,Escolha a dificuldade,Choose the difficulty
+DIFF_EASY,Fácil,Easy
+DIFF_NORMAL,Normal,Normal
+DIFF_HARD,Difícil,Hard
+DIFF_EASY_DESC,Inimigos com 25% menos vida e dano; perder uma luta custa metade.,Enemies have 25% less health and damage; losing a fight costs half.
+DIFF_NORMAL_DESC,Como o jogo foi pensado.,As the game was designed.
+DIFF_HARD_DESC,Inimigos 40% mais fortes; 25% mais XP e mais itens.,Enemies 40% stronger; 25% more XP and more items.
+DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumentar.","You can lower it later (in Options, in a town), but not raise it."
+DIFF_NOW,Dificuldade: %s,Difficulty: %s
+DIFF_LOWER,Mudar para %s,Change to %s
+DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town

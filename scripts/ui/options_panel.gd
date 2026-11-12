@@ -6,6 +6,10 @@ extends PanelContainer
 signal closed
 
 var _credits: ScrollContainer
+## Set in the game (not on the title screen): shows the difficulty row.
+var in_game: bool = false
+var _diff_label: Label
+var _diff_btn: Button
 
 
 func _ready() -> void:
@@ -21,6 +25,18 @@ func _ready() -> void:
 	box.add_child(title)
 	for bus: String in ["Music", "SFX", "Voice"]:
 		box.add_child(_slider_row(bus))
+	var diff_row := HBoxContainer.new()
+	diff_row.add_theme_constant_override("separation", 14)
+	box.add_child(diff_row)
+	_diff_label = Label.new()
+	_diff_label.add_theme_font_size_override("font_size", 20)
+	_diff_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	diff_row.add_child(_diff_label)
+	_diff_btn = Button.new()
+	_diff_btn.focus_mode = Control.FOCUS_NONE
+	_diff_btn.custom_minimum_size = Vector2(0, 44)
+	_diff_btn.pressed.connect(_lower_difficulty)
+	diff_row.add_child(_diff_btn)
 	var credits_btn := Button.new()
 	credits_btn.text = tr("OPT_CREDITS")
 	credits_btn.focus_mode = Control.FOCUS_NONE
@@ -54,9 +70,31 @@ func _ready() -> void:
 
 func open() -> void:
 	_credits.hide()
+	_refresh_difficulty()
 	show()
 	reset_size()
 	_center()
+
+
+## Difficulty can go down (never up), and only in a town (GDD 6.10).
+func _refresh_difficulty() -> void:
+	var row: Control = _diff_label.get_parent()
+	row.visible = in_game
+	if not in_game:
+		return
+	_diff_label.text = tr("DIFF_NOW") % tr("DIFF_" + Session.difficulty.to_upper())
+	var lower: String = {"hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
+	var in_town: bool = bool(GameMap.load_data(Session.current_map).get("safe", false))
+	_diff_btn.visible = lower != ""
+	_diff_btn.disabled = not in_town
+	_diff_btn.text = (tr("DIFF_LOWER") % tr("DIFF_" + lower.to_upper())) if in_town else tr("DIFF_ONLY_TOWN")
+
+
+func _lower_difficulty() -> void:
+	var lower: String = {"hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
+	if lower != "" and bool(GameMap.load_data(Session.current_map).get("safe", false)):
+		Session.difficulty = lower
+		_refresh_difficulty()
 
 
 func _center() -> void:

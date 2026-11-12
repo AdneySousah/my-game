@@ -60,7 +60,8 @@ func _ready() -> void:
 		var note: String = str(Data.quest(id).get("end_note", ""))
 		if note != "":
 			hud.banner(tr(note)))
-	player.stats.leveled_up.connect(func(_l: int) -> void:
+	player.stats.leveled_up.connect(func(l: int) -> void:
+		Session.routine.on_event("level", "", l)
 		Audio.play_sfx("level_up")
 		_refresh_quest_world()
 		save_now())
@@ -91,6 +92,11 @@ func _ready() -> void:
 			spawn = "pos:%s:%s:%s" % [pos[0], pos[1], st.get("yaw", 0)]
 		SaveGame.pending = {}
 	Session.give_starter_gear()
+	Store.granted.connect(_on_store_granted)
+	Store.claim_waiting()
+	Session.routine.unlocked.connect(_on_achievement)
+	Session.routine.refresh_daily(player.stats.level)
+	Session.routine.check_achievements()
 	await load_map(map_id, spawn, false)
 	quests.start_auto_quests()
 
@@ -194,6 +200,11 @@ func talk_to_nearby() -> void:
 	quests.finish_talk(plan)
 	_refresh_quest_world()
 	_talking = false
+	# NPCs with a service open it after their everyday line (Tobias = forge, Celeste = shop).
+	if str(plan.get("kind", "")) == "":
+		match str(Data.npc(npc.npc_id).get("service", "")):
+			"smith": hud.open_smith()
+			"shop": hud.open_shop(npc.npc_id)
 
 
 ## Where the tracked quest points in this map (the target, or the exit towards it).
@@ -237,12 +248,16 @@ func xp_for_kill(e: Enemy) -> int:
 	var mult: float = 1.0
 	if diff > 0:
 		mult = maxf(float(p.get("xp_min_mult", 0.1)), 1.0 - diff * float(p.get("xp_level_diff_penalty", 0.1)))
+	if Session.xp_boost_left() > 0.0:
+		mult *= 1.0 + float(Data.store.get("xp_boost", 0.5))
+	mult *= Session.diff("xp")
 	return roundi(e.xp_reward * mult)
 
 
 func _on_enemy_killed(e: Enemy) -> void:
 	kills += 1
 	quests.on_enemy_killed(e.base_id, Session.current_map)
+	Session.routine.on_event("kill", e.base_id)
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(e.gold_reward)
 	_drop_loot(e)
@@ -342,15 +357,42 @@ func _drop_loot(e: Enemy) -> void:
 		burst.global_position = e.global_position
 	var base: Dictionary = Data.enemies.get(e.base_id, {})
 	for d: Dictionary in base.get("drops", []):
-		if randf() > float(d.get("chance", 1.0)):
+		if randf() > float(d.get("chance", 1.0)) * Session.diff("drops"):
 			continue
-		if d.has("gear"):
+		if d.has("gem"):
+			for i: int in int(d.get("count", 1)):
+				give_item("gema_%s_%d" % [["rubi", "safira", "esmeralda", "topazio", "ametista"].pick_random(), int(d["gem"])], 1)
+		elif d.has("gear"):
 			for i: int in int(d.get("count", 1)):
 				var id: String = random_gear(str(d["gear"]))
 				if id != "":
 					give_item(id, 1)
 		else:
 			give_item(str(d["item"]), int(d.get("count", 1)))
+
+
+## New achievement: a banner and its title becomes available.
+func _on_achievement(a: Dictionary) -> void:
+	hud.banner(tr("ROUTINE_ACH_GOT") % tr(str(a.get("title", ""))))
+	Audio.play_sfx("quest")
+
+
+## A real-money purchase went through: give it to the hero and save at once.
+func _on_store_granted(p: Dictionary) -> void:
+	var g: Dictionary = p.get("grants", {})
+	if int(g.get("gold", 0)) > 0:
+		player.add_gold(int(g["gold"]))
+	if float(g.get("xp_boost_seconds", 0.0)) > 0.0:
+		Session.add_xp_boost(float(g["xp_boost_seconds"]))
+	var items: Dictionary = g.get("items", {})
+	for id: String in items:
+		# Bought items always reach the hero, even with a full bag (they pile on top).
+		var left: int = Session.add_item(id, int(items[id]))
+		if left > 0:
+			Session.inventory.put_back({"id": id, "count": left})
+	hud.toast(tr("STORE_GOT") % tr(str(p.get("name", ""))), 2.0)
+	Audio.play_sfx("quest")
+	save_now()
 
 
 ## A random gear piece of this rarity (not part of a set; sets come from the smith).
@@ -366,6 +408,8 @@ static func random_gear(rarity: String) -> String:
 ## Puts items in the bag with a short message ("+2 Poção de vida" or "Mochila cheia").
 func give_item(id: String, n: int = 1) -> void:
 	var left: int = Session.add_item(id, n)
+	if left < n and str(Data.item(id).get("type", "")) == "material":
+		Session.routine.on_event("gather", id, n - left)
 	if left < n:
 		hud.toast(tr("HUD_MATERIAL_GOT") % [n - left, tr(str(Data.item(id).get("name", id)))], 1.4)
 	if left > 0:

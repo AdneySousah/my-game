@@ -44,11 +44,13 @@ func _register_inputs() -> void:
 	_action("toggle_quests", [KEY_L], [])
 	_action("toggle_bag", [KEY_B], [])
 	_action("toggle_equipment", [KEY_G], [])
+	_action("toggle_routine", [KEY_R], [])
 	_action("potion_1", [KEY_5, KEY_Z], [])
 	_action("potion_2", [KEY_6, KEY_X], [])
 	_action("potion_3", [KEY_7, KEY_V], [])
 	_action("interact", [KEY_E, KEY_F], [JOY_BUTTON_RIGHT_STICK])
 	_action("debug_level_up", [KEY_F1], [])
+	_action("debug_forge_kit", [KEY_F2], [])
 
 
 func _action(action: String, keys: Array, buttons: Array, axes: Array = []) -> void:

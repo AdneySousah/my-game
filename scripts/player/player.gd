@@ -88,8 +88,9 @@ func _ready() -> void:
 	stats = Stats.new()
 	stats.leveled_up.connect(_on_leveled_up)
 	stats.stats_changed.connect(_on_stats_changed)
-	stats.gear = Session.gear.bonuses()
+	stats.gear = _bonuses()
 	Session.gear.changed.connect(_on_gear_changed)
+	Session.routine.changed.connect(_on_title_maybe_changed)
 	if model:
 		model.set_weapon(Session.gear.weapon_model())
 	status = StatusEffects.new()
@@ -382,6 +383,7 @@ func use_potion(item_id: String) -> bool:
 		"buff":
 			stats.add_buff(str(e.get("stat", "atk")), float(e.get("amount", 0.1)), seconds)
 	Audio.play_sfx("pickup", global_position, 0.8)
+	Session.routine.on_event("event", "potion")
 	return true
 
 
@@ -532,10 +534,10 @@ func _die() -> void:
 	hp = 0.0
 	_forced_time = 0.0
 	var death: Dictionary = Data.progression.get("death", {})
-	var gold_lost: int = int(gold * float(death.get("gold_loss", 0.1)))
+	var gold_lost: int = int(gold * float(death.get("gold_loss", 0.1)) * Session.diff("death"))
 	gold -= gold_lost
 	gold_changed.emit(gold)
-	var xp_lost: int = stats.lose_xp_fraction(float(death.get("xp_loss", 0.05)))
+	var xp_lost: int = stats.lose_xp_fraction(float(death.get("xp_loss", 0.05)) * Session.diff("death"))
 	stats.set_defeated(float(death.get("defeated_seconds", 300)))
 	if model:
 		model.play_action("dead")
@@ -612,9 +614,25 @@ func _on_leveled_up(new_level: int) -> void:
 
 ## When a maximum grows (attribute point, buff ending...), the current value grows by
 ## the same amount; when it shrinks (Derrotado), the current value is clamped.
+## Equipment and title bonuses together (both are flat bonuses on the stats).
+func _bonuses() -> Dictionary:
+	var b: Dictionary = Session.gear.bonuses()
+	var t: Dictionary = Session.routine.title_bonus()
+	for k: String in t:
+		b[k] = float(b.get(k, 0.0)) + float(t[k])
+	return b
+
+
+func _on_title_maybe_changed() -> void:
+	var b: Dictionary = _bonuses()
+	if b != stats.gear:
+		stats.gear = b
+		stats.stats_changed.emit()
+
+
 ## Equipment changed: new bonuses and the sword in hand.
 func _on_gear_changed() -> void:
-	stats.gear = Session.gear.bonuses()
+	stats.gear = _bonuses()
 	stats.stats_changed.emit()
 	if model:
 		model.set_weapon(Session.gear.weapon_model())

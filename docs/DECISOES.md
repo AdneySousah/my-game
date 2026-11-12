@@ -166,3 +166,31 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Teclas: Mochila B (era I, que também é a skill 2), Equipamento G (era K, igual a Skills).
 - Créditos em Opções: o texto rola dentro de uma caixa; o painel não passa mais da tela.
 - Molduras: o conteúdo dos painéis começa dentro da moldura entalhada (margem 60). Todo painel é centralizado e, se a janela for pequena, encolhe para caber inteiro.
+
+## Ferreiro (11/11/2026, etapa 5.4)
+- A forja abre quando se fala com o Tobias (depois da fala do dia a dia; conversas de missão vêm antes). Quatro abas: Fortalecer, Encaixes e gemas, Criar e Desmontar. Regras e custos em `data/smith/smith.json`.
+- Fortalecer +1 a +20 com as chances do GDD 6.5 (100% → 5%) e do Trevo (Trevo Real = sempre). Até +10, falhar só gasta o custo; de +11 a +15 a peça quebra (sem bônus até restaurar); de +16 a +20 ela some. O Amuleto evita as duas coisas. Trevo e Amuleto são gastos na tentativa. Funciona em peças equipadas ou na mochila.
+- O GDD não dizia qual material o fortalecimento gasta: escolhemos o **Lingote de aço** (cai de orcs e esqueletos, Golem e Gorvan, e de um baú da mina; depois também na loja). Custo em ouro sobe com o +nível e com a raridade.
+- Restaurar peça quebrada: ouro (60 por +nível) e 3 Lingotes.
+- Encaixes: Broca comum abre o 1º/2º/3º com 100%/50%/25%; Broca Real sempre. A broca é gasta mesmo se falhar.
+- Gemas em 5 níveis (I a V) para os 5 tipos do GDD: Rubi ataque, Safira vida, Esmeralda crítico, Topázio recarga, Ametista defesa. **Três iguais viram uma do nível seguinte** no ferreiro (o GDD não dizia como subir de nível; essa é a forma mais comum no gênero). Tirar uma gema custa 50 de ouro e ela volta para a mochila. Gemas caem de inimigos (nível I), chefes (nível II) e baús.
+- Criar: todas as 32 peças (inclusive as lendárias do Sol Alado, que só saem daqui). Custo por raridade, com os materiais do Ato 1; os encaixes são sorteados (0 a 3).
+- Desmontar: só peças na mochila. Nunca usada = devolve todos os materiais da receita; já usada = metade. Gemas encaixadas voltam. Não dá para desmontar a espada de aprendiz.
+- Novos drops de materiais: palha dourada (bandidos e arqueiros, 5%), lingote (orcs e esqueletos, 12%), fragmento de pedra (esqueletos, 8%).
+- Os valores de ouro são provisórios: serão calibrados junto com a economia das lojas (5.5).
+
+## Lojas (11/11/2026, etapa 5.5)
+- Loja de ouro da Dona Celeste: abre depois da fala dela (como o Tobias). Vende poções (P/M/G), os 3 tônicos, Lingote de aço, Trevo, Broca, Amuleto e as peças comuns e raras (sem conjunto), como no GDD 6.6. Lista e preços em `data/shop/shop.json`.
+- Vender: qualquer item da mochila pelo "price" do item; equipamento vale +15% por +nível. Não se vende a espada de aprendiz nem peça equipada. Quantidade com −/+/+10.
+- Loja especial (dinheiro real) com os 7 produtos do rascunho do plano (preços em `data/shop/store.json`, esperando a confirmação do dono). Pergaminho do saber = +50% de XP dos inimigos por 1 hora em tempo real (soma se comprar outro). Kit de poções = 10 vida média, 10 fôlego médio e 3 tônicos.
+- Camada `Store` (autoload): no Android usa o plugin Godot Google Play Billing (instalado na Fase 7, junto com a exportação); na versão de teste do PC há uma "loja de teste" que simula a compra sem cobrar; na versão final do PC a loja especial some.
+- Segurança da compra: o item é entregue e o jogo salva antes de a compra ser "consumida" no Google Play. Compras pagas com o jogo fechado (ou na tela inicial) são entregues quando o jogo abre. Itens comprados chegam mesmo com a mochila cheia.
+
+## Rotina e dificuldade (11/11/2026, etapa 5.6)
+- Tela "Rotina" (tecla R ou menu do retrato, com "!" quando há prêmio): abas Diárias, Login e Conquistas. Regras em `data/routine/routine.json`.
+- Missões diárias: 5 por dia, sorteadas pelo nível entre 11 modelos do Ato 1 (derrotar inimigos, juntar materiais, beber poções, fortalecer, comprar, criar). Iguais o dia todo; renovam à meia-noite do aparelho. Prêmio: 12% do XP do nível, ouro (40 + 12 por nível) e 2 materiais.
+- Calendário de login de 28 dias (GDD 6.7): dias 6/13/20/27 Broca, 7/14/21/28 Amuleto, o 28º também Trevo Real, 5.000 de ouro e 3 poções grandes; os outros dias dão ouro, poções, lingotes ou gemas. Um prêmio por dia de jogo (não precisa ser seguido); depois do 28º recomeça.
+- Proteção do relógio: o jogo guarda a maior data já vista; se o relógio voltar mais de 1 hora, diárias e login ficam bloqueados até a data voltar.
+- Conquistas: 10 no Ato 1, cada uma libera um título com bônus (ex.: Caçador de Orcs +5 de ataque, Fim do Tributo +8 de ataque e +80 de vida). Um título em uso por vez; aparece no menu do retrato.
+- Dificuldade (GDD 6.10): escolhida no Novo jogo. Fácil = inimigos −25% de vida e dano, penalidade de morte pela metade; Difícil = inimigos +40%, +25% de XP e de chance de itens. Em Opções dá para diminuir, só numa cidade (Pradoluz), nunca aumentar. Saves antigos ficam no Normal.
+- O Modo Infernal das dungeons fica para a Fase 6, como no plano.

@@ -16,6 +16,13 @@ var dialogues: Dictionary = {}
 ## Item definitions (data/items/items.json): id -> {...}; items_config has the rest of the file.
 var items: Dictionary = {}
 var items_config: Dictionary = {}
+## Blacksmith rules (data/smith/smith.json): enhance chances and costs, sockets, recipes.
+var smith: Dictionary = {}
+## Gold shops (data/shop/shop.json) and the real-money shop (data/shop/store.json).
+var shop: Dictionary = {}
+var store: Dictionary = {}
+## Daily missions, login calendar, achievements (data/routine/routine.json).
+var routine: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -38,6 +45,10 @@ func _ready() -> void:
 
 	items_config = _load_json("res://data/items/items.json")
 	items = items_config.get("items", {})
+	smith = _load_json("res://data/smith/smith.json")
+	shop = _load_json("res://data/shop/shop.json")
+	store = _load_json("res://data/shop/store.json")
+	routine = _load_json("res://data/routine/routine.json")
 	npcs = _load_json("res://data/characters/npcs.json").get("npcs", {})
 	for q: Dictionary in _load_json("res://data/quests/quests.json").get("quests", []):
 		quests.append(q)

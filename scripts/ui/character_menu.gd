@@ -10,6 +10,7 @@ var _title: Label
 var _attr_btn: Button
 var _skills_btn: Button
 var _equip_btn: Button
+var _routine_btn: Button
 
 
 func _ready() -> void:
@@ -28,6 +29,8 @@ func _ready() -> void:
 	_equip_btn = _item(box, "equipment")
 	_equip_btn.text = tr("HUD_EQUIPMENT")
 	_item(box, "bag").text = tr("HUD_BAG")
+	_routine_btn = _item(box, "routine")
+	_routine_btn.text = tr("HUD_ROUTINE")
 	_item(box, "quests").text = tr("HUD_QUESTS")
 	_item(box, "map").text = tr("HUD_MAP")
 	_item(box, "options").text = tr("OPT_MENU")
@@ -43,13 +46,17 @@ func _ready() -> void:
 
 ## points = unspent attribute points; new_skills = skills unlocked and not seen yet;
 ## new_gear = a wearable piece arrived. Each item that needs attention gets a red "!".
-func open_with(level: int, points: int, new_skills: bool, new_gear: bool = false) -> void:
+func open_with(level: int, points: int, new_skills: bool, new_gear: bool = false, routine: bool = false) -> void:
 	_title.text = "Lio · " + tr("HUD_LEVEL") % level
+	var title_id: String = str(Session.routine.state.get("title", ""))
+	if title_id != "":
+		_title.text += "\n" + tr(str(Routine.achievement(title_id).get("title", "")))
 	_attr_btn.text = tr("HUD_ATTRIBUTES") + ("   (+%d)" % points if points > 0 else "")
 	_skills_btn.text = tr("HUD_SKILLS")
 	_set_alert(_attr_btn, points > 0)
 	_set_alert(_skills_btn, new_skills)
 	_set_alert(_equip_btn, new_gear)
+	_set_alert(_routine_btn, routine)
 	show()
 	reset_size()
 	GameTheme.place_center(self)

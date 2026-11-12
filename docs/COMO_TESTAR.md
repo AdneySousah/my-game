@@ -39,6 +39,10 @@ Tudo ainda é forma simples. O amarelo é o Lio, o vermelho é o bandido e o rox
 8. **Poções:** os 3 botões redondos acima da barra de fôlego (vida, fôlego, reforço), ou teclas **5, 6 e 7**. O número pequeno é quanto sobra; depois de beber, o botão escurece por 8 s.
 9. **Baús:** há 2 na floresta, 2 na mina e 1 no celeiro. Chegue perto e aperte **E** ("Abrir"). Cada baú abre uma vez só.
 10. **Equipamento:** tecla **G** (ou retrato > Equipamento). Toque num espaço, escolha uma peça da mochila embaixo e veja quanto muda (verde = melhor). "Equipar" troca; "Tirar" devolve para a mochila. Arraste o Lio para girar. Peças de nível alto ficam com fundo vermelho.
+11. **Ferreiro:** fale com o Tobias em Pradoluz; depois da fala dele abre a forja. Fortalecer (veja a chance e o risco antes), Encaixes e gemas (Broca abre encaixe; toque numa gema encaixada para tirar; "Juntar 3 → 1"), Criar (peças com materiais e ouro) e Desmontar (só peças na mochila). Para testar rápido: **F1** sobe de nível e **F2** (botão "+kit forja") dá ouro e materiais da forja. Esses dois botões só existem na versão de teste.
+12. **Lojas:** fale com a Dona Celeste em Pradoluz. Comprar (−/+ escolhe a quantidade), Vender (toque no item da mochila) e Loja especial. No PC a loja especial é **de teste**: nada é cobrado, o item chega na hora.
+13. **Rotina:** tecla **R** (ou retrato > Rotina). Diárias (5 por dia; "Pegar prêmio" quando completar), Login (um prêmio por dia) e Conquistas (escolha um título para usar).
+14. **Dificuldade:** no Novo jogo aparece Fácil / Normal / Difícil. Em Opções, numa cidade, dá para diminuir.
 
 Anote o que achou: rápido, lento, fácil, difícil, confuso. Os números ficam todos em `data/` e são fáceis de ajustar.
 

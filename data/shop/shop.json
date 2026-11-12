@@ -1,0 +1,40 @@
+{
+  "_comment": "Lojas de ouro (GDD 6.6). merchants: o que cada comerciante vende e por quanto (buy). Vender: o jogador recebe o 'price' do item (data/items); equipamentos valem mais com +nível (sell_plus_bonus por nível). Não dá para vender a espada de aprendiz nem peças equipadas.",
+  "sell_plus_bonus": 0.15,
+  "merchants": {
+    "celeste": {
+      "name": "SHOP_CELESTE",
+      "goods": [
+        {"id": "pot_vida_p", "buy": 30},
+        {"id": "pot_vida_m", "buy": 80},
+        {"id": "pot_vida_g", "buy": 200},
+        {"id": "pot_folego_p", "buy": 30},
+        {"id": "pot_folego_m", "buy": 80},
+        {"id": "pot_folego_g", "buy": 200},
+        {"id": "pot_forca", "buy": 120},
+        {"id": "pot_pedra", "buy": 120},
+        {"id": "pot_vento", "buy": 120},
+        {"id": "mat_lingote_aco", "buy": 60},
+        {"id": "trevo", "buy": 350},
+        {"id": "broca", "buy": 300},
+        {"id": "amuleto", "buy": 600},
+        {"id": "eq_espada_comum", "buy": 120},
+        {"id": "eq_elmo_comum", "buy": 120},
+        {"id": "eq_peitoral_comum", "buy": 120},
+        {"id": "eq_luvas_comum", "buy": 120},
+        {"id": "eq_calca_comum", "buy": 120},
+        {"id": "eq_botas_comum", "buy": 120},
+        {"id": "eq_pulseira_comum", "buy": 120},
+        {"id": "eq_cinto_comum", "buy": 120},
+        {"id": "eq_espada_raro", "buy": 450},
+        {"id": "eq_elmo_raro", "buy": 450},
+        {"id": "eq_peitoral_raro", "buy": 450},
+        {"id": "eq_luvas_raro", "buy": 450},
+        {"id": "eq_calca_raro", "buy": 450},
+        {"id": "eq_botas_raro", "buy": 450},
+        {"id": "eq_pulseira_raro", "buy": 450},
+        {"id": "eq_cinto_raro", "buy": 450}
+      ]
+    }
+  }
+}

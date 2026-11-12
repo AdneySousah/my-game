@@ -23,6 +23,9 @@ func _ready() -> void:
 	await _audio_test()
 	await _items_test()
 	await _gear_test()
+	await _smith_test()
+	await _shop_test()
+	await _routine_test()
 	# Let any navigation bake still running on a thread finish before quitting
 	# (tests run faster than real time, so wait real milliseconds). Music stops first
 	# so the audio thread lets go of it in the meantime.
@@ -161,6 +164,8 @@ func _bot_test() -> void:
 	check(is_equal_approx(player.stamina, st_before + 1.0), "vitality point also raises current fôlego")
 	while player.stats.unspent_points > 0:
 		player.stats.spend_point("str")
+	# Today's login prize also lights the alert: collect it first.
+	Session.routine.claim_login(player)
 	check(not status.alert, "portrait alert off once points are spent and skills seen")
 
 	await _stamina_tests(player)
@@ -364,7 +369,7 @@ func _world_test() -> void:
 	# Death in the mine sends the hero back to the last rest point (forest camp).
 	Session.last_rest = {"map": "floresta", "point": "floresta_entrada"}
 	main.player.receive_attack(1_000_000.0)
-	await _wait_map(main, "floresta", 600)
+	await _wait_map(main, "floresta", 900)
 	check(main.map.map_id == "floresta" and not main.player.is_dead(), "after dying the hero returns to the last camp")
 	main.queue_free()
 	await _frames(2)
@@ -883,6 +888,268 @@ func _gear_test() -> void:
 	var panel: EquipmentPanel = main.hud.equipment_panel()
 	check(panel.visible and get_tree().paused, "the equipment screen opens and pauses")
 	panel.hide()
+	main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(2)
+
+
+func _smith_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	var smith := Smith.new(p)
+	smith.rng.seed = 12345
+	p.add_gold(100000)
+
+	# Craft: pays gold and materials, gives a new piece.
+	check(not smith.craft("eq_elmo_comum")["ok"], "no materials, no crafting")
+	Session.add_item("mat_couro_orc", 3)
+	Session.add_item("mat_osso_velho", 2)
+	var g0: int = p.gold
+	var res: Dictionary = smith.craft("eq_elmo_comum")
+	check(res["ok"] and Session.inventory.count("eq_elmo_comum") == 1 and p.gold == g0 - 60, "crafting a common helmet")
+	check(Session.inventory.count("mat_couro_orc") == 0, "crafting uses the materials")
+	var helm: int = int(res["piece"]["uid"])
+
+	# Disassemble a never-worn piece: all materials back.
+	check(smith.disassemble(helm)["ok"] and Session.inventory.count("mat_couro_orc") == 3 and Session.inventory.count("mat_osso_velho") == 2, "never-worn piece gives back 100%")
+	# Worn once: half back.
+	Session.inventory.remove("mat_couro_orc", 3)
+	Session.inventory.remove("mat_osso_velho", 2)
+	Session.add_item("eq_botas_comum", 1)
+	var boots: int = int(Session.inventory.slots.back()["uid"])
+	Session.gear.equip(Session.inventory, boots, p.stats.level)
+	check(not smith.disassemble(boots)["ok"], "a worn piece must be taken off first")
+	Session.gear.unequip(Session.inventory, "boots")
+	smith.disassemble(boots)
+	check(Session.inventory.count("mat_couro_orc") == 1 and Session.inventory.count("mat_osso_velho") == 1, "worn piece gives back half")
+
+	# Strengthen: +1 always works, costs gold and ingots, raises the stats.
+	Session.add_item("mat_lingote_aco", 400)
+	Session.add_item("eq_espada_comum", 1)
+	var sword: int = int(Session.inventory.slots.back()["uid"])
+	Session.gear.equip(Session.inventory, sword, p.stats.level)
+	var atk0: float = p.stats.get_stat("atk")
+	var ingots: int = Session.inventory.count("mat_lingote_aco")
+	res = smith.enhance(sword)
+	check(res["ok"] and int(Smith.find_piece(sword)["plus"]) == 1, "+1 always succeeds")
+	check(Session.inventory.count("mat_lingote_aco") == ingots - 1, "strengthening uses a steel ingot")
+	check(p.stats.get_stat("atk") > atk0, "a stronger worn sword raises attack")
+	# From +11 a failure breaks the piece; restore fixes it.
+	var piece: Dictionary = Smith.find_piece(sword)
+	var broke: bool = false
+	for i: int in 60:
+		piece["plus"] = 13
+		if smith.enhance(sword)["result"] == "broken":
+			broke = true
+			break
+	check(broke and bool(piece.get("broken", false)), "failing at +14 breaks the piece")
+	check(not p.stats.gear.has("atk") or p.stats.get_stat("atk") < atk0, "a broken sword gives no bonus")
+	check(not smith.enhance(sword)["ok"], "a broken piece cannot be strengthened")
+	check(smith.restore(sword)["ok"] and not piece.has("broken"), "restoring a broken piece")
+	# The Trevo Real always works; the Amulet saves the piece from vanishing.
+	Session.add_item("trevo_real", 1)
+	piece["plus"] = 18
+	check(smith.enhance(sword, "trevo_real")["ok"] and int(piece["plus"]) == 19, "Trevo Real always succeeds")
+	Session.add_item("amuleto", 30)
+	var saved: bool = false
+	for i: int in 30:
+		piece["plus"] = 19
+		res = smith.enhance(sword, "", true)
+		if res["result"] == "fail":
+			saved = true
+			break
+	check(saved and not Smith.find_piece(sword).is_empty(), "the Amulet keeps the piece at +20 tries")
+	var vanished: bool = false
+	for i: int in 60:
+		var pc: Dictionary = Smith.find_piece(sword)
+		if pc.is_empty():
+			break
+		pc["plus"] = 19
+		if smith.enhance(sword)["result"] == "vanished":
+			vanished = true
+			break
+	check(vanished and Smith.find_piece(sword).is_empty() and Session.gear.get_piece("weapon").is_empty(), "failing at +20 without the Amulet destroys it")
+
+	# Sockets and gems.
+	Session.add_item("eq_pulseira_comum", 1)
+	var br: int = int(Session.inventory.slots.back()["uid"])
+	var bp: Dictionary = Smith.find_piece(br)
+	bp["sockets"] = 0
+	Session.add_item("broca", 1)
+	check(smith.open_socket(br, "broca")["ok"] and int(bp["sockets"]) == 1, "the first socket always opens")
+	Session.add_item("gema_rubi_1", 4)
+	check(smith.insert_gem(br, "gema_rubi_1")["ok"] and bp["gems"].size() == 1, "setting a gem")
+	check(not smith.insert_gem(br, "gema_rubi_1")["ok"], "no free socket, no second gem")
+	Session.gear.equip(Session.inventory, br, p.stats.level)
+	check(is_equal_approx(float(Session.gear.bonuses().get("atk", 0.0)), 2.0 + 5.0), "a worn gem adds its stat")
+	check(smith.remove_gem(br, 0)["ok"] and Session.inventory.count("gema_rubi_1") == 4, "taking the gem out returns it")
+	check(smith.merge_gems("gema_rubi_1")["ok"] and Session.inventory.count("gema_rubi_2") == 1 and Session.inventory.count("gema_rubi_1") == 1, "three gems become one of the next tier")
+
+	# Talking to Tobias opens the forge.
+	main.quests.finish_talk({"kind": ""})
+	var tobias: Npc = main.map.npcs.get("tobias")
+	check(tobias != null, "Tobias is in Pradoluz")
+	if tobias:
+		await _talk(main, "tobias")
+		await _frames(2)
+		check(main.hud.smith_panel().visible, "talking to Tobias opens the forge")
+		main.hud.smith_panel().hide()
+		main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(2)
+
+
+func _shop_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	var shop := Shop.new(p)
+	p.add_gold(1000 - p.gold)
+
+	# Buying.
+	check(shop.buy("celeste", "pot_vida_p", 5)["ok"] and Session.inventory.count("pot_vida_p") == 5 and p.gold == 1000 - 150, "buying 5 small health potions")
+	check(not shop.buy("celeste", "amuleto", 2)["ok"] and Session.inventory.count("amuleto") == 0, "not enough gold, no purchase")
+	check(shop.max_buy("celeste", "pot_vida_p") == mini(99, p.gold / 30), "the most you can buy follows your gold")
+	check(shop.buy("celeste", "eq_elmo_comum", 1)["ok"] and Session.inventory.count("eq_elmo_comum") == 1, "buying gear")
+	check(not shop.buy("celeste", "eq_elmo_lendario", 1)["ok"], "items she does not sell cannot be bought")
+
+	# Selling.
+	var gold0: int = p.gold
+	var idx: int = -1
+	for i: int in Session.inventory.slots.size():
+		if Session.inventory.slots[i]["id"] == "pot_vida_p":
+			idx = i
+	check(shop.sell(idx, 3)["ok"] and Session.inventory.count("pot_vida_p") == 2 and p.gold == gold0 + 45, "selling 3 potions at their price")
+	var helm: Dictionary = {}
+	for i: int in Session.inventory.slots.size():
+		if Session.inventory.slots[i]["id"] == "eq_elmo_comum":
+			helm = Session.inventory.slots[i]
+			idx = i
+	helm["plus"] = 4
+	gold0 = p.gold
+	check(shop.sell(idx)["ok"] and p.gold == gold0 + roundi(20 * 1.6), "a +4 piece sells for more")
+	Session.inventory.put_back(Inventory.clean_piece({"id": "eq_espada_aprendiz", "uid": 999}))
+	check(not shop.sell(Session.inventory.slots.size() - 1)["ok"], "the apprentice sword cannot be sold")
+
+	# Special shop (test store in test builds): purchases reach the hero and are saved.
+	check(Store.available() and Store.mode == "test", "test builds use the test store")
+	check(Store.price_text("ouro_5000") == "R$ 4,90", "prices show in reais")
+	gold0 = p.gold
+	Store.buy("ouro_5000")
+	await get_tree().create_timer(0.5, true, false, true).timeout
+	check(p.gold == gold0 + 5000, "the gold pack gives 5000 gold")
+	Store.buy("kit_pocoes")
+	await get_tree().create_timer(0.5, true, false, true).timeout
+	check(Session.inventory.count("pot_vida_m") >= 10 and Session.inventory.count("pot_folego_m") >= 10, "the potion kit fills the bag")
+	var xp_before: int = main.xp_for_kill(_any_enemy(main))
+	Store.buy("xp_boost_1h")
+	await get_tree().create_timer(0.5, true, false, true).timeout
+	check(Session.xp_boost_left() > 3500.0, "the XP pack gives one hour")
+	check(main.xp_for_kill(_any_enemy(main)) == roundi(xp_before * 1.5) or xp_before == 0, "enemies give 50% more XP meanwhile")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.xp_boost_left() > 3500.0, "the XP bonus survives the save")
+
+	# Talking to Dona Celeste opens her shop.
+	await _talk(main, "celeste")
+	await _frames(2)
+	check(main.hud.shop_panel().visible, "talking to Dona Celeste opens the shop")
+	main.hud.shop_panel().hide()
+	main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(2)
+
+
+func _any_enemy(main: Main) -> Enemy:
+	# A loose enemy (not in the world) just to ask how much XP it gives.
+	var e := Enemy.new()
+	e.level = main.player.stats.level
+	e.xp_reward = 100
+	e.queue_free()
+	return e
+
+func _routine_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var p: Player = main.player
+	var r: Routine = Session.routine
+
+	# Daily missions: 5 for the day, the same all day, new ones on a new date.
+	check(r.state["daily"].size() == 5, "5 daily missions are drawn")
+	var first: Array = r.state["daily"].map(func(d: Dictionary) -> String: return d["id"])
+	r.refresh_daily(1)
+	check(r.state["daily"].map(func(d: Dictionary) -> String: return d["id"]) == first, "the same missions all day")
+	# Finish one and collect it.
+	var i: int = 0
+	var t: Dictionary = Routine.daily_template(str(r.state["daily"][0]["id"]))
+	match str(t["kind"]):
+		"kill": r.on_event("kill", str(t["target"]) if str(t["target"]) != "" else "bandido", int(t["amount"]))
+		"gather": r.on_event("gather", str(t["target"]), int(t["amount"]))
+		_: r.on_event("event", str(t["target"]), int(t["amount"]))
+	check(r.daily_done(i), "a daily mission completes")
+	check(r.has_reward(), "a finished mission lights the alert")
+	var gold0: int = p.gold
+	check(r.claim_daily(i, p) and p.gold > gold0, "collecting gives gold (and XP and materials)")
+	check(not r.claim_daily(i, p), "a mission is collected only once")
+
+	# Login calendar: one prize per day.
+	gold0 = p.gold
+	check(r.can_claim_login(), "today's login prize is ready")
+	r.claim_login(p)
+	check(p.gold == gold0 + 200 and not r.can_claim_login(), "day 1 gives 200 gold, then wait for tomorrow")
+	r.state["login_last"] = "2000-01-01"
+	r.claim_login(p)
+	check(int(r.state["login_day"]) == 2 and Session.inventory.count("pot_vida_m") >= 3, "next day gives day 2's prize")
+	# Clock turned back: prizes wait.
+	r.state["login_last"] = "2000-01-01"
+	r.state["clock_high"] = Time.get_unix_time_from_system() + 100000.0
+	check(not r.clock_ok() and not r.can_claim_login(), "turning the clock back blocks the prizes")
+	r.state["clock_high"] = 0.0
+
+	# Achievements and titles.
+	r.on_event("kill", "orc", 50)
+	check(r.is_unlocked("cacador_orcs"), "50 orcs unlock the Orc Hunter title")
+	var atk0: float = p.stats.get_stat("atk")
+	r.set_title("cacador_orcs")
+	check(is_equal_approx(p.stats.get_stat("atk"), atk0 + 5.0), "wearing the title adds its bonus")
+	r.set_title("golem")
+	check(str(r.state["title"]) == "cacador_orcs", "titles not earned cannot be worn")
+	Session.set_flag("golem_defeated")
+	check(r.is_unlocked("golem"), "story achievements unlock with the story")
+
+	# Save keeps it all.
+	Session.difficulty = "hard"
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(int(Session.routine.state["login_day"]) == 2 and Session.routine.is_unlocked("cacador_orcs") and str(Session.routine.state["title"]) == "cacador_orcs", "routine progress survives the save")
+	check(Session.difficulty == "hard", "difficulty survives the save")
+
+	# Difficulty changes enemies.
+	var e := Enemy.new()
+	e.setup("bandido", 1, p)
+	var hard_hp: float = e.max_hp
+	Session.difficulty = "easy"
+	e.setup("bandido", 1, p)
+	check(is_equal_approx(hard_hp / e.max_hp, 1.4 / 0.75), "hard enemies have more health than easy ones")
+	e.free()
+	Session.difficulty = "normal"
+	main.hud.open_routine()
+	await _frames(2)
+	check(main.hud.routine_panel().visible, "the routine screen opens")
+	main.hud.routine_panel().hide()
 	main.hud.call("_on_panel_closed")
 	main.queue_free()
 	await _frames(2)

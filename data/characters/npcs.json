@@ -73,6 +73,7 @@
     },
     "celeste": {
       "name": "NPC_CELESTE",
+      "service": "shop",
       "color": "#8e5fb0",
       "voice": 1.15,
       "portrait": "ui_retrato_celeste",
@@ -92,6 +93,7 @@
     },
     "tobias": {
       "name": "NPC_TOBIAS",
+      "service": "smith",
       "color": "#8a4b2a",
       "voice": 0.8,
       "portrait": "ui_retrato_tobias",

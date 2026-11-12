@@ -77,8 +77,8 @@ func setup(id: String, lvl: int, player: Player) -> void:
 	data = Data.enemies.get(id, {})
 	var sc: Dictionary = Data.enemy_scaling
 	var l: int = level - 1
-	max_hp = float(data.get("hp", 50)) * (1.0 + float(sc.get("hp", 0.0)) * l)
-	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l)
+	max_hp = float(data.get("hp", 50)) * (1.0 + float(sc.get("hp", 0.0)) * l) * Session.diff("hp")
+	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l) * Session.diff("atk")
 	defense = float(data.get("def", 0)) * (1.0 + float(sc.get("def", 0.0)) * l)
 	speed = float(data.get("speed", 3.0))
 	is_boss = bool(data.get("boss", false))

@@ -48,6 +48,13 @@ static func describe(piece: Dictionary, hero_level: int, compare: Dictionary = {
 	var sockets: int = int(piece.get("sockets", 0))
 	if sockets > 0:
 		lines.append("[color=%s]%s[/color]" % [DIM, TranslationServer.translate("EQ_SOCKETS") % sockets])
+		for g: Variant in piece.get("gems", []):
+			var gem: Dictionary = Data.item(str(g))
+			var gs: Dictionary = gem.get("stats", {})
+			var parts: PackedStringArray = []
+			for k: String in gs:
+				parts.append("%s %s" % [stat_name(k), value_text(k, float(gs[k]))])
+			lines.append("  ◆ %s: %s" % [TranslationServer.translate(str(gem.get("name", g))), ", ".join(parts)])
 	var set_id: String = str(item.get("set", ""))
 	if set_id != "":
 		lines.append_array(set_lines(set_id))

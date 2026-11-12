@@ -7,6 +7,7 @@ const BACKGROUND: String = "res://assets/story/pro_08_torre.webp"
 
 var _buttons: VBoxContainer
 var _confirm: PanelContainer
+var _difficulty: PanelContainer
 var _options: OptionsPanel
 
 
@@ -67,6 +68,8 @@ func _ready() -> void:
 	Audio.play_music("titulo", 1.5)
 	_confirm = _build_confirm()
 	add_child(_confirm)
+	_difficulty = _build_difficulty()
+	add_child(_difficulty)
 	_options = OptionsPanel.new()
 	add_child(_options)
 	_options.closed.connect(func() -> void: _buttons.show())
@@ -78,9 +81,9 @@ func _layout() -> void:
 	var vp: Vector2 = get_viewport_rect().size
 	_buttons.reset_size()
 	_buttons.position = Vector2((vp.x - _buttons.size.x) * 0.5, vp.y * 0.52)
-	if _confirm.visible:
-		_confirm.reset_size()
-		_confirm.position = ((vp - _confirm.size) * 0.5).floor()
+	for p: Control in [_confirm, _difficulty]:
+		if p and p.visible:
+			GameTheme.place_center(p)
 
 
 func _continue() -> void:
@@ -90,17 +93,25 @@ func _continue() -> void:
 
 
 func _on_new() -> void:
+	_buttons.hide()
 	if SaveGame.has_save():
-		_buttons.hide()
 		_confirm.show()
-		_layout()
 	else:
-		_start_new()
+		_difficulty.show()
+	_layout()
 
 
-func _start_new() -> void:
+## After confirming: pick the difficulty (GDD 6.10), then the prologue starts.
+func _ask_difficulty() -> void:
+	_confirm.hide()
+	_difficulty.show()
+	_layout()
+
+
+func _start_new(difficulty: String = "normal") -> void:
 	SaveGame.delete_save()
 	Session.reset()
+	Session.difficulty = difficulty
 	SaveGame.active = true
 	Main.start_map = "pradoluz"
 	Main.start_spawn = "start"
@@ -120,7 +131,42 @@ func _build_confirm() -> PanelContainer:
 	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	msg.add_theme_font_size_override("font_size", 20)
 	box.add_child(msg)
-	box.add_child(_button(tr("TITLE_YES"), _start_new))
+	box.add_child(_button(tr("TITLE_YES"), _ask_difficulty))
+	box.add_child(_button(tr("TITLE_NO"), func() -> void:
+		panel.hide()
+		_buttons.show()))
+	return panel
+
+
+func _build_difficulty() -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.hide()
+	panel.custom_minimum_size = Vector2(620, 0)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 10)
+	panel.add_child(box)
+	var msg := Label.new()
+	msg.text = tr("DIFF_CHOOSE")
+	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	msg.add_theme_font_size_override("font_size", 24)
+	box.add_child(msg)
+	for d: String in ["easy", "normal", "hard"]:
+		box.add_child(_button(tr("DIFF_" + d.to_upper()), func() -> void: _start_new(d)))
+		var info := Label.new()
+		info.text = tr("DIFF_" + d.to_upper() + "_DESC")
+		info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		info.custom_minimum_size = Vector2(560, 0)
+		info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		info.add_theme_font_size_override("font_size", 15)
+		box.add_child(info)
+	var note := Label.new()
+	note.text = tr("DIFF_NOTE")
+	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	note.custom_minimum_size = Vector2(560, 0)
+	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	note.add_theme_font_size_override("font_size", 14)
+	note.add_theme_color_override("font_color", Color("#c8b89a"))
+	box.add_child(note)
 	box.add_child(_button(tr("TITLE_NO"), func() -> void:
 		panel.hide()
 		_buttons.show()))

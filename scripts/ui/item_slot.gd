@@ -13,6 +13,10 @@ var empty_text: String = ""
 var blocked: bool = false
 ## Small green mark: the piece is being worn.
 var worn: bool = false
+## Red cross: the piece broke while being strengthened.
+var broken: bool = false
+
+const ROMAN: Array[String] = ["", "I", "II", "III", "IV", "V"]
 
 
 func _ready() -> void:
@@ -42,6 +46,14 @@ func _draw() -> void:
 		var p2 := Vector2(5, 18)
 		draw_string_outline(font, p2, "+%d" % plus, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color.BLACK)
 		draw_string(font, p2, "+%d" % plus, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color("#ffe27a"))
+	var tier: int = int(Data.item(item_id).get("gem_level", 0))
+	if tier > 0:
+		var p3 := Vector2(5, size.y - 6)
+		draw_string_outline(font, p3, ROMAN[tier], HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color.BLACK)
+		draw_string(font, p3, ROMAN[tier], HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color("#fff3d6"))
+	if broken:
+		draw_line(Vector2(8, 8), size - Vector2(8, 8), Color(0.9, 0.15, 0.1, 0.9), 4.0)
+		draw_line(Vector2(size.x - 8, 8), Vector2(8, size.y - 8), Color(0.9, 0.15, 0.1, 0.9), 4.0)
 	if worn:
 		draw_circle(Vector2(size.x - 10, 10), 5.0, Color("#5fd35f"))
 		draw_arc(Vector2(size.x - 10, 10), 5.0, 0, TAU, 16, Color.BLACK, 1.5, true)

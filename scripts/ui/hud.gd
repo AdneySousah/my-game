@@ -37,11 +37,15 @@ var _skill_btns: Array[TouchActionButton] = []
 var _attributes_panel: AttributesPanel
 var _skills_panel: SkillsPanel
 var _debug_btn: Button
+var _debug_kit_btn: Button
 var quests: QuestLog
 var _quest_panel: QuestPanel
 var _options_panel: OptionsPanel
 var _bag_panel: InventoryPanel
 var _equip_panel: EquipmentPanel
+var _smith_panel: SmithPanel
+var _shop_panel: ShopPanel
+var _routine_panel: RoutinePanel
 var _potion_btns: Array[TouchActionButton] = []
 var _dialogue: DialogueBox
 var _talk_btn: Button
@@ -102,7 +106,26 @@ func _ready() -> void:
 	_equip_panel = EquipmentPanel.new()
 	root.add_child(_equip_panel)
 	_equip_panel.closed.connect(_on_panel_closed)
+	_smith_panel = SmithPanel.new()
+	root.add_child(_smith_panel)
+	_routine_panel = RoutinePanel.new()
+	root.add_child(_routine_panel)
+	_routine_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			_main.save_now())
+	_shop_panel = ShopPanel.new()
+	root.add_child(_shop_panel)
+	_shop_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			_main.save_now())
+	_smith_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			_main.save_now())
 	_options_panel = OptionsPanel.new()
+	_options_panel.in_game = true
 	root.add_child(_options_panel)
 	_options_panel.closed.connect(_on_panel_closed)
 
@@ -190,6 +213,10 @@ func bind(p: Player) -> void:
 	_skills_panel.player = player
 	_bag_panel.player = player
 	_equip_panel.player = player
+	_smith_panel.player = player
+	_shop_panel.player = player
+	_routine_panel.player = player
+	Session.routine.changed.connect(_refresh)
 	Session.inventory.changed.connect(_refresh)
 	_refresh()
 	_refresh_skill_buttons()
@@ -312,6 +339,34 @@ func equipment_panel() -> EquipmentPanel:
 	return _equip_panel
 
 
+## Tobias's forge (opened after talking to him).
+func open_smith() -> void:
+	_open_panel(_smith_panel)
+
+
+func smith_panel() -> SmithPanel:
+	return _smith_panel
+
+
+## Daily missions, login calendar and achievements.
+func open_routine() -> void:
+	_open_panel(_routine_panel)
+
+
+func routine_panel() -> RoutinePanel:
+	return _routine_panel
+
+
+## A merchant's shop (Dona Celeste in Pradoluz).
+func open_shop(merchant: String = "celeste") -> void:
+	_shop_panel.merchant = merchant
+	_open_panel(_shop_panel)
+
+
+func shop_panel() -> ShopPanel:
+	return _shop_panel
+
+
 ## Drinks the potion chosen for quick slot `i` (vida, fôlego, reforço). If the chosen
 ## one ran out, any other potion of the same kind is used.
 func use_quick_potion(i: int) -> bool:
@@ -384,6 +439,8 @@ func _input(event: InputEvent) -> void:
 		_toggle(_quest_panel)
 	elif event.is_action_pressed("toggle_bag"):
 		_toggle(_bag_panel)
+	elif event.is_action_pressed("toggle_routine"):
+		_toggle(_routine_panel)
 	elif event.is_action_pressed("toggle_equipment"):
 		if _equip_panel.visible:
 			_toggle(_equip_panel)
@@ -395,6 +452,8 @@ func _input(event: InputEvent) -> void:
 		interact_pressed.emit()
 	elif event.is_action_pressed("debug_level_up") and OS.is_debug_build():
 		_debug_level_up()
+	elif event.is_action_pressed("debug_forge_kit") and OS.is_debug_build():
+		_debug_forge_kit()
 
 
 func _process(delta: float) -> void:
@@ -469,6 +528,9 @@ func _build_status(root: Control) -> void:
 		_debug_btn.position = Vector2(-20 - 170, Minimap.FRAME_SIZE + 60)
 		_debug_btn.custom_minimum_size = Vector2(170, 44)
 		root.add_child(_debug_btn)
+		_debug_kit_btn = _button(tr("HUD_DEBUG_KIT"), _debug_forge_kit)
+		_debug_kit_btn.custom_minimum_size = Vector2(170, 44)
+		root.add_child(_debug_kit_btn)
 
 
 func _build_controls(root: Control) -> void:
@@ -511,6 +573,8 @@ func _layout() -> void:
 		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:
 		_debug_btn.position = Vector2(vp.x - _debug_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 60)
+	if _debug_kit_btn:
+		_debug_kit_btn.position = Vector2(vp.x - _debug_kit_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 112)
 
 
 func _button(text: String, cb: Callable) -> Button:
@@ -545,7 +609,7 @@ func _refresh() -> void:
 	_status.xp_max = maxi(1, s.xp_needed())
 	_status.xp = s.xp
 	_status.gold = player.gold
-	_status.alert = s.unspent_points > 0 or _new_skills or _new_gear()
+	_status.alert = s.unspent_points > 0 or _new_skills or _new_gear() or Session.routine.has_reward()
 
 
 func _refresh_skill_buttons() -> void:
@@ -597,11 +661,14 @@ func _open_panel(panel: Control) -> void:
 	_options_panel.hide()
 	_bag_panel.hide()
 	_equip_panel.hide()
+	_smith_panel.hide()
+	_shop_panel.hide()
+	_routine_panel.hide()
 	_talk_btn.hide()
 	if panel != _dialogue:
 		Audio.play_sfx("ui_open")
 	if panel == _character_menu:
-		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills, _new_gear())
+		_character_menu.open_with(player.stats.level, player.stats.unspent_points, _new_skills, _new_gear(), Session.routine.has_reward())
 	elif panel != _dialogue:
 		panel.call("open")
 	_controls.hide()
@@ -609,7 +676,7 @@ func _open_panel(panel: Control) -> void:
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible and not _equip_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible and not _equip_panel.visible and not _smith_panel.visible and not _shop_panel.visible and not _routine_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -621,6 +688,7 @@ func _on_character_choice(what: String) -> void:
 		"quests": open_quests()
 		"bag": open_bag()
 		"equipment": open_equipment()
+		"routine": open_routine()
 		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
 
@@ -632,6 +700,22 @@ func _refresh_tracker() -> void:
 	_tracker_bg.visible = id != ""
 	if id != "":
 		_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD if str(Data.quest(id).get("type", "")) == "main" else Color("#7fd1ff"))
+
+
+## Test builds only: gold and forge materials to try the blacksmith quickly.
+func _debug_forge_kit() -> void:
+	if player == null:
+		return
+	player.add_gold(3000)
+	for id: String in ["mat_couro_orc", "mat_osso_velho", "mat_fragmento_pedra", "mat_lingote_aco"]:
+		Session.add_item(id, 20)
+	Session.add_item("mat_palha_dourada", 10)
+	Session.add_item("broca", 3)
+	Session.add_item("trevo", 2)
+	Session.add_item("amuleto", 1)
+	Session.add_item("gema_rubi_1", 3)
+	Session.add_item("gema_safira_1", 3)
+	toast(tr("HUD_DEBUG_KIT_GOT"))
 
 
 func _debug_level_up() -> void:

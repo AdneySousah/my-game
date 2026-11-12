@@ -89,13 +89,18 @@ static func plus_mult(plus: int) -> float:
 	return 1.0 + 0.04 * mini(p, 10) + 0.06 * clampi(p - 10, 0, 5) + 0.10 * clampi(p - 15, 0, 5)
 
 
-## Stats of one piece with its +level applied.
-static func piece_stats(piece: Dictionary) -> Dictionary:
+## Stats of one piece with its +level applied (gems in its sockets are added on top).
+static func piece_stats(piece: Dictionary, with_gems: bool = true) -> Dictionary:
 	var out: Dictionary = {}
 	var m: float = plus_mult(int(piece.get("plus", 0)))
 	var base: Dictionary = Data.item(str(piece.get("id", ""))).get("stats", {})
 	for k: String in base:
 		out[k] = float(base[k]) * m
+	if with_gems:
+		for g: Variant in piece.get("gems", []):
+			var gs: Dictionary = Data.item(str(g)).get("stats", {})
+			for k: String in gs:
+				out[k] = float(out.get(k, 0.0)) + float(gs[k])
 	return out
 
 

@@ -22,6 +22,12 @@ var rest_ready_at: Dictionary = {}
 var inventory: Inventory = Inventory.new()
 ## What the hero is wearing (sword, armour, accessories).
 var gear: Equipment = Equipment.new()
+## Daily missions, login calendar, achievements and the equipped title.
+var routine: Routine = Routine.new()
+## "easy", "normal" or "hard" (GDD 6.10); chosen on Novo jogo, can only go down in town.
+var difficulty: String = "normal"
+## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
+var xp_boost_until: float = 0.0
 ## Sword every new hero starts with.
 const STARTER_WEAPON: String = "eq_espada_aprendiz"
 ## Potion chosen for each quick slot on the screen (data/items "quick_slots").
@@ -39,6 +45,9 @@ func reset() -> void:
 	gear.clear()
 	quick_slots = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 	rest_ready_at.clear()
+	xp_boost_until = 0.0
+	routine.reset()
+	difficulty = "normal"
 
 
 func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
@@ -60,6 +69,8 @@ func has_flag(flag: String) -> bool:
 
 func set_flag(flag: String) -> void:
 	flags[flag] = true
+	# Some achievements are story marks (e.g. "gorvan_defeated").
+	routine.check_achievements()
 
 
 ## A new hero holds the apprentice sword (once per playthrough).
@@ -88,7 +99,8 @@ func to_dict() -> Dictionary:
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
 		"quests": quests, "flags": flags, "tracked_quest": tracked_quest,
 		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
-		"quick_slots": quick_slots, "rest_ready_at": rest_ready_at,
+		"quick_slots": quick_slots, "xp_boost_until": xp_boost_until,
+		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
 	}.duplicate(true)
 
 
@@ -114,6 +126,11 @@ func from_dict(d: Dictionary) -> void:
 		give_starter_gear()
 	quick_slots.merge(d.get("quick_slots", {}), true)
 	rest_ready_at = d.get("rest_ready_at", {})
+	xp_boost_until = float(d.get("xp_boost_until", 0.0))
+	routine.from_dict(d.get("routine", {}))
+	difficulty = str(d.get("difficulty", "normal"))
+	if not ["easy", "normal", "hard"].has(difficulty):
+		difficulty = "normal"
 	# JSON brings numbers back as floats; quest counters are ints.
 	for id: String in quests:
 		var q: Dictionary = quests[id]
@@ -123,6 +140,22 @@ func from_dict(d: Dictionary) -> void:
 		for i: Variant in q.get("picked", []):
 			picked.append(int(i))
 		q["picked"] = picked
+
+
+## Multipliers of the chosen difficulty: hp, atk, xp, drops, death.
+func diff(key: String) -> float:
+	var d: Dictionary = (Data.progression.get("difficulty", {}) as Dictionary).get(difficulty, {})
+	return float(d.get(key, 1.0))
+
+
+## Seconds of bought XP bonus left (0 = none).
+func xp_boost_left() -> float:
+	return maxf(0.0, xp_boost_until - Time.get_unix_time_from_system())
+
+
+## Adds bonus time (a second pack while one is running adds up).
+func add_xp_boost(seconds: float) -> void:
+	xp_boost_until = maxf(xp_boost_until, Time.get_unix_time_from_system()) + seconds
 
 
 ## Seconds until a rest point heals again (0 = ready).

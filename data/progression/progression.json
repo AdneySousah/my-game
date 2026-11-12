@@ -67,6 +67,7 @@
     "defeated_mult": 0.95
   },
   "xp_level_diff_penalty": 0.1,
+  "enemy_density": {"_comment": "Mais monstros longe das cidades (pedido do dono): o 1º campo depois de cada cidade fica como está; os seguintes e as masmorras têm 50% mais por zona.", "floresta": 1.5, "mina": 1.3, "bosque_seco": 1.5, "estepe": 1.5, "ruinas": 1.4, "torre": 1.4, "planalto": 1.5, "pinheiral": 1.5, "picos": 1.5, "mina_gelo": 1.3, "castelo": 1.3, "mata_umida": 1.5, "bordas_pantano": 1.5, "pantano": 1.5, "torre_vigia": 1.3},
   "xp_min_mult": 0.1,
   "stamina": {
     "_comment": "Fôlego (pedido do dono em 11/11/2026). Ataque básico não gasta.",

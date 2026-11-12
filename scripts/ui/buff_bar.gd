@@ -58,7 +58,7 @@ func _collect() -> void:
 			"item": item, "color": Color(str(info.get("color", "#ffffff")))})
 	if s.defeated_time_left > 0.0:
 		_items.append({"name": "BUFF_DEFEATED", "time": s.defeated_time_left, "glyph": "!", "color": Color("#ff7a7a"), "debuff": true})
-	for e: String in ["stun", "slow", "weaken", "def_break"]:
+	for e: String in ["stun", "slow", "weaken", "poison", "def_break"]:
 		if player.status and player.status.has(e):
 			_items.append({"name": "BUFF_" + e.to_upper(), "time": player.status.time_left(e), "glyph": "!", "color": Color("#ff7a7a"), "debuff": true})
 

@@ -94,6 +94,9 @@ func setup(id: String, lvl: int, player: Player) -> void:
 	var l: int = level - 1
 	max_hp = float(data.get("hp", 50)) * (1.0 + float(sc.get("hp", 0.0)) * l) * Session.diff("hp")
 	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l) * Session.diff("atk")
+	if not bool(data.get("boss", false)):
+		# Field and dungeon monsters hit harder than the base numbers (owner's request).
+		atk *= float(sc.get("mob_atk_mult", 1.0))
 	defense = float(data.get("def", 0)) * (1.0 + float(sc.get("def", 0.0)) * l)
 	speed = float(data.get("speed", 3.0))
 	is_boss = bool(data.get("boss", false))
@@ -388,21 +391,31 @@ func _resolve_attack() -> void:
 	match str(a.get("shape", "front")):
 		"line":
 			if Telegraph.in_line(p, _attack_center, _attack_dir, float(a.get("length", 4.0)), float(a.get("width", 1.0)) + PLAYER_RADIUS * 2.0):
-				target.receive_attack(dmg)
+				if target.receive_attack(dmg):
+					_hit_status(a)
+			if bool(data.get("boss", false)):
+				var end: Vector3 = _attack_center + _attack_dir * float(a.get("length", 4.0))
+				SkillVfx.boss_impact(get_parent(), end, 2.0, Color(str(data.get("color", "#ffb060"))))
 		"projectile":
 			Audio.play_sfx("shoot", global_position)
 			var pr := Projectile.new()
 			pr.setup(target, _attack_dir, float(a.get("speed", 14.0)), float(a.get("range", 10.0)), dmg, str(a.get("look", "arrow")))
+			pr.hit_status = a.get("status", {})
 			get_parent().add_child(pr)
 			pr.global_position = global_position + Vector3(0, 1.1, 0) + _attack_dir * 0.6
 		"summon":
 			_summon(a)
 		_:
 			if p.distance_to(_attack_center) <= float(a.get("radius", 1.2)) + PLAYER_RADIUS:
-				target.receive_attack(dmg)
+				if target.receive_attack(dmg):
+					_hit_status(a)
 			if float(a.get("radius", 1.2)) >= 2.0:
 				Audio.play_sfx("slam", _attack_center)
-				ProtoVisuals.flash_disc(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(1, 0.6, 0.3, 0.5))
+				if bool(data.get("boss", false)):
+					# Boss blows land with a shockwave, cracks and flying rocks in its colour.
+					SkillVfx.boss_impact(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(str(data.get("color", "#ffb060"))))
+				else:
+					ProtoVisuals.flash_disc(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(1, 0.6, 0.3, 0.5))
 	_clear_telegraph()
 	if a.has("dodge_after") and _target_alive():
 		_dodge_after_shot(a["dodge_after"])
@@ -413,6 +426,14 @@ func _resolve_attack() -> void:
 	_state = State.RECOVER
 	_timer = float(a.get("recover", RECOVER_TIME))
 	_cooldown = float(a.get("cooldown", data.get("attack_cooldown", 1.5)))
+
+
+## "status" of an attack that landed: {"id": "stun|slow|weaken|poison", "time", "value"}.
+func _hit_status(a: Dictionary) -> void:
+	var st: Dictionary = a.get("status", {})
+	if st.is_empty() or not _target_alive():
+		return
+	target.apply_status(str(st.get("id", "")), float(st.get("time", 1.0)), float(st.get("value", 0.0)))
 
 
 ## Rolls sideways (a little away from the hero) right after shooting: "dodge_after":

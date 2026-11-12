@@ -24,6 +24,8 @@ func _ready() -> void:
 	await _north_test()
 	await _castle_test()
 	await _elf_test()
+	await _swamp_test()
+	await _status_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -686,6 +688,114 @@ func _elf_test() -> void:
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
+	Session.reset()
+
+
+## 6.4b: the Swamp of Roots (more mobs), Severin's third duel with the illustrated scene,
+## the Thorn Guardian in the Watcher's Tower and Bram in Lys'Thaël.
+func _swamp_test() -> void:
+	Session.reset()
+	Session.set_flag("act3_done")
+	Session.set_flag("time_skip")
+	Session.set_flag("act4_lysthael")
+	check(Data.quest("main_14").get("requires", []) == ["main_13"], "quest 14 follows the silent forest")
+	Main.start_map = "pantano"
+	Main.start_spawn = "from_lysthael"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var zone_max: int = 0
+	for z: Node in main.map.find_children("*", "EnemyZone", true, false):
+		zone_max = maxi(zone_max, int(z.get("max_alive")))
+	check(zone_max >= 8, "second map after a city has more mobs (max per zone %d)" % zone_max)
+	var sev: Enemy = null
+	var mob: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e := n as Enemy
+		if e.base_id == "severin_3":
+			sev = e
+		elif mob == null and not bool(e.data.get("boss", false)):
+			mob = e
+	check(mob != null, "the swamp has mobs")
+	if mob:
+		var base_atk: float = float(mob.data.get("atk", 1.0))
+		check(mob.atk > base_atk * 1.15, "mobs hit 20%% harder than before (atk %.1f, base %.1f)" % [mob.atk, base_atk])
+	check(sev != null, "Severin waits before the Watcher's Tower")
+	if sev:
+		sev.take_damage(100000, false)
+		check(not sev.is_dead() and sev.hp_ratio() >= 0.079, "the third duel cannot be won outright (hp %.2f)" % sev.hp_ratio())
+		var saw_story: bool = false
+		for i: int in 900:
+			await _frames(1)
+			if main.hud.is_in_dialogue():
+				await _finish_dialogue(main)
+			for c: Node in get_tree().root.get_children():
+				if c is StoryOverlay:
+					saw_story = true
+					(c as StoryOverlay)._next()
+			if Session.has_flag("severin_duel_3"):
+				break
+		await _frames(30)
+		check(saw_story, "after the duel the illustrated scene plays")
+	check(Session.has_flag("severin_duel_3"), "the duel ends and the tower opens")
+	get_tree().paused = false
+	for m: String in ["pantano", "torre_vigia"]:
+		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
+	for p: String in ["sto_severin_1", "sto_severin_2"]:
+		check(ResourceLoader.exists("res://assets/story/%s.webp" % p), "%s panel exists" % p)
+	main.load_map("torre_vigia", "from_pantano")
+	await _wait_map(main, "torre_vigia")
+	await _frames(6)
+	var guard: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "guardiao_espinhos":
+			guard = n as Enemy
+	check(guard != null, "the Thorn Guardian waits in the tower")
+	if guard:
+		check(guard.model != null and guard.model.character_id == "enm_guardiao_espinhos", "the guardian wears the thorn skin")
+	main.load_map("lysthael", "from_pantano")
+	await _wait_map(main, "lysthael")
+	await _frames(4)
+	var ids: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("npcs"):
+		ids[str(n.get("npc_id"))] = true
+	check(ids.has("bram"), "Bram comes to Lys'Thaël after the third duel (got %s)" % [ids.keys()])
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
+## Boss hits carry effects: stun stops the hero, slow and weaken cut speed and damage,
+## poison drains health; every boss has at least one.
+func _status_test() -> void:
+	for id: String in Data.enemies:
+		var d: Dictionary = Data.enemies[id]
+		if not bool(d.get("boss", false)) or d.has("duel"):
+			continue
+		var has_status: bool = false
+		for a: Dictionary in d.get("attacks", []):
+			if a.has("status"):
+				has_status = true
+		check(has_status, "boss %s has an attack with an effect" % id)
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var p: Player = main.player
+	p.apply_status("stun", 0.5)
+	check(not p.can_act(), "a stunned hero cannot act")
+	await _frames(45)
+	check(p.can_act(), "the stun wears off")
+	var hp0: float = p.hp
+	p.apply_status("poison", 1.0, 0.05)
+	await _frames(40)
+	check(p.hp < hp0, "poison drains health (%.0f -> %.0f)" % [hp0, p.hp])
+	main.queue_free()
+	await _frames(2)
 	Session.reset()
 
 

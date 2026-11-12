@@ -440,6 +440,28 @@ REST_CASTELO_TUNEL,Boca do Túnel,Tunnel Mouth
 REST_CASTELO_PATIO,Pátio Gelado,Frozen Court
 ENEMY_BRANNOC,"Brannoc, Arauto do Frio","Brannoc, Herald of Cold"
 ENEMY_BRANNOC_GELO,"Brannoc, Gigante de Gelo","Brannoc, Ice Giant"
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+MAP_VALE_DEGELO,Vale do Degelo,Thaw Valley
+MAP_MATA_UMIDA,Mata Úmida,Damp Woods
+MAP_BORDAS_PANTANO,Bordas do Pântano,Swamp's Edge
+MAP_LYSTHAEL,Lys'Thaël,Lys'Thaël
+MAP_PANTANO,Pântano das Raízes,Swamp of Roots
+REST_VALE_PONTE,Ponte do Riacho,Brook Bridge
+REST_VALE_CASCATA,Cascata Nova,New Waterfall
+REST_MATA_RAIZ,Raiz Velha,Old Root
+REST_MATA_CLAREIRA,Clareira Musgosa,Mossy Glade
+REST_BORDAS_PASSARELA,Passarela,Boardwalk
+REST_BORDAS_VAGALUME,Lago dos Vaga-lumes,Firefly Pond
+REST_LYSTHAEL_PEDRA,Pedra de Passagem de Lys'Thaël,Lys'Thaël Waystone
+ENEMY_LAGARTO_PANTANO,Homem-lagarto do pântano,Swamp lizardman
+ENEMY_MORTO_PANTANO,Morto do pântano,Swamp dead
+ENEMY_CULTISTA,Cultista do silêncio,Cultist of Silence
+SHOP_ELARION,Loja do Elarion,Elarion's Shop
+BUFF_POISON,Envenenado,Poisoned
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -482,6 +504,15 @@ QUEST_SIDE_MOVEIS,Os móveis do Osk,Osk's Furniture
 QUEST_MAIN_11,A mina debaixo da montanha,The Mine Beneath the Mountain
 QUEST_MAIN_12,O Arauto do Frio,The Herald of Cold
 QUEST_MAIN_13,A floresta em silêncio,The Silent Forest
+QUEST_MAIN_14,O vigia e o segredo,The Watcher and the Secret
+QUEST_ACT4_SOON2,A escada para o topo da Torre do Vigia está livre: a Velyra chega na próxima versão,The stairs to the top of the Watcher's Tower are clear: Velyra arrives in the next version
+OBJ_TALK_FAENOR_SWAMP,Fale com o Faenor sobre o pântano,Talk to Faenor about the swamp
+OBJ_REACH_PANTANO,"Entre no Pântano das Raízes, ao norte de Lys'Thaël","Enter the Swamp of Roots, north of Lys'Thaël"
+OBJ_DUEL_SEVERIN_3,Enfrente o Severin na clareira diante da torre,Face Severin in the clearing before the tower
+OBJ_KILL_THORN_GUARDIAN,Derrote o Guardião de Espinhos na Torre do Vigia,Defeat the Thorn Guardian in the Watcher's Tower
+OBJ_TALK_BRAM_LYSTHAEL,Fale com o Mestre Bram em Lys'Thaël,Talk to Master Bram in Lys'Thaël
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
 QUEST_ACT4_SOON,O portão norte de Lys'Thaël abriu: o Pântano das Raízes e a Torre do Vigia chegam na próxima versão,Lys'Thaël's north gate is open: the Swamp of Roots and the Watcher's Tower arrive in the next version
 QUEST_SIDE_CANTOS,Os cantos escondidos,The Hidden Songs
 QUEST_SIDE_LAMINA,Lâmina de raiz,Root Blade
@@ -949,6 +980,28 @@ DLG_MAIN_13_FAENOR_3,"O caminho para o pântano sai pelo norte da cidade. Agora 
 DLG_MAIN_13_FAENOR_4,"Obrigado, Faenor. Afia a minha espada enquanto eu ainda tenho uma, tá?","Thanks, Faenor. Sharpen my sword while I still have one, okay?"
 DLG_ELARION_IDLE_1,Tenho de tudo um pouco. Só não peça partitura... isso dá cadeia por aqui.,I've got a bit of everything. Just don't ask for sheet music... that'll get you jailed around here.
 DLG_FAENOR_IDLE_1,Uma lâmina boa é como um canto: precisa de paciência e de alguém que a escute.,A good blade is like a song: it needs patience and someone to listen to it.
+DLG_MAIN_14_FAENOR_1,"O portão norte está aberto. O Pântano das Raízes começa logo depois, e a Torre do Vigia fica no fundo dele.","The north gate is open. The Swamp of Roots starts right after it, and the Watcher's Tower stands at its far end."
+DLG_MAIN_14_FAENOR_2,"Dizem que um cavaleiro de armadura azul chegou ontem. Ficou parado na clareira diante da torre, como quem espera alguém.","They say a knight in blue armor arrived yesterday. He's been standing in the clearing before the tower, like someone waiting."
+DLG_MAIN_14_FAENOR_3,Armadura azul e cara de quem nunca ri? Eu sei quem é.,Blue armor and a face that never smiles? I know who that is.
+DLG_MAIN_14_SWAMP_1,Raízes do tamanho de pontes... e todas apontando para aquela torre. Como se a Velyra puxasse a vida da floresta inteira.,Roots the size of bridges... all pointing at that tower. As if Velyra were pulling the life out of the whole forest.
+DLG_SEVERIN3_INTRO_1,Garoto. Ou melhor... não é mais um garoto. Dois anos fizeram diferença.,Boy. Or rather... not a boy anymore. Two years made a difference.
+DLG_SEVERIN3_INTRO_2,"Você também mudou, Severin. Da última vez você hesitou.","You've changed too, Severin. Last time you hesitated."
+DLG_SEVERIN3_INTRO_3,Eu não hesito. A Velyra mantém essa floresta em ordem. É o meu dever proteger a torre.,I don't hesitate. Velyra keeps this forest in order. It's my duty to guard the tower.
+DLG_SEVERIN3_INTRO_4,Então vamos terminar isso. Sem empate dessa vez.,Then let's finish this. No draw this time.
+DLG_SEVERIN3_DUEL_END_1,Hah... não... eu perdi.,Hah... no... I lost.
+DLG_SEVERIN3_DUEL_END_2,"Fica no chão, Severin. Eu não vim te matar.","Stay down, Severin. I didn't come to kill you."
+DLG_SEVERIN3_DUEL_END_3,...Espera. Ouviu isso? Tem crianças cantando lá na beira da água.,...Wait. Did you hear that? There are children singing by the water.
+DLG_SEVERIN3_AFTER_1,Ela... ia matá-las. Crianças. Só por cantarem.,She... was going to kill them. Children. Just for singing.
+DLG_SEVERIN3_AFTER_2,Disseram que os Arautos trazem ordem. Que ordem precisa de um chicote de espinhos contra crianças?,They said the Heralds bring order. What order needs a whip of thorns against children?
+DLG_SEVERIN3_AFTER_3,Você sabe a resposta. Só falta ter coragem de dizer.,You know the answer. You just need the courage to say it.
+DLG_SEVERIN3_AFTER_4,...Vá até a torre. Eu não vou te impedir. Preciso pensar.,...Go to the tower. I won't stop you. I need to think.
+DLG_MAIN_14_BRAM_1,"Moleque! Ou melhor, homem feito. Olha só a cicatriz. Ficou melhor que a minha.","Kid! Or rather, a grown man. Look at that scar. Looks better than mine."
+DLG_MAIN_14_BRAM_2,Mestre Bram? Você atravessou meio mundo até aqui?,Master Bram? You crossed half the world to get here?
+DLG_MAIN_14_BRAM_3,"Soube do Bento. Sinto muito, garoto. E soube que você está indo atrás dos Arautos, um por um. Então tem uma coisa que eu devia ter contado há muito tempo.","I heard about Bento. I'm sorry, kid. And I heard you're going after the Heralds, one by one. So there's something I should have told you a long time ago."
+DLG_MAIN_14_BRAM_4,"Na noite em que você nasceu, acharam só um dedo do seu pai na neve. Disseram que foram lobos.","The night you were born, they only found one of your father's fingers in the snow. They said it was wolves."
+DLG_MAIN_14_BRAM_5,"Eu vi aquele dedo, Lio. Não foi dente. Foi um corte limpo. De faca.","I saw that finger, Lio. It wasn't teeth. It was a clean cut. A knife."
+DLG_MAIN_14_BRAM_6,Então... meu pai...,Then... my father...
+DLG_MAIN_14_BRAM_7,"O Doran pode estar vivo. Não sei onde, nem por quê. Mas lobo nenhum corta assim.","Doran may be alive. I don't know where, or why. But no wolf cuts like that."
 DLG_SIDE_CANTOS_OFFER_1,"Antes da proibição, os bardos esconderam as partituras mais antigas na Mata Úmida. Se a Velyra achar, queima tudo.","Before the ban, the bards hid the oldest sheet music in the Damp Woods. If Velyra finds it, she'll burn it all."
 DLG_SIDE_CANTOS_OFFER_2,Traz as quatro? Um dia a gente vai cantar de novo. E eu quero estar com a letra certa.,Will you bring all four? One day we'll sing again. And I want to have the right lyrics.
 DLG_SIDE_CANTOS_OFFER_3,Quatro partituras na mata. Eu só não prometo cantar junto.,Four sheets in the woods. I just don't promise to sing along.
@@ -986,23 +1039,10 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-MAP_VALE_DEGELO,Vale do Degelo,Thaw Valley
-MAP_MATA_UMIDA,Mata Úmida,Damp Woods
-MAP_BORDAS_PANTANO,Bordas do Pântano,Swamp's Edge
-MAP_LYSTHAEL,Lys'Thaël,Lys'Thaël
-MAP_PANTANO,Pântano das Raízes,Swamp of Roots
-REST_VALE_PONTE,Ponte do Riacho,Brook Bridge
-REST_VALE_CASCATA,Cascata Nova,New Waterfall
-REST_MATA_RAIZ,Raiz Velha,Old Root
-REST_MATA_CLAREIRA,Clareira Musgosa,Mossy Glade
-REST_BORDAS_PASSARELA,Passarela,Boardwalk
-REST_BORDAS_VAGALUME,Lago dos Vaga-lumes,Firefly Pond
-REST_LYSTHAEL_PEDRA,Pedra de Passagem de Lys'Thaël,Lys'Thaël Waystone
-ENEMY_LAGARTO_PANTANO,Homem-lagarto do pântano,Swamp lizardman
-ENEMY_MORTO_PANTANO,Morto do pântano,Swamp dead
-ENEMY_CULTISTA,Cultista do silêncio,Cultist of Silence
-ITEM_MAT_ESCAMA_PANTANO,Escama do pântano,Swamp scale
-ITEM_MAT_SEIVA_AMARGA,Seiva amarga,Bitter sap
-NPC_ELARION,Elarion,Elarion
-NPC_FAENOR,Faenor,Faenor
-SHOP_ELARION,Loja do Elarion,Elarion's Shop
+MAP_TORRE_VIGIA,Torre do Vigia Élfico,Elven Watcher's Tower
+MAP_TOPO_TORRE,Topo da Torre,Tower Top
+REST_PANTANO_RAIZ,Raiz Ponte,Bridge Root
+REST_PANTANO_ILHA,Ilhota de Musgo,Moss Islet
+REST_TORRE_VIGIA_ENTRADA,Porta das Raízes,Root Door
+REST_TORRE_VIGIA_MEIO,Salão dos Cantores,Singers' Hall
+ENEMY_GUARDIAO_ESPINHOS,Guardião de Espinhos,Thorn Guardian

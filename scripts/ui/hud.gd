@@ -3,9 +3,9 @@ extends CanvasLayer
 ## In-game HUD: portrait with health/XP rings, stamina bar at the bottom, touch
 ## controls, the character menu (opened from the portrait), panels and messages.
 
-const SKILL_RADIUS: float = 46.0
+const SKILL_RADIUS: float = 51.0
 const ATTACK_RADIUS: float = 72.0
-const DODGE_RADIUS: float = 40.0
+const DODGE_RADIUS: float = 44.0
 const POTION_RADIUS: float = 32.0
 
 signal travel_requested(point_id: String)

@@ -162,6 +162,8 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	camera_rig.snap_to_target()
 	if card:
 		get_tree().paused = was_paused
+		# Effects shown once, tiny, behind the card: no stutter on the first skill later.
+		SkillVfx.prewarm(map, player.global_position, player)
 		await card.close()
 	hud.banner(tr(str(map.data.get("name", map_id))))
 	if with_fade and card == null:
@@ -533,6 +535,12 @@ func _check_duel(e: Enemy) -> void:
 	var line: String = str(duel.get("end_dialogue", ""))
 	if line != "":
 		await _boss_line_await(line)
+	# Optional illustrated scene after the talk (data/story.json), then more talk.
+	if str(duel.get("end_story", "")) != "":
+		var s: StoryOverlay = StoryOverlay.play(get_tree(), str(duel["end_story"]))
+		await s.finished
+		if str(duel.get("after_story_dialogue", "")) != "":
+			await _boss_line_await(str(duel["after_story_dialogue"]))
 	if str(duel.get("flag", "")) != "":
 		Session.set_flag(str(duel["flag"]))
 	quests.on_enemy_killed(e.base_id, Session.current_map)

@@ -3,11 +3,36 @@
   "bento": {
     "music": "prologo",
     "panels": [
-      {"image": "sto_bento_1", "text": "STO_BENTO_1"},
-      {"image": "sto_bento_2", "text": "STO_BENTO_2"},
-      {"image": "sto_bento_3", "text": "STO_BENTO_3"},
-      {"image": "sto_bento_4", "text": "STO_BENTO_4"}
+      {
+        "image": "sto_bento_1",
+        "text": "STO_BENTO_1"
+      },
+      {
+        "image": "sto_bento_2",
+        "text": "STO_BENTO_2"
+      },
+      {
+        "image": "sto_bento_3",
+        "text": "STO_BENTO_3"
+      },
+      {
+        "image": "sto_bento_4",
+        "text": "STO_BENTO_4"
+      }
     ],
     "end_text": "STO_BENTO_LATER"
+  },
+  "severin_doubt": {
+    "music": "prologo",
+    "panels": [
+      {
+        "image": "sto_severin_1",
+        "text": "STO_SEVERIN_1"
+      },
+      {
+        "image": "sto_severin_2",
+        "text": "STO_SEVERIN_2"
+      }
+    ]
   }
 }

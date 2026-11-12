@@ -660,10 +660,12 @@ func _open_exit(e: Dictionary) -> void:
 
 
 func _build_enemy_zones() -> void:
+	# More monsters away from the cities: progression.json "enemy_density" per map.
+	var density: float = float((Data.progression.get("enemy_density", {}) as Dictionary).get(map_id, 1.0))
 	for z: Dictionary in data.get("enemy_zones", []):
 		var zone := EnemyZone.new()
-		zone.radius = float(z.get("radius", 10))
-		zone.max_alive = int(z.get("max", 4))
+		zone.radius = float(z.get("radius", 10)) + (2.0 if density > 1.0 else 0.0)
+		zone.max_alive = ceili(int(z.get("max", 4)) * density)
 		zone.types = z.get("types", {"bandido": 1})
 		var lv: Array = z.get("level", [1, 1])
 		zone.level_range = Vector2i(int(lv[0]), int(lv[1]))

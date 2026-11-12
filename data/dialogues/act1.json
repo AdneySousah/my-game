@@ -1229,6 +1229,118 @@
         ]
       ]
     },
+    "main_14_faenor": {
+      "lines": [
+        [
+          "faenor",
+          "DLG_MAIN_14_FAENOR_1"
+        ],
+        [
+          "faenor",
+          "DLG_MAIN_14_FAENOR_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_14_FAENOR_3"
+        ]
+      ]
+    },
+    "main_14_swamp": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_14_SWAMP_1"
+        ]
+      ]
+    },
+    "severin3_intro": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN3_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN3_INTRO_2"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN3_INTRO_3"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN3_INTRO_4"
+        ]
+      ]
+    },
+    "severin3_duel_end": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN3_DUEL_END_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN3_DUEL_END_2"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN3_DUEL_END_3"
+        ]
+      ]
+    },
+    "severin3_after": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN3_AFTER_1"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN3_AFTER_2"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN3_AFTER_3"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN3_AFTER_4"
+        ]
+      ]
+    },
+    "main_14_bram": {
+      "lines": [
+        [
+          "bram",
+          "DLG_MAIN_14_BRAM_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_14_BRAM_2"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_14_BRAM_3"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_14_BRAM_4"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_14_BRAM_5"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_14_BRAM_6"
+        ],
+        [
+          "bram",
+          "DLG_MAIN_14_BRAM_7"
+        ]
+      ]
+    },
     "side_cantos_offer": {
       "lines": [
         [

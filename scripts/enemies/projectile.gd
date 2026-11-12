@@ -12,6 +12,8 @@ var _range: float = 10.0
 var _damage: float = 1.0
 var _look: String = "arrow"
 var _travelled: float = 0.0
+## Status the shot gives when it hits (see Enemy._hit_status).
+var hit_status: Dictionary = {}
 
 
 func setup(target: Player, dir: Vector3, speed: float, max_range: float, damage: float, look: String) -> void:
@@ -88,7 +90,8 @@ func _physics_process(delta: float) -> void:
 	if is_instance_valid(_target) and not _target.is_dead():
 		var d: Vector3 = _target.global_position + Vector3(0, 1.0, 0) - global_position
 		if d.length() <= RADIUS + 0.4 and not _target.is_invulnerable():
-			_target.receive_attack(_damage)
+			if _target.receive_attack(_damage) and not hit_status.is_empty():
+				_target.apply_status(str(hit_status.get("id", "")), float(hit_status.get("time", 1.0)), float(hit_status.get("value", 0.0)))
 			queue_free()
 			return
 	if _travelled >= _range:

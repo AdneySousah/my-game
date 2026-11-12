@@ -5470,6 +5470,114 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "env_torre_vigia",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "elven watchtower wrapped in black thorn roots, green roof",
+      "file": "assets/environment/env_torre_vigia/env_torre_vigia.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d21a-6751-76e8-a233-c6ad8cbcb41e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d21e-c925-70f9-8339-22f96d2d7f10",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_raiz_gigante",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "giant mossy twisted root arch, thorns",
+      "file": "assets/props/prp_raiz_gigante/prp_raiz_gigante.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d21a-666d-7100-9508-fc49250b7bd0",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d21e-c3e6-70e2-9886-cf37cb4520c2",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_guardiao_espinhos",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "thorn golem, dark wood, purple cracks (retexture of enm_golem)",
+      "file": "assets/enemies/boss_guardiao_espinhos/boss_guardiao_espinhos.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d21a-6838-719f-b420-f3297720bd0d",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d21e-cca3-7038-95dc-e144b9233f03",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pro_severin",
+      "category": "pro",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "story panels: Velyra and the children, Severin kneeling",
+      "file": "assets/story/pro_severin/pro_severin.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 12,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato4b",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "loading art: pantano, torre_vigia",
+      "file": "assets/ui/ui_loading_ato4b/ui_loading_ato4b.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 12,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

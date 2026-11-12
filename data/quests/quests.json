@@ -149,6 +149,19 @@
       "rewards": { "xp": 16000, "gold": 4500, "items": { "pot_vida_g": 6, "eq_calca_epico": 1 } }
     },
     {
+      "id": "main_14", "type": "main", "name": "QUEST_MAIN_14", "auto": true,
+      "requires": ["main_13"], "min_level": 49,
+      "steps": [
+        { "type": "talk", "npc": "faenor", "dialogue": "main_14_faenor", "text": "OBJ_TALK_FAENOR_SWAMP" },
+        { "type": "reach", "map": "pantano", "pos": [0, 30], "radius": 8, "text": "OBJ_REACH_PANTANO", "dialogue": "main_14_swamp" },
+        { "type": "kill", "enemy": "severin_3", "count": 1, "map": "pantano", "pos": [0, -32], "text": "OBJ_DUEL_SEVERIN_3", "skip_if_flag": "severin_duel_3" },
+        { "type": "kill", "enemy": "guardiao_espinhos", "count": 1, "map": "torre_vigia", "pos": [0, -35], "text": "OBJ_KILL_THORN_GUARDIAN", "skip_if_flag": "guardiao_espinhos_defeated" },
+        { "type": "talk", "npc": "bram", "dialogue": "main_14_bram", "text": "OBJ_TALK_BRAM_LYSTHAEL" }
+      ],
+      "set_flag": "act4_tower", "end_note": "QUEST_ACT4_SOON2",
+      "rewards": { "xp": 19000, "gold": 5200, "items": { "pot_vida_g": 6, "eq_elmo_epico": 1, "trevo_real": 1 } }
+    },
+    {
       "id": "side_cantos", "type": "side", "name": "QUEST_SIDE_CANTOS", "giver": "elarion", "offer": "side_cantos_offer",
       "requires": ["main_13"], "min_level": 46,
       "steps": [

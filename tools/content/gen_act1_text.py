@@ -413,6 +413,41 @@ DIALOGUES = {
     "faenor_idle": [
         ("faenor", "Uma lâmina boa é como um canto: precisa de paciência e de alguém que a escute.", "A good blade is like a song: it needs patience and someone to listen to it."),
     ],
+    # --- Ato 4, missão 14: O vigia e o segredo ---
+    "main_14_faenor": [
+        ("faenor", "O portão norte está aberto. O Pântano das Raízes começa logo depois, e a Torre do Vigia fica no fundo dele.", "The north gate is open. The Swamp of Roots starts right after it, and the Watcher's Tower stands at its far end."),
+        ("faenor", "Dizem que um cavaleiro de armadura azul chegou ontem. Ficou parado na clareira diante da torre, como quem espera alguém.", "They say a knight in blue armor arrived yesterday. He's been standing in the clearing before the tower, like someone waiting."),
+        ("lio", "Armadura azul e cara de quem nunca ri? Eu sei quem é.", "Blue armor and a face that never smiles? I know who that is."),
+    ],
+    "main_14_swamp": [
+        ("lio", "Raízes do tamanho de pontes... e todas apontando para aquela torre. Como se a Velyra puxasse a vida da floresta inteira.", "Roots the size of bridges... all pointing at that tower. As if Velyra were pulling the life out of the whole forest."),
+    ],
+    "severin3_intro": [
+        ("severin", "Garoto. Ou melhor... não é mais um garoto. Dois anos fizeram diferença.", "Boy. Or rather... not a boy anymore. Two years made a difference."),
+        ("lio", "Você também mudou, Severin. Da última vez você hesitou.", "You've changed too, Severin. Last time you hesitated."),
+        ("severin", "Eu não hesito. A Velyra mantém essa floresta em ordem. É o meu dever proteger a torre.", "I don't hesitate. Velyra keeps this forest in order. It's my duty to guard the tower."),
+        ("lio", "Então vamos terminar isso. Sem empate dessa vez.", "Then let's finish this. No draw this time."),
+    ],
+    "severin3_duel_end": [
+        ("severin", "Hah... não... eu perdi.", "Hah... no... I lost."),
+        ("lio", "Fica no chão, Severin. Eu não vim te matar.", "Stay down, Severin. I didn't come to kill you."),
+        ("lio", "...Espera. Ouviu isso? Tem crianças cantando lá na beira da água.", "...Wait. Did you hear that? There are children singing by the water."),
+    ],
+    "severin3_after": [
+        ("severin", "Ela... ia matá-las. Crianças. Só por cantarem.", "She... was going to kill them. Children. Just for singing."),
+        ("severin", "Disseram que os Arautos trazem ordem. Que ordem precisa de um chicote de espinhos contra crianças?", "They said the Heralds bring order. What order needs a whip of thorns against children?"),
+        ("lio", "Você sabe a resposta. Só falta ter coragem de dizer.", "You know the answer. You just need the courage to say it."),
+        ("severin", "...Vá até a torre. Eu não vou te impedir. Preciso pensar.", "...Go to the tower. I won't stop you. I need to think."),
+    ],
+    "main_14_bram": [
+        ("bram", "Moleque! Ou melhor, homem feito. Olha só a cicatriz. Ficou melhor que a minha.", "Kid! Or rather, a grown man. Look at that scar. Looks better than mine."),
+        ("lio", "Mestre Bram? Você atravessou meio mundo até aqui?", "Master Bram? You crossed half the world to get here?"),
+        ("bram", "Soube do Bento. Sinto muito, garoto. E soube que você está indo atrás dos Arautos, um por um. Então tem uma coisa que eu devia ter contado há muito tempo.", "I heard about Bento. I'm sorry, kid. And I heard you're going after the Heralds, one by one. So there's something I should have told you a long time ago."),
+        ("bram", "Na noite em que você nasceu, acharam só um dedo do seu pai na neve. Disseram que foram lobos.", "The night you were born, they only found one of your father's fingers in the snow. They said it was wolves."),
+        ("bram", "Eu vi aquele dedo, Lio. Não foi dente. Foi um corte limpo. De faca.", "I saw that finger, Lio. It wasn't teeth. It was a clean cut. A knife."),
+        ("lio", "Então... meu pai...", "Then... my father..."),
+        ("bram", "O Doran pode estar vivo. Não sei onde, nem por quê. Mas lobo nenhum corta assim.", "Doran may be alive. I don't know where, or why. But no wolf cuts like that."),
+    ],
     # --- Secundária: Os cantos escondidos (Mata Úmida, Elarion) ---
     "side_cantos_offer": [
         ("elarion", "Antes da proibição, os bardos esconderam as partituras mais antigas na Mata Úmida. Se a Velyra achar, queima tudo.", "Before the ban, the bards hid the oldest sheet music in the Damp Woods. If Velyra finds it, she'll burn it all."),
@@ -549,6 +584,15 @@ TEXTS = {
     "QUEST_MAIN_11": ("A mina debaixo da montanha", "The Mine Beneath the Mountain"),
     "QUEST_MAIN_12": ("O Arauto do Frio", "The Herald of Cold"),
     "QUEST_MAIN_13": ("A floresta em silêncio", "The Silent Forest"),
+    "QUEST_MAIN_14": ("O vigia e o segredo", "The Watcher and the Secret"),
+    "QUEST_ACT4_SOON2": ("A escada para o topo da Torre do Vigia está livre: a Velyra chega na próxima versão", "The stairs to the top of the Watcher's Tower are clear: Velyra arrives in the next version"),
+    "OBJ_TALK_FAENOR_SWAMP": ("Fale com o Faenor sobre o pântano", "Talk to Faenor about the swamp"),
+    "OBJ_REACH_PANTANO": ("Entre no Pântano das Raízes, ao norte de Lys'Thaël", "Enter the Swamp of Roots, north of Lys'Thaël"),
+    "OBJ_DUEL_SEVERIN_3": ("Enfrente o Severin na clareira diante da torre", "Face Severin in the clearing before the tower"),
+    "OBJ_KILL_THORN_GUARDIAN": ("Derrote o Guardião de Espinhos na Torre do Vigia", "Defeat the Thorn Guardian in the Watcher's Tower"),
+    "OBJ_TALK_BRAM_LYSTHAEL": ("Fale com o Mestre Bram em Lys'Thaël", "Talk to Master Bram in Lys'Thaël"),
+    "STO_SEVERIN_1": ("Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.", "By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."),
+    "STO_SEVERIN_2": ("Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.", "Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."),
     "QUEST_ACT4_SOON": ("O portão norte de Lys'Thaël abriu: o Pântano das Raízes e a Torre do Vigia chegam na próxima versão", "Lys'Thaël's north gate is open: the Swamp of Roots and the Watcher's Tower arrive in the next version"),
     "QUEST_SIDE_CANTOS": ("Os cantos escondidos", "The Hidden Songs"),
     "QUEST_SIDE_LAMINA": ("Lâmina de raiz", "Root Blade"),

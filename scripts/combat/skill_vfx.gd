@@ -735,3 +735,54 @@ static func wave_blade(holder: Node3D, width: float, color: Color, height: float
 	ground.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	ground.position = Vector3(0, 0.05 - height, r * 0.75)
 	holder.add_child(ground)
+
+
+# --- Warm-up ------------------------------------------------------------------------------
+
+## Plays every effect once, shrunk to almost nothing at `at`, so the phone prepares its
+## shaders while the loading card covers the screen (the first real use of an effect
+## stuttered). Includes boss hits and enemy projectiles.
+static func prewarm(parent: Node, at: Vector3, player: Node3D) -> void:
+	var holder := Node3D.new()
+	holder.name = "VfxWarmup"
+	parent.add_child(holder)
+	holder.global_position = at + Vector3(0, 0.5, 0)
+	holder.scale = Vector3.ONE * 0.01
+	var c := Color("#ffd23f")
+	var p: Vector3 = holder.global_position
+	spin(holder, p, 0.0, 3.0, c, 0)
+	seismic(holder, p, 0.0, 4.0, 90.0, c)
+	guard_break(holder, p, 0.0, 3.5, 90.0, Color("#e8433f"))
+	shield_shatter(holder, p, Vector3.FORWARD, Color("#e8433f"))
+	war_cry(holder, p, 6.0, Color("#ff8c42"))
+	weaken_mark(holder, p, Color("#ff8c42"))
+	leap_takeoff(holder, p, Color("#9b5de5"))
+	leap_landing(holder, p, 3.5, Color("#9b5de5"))
+	judgment(holder, p, c, true)
+	charge(holder, p, c, 0.3, 1.4)
+	hit_sparks(holder, p, c)
+	dust(holder, p)
+	burst(holder, p, c, 6, 3.0)
+	boss_impact(holder, p, 3.0, Color("#bfe8ff"))
+	if player:
+		dash(holder, holder, Vector3.FORWARD, 0.2, 1.4, c)
+	var blade := Node3D.new()
+	holder.add_child(blade)
+	wave_blade(blade, 1.4, Color("#2ec4b6"), 1.0)
+	for look: String in ["orb", "sand", "crow", "arrow"]:
+		var pr := Projectile.new()
+		pr.setup(null, Vector3.FORWARD, 0.0, 1.0, 0.0, look)
+		holder.add_child(pr)
+	holder.get_tree().create_timer(2.5).timeout.connect(holder.queue_free)
+
+
+## Ground hit of a boss attack: shockwave, cracks, dust and flying rocks (coloured by the
+## boss), so heavy blows read as heavy.
+static func boss_impact(parent: Node, at: Vector3, radius: float, color: Color) -> void:
+	var p: Vector3 = Vector3(at.x, at.y, at.z)
+	shockwave(parent, p, radius, color, 0.45, 0.14)
+	shockwave(parent, p, radius * 0.6, Color(1, 1, 1, 0.8), 0.3, 0.1, 0.05)
+	ground_flash(parent, p, radius * 0.8, Color(color, 0.45), 0.3)
+	cracks(parent, p, 0.0, radius * 0.9, TAU, 7, color, 1.0)
+	dust(parent, p, 10, radius * 0.5, 3.5)
+	debris(parent, p, 5, radius * 0.7, 1.8)

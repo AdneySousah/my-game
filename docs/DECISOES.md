@@ -351,3 +351,46 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - **Próximo:**
   - 6.4b: Pântano das Raízes, Torre do Vigia Élfico, 3º duelo com o Severin (ele perde e começa a duvidar) e a revelação do Bram;
   - 6.4c: Velyra em 2 formas (Dríade de Espinhos, raízes que prendem) e a Árvore-Mãe florescendo.
+
+## Ajustes do dono depois da 0.2.4 (12/11/2026)
+- **Queda de quadros ao soltar skill:** era o 1º uso de cada efeito, que compilava shaders e criava malhas na hora. Agora `SkillVfx.prewarm` toca todos os efeitos (skills, impactos de chefe, projéteis) bem pequenos atrás da tela de carregamento de cada mapa.
+- **Botões maiores:** skills, correr e esquiva +10% (raio 46 → 51 e 40 → 44). O botão de atacar ficou igual.
+- **Todo chefe tem um efeito** nos golpes (`status` do ataque em enemies.json):
+  - atordoar (`stun`): não anda nem ataca;
+  - lentidão (`slow`): perde parte da velocidade;
+  - enfraquecer (`weaken`): causa menos dano;
+  - veneno (`poison`): perde % da vida por segundo.
+  - Aparecem como ícone vermelho na barra de efeitos e com texto sobre o herói.
+  - O teste confere que todo chefe (fora os duelos) tem pelo menos um.
+- **Efeito visual nos golpes dos chefes:** golpes de área e em linha agora têm onda de choque, rachaduras e pedras na cor do chefe (`SkillVfx.boss_impact`). Antes o golem só piscava um disco.
+- **Mobs +20% de dano** em campos e masmorras: `mob_atk_mult: 1.2` em `scaling_per_level`. Não vale para chefes.
+- **Mais mobs depois das cidades:** `enemy_density` em progression.json multiplica o máximo de cada zona.
+  - O 1º campo depois de cada cidade fica igual.
+  - Os campos seguintes ganham +50%, e as masmorras +30–40%. As zonas também ficam 2 m maiores.
+- **Simulação de equilíbrio:** com os efeitos, a luta do Brannoc (nível 44) varia entre 110 e 200 s (antes ~90 s). A vida mínima continua em 36–39%, sem mortes. O "enfraquecer" ficou em −15% por 3 s (Gorvan −20%) para não pesar demais.
+
+## Fase 6.4b: o Pântano das Raízes e a Torre do Vigia (12/11/2026)
+- **Pântano das Raízes** (50–53), ao norte de Lys'Thaël:
+  - raízes gigantes saindo da água, cogumelos e juncos;
+  - lagartos, mortos do pântano e cultistas.
+  - Uma parede de raízes com portão fecha a clareira diante da Torre do Vigia, onde o Severin espera.
+- **3º duelo com o Severin** (nível 54):
+  - desta vez ele perde (para em 8% da vida);
+  - depois, a cena ilustrada "severin_doubt": a Velyra ameaça crianças élficas, o Lio as protege e o Severin, de joelhos, começa a duvidar.
+  - O `duel` ganhou `end_story` (cena depois da fala final) e `after_story_dialogue` (fala depois da cena).
+- **Torre do Vigia Élfico** (53–55): masmorra fechada, com cerca élfica, lanternas e raízes.
+  - No alto, o **Guardião de Espinhos**: um golem de madeira escura com rachaduras roxas. É Retexture do golem, usa as mesmas animações.
+  - Golpes:
+    - soco com veneno;
+    - pancada que atordoa;
+    - raízes que brotam do chão e deixam lento;
+    - abaixo de 60% da vida, chama 2 cultistas.
+  - Simulação: nível 55, vence em ~93 s, vida mínima 39%.
+  - A saída para o topo (Velyra) abre com `act4_tower`.
+- **Missão 14 "O vigia e o segredo":**
+  1. Faenor;
+  2. entrar no pântano;
+  3. duelo com o Severin;
+  4. Guardião de Espinhos;
+  5. Bram, que veio até Lys'Thaël (aparece com `severin_duel_3` e sai de Pradoluz). Ele conta que o dedo do pai na neve tinha um corte limpo de faca: o Doran pode estar vivo.
+- **Próximo:** 6.4c, a Velyra em 2 formas (Dríade de Espinhos, raízes que prendem) no topo da torre e a Árvore-Mãe florescendo.

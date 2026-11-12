@@ -261,6 +261,8 @@
     "prp_lanterna_elfica": {"scene": "res://assets/props/prp_lanterna_elfica/prp_lanterna_elfica.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.2}, "light": {"color": "#b8ffb0", "energy": 1.4, "range": 6.0, "y": 2.2}},
     "env_cerca_elfica": {"scene": "res://assets/environment/env_cerca_elfica/env_cerca_elfica.glb", "scale": 3.0, "center_origin": true, "collision": {"type": "box"}, "tile_length": 2.9},
     "prp_arvore_pantano": {"scene": "res://assets/props/prp_arvore_pantano/prp_arvore_pantano.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "wind": {"sway": 0.08, "flutter": 0.01}},
-    "prp_cogumelo_gigante": {"scene": "res://assets/props/prp_cogumelo_gigante/prp_cogumelo_gigante.glb", "scale": 2.2, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#5fe8d0", "energy": 0.9, "range": 4.0, "y": 1.2}}
+    "prp_cogumelo_gigante": {"scene": "res://assets/props/prp_cogumelo_gigante/prp_cogumelo_gigante.glb", "scale": 2.2, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#5fe8d0", "energy": 0.9, "range": 4.0, "y": 1.2}},
+    "prp_raiz_gigante": {"scale": 8.0, "scene": "res://assets/props/prp_raiz_gigante/prp_raiz_gigante.glb", "center_origin": true, "collision": {"type": "box"}},
+    "env_torre_vigia": {"scene": "res://assets/environment/env_torre_vigia/env_torre_vigia.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}}
   }
 }

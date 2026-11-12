@@ -1,0 +1,69 @@
+{
+  "_comment": "Pântano das Raízes (Fase 6.4b, níveis 50-53): raízes gigantes saindo da água, espinhos e névoa. Ao norte, a Torre do Vigia Élfico, onde a Velyra vive; antes dela, a clareira onde o Severin espera (3º duelo: ele perde).",
+  "id": "pantano",
+  "name": "MAP_PANTANO",
+  "size": [104, 104],
+  "seed": 241,
+  "biome": {"moss": 1.0},
+  "ground": "#4c6440",
+  "grass": {"count": 1000, "root": "#2f4a2a", "tip": "#86a860"},
+  "sky": "#7f8fa8",
+  "ambient": 0.52,
+  "sun": 0.85,
+  "sun_color": "#e0e4ff",
+  "patches": {"color": "#3a5032", "count": 180},
+  "spawns": {"from_lysthael": [0, 46, 0], "from_torre_vigia": [0, -46, 180]},
+  "exits": [
+    {"to": "lysthael", "spawn": "from_pantano", "pos": [0, 52], "size": [10, 2], "label": "MAP_LYSTHAEL", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "torre_vigia", "spawn": "from_pantano", "pos": [0, -52], "size": [10, 2], "label": "MAP_TORRE_VIGIA", "model": "prp_portal", "model_pos": [0, -53.5], "if_flag": "severin_duel_3", "locked_label": "MAP_ROAD_CLOSED"}
+  ],
+  "chests": [
+    {"id": "pantano_bau_1", "pos": [-32, 18], "yaw": 90, "gold": 3300, "items": {"pot_vida_g": 5, "pot_forca": 1, "gema_ametista_3": 1}},
+    {"id": "pantano_bau_2", "pos": [32, 2], "yaw": -90, "gold": 3400, "items": {"pot_folego_g": 3, "trevo_real": 1, "eq_peitoral_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "pantano_raiz", "name": "REST_PANTANO_RAIZ", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "pantano_ilha", "name": "REST_PANTANO_ILHA", "pos": [8, -8], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#5d6f4a"}
+  ],
+  "props": [
+    {"id": "prp_raiz_gigante", "pos": [-14, 14], "rot": 30},
+    {"id": "prp_raiz_gigante", "pos": [16, 22], "rot": 110},
+    {"id": "prp_raiz_gigante", "pos": [-20, -6], "rot": 200},
+    {"id": "prp_raiz_gigante", "pos": [22, -2], "rot": 300},
+    {"id": "env_torre_vigia", "pos": [0, -44], "rot": 0},
+    {"id": "prp_cogumelo_gigante", "pos": [-10, -30]},
+    {"id": "prp_cogumelo_gigante", "pos": [10, -34], "rot": 120},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10}
+  ],
+  "lines": [
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2410, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2411, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2412, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2413, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2414, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_raiz_gigante", "prp_arvore_torta"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2415, "solid": true},
+    {"ids": ["prp_raiz_gigante", "prp_arvore_pantano"], "spacing": 5.5, "scale": [0.9, 1.1], "jitter": 0.2, "points": [[-46, -20], [-8, -20]], "seed": 2417, "solid": true},
+    {"ids": ["prp_raiz_gigante", "prp_arvore_pantano"], "spacing": 5.5, "scale": [0.9, 1.1], "jitter": 0.2, "points": [[8, -20], [46, -20]], "seed": 2418, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_cogumelo_gigante", "prp_junco"], "count": 60, "rect": [-45, -18, 45, 47], "spacing": 5, "seed": 242},
+    {"ids": ["prp_junco", "prp_cogumelos", "prp_toco", "prp_junco"], "count": 60, "rect": [-45, -18, 45, 47], "spacing": 3, "seed": 243},
+    {"ids": ["prp_junco", "prp_cogumelos"], "count": 14, "rect": [-40, -46, 40, -24], "spacing": 4, "seed": 244}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 24], "radius": 11, "max": 5, "types": {"lagarto_pantano": 3, "cultista": 2}, "level": [50, 51], "respawn": 25},
+    {"pos": [22, 12], "radius": 11, "max": 5, "types": {"morto_pantano": 3, "cultista": 2}, "level": [51, 52], "respawn": 25},
+    {"pos": [-20, -4], "radius": 10, "max": 5, "types": {"cultista": 3, "lagarto_pantano": 2}, "level": [52, 53], "respawn": 25}
+  ],
+  "rivers": [
+    {"points": [[-32, 30], [-22, 26], [-14, 30]], "width": 6, "bank_ids": ["prp_junco"], "bank_spacing": 2.5},
+    {"points": [[20, -8], [30, -12], [38, -6]], "width": 6, "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0}
+  ],
+  "arena": {"gate": [[-8, -20], [8, -20]]},
+  "bosses": [
+    {"id": "severin_3", "pos": [0, -32], "level": 54, "yaw": 0, "unless_flag": "severin_duel_3", "intro": "severin3_intro"}
+  ]
+}

@@ -120,7 +120,13 @@ func _physics_process(delta: float) -> void:
 	_tick_premium()
 	_tick_potions(delta)
 	_tick_stamina(delta)
+	_tick_poison(delta)
 	if _dead or _scripted:
+		return
+	if status.has("stun"):
+		# Stunned by a boss blow: can't move or act for a moment.
+		velocity = Vector3.ZERO
+		move_and_slide()
 		return
 	if _forced_time > 0.0:
 		_forced_time -= delta
@@ -150,6 +156,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			_update_sprint(dir, delta)
 			var speed: float = MOVE_SPEED * (1.0 + stats.buff("speed")) * (float(_stamina_rules().get("sprint_speed_mult", 1.6)) if _sprinting else 1.0)
+			speed *= 1.0 - clampf(status.value("slow"), 0.0, 0.8)
 			velocity = dir * speed
 			if dir.length_squared() > 0.01:
 				face_direction(dir)
@@ -267,7 +274,41 @@ func spend_stamina(cost: float) -> bool:
 
 
 func can_act() -> bool:
-	return not _dead and not _scripted and _forced_time <= 0.0 and _lock <= 0.0
+	return not _dead and not _scripted and _forced_time <= 0.0 and _lock <= 0.0 and not status.has("stun")
+
+
+## A status from an enemy hit: "stun" (no moving or acting), "slow" (value = speed lost),
+## "weaken" (value = damage lost) or "poison" (value = fraction of max health per second).
+func apply_status(effect: String, seconds: float, value: float = 0.0) -> void:
+	if _dead or seconds <= 0.0:
+		return
+	status.apply(effect, seconds, value)
+	var names: Dictionary = {"stun": "BUFF_STUN", "slow": "BUFF_SLOW", "weaken": "BUFF_WEAKEN", "poison": "BUFF_POISON"}
+	var colors: Dictionary = {"stun": Color("#ffe066"), "slow": Color("#7fd1ff"), "weaken": Color("#c08aff"), "poison": Color("#8ee04a")}
+	ProtoVisuals.damage_number(get_parent(), global_position + Vector3(0, 0.6, 0), tr(str(names.get(effect, effect))), colors.get(effect, Color.WHITE))
+	if model:
+		model.set_tint(colors.get(effect, Color.WHITE), 0.35)
+		get_tree().create_timer(minf(seconds, 1.0), false).timeout.connect(func() -> void:
+			if model and not _dead:
+				model.set_tint(Color.WHITE, 0.0))
+	if effect == "stun":
+		_queued_attack = false
+
+
+var _poison_tick: float = 0.0
+
+
+func _tick_poison(delta: float) -> void:
+	if _dead or not status.has("poison"):
+		return
+	hp -= max_hp() * status.value("poison") * delta
+	_poison_tick -= delta
+	if _poison_tick <= 0.0:
+		_poison_tick = 1.0
+		ProtoVisuals.damage_number(get_parent(), global_position, tr("BUFF_POISON"), Color("#8ee04a"))
+	hp_changed.emit(hp, max_hp())
+	if hp <= 0.0:
+		_die()
 
 
 func lock(seconds: float) -> void:
@@ -373,7 +414,7 @@ func enemies_in_cone(radius: float, half_angle_deg: float) -> Array[Enemy]:
 
 ## Hits one enemy with the hero's attack. Returns the damage dealt.
 func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0.0) -> int:
-	var m: float = mult
+	var m: float = mult * (1.0 - clampf(status.value("weaken"), 0.0, 0.8))
 	if is_skill:
 		m *= 1.0 + stats.get_stat("skill_dmg")
 	var res: Dictionary = Damage.compute(stats.get_stat("atk"), m, enemy.get_defense(),
@@ -391,12 +432,13 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 var min_hp_ratio: float = 0.0
 
 
-func receive_attack(atk_value: float) -> void:
+## Takes an enemy hit. True when it landed (not dodged, evaded or invulnerable).
+func receive_attack(atk_value: float) -> bool:
 	if _dead or _invulnerable > 0.0:
-		return
+		return false
 	if _rng.randf() < stats.get_stat("evade"):
 		ProtoVisuals.damage_number(get_parent(), global_position, tr("HUD_EVADED"), Color("#7fd1ff"))
-		return
+		return false
 	var res: Dictionary = Damage.compute(atk_value, 1.0, stats.get_stat("def"), 0.0, 1.0, _rng)
 	hp -= res["amount"]
 	if min_hp_ratio > 0.0:
@@ -416,6 +458,7 @@ func receive_attack(atk_value: float) -> void:
 	hp_changed.emit(hp, max_hp())
 	if hp <= 0.0:
 		_die()
+	return true
 
 
 ## Hero progress for the save file (position is saved by Main).

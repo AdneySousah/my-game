@@ -38,7 +38,9 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] 5.6 Rotina e metas: 5 diárias por nível, calendário de login de 28 dias com proteção do relógio, 10 conquistas com títulos, dificuldade no Novo jogo (diminuir só na cidade). Aprovado
 - [ ] Fase 7 (adiantada antes da Fase 6) — versão Android e loja do Google Play: Java 17, Android SDK 36 e modelos do Godot instalados; plugin de compras 3.3.0; chave de upload fora do projeto; pacote `com.adneysousah.herdeirodosceus`; build por `tools/build/build_android.sh`. Passo a passo do dono em `docs/PUBLICACAO.md`. Inglês mantido, sem espanhol.
   - [x] Teste interno no celular (12/11/2026): compras de teste, atalhos no topo com ícones pintados (6 créditos), balão de fala no botão de ataque, limite de 60 quadros e 3D em até 1080 linhas. Aprovado
-  - [ ] Ficha da loja, conteúdo do app e teste fechado (12 testadores por 14 dias) antes da produção
+  - [x] Ficha da loja, conteúdo do app e ícone novo (12/11/2026); teste fechado enviado para revisão
+  - [ ] 12 testadores por 14 dias seguidos e pedido de produção
+- [ ] Fase 6 — expansão: plano em `docs/FASE6_PLANO.md` (6 etapas, ~4.400 créditos), aguardando aprovação da etapa 6.1
 
 ## Pendências para depois do jogo concluído
 

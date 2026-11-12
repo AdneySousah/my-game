@@ -350,6 +350,11 @@ REST_DUNAS_COSTELAS,Sombra das Costelas,Shade of the Ribs
 ENEMY_BANDIDO_DESERTO,Saqueador do deserto,Desert raider
 ENEMY_HOMEM_LAGARTO,Homem-lagarto,Lizardman
 SHOP_ZAHIR,Bazar do Zahir,Zahir's Bazaar
+MAP_RUINAS,Ruínas de Ammar,Ruins of Ammar
+REST_RUINAS_ENTRADA,Portal das Areias,Gate of Sands
+REST_RUINAS_PATIO,Pátio dos Guardiões,Guardians' Court
+ENEMY_ESQUELETO_ANTIGO,Guardião antigo,Ancient guardian
+ENEMY_SEVERIN,"Severin, Cavaleiro Celeste","Severin, Celestial Knight"
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -360,6 +365,7 @@ NPC_NINA,Nina,Nina
 NPC_JUCA,Velho Juca,Old Juca
 NPC_ZAHIR,Zahir,Zahir
 NPC_NADIRA,Nadira,Nadira
+NPC_SEVERIN,Severin,Severin
 BARK_ZAHIR_1,Água fresquinha! Quase de graça!,Fresh water! Almost free!
 BARK_NADIRA_1,Cuidado com as faíscas.,Mind the sparks.
 BARK_MARTA_1,"Cuidado na estrada, filho!","Careful on the road, son!"
@@ -377,11 +383,13 @@ QUEST_MAIN_01,Mais um dia em Pradoluz,Another Day in Pradoluz
 QUEST_MAIN_02,A lição do caolho,The One-Eyed Lesson
 QUEST_MAIN_03,Um cozinheiro na floresta,A Cook in the Woods
 QUEST_MAIN_07,A cidade da sede,The Thirsty City
+QUEST_MAIN_08,As Ruínas de Ammar,The Ruins of Ammar
 QUEST_MAIN_04,Os corvos da mina,The Crows of the Mine
 QUEST_MAIN_05,O Arauto da Colheita,The Herald of the Harvest
 QUEST_MAIN_06,Mais cinco desses,Five More Like Him
 QUEST_MORE_SOON,Fim do Ato 1 — a estrada do nordeste leva ao deserto de Qaressa,End of Act 1 — the north-east road leads to the desert of Qaressa
-QUEST_ACT2_SOON,As Ruínas de Ammar chegam na próxima versão,The Ruins of Ammar arrive in the next version
+QUEST_ACT2_SOON,"Fale com a Nadira: as Ruínas de Ammar, a leste das dunas, estão abertas","Talk to Nadira: the Ruins of Ammar, east of the dunes, are open"
+QUEST_ACT2_SOON2,A Torre Afundada e a Arauta Sahra chegam na próxima versão,The Sunken Tower and Herald Sahra arrive in the next version
 OBJ_KILL_GOLEM,Derrote o Golem de pedra no fundo da mina,Defeat the stone golem in the depths of the mine
 OBJ_KILL_GORVAN,Derrote Gorvan no Celeiro do Tributo,Defeat Gorvan in the Tribute Granary
 OBJ_RETURN_VILLAGE,Volte para a Marta em Pradoluz,Return to Marta in Pradoluz
@@ -421,6 +429,11 @@ OBJ_TALK_ZAHIR,Fale com Zahir no mercado,Talk to Zahir at the market
 OBJ_TALK_NADIRA,"Fale com Nadira, a ferreira","Talk to Nadira, the blacksmith"
 OBJ_KILL_LIZARDMEN,Derrote homens-lagarto nas Dunas: %d/%d,Defeat lizardmen in the Dunes: %d/%d
 OBJ_RETURN_NADIRA,Leve as escamas para a Nadira,Bring the scales to Nadira
+OBJ_TALK_NADIRA_RUINS,Pergunte à Nadira sobre as ruínas,Ask Nadira about the ruins
+OBJ_KILL_ANCIENT,Derrote esqueletos antigos nas Ruínas: %d/%d,Defeat ancient skeletons in the Ruins: %d/%d
+OBJ_REACH_MURAL,"Encontre o mural do templo, ao norte das Ruínas","Find the temple mural, north of the Ruins"
+OBJ_DUEL_SEVERIN,Enfrente o cavaleiro no templo,Face the knight in the temple
+OBJ_RETURN_NADIRA_RUINS,Volte para a Nadira em Qaressa,Go back to Nadira in Qaressa
 OBJ_KILL_RAIDERS,Derrote orcs saqueadores no Bosque Seco: %d/%d,Defeat orc raiders in the Withered Grove: %d/%d
 OBJ_COLLECT_STEEL,Recupere os caixotes de aço no acampamento: %d/%d,Recover the steel crates at the camp: %d/%d
 OBJ_RETURN_TOBIAS_STEEL,Leve o aço para o Tobias,Bring the steel to Tobias
@@ -527,6 +540,7 @@ ITEM_EQ_EPICO_DESC,Runas antigas brilham no metal escuro.,Ancient runes glow on 
 ITEM_EQ_LENDARIO_DESC,Dizem que foi forjada com a luz do céu.,They say it was forged with the light of the sky.
 ITEM_MAT_LINGOTE_ACO,Lingote de aço,Steel ingot
 ITEM_MAT_SEDA_DESERTO,Seda do deserto,Desert silk
+ITEM_MAT_FRAGMENTO_RUINA,Fragmento de ruína,Ruin shard
 ITEM_MAT_ESCAMA_DUNA,Escama de duna,Dune scale
 ITEM_MAT_CRISTAL_AREIA,Cristal de areia,Sand crystal
 ITEM_MAT_LINGOTE_ACO_DESC,O ferreiro usa para fortalecer e restaurar equipamentos.,The smith uses it to strengthen and restore gear.
@@ -681,6 +695,24 @@ DLG_MAIN_07_NADIRA_DONE_1,Escamas boas. Grossas. Isso vai virar couraça.,Good s
 DLG_MAIN_07_NADIRA_DONE_2,"As Ruínas de Ammar ficam a leste das dunas. Ainda estamos limpando o caminho, então descanse e se prepare.","The Ruins of Ammar lie east of the dunes. We're still clearing the way, so rest and get ready."
 DLG_ZAHIR_IDLE_1,"Preço especial pra você, amigo! Bem... especial pra mim, mas você entendeu.","Special price for you, friend! Well... special for me, but you get it."
 DLG_NADIRA_IDLE_1,"Fogo, martelo e paciência. O resto é conversa.","Fire, hammer and patience. The rest is just talk."
+DLG_MAIN_08_NADIRA_1,"O caminho para as Ruínas de Ammar está aberto, a leste das dunas.","The way to the Ruins of Ammar is open, east of the dunes."
+DLG_MAIN_08_NADIRA_2,Dizem que os selos da Torre Afundada estão lá. E que os mortos guardam cada pedra.,They say the seals of the Sunken Tower are there. And that the dead guard every stone.
+DLG_MAIN_08_NADIRA_3,Mortos guardando pedra. Deve ser o emprego mais chato do mundo.,Dead guys guarding rocks. Must be the most boring job in the world.
+DLG_MAIN_08_MURAL_1,Uma pintura... gente subindo uma escada até o céu. E um homem com asas lá em cima.,A painting... people climbing a staircase to the sky. And a winged man up top.
+DLG_MAIN_08_MURAL_2,Homens que subiram ao céu. Então o Vaelor não caiu do céu. Ele SUBIU até lá?,Men who rose to the sky. So Vaelor didn't fall from the sky. He CLIMBED up there?
+DLG_SEVERIN_INTRO_1,Pare aí. Este templo pertence à Ordem Celeste.,Stop right there. This temple belongs to the Celestial Order.
+DLG_SEVERIN_INTRO_2,E você é...?,And you are...?
+DLG_SEVERIN_INTRO_3,Severin Vale. Ouvi falar de um garoto que derrubou o Arauto da Colheita. Esperava alguém maior.,Severin Vale. I heard of a boy who brought down the Herald of the Harvest. I expected someone bigger.
+DLG_SEVERIN_INTRO_4,"Os Arautos mantêm a ordem. Sem eles, o mundo vira caos. Vou te mostrar o que acontece com quem esquece isso.","The Heralds keep order. Without them, the world falls into chaos. I'll show you what happens to those who forget it."
+DLG_SEVERIN_DUEL_END_1,"Chega. Você é rápido, mas luta como quem briga na feira.","Enough. You're fast, but you fight like a market brawler."
+DLG_SEVERIN_DUEL_END_2,Ainda... estou de pé...,Still... standing...
+DLG_SEVERIN_DUEL_END_3,"De pé, não. Vivo. Porque eu quis.",Not standing. Alive. Because I allowed it.
+DLG_SEVERIN_DUEL_END_4,"Volte para a sua vila, garoto. Da próxima vez eu não vou segurar o golpe.","Go back to your village, boy. Next time I won't hold back my blade."
+DLG_SEVERIN_DUEL_END_5,Da próxima vez... eu vou estar pronto.,Next time... I'll be ready.
+DLG_MAIN_08_RETURN_1,Você está um trapo. O que houve?,You look like a rag. What happened?
+DLG_MAIN_08_RETURN_2,Um cavaleiro da Ordem Celeste. Severin. Ele me derrubou como se eu fosse um saco de farinha.,A knight of the Celestial Order. Severin. He knocked me down like a sack of flour.
+DLG_MAIN_08_RETURN_3,"A Ordem serve aos Arautos. Se ele estava lá, a Sahra sabe que você vem.","The Order serves the Heralds. If he was there, Sahra knows you're coming."
+DLG_MAIN_08_RETURN_4,Descanse. E treine. A Torre Afundada não vai ser mais gentil que ele.,Rest. And train. The Sunken Tower won't be any kinder than he was.
 DLG_MARTA_IDLE_FED_1,A despensa está cheia pela primeira vez em anos. Come mais um pedaço!,The pantry is full for the first time in years. Have another slice!
 DLG_BRAM_IDLE_FED_1,"Não fique se achando. Mas... bom trabalho, moleque.","Don't get cocky. But... good work, kid."
 DLG_CELESTE_IDLE_FED_1,"Prateleiras cheias de novo! Logo, logo eu reabro o armazém, querido.","Full shelves again! Very soon I'll reopen the store, dear."

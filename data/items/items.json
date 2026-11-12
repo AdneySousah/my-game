@@ -18,6 +18,7 @@
     "mat_fragmento_pedra": { "name": "MAT_FRAGMENTO_PEDRA", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "rare", "stack": 999, "price": 25, "color": "#8a8178", "glyph": "p" },
     "mat_palha_dourada":   { "name": "MAT_PALHA_DOURADA", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "epic", "stack": 999, "price": 60, "color": "#e6b325", "glyph": "*" },
     "mat_lingote_aco":     { "name": "ITEM_MAT_LINGOTE_ACO", "desc": "ITEM_MAT_LINGOTE_ACO_DESC", "type": "material", "rarity": "rare", "stack": 999, "price": 30, "color": "#c8ccd4", "glyph": "L" },
+    "mat_fragmento_ruina": { "name": "ITEM_MAT_FRAGMENTO_RUINA", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "rare", "stack": 999, "price": 26, "color": "#d9a96a", "glyph": "R" },
     "mat_seda_deserto":    { "name": "ITEM_MAT_SEDA_DESERTO", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "common", "stack": 999, "price": 14, "color": "#9b5de5", "glyph": "S" },
     "mat_escama_duna":     { "name": "ITEM_MAT_ESCAMA_DUNA", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "rare", "stack": 999, "price": 24, "color": "#2e8b6e", "glyph": "E" },
     "mat_cristal_areia":   { "name": "ITEM_MAT_CRISTAL_AREIA", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "epic", "stack": 999, "price": 70, "color": "#f4c27a", "glyph": "C" },

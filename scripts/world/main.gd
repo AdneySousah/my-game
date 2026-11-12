@@ -58,6 +58,7 @@ func _ready() -> void:
 	hud.set_quests(quests)
 	hud.interact_pressed.connect(talk_to_nearby)
 	quests.changed.connect(_refresh_quest_world)
+	quests.reached_dialogue.connect(func(d: String) -> void: _boss_line(d))
 	quests.quest_completed.connect(func(id: String) -> void:
 		var note: String = str(Data.quest(id).get("end_note", ""))
 		if note != "":
@@ -108,6 +109,8 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	if _changing:
 		return
 	_changing = true
+	# A duel's "cannot die" only lasts in its own map.
+	player.min_hp_ratio = 0.0
 	if with_fade:
 		Audio.play_sfx("door")
 		await hud.fade(true)
@@ -460,8 +463,54 @@ func _on_boss_spawned(e: Enemy) -> void:
 	var reborn: String = str(e.get_meta("reborn_line", ""))
 	if reborn != "":
 		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(reborn), CONNECT_ONE_SHOT)
+	var duel: Dictionary = e.data.get("duel", {})
+	if not duel.is_empty():
+		player.min_hp_ratio = float(duel.get("hero_min_hp", 0.2))
+		var check := func(_x: Variant = null, _y: Variant = null) -> void: _check_duel(e)
+		e.hp_changed.connect(check)
+		player.hp_changed.connect(check)
 	e.shield_broken.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BROKEN"), 2.2))
 	e.shield_restored.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BACK"), 1.8))
+
+
+## The duel ends (the hero is worn down, or the rival is): talk, the rival leaves, story goes on.
+func _check_duel(e: Enemy) -> void:
+	if not is_instance_valid(e) or e.is_dead() or e.has_meta("duel_over"):
+		return
+	var duel: Dictionary = e.data.get("duel", {})
+	var hero_low: bool = player.hp <= player.max_hp() * float(duel.get("hero_min_hp", 0.2)) + 0.5
+	var rival_low: bool = e.hp_ratio() <= float(duel.get("min_hp", 0.35)) + 0.001
+	if not hero_low and not rival_low:
+		return
+	e.set_meta("duel_over", true)
+	e.invulnerable = true
+	e.set_physics_process(false)
+	player.set_invulnerable(30.0)
+	Audio.play_music(Audio.music_for_map(map.map_id), 1.5)
+	await get_tree().create_timer(0.8, false).timeout
+	var line: String = str(duel.get("end_dialogue", ""))
+	if line != "":
+		await _boss_line_await(line)
+	if str(duel.get("flag", "")) != "":
+		Session.set_flag(str(duel["flag"]))
+	quests.on_enemy_killed(e.base_id, Session.current_map)
+	player.min_hp_ratio = 0.0
+	player.hp = maxf(player.hp, player.max_hp() * 0.5)
+	player.hp_changed.emit(player.hp, player.max_hp())
+	var tw := create_tween()
+	tw.tween_property(e, "scale", Vector3(0.01, 0.01, 0.01), 0.6)
+	tw.tween_callback(e.queue_free)
+	map.call("_open_arena")
+	_refresh_quest_world()
+
+
+func _boss_line_await(dialogue_id: String) -> void:
+	var dlg: Dictionary = Data.dialogues.get(dialogue_id, {})
+	if dlg.is_empty():
+		return
+	_talking = true
+	await hud.play_dialogue(dlg.get("lines", []))
+	_talking = false
 
 
 func _boss_line(dialogue_id: String) -> void:

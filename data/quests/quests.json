@@ -74,6 +74,19 @@
       "rewards": { "xp": 2400, "gold": 600, "items": { "pot_vida_m": 5, "eq_peitoral_raro": 1 } }
     },
     {
+      "id": "main_08", "type": "main", "name": "QUEST_MAIN_08", "auto": true,
+      "requires": ["main_07"], "min_level": 20,
+      "steps": [
+        { "type": "talk", "npc": "nadira", "dialogue": "main_08_nadira", "text": "OBJ_TALK_NADIRA_RUINS" },
+        { "type": "kill", "enemy": "esqueleto_antigo", "count": 6, "map": "ruinas", "pos": [4, 14], "text": "OBJ_KILL_ANCIENT" },
+        { "type": "reach", "map": "ruinas", "pos": [0, -36], "radius": 7, "text": "OBJ_REACH_MURAL", "dialogue": "main_08_mural" },
+        { "type": "kill", "enemy": "severin", "count": 1, "map": "ruinas", "pos": [0, -34], "text": "OBJ_DUEL_SEVERIN", "skip_if_flag": "severin_duel_1" },
+        { "type": "talk", "npc": "nadira", "dialogue": "main_08_return", "text": "OBJ_RETURN_NADIRA_RUINS" }
+      ],
+      "set_flag": "act2_ruins", "end_note": "QUEST_ACT2_SOON2",
+      "rewards": { "xp": 5200, "gold": 1200, "items": { "pot_vida_g": 3, "eq_luvas_epico": 1 } }
+    },
+    {
       "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",
       "requires": ["main_01"], "min_level": 2,
       "steps": [

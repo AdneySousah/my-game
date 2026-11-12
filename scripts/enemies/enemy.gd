@@ -151,6 +151,10 @@ func take_damage(amount: int, crit: bool, knockback: Vector3 = Vector3.ZERO) -> 
 		hp_changed.emit(self)
 		return
 	hp -= amount
+	# "duel": {"min_hp": 0.35} — a rival the hero cannot beat yet.
+	var duel: Dictionary = data.get("duel", {})
+	if not duel.is_empty():
+		hp = maxf(hp, max_hp * float(duel.get("min_hp", 0.35)))
 	if not is_boss:
 		_bar.set_ratio(hp_ratio())
 	_knockback += knockback * (1.0 - float(data.get("knockback_resist", 0.0)))

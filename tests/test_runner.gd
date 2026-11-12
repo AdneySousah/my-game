@@ -19,6 +19,7 @@ func _ready() -> void:
 	await _world_test()
 	await _road_test()
 	await _ambience_test()
+	await _duel_test()
 	await _quest_test()
 	await _boss_test()
 	await _save_test()
@@ -473,6 +474,49 @@ func _ambience_test() -> void:
 	Session.day_hour = 10.0
 	main.queue_free()
 	await _frames(2)
+
+
+## Ruins of Ammar (stage 6.2c): the duel with Severin cannot be won and the hero cannot die.
+func _duel_test() -> void:
+	Session.reset()
+	Session.set_flag("act2_qaressa")
+	Main.start_map = "ruinas"
+	Main.start_spawn = "from_dunas"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("esqueleto_antigo"), "ancient guardians live in the ruins (got %s)" % [kinds.keys()])
+	var sev: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "severin":
+			sev = n as Enemy
+	check(sev != null, "Severin waits in the temple")
+	if sev:
+		sev.take_damage(100000, false)
+		check(not sev.is_dead() and sev.hp_ratio() >= 0.549, "Severin cannot be beaten (hp %.2f)" % sev.hp_ratio())
+		# The intro talk, then the end-of-duel talk.
+		for i: int in 400:
+			await _frames(1)
+			if main.hud.is_in_dialogue():
+				await _finish_dialogue(main)
+			if Session.has_flag("severin_duel_1"):
+				break
+		await _frames(30)
+	check(Session.has_flag("severin_duel_1"), "the duel ends with Severin leaving")
+	main.player.min_hp_ratio = 0.0
+	main.load_map("ruinas", "from_dunas")
+	await _wait_map(main, "ruinas")
+	await _frames(8)
+	main.player.min_hp_ratio = 0.2
+	main.player.receive_attack(1_000_000.0)
+	check(not main.player.is_dead(), "in a duel the hero cannot die")
+	main.queue_free()
+	get_tree().paused = false
+	await _frames(2)
+	Main.start_spawn = "start"
 
 
 ## Quest pickups of the current map are not inside a prop (rock, tree, cart).

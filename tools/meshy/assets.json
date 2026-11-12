@@ -3778,6 +3778,336 @@
       "notes": [
         "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
       ]
+    },
+    {
+      "id": "env_coluna_ruina",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/environment/env_coluna_ruina/env_coluna_ruina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-101a-7507-9d1d-051d1652cf06",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-afef-72e2-bef0-481c59f05b6a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "env_arco_ruina",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/environment/env_arco_ruina/env_arco_ruina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-1118-750e-b479-67422c7026b4",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-b4ed-7341-b6f6-b157c1a67b6e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "env_parede_ruina",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/environment/env_parede_ruina/env_parede_ruina.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-1211-72f2-87b8-4fa8d3ac6483",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-b9b2-74bf-9748-2f605b2165fd",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "prp_estatua_alada",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/props/prp_estatua_alada/prp_estatua_alada.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-131a-7608-a10f-98959c528e2e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-bde9-735d-85bf-519c4dab36d1",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "prp_mural_ceu",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/props/prp_mural_ceu/prp_mural_ceu.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-13ff-7274-897a-fc004c44a584",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-c227-75fc-928e-569b45f12e75",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "prp_braseiro",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/props/prp_braseiro/prp_braseiro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-14ed-70cb-ab24-c8ddd4a41afa",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-c788-7410-8d46-297904ac4acb",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "prp_sarcofago",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Ruínas de Ammar",
+      "file": "assets/props/prp_sarcofago/prp_sarcofago.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-15d6-7486-b6e3-859ac9075c28",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-cc49-7250-8587-e7c0e86d3423",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "enm_esqueleto_antigo",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Retexture do esqueleto mineiro + khopesh",
+      "file": "assets/enemies/enm_esqueleto_antigo/enm_esqueleto_antigo.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-1b92-74e7-b053-659b4bba6e88",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d128-55ae-767f-b110-e628548bc506",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "wpn_khopesh",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c espada curva do esqueleto antigo",
+      "file": "assets/weapons/wpn_khopesh/wpn_khopesh.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-16c3-7278-a5d1-d50444da10ab",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-cfd0-7609-b2e1-9d6a2f27414f",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "boss_severin",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c Severin (rival, duelo do Ato 2)",
+      "file": "assets/enemies/boss_severin/boss_severin.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-1891-75e6-92aa-45416224e973",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-d88f-73fe-a60e-54818c971c95",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d12b-1710-736d-bf4d-5b24e28a3fff",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 18,
+          "task_id": "01a1d12f-1aa0-7156-b303-46cc7cb5fe15",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "wpn_espadao_severin",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2c espadão de duas mãos do Severin",
+      "file": "assets/weapons/wpn_espadao_severin/wpn_espadao_severin.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d128-17a3-76d6-ae42-af900140a349",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d129-d428-7352-b79f-cbcfcd497b00",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
+    },
+    {
+      "id": "ui_retratos_ato2",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Retratos de Zahir, Nadira e Severin",
+      "file": "assets/ui/ui_retratos_ato2/ui_retratos_ato2.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d129-dd98-74f3-a043-12581bb1c65e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d129-e399-77f0-969b-a126b95b53f4",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d129-e6e9-7430-ba5f-c871d0acb689",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
+      ]
     }
   ]
 }

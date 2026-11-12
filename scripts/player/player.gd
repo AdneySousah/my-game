@@ -337,6 +337,11 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 
 
 ## Called by enemies. `atk_value` is the attacker's raw attack.
+## Set during a fight the hero must lose without dying (the duel with Severin): his
+## health never goes below this fraction.
+var min_hp_ratio: float = 0.0
+
+
 func receive_attack(atk_value: float) -> void:
 	if _dead or _invulnerable > 0.0:
 		return
@@ -345,6 +350,8 @@ func receive_attack(atk_value: float) -> void:
 		return
 	var res: Dictionary = Damage.compute(atk_value, 1.0, stats.get_stat("def"), 0.0, 1.0, _rng)
 	hp -= res["amount"]
+	if min_hp_ratio > 0.0:
+		hp = maxf(hp, max_hp() * min_hp_ratio)
 	Audio.play_sfx("hurt", global_position)
 	ProtoVisuals.damage_number(get_parent(), global_position, str(res["amount"]), Color("#ff5a5a"))
 	_combat_time = 3.0

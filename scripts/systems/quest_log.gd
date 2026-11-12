@@ -9,6 +9,8 @@ signal quest_updated(quest_id: String)
 signal quest_completed(quest_id: String)
 ## The world must refresh NPC markers / pickups (a quest moved on).
 signal changed
+## A "reach" step with "dialogue" was reached: Main plays that conversation.
+signal reached_dialogue(dialogue_id: String)
 
 var player: Player
 
@@ -203,6 +205,8 @@ func on_position(map_id: String, pos: Vector3) -> void:
 		var target := Vector3(float(p[0]), 0, float(p[1]))
 		if Vector2(pos.x - target.x, pos.z - target.z).length() <= float(step.get("radius", 4)):
 			_advance(id)
+			if str(step.get("dialogue", "")) != "":
+				reached_dialogue.emit(str(step["dialogue"]))
 
 
 # --- Targets for the markers --------------------------------------------------------

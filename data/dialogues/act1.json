@@ -625,6 +625,98 @@
         ]
       ]
     },
+    "main_08_nadira": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_08_NADIRA_1"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_08_NADIRA_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_08_NADIRA_3"
+        ]
+      ]
+    },
+    "main_08_mural": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_08_MURAL_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_08_MURAL_2"
+        ]
+      ]
+    },
+    "severin_intro": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN_INTRO_2"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN_INTRO_3"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN_INTRO_4"
+        ]
+      ]
+    },
+    "severin_duel_end": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN_DUEL_END_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN_DUEL_END_2"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN_DUEL_END_3"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN_DUEL_END_4"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN_DUEL_END_5"
+        ]
+      ]
+    },
+    "main_08_return": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_08_RETURN_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_08_RETURN_2"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_08_RETURN_3"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_08_RETURN_4"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

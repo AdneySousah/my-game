@@ -1,0 +1,127 @@
+{
+  "_comment": "Ruínas de Ammar (Ato 2, níveis 22-25): cidade antiga meio enterrada a leste das Dunas. Esqueletos antigos guardam o pátio; o mural dos 'homens que subiram ao céu' fica no templo do norte, onde o Severin espera.",
+  "id": "ruinas",
+  "name": "MAP_RUINAS",
+  "size": [90, 100],
+  "seed": 111,
+  "ground": "#dcae6c",
+  "grass": {"count": 200, "root": "#b99a4f", "tip": "#e6d48e"},
+  "sky": "#f2c38a",
+  "ambient": 0.6,
+  "sun": 1.2,
+  "sun_color": "#ffd9a8",
+  "patches": {"color": "#c99c5c", "count": 140},
+  "spawns": {"from_dunas": [0, 44, 0]},
+  "exits": [
+    {
+      "to": "dunas",
+      "spawn": "from_ruinas",
+      "pos": [0, 50],
+      "size": [10, 2],
+      "label": "MAP_DUNAS",
+      "model": "prp_portal",
+      "model_pos": [0, 51.5]
+    }
+  ],
+  "rest_points": [
+    {"id": "ruinas_entrada", "name": "REST_RUINAS_ENTRADA", "pos": [6, 38], "kind": "fogueira"},
+    {"id": "ruinas_patio", "name": "REST_RUINAS_PATIO", "pos": [-8, 2], "kind": "fogueira"}
+  ],
+  "chests": [
+    {
+      "id": "ruinas_bau_1",
+      "pos": [-30, 20],
+      "yaw": 90,
+      "gold": 700,
+      "items": {"pot_vida_g": 2, "broca": 1, "gema_ametista_1": 2}
+    },
+    {
+      "id": "ruinas_bau_2",
+      "pos": [30, -6],
+      "yaw": -90,
+      "gold": 800,
+      "items": {"pot_folego_g": 2, "trevo": 1, "eq_espada_epico": 1}
+    }
+  ],
+  "paths": [
+    {"points": [[0, 50], [0, 30], [6, 14], [0, 0], [-4, -16], [0, -30]], "width": 3.6, "color": "#c99f62"}
+  ],
+  "props": [
+    {"id": "env_arco_ruina", "pos": [0, 30], "rot": 0},
+    {"id": "env_arco_ruina", "pos": [0, -22], "rot": 0},
+    {"id": "env_coluna_ruina", "pos": [-8, 22]},
+    {"id": "env_coluna_ruina", "pos": [8, 22], "rot": 90},
+    {"id": "env_coluna_ruina", "pos": [-14, 8], "rot": 40},
+    {"id": "env_coluna_ruina", "pos": [14, 8], "rot": 200},
+    {"id": "env_coluna_ruina", "pos": [-14, -8], "rot": 120},
+    {"id": "env_coluna_ruina", "pos": [14, -8], "rot": 300},
+    {"id": "env_coluna_ruina", "pos": [-9, -30]},
+    {"id": "env_coluna_ruina", "pos": [9, -30], "rot": 180},
+    {"id": "prp_estatua_alada", "pos": [-22, 0], "rot": 90},
+    {"id": "prp_estatua_alada", "pos": [22, 0], "rot": -90},
+    {"id": "prp_mural_ceu", "pos": [0, -40], "rot": 0},
+    {"id": "prp_braseiro", "pos": [-5, -36]},
+    {"id": "prp_braseiro", "pos": [5, -36]},
+    {"id": "prp_braseiro", "pos": [-4, 26]},
+    {"id": "prp_braseiro", "pos": [4, 26]},
+    {"id": "prp_sarcofago", "pos": [-20, -20], "rot": 30},
+    {"id": "prp_sarcofago", "pos": [22, -18], "rot": -20},
+    {"id": "prp_ossos_gigantes", "pos": [-28, 34], "rot": 70, "scale": 0.7}
+  ],
+  "walls": [
+    {"id": "env_parede_ruina", "from": [-40, 46], "to": [-6, 46]},
+    {"id": "env_parede_ruina", "from": [6, 46], "to": [40, 46]},
+    {"id": "env_parede_ruina", "from": [42, 44], "to": [42, -44]},
+    {"id": "env_parede_ruina", "from": [40, -46], "to": [-40, -46]},
+    {"id": "env_parede_ruina", "from": [-42, -44], "to": [-42, 44]},
+    {"id": "env_parede_ruina", "from": [-20, -26], "to": [-7, -26]},
+    {"id": "env_parede_ruina", "from": [7, -26], "to": [20, -26]}
+  ],
+  "scatter": [
+    {
+      "ids": ["env_coluna_ruina", "prp_rocha_duna", "prp_arenito"],
+      "count": 18,
+      "rect": [-38, -42, 38, 42],
+      "spacing": 8,
+      "seed": 112
+    },
+    {
+      "ids": ["prp_arenito_pequeno", "prp_capim_seco", "prp_jarro", "prp_arbusto_seco"],
+      "count": 50,
+      "rect": [-38, -42, 38, 42],
+      "spacing": 3,
+      "seed": 113
+    }
+  ],
+  "enemy_zones": [
+    {
+      "pos": [4, 14],
+      "radius": 10,
+      "max": 4,
+      "types": {"esqueleto_antigo": 3, "homem_lagarto": 1},
+      "level": [22, 23],
+      "respawn": 25
+    },
+    {"pos": [-22, -10], "radius": 9, "max": 4, "types": {"esqueleto_antigo": 4}, "level": [23, 24], "respawn": 25},
+    {
+      "pos": [24, -10],
+      "radius": 9,
+      "max": 4,
+      "types": {"esqueleto_antigo": 3, "bandido_deserto": 1},
+      "level": [24, 25],
+      "respawn": 25
+    }
+  ],
+  "arena": {"gate": [[-7, -26], [7, -26]]},
+  "bosses": [
+    {
+      "id": "severin",
+      "pos": [0, -34],
+      "level": 30,
+      "yaw": 0,
+      "unless_flag": "severin_duel_1",
+      "intro": "severin_intro"
+    }
+  ],
+  "ambience": {"flocks": [[-30, 36, 3]]}
+}

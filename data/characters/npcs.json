@@ -192,6 +192,15 @@
         "BARK_NADIRA_1"
       ],
       "model": "npc_nadira"
+    },
+    "severin": {
+      "name": "NPC_SEVERIN",
+      "color": "#2c3e8f",
+      "voice": 0.75,
+      "portrait": "ui_retrato_severin",
+      "talk": [],
+      "barks": [],
+      "model": "boss_severin"
     }
   }
 }

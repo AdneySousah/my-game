@@ -335,3 +335,19 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - as skins compradas continuam com o rosto jovem; quando uma está vestida, ela tem prioridade.
 - **Hrimvald depois:** braseiros e fogueira acesos, a jaula de lenha some, o túmulo do Bento aparece na colina e o Bento sai da cidade. O Osk e a Brunhild ganham falas novas.
 - **Missão 12 "O Arauto do Frio"** fecha o Ato 3 (`act3_done`). O Osk conta do mensageiro dos elfos de Lys'Thaël, gancho do Ato 4.
+
+## Fase 6.4a: a estrada para Lys'Thaël (12/11/2026)
+- **Caminho, como no GDD:** Picos Uivantes (saída leste, abre com `act3_done`) → Vale do Degelo (44–46, neve derretendo, riachos e flores) → Mata Úmida (46–48, musgo, cogumelos que brilham) → Bordas do Pântano (48–50, água parada e mangues) → **Lys'Thaël**.
+  - O bioma passa de `snow` para `moss`.
+- **Lys'Thaël:** cidade élfica com casas nas árvores, cerca de galhos vivos e lanternas de cristal. No centro fica a **Árvore-Mãe murchando**. Moram lá o Elarion (loja com peças épicas e poções) e o Faenor (ferreiro).
+  - O portão norte, para o Pântano das Raízes, abre com `act4_lysthael`.
+- **Inimigos:**
+  - **cultista do silêncio** (modelo novo, com as animações do bandido): luta de perto e joga orbes sombrios à distância (projétil `look: "orb"`);
+  - homem-lagarto do pântano e morto do pântano: Retexture, mantêm esqueleto e animações.
+  - Materiais novos: escama do pântano e seiva amarga.
+- **Missões:**
+  - **13 "A floresta em silêncio"**: chegar a Lys'Thaël → Elarion → 8 cultistas nas Bordas → Faenor, que conta da Velyra na Torre do Vigia.
+  - Secundárias: **"Os cantos escondidos"** (4 partituras na Mata Úmida, para o Elarion; só ouro e itens) e **"Lâmina de raiz"** (8 mortos do pântano, para o Faenor).
+- **Próximo:**
+  - 6.4b: Pântano das Raízes, Torre do Vigia Élfico, 3º duelo com o Severin (ele perde e começa a duvidar) e a revelação do Bram;
+  - 6.4c: Velyra em 2 formas (Dríade de Espinhos, raízes que prendem) e a Árvore-Mãe florescendo.

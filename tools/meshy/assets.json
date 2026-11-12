@@ -5140,6 +5140,336 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "enm_lagarto_pantano",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Homem-lagarto do pântano (Retexture)",
+      "file": "assets/enemies/enm_lagarto_pantano/enm_lagarto_pantano.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-d27c-7779-9a86-75d41e05c8fd",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d1f8-f20f-7099-b2cb-306091db3976",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_morto_pantano",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Morto do pântano (Retexture do morto congelado)",
+      "file": "assets/enemies/enm_morto_pantano/enm_morto_pantano.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-d426-7380-a82a-9940ee553f4d",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d1f8-f7e1-7755-b62c-6dba7cc988ba",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_cultista",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cultista do silêncio",
+      "file": "assets/enemies/enm_cultista/enm_cultista.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-d5d4-700d-b079-239adc36aeee",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f8-fc84-7374-b5a7-267bf393d944",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1fc-1fc8-750e-9384-94b76cba064a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_elarion",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Elarion, comerciante élfico",
+      "file": "assets/npcs/npc_elarion/npc_elarion.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-d8b4-7625-a689-2c7d0cd9398b",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-0232-7578-9479-9ea70bdbc3af",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1fc-2cff-7382-90ef-5218d8d833cb",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_faenor",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Faenor, entalhador de lâminas",
+      "file": "assets/npcs/npc_faenor/npc_faenor.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-db2b-7541-a85f-ff2ca46ab004",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-07c4-7401-8639-c9a2705645ca",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1fc-3979-7532-affd-d402138bd01e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_casa_arvore",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Casa élfica na árvore",
+      "file": "assets/environment/env_casa_arvore/env_casa_arvore.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-de96-707c-a326-cf9b526f897b",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-0cee-710f-b1b9-c5ebde624d1c",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_arvore_mae",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Árvore-Mãe murchando",
+      "file": "assets/environment/env_arvore_mae/env_arvore_mae.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-df7d-74c1-8492-ca28f8d679c0",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-12c9-714c-8ebd-a84fefa393b2",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_lanterna_elfica",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lanterna élfica",
+      "file": "assets/props/prp_lanterna_elfica/prp_lanterna_elfica.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-e057-734d-8508-3a2cdf5c01a2",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-1667-7242-aa60-1a03a07371b5",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_cerca_elfica",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cerca élfica de galhos",
+      "file": "assets/environment/env_cerca_elfica/env_cerca_elfica.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-e13d-767e-85df-9efd2b52d868",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-1a92-76da-ac59-fb75f8bcf8f2",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_arvore_pantano",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Mangue do pântano",
+      "file": "assets/props/prp_arvore_pantano/prp_arvore_pantano.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-e221-71e7-802e-f602941d468e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-1dc5-7207-bf2f-4650f5695c89",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_cogumelo_gigante",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cogumelos gigantes",
+      "file": "assets/props/prp_cogumelo_gigante/prp_cogumelo_gigante.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1f6-e2fb-736a-a996-2879f5e99a55",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1f9-21ba-7690-81df-47cbedf4492d",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_ato4a",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Carregamento do Ato 4 (4) e retratos Elarion/Faenor",
+      "file": "assets/ui/ui_ato4a/ui_ato4a.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-e3e2-7340-9075-47632b310cd7",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-e4c0-76a7-98b2-aae4c616ec78",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-e59e-74c7-a6f5-b49a3ab3d60a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1f6-e67d-7638-8c72-bedbe48ea082",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1fe-84ed-71ef-b444-0ea3b85ba560",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1fe-8ac3-71c9-8e72-8a6285ab2773",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

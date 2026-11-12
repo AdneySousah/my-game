@@ -226,6 +226,26 @@
       "barks": ["BARK_BRUNHILD_1"],
       "model": "npc_brunhild"
     },
+    "elarion": {
+      "name": "NPC_ELARION",
+      "service": "shop",
+      "color": "#3ddc97",
+      "voice": 1.15,
+      "portrait": "ui_retrato_elarion",
+      "talk": [{"dialogue": "elarion_idle"}],
+      "barks": ["BARK_ELARION_1"],
+      "model": "npc_elarion"
+    },
+    "faenor": {
+      "name": "NPC_FAENOR",
+      "service": "smith",
+      "color": "#8c5e3c",
+      "voice": 0.8,
+      "portrait": "ui_retrato_faenor",
+      "talk": [{"dialogue": "faenor_idle"}],
+      "barks": ["BARK_FAENOR_1"],
+      "model": "npc_faenor"
+    },
     "brannoc": {
       "name": "NPC_BRANNOC",
       "color": "#5c6f8a",

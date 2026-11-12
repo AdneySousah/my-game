@@ -1,0 +1,59 @@
+{
+  "_comment": "Bordas do Pântano (Fase 6.4a, níveis 48-50): água parada, mangues e vaga-lumes; ao norte, Lys'Thaël entre as árvores. Sul: Mata Úmida.",
+  "id": "bordas_pantano",
+  "name": "MAP_BORDAS_PANTANO",
+  "size": [104, 104],
+  "seed": 221,
+  "biome": {"moss": 1.0},
+  "ground": "#56704a",
+  "grass": {"count": 1200, "root": "#38502f", "tip": "#8fb06a"},
+  "sky": "#8e9fb4",
+  "ambient": 0.55,
+  "sun": 0.9,
+  "sun_color": "#e6e8ff",
+  "patches": {"color": "#3d5634", "count": 170},
+  "spawns": {"from_mata_umida": [0, 46, 0], "from_lysthael": [0, -46, 180]},
+  "exits": [
+    {"to": "mata_umida", "spawn": "from_bordas_pantano", "pos": [0, 52], "size": [10, 2], "label": "MAP_MATA_UMIDA", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "lysthael", "spawn": "from_bordas_pantano", "pos": [0, -52], "size": [10, 2], "label": "MAP_LYSTHAEL", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "bordas_bau_1", "pos": [-30, 16], "yaw": 90, "gold": 3000, "items": {"pot_vida_g": 5, "amuleto": 1, "gema_rubi_3": 1}},
+    {"id": "bordas_bau_2", "pos": [30, -24], "yaw": -90, "gold": 3100, "items": {"pot_folego_g": 3, "broca": 1, "eq_luvas_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "bordas_passarela", "name": "REST_BORDAS_PASSARELA", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "bordas_vagalume", "name": "REST_BORDAS_VAGALUME", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#6d7f5a"}
+  ],
+  "props": [
+    {"id": "prp_arvore_pantano", "pos": [-12, 12], "rot": 30},
+    {"id": "prp_arvore_pantano", "pos": [14, -10], "rot": 120},
+    {"id": "prp_cogumelo_gigante", "pos": [20, 16], "rot": 80},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2210, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2211, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2212, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2213, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2214, "solid": true},
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2215, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore_pantano", "prp_arvore_torta", "prp_junco", "prp_cogumelo_gigante"], "count": 70, "rect": [-45, -47, 45, 47], "spacing": 5, "seed": 222},
+    {"ids": ["prp_junco", "prp_cogumelos", "prp_toco", "prp_junco"], "count": 70, "rect": [-45, -47, 45, 47], "spacing": 3, "seed": 223}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"lagarto_pantano": 3, "morto_pantano": 2}, "level": [48, 49], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"cultista": 3, "lagarto_pantano": 2}, "level": [49, 50], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"morto_pantano": 3, "cultista": 2}, "level": [49, 50], "respawn": 25}
+  ],
+  "rivers": [
+    {"points": [[-30, 4], [-20, 0], [-12, -6]], "width": 7, "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0},
+    {"points": [[18, 26], [28, 22], [36, 14]], "width": 6, "bank_ids": ["prp_junco"], "bank_spacing": 2.5}
+  ]
+}

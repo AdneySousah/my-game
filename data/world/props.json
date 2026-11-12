@@ -255,6 +255,12 @@
     "env_entrada_mina_gelo": {"scene": "res://assets/environment/env_entrada_mina_gelo/env_entrada_mina_gelo.glb", "scale": 5.0, "center_origin": true, "collision": null},
     "env_trono_gelo": {"scene": "res://assets/environment/env_trono_gelo/env_trono_gelo.glb", "scale": 3.6, "center_origin": true, "collision": {"type": "box"}},
     "prp_tumulo_bento": {"scene": "res://assets/props/prp_tumulo_bento/prp_tumulo_bento.glb", "scale": 1.8, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.8}, "light": {"color": "#ffb060", "energy": 0.8, "range": 3.0, "y": 0.5}},
-    "prp_estandarte_gelo": {"scene": "res://assets/props/prp_estandarte_gelo/prp_estandarte_gelo.glb", "scale": 3.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.3}}
+    "prp_estandarte_gelo": {"scene": "res://assets/props/prp_estandarte_gelo/prp_estandarte_gelo.glb", "scale": 3.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.3}},
+    "env_casa_arvore": {"scene": "res://assets/environment/env_casa_arvore/env_casa_arvore.glb", "scale": 8.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 2.2}},
+    "env_arvore_mae": {"scene": "res://assets/environment/env_arvore_mae/env_arvore_mae.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}},
+    "prp_lanterna_elfica": {"scene": "res://assets/props/prp_lanterna_elfica/prp_lanterna_elfica.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.2}, "light": {"color": "#b8ffb0", "energy": 1.4, "range": 6.0, "y": 2.2}},
+    "env_cerca_elfica": {"scene": "res://assets/environment/env_cerca_elfica/env_cerca_elfica.glb", "scale": 3.0, "center_origin": true, "collision": {"type": "box"}, "tile_length": 2.9},
+    "prp_arvore_pantano": {"scene": "res://assets/props/prp_arvore_pantano/prp_arvore_pantano.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "wind": {"sway": 0.08, "flutter": 0.01}},
+    "prp_cogumelo_gigante": {"scene": "res://assets/props/prp_cogumelo_gigante/prp_cogumelo_gigante.glb", "scale": 2.2, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#5fe8d0", "energy": 0.9, "range": 4.0, "y": 1.2}}
   }
 }

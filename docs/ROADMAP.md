@@ -49,6 +49,7 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [~] 6.3a Ato 3 começo: Deserto Rochoso, Planalto Frio, Pinheiral Nevado e Hrimvald; Velho Osk, Brunhild (ferreira) e Bento na cidade; orc da neve, golem de gelo e morto congelado; missão 10 e 2 secundárias (~210 créditos). Em teste na 0.2.1 (código 12)
   - [~] 6.3b Picos Uivantes, Mina de Gelo Esquecida com o Guardião de Gelo, 2º duelo com o Severin (empate) e missão 11 (~66 créditos). Em teste na 0.2.2 (código 13)
   - [~] 6.3c Castelo Ermo, Brannoc em 2 formas (Gigante de Gelo, cristais que curam), cena ilustrada da morte do Bento, salto de 2 anos com o Lio adulto e Hrimvald aquecida; missão 12 fecha o Ato 3 (~260 créditos). Em teste na 0.2.3 (código 14)
+  - [~] 6.4a Ato 4 começo: Vale do Degelo, Mata Úmida, Bordas do Pântano e Lys'Thaël (Árvore-Mãe murchando); Elarion (loja) e Faenor (ferreiro); cultista, homem-lagarto e morto do pântano; missão 13 e 2 secundárias (~260 créditos). Em teste na 0.2.4 (código 15)
   - [~] Melhorias do dono (12/11/2026), na 0.2.0: telas de carregamento com ilustração de cada lugar, efeitos visuais das 8 skills, tela de atributos nova (herói em 3D, totais, prévia do +1), ícones de efeitos ao lado do retrato, passe premium (7/14/30 dias) e 2 visuais à venda (Cavaleiro do Sol e Lâmina da Tempestade). Em teste
 
 ## Pendências para depois do jogo concluído

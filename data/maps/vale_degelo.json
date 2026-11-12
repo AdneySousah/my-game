@@ -1,0 +1,58 @@
+{
+  "_comment": "Vale do Degelo (Fase 6.4a, níveis 44-46): a neve derretendo em riachos, primeiras flores. Sul: Picos Uivantes. Norte: Mata Úmida.",
+  "id": "vale_degelo",
+  "name": "MAP_VALE_DEGELO",
+  "size": [104, 104],
+  "seed": 201,
+  "biome": {"snow": 0.25, "moss": 0.25},
+  "ground": "#93b07e",
+  "grass": {"count": 1600, "root": "#5f8048", "tip": "#cfe3a6"},
+  "sky": "#b6d6e8",
+  "ambient": 0.6,
+  "sun": 1.2,
+  "sun_color": "#fff6e0",
+  "patches": {"color": "#e6edf0", "count": 120},
+  "spawns": {"from_picos": [0, 46, 0], "from_mata_umida": [0, -46, 180]},
+  "exits": [
+    {"to": "picos", "spawn": "from_vale_degelo", "pos": [0, 52], "size": [10, 2], "label": "MAP_PICOS", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "mata_umida", "spawn": "from_vale_degelo", "pos": [0, -52], "size": [10, 2], "label": "MAP_MATA_UMIDA", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "vale_bau_1", "pos": [-30, 12], "yaw": 90, "gold": 2600, "items": {"pot_vida_g": 4, "pot_vento": 1, "gema_ametista_3": 1}},
+    {"id": "vale_bau_2", "pos": [32, -26], "yaw": -90, "gold": 2700, "items": {"pot_folego_g": 3, "broca": 1, "eq_pulseira_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "vale_ponte", "name": "REST_VALE_PONTE", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "vale_cascata", "name": "REST_VALE_CASCATA", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#b9c49a"}
+  ],
+  "props": [
+    {"id": "prp_flores", "pos": [-8, 14]},
+    {"id": "prp_flores", "pos": [12, -6]},
+    {"id": "prp_tronco_caido", "pos": [18, 18], "rot": 40},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2010, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2011, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2012, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2013, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2014, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2015, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_pinheiro", "prp_arvore", "prp_rochedo", "prp_pedra"], "count": 60, "rect": [-45, -47, 45, 47], "spacing": 6, "seed": 202},
+    {"ids": ["prp_flores", "prp_arbusto", "prp_pedrinhas", "prp_junco"], "count": 70, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 203}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"orc_neve": 2, "morto_gelo": 2}, "level": [44, 45], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"cultista": 2, "orc_neve": 2}, "level": [45, 46], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"cultista": 2, "lagarto_pantano": 2}, "level": [45, 46], "respawn": 25}
+  ],
+  "rivers": [
+    {"points": [[-40, -10], [-24, -4], [-14, 6], [-20, 20]], "width": 4, "bank_ids": ["prp_junco", "prp_flores"], "bank_spacing": 3.0}
+  ]
+}

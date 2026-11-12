@@ -23,6 +23,7 @@ func _ready() -> void:
 	await _tower_test()
 	await _north_test()
 	await _castle_test()
+	await _elf_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -649,6 +650,39 @@ func _castle_test() -> void:
 	check(main.player.model.character_id == "hero_lio_adulto", "Lio looks two years older")
 	check(main.map.map_id == "hrimvald", "the jump ends back in Hrimvald")
 	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
+## 6.4a: road to Lys'Thaël (cultists in the damp woods) and the elven city with Elarion
+## (shop) and Faenor (smith).
+func _elf_test() -> void:
+	Session.reset()
+	Session.set_flag("act3_done")
+	Session.set_flag("time_skip")
+	check(Data.quest("main_13").get("requires", []) == ["main_12"], "quest 13 follows Brannoc")
+	Main.start_map = "mata_umida"
+	Main.start_spawn = "from_vale_degelo"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("cultista"), "cultists prowl the damp woods (got %s)" % [kinds.keys()])
+	main.load_map("lysthael", "from_bordas_pantano")
+	await _wait_map(main, "lysthael")
+	await _frames(4)
+	var ids: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("npcs"):
+		ids[str(n.get("npc_id"))] = true
+	check(ids.has("elarion") and ids.has("faenor"), "Elarion and Faenor live in Lys'Thaël (got %s)" % [ids.keys()])
+	check(str(Data.npc("elarion").get("service", "")) == "shop" and str(Data.npc("faenor").get("service", "")) == "smith", "Elarion sells and Faenor forges")
+	for m: String in ["vale_degelo", "mata_umida", "bordas_pantano", "lysthael"]:
+		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
+	check(main.player.model.character_id == "hero_lio_adulto", "after the jump the hero stays older")
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"

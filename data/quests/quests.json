@@ -137,6 +137,36 @@
       "rewards": { "xp": 15000, "gold": 4000, "items": { "pot_vida_g": 6, "eq_espada_epico": 1, "trevo_real": 1 } }
     },
     {
+      "id": "main_13", "type": "main", "name": "QUEST_MAIN_13", "auto": true,
+      "requires": ["main_12"], "min_level": 44,
+      "steps": [
+        { "type": "reach", "map": "lysthael", "pos": [0, 26], "radius": 8, "text": "OBJ_REACH_LYSTHAEL", "dialogue": "main_13_arrive" },
+        { "type": "talk", "npc": "elarion", "dialogue": "main_13_elarion", "text": "OBJ_TALK_ELARION" },
+        { "type": "kill", "enemy": "cultista", "count": 8, "map": "bordas_pantano", "pos": [20, 2], "text": "OBJ_KILL_CULTISTS" },
+        { "type": "talk", "npc": "faenor", "dialogue": "main_13_faenor", "text": "OBJ_TALK_FAENOR" }
+      ],
+      "set_flag": "act4_lysthael", "end_note": "QUEST_ACT4_SOON",
+      "rewards": { "xp": 16000, "gold": 4500, "items": { "pot_vida_g": 6, "eq_calca_epico": 1 } }
+    },
+    {
+      "id": "side_cantos", "type": "side", "name": "QUEST_SIDE_CANTOS", "giver": "elarion", "offer": "side_cantos_offer",
+      "requires": ["main_13"], "min_level": 46,
+      "steps": [
+        { "type": "collect", "map": "mata_umida", "item": "ITEM_PARTITURA", "points": [[-30, 30], [26, 20], [-28, -10], [30, -36]], "text": "OBJ_COLLECT_SONGS" },
+        { "type": "talk", "npc": "elarion", "dialogue": "side_cantos_done", "text": "OBJ_RETURN_ELARION" }
+      ],
+      "rewards": { "gold": 1600, "items": { "pot_vida_g": 5, "trevo_real": 1 } }
+    },
+    {
+      "id": "side_lamina", "type": "side", "name": "QUEST_SIDE_LAMINA", "giver": "faenor", "offer": "side_lamina_offer",
+      "requires": ["main_13"], "min_level": 48,
+      "steps": [
+        { "type": "kill", "enemy": "morto_pantano", "count": 8, "map": "bordas_pantano", "pos": [-14, -26], "text": "OBJ_KILL_SWAMP_DEAD" },
+        { "type": "talk", "npc": "faenor", "dialogue": "side_lamina_done", "text": "OBJ_RETURN_FAENOR" }
+      ],
+      "rewards": { "xp": 5200, "gold": 1800, "items": { "broca_real": 1, "eq_espada_epico": 1 } }
+    },
+    {
       "id": "side_moveis", "type": "side", "name": "QUEST_SIDE_MOVEIS", "giver": "osk", "offer": "side_moveis_offer",
       "requires": ["main_10"], "min_level": 32,
       "steps": [

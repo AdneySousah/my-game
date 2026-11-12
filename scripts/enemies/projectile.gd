@@ -25,7 +25,20 @@ func setup(target: Player, dir: Vector3, speed: float, max_range: float, damage:
 
 func _ready() -> void:
 	rotation.y = atan2(-_dir.x, -_dir.z)
-	if _look == "sand":
+	if _look == "orb":
+		# Shadow orb of the silent cultists.
+		var orb := SphereMesh.new()
+		orb.radius = 0.26
+		orb.height = 0.52
+		add_child(ProtoVisuals.mesh_instance(orb, Color("#7a3fc8"), true))
+		var halo := TorusMesh.new()
+		halo.inner_radius = 0.28
+		halo.outer_radius = 0.38
+		var ring: MeshInstance3D = ProtoVisuals.mesh_instance(halo, Color("#d0a8ff"), true)
+		ring.name = "Spin"
+		ring.rotation_degrees.x = 90.0
+		add_child(ring)
+	elif _look == "sand":
 		# Spinning blade of sand (Sahra).
 		var blade := TorusMesh.new()
 		blade.inner_radius = 0.18

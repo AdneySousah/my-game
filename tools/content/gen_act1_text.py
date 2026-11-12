@@ -388,6 +388,50 @@ DIALOGUES = {
     "brunhild_idle_final": [
         ("brunhild", "Carvão à vontade e um herói de volta. Essa bigorna nunca cantou tão alto. Bora melhorar essa espada?", "Coal galore and a hero back home. This anvil never sang so loud. Shall we improve that sword?"),
     ],
+    # --- Ato 4, missão 13: A floresta em silêncio ---
+    "main_13_arrive": [
+        ("lio", "Lys'Thaël... uma cidade inteira nas árvores. E ninguém fala. Nem um passarinho.", "Lys'Thaël... a whole city in the trees. And nobody speaks. Not even a bird."),
+        ("lio", "Aquela árvore gigante no meio está perdendo as folhas. Dá pra sentir que ela está doente.", "That giant tree in the middle is losing its leaves. You can feel it's sick."),
+        ("lio", "Bento ia dizer que um lugar tão bonito precisa de música. ...Vamos descobrir quem tirou a música daqui.", "Bento would say a place this beautiful needs music. ...Let's find out who took the music away."),
+    ],
+    "main_13_elarion": [
+        ("elarion", "Psiu! Fale baixo, forasteiro. Aqui quem canta, some. Ordem da Arauta Velyra.", "Shh! Keep your voice down, outsider. Here, whoever sings disappears. Herald Velyra's orders."),
+        ("lio", "Proibiram cantar? Por quê?", "They banned singing? Why?"),
+        ("elarion", "Nossos cantos alimentavam a Árvore-Mãe. Sem eles, a Velyra suga a força dela para o céu. E a floresta inteira murcha junto.", "Our songs fed the Mother Tree. Without them, Velyra drains her strength up to the sky. And the whole forest withers with her."),
+        ("elarion", "Os cultistas mascarados vigiam as bordas do pântano. Quem tenta fugir para cantar lá fora não volta.", "The masked cultists watch the swamp's edge. Whoever tries to sneak out to sing never comes back."),
+        ("lio", "Então eu vou lá conversar com eles. Do meu jeito.", "Then I'll go have a word with them. My way."),
+    ],
+    "main_13_faenor": [
+        ("faenor", "Então foi você que espantou os mascarados. A cidade respirou um pouco hoje.", "So you're the one who scared off the masked ones. The city breathed a little today."),
+        ("faenor", "Eu entalho lâminas há trezentos anos. Nunca vi a Árvore-Mãe tão fraca. A Velyra mora na Torre do Vigia, no meio do Pântano das Raízes.", "I've carved blades for three hundred years. I've never seen the Mother Tree so weak. Velyra lives in the Watcher's Tower, in the middle of the Swamp of Roots."),
+        ("faenor", "O caminho para o pântano sai pelo norte da cidade. Agora que os cultistas recuaram, o portão pode abrir.", "The way to the swamp leaves through the north of the city. Now that the cultists fell back, the gate can open."),
+        ("lio", "Obrigado, Faenor. Afia a minha espada enquanto eu ainda tenho uma, tá?", "Thanks, Faenor. Sharpen my sword while I still have one, okay?"),
+    ],
+    "elarion_idle": [
+        ("elarion", "Tenho de tudo um pouco. Só não peça partitura... isso dá cadeia por aqui.", "I've got a bit of everything. Just don't ask for sheet music... that'll get you jailed around here."),
+    ],
+    "faenor_idle": [
+        ("faenor", "Uma lâmina boa é como um canto: precisa de paciência e de alguém que a escute.", "A good blade is like a song: it needs patience and someone to listen to it."),
+    ],
+    # --- Secundária: Os cantos escondidos (Mata Úmida, Elarion) ---
+    "side_cantos_offer": [
+        ("elarion", "Antes da proibição, os bardos esconderam as partituras mais antigas na Mata Úmida. Se a Velyra achar, queima tudo.", "Before the ban, the bards hid the oldest sheet music in the Damp Woods. If Velyra finds it, she'll burn it all."),
+        ("elarion", "Traz as quatro? Um dia a gente vai cantar de novo. E eu quero estar com a letra certa.", "Will you bring all four? One day we'll sing again. And I want to have the right lyrics."),
+        ("lio", "Quatro partituras na mata. Eu só não prometo cantar junto.", "Four sheets in the woods. I just don't promise to sing along."),
+    ],
+    "side_cantos_done": [
+        ("elarion", "Estão todas aqui... até a Canção da Primeira Folha. Obrigado, de verdade.", "They're all here... even the Song of the First Leaf. Thank you, truly."),
+        ("elarion", "Toma, por conta da casa. E um dia eu te ensino o refrão.", "Here, on the house. And one day I'll teach you the chorus."),
+    ],
+    # --- Secundária: Lâmina de raiz (Bordas do Pântano, Faenor) ---
+    "side_lamina_offer": [
+        ("faenor", "Os mortos do pântano carregam raízes da Árvore-Mãe arrancadas pela Velyra. Elas ainda guardam força.", "The swamp dead carry roots of the Mother Tree that Velyra tore out. They still hold strength."),
+        ("faenor", "Derrote oito deles e traga o que sobrar. Faço uma lâmina digna de quem vai enfrentar uma Arauta.", "Defeat eight of them and bring what's left. I'll make a blade worthy of someone facing a Herald."),
+    ],
+    "side_lamina_done": [
+        ("faenor", "Raiz viva, aço velho e trezentos anos de mão firme. Ela é sua.", "Living root, old steel and three hundred years of steady hands. It's yours."),
+        ("lio", "Ela é leve... e quente. Como se estivesse viva.", "It's light... and warm. As if it were alive."),
+    ],
     # --- Secundária: Os móveis do Osk (Pinheiral, Osk) ---
     "side_moveis_offer": [
         ("osk", "Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.", "Lad... may I ask one more thing? All that's left to burn is my front door."),
@@ -504,6 +548,21 @@ TEXTS = {
     "QUEST_SIDE_MOVEIS": ("Os móveis do Osk", "Osk's Furniture"),
     "QUEST_MAIN_11": ("A mina debaixo da montanha", "The Mine Beneath the Mountain"),
     "QUEST_MAIN_12": ("O Arauto do Frio", "The Herald of Cold"),
+    "QUEST_MAIN_13": ("A floresta em silêncio", "The Silent Forest"),
+    "QUEST_ACT4_SOON": ("O portão norte de Lys'Thaël abriu: o Pântano das Raízes e a Torre do Vigia chegam na próxima versão", "Lys'Thaël's north gate is open: the Swamp of Roots and the Watcher's Tower arrive in the next version"),
+    "QUEST_SIDE_CANTOS": ("Os cantos escondidos", "The Hidden Songs"),
+    "QUEST_SIDE_LAMINA": ("Lâmina de raiz", "Root Blade"),
+    "OBJ_REACH_LYSTHAEL": ("Chegue a Lys'Thaël: Picos (leste) → Vale do Degelo → Mata Úmida → Bordas do Pântano", "Reach Lys'Thaël: Peaks (east) → Thaw Valley → Damp Woods → Swamp's Edge"),
+    "OBJ_TALK_ELARION": ("Fale com o Elarion", "Talk to Elarion"),
+    "OBJ_KILL_CULTISTS": ("Derrote cultistas nas Bordas do Pântano: %d/%d", "Defeat cultists at the Swamp's Edge: %d/%d"),
+    "OBJ_TALK_FAENOR": ("Fale com o Faenor", "Talk to Faenor"),
+    "OBJ_COLLECT_SONGS": ("Encontre partituras na Mata Úmida: %d/%d", "Find sheet music in the Damp Woods: %d/%d"),
+    "OBJ_RETURN_ELARION": ("Leve as partituras para o Elarion", "Bring the sheet music to Elarion"),
+    "OBJ_KILL_SWAMP_DEAD": ("Derrote mortos do pântano: %d/%d", "Defeat swamp dead: %d/%d"),
+    "OBJ_RETURN_FAENOR": ("Volte para o Faenor", "Go back to Faenor"),
+    "ITEM_PARTITURA": ("Partitura antiga", "Ancient sheet music"),
+    "BARK_ELARION_1": ("Psiu...", "Shh..."),
+    "BARK_FAENOR_1": ("Hmm.", "Hmm."),
     "QUEST_ACT3_DONE": ("Fim do Ato 3 — Hrimvald está aquecida. O Ato 4 (Lys'Thaël) vem nas próximas versões", "End of Act 3 — Hrimvald is warm again. Act 4 (Lys'Thaël) comes in the next versions"),
     "OBJ_TALK_BENTO_CASTLE": ("Fale com o Bento", "Talk to Bento"),
     "OBJ_REACH_CASTELO": ("Suba ao Castelo Ermo pelo túnel no fundo da Mina de Gelo", "Climb to the Lonely Castle through the tunnel at the bottom of the Ice Mine"),

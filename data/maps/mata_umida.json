@@ -1,0 +1,55 @@
+{
+  "_comment": "Mata Úmida (Fase 6.4a, níveis 46-48): árvores cobertas de musgo, névoa e cogumelos que brilham; os cultistas do silêncio rondam. Sul: Vale do Degelo. Norte: Bordas do Pântano.",
+  "id": "mata_umida",
+  "name": "MAP_MATA_UMIDA",
+  "size": [104, 104],
+  "seed": 211,
+  "biome": {"moss": 0.8},
+  "ground": "#4f7a45",
+  "grass": {"count": 1800, "root": "#2f5530", "tip": "#9cc46e"},
+  "sky": "#9fbfa8",
+  "ambient": 0.55,
+  "sun": 0.95,
+  "sun_color": "#e8ffe0",
+  "patches": {"color": "#3e6436", "count": 160},
+  "spawns": {"from_vale_degelo": [0, 46, 0], "from_bordas_pantano": [0, -46, 180]},
+  "exits": [
+    {"to": "vale_degelo", "spawn": "from_mata_umida", "pos": [0, 52], "size": [10, 2], "label": "MAP_VALE_DEGELO", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "bordas_pantano", "spawn": "from_mata_umida", "pos": [0, -52], "size": [10, 2], "label": "MAP_BORDAS_PANTANO", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "mata_bau_1", "pos": [30, 14], "yaw": -90, "gold": 2800, "items": {"pot_vida_g": 4, "pot_pedra": 1, "gema_safira_3": 1}},
+    {"id": "mata_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 2900, "items": {"pot_folego_g": 3, "trevo": 1, "eq_cinto_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "mata_raiz", "name": "REST_MATA_RAIZ", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "mata_clareira", "name": "REST_MATA_CLAREIRA", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#6f8a55"}
+  ],
+  "props": [
+    {"id": "prp_cogumelo_gigante", "pos": [-14, 10], "rot": 30},
+    {"id": "prp_cogumelo_gigante", "pos": [16, -14], "rot": 200},
+    {"id": "prp_tronco_caido", "pos": [10, 20], "rot": 60},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2110, "solid": true},
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2111, "solid": true},
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2112, "solid": true},
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2113, "solid": true},
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2114, "solid": true},
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2115, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore", "prp_arvore_torta", "prp_arvore", "prp_cogumelo_gigante"], "count": 80, "rect": [-45, -47, 45, 47], "spacing": 5, "seed": 212},
+    {"ids": ["prp_cogumelos", "prp_arbusto", "prp_tronco_caido", "prp_toco"], "count": 60, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 213}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"cultista": 3, "morto_pantano": 2}, "level": [46, 47], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"lagarto_pantano": 3, "cultista": 2}, "level": [47, 48], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"morto_pantano": 3, "cultista": 2}, "level": [47, 48], "respawn": 25}
+  ]
+}

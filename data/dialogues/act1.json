@@ -1153,6 +1153,134 @@
         ]
       ]
     },
+    "main_13_arrive": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_13_ARRIVE_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_13_ARRIVE_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_13_ARRIVE_3"
+        ]
+      ]
+    },
+    "main_13_elarion": {
+      "lines": [
+        [
+          "elarion",
+          "DLG_MAIN_13_ELARION_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_13_ELARION_2"
+        ],
+        [
+          "elarion",
+          "DLG_MAIN_13_ELARION_3"
+        ],
+        [
+          "elarion",
+          "DLG_MAIN_13_ELARION_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_13_ELARION_5"
+        ]
+      ]
+    },
+    "main_13_faenor": {
+      "lines": [
+        [
+          "faenor",
+          "DLG_MAIN_13_FAENOR_1"
+        ],
+        [
+          "faenor",
+          "DLG_MAIN_13_FAENOR_2"
+        ],
+        [
+          "faenor",
+          "DLG_MAIN_13_FAENOR_3"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_13_FAENOR_4"
+        ]
+      ]
+    },
+    "elarion_idle": {
+      "lines": [
+        [
+          "elarion",
+          "DLG_ELARION_IDLE_1"
+        ]
+      ]
+    },
+    "faenor_idle": {
+      "lines": [
+        [
+          "faenor",
+          "DLG_FAENOR_IDLE_1"
+        ]
+      ]
+    },
+    "side_cantos_offer": {
+      "lines": [
+        [
+          "elarion",
+          "DLG_SIDE_CANTOS_OFFER_1"
+        ],
+        [
+          "elarion",
+          "DLG_SIDE_CANTOS_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_CANTOS_OFFER_3"
+        ]
+      ]
+    },
+    "side_cantos_done": {
+      "lines": [
+        [
+          "elarion",
+          "DLG_SIDE_CANTOS_DONE_1"
+        ],
+        [
+          "elarion",
+          "DLG_SIDE_CANTOS_DONE_2"
+        ]
+      ]
+    },
+    "side_lamina_offer": {
+      "lines": [
+        [
+          "faenor",
+          "DLG_SIDE_LAMINA_OFFER_1"
+        ],
+        [
+          "faenor",
+          "DLG_SIDE_LAMINA_OFFER_2"
+        ]
+      ]
+    },
+    "side_lamina_done": {
+      "lines": [
+        [
+          "faenor",
+          "DLG_SIDE_LAMINA_DONE_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_LAMINA_DONE_2"
+        ]
+      ]
+    },
     "side_moveis_offer": {
       "lines": [
         [

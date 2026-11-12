@@ -1,0 +1,68 @@
+{
+  "_comment": "Lys'Thaël (Ato 4): cidade élfica nas árvores, em volta da Árvore-Mãe que murcha. Velyra, a Arauta do Silêncio, proibiu os cantos. Elarion (loja) e Faenor (ferreiro, entalhador de lâminas).",
+  "id": "lysthael",
+  "name": "MAP_LYSTHAEL",
+  "safe": true,
+  "size": [84, 84],
+  "seed": 231,
+  "biome": {"moss": 0.5},
+  "ground": "#6f9a5a",
+  "grass": {"count": 900, "root": "#3f6a36", "tip": "#b8d88a"},
+  "sky": "#c8d8b8",
+  "ambient": 0.62,
+  "sun": 1.0,
+  "sun_color": "#fff2c8",
+  "patches": {"color": "#8aae6a", "count": 110},
+  "spawns": {"start": [0, 28, 0], "from_bordas_pantano": [0, 32, 0], "from_pantano": [0, -30, 180]},
+  "exits": [
+    {"to": "bordas_pantano", "spawn": "from_lysthael", "pos": [0, 38], "size": [8, 2], "label": "MAP_BORDAS_PANTANO", "model": "prp_portal", "model_pos": [0, 39.5]},
+    {"to": "pantano", "spawn": "from_lysthael", "pos": [0, -38], "size": [8, 2], "label": "MAP_PANTANO", "model": "prp_portal", "model_pos": [0, -39.5], "if_flag": "act4_lysthael", "locked_label": "MAP_ROAD_CLOSED"}
+  ],
+  "npcs": [
+    {"id": "elarion", "pos": [-11, 10], "yaw": 40},
+    {"id": "faenor", "pos": [12, 9], "yaw": -40}
+  ],
+  "rest_points": [
+    {"id": "lysthael_pedra", "name": "REST_LYSTHAEL_PEDRA", "pos": [0, 20], "kind": "pedra"}
+  ],
+  "paths": [
+    {"points": [[0, 38], [0, 20], [0, 8]], "width": 3.4, "color": "#b9a27a"},
+    {"points": [[-22, 12], [-8, 12], [8, 12], [22, 12]], "width": 2.8, "color": "#b9a27a"},
+    {"points": [[0, -14], [0, -38]], "width": 3.0, "color": "#b9a27a"}
+  ],
+  "props": [
+    {"id": "env_arvore_mae", "pos": [0, -6], "rot": 0},
+    {"id": "env_casa_arvore", "pos": [-20, -12], "rot": 30},
+    {"id": "env_casa_arvore", "pos": [20, -12], "rot": -30},
+    {"id": "env_casa_arvore", "pos": [-24, 6], "rot": 80},
+    {"id": "env_casa_arvore", "pos": [24, 6], "rot": -80},
+    {"id": "env_casa_arvore", "pos": [-20, 24], "rot": 140},
+    {"id": "env_casa_arvore", "pos": [20, 24], "rot": -140},
+    {"id": "env_casa_arvore", "pos": [-14, -26], "rot": 10},
+    {"id": "env_casa_arvore", "pos": [14, -26], "rot": -10},
+    {"id": "prp_lanterna_elfica", "pos": [-4, 22]},
+    {"id": "prp_lanterna_elfica", "pos": [4, 22]},
+    {"id": "prp_lanterna_elfica", "pos": [-9, 14]},
+    {"id": "prp_lanterna_elfica", "pos": [9, 14]},
+    {"id": "prp_lanterna_elfica", "pos": [-4, -16]},
+    {"id": "prp_lanterna_elfica", "pos": [4, -16]},
+    {"id": "prp_bigorna", "pos": [13.5, 6.5], "rot": 20},
+    {"id": "prp_banco", "pos": [-6, 16], "rot": 90},
+    {"id": "prp_banco", "pos": [6, 16], "rot": -90},
+    {"id": "prp_cogumelo_gigante", "pos": [-28, -22], "rot": 30},
+    {"id": "prp_cogumelo_gigante", "pos": [28, 18], "rot": 140}
+  ],
+  "walls": [
+    {"id": "env_cerca_elfica", "from": [-32, 36], "to": [-4.5, 36]},
+    {"id": "env_cerca_elfica", "from": [4.5, 36], "to": [32, 36]},
+    {"id": "env_cerca_elfica", "from": [34, 34], "to": [34, -34]},
+    {"id": "env_cerca_elfica", "from": [32, -36], "to": [4.5, -36]},
+    {"id": "env_cerca_elfica", "from": [-4.5, -36], "to": [-32, -36]},
+    {"id": "env_cerca_elfica", "from": [-34, -34], "to": [-34, 34]}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore", "prp_flores", "prp_cogumelos"], "count": 18, "rect": [-31, -31, 31, 32], "spacing": 6, "seed": 232},
+    {"ids": ["prp_flores", "prp_arbusto", "prp_cogumelos"], "count": 30, "rect": [-31, -31, 31, 32], "spacing": 3, "seed": 233}
+  ],
+  "ambience": {"villagers": 4, "spots": [[0, 12], [-8, 16], [8, 16], [-16, 0], [16, 0], [0, 24], [-18, 12], [18, 12]], "homes": [[-18, -9], [18, -9], [-21, 6], [21, 6]], "animals": [{"kind": "gato", "pos": [-12, 16]}], "flocks": [[-26, 30, 3]]}
+}

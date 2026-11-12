@@ -12,10 +12,11 @@
   "sun": 1.05,
   "sun_color": "#e3ecff",
   "patches": {"color": "#c9d6e2", "count": 170},
-  "spawns": {"from_hrimvald": [0, 46, 0], "from_mina_gelo": [0, -40, 180]},
+  "spawns": {"from_hrimvald": [0, 46, 0], "from_mina_gelo": [0, -40, 180], "from_vale_degelo": [46, 20, -90]},
   "exits": [
     {"to": "hrimvald", "spawn": "from_picos", "pos": [0, 52], "size": [10, 2], "label": "MAP_HRIMVALD", "model": "prp_portal", "model_pos": [0, 53.5]},
-    {"to": "mina_gelo", "spawn": "from_picos", "pos": [0, -48], "size": [6, 2], "label": "MAP_MINA_GELO", "model": "env_entrada_mina_gelo", "model_pos": [0, -50], "if_flag": "severin_duel_2", "locked_label": "MAP_ROAD_CLOSED"}
+    {"to": "mina_gelo", "spawn": "from_picos", "pos": [0, -48], "size": [6, 2], "label": "MAP_MINA_GELO", "model": "env_entrada_mina_gelo", "model_pos": [0, -50], "if_flag": "severin_duel_2", "locked_label": "MAP_ROAD_CLOSED"},
+    {"to": "vale_degelo", "spawn": "from_picos", "pos": [52, 20], "size": [2, 10], "label": "MAP_VALE_DEGELO", "model": "prp_portal", "model_pos": [53.5, 20], "model_rot": 90, "if_flag": "act3_done", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "chests": [
     {"id": "picos_bau_1", "pos": [-32, 18], "yaw": 90, "gold": 1700, "items": {"pot_vida_g": 4, "pot_pedra": 1, "gema_safira_3": 1}},
@@ -39,7 +40,8 @@
   ],
   "lines": [
     {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 1711, "solid": true},
-    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 1712, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[48, -50], [48, 14]], "seed": 1712, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[48, 26], [48, 50]], "seed": 1812, "solid": true},
     {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[-46, -50], [-5, -50]], "seed": 1713, "solid": true},
     {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[5, -50], [46, -50]], "seed": 1714, "solid": true},
     {"ids": ["prp_rochedo", "prp_pinheiro"], "spacing": 3.0, "scale": [1.3, 1.9], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 1715, "solid": true},

@@ -394,5 +394,10 @@
     "actions": {"idle": {"anim": "Idle", "loop": true}, "combat_idle": {"anim": "Idle", "loop": true}, "walk": {"anim": "Walk", "loop": true}, "run": {"anim": "Run", "loop": true},
       "hit": {"anim": "Hit_Reaction", "start": 0.0, "end": 0.6, "speed": 1.8}, "dead": {"anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3},
       "attack": {"anim": "Punch_Forward_with_Both_Fists", "strike": 0.9, "end": 1.6, "speed": 1.0}, "slam": {"anim": "Charged_Ground_Slam", "strike": 1.63, "end": 2.0, "speed": 1.0},
-      "cast": {"anim": "mage_soell_cast", "strike": 0.6, "end": 2.0, "speed": 1.0}, "taunt": {"anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5}}}
+      "cast": {"anim": "mage_soell_cast", "strike": 0.6, "end": 2.0, "speed": 1.0}, "taunt": {"anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5}}},
+  "enm_lagarto_pantano": {"base": "enm_homem_lagarto", "texture": "res://assets/enemies/enm_lagarto_pantano/enm_lagarto_pantano.png"},
+  "enm_morto_pantano": {"base": "enm_morto_gelo", "texture": "res://assets/enemies/enm_morto_pantano/enm_morto_pantano.png"},
+  "enm_cultista": {"base": "enm_bandido", "scene": "res://assets/enemies/enm_cultista/enm_cultista.glb", "weapon": {"scene": "res://assets/weapons/wpn_khopesh/wpn_khopesh.glb", "bone": "RightHand", "length": 0.6, "grip": 0.38, "rotation_deg": [0, 63.3, 88.8], "offset": [-0.014, 0.085, -0.008]}},
+  "npc_elarion": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_elarion/npc_elarion.glb", "height": 1.8},
+  "npc_faenor": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_faenor/npc_faenor.glb", "height": 1.8}
 }

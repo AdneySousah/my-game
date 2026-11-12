@@ -2,7 +2,8 @@ extends Node3D
 ## Renders a character (CharacterModel) in several actions, for checking animations
 ## and the weapon grip. Optional weapon rotation override to try angles quickly.
 ##   godot --path . --resolution 1600x400 res://tests/character_preview.tscn -- <id> <out.png> [rx,ry,rz] [action:t ...]
-## Special shots: "turn:deg" turns the character, "far:factor" moves the camera back.
+## Special shots: "turn:deg" turns the character, "far:factor" moves the camera back,
+## "attack!:t:lead" plays an enemy strike as in the game (lead = windup in seconds).
 
 const DEFAULT_SHOTS: Array[String] = ["idle:0.5", "attack_0:0.2", "attack_2:0.15", "corte_giratorio:0.2"]
 
@@ -60,7 +61,10 @@ func _ready() -> void:
 			var f: float = float(parts[1])
 			cam.look_at_from_position(Vector3(1.8, 1.5, -2.6) * f, Vector3(0, 0.8 * f, 0))
 			continue
-		if model.config.get("actions", {}).get(parts[0], {}).get("loop", false):
+		# "attack!:t:lead" plays the strike the way enemies do (play_strike, `lead` seconds).
+		if parts[0].ends_with("!"):
+			dur = model.play_strike(parts[0].trim_suffix("!"), float(parts[2]) if parts.size() > 2 else 0.6)
+		elif model.config.get("actions", {}).get(parts[0], {}).get("loop", false):
 			model.set_weapon_drawn(parts[0].begins_with("combat"))
 			model.play_loop(parts[0])
 		else:

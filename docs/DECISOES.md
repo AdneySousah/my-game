@@ -226,3 +226,8 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - Quando se afasta do herói para ter distância, anda de costas (a caminhada tocada ao contrário), sem gastar créditos. Se quiser algo ainda mais real, o Meshy tem "Walk Backward with Bow" (3 créditos).
   - Depois de cada flecha ele rola para o lado, um pouco para longe do herói (~3 m), com o mesmo rolamento do Lio. Distância: `dodge_after` no ataque em `data/enemies/enemies.json`.
   - O tiro carrega 0,5 s mais rápido: o aviso no chão dura 0,3 s (antes 0,8 s) e a animação de puxar a corda foi acelerada para caber nesse tempo.
+
+## Esqueleto da mina (12/11/2026)
+- **Ataque que não aparecia:** o golpe usava só 0,8 s de uma animação de 7,7 s, tocado devagar dentro do tempo do aviso (0,45 s). Na tela só dava para ver o fim do movimento, com a picareta parada. Agora o aviso dura 0,6 s e a animação vai 1,6x mais rápida: ele ergue a picareta acima da cabeça e desce numa picaretada à frente, terminando com a ponta para baixo, no momento do dano.
+- **Pegada:** ganhou os ossos dos dedos; a mão fecha no cabo e o cabo sai do punho inclinado para a frente, como se segura uma picareta (o golpe é de uma mão só, então a outra fica livre).
+- Ferramenta: `character_preview` aceita `ataque!:tempo:aviso` para ver o golpe de um inimigo exatamente como no jogo.

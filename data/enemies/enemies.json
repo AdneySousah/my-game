@@ -101,7 +101,7 @@
       "speed": 3.6,
       "aggro_range": 13.0,
       "attacks": [
-        {"id": "pick", "shape": "front", "range": 1.8, "radius": 1.2, "windup": 0.45, "cooldown": 1.2}
+        {"id": "pick", "shape": "front", "range": 1.8, "radius": 1.2, "windup": 0.6, "cooldown": 1.2}
       ],
       "drops": [
         {"item": "mat_osso_velho", "chance": 0.5},

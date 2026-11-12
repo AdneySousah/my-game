@@ -25,6 +25,8 @@ var store: Dictionary = {}
 var routine: Dictionary = {}
 ## Day/night light per hour and the wind (data/world/daynight.json).
 var daynight: Dictionary = {}
+## Villagers, animals and birds that bring the maps to life (data/world/ambience.json).
+var ambience: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -33,6 +35,7 @@ var _quests_by_id: Dictionary = {}
 func _ready() -> void:
 	progression = _load_json("res://data/progression/progression.json")
 	daynight = _load_json("res://data/world/daynight.json")
+	ambience = _load_json("res://data/world/ambience.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])

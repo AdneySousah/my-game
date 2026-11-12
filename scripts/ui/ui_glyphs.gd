@@ -33,6 +33,7 @@ static func draw(ci: CanvasItem, id: String, c: Vector2, r: float, tint: Color =
 		"quests": _quests(ci, c, r, tint)
 		"routine": _routine(ci, c, r, tint)
 		"store": _store(ci, c, r, tint)
+		"pet": _paw(ci, c, r, tint)
 
 
 static func _poly(ci: CanvasItem, pts: PackedVector2Array, fill: Color, line: Color, w: float) -> void:
@@ -121,6 +122,21 @@ static func _star(ci: CanvasItem, c: Vector2, r: float, fill: Color, line: Color
 		var a: float = -PI * 0.5 + TAU * float(i) / 10.0
 		pts.append(c + Vector2(cos(a), sin(a)) * (r if i % 2 == 0 else r * 0.45))
 	_poly(ci, pts, fill, line, w)
+
+
+## A paw print (petting an animal).
+static func _paw(ci: CanvasItem, c: Vector2, r: float, t: Color) -> void:
+	var w: float = maxf(2.0, r * 0.07)
+	var pad := PackedVector2Array()
+	for i: int in 24:
+		var a: float = TAU * float(i) / 24.0
+		pad.append(c + Vector2(0, r * 0.22) + Vector2(cos(a) * r * 0.42, sin(a) * r * 0.34))
+	_poly(ci, pad, CREAM * t, INK * t, w)
+	for k: int in 4:
+		var a2: float = deg_to_rad(-150.0 + k * 40.0)
+		var toe: Vector2 = c + Vector2(0, r * 0.1) + Vector2(cos(a2), sin(a2)) * r * 0.62
+		ci.draw_circle(toe, r * 0.17, INK * t)
+		ci.draw_circle(toe, r * 0.17 - w, CREAM * t)
 
 
 ## Faceted gem with a sparkle (the real-money shop).

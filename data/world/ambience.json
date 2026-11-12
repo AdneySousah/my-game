@@ -1,0 +1,210 @@
+{
+  "_comment": "Figurantes (Fase 6.2a): moradores que andam, olham, conversam, pescam e dormem à noite; animais com carinho; pássaros. Cada mapa diz onde ficam (campo 'ambience' do mapa). 'recolor': trocas de cor da roupa e do cabelo (hue = giro de cor 0..1, sat = saturação), sorteadas por morador, para os mesmos modelos parecerem gente diferente. Frases: chaves AMB_* no strings.csv, por período do dia e humor.",
+  "villagers": {
+    "models": [
+      "npc_morador_fazendeiro",
+      "npc_moradora_avental",
+      "npc_morador_idoso",
+      "npc_moradora_idosa",
+      "npc_morador_menino",
+      "npc_morador_carregador"
+    ],
+    "recolor": [
+      {
+        "hue": 0.0,
+        "sat": 1.0
+      },
+      {
+        "hue": 0.12,
+        "sat": 1.0
+      },
+      {
+        "hue": 0.33,
+        "sat": 0.9
+      },
+      {
+        "hue": 0.55,
+        "sat": 1.0
+      },
+      {
+        "hue": 0.72,
+        "sat": 0.9
+      },
+      {
+        "hue": 0.88,
+        "sat": 1.0
+      },
+      {
+        "hue": 0.0,
+        "sat": 0.55
+      }
+    ],
+    "names": [
+      "Abel",
+      "Bia",
+      "Caio",
+      "Dora",
+      "Elias",
+      "Fia",
+      "Gustavo",
+      "Hilda",
+      "Ivo",
+      "Joana",
+      "Lúcio",
+      "Mila",
+      "Nico",
+      "Olga",
+      "Pedro",
+      "Quitéria",
+      "Rui",
+      "Sara",
+      "Teo",
+      "Úrsula",
+      "Vítor",
+      "Zélia"
+    ],
+    "moods": [
+      "happy",
+      "tired",
+      "grumpy"
+    ],
+    "barks": {
+      "morning": {
+        "happy": [
+          "AMB_MORNING_HAPPY_1",
+          "AMB_MORNING_HAPPY_2"
+        ],
+        "tired": [
+          "AMB_MORNING_TIRED_1",
+          "AMB_MORNING_TIRED_2"
+        ],
+        "grumpy": [
+          "AMB_MORNING_GRUMPY_1",
+          "AMB_MORNING_GRUMPY_2"
+        ]
+      },
+      "afternoon": {
+        "happy": [
+          "AMB_AFTERNOON_HAPPY_1",
+          "AMB_AFTERNOON_HAPPY_2"
+        ],
+        "tired": [
+          "AMB_AFTERNOON_TIRED_1",
+          "AMB_AFTERNOON_TIRED_2"
+        ],
+        "grumpy": [
+          "AMB_AFTERNOON_GRUMPY_1",
+          "AMB_AFTERNOON_GRUMPY_2"
+        ]
+      },
+      "evening": {
+        "happy": [
+          "AMB_EVENING_HAPPY_1",
+          "AMB_EVENING_HAPPY_2"
+        ],
+        "tired": [
+          "AMB_EVENING_TIRED_1",
+          "AMB_EVENING_TIRED_2"
+        ],
+        "grumpy": [
+          "AMB_EVENING_GRUMPY_1",
+          "AMB_EVENING_GRUMPY_2"
+        ]
+      },
+      "night": {
+        "happy": [
+          "AMB_NIGHT_1"
+        ],
+        "tired": [
+          "AMB_NIGHT_1"
+        ],
+        "grumpy": [
+          "AMB_NIGHT_1"
+        ]
+      }
+    },
+    "fishing_barks": [
+      "AMB_FISH_1",
+      "AMB_FISH_2",
+      "AMB_FISH_3"
+    ],
+    "walk_speed": 1.3,
+    "sleep_from": 22.0,
+    "wake_at": 6.0,
+    "rod": {
+      "rotation_deg": [
+        0,
+        -90,
+        25
+      ],
+      "offset": [
+        0.15,
+        0.6,
+        -0.7
+      ],
+      "scale": 2.0
+    }
+  },
+  "animals": {
+    "cachorro": {
+      "model": "npc_cachorro",
+      "height": 0.75,
+      "speed": 1.8,
+      "small": true,
+      "pet": [
+        "AMB_PET_DOG_1",
+        "AMB_PET_DOG_2",
+        "AMB_PET_DOG_3"
+      ],
+      "sfx": "pet_dog",
+      "motion": {
+        "leg": 0.32,
+        "tail": 0.6,
+        "wag": 9.0
+      },
+      "scale": 0.8
+    },
+    "gato": {
+      "model": "npc_gato",
+      "height": 0.55,
+      "speed": 1.4,
+      "small": true,
+      "pet": [
+        "AMB_PET_CAT_1",
+        "AMB_PET_CAT_2",
+        "AMB_PET_CAT_3"
+      ],
+      "sfx": "pet_cat",
+      "motion": {
+        "leg": 0.3,
+        "tail": 0.5,
+        "wag": 4.0
+      },
+      "scale": 0.55
+    },
+    "vaca": {
+      "model": "npc_vaca",
+      "height": 1.7,
+      "speed": 0.8,
+      "small": false,
+      "pet": [
+        "AMB_PET_COW_1",
+        "AMB_PET_COW_2",
+        "AMB_PET_COW_3"
+      ],
+      "sfx": "pet_cow",
+      "motion": {
+        "leg": 0.3,
+        "tail": 0.35,
+        "wag": 3.0
+      },
+      "scale": 2.3
+    }
+  },
+  "bird": {
+    "model": "npc_passaro",
+    "length": 0.7,
+    "flee_range": 6.0,
+    "fly_speed": 7.0
+  }
+}

@@ -79,6 +79,7 @@ func _ready() -> void:
 	_bark.outline_size = 26
 	_bark.position.y = _height + 0.8
 	_bark.modulate.a = 0.0
+	_bark.outline_modulate.a = 0.0
 	add_child(_bark)
 
 
@@ -135,10 +136,12 @@ func _show_bark(text: String) -> void:
 	_bark.text = text
 	if _bark_tween:
 		_bark_tween.kill()
-	_bark_tween = create_tween()
+	_bark_tween = create_tween().set_parallel()
 	_bark_tween.tween_property(_bark, "modulate:a", 1.0, 0.25)
-	_bark_tween.tween_interval(2.6)
-	_bark_tween.tween_property(_bark, "modulate:a", 0.0, 0.4)
+	_bark_tween.tween_property(_bark, "outline_modulate:a", 1.0, 0.25)
+	_bark_tween.chain().tween_interval(2.6)
+	_bark_tween.chain().tween_property(_bark, "modulate:a", 0.0, 0.4)
+	_bark_tween.parallel().tween_property(_bark, "outline_modulate:a", 0.0, 0.4)
 
 
 func _label3d(size: int, color: Color) -> Label3D:

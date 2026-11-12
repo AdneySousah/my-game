@@ -18,6 +18,7 @@ func _ready() -> void:
 	await _bot_test()
 	await _world_test()
 	await _road_test()
+	await _ambience_test()
 	await _quest_test()
 	await _boss_test()
 	await _save_test()
@@ -423,6 +424,47 @@ func _road_test() -> void:
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
+
+
+## Villagers, animals and birds (stage 6.2a): there by day, home at night, petting works.
+func _ambience_test() -> void:
+	Session.reset()
+	Session.day_hour = 10.0
+	Main.start_map = "pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	var villagers: Array = get_tree().get_nodes_in_group("villagers")
+	check(villagers.size() == 7, "Pradoluz has 7 villagers (got %d)" % villagers.size())
+	var names: Dictionary = {}
+	for v: Node in villagers:
+		names[(v as Villager).display_name] = true
+	check(names.size() == villagers.size(), "every villager has a different name")
+	check(get_tree().get_nodes_in_group("animals").size() == 2 and get_tree().get_nodes_in_group("birds").size() >= 4, "a dog, a cat and birds live in the village")
+	var dog: Animal = null
+	for n: Node in get_tree().get_nodes_in_group("animals"):
+		if (n as Animal).kind == "cachorro":
+			dog = n as Animal
+	main.player.global_position = dog.global_position + Vector3(1.0, 0, 0.0)
+	await _frames(3)
+	check(main.hud.interact_button_visible() and main.hud.is_talk_on_attack(), "next to the dog the attack button becomes 'pet'")
+	main.talk_to_nearby()
+	await _frames(2)
+	check(main.get("_petting") and not main.player.can_act(), "petting plays the hero's gesture")
+	await _frames(240)
+	check(not main.get("_petting"), "after petting the hero is free again")
+	Session.day_hour = 23.5
+	main.load_map("pradoluz", "start")
+	await _wait_map(main, "pradoluz")
+	await _frames(5)
+	var awake: int = 0
+	for v: Node in get_tree().get_nodes_in_group("villagers"):
+		if (v as Node3D).visible:
+			awake += 1
+	check(awake == 0, "at night the villagers are home (visible: %d)" % awake)
+	Session.day_hour = 10.0
+	main.queue_free()
+	await _frames(2)
 
 
 ## Quest pickups of the current map are not inside a prop (rock, tree, cart).

@@ -78,8 +78,12 @@ def spent_this_cycle(db: dict, today: date) -> int:
 
 
 def available(db: dict, today: date) -> int:
+    """Monthly credits left plus the bought credits that never expire ("extra_credits").
+    Meshy spends the monthly ones first; after a cycle ends, update extra_credits with the
+    real balance (meshy_check_balance: permanent_credits)."""
     b = db["budget"]
-    return b["monthly_credits"] - b["reserve"] - spent_this_cycle(db, today)
+    monthly_left = max(0, b["monthly_credits"] - spent_this_cycle(db, today))
+    return monthly_left + int(b.get("extra_credits", 0)) - b["reserve"]
 
 
 def cmd_report(db: dict, _: argparse.Namespace) -> None:

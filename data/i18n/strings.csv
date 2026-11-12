@@ -631,3 +631,35 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+AMB_MORNING_HAPPY_1,Bom dia! O sol hoje veio caprichado.,Good morning! The sun really showed up today.
+AMB_MORNING_HAPPY_2,Cheirinho de pão no ar... ou é sonho meu?,Smell of bread in the air... or am I dreaming?
+AMB_MORNING_TIRED_1,Cedo demais pra existir.,Too early to exist.
+AMB_MORNING_TIRED_2,*bocejo* Já é de manhã?,*yawn* Morning already?
+AMB_MORNING_GRUMPY_1,O galo cantou às quatro. QUATRO.,The rooster crowed at four. FOUR.
+AMB_MORNING_GRUMPY_2,Nem vem falar comigo antes do chá.,Don't talk to me before my tea.
+AMB_AFTERNOON_HAPPY_1,Dia bonito pra não fazer nada.,Lovely day to do nothing.
+AMB_AFTERNOON_HAPPY_2,"Ô, herói! Tudo certo por aí?","Hey, hero! All good out there?"
+AMB_AFTERNOON_TIRED_1,Esse calor derrete até a vontade.,This heat melts even my will.
+AMB_AFTERNOON_TIRED_2,Só mais um pouquinho e eu sento.,Just a little more and I'll sit down.
+AMB_AFTERNOON_GRUMPY_1,Hmpf. Turista com espada.,Hmph. Tourist with a sword.
+AMB_AFTERNOON_GRUMPY_2,"Sai da frente, tô com pressa.","Out of the way, I'm in a hurry."
+AMB_EVENING_HAPPY_1,"Que pôr do sol, hein?","What a sunset, huh?"
+AMB_EVENING_HAPPY_2,Hoje o jantar é sopa. De novo. Oba!,Soup for dinner. Again. Yay!
+AMB_EVENING_TIRED_1,Meus pés pedem cama.,My feet are begging for bed.
+AMB_EVENING_TIRED_2,Que dia comprido...,What a long day...
+AMB_EVENING_GRUMPY_1,Escureceu e ninguém acendeu o lampião.,It's dark and nobody lit the lamp.
+AMB_EVENING_GRUMPY_2,Amanhã eu reclamo mais.,Tomorrow I'll complain some more.
+AMB_NIGHT_1,"Já é tarde, vou pra casa.","It's late, I'm heading home."
+AMB_FISH_1,Shhh... você vai espantar os peixes.,Shhh... you'll scare the fish.
+AMB_FISH_2,"Hoje sai um peixão, eu sinto.","Today I'll catch a big one, I can feel it."
+AMB_FISH_3,Três horas e nem uma beliscada.,Three hours and not a single nibble.
+AMB_PET_DOG_1,Quem é um bom garoto? É você!,Who's a good boy? You are!
+AMB_PET_DOG_2,"Calma, calma! Não precisa lamber a mão toda.","Easy, easy! No need to lick my whole hand."
+AMB_PET_DOG_3,Esse rabo vai sair voando de tanto abanar.,That tail's going to fly off from all the wagging.
+AMB_PET_CAT_1,Ronrona feito chaleira.,Purring like a kettle.
+AMB_PET_CAT_2,Ele deixou! Isso é quase uma honra.,He allowed it! That's almost an honor.
+AMB_PET_CAT_3,Atrás da orelha é o ponto certo.,Behind the ear is the sweet spot.
+AMB_PET_COW_1,Ela parece gostar de você... ou do seu cheiro de pão.,She seems to like you... or your bread smell.
+AMB_PET_COW_2,Muuu pra você também.,Moo to you too.
+AMB_PET_COW_3,"Vaca calma, vila feliz.","Calm cow, happy village."
+HUD_PET,Acariciar,Pet

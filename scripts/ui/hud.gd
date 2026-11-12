@@ -315,7 +315,7 @@ func _update_boss_bar() -> void:
 func show_interact_button(kind: String) -> void:
 	_interact_kind = kind
 	_interact_shown = kind != ""
-	_talk_btn.visible = kind != "" and kind != "talk"
+	_talk_btn.visible = kind != "" and kind != "talk" and kind != "pet"
 	if _talk_btn.visible:
 		var key: String = "HUD_OPEN" if kind == "open" else "HUD_PICK_UP"
 		# Phones have no E key: the button shows just the word.
@@ -333,11 +333,12 @@ func is_talk_on_attack() -> bool:
 
 
 func _update_talk_mode() -> void:
-	var want: bool = _interact_shown and _interact_kind == "talk" and player != null and not player.in_combat()
-	if want == _talk_on_attack:
+	var want: bool = _interact_shown and _interact_kind in ["talk", "pet"] and player != null and not player.in_combat()
+	var glyph: String = _interact_kind if want else ""
+	if want == _talk_on_attack and _attack_btn.glyph == glyph:
 		return
 	_talk_on_attack = want
-	_attack_btn.glyph = "talk" if want else ""
+	_attack_btn.glyph = glyph
 	_attack_btn.set_action("" if want else "attack")
 
 

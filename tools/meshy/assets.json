@@ -2,7 +2,9 @@
   "budget": {
     "monthly_credits": 3000,
     "reserve": 300,
-    "cycle_start_day": 4
+    "cycle_start_day": 4,
+    "extra_credits": 3350,
+    "extra_note": "Recarga de 12/11/2026 (créditos permanentes). Saldo real: meshy_check_balance."
   },
   "assets": [
     {
@@ -168,6 +170,12 @@
           "type": "animation",
           "credits": 21,
           "task_id": "01a1cf8b-4ddd-73dd-a0b7-0146e79ec8a3",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1d0f6-1ddc-7768-810e-f894da172b46",
           "date": "2026-11-12"
         }
       ],
@@ -2969,6 +2977,334 @@
       ],
       "notes": [
         "2026-11-12: 2026-11-12: Retexture com UV original; usa esqueleto, animações e marreta do enm_orc (characters.json base)"
+      ]
+    },
+    {
+      "id": "npc_morador_fazendeiro",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_morador_fazendeiro/npc_morador_fazendeiro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-4341-72f4-8a17-ca4f1190b92d",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-9394-74ca-9520-09d9a2908615",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f7-ec09-7625-ac24-f4f0522bc146",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 18,
+          "task_id": "01a1d0f9-8b4e-7503-9e96-2693f56b4f3d",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_moradora_avental",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_moradora_avental/npc_moradora_avental.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-46d1-7491-acf5-25b9925707d0",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-9963-768d-ab71-9bc69ee44218",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f8-023e-733b-be29-34829737d53d",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_morador_idoso",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_morador_idoso/npc_morador_idoso.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-49b1-73a4-b4b7-843300f4f5af",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-9eec-7547-beaf-5cd9d24014f9",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f8-103e-702f-8364-dbc9860d527d",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_moradora_idosa",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_moradora_idosa/npc_moradora_idosa.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-4cc0-7189-911b-07269b31c9b1",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-a3c1-7582-9187-285f1c1fd702",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f8-2165-749c-8f0d-038cd57e1eac",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_morador_menino",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_morador_menino/npc_morador_menino.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-4ff2-7483-910a-52b2774eac80",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-a887-7224-a074-c43839ee0e68",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f8-2ffe-774c-b2de-e973b53414d5",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_morador_carregador",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a morador figurante (imagem + Image to 3D t2.5 + rig; animações compartilhadas)",
+      "file": "assets/npcs/npc_morador_carregador/npc_morador_carregador.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-552a-70d8-baf4-914fbcfb18e7",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-aeb0-72d2-a8ed-b8495a5c0e06",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d0f8-43ac-7329-9529-7d65e62b57ff",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_cachorro",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a animal sem esqueleto (imagem + Image to 3D t2; animado por shader)",
+      "file": "assets/npcs/npc_cachorro/npc_cachorro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-5890-734b-a978-c323aecaff2e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-b473-74fc-92d3-a442e5de1146",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_gato",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a animal sem esqueleto (imagem + Image to 3D t2; animado por shader)",
+      "file": "assets/npcs/npc_gato/npc_gato.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-5972-7752-9961-158487111b30",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-b9ab-713d-96c7-d55cd448274f",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_vaca",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a animal sem esqueleto (imagem + Image to 3D t2; animado por shader)",
+      "file": "assets/npcs/npc_vaca/npc_vaca.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-5a50-7466-9576-1c593e5b5fd0",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-c10a-71ad-8c71-e60422408c92",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "npc_passaro",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a animal sem esqueleto (imagem + Image to 3D t2; animado por shader)",
+      "file": "assets/npcs/npc_passaro/npc_passaro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-5b2f-7228-8ed4-a2c76f7cb342",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-c685-7422-a239-36ccb640bcd2",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
+      ]
+    },
+    {
+      "id": "wpn_vara_pesca",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2a vara de pesca dos moradores",
+      "file": "assets/weapons/wpn_vara_pesca/wpn_vara_pesca.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0f4-5c11-75ec-a851-6039bfd5b885",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0f5-cb84-779e-9943-c1097d01f57e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
       ]
     }
   ]

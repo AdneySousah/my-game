@@ -108,6 +108,7 @@ func _ready() -> void:
 	_build_paths()
 	_build_rest_points()
 	_build_npcs()
+	_build_ambience()
 	_build_chests()
 	_build_rivers()
 	_build_walls()
@@ -329,6 +330,60 @@ func _build_npcs() -> void:
 
 
 ## Treasure chests: {"id", "pos", "yaw", "gold", "items": {id: n}}.
+## Villagers, animals and birds that bring the map to life (map "ambience"):
+## {"villagers": n, "spots": [[x,z]...], "homes": [[x,z]...], "fish": [[x,z,yaw]...],
+##  "animals": [{"kind": "cachorro", "pos": [x,z]}], "flocks": [[x,z,count]...],
+##  "perches": [[x,y,z]...], "perch_birds": n}.
+func _build_ambience() -> void:
+	var amb: Dictionary = data.get("ambience", {})
+	if amb.is_empty():
+		return
+	var cfg: Dictionary = Data.ambience.get("villagers", {})
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(data.get("seed", 1)) * 977
+	var models: Array = cfg.get("models", [])
+	var colors: Array = cfg.get("recolor", [{}])
+	var names: Array = (cfg.get("names", []) as Array).duplicate()
+	var moods: Array = cfg.get("moods", ["happy"])
+	var spots: Array[Vector3] = []
+	for pt: Array in amb.get("spots", []):
+		spots.append(_v(pt))
+	var homes: Array = amb.get("homes", [])
+	var fish: Array = amb.get("fish", [])
+	for i: int in int(amb.get("villagers", 0)):
+		if models.is_empty() or spots.is_empty():
+			break
+		var vname: String = str(names.pop_at(rng.randi() % names.size())) if not names.is_empty() else "?"
+		# The first of each model keeps its own colours; the others get a new outfit.
+		var color: Dictionary = {} if i < models.size() else colors[rng.randi() % colors.size()]
+		var v := Villager.new()
+		v.setup(str(models[i % models.size()]), color, vname, str(moods[rng.randi() % moods.size()]), rng.randi(), player, self)
+		v.spots = spots
+		v.home = _v(homes[i % homes.size()]) if not homes.is_empty() else spots[0]
+		if i < fish.size():
+			var f: Array = fish[i]
+			v.fish_spot = {"pos": Vector3(float(f[0]), 0, float(f[1])), "yaw": float(f[2]) if f.size() > 2 else 0.0}
+		v.position = spots[rng.randi() % spots.size()]
+		add_child(v)
+		_clear_spots.append(v.position)
+	for a: Dictionary in amb.get("animals", []):
+		var an := Animal.new()
+		an.setup(str(a["kind"]), _v(a["pos"]), rng.randi(), player, self)
+		add_child(an)
+	for f: Array in amb.get("flocks", []):
+		var flock := BirdFlock.new()
+		add_child(flock)
+		flock.setup(Vector3(float(f[0]), 0, float(f[1])), int(f[2]) if f.size() > 2 else 4, rng.randi(), player)
+	var perches: Array[Vector3] = []
+	for pt: Array in amb.get("perches", []):
+		perches.append(Vector3(float(pt[0]), float(pt[1]), float(pt[2])))
+	for i: int in mini(int(amb.get("perch_birds", 0)), perches.size()):
+		var b := Bird.new()
+		b.setup(perches[i], rng.randi(), player)
+		b.perches = perches
+		add_child(b)
+
+
 func _build_chests() -> void:
 	for c: Dictionary in data.get("chests", []):
 		var chest := Chest.new()

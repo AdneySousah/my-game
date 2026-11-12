@@ -24,6 +24,8 @@ var _changing: bool = false
 var _at_point: RestPoint
 var _near_npc: Npc
 var _near_chest: Chest
+var _near_animal: Animal
+var _petting: bool = false
 var _interact_kind: String = ""
 var _autosave_timer: float = 0.0
 ## Seconds of healing left at the current rest point.
@@ -184,6 +186,9 @@ func talk_to_nearby() -> void:
 	if _near_chest and not _talking and not _changing:
 		_open_chest(_near_chest)
 		return
+	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
+		_pet(_near_animal)
+		return
 	if _near_npc == null or _talking or _changing:
 		return
 	var npc: Npc = _near_npc
@@ -207,6 +212,19 @@ func talk_to_nearby() -> void:
 		match str(Data.npc(npc.npc_id).get("service", "")):
 			"smith": hud.open_smith()
 			"shop": hud.open_shop(npc.npc_id)
+
+
+## The hero pets an animal: crouches for small ones, stays standing for big ones.
+func _pet(an: Animal) -> void:
+	if not player.can_act():
+		return
+	_petting = true
+	player.face_towards(an.global_position)
+	var small: bool = an.pet(player.global_position)
+	var seconds: float = player.model.play_action("pet_low" if small else "pet_high") if player.model else 1.5
+	player.lock(maxf(seconds, 1.0))
+	await get_tree().create_timer(maxf(seconds, 1.0), false).timeout
+	_petting = false
 
 
 ## Where the tracked quest points in this map (the target, or the exit towards it).
@@ -332,7 +350,14 @@ func _update_quest_contacts() -> void:
 		if not c.opened and c.in_range(pos):
 			_near_chest = c
 			break
-	var kind: String = "" if _talking else ("open" if _near_chest else ("talk" if nearest else ""))
+	_near_animal = null
+	if nearest == null and _near_chest == null:
+		for n: Node in get_tree().get_nodes_in_group("animals"):
+			var an := n as Animal
+			if an and an.is_inside_tree() and an.can_pet(pos):
+				_near_animal = an
+				break
+	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("talk" if nearest else ("pet" if _near_animal else "")))
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)

@@ -73,6 +73,37 @@ static func config_for(id: String) -> Dictionary:
 	return cfg
 
 
+## Clothes and hair in other colours (villagers): {"hue": 0..1, "sat": multiplier}.
+## Set before the model enters the tree.
+var recolor: Dictionary = {}
+static var _recolor_shader: Shader
+
+
+func _apply_recolor() -> void:
+	if _recolor_shader == null:
+		_recolor_shader = load("res://assets/shaders/toon_recolor.gdshader")
+	for mi: MeshInstance3D in _meshes:
+		if mi.mesh == null:
+			continue
+		for i: int in mi.mesh.get_surface_count():
+			var src: BaseMaterial3D = mi.get_active_material(i) as BaseMaterial3D
+			if src == null:
+				continue
+			var m := ShaderMaterial.new()
+			m.shader = _recolor_shader
+			m.set_shader_parameter("albedo_color", src.albedo_color)
+			m.set_shader_parameter("use_texture", src.albedo_texture != null)
+			if src.albedo_texture:
+				m.set_shader_parameter("albedo_tex", src.albedo_texture)
+			if src.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR:
+				m.set_shader_parameter("alpha_scissor", src.alpha_scissor_threshold)
+			m.set_shader_parameter("rim", ToonStyle.RIM)
+			m.set_shader_parameter("rim_tint", ToonStyle.RIM_TINT)
+			m.set_shader_parameter("hue_shift", float(recolor.get("hue", 0.0)))
+			m.set_shader_parameter("sat_mult", float(recolor.get("sat", 1.0)))
+			mi.set_surface_override_material(i, m)
+
+
 ## Puts `tex` as the colour picture of every material of the model (copies, not shared).
 func _swap_texture(tex: Texture2D) -> void:
 	if tex == null:
@@ -106,6 +137,8 @@ func _ready() -> void:
 	if config.has("texture"):
 		_swap_texture(load(str(config["texture"])) as Texture2D)
 	ToonStyle.apply(model)
+	if not recolor.is_empty():
+		_apply_recolor()
 	_overlay = ToonStyle.flash_overlay()
 	for mi: MeshInstance3D in _meshes:
 		mi.material_overlay = _overlay

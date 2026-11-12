@@ -6,13 +6,21 @@ extends RefCounted
 const RIM: float = 0.35
 const RIM_TINT: float = 0.4
 
+## Set by GameMap: the current map has a biome look (dry, snow, moss), so props use the
+## biome shader instead of the plain toon material. Characters never do.
+static var biome_props: bool = false
+
 static var _converted: Dictionary = {}
 static var _wind_mats: Dictionary = {}
 static var _wind_shader: Shader
 
 
 ## Converts all materials under `root` to the toon look (shared per source material).
-static func apply(root: Node) -> void:
+## `prop` = scenery: in a map with a biome it gets the biome shader (no sway).
+static func apply(root: Node, prop: bool = false) -> void:
+	if prop and biome_props:
+		apply_wind(root, {"sway": 0.0, "flutter": 0.0}, 1.0)
+		return
 	for n: Node in root.find_children("*", "MeshInstance3D", true, false):
 		var mi := n as MeshInstance3D
 		if mi.mesh == null:

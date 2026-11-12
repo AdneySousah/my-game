@@ -66,3 +66,15 @@ wind_strength={
 "type": "float",
 "value": 1.0
 }
+biome_dry={
+"type": "float",
+"value": 0.0
+}
+biome_snow={
+"type": "float",
+"value": 0.0
+}
+biome_moss={
+"type": "float",
+"value": 0.0
+}

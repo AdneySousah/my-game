@@ -39,7 +39,7 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 	if wind is Dictionary:
 		ToonStyle.apply_wind(model, wind, _aabb(model, body).size.y)
 	else:
-		ToonStyle.apply(model)
+		ToonStyle.apply(model, true)
 	var col: Variant = p.get("collision")
 	if col is Dictionary:
 		var shape := CollisionShape3D.new()

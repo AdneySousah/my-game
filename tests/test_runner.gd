@@ -17,6 +17,7 @@ func _ready() -> void:
 	_unit_tests()
 	await _bot_test()
 	await _world_test()
+	await _road_test()
 	await _quest_test()
 	await _boss_test()
 	await _save_test()
@@ -296,11 +297,16 @@ func _world_test() -> void:
 	await _frames(5)
 	check(Session.is_activated("pradoluz_pedra"), "touching the waystone activates it")
 
-	# Walk into the north exit -> Whispering Forest.
-	var exit_pos: Vector3 = Vector3(0, 0, -34)
-	main.player.global_position = exit_pos
+	# Walk into the north exit -> Pradoluz Fields -> Whispering Forest.
+	main.player.global_position = Vector3(0, 0, -34)
+	await _wait_map(main, "campos")
+	check(main.map.map_id == "campos", "north exit of the village leads to the fields")
+	await _frames(5)
+	check(get_tree().get_nodes_in_group("enemies").size() > 0, "the fields have enemies")
+	check(main.player.global_position.distance_to(Vector3(0, 0, 44)) < 1.5, "hero arrives at the fields entrance")
+	main.player.global_position = Vector3(0, 0, -50)
 	await _wait_map(main, "floresta")
-	check(main.map.map_id == "floresta", "north exit leads to the forest")
+	check(main.map.map_id == "floresta", "north exit of the fields leads to the forest")
 	await _frames(5)
 	check(get_tree().get_nodes_in_group("enemies").size() > 0, "forest has enemies")
 	check(main.player.global_position.distance_to(Vector3(0, 0, 49)) < 1.5, "hero arrives at the forest entrance")
@@ -373,6 +379,45 @@ func _world_test() -> void:
 	check(main.map.map_id == "floresta" and not main.player.is_dead(), "after dying the hero returns to the last camp")
 	main.queue_free()
 	await _frames(2)
+
+
+## The road past the forest (stage 6.1): closed until Gorvan, dry biome, "coming soon" dunes.
+func _road_test() -> void:
+	Session.reset()
+	Main.start_map = "floresta"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(5)
+	check(not ToonStyle.biome_props, "the forest has no biome look")
+	check(main.map.get("_locked_exits").size() == 1, "the road to the dry grove starts closed")
+	main.player.global_position = Vector3(30, 0, -53)
+	await _frames(30)
+	check(main.map.map_id == "floresta", "the closed road does not let the hero through")
+	Session.set_flag("gorvan_defeated")
+	main.map.refresh_locks()
+	check(main.map.get("_locked_exits").is_empty(), "after Gorvan the road opens")
+	main.player.global_position = Vector3(30, 0, -55)
+	await _wait_map(main, "bosque_seco")
+	check(main.map.map_id == "bosque_seco", "the north-east exit leads to the dry grove")
+	check(ToonStyle.biome_props and is_equal_approx(float((main.map.data.get("biome", {}) as Dictionary).get("dry", 0.0)), 0.6), "the dry grove turns the leaves dry")
+	await _frames(5)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("bandido_estrada"), "road bandits live in the dry grove (got %s)" % [kinds.keys()])
+	main.player.global_position = Vector3(0, 0, -52)
+	await _wait_map(main, "estepe")
+	check(main.map.map_id == "estepe", "the grove leads to the stone steppe")
+	check(main.map.get("_locked_exits").size() == 1, "the dunes are closed (coming soon)")
+	var signs: Array = main.map.find_children("*", "Label3D", true, false).filter(func(l: Node) -> bool: return (l as Label3D).text == tr("MAP_COMING_SOON"))
+	check(signs.size() == 1, "a sign says the dunes are coming soon")
+	main.load_map("floresta", "from_bosque_seco")
+	await _wait_map(main, "floresta")
+	check(not ToonStyle.biome_props, "back in the forest the biome look is off")
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
 
 
 ## NPCs, dialogue and the Act 1 quests (stage 4.2).

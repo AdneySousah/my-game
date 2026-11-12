@@ -381,6 +381,106 @@
         ]
       ]
     },
+    "side_juca_offer": {
+      "lines": [
+        [
+          "juca",
+          "DLG_SIDE_JUCA_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_JUCA_OFFER_2"
+        ],
+        [
+          "juca",
+          "DLG_SIDE_JUCA_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_JUCA_OFFER_4"
+        ]
+      ]
+    },
+    "side_juca_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_JUCA_DONE_1"
+        ],
+        [
+          "juca",
+          "DLG_SIDE_JUCA_DONE_2"
+        ]
+      ]
+    },
+    "side_farinha_offer": {
+      "lines": [
+        [
+          "celeste",
+          "DLG_SIDE_FARINHA_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_FARINHA_OFFER_2"
+        ],
+        [
+          "celeste",
+          "DLG_SIDE_FARINHA_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_FARINHA_OFFER_4"
+        ]
+      ]
+    },
+    "side_farinha_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_FARINHA_DONE_1"
+        ],
+        [
+          "celeste",
+          "DLG_SIDE_FARINHA_DONE_2"
+        ]
+      ]
+    },
+    "side_estrada_offer": {
+      "lines": [
+        [
+          "bram",
+          "DLG_SIDE_ESTRADA_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_ESTRADA_OFFER_2"
+        ],
+        [
+          "bram",
+          "DLG_SIDE_ESTRADA_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_ESTRADA_OFFER_4"
+        ]
+      ]
+    },
+    "side_estrada_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_ESTRADA_DONE_1"
+        ],
+        [
+          "bram",
+          "DLG_SIDE_ESTRADA_DONE_2"
+        ],
+        [
+          "bram",
+          "DLG_SIDE_ESTRADA_DONE_3"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

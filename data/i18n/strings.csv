@@ -295,6 +295,22 @@ HUD_PICK_UP_TAP,Pegar,Pick up
 HUD_SHIELD_BROKEN,Escudo quebrado! Ataque agora!,Shield broken! Strike now!
 HUD_SHIELD_BACK,O escudo voltou!,The shield is back!
 HUD_BOSS_SHIELDED,%d%% · escudo,%d%% · shield
+SKILLS_PICK_HINT,Toque no + de uma skill para ver o que ela faz e escolher o botão.,Tap the + on a skill to see what it does and pick its button.
+SKILLS_PICK_SLOT,Colocar no botão:,Put it on button:
+SKILLS_LOCKED_AT,abre no nível %d,unlocks at level %d
+MAP_CAMPOS,Campos de Pradoluz,Pradoluz Fields
+MAP_BOSQUE_SECO,Bosque Seco,Withered Grove
+MAP_ESTEPE,Estepe de Pedra,Stone Steppe
+MAP_DUNAS,Dunas de Ossos,Bone Dunes
+MAP_ROAD_CLOSED,Estrada fechada,Road closed
+MAP_COMING_SOON,Em breve,Coming soon
+REST_CAMPOS_SITIO,Sítio do Poço Velho,Old Well Farm
+REST_BOSQUE_ENTRADA,Trilha das Folhas Secas,Dry Leaf Trail
+REST_BOSQUE_ACAMPAMENTO,Acampamento Abandonado,Abandoned Camp
+REST_ESTEPE_PEDRA,Pedra do Viajante,Traveler's Stone
+REST_ESTEPE_MIRANTE,Mirante das Dunas,Dune Lookout
+ENEMY_BANDIDO_ESTRADA,Bandido da estrada,Road bandit
+ENEMY_ORC_SAQUEADOR,Orc saqueador,Orc raider
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -320,7 +336,7 @@ QUEST_MAIN_03,Um cozinheiro na floresta,A Cook in the Woods
 QUEST_MAIN_04,Os corvos da mina,The Crows of the Mine
 QUEST_MAIN_05,O Arauto da Colheita,The Herald of the Harvest
 QUEST_MAIN_06,Mais cinco desses,Five More Like Him
-QUEST_MORE_SOON,Fim do Ato 1 — a jornada continua na próxima versão,End of Act 1 — the journey continues in the next version
+QUEST_MORE_SOON,"Fim do Ato 1 — a estrada do nordeste, depois da floresta, está aberta",End of Act 1 — the north-east road past the forest is open
 OBJ_KILL_GOLEM,Derrote o Golem de pedra no fundo da mina,Defeat the stone golem in the depths of the mine
 OBJ_KILL_GORVAN,Derrote Gorvan no Celeiro do Tributo,Defeat Gorvan in the Tribute Granary
 OBJ_RETURN_VILLAGE,Volte para a Marta em Pradoluz,Return to Marta in Pradoluz
@@ -328,10 +344,13 @@ OBJ_TALK_BRAM_END,Converse com o Bram,Talk to Bram
 OBJ_TALK_BENTO_END,Converse com o Bento,Talk to Bento
 QUEST_SIDE_TRIGO,Trigo escondido,Hidden Wheat
 QUEST_SIDE_FERRO,O ferro do Tobias,Tobias's Iron
+QUEST_SIDE_JUCA,O sítio do Juca,Juca's Farm
+QUEST_SIDE_FARINHA,A farinha da Celeste,Celeste's Flour
+QUEST_SIDE_ESTRADA,A estrada do nordeste,The North-East Road
 OBJ_TALK_MARTA,Fale com a Marta,Talk to Marta
 OBJ_TALK_BRAM,Encontre o Mestre Bram no treino,Meet Master Bram at training
 OBJ_KILL_BANDIDOS,Derrote bandidos na floresta: %d/%d,Defeat bandits in the forest: %d/%d
-OBJ_RETURN_BRAM,Volte ao Mestre Bram,Return to Master Bram
+OBJ_RETURN_BRAM,Volte ao Mestre Bram,Go back to Master Bram
 OBJ_FIND_BENTO,Encontre o homem na clareira da floresta,Find the man in the forest clearing
 OBJ_KILL_ORCS_BENTO,Derrote os orcs da clareira: %d/%d,Defeat the clearing orcs: %d/%d
 OBJ_TALK_BENTO,Fale com o Bento,Talk to Bento
@@ -344,6 +363,12 @@ OBJ_RETURN_NINA,Leve as ervas para a Nina,Bring the herbs to Nina
 OBJ_KILL_ORCS,Derrote orcs na floresta: %d/%d,Defeat orcs in the forest: %d/%d
 OBJ_FIND_IRON,Ache o caixote de ferro na trilha norte,Find the iron crate on the north trail
 OBJ_RETURN_TOBIAS,Devolva o ferro ao Tobias,Return the iron to Tobias
+OBJ_KILL_FARM_BANDITS,Expulse os bandidos do sítio nos Campos: %d/%d,Drive the bandits off the farm in the Fields: %d/%d
+OBJ_FIND_HORSESHOE,Ache a ferradura da sorte perto da carroça,Find the lucky horseshoe by the cart
+OBJ_RETURN_JUCA,Leve a ferradura para o Velho Juca,Bring the horseshoe to Old Juca
+OBJ_COLLECT_FLOUR,Recolha os sacos de farinha nos Campos: %d/%d,Pick up the flour sacks in the Fields: %d/%d
+OBJ_RETURN_CELESTE,Leve a farinha para a Dona Celeste,Bring the flour to Mrs. Celeste
+OBJ_KILL_ROAD_BANDITS,Derrote bandidos da estrada no Bosque Seco: %d/%d,Defeat road bandits in the Withered Grove: %d/%d
 PRO_1,"Há dezenove invernos, em Pradoluz, uma vila de fazendeiros esquecida pelo resto do mundo...","Nineteen winters ago, in Pradoluz, a farming village the rest of the world had forgotten..."
 PRO_2,...nasceu um menino. E ele brilhava.,...a boy was born. And he shone.
 PRO_3,"A luz dourada iluminou a vila inteira, como se o sol tivesse nascido no meio da noite.","The golden light lit up the whole village, as if the sun had risen in the middle of the night."
@@ -367,6 +392,10 @@ OPT_SFX,Efeitos,Effects
 OPT_VOICE,Vozes,Voices
 OPT_CREDITS,Créditos,Credits
 OPT_MENU,Opções,Options
+OPT_SHOW_FPS,Mostrar quadros por segundo,Show frames per second
+OPT_FPS_LIMIT,Limite de quadros,Frame limit
+OPT_ON,Ligado,On
+OPT_OFF,Desligado,Off
 OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
@@ -397,6 +426,8 @@ ITEM_AMULETO,Amuleto de Proteção,Protection Amulet
 ITEM_AMULETO_DESC,"Se o fortalecimento falhar, o equipamento não quebra nem some.","If strengthening fails, the gear neither breaks nor vanishes."
 ITEM_ERVA_ORVALHO,Erva-de-orvalho,Dewleaf
 ITEM_CAIXOTE_FERRO,Caixote de ferro,Iron crate
+ITEM_FERRADURA_SORTE,Ferradura da sorte,Lucky horseshoe
+ITEM_SACO_FARINHA,Saco de farinha,Sack of flour
 ITEM_EQ_ESPADA_APRENDIZ,Espada de aprendiz,Apprentice sword
 ITEM_EQ_ESPADA_COMUM,Espada de ferro,Iron sword
 ITEM_EQ_ELMO_COMUM,Elmo de ferro,Iron helmet
@@ -542,6 +573,25 @@ DLG_SIDE_FERRO_OFFER_4,Orcs ladrões de ferro. Vou trazer o seu caixote. E uns o
 DLG_SIDE_FERRO_DONE_1,"Um caixote de ferro, entregue em mãos. Pesado, hein?","One crate of iron, hand-delivered. Heavy, huh?"
 DLG_SIDE_FERRO_DONE_2,"O-obrigado! Quando eu voltar a f-forjar, a sua espada vai ser a p-primeira da fila.","Th-thank you! When I'm back at the f-forge, your sword will be f-first in line."
 DLG_SIDE_FERRO_DONE_3,"Nada de colher de pau, então!","No more wooden spoon, then!"
+DLG_SIDE_JUCA_OFFER_1,"No meu tempo, o sítio do leste, lá nos Campos, era o mais bonito de Pradoluz. Hoje é ninho de bandido.","Back in my day, the east farm out in the Fields was the prettiest in Pradoluz. Now it's a bandit nest."
+DLG_SIDE_JUCA_OFFER_2,"O sítio da carroça velha, perto dos fenos?","The one with the old cart, by the haystacks?"
+DLG_SIDE_JUCA_OFFER_3,Esse mesmo. E levaram a minha ferradura da sorte. Sessenta anos pendurada na porta!,That's the one. And they took my lucky horseshoe. Sixty years hanging on the door!
+DLG_SIDE_JUCA_OFFER_4,"Bandidos fora, ferradura de volta. Pode deixar, seu Juca.","Bandits out, horseshoe back. Leave it to me, Mr. Juca."
+DLG_SIDE_JUCA_DONE_1,A sua ferradura. E o sítio está livre de bandidos.,Your horseshoe. And the farm is free of bandits.
+DLG_SIDE_JUCA_DONE_2,"Hehe! Agora sim. No meu tempo a gente pagava com galinha, mas toma umas moedas.","Heh! Now that's more like it. Back in my day we paid in chickens, but here, take some coins."
+DLG_SIDE_FARINHA_OFFER_1,"Ai, Lio... a carroça da farinha tombou nos Campos quando os bandidos atacaram. Os sacos ficaram espalhados.","Oh, Lio... the flour cart tipped over in the Fields when the bandits attacked. The sacks got scattered."
+DLG_SIDE_FARINHA_OFFER_2,Quantos sacos?,How many sacks?
+DLG_SIDE_FARINHA_OFFER_3,"Três. Sem farinha, nada de pão doce na loja.","Three. No flour, no sweet bread in the shop."
+DLG_SIDE_FARINHA_OFFER_4,Pão doce? Já estou indo.,Sweet bread? I'm already on my way.
+DLG_SIDE_FARINHA_DONE_1,"Três sacos de farinha. Meio amassados, mas inteiros.","Three sacks of flour. A bit squashed, but whole."
+DLG_SIDE_FARINHA_DONE_2,"Que menino bom! Toma, e passa aqui amanhã que tem pão doce saindo do forno.","What a good boy! Here, and come by tomorrow, there'll be sweet bread fresh from the oven."
+DLG_SIDE_ESTRADA_OFFER_1,"Antes de você sumir no mundo: a estrada do nordeste, depois da floresta, está tomada por bandidos.","Before you vanish into the world: the north-east road, past the forest, is overrun by bandits."
+DLG_SIDE_ESTRADA_OFFER_2,Os mesmos que roubavam aqui?,The same ones who robbed us here?
+DLG_SIDE_ESTRADA_OFFER_3,Piores. Gente que perdeu tudo pros Arautos e agora rouba quem passa. Limpe o caminho e volte inteiro.,Worse. People who lost everything to the Heralds and now rob whoever passes. Clear the road and come back in one piece.
+DLG_SIDE_ESTRADA_OFFER_4,Inteiro é o meu tamanho favorito.,One piece is my favorite size.
+DLG_SIDE_ESTRADA_DONE_1,Estrada limpa. Eles nem eram tão durões.,Road's clear. They weren't even that tough.
+DLG_SIDE_ESTRADA_DONE_2,Mentira. Tem um corte novo na sua bochecha.,Liar. There's a new cut on your cheek.
+DLG_SIDE_ESTRADA_DONE_3,Toma. Foi minha quando eu tinha a sua idade. Hoje fica melhor em você.,Here. It was mine when I was your age. It suits you better now.
 DLG_MARTA_IDLE_FED_1,A despensa está cheia pela primeira vez em anos. Come mais um pedaço!,The pantry is full for the first time in years. Have another slice!
 DLG_BRAM_IDLE_FED_1,"Não fique se achando. Mas... bom trabalho, moleque.","Don't get cocky. But... good work, kid."
 DLG_CELESTE_IDLE_FED_1,"Prateleiras cheias de novo! Logo, logo eu reabro o armazém, querido.","Full shelves again! Very soon I'll reopen the store, dear."
@@ -559,6 +609,3 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-SKILLS_PICK_HINT,Toque no + de uma skill para ver o que ela faz e escolher o botão.,Tap the + on a skill to see what it does and pick its button.
-SKILLS_PICK_SLOT,Colocar no botão:,Put it on button:
-SKILLS_LOCKED_AT,abre no nível %d,unlocks at level %d

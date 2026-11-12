@@ -1,23 +1,28 @@
 {
-  "_comment": "Floresta Sussurrante (Ato 1, níveis 1-8). Fechada por rios (leste/oeste) e paredões de rocha (norte/sul). Sul: Pradoluz. Norte: Mina dos Corvos. Inimigos provisórios até a etapa 4.3.",
+  "_comment": "Floresta Sussurrante (Ato 1, níveis 3-8). Fechada por rios (leste/oeste) e paredões de rocha (norte/sul). Sul: Campos de Pradoluz. Norte: Mina dos Corvos. Nordeste: Bosque Seco (abre depois do Gorvan).",
   "id": "floresta",
   "name": "MAP_FLORESTA",
   "size": [100, 112],
   "seed": 31,
   "ground": "#5aa043",
-  "grass": { "count": 4500, "root": "#4c9038", "tip": "#9fd963" },
+  "grass": {"count": 4500, "root": "#4c9038", "tip": "#9fd963"},
   "sky": "#7fc4e8",
   "ambient": 0.5,
   "sun": 1.0,
-  "patches": { "color": "#4c8f38", "count": 110},
-  "spawns": { "from_pradoluz": [0, 49, 0], "from_mina": [0, -47, 180] },
+  "patches": {"color": "#4c8f38", "count": 110},
+  "spawns": {
+    "from_pradoluz": [0, 49, 0],
+    "from_mina": [0, -47, 180],
+    "from_campos": [0, 49, 0],
+    "from_bosque_seco": [30, -47, 180]
+  },
   "exits": [
     {
-      "to": "pradoluz",
+      "to": "campos",
       "spawn": "from_floresta",
       "pos": [0, 55],
       "size": [10, 2],
-      "label": "MAP_PRADOLUZ",
+      "label": "MAP_CAMPOS",
       "model": "prp_portal",
       "model_pos": [0, 56.5]
     },
@@ -29,44 +34,63 @@
       "label": "MAP_MINA",
       "model": "prp_portal",
       "model_pos": [0, -56.5]
+    },
+    {
+      "to": "bosque_seco",
+      "spawn": "from_floresta",
+      "pos": [30, -55],
+      "size": [10, 2],
+      "label": "MAP_BOSQUE_SECO",
+      "model": "prp_portal",
+      "model_pos": [30, -56.5],
+      "if_flag": "gorvan_defeated",
+      "locked_label": "MAP_ROAD_CLOSED"
     }
   ],
   "npcs": [
     {"id": "bento", "pos": [-21, 10], "yaw": -120, "unless_flag": "bento_joined"}
   ],
   "chests": [
-    {"id": "floresta_bau_1", "pos": [30, -30], "yaw": -30, "gold": 60, "items": {"pot_vida_p": 3, "pot_folego_p": 2, "eq_botas_comum": 1}},
-    {"id": "floresta_bau_2", "pos": [-36, 6], "yaw": 90, "gold": 90, "items": {"pot_forca": 1, "broca": 1, "eq_luvas_comum": 1, "gema_rubi_1": 1}}
+    {
+      "id": "floresta_bau_1",
+      "pos": [30, -30],
+      "yaw": -30,
+      "gold": 60,
+      "items": {"pot_vida_p": 3, "pot_folego_p": 2, "eq_botas_comum": 1}
+    },
+    {
+      "id": "floresta_bau_2",
+      "pos": [-36, 6],
+      "yaw": 90,
+      "gold": 90,
+      "items": {"pot_forca": 1, "broca": 1, "eq_luvas_comum": 1, "gema_rubi_1": 1}
+    }
   ],
   "rest_points": [
-    { "id": "floresta_entrada", "name": "REST_FLORESTA_ENTRADA", "pos": [5, 44], "kind": "fogueira" },
-    {
-      "id": "floresta_clareira",
-      "name": "REST_FLORESTA_CLAREIRA",
-      "pos": [-15, 6],
-      "kind": "fogueira"
-    }
+    {"id": "floresta_entrada", "name": "REST_FLORESTA_ENTRADA", "pos": [5, 44], "kind": "fogueira"},
+    {"id": "floresta_clareira", "name": "REST_FLORESTA_CLAREIRA", "pos": [-15, 6], "kind": "fogueira"}
   ],
   "paths": [
     {
       "points": [[0, 55], [0, 40], [-12, 26], [-11, 8], [6, -4], [18, -18], [13, -34], [0, -46], [0, -55]],
       "width": 3.4,
       "color": "#b8955c"
-    }
+    },
+    {"points": [[13, -34], [24, -42], [30, -48], [30, -55]], "width": 2.6, "color": "#b8955c"}
   ],
   "props": [
-    { "id": "prp_placa", "pos": [3, 50], "rot": 0},
-    { "id": "prp_cerca_quebrada", "pos": [-4, 47], "rot": 10},
-    { "id": "prp_cerca_quebrada", "pos": [4.4, 37], "rot": -30},
-    { "id": "prp_tronco_caido", "pos": [-17, 2], "rot": 40},
-    { "id": "prp_cogumelos", "pos": [-12, 3] },
-    { "id": "prp_cogumelos", "pos": [-18, 9] },
-    { "id": "prp_cogumelos", "pos": [-13, 10] },
-    { "id": "prp_toco", "pos": [-19, 6] },
-    { "id": "prp_carroca", "pos": [12, -8], "rot": 70},
-    { "id": "prp_caixa", "pos": [14.2, -7.2] },
-    { "id": "prp_barril", "pos": [13, -10.4] },
-    { "id": "prp_placa", "pos": [4, -48], "rot": 180}
+    {"id": "prp_placa", "pos": [3, 50], "rot": 0},
+    {"id": "prp_cerca_quebrada", "pos": [-4, 47], "rot": 10},
+    {"id": "prp_cerca_quebrada", "pos": [4.4, 37], "rot": -30},
+    {"id": "prp_tronco_caido", "pos": [-17, 2], "rot": 40},
+    {"id": "prp_cogumelos", "pos": [-12, 3]},
+    {"id": "prp_cogumelos", "pos": [-18, 9]},
+    {"id": "prp_cogumelos", "pos": [-13, 10]},
+    {"id": "prp_toco", "pos": [-19, 6]},
+    {"id": "prp_carroca", "pos": [12, -8], "rot": 70},
+    {"id": "prp_caixa", "pos": [14.2, -7.2]},
+    {"id": "prp_barril", "pos": [13, -10.4]},
+    {"id": "prp_placa", "pos": [4, -48], "rot": 180}
   ],
   "scatter": [
     {
@@ -92,9 +116,23 @@
     }
   ],
   "enemy_zones": [
-    {"pos": [-7, 32], "radius": 8, "max": 3, "types": {"bandido": 1}, "level": [1, 3], "respawn": 25},
-    {"pos": [-2, 14], "radius": 9, "max": 4, "types": {"bandido": 3, "arqueiro": 1, "orc": 1}, "level": [3, 5], "respawn": 25},
-    {"pos": [14, -12], "radius": 9, "max": 4, "types": {"bandido": 2, "arqueiro": 1, "orc": 2}, "level": [5, 7], "respawn": 25},
+    {"pos": [-7, 32], "radius": 8, "max": 3, "types": {"bandido": 1}, "level": [3, 4], "respawn": 25},
+    {
+      "pos": [-2, 14],
+      "radius": 9,
+      "max": 4,
+      "types": {"bandido": 3, "arqueiro": 1, "orc": 1},
+      "level": [3, 5],
+      "respawn": 25
+    },
+    {
+      "pos": [14, -12],
+      "radius": 9,
+      "max": 4,
+      "types": {"bandido": 2, "arqueiro": 1, "orc": 2},
+      "level": [5, 7],
+      "respawn": 25
+    },
     {"pos": [6, -38], "radius": 8, "max": 4, "types": {"arqueiro": 1, "orc": 2}, "level": [6, 8], "respawn": 25}
   ],
   "rivers": [
@@ -126,7 +164,7 @@
       "spacing": 3.2,
       "scale": [0.85, 1.25],
       "jitter": 0.5,
-      "points": [[6, -52], [42, -52]],
+      "points": [[6, -52], [23, -52]],
       "seed": 12,
       "solid": true
     },
@@ -146,6 +184,15 @@
       "jitter": 0.5,
       "points": [[6, 52], [42, 52]],
       "seed": 14,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[37, -52], [42, -52]],
+      "seed": 15,
       "solid": true
     }
   ]

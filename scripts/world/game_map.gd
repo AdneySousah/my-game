@@ -33,7 +33,12 @@ var _path_segments: Array = []
 
 static func load_data(id: String) -> Dictionary:
 	if not _data_cache.has(id):
-		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string("res://data/maps/%s.json" % id))
+		# A map that is not built yet (e.g. the dunes behind a "coming soon" exit) is empty.
+		var path: String = "res://data/maps/%s.json" % id
+		if not FileAccess.file_exists(path):
+			_data_cache[id] = {}
+			return _data_cache[id]
+		var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(path))
 		_data_cache[id] = parsed if parsed is Dictionary else {}
 	return _data_cache[id]
 
@@ -168,6 +173,14 @@ func _build_environment() -> void:
 	var wd: Array = wind.get("dir", [1.0, 0.35])
 	RenderingServer.global_shader_parameter_set("wind_dir", Vector2(float(wd[0]), float(wd[1])))
 	RenderingServer.global_shader_parameter_set("wind_strength", 0.0 if is_indoor() else float(wind.get("strength", 1.0)))
+	# Biome look of the props: "biome": {"dry": 0..1, "snow": 0..1, "moss": 0..1}.
+	var biome: Dictionary = data.get("biome", {})
+	var any_biome: bool = false
+	for k: String in ["dry", "snow", "moss"]:
+		var v: float = float(biome.get(k, 0.0))
+		RenderingServer.global_shader_parameter_set("biome_" + k, v)
+		any_biome = any_biome or v > 0.0
+	ToonStyle.biome_props = any_biome
 	if not is_indoor():
 		var cycle := DayNight.new()
 		cycle.name = "DayNight"
@@ -538,7 +551,19 @@ func _build_exits() -> void:
 			var sz: Array = e.get("size", [6, 2])
 			var rot: float = deg_to_rad(float(e.get("rot", 0)))
 			var half := Vector3(cos(rot), 0, -sin(rot)) * float(sz[0]) * 0.5
-			_locked_exits[i] = _invisible_wall(_v(e["pos"]) - half, _v(e["pos"]) + half, 1.5)
+			var wall: StaticBody3D = _invisible_wall(_v(e["pos"]) - half, _v(e["pos"]) + half, 1.5)
+			_locked_exits[i] = wall
+			# Optional sign over a closed way ("Estrada fechada", "Em breve"); goes with the wall.
+			if e.has("locked_label"):
+				var label := Label3D.new()
+				label.text = tr(str(e["locked_label"]))
+				label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+				label.font_size = 40
+				label.outline_size = 10
+				label.pixel_size = 0.01
+				label.modulate = Color("#ffd9a0")
+				label.position = _v(e["pos"]) - wall.position + Vector3(0, 2.2, 0)
+				wall.add_child(label)
 			continue
 		_open_exit(e)
 

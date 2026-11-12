@@ -79,6 +79,34 @@
         { "type": "talk", "npc": "tobias", "dialogue": "side_ferro_done", "text": "OBJ_RETURN_TOBIAS" }
       ],
       "rewards": { "xp": 320, "gold": 70, "items": { "trevo": 1, "eq_espada_raro": 1 } }
+    },
+    {
+      "id": "side_juca", "type": "side", "name": "QUEST_SIDE_JUCA", "giver": "juca", "offer": "side_juca_offer",
+      "requires": ["main_01"], "min_level": 2,
+      "steps": [
+        { "type": "kill", "enemy": "bandido", "count": 3, "map": "campos", "pos": [22, 2], "text": "OBJ_KILL_FARM_BANDITS" },
+        { "type": "collect", "map": "campos", "item": "ITEM_FERRADURA_SORTE", "points": [[34, -2.5]], "text": "OBJ_FIND_HORSESHOE" },
+        { "type": "talk", "npc": "juca", "dialogue": "side_juca_done", "text": "OBJ_RETURN_JUCA" }
+      ],
+      "rewards": { "xp": 160, "gold": 40, "items": { "pot_vida_p": 3, "eq_elmo_comum": 1 } }
+    },
+    {
+      "id": "side_farinha", "type": "side", "name": "QUEST_SIDE_FARINHA", "giver": "celeste", "offer": "side_farinha_offer",
+      "requires": ["main_01"], "min_level": 1,
+      "steps": [
+        { "type": "collect", "map": "campos", "item": "ITEM_SACO_FARINHA", "points": [[-10, -13], [10, 30], [-20, -38]], "text": "OBJ_COLLECT_FLOUR" },
+        { "type": "talk", "npc": "celeste", "dialogue": "side_farinha_done", "text": "OBJ_RETURN_CELESTE" }
+      ],
+      "rewards": { "xp": 120, "gold": 60, "items": { "pot_folego_p": 3, "pot_vida_p": 2 } }
+    },
+    {
+      "id": "side_estrada", "type": "side", "name": "QUEST_SIDE_ESTRADA", "giver": "bram", "offer": "side_estrada_offer",
+      "requires": ["main_06"], "min_level": 12,
+      "steps": [
+        { "type": "kill", "enemy": "bandido_estrada", "count": 5, "map": "bosque_seco", "pos": [16, 0], "text": "OBJ_KILL_ROAD_BANDITS" },
+        { "type": "talk", "npc": "bram", "dialogue": "side_estrada_done", "text": "OBJ_RETURN_BRAM" }
+      ],
+      "rewards": { "xp": 600, "gold": 300, "items": { "pot_vida_m": 3, "eq_peitoral_raro": 1 } }
     }
   ]
 }

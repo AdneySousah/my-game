@@ -1,0 +1,179 @@
+{
+  "_comment": "Estepe de Pedra (Fase 6.1, níveis 15-18): capim seco e arenito, o deserto chegando. Sul: Bosque Seco. Norte: Dunas de Ossos (Ato 2, fechado). Bordas: paredões de rocha.",
+  "id": "estepe",
+  "name": "MAP_ESTEPE",
+  "size": [104, 104],
+  "seed": 81,
+  "biome": {"dry": 0.9},
+  "ground": "#bda766",
+  "grass": {"count": 1600, "root": "#a69050", "tip": "#e6d48e"},
+  "sky": "#a9d4ea",
+  "ambient": 0.6,
+  "sun": 1.25,
+  "sun_color": "#fff0cc",
+  "patches": {"color": "#cdb87a", "count": 140},
+  "spawns": {"from_bosque_seco": [0, 46, 0], "from_dunas": [0, -46, 180]},
+  "exits": [
+    {
+      "to": "bosque_seco",
+      "spawn": "from_estepe",
+      "pos": [0, 52],
+      "size": [10, 2],
+      "label": "MAP_BOSQUE_SECO",
+      "model": "prp_portal",
+      "model_pos": [0, 53.5]
+    },
+    {
+      "to": "dunas",
+      "spawn": "from_estepe",
+      "pos": [0, -52],
+      "size": [10, 2],
+      "label": "MAP_DUNAS",
+      "model": "prp_portal",
+      "model_pos": [0, -53.5],
+      "if_flag": "act2_open",
+      "locked_label": "MAP_COMING_SOON"
+    }
+  ],
+  "chests": [
+    {
+      "id": "estepe_bau_1",
+      "pos": [30, 10],
+      "yaw": -90,
+      "gold": 380,
+      "items": {"pot_vida_m": 3, "pot_pedra": 1, "gema_rubi_1": 2}
+    },
+    {
+      "id": "estepe_bau_2",
+      "pos": [-28, -30],
+      "yaw": 45,
+      "gold": 450,
+      "items": {"pot_vida_g": 1, "amuleto": 1, "eq_botas_raro": 1}
+    }
+  ],
+  "rest_points": [
+    {"id": "estepe_pedra", "name": "REST_ESTEPE_PEDRA", "pos": [-6, 30], "kind": "fogueira"},
+    {"id": "estepe_mirante", "name": "REST_ESTEPE_MIRANTE", "pos": [6, -38], "kind": "fogueira"}
+  ],
+  "paths": [
+    {
+      "points": [[0, 52], [0, 38], [-8, 24], [-4, 6], [10, -8], [14, -24], [4, -38], [0, -52]],
+      "width": 3.6,
+      "color": "#d8c28a"
+    }
+  ],
+  "props": [
+    {"id": "prp_placa", "pos": [3, 48], "rot": 0},
+    {"id": "prp_carroca", "pos": [18, -12], "rot": 100},
+    {"id": "prp_caixa", "pos": [20, -9]},
+    {"id": "prp_barril", "pos": [16, -15.5]},
+    {"id": "prp_cerca_quebrada", "pos": [-14, 10], "rot": 70},
+    {"id": "prp_tronco_caido", "pos": [-20, -16], "rot": 20},
+    {"id": "prp_placa", "pos": [5, -47], "rot": 180}
+  ],
+  "lines": [
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[-48, -50], [-48, 50]],
+      "seed": 21,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[48, -50], [48, 50]],
+      "seed": 22,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[-46, -50], [-6, -50]],
+      "seed": 23,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[6, -50], [46, -50]],
+      "seed": 24,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[-46, 50], [-6, 50]],
+      "seed": 25,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra"],
+      "spacing": 3.2,
+      "scale": [0.85, 1.25],
+      "jitter": 0.5,
+      "points": [[6, 50], [46, 50]],
+      "seed": 26,
+      "solid": true
+    }
+  ],
+  "scatter": [
+    {
+      "ids": ["prp_rochedo", "prp_rochedo", "prp_pedra", "prp_pedra"],
+      "count": 55,
+      "rect": [-45, -47, 45, 47],
+      "spacing": 6,
+      "seed": 82
+    },
+    {
+      "ids": ["prp_arbusto", "prp_arbusto", "prp_toco", "prp_arvore_torta"],
+      "count": 40,
+      "rect": [-45, -47, 45, 47],
+      "spacing": 5,
+      "seed": 83
+    },
+    {
+      "ids": ["prp_pedra", "prp_arbusto", "prp_toco"],
+      "count": 60,
+      "rect": [-45, -47, 45, 47],
+      "spacing": 2.5,
+      "seed": 84
+    }
+  ],
+  "enemy_zones": [
+    {
+      "pos": [-8, 16],
+      "radius": 10,
+      "max": 4,
+      "types": {"bandido_estrada": 2, "arqueiro": 2},
+      "level": [15, 16],
+      "respawn": 25
+    },
+    {
+      "pos": [16, -16],
+      "radius": 10,
+      "max": 5,
+      "types": {"bandido_estrada": 2, "arqueiro": 1, "orc_saqueador": 2},
+      "level": [16, 17],
+      "respawn": 25
+    },
+    {
+      "pos": [-4, -34],
+      "radius": 9,
+      "max": 4,
+      "types": {"orc_saqueador": 2, "arqueiro": 2},
+      "level": [17, 18],
+      "respawn": 25
+    }
+  ]
+}

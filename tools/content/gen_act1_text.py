@@ -137,6 +137,40 @@ DIALOGUES = {
         ("tobias", "O-obrigado! Quando eu voltar a f-forjar, a sua espada vai ser a p-primeira da fila.", "Th-thank you! When I'm back at the f-forge, your sword will be f-first in line."),
         ("lio", "Nada de colher de pau, então!", "No more wooden spoon, then!"),
     ],
+    # --- Secundária: O sítio do Juca (Campos de Pradoluz) ---
+    "side_juca_offer": [
+        ("juca", "No meu tempo, o sítio do leste, lá nos Campos, era o mais bonito de Pradoluz. Hoje é ninho de bandido.", "Back in my day, the east farm out in the Fields was the prettiest in Pradoluz. Now it's a bandit nest."),
+        ("lio", "O sítio da carroça velha, perto dos fenos?", "The one with the old cart, by the haystacks?"),
+        ("juca", "Esse mesmo. E levaram a minha ferradura da sorte. Sessenta anos pendurada na porta!", "That's the one. And they took my lucky horseshoe. Sixty years hanging on the door!"),
+        ("lio", "Bandidos fora, ferradura de volta. Pode deixar, seu Juca.", "Bandits out, horseshoe back. Leave it to me, Mr. Juca."),
+    ],
+    "side_juca_done": [
+        ("lio", "A sua ferradura. E o sítio está livre de bandidos.", "Your horseshoe. And the farm is free of bandits."),
+        ("juca", "Hehe! Agora sim. No meu tempo a gente pagava com galinha, mas toma umas moedas.", "Heh! Now that's more like it. Back in my day we paid in chickens, but here, take some coins."),
+    ],
+    # --- Secundária: A farinha da Celeste (Campos de Pradoluz) ---
+    "side_farinha_offer": [
+        ("celeste", "Ai, Lio... a carroça da farinha tombou nos Campos quando os bandidos atacaram. Os sacos ficaram espalhados.", "Oh, Lio... the flour cart tipped over in the Fields when the bandits attacked. The sacks got scattered."),
+        ("lio", "Quantos sacos?", "How many sacks?"),
+        ("celeste", "Três. Sem farinha, nada de pão doce na loja.", "Three. No flour, no sweet bread in the shop."),
+        ("lio", "Pão doce? Já estou indo.", "Sweet bread? I'm already on my way."),
+    ],
+    "side_farinha_done": [
+        ("lio", "Três sacos de farinha. Meio amassados, mas inteiros.", "Three sacks of flour. A bit squashed, but whole."),
+        ("celeste", "Que menino bom! Toma, e passa aqui amanhã que tem pão doce saindo do forno.", "What a good boy! Here, and come by tomorrow, there'll be sweet bread fresh from the oven."),
+    ],
+    # --- Secundária: A estrada do nordeste (Bosque Seco, depois do Gorvan) ---
+    "side_estrada_offer": [
+        ("bram", "Antes de você sumir no mundo: a estrada do nordeste, depois da floresta, está tomada por bandidos.", "Before you vanish into the world: the north-east road, past the forest, is overrun by bandits."),
+        ("lio", "Os mesmos que roubavam aqui?", "The same ones who robbed us here?"),
+        ("bram", "Piores. Gente que perdeu tudo pros Arautos e agora rouba quem passa. Limpe o caminho e volte inteiro.", "Worse. People who lost everything to the Heralds and now rob whoever passes. Clear the road and come back in one piece."),
+        ("lio", "Inteiro é o meu tamanho favorito.", "One piece is my favorite size."),
+    ],
+    "side_estrada_done": [
+        ("lio", "Estrada limpa. Eles nem eram tão durões.", "Road's clear. They weren't even that tough."),
+        ("bram", "Mentira. Tem um corte novo na sua bochecha.", "Liar. There's a new cut on your cheek."),
+        ("bram", "Toma. Foi minha quando eu tinha a sua idade. Hoje fica melhor em você.", "Here. It was mine when I was your age. It suits you better now."),
+    ],
     # --- Conversas fora de missão ---
     "marta_idle_fed": [
         ("marta", "A despensa está cheia pela primeira vez em anos. Come mais um pedaço!", "The pantry is full for the first time in years. Have another slice!"),
@@ -216,7 +250,7 @@ TEXTS = {
     "QUEST_MAIN_04": ("Os corvos da mina", "The Crows of the Mine"),
     "QUEST_MAIN_05": ("O Arauto da Colheita", "The Herald of the Harvest"),
     "QUEST_MAIN_06": ("Mais cinco desses", "Five More Like Him"),
-    "QUEST_MORE_SOON": ("Fim do Ato 1 — a jornada continua na próxima versão", "End of Act 1 — the journey continues in the next version"),
+    "QUEST_MORE_SOON": ("Fim do Ato 1 — a estrada do nordeste, depois da floresta, está aberta", "End of Act 1 — the north-east road past the forest is open"),
     "OBJ_KILL_GOLEM": ("Derrote o Golem de pedra no fundo da mina", "Defeat the stone golem in the depths of the mine"),
     "OBJ_KILL_GORVAN": ("Derrote Gorvan no Celeiro do Tributo", "Defeat Gorvan in the Tribute Granary"),
     "OBJ_RETURN_VILLAGE": ("Volte para a Marta em Pradoluz", "Return to Marta in Pradoluz"),
@@ -224,6 +258,9 @@ TEXTS = {
     "OBJ_TALK_BENTO_END": ("Converse com o Bento", "Talk to Bento"),
     "QUEST_SIDE_TRIGO": ("Trigo escondido", "Hidden Wheat"),
     "QUEST_SIDE_FERRO": ("O ferro do Tobias", "Tobias's Iron"),
+    "QUEST_SIDE_JUCA": ("O sítio do Juca", "Juca's Farm"),
+    "QUEST_SIDE_FARINHA": ("A farinha da Celeste", "Celeste's Flour"),
+    "QUEST_SIDE_ESTRADA": ("A estrada do nordeste", "The North-East Road"),
     "OBJ_TALK_MARTA": ("Fale com a Marta", "Talk to Marta"),
     "OBJ_TALK_BRAM": ("Encontre o Mestre Bram no treino", "Meet Master Bram at training"),
     "OBJ_KILL_BANDIDOS": ("Derrote bandidos na floresta: %d/%d", "Defeat bandits in the forest: %d/%d"),
@@ -240,6 +277,13 @@ TEXTS = {
     "OBJ_KILL_ORCS": ("Derrote orcs na floresta: %d/%d", "Defeat orcs in the forest: %d/%d"),
     "OBJ_FIND_IRON": ("Ache o caixote de ferro na trilha norte", "Find the iron crate on the north trail"),
     "OBJ_RETURN_TOBIAS": ("Devolva o ferro ao Tobias", "Return the iron to Tobias"),
+    "OBJ_KILL_FARM_BANDITS": ("Expulse os bandidos do sítio nos Campos: %d/%d", "Drive the bandits off the farm in the Fields: %d/%d"),
+    "OBJ_FIND_HORSESHOE": ("Ache a ferradura da sorte perto da carroça", "Find the lucky horseshoe by the cart"),
+    "OBJ_RETURN_JUCA": ("Leve a ferradura para o Velho Juca", "Bring the horseshoe to Old Juca"),
+    "OBJ_COLLECT_FLOUR": ("Recolha os sacos de farinha nos Campos: %d/%d", "Pick up the flour sacks in the Fields: %d/%d"),
+    "OBJ_RETURN_CELESTE": ("Leve a farinha para a Dona Celeste", "Bring the flour to Mrs. Celeste"),
+    "OBJ_KILL_ROAD_BANDITS": ("Derrote bandidos da estrada no Bosque Seco: %d/%d", "Defeat road bandits in the Withered Grove: %d/%d"),
+    "OBJ_RETURN_BRAM": ("Volte ao Mestre Bram", "Go back to Master Bram"),
     # Prólogo (um texto por ilustração, na ordem) e tela inicial
     "PRO_1": ("Há dezenove invernos, em Pradoluz, uma vila de fazendeiros esquecida pelo resto do mundo...", "Nineteen winters ago, in Pradoluz, a farming village the rest of the world had forgotten..."),
     "PRO_2": ("...nasceu um menino. E ele brilhava.", "...a boy was born. And he shone."),
@@ -264,6 +308,10 @@ TEXTS = {
     "OPT_VOICE": ("Vozes", "Voices"),
     "OPT_CREDITS": ("Créditos", "Credits"),
     "OPT_MENU": ("Opções", "Options"),
+    "OPT_SHOW_FPS": ("Mostrar quadros por segundo", "Show frames per second"),
+    "OPT_FPS_LIMIT": ("Limite de quadros", "Frame limit"),
+    "OPT_ON": ("Ligado", "On"),
+    "OPT_OFF": ("Desligado", "Off"),
     "OPT_CREDITS_TEXT": (
         "Música (CC-BY 3.0), série RPG Orchestral Essentials: \"A Dream of First Flight\", \"Visions of Freedom\", "
         "\"Morning Frost\", \"The World At Your Door\", \"A Bitter Hope\", \"A Slave To No One\" e \"Can't Stop Winning\" "
@@ -306,6 +354,8 @@ TEXTS = {
     "ITEM_AMULETO_DESC": ("Se o fortalecimento falhar, o equipamento não quebra nem some.", "If strengthening fails, the gear neither breaks nor vanishes."),
     "ITEM_ERVA_ORVALHO": ("Erva-de-orvalho", "Dewleaf"),
     "ITEM_CAIXOTE_FERRO": ("Caixote de ferro", "Iron crate"),
+    "ITEM_FERRADURA_SORTE": ("Ferradura da sorte", "Lucky horseshoe"),
+    "ITEM_SACO_FARINHA": ("Saco de farinha", "Sack of flour"),
     "ITEM_EQ_ESPADA_APRENDIZ": ("Espada de aprendiz", "Apprentice sword"),
     "ITEM_EQ_ESPADA_COMUM": ("Espada de ferro", "Iron sword"),
     "ITEM_EQ_ELMO_COMUM": ("Elmo de ferro", "Iron helmet"),

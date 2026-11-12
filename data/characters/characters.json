@@ -376,5 +376,10 @@
       "hit": {"anim": "Hit_Reaction", "start": 0.0, "end": 0.6, "speed": 1.8}, "dead": {"anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3},
       "attack": {"anim": "Punch_Forward_with_Both_Fists", "strike": 0.9, "end": 1.6, "speed": 1.0}, "heavy": {"anim": "Heavy_Hammer_Swing", "strike": 1.3, "end": 1.83, "speed": 1.0},
       "slam": {"anim": "Charged_Ground_Slam", "strike": 1.63, "end": 2.0, "speed": 1.0}, "cast": {"anim": "mage_soell_cast", "strike": 0.6, "end": 2.0, "speed": 1.0},
-      "taunt": {"anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5}}}
+      "taunt": {"anim": "Chest_Pound_Taunt", "start": 1.9, "end": 3.7, "speed": 1.5}}},
+  "enm_orc_neve": {"base": "enm_orc", "texture": "res://assets/enemies/enm_orc_neve/enm_orc_neve.png"},
+  "enm_golem_gelo": {"base": "enm_golem", "texture": "res://assets/enemies/enm_golem_gelo/enm_golem_gelo.png"},
+  "enm_morto_gelo": {"base": "enm_esqueleto", "scene": "res://assets/enemies/enm_morto_gelo/enm_morto_gelo.glb", "weapon": {"scene": "res://assets/weapons/wpn_espada_aprendiz/wpn_espada_aprendiz.glb", "bone": "RightHand", "length": 0.8, "grip": 0.38, "rotation_deg": [0, 76.1, 26.1], "offset": [-0.015, 0.098, -0.01]}},
+  "npc_osk": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_osk/npc_osk.glb", "height": 1.75},
+  "npc_brunhild": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_brunhild/npc_brunhild.glb", "height": 1.85}
 }

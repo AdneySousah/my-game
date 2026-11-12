@@ -283,3 +283,18 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - São modelos novos com o mesmo esqueleto do herói (usam todas as animações dele) e ganharam os ossos dos dedos.
   - A espada do visual aparece no lugar da espada equipada, mas os números continuam sendo os da arma equipada.
   - O visual vestido fica salvo. Para trocar: Vestir/Tirar na loja especial, ou o botão "Visual" na tela de equipamentos.
+
+## Fase 6.3a: a estrada do frio e Hrimvald (12/11/2026)
+- **Caminho, como no GDD:** Dunas de Ossos (saída oeste, abre com `act2_done`) → Deserto Rochoso (28–31) → Planalto Frio (31–34, primeiras manchas de neve) → Pinheiral Nevado (34–37) → **Hrimvald**. A neve vem do shader de bioma (`snow` de 0,35 no planalto, 0,9 no pinheiral e 1 na cidade), aplicado sobre as peças que já existiam (pinheiros, rochas, muralha).
+- **Hrimvald:** fortaleza de casas nórdicas e torres de madeira. A lenha toda está trancada numa jaula no meio da praça, e os braseiros estão frios.
+  - Moradores: Velho Osk (queima os próprios móveis para aquecer os netos, como no GDD), Brunhild (ferreira) e Bento, que deixa Pradoluz e vai com o Lio depois do Ato 2.
+  - Os 6 figurantes recoloridos também estão lá.
+- **Inimigos novos:**
+  - morto congelado: modelo novo, usa as animações do esqueleto e uma espada velha;
+  - orc da neve e golem de gelo: Retexture com o UV original, então mantêm esqueleto e animações.
+  - Materiais novos: pele de orc da neve e cristal de gelo eterno.
+- **Missões:**
+  - **10 "Rumo ao frio"**: Nadira → chegar a Hrimvald → Osk → 6 mortos congelados no Pinheiral → Osk. Termina com `act3_hrimvald`.
+  - Secundária **"Os móveis do Osk"**: 4 feixes de galhos no Pinheiral. Dá só ouro e itens, sem XP.
+  - Secundária **"Carvão roubado"**: 8 orcs da neve no Planalto, a pedido da Brunhild.
+- **Próximo (6.3b e 6.3c):** Picos Uivantes, Mina de Gelo Esquecida, 2º duelo com o Severin (empate), Castelo Ermo, Brannoc em 2 formas (Gigante de Gelo, com chão que congela), a morte do Bento (ilustrações) e o salto de 2 anos com o Lio mais velho.

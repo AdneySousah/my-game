@@ -279,6 +279,66 @@ DIALOGUES = {
         ("nadira", "Você derrubou dois Arautos, garoto. A Ordem Celeste não vai deixar barato.", "You've brought down two Heralds, kid. The Celestial Order won't let this go."),
         ("nadira", "Mas hoje Qaressa bebe de graça. Hoje a gente comemora.", "But today Qaressa drinks for free. Today we celebrate."),
     ],
+    # --- Ato 3, missão 10: Rumo ao frio ---
+    "main_10_nadira": [
+        ("nadira", "Chegou carta do norte, de Hrimvald. Uma fortaleza nas montanhas. O povo está congelando.", "A letter came from the north, from Hrimvald. A fortress in the mountains. The people are freezing."),
+        ("nadira", "Dizem que o Arauto de lá, o Brannoc, trancou toda a lenha e todo o carvão. Quem quer se aquecer, ajoelha.", "They say their Herald, Brannoc, locked away all the firewood and coal. Whoever wants warmth has to kneel."),
+        ("lio", "Primeiro comida, depois água, agora fogo. Esses Arautos têm um manual?", "First food, then water, now fire. Do these Heralds share a handbook?"),
+        ("nadira", "O caminho sai das Dunas, a oeste: deserto de pedra, planalto e um pinheiral cheio de neve. Leve roupa quente.", "The road leaves the Dunes to the west: stone desert, highlands and a pine forest full of snow. Take warm clothes."),
+        ("bento", "Roupa quente e uma panela grande. Onde tem frio, tem gente precisando de sopa.", "Warm clothes and a big pot. Where it's cold, people need soup."),
+    ],
+    "main_10_arrive": [
+        ("lio", "Hrimvald... nenhuma chaminé soltando fumaça. E aquela jaula cheia de lenha bem no meio da praça.", "Hrimvald... not a single chimney smoking. And that cage full of firewood right in the middle of the square."),
+        ("bento", "Lenha trancada na frente de quem está morrendo de frio. Isso não é lei, Lio. É crueldade com cadeado.", "Firewood locked in front of people freezing to death. That's not law, Lio. That's cruelty with a padlock."),
+        ("lio", "Vamos achar alguém que conheça a cidade. Aquele velhinho de cobertor parece saber de tudo.", "Let's find someone who knows the town. That old man in the blanket looks like he knows everything."),
+    ],
+    "main_10_osk": [
+        ("osk", "Forasteiros... e sem tremer? Ou são loucos ou são de muito longe.", "Strangers... and not shivering? Either you're mad or from very far away."),
+        ("lio", "Um pouco dos dois. Sou o Lio. O que aconteceu com a lenha da cidade?", "A bit of both. I'm Lio. What happened to the town's firewood?"),
+        ("osk", "O Brannoc mandou cortar tudo e trancar. Diz que o calor é presente do céu, e presente se merece.", "Brannoc had it all cut and locked up. He says warmth is a gift from the sky, and gifts must be earned."),
+        ("osk", "Eu já queimei a mesa, as cadeiras e a cama pra aquecer meus netos. Ia buscar galhos no pinheiral...", "I've already burned the table, the chairs and the bed to warm my grandchildren. I was going to fetch branches in the pine woods..."),
+        ("osk", "Mas os mortos andam lá agora. Gente que morreu de frio, e o frio não deixou descansar.", "But the dead walk there now. People who died of cold, and the cold wouldn't let them rest."),
+        ("lio", "Então eu limpo o caminho. Ninguém mais vai ter medo de buscar lenha.", "Then I'll clear the way. Nobody will be afraid to fetch wood again."),
+    ],
+    "main_10_osk_done": [
+        ("lio", "O pinheiral está mais calmo. Os mortos de lá descansaram, finalmente.", "The pine woods are calmer. The dead there are finally resting."),
+        ("osk", "Você fez isso por gente que nem conhece... Meu pai dizia que o calor de verdade vem das pessoas.", "You did this for people you don't even know... My father used to say real warmth comes from people."),
+        ("osk", "Mas o Brannoc vai saber. Ele sempre sabe. Cuidado, rapaz. Ele não é um homem que perdoa.", "But Brannoc will know. He always knows. Be careful, lad. He's not a man who forgives."),
+        ("bento", "Eu fico aqui ajudando o povo. Faço sopa com o que tiver. Você descobre um jeito de abrir aquela jaula.", "I'll stay and help the people. I'll make soup with whatever there is. You find a way to open that cage."),
+    ],
+    "osk_idle": [
+        ("osk", "Os netos dormem abraçados no cachorro. É o único cobertor que sobrou.", "My grandkids sleep hugging the dog. It's the only blanket left."),
+    ],
+    "osk_idle_after": [
+        ("osk", "O fogo voltou a uma casa: a minha. Graças a você e àquele seu amigo da sopa.", "Fire came back to one house: mine. Thanks to you and that soup friend of yours."),
+    ],
+    "brunhild_idle": [
+        ("brunhild", "Forja sem carvão é só um banquinho de ferro. Mas eu dou meu jeito. Quer melhorar essa espada?", "A forge without coal is just an iron stool. But I manage. Want to improve that sword?"),
+    ],
+    "bento_idle_hrimvald": [
+        ("bento", "Sopa de raiz, sopa de casca, sopa de sola de bota... aqui a gente inventa. O importante é estar quente.", "Root soup, bark soup, boot-sole soup... here we improvise. What matters is that it's hot."),
+    ],
+    # --- Secundária: Os móveis do Osk (Pinheiral, Osk) ---
+    "side_moveis_offer": [
+        ("osk", "Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.", "Lad... may I ask one more thing? All that's left to burn is my front door."),
+        ("osk", "Tem galhos secos caídos no pinheiral, debaixo da neve. Quatro feixes e meus netos passam a semana quentinhos.", "There are dry branches fallen in the pine woods, under the snow. Four bundles and my grandkids stay warm all week."),
+        ("lio", "Quatro feixes de galho. E a porta continua no lugar. Combinado.", "Four bundles of branches. And the door stays where it is. Deal."),
+    ],
+    "side_moveis_done": [
+        ("lio", "Quatro feixes. Secos, do jeito que o senhor pediu.", "Four bundles. Dry, just the way you asked."),
+        ("osk", "A porta agradece. E eu também. Leve isso: era do meu pai, dá sorte na forja.", "The door thanks you. And so do I. Take this: it was my father's, it brings luck at the forge."),
+    ],
+    # --- Secundária: Carvão roubado (Planalto Frio, Brunhild) ---
+    "side_carvao_offer": [
+        ("brunhild", "Você bate forte, dá pra ver pelo jeito que segura a espada. Tenho um serviço.", "You hit hard, I can tell by how you hold that sword. I've got a job."),
+        ("brunhild", "Os orcs da neve roubaram as últimas carroças de carvão no Planalto Frio. Sem carvão, nada de forja.", "The snow orcs stole the last coal carts on the Cold Highlands. No coal, no forge."),
+        ("lio", "Orcs que roubam carvão no frio. Pelo menos eles são coerentes.", "Orcs stealing coal in the cold. At least they're consistent."),
+        ("brunhild", "Derrube oito deles e o resto foge com o rabo entre as pernas. Eu pago bem.", "Knock down eight of them and the rest run off with their tails between their legs. I pay well."),
+    ],
+    "side_carvao_done": [
+        ("brunhild", "O carvão voltou! Agora sim, essa bigorna vai cantar.", "The coal is back! Now this anvil is going to sing."),
+        ("brunhild", "Toma umas luvas que eu fiz com a sobra. Não queimam, não congelam e combinam com você.", "Take these gloves I made from the leftovers. They don't burn, don't freeze and they suit you."),
+    ],
     # --- Conversas fora de missão ---
     "marta_idle_fed": [
         ("marta", "A despensa está cheia pela primeira vez em anos. Come mais um pedaço!", "The pantry is full for the first time in years. Have another slice!"),
@@ -369,6 +429,22 @@ TEXTS = {
     "QUEST_ACT2_SOON": ("Fale com a Nadira: as Ruínas de Ammar, a leste das dunas, estão abertas", "Talk to Nadira: the Ruins of Ammar, east of the dunes, are open"),
     "QUEST_ACT2_SOON2": ("Fale com a Nadira: o caminho para a Torre Afundada está aberto", "Talk to Nadira: the way to the Sunken Tower is open"),
     "QUEST_MAIN_09": ("A Arauta da Sede", "The Herald of Thirst"),
+    "QUEST_MAIN_10": ("Rumo ao frio", "Into the Cold"),
+    "QUEST_ACT3_SOON": ("Hrimvald precisa de você: os Picos Uivantes e a Mina de Gelo chegam na próxima versão", "Hrimvald needs you: the Howling Peaks and the Ice Mine arrive in the next version"),
+    "QUEST_SIDE_MOVEIS": ("Os móveis do Osk", "Osk's Furniture"),
+    "QUEST_SIDE_CARVAO": ("Carvão roubado", "Stolen Coal"),
+    "OBJ_TALK_NADIRA_NORTH": ("Fale com a Nadira sobre o norte", "Talk to Nadira about the north"),
+    "OBJ_REACH_HRIMVALD": ("Chegue a Hrimvald: Dunas (oeste) → Deserto Rochoso → Planalto Frio → Pinheiral", "Reach Hrimvald: Dunes (west) → Rocky Desert → Cold Highlands → Pine Woods"),
+    "OBJ_TALK_OSK": ("Fale com o Velho Osk", "Talk to Old Osk"),
+    "OBJ_KILL_FROZEN": ("Derrote mortos congelados no Pinheiral: %d/%d", "Defeat frozen dead in the Pine Woods: %d/%d"),
+    "OBJ_RETURN_OSK": ("Volte para o Velho Osk", "Go back to Old Osk"),
+    "OBJ_COLLECT_BRANCHES": ("Recolha galhos secos no Pinheiral: %d/%d", "Gather dry branches in the Pine Woods: %d/%d"),
+    "OBJ_RETURN_OSK_WOOD": ("Leve os galhos para o Osk", "Bring the branches to Osk"),
+    "OBJ_KILL_SNOW_ORCS": ("Derrote orcs da neve no Planalto Frio: %d/%d", "Defeat snow orcs on the Cold Highlands: %d/%d"),
+    "OBJ_RETURN_BRUNHILD": ("Volte para a Brunhild", "Go back to Brunhild"),
+    "ITEM_GALHO_SECO": ("Feixe de galhos secos", "Bundle of dry branches"),
+    "BARK_OSK_1": ("Brrr...", "Brrr..."),
+    "BARK_BRUNHILD_1": ("Clang!", "Clang!"),
     "QUEST_ACT2_DONE": ("Fim do Ato 2 — os poços de Qaressa estão abertos. O Ato 3 vem nas próximas versões", "End of Act 2 — Qaressa's wells are open. Act 3 comes in the next versions"),
     "OBJ_TALK_NADIRA_TOWER": ("Pergunte à Nadira sobre a Torre Afundada", "Ask Nadira about the Sunken Tower"),
     "OBJ_REACH_TOWER": ("Chegue à Torre Afundada, a leste das Ruínas", "Reach the Sunken Tower, east of the Ruins"),

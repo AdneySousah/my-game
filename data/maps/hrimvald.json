@@ -1,0 +1,72 @@
+{
+  "_comment": "Hrimvald (Ato 3): fortaleza de madeira na neve. Brannoc, o Arauto do Frio, trancou toda a lenha numa jaula na praça. Velho Osk queima os próprios móveis; Brunhild é a ferreira; Bento chega com o Lio.",
+  "id": "hrimvald",
+  "name": "MAP_HRIMVALD",
+  "safe": true,
+  "size": [80, 80],
+  "seed": 161,
+  "biome": {"snow": 1.0},
+  "ground": "#e8eef3",
+  "grass": {"count": 160, "root": "#a9b8a8", "tip": "#f2f6f8"},
+  "sky": "#b8c6dc",
+  "ambient": 0.6,
+  "sun": 1.0,
+  "sun_color": "#e6eeff",
+  "patches": {"color": "#f6f9fb", "count": 90},
+  "spawns": {"start": [0, 26, 0], "from_pinheiral": [0, 30, 0]},
+  "exits": [
+    {"to": "pinheiral", "spawn": "from_hrimvald", "pos": [0, 36], "size": [8, 2], "label": "MAP_PINHEIRAL", "model": "env_portao_cidade", "model_pos": [0, 30], "model_rot": 180}
+  ],
+  "npcs": [
+    {"id": "osk", "pos": [-10, 5], "yaw": 50},
+    {"id": "brunhild", "pos": [12, 3], "yaw": -50},
+    {"id": "bento", "pos": [-3, 10], "yaw": 160, "if_flag": "act2_done"}
+  ],
+  "rest_points": [
+    {"id": "hrimvald_pedra", "name": "REST_HRIMVALD_PEDRA", "pos": [0, 18], "kind": "pedra"}
+  ],
+  "paths": [
+    {"points": [[0, 36], [0, 18], [0, 4]], "width": 3.6, "color": "#cfd6dc"},
+    {"points": [[-20, 8], [-8, 8], [8, 8], [20, 8]], "width": 3.0, "color": "#cfd6dc"}
+  ],
+  "props": [
+    {"id": "prp_lenha_trancada", "pos": [0, -2]},
+    {"id": "env_casa_nordica", "pos": [-18, -12], "rot": 30},
+    {"id": "env_casa_nordica", "pos": [-7, -18], "rot": 10},
+    {"id": "env_casa_nordica", "pos": [8, -18], "rot": -10},
+    {"id": "env_casa_nordica", "pos": [19, -12], "rot": -30},
+    {"id": "env_casa_nordica", "pos": [-22, 4], "rot": 80},
+    {"id": "env_casa_nordica", "pos": [22, 4], "rot": -80},
+    {"id": "env_casa_nordica", "pos": [-18, 19], "rot": 140},
+    {"id": "env_casa_nordica", "pos": [18, 19], "rot": -140},
+    {"id": "env_torre_madeira", "pos": [-26, -26]},
+    {"id": "env_torre_madeira", "pos": [26, -26], "rot": 90},
+    {"id": "env_torre_madeira", "pos": [-26, 26], "rot": 180},
+    {"id": "env_torre_madeira", "pos": [26, 26], "rot": -90},
+    {"id": "prp_braseiro_frio", "pos": [-5, 2]},
+    {"id": "prp_braseiro_frio", "pos": [5, 2]},
+    {"id": "prp_braseiro_frio", "pos": [-4, 22]},
+    {"id": "prp_braseiro_frio", "pos": [4, 22]},
+    {"id": "prp_bigorna", "pos": [13.5, 0.5], "rot": 20},
+    {"id": "prp_barril", "pos": [10, 0]},
+    {"id": "prp_caixa", "pos": [-12, 2.5]},
+    {"id": "prp_banco", "pos": [-8, 8.5], "rot": 90},
+    {"id": "prp_banco", "pos": [8, 8.5], "rot": -90},
+    {"id": "prp_pinheiro", "pos": [-25, 12]},
+    {"id": "prp_pinheiro", "pos": [25, -4]},
+    {"id": "prp_pinheiro", "pos": [-12, -25]},
+    {"id": "prp_pinheiro", "pos": [12, 26]}
+  ],
+  "walls": [
+    {"id": "env_muralha", "from": [-30, 32], "to": [-4.5, 32]},
+    {"id": "env_muralha", "from": [4.5, 32], "to": [30, 32]},
+    {"id": "env_muralha", "from": [30, 30], "to": [30, -28]},
+    {"id": "env_muralha", "from": [28, -30], "to": [-28, -30]},
+    {"id": "env_muralha", "from": [-30, -28], "to": [-30, 30]}
+  ],
+  "scatter": [
+    {"ids": ["prp_pinheiro", "prp_pedra", "prp_barril"], "count": 14, "rect": [-27, -27, 27, 28], "spacing": 6, "seed": 162},
+    {"ids": ["prp_pedrinhas", "prp_toco", "prp_capim_seco"], "count": 20, "rect": [-27, -27, 27, 28], "spacing": 3, "seed": 163}
+  ],
+  "ambience": {"villagers": 6, "spots": [[0, 8], [-8, 12], [8, 12], [-14, -2], [14, -2], [0, 16], [-18, 8], [18, 8], [-6, -10], [6, -10]], "homes": [[-17, -9.5], [-7, -15], [8, -15], [18, -9.5], [-19, 4]], "animals": [{"kind": "cachorro", "pos": [6, 14]}, {"kind": "gato", "pos": [-14, 10]}], "perches": [[-26, 6.0, -26], [26, 6.0, -26], [-18, 4.2, -12], [19, 4.2, -12]], "perch_birds": 2}
+}

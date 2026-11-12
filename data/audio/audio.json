@@ -36,7 +36,7 @@
     "titulo": "titulo.mp3", "prologo": "prologo.mp3", "vila": "vila.mp3", "floresta": "floresta.mp3",
     "mina": "mina.mp3", "chefe": "chefe.mp3", "vitoria": "vitoria.mp3"
   },
-  "map_music": { "pradoluz": "vila", "floresta": "floresta", "mina": "mina", "celeiro": "mina", "arena": "floresta", "campos": "floresta", "bosque_seco": "floresta", "estepe": "floresta", "qaressa": "vila", "dunas": "floresta" },
+  "map_music": { "pradoluz": "vila", "floresta": "floresta", "mina": "mina", "celeiro": "mina", "arena": "floresta", "campos": "floresta", "bosque_seco": "floresta", "estepe": "floresta", "qaressa": "vila", "dunas": "floresta", "deserto_rochoso": "floresta", "planalto": "floresta", "pinheiral": "floresta", "hrimvald": "vila", "torre": "mina" },
   "skill_sfx": {
     "corte_giratorio": "swing", "investida": "dodge", "golpe_sismico": "slam", "quebra_guarda": "metal",
     "brado_de_guerra": "skill_big", "onda_de_corte": "skill", "salto_devastador": "slam", "julgamento": "skill_fire"

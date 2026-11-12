@@ -813,6 +813,186 @@
         ]
       ]
     },
+    "main_10_nadira": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_10_NADIRA_1"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_10_NADIRA_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_10_NADIRA_3"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_10_NADIRA_4"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_10_NADIRA_5"
+        ]
+      ]
+    },
+    "main_10_arrive": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_10_ARRIVE_1"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_10_ARRIVE_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_10_ARRIVE_3"
+        ]
+      ]
+    },
+    "main_10_osk": {
+      "lines": [
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_10_OSK_2"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_3"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_4"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_5"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_10_OSK_6"
+        ]
+      ]
+    },
+    "main_10_osk_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_10_OSK_DONE_1"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_DONE_2"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_10_OSK_DONE_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_10_OSK_DONE_4"
+        ]
+      ]
+    },
+    "osk_idle": {
+      "lines": [
+        [
+          "osk",
+          "DLG_OSK_IDLE_1"
+        ]
+      ]
+    },
+    "osk_idle_after": {
+      "lines": [
+        [
+          "osk",
+          "DLG_OSK_IDLE_AFTER_1"
+        ]
+      ]
+    },
+    "brunhild_idle": {
+      "lines": [
+        [
+          "brunhild",
+          "DLG_BRUNHILD_IDLE_1"
+        ]
+      ]
+    },
+    "bento_idle_hrimvald": {
+      "lines": [
+        [
+          "bento",
+          "DLG_BENTO_IDLE_HRIMVALD_1"
+        ]
+      ]
+    },
+    "side_moveis_offer": {
+      "lines": [
+        [
+          "osk",
+          "DLG_SIDE_MOVEIS_OFFER_1"
+        ],
+        [
+          "osk",
+          "DLG_SIDE_MOVEIS_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_MOVEIS_OFFER_3"
+        ]
+      ]
+    },
+    "side_moveis_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_MOVEIS_DONE_1"
+        ],
+        [
+          "osk",
+          "DLG_SIDE_MOVEIS_DONE_2"
+        ]
+      ]
+    },
+    "side_carvao_offer": {
+      "lines": [
+        [
+          "brunhild",
+          "DLG_SIDE_CARVAO_OFFER_1"
+        ],
+        [
+          "brunhild",
+          "DLG_SIDE_CARVAO_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_CARVAO_OFFER_3"
+        ],
+        [
+          "brunhild",
+          "DLG_SIDE_CARVAO_OFFER_4"
+        ]
+      ]
+    },
+    "side_carvao_done": {
+      "lines": [
+        [
+          "brunhild",
+          "DLG_SIDE_CARVAO_DONE_1"
+        ],
+        [
+          "brunhild",
+          "DLG_SIDE_CARVAO_DONE_2"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

@@ -27,7 +27,7 @@
     {"id": "tobias", "pos": [8.4, 3.2], "yaw": 120},
     {"id": "nina", "pos": [-15.5, -3.6], "yaw": -120},
     {"id": "juca", "pos": [5.2, -1.8], "yaw": 30},
-    {"id": "bento", "pos": [-1.8, 3.6], "yaw": 20, "if_flag": "bento_joined"}
+    {"id": "bento", "pos": [-1.8, 3.6], "yaw": 20, "if_flag": "bento_joined", "unless_flag": "act2_done"}
   ],
   "rest_points": [
     {"id": "pradoluz_pedra", "name": "REST_PRADOLUZ_PEDRA", "pos": [0, -1], "kind": "pedra"}

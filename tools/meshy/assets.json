@@ -4486,6 +4486,300 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "enm_orc_neve",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Orc da neve (Retexture do orc)",
+      "file": "assets/enemies/enm_orc_neve/enm_orc_neve.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-1c68-70dc-9077-5773c25371d1",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d19d-5158-7183-b146-d6d833e56cd7",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_golem_gelo",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Golem de gelo (Retexture do golem)",
+      "file": "assets/enemies/enm_golem_gelo/enm_golem_gelo.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-1e20-749c-8344-73947dde1c83",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d19d-5536-7041-bd6c-d94ba06485d7",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_morto_gelo",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Morto congelado",
+      "file": "assets/enemies/enm_morto_gelo/enm_morto_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-1fea-74a0-864a-e091de63b943",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-442d-705e-8049-21dc22da5c28",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d19f-8b24-77e6-b0ed-a51326775683",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_osk",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Velho Osk",
+      "file": "assets/npcs/npc_osk/npc_osk.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-23cc-754c-8080-8bf34fdf017a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-495b-7752-b774-8c66567b1653",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d19f-c442-7411-9555-8de01f6be1f0",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_brunhild",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Brunhild, ferreira de Hrimvald",
+      "file": "assets/npcs/npc_brunhild/npc_brunhild.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-2687-7226-b0c8-defa2179b9ad",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-4dda-77f0-9592-097289d06ab3",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d19f-d1d0-704f-8cec-c79e0877e7b4",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_casa_nordica",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Casa nórdica com neve",
+      "file": "assets/environment/env_casa_nordica/env_casa_nordica.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-2a66-7193-bfbe-5a6cb978648a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-51ac-77fc-9798-3a2b8bf70a52",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_torre_madeira",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Torre de vigia de madeira",
+      "file": "assets/environment/env_torre_madeira/env_torre_madeira.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-2b4a-7715-974d-786781a7ce6a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-5616-7693-a64c-96d089a82603",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_lenha_trancada",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lenha trancada na jaula",
+      "file": "assets/props/prp_lenha_trancada/prp_lenha_trancada.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-2c2b-7649-bfb4-58172685de22",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-59cf-70f2-8bdf-906c9518b682",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_braseiro_frio",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Braseiro frio",
+      "file": "assets/props/prp_braseiro_frio/prp_braseiro_frio.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d19c-2d12-7032-8b16-96cd4dd69a3b",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d19e-5e58-76ff-af7b-c270f95c445e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato3",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Telas de carregamento do Ato 3 (4)",
+      "file": "assets/ui/ui_loading_ato3/ui_loading_ato3.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-2df4-77c0-8fa4-ef7bfeb23264",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-2ee8-73b2-9ea4-634518db769a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-2fc8-77b6-8a3d-02ce73d6fc13",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d19c-30b5-7689-bc9c-4c86a6739893",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retratos_ato3",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Retratos de Osk e Brunhild",
+      "file": "assets/ui/ui_retratos_ato3/ui_retratos_ato3.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1a5-5001-7027-9acf-4e99b15be414",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1a5-55e7-7637-960a-5fa94054b5df",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

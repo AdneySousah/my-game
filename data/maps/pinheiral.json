@@ -1,0 +1,55 @@
+{
+  "_comment": "Pinheiral Nevado (Fase 6.3a, níveis 34-37): pinheiros carregados de neve e mortos congelados que andam entre as árvores. Sul: Planalto Frio. Norte: Hrimvald.",
+  "id": "pinheiral",
+  "name": "MAP_PINHEIRAL",
+  "size": [104, 104],
+  "seed": 151,
+  "biome": {"snow": 0.9},
+  "ground": "#e4ebf0",
+  "grass": {"count": 300, "root": "#a9b8a8", "tip": "#f2f6f8"},
+  "sky": "#c3d3e2",
+  "ambient": 0.62,
+  "sun": 1.0,
+  "sun_color": "#eaf2ff",
+  "patches": {"color": "#f4f8fb", "count": 160},
+  "spawns": {"from_planalto": [0, 46, 0], "from_hrimvald": [0, -46, 180]},
+  "exits": [
+    {"to": "planalto", "spawn": "from_pinheiral", "pos": [0, 52], "size": [10, 2], "label": "MAP_PLANALTO", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "hrimvald", "spawn": "from_pinheiral", "pos": [0, -52], "size": [10, 2], "label": "MAP_HRIMVALD", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "pinheiral_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 1500, "items": {"pot_vida_g": 4, "amuleto": 1, "gema_rubi_2": 2}},
+    {"id": "pinheiral_bau_2", "pos": [30, -24], "yaw": -90, "gold": 1600, "items": {"pot_folego_g": 3, "broca": 1, "eq_calca_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "pinheiral_trilha", "name": "REST_PINHEIRAL_TRILHA", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "pinheiral_riacho", "name": "REST_PINHEIRAL_RIACHO", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#d7e0e8"}
+  ],
+  "props": [
+    {"id": "prp_tronco_caido", "pos": [14, 12], "rot": 30},
+    {"id": "prp_toco", "pos": [-12, -8]},
+    {"id": "prp_carroca_quebrada", "pos": [18, -16], "rot": 60},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 1510, "solid": true},
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 1511, "solid": true},
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 1512, "solid": true},
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 1513, "solid": true},
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 1514, "solid": true},
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 1515, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_pinheiro", "prp_pinheiro", "prp_pinheiro", "prp_rochedo"], "count": 90, "rect": [-45, -47, 45, 47], "spacing": 5, "seed": 152},
+    {"ids": ["prp_toco", "prp_pedra", "prp_tronco_caido", "prp_pedrinhas"], "count": 40, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 153}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 20], "radius": 11, "max": 5, "types": {"morto_gelo": 4}, "level": [34, 35], "respawn": 25},
+    {"pos": [20, 0], "radius": 11, "max": 5, "types": {"morto_gelo": 3, "orc_neve": 2}, "level": [35, 36], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"morto_gelo": 3, "golem_gelo": 1}, "level": [36, 37], "respawn": 25}
+  ]
+}

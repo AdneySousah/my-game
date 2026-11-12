@@ -99,6 +99,37 @@
       "rewards": { "xp": 8000, "gold": 2000, "items": { "pot_vida_g": 5, "eq_espada_epico": 1, "gema_rubi_3": 1 } }
     },
     {
+      "id": "main_10", "type": "main", "name": "QUEST_MAIN_10", "auto": true,
+      "requires": ["main_09"], "min_level": 28,
+      "steps": [
+        { "type": "talk", "npc": "nadira", "dialogue": "main_10_nadira", "text": "OBJ_TALK_NADIRA_NORTH" },
+        { "type": "reach", "map": "hrimvald", "pos": [0, 24], "radius": 8, "text": "OBJ_REACH_HRIMVALD", "dialogue": "main_10_arrive" },
+        { "type": "talk", "npc": "osk", "dialogue": "main_10_osk", "text": "OBJ_TALK_OSK" },
+        { "type": "kill", "enemy": "morto_gelo", "count": 6, "map": "pinheiral", "pos": [-18, 20], "text": "OBJ_KILL_FROZEN" },
+        { "type": "talk", "npc": "osk", "dialogue": "main_10_osk_done", "text": "OBJ_RETURN_OSK" }
+      ],
+      "set_flag": "act3_hrimvald", "end_note": "QUEST_ACT3_SOON",
+      "rewards": { "xp": 9500, "gold": 2400, "items": { "pot_vida_g": 4, "eq_peitoral_epico": 1 } }
+    },
+    {
+      "id": "side_moveis", "type": "side", "name": "QUEST_SIDE_MOVEIS", "giver": "osk", "offer": "side_moveis_offer",
+      "requires": ["main_10"], "min_level": 32,
+      "steps": [
+        { "type": "collect", "map": "pinheiral", "item": "ITEM_GALHO_SECO", "points": [[-28, 30], [24, 18], [-30, -12], [28, -38]], "text": "OBJ_COLLECT_BRANCHES" },
+        { "type": "talk", "npc": "osk", "dialogue": "side_moveis_done", "text": "OBJ_RETURN_OSK_WOOD" }
+      ],
+      "rewards": { "gold": 900, "items": { "pot_vida_g": 4, "trevo": 1 } }
+    },
+    {
+      "id": "side_carvao", "type": "side", "name": "QUEST_SIDE_CARVAO", "giver": "brunhild", "offer": "side_carvao_offer",
+      "requires": ["main_10"], "min_level": 33,
+      "steps": [
+        { "type": "kill", "enemy": "orc_neve", "count": 8, "map": "planalto", "pos": [20, 2], "text": "OBJ_KILL_SNOW_ORCS" },
+        { "type": "talk", "npc": "brunhild", "dialogue": "side_carvao_done", "text": "OBJ_RETURN_BRUNHILD" }
+      ],
+      "rewards": { "xp": 3200, "gold": 1100, "items": { "broca": 1, "eq_luvas_epico": 1 } }
+    },
+    {
       "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",
       "requires": ["main_01"], "min_level": 2,
       "steps": [

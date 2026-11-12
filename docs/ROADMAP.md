@@ -46,6 +46,7 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [~] 6.2b Ato 2 começo: Qaressa, Dunas de Ossos, Zahir, Nadira, homem-lagarto, saqueador, missão 7 (~350 créditos). Em teste
   - [~] 6.2c Ruínas de Ammar, guardião antigo, mural do céu, 1º duelo com o Severin, missão 8 (~200 créditos). Em teste na 0.1.9 (código 10)
   - [~] 6.2d Torre Afundada e a Sahra (2 formas, escudo, jarros de água que curam), missão 9 e fim do Ato 2. Em teste na 0.2.0 (código 11)
+  - [~] 6.3a Ato 3 começo: Deserto Rochoso, Planalto Frio, Pinheiral Nevado e Hrimvald; Velho Osk, Brunhild (ferreira) e Bento na cidade; orc da neve, golem de gelo e morto congelado; missão 10 e 2 secundárias (~210 créditos). Em teste na 0.2.1 (código 12)
   - [~] Melhorias do dono (12/11/2026), na 0.2.0: telas de carregamento com ilustração de cada lugar, efeitos visuais das 8 skills, tela de atributos nova (herói em 3D, totais, prévia do +1), ícones de efeitos ao lado do retrato, passe premium (7/14/30 dias) e 2 visuais à venda (Cavaleiro do Sol e Lâmina da Tempestade). Em teste
 
 ## Pendências para depois do jogo concluído

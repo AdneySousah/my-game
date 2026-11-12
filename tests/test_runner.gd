@@ -21,6 +21,7 @@ func _ready() -> void:
 	await _ambience_test()
 	await _duel_test()
 	await _tower_test()
+	await _north_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -553,6 +554,37 @@ func _tower_test() -> void:
 		check(is_instance_valid(sahra.ground) and sahra.ground.ready_count() == 5, "5 water jars rise in the court")
 	main.queue_free()
 	get_tree().paused = false
+	await _frames(2)
+	Main.start_spawn = "start"
+
+
+## Act 3 road: the Dunes open west after Act 2; the snowy maps have their enemies and
+## Hrimvald has Osk, Brunhild (smith) and Bento.
+func _north_test() -> void:
+	Session.reset()
+	check(Data.quest("main_10").get("requires", []) == ["main_09"], "quest 10 follows the Sunken Tower")
+	Session.set_flag("act2_done")
+	Session.set_flag("bento_joined")
+	Main.start_map = "pinheiral"
+	Main.start_spawn = "from_planalto"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("morto_gelo"), "frozen dead walk in the pine woods (got %s)" % [kinds.keys()])
+	main.load_map("hrimvald", "from_pinheiral")
+	await _wait_map(main, "hrimvald")
+	await _frames(4)
+	var ids: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("npcs"):
+		ids[str(n.get("npc_id"))] = true
+	check(ids.has("osk") and ids.has("brunhild") and ids.has("bento"), "Osk, Brunhild and Bento are in Hrimvald (got %s)" % [ids.keys()])
+	check(str(Data.npc("brunhild").get("service", "")) == "smith", "Brunhild is the Hrimvald smith")
+	for m: String in ["deserto_rochoso", "planalto", "pinheiral", "hrimvald"]:
+		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
+	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
 

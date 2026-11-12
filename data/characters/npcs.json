@@ -58,6 +58,10 @@
       "portrait": "ui_retrato_bento",
       "talk": [
         {
+          "if_flag": "act2_done",
+          "dialogue": "bento_idle_hrimvald"
+        },
+        {
           "if_flag": "bento_joined",
           "dialogue": "bento_idle_vila"
         },
@@ -201,6 +205,25 @@
       "talk": [],
       "barks": [],
       "model": "boss_severin"
+    },
+    "osk": {
+      "name": "NPC_OSK",
+      "color": "#8c5e3c",
+      "voice": 0.7,
+      "portrait": "ui_retrato_osk",
+      "talk": [{"if_flag": "act3_hrimvald", "dialogue": "osk_idle_after"}, {"dialogue": "osk_idle"}],
+      "barks": ["BARK_OSK_1"],
+      "model": "npc_osk"
+    },
+    "brunhild": {
+      "name": "NPC_BRUNHILD",
+      "service": "smith",
+      "color": "#c8323c",
+      "voice": 1.05,
+      "portrait": "ui_retrato_brunhild",
+      "talk": [{"dialogue": "brunhild_idle"}],
+      "barks": ["BARK_BRUNHILD_1"],
+      "model": "npc_brunhild"
     },
     "sahra": {
       "name": "NPC_SAHRA",

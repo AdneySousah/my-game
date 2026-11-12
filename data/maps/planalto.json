@@ -1,0 +1,56 @@
+{
+  "_comment": "Planalto Frio (Fase 6.3a, níveis 31-34): pedra, capim pálido e as primeiras manchas de neve. Orcs da neve descem das montanhas. Sul: Deserto Rochoso. Norte: Pinheiral Nevado.",
+  "id": "planalto",
+  "name": "MAP_PLANALTO",
+  "size": [104, 104],
+  "seed": 141,
+  "biome": {"snow": 0.35, "dry": 0.2},
+  "ground": "#9ea58c",
+  "grass": {"count": 1400, "root": "#7c8a62", "tip": "#d4dcc0"},
+  "sky": "#b9c9d6",
+  "ambient": 0.58,
+  "sun": 1.1,
+  "sun_color": "#e8f0ff",
+  "patches": {"color": "#e3e9ee", "count": 170},
+  "spawns": {"from_deserto_rochoso": [0, 46, 0], "from_pinheiral": [0, -46, 180]},
+  "exits": [
+    {"to": "deserto_rochoso", "spawn": "from_planalto", "pos": [0, 52], "size": [10, 2], "label": "MAP_DESERTO_ROCHOSO", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "pinheiral", "spawn": "from_planalto", "pos": [0, -52], "size": [10, 2], "label": "MAP_PINHEIRAL", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "planalto_bau_1", "pos": [30, 16], "yaw": -90, "gold": 1300, "items": {"pot_vida_g": 3, "pot_pedra": 1, "gema_safira_2": 2}},
+    {"id": "planalto_bau_2", "pos": [-32, -26], "yaw": 45, "gold": 1400, "items": {"pot_folego_g": 2, "trevo": 1, "eq_elmo_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "planalto_marco", "name": "REST_PLANALTO_MARCO", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "planalto_vento", "name": "REST_PLANALTO_VENTO", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#b9b49a"}
+  ],
+  "props": [
+    {"id": "prp_carroca", "pos": [16, -14], "rot": 100},
+    {"id": "prp_caixa", "pos": [18, -11]},
+    {"id": "prp_tenda", "pos": [-22, 4], "rot": 60},
+    {"id": "prp_fogueira", "pos": [-18, 6]},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 1410, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 1411, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 1412, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 1413, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 1414, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 1415, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_pinheiro", "prp_pedra"], "count": 55, "rect": [-45, -47, 45, 47], "spacing": 6, "seed": 142},
+    {"ids": ["prp_capim_seco", "prp_arbusto", "prp_pedrinhas", "prp_capim_seco"], "count": 70, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 143}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 20], "radius": 11, "max": 5, "types": {"orc_neve": 3, "bandido_estrada": 2}, "level": [31, 32], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"orc_neve": 3, "golem_gelo": 1}, "level": [32, 33], "respawn": 25},
+    {"pos": [-16, -26], "radius": 10, "max": 5, "types": {"orc_neve": 3, "golem_gelo": 1}, "level": [33, 34], "respawn": 25}
+  ]
+}

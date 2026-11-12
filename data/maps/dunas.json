@@ -11,8 +11,9 @@
   "sun": 1.35,
   "sun_color": "#fff2d0",
   "patches": {"color": "#efc88a", "count": 160},
-  "spawns": {"from_estepe": [0, -49, 180], "from_qaressa": [0, 49, 0], "from_ruinas": [49, 0, 90]},
+  "spawns": {"from_estepe": [0, -49, 180], "from_qaressa": [0, 49, 0], "from_ruinas": [49, 0, 90], "from_deserto_rochoso": [-49, 0, -90]},
   "exits": [
+    {"to": "deserto_rochoso", "spawn": "from_dunas", "pos": [-55, 0], "size": [2, 10], "label": "MAP_DESERTO_ROCHOSO", "model": "prp_portal", "model_pos": [-56.5, 0], "model_rot": 90, "if_flag": "act2_done", "locked_label": "MAP_ROAD_CLOSED"},
     {
       "to": "estepe",
       "spawn": "from_dunas",
@@ -99,8 +100,16 @@
       "spacing": 3.4,
       "scale": [1.4, 2.2],
       "jitter": 0.6,
-      "points": [[-52, -52], [-52, 52]],
+      "points": [[-52, -52], [-52, -6]],
       "seed": 31,
+      "solid": true
+    }, {
+      "ids": ["prp_rocha_duna", "prp_arenito", "prp_arenito"],
+      "spacing": 3.4,
+      "scale": [1.4, 2.2],
+      "jitter": 0.6,
+      "points": [[-52, 6], [-52, 52]],
+      "seed": 38,
       "solid": true
     },
     {

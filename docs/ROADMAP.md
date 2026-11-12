@@ -44,7 +44,8 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] 6.1 Estrada: Campos de Pradoluz, Bosque Seco, Estepe de Pedra, shader de bioma, 5 secundárias (170 créditos). Em teste
   - [x] 6.2a Figurantes: 6 moradores, cachorro, gato, vaca, pássaros, carinho e pesca (~255 créditos). Em teste
   - [~] 6.2b Ato 2 começo: Qaressa, Dunas de Ossos, Zahir, Nadira, homem-lagarto, saqueador, missão 7 (~350 créditos). Em teste
-  - [ ] 6.2c Ruínas de Ammar, esqueleto antigo, 1º duelo com o Severin, Torre Afundada e a Sahra
+  - [~] 6.2c Ruínas de Ammar, guardião antigo, mural do céu, 1º duelo com o Severin, missão 8 (~200 créditos). Em teste na 0.1.9 (código 10)
+  - [ ] 6.2d Torre Afundada e a Sahra (chefe final do Ato 2: 2 formas, escudo de quebra e arena a favor)
 
 ## Pendências para depois do jogo concluído
 

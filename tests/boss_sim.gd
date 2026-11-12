@@ -57,6 +57,15 @@ func _ready() -> void:
 		print("SIM: no boss")
 		get_tree().quit(1)
 		return
+	# Final bosses: how often the shield broke and how often the wheat healed it.
+	var counts: Dictionary = {"breaks": 0, "heals": 0, "healed": 0.0, "phase2": 0.0}
+	boss.shield_broken.connect(func(_b: Enemy) -> void: counts["breaks"] += 1)
+	boss.transformed.connect(func(b: Enemy) -> void:
+		counts["phase2"] = Time.get_ticks_msec()
+		if is_instance_valid(b.ground):
+			b.ground.healed.connect(func(amount: float) -> void:
+				counts["heals"] += 1
+				counts["healed"] += amount))
 	var deaths: int = 0
 	var t: float = 0.0
 	var was_dead: bool = false
@@ -110,6 +119,7 @@ func _ready() -> void:
 	print("SIM: health_potions_left=%d/9 potions=%s boss=%s level=%d dodge=%s won=%s time=%.0fs deaths=%d lowest_hp=%d%% boss_hp=%s" % [
 		left, potions, boss_id, lvl, dodge, won, t, deaths, roundi(min_hp * 100.0),
 		"0" if won or not is_instance_valid(boss) else "%d%%" % roundi(boss.hp_ratio() * 100.0)])
+	print("SIM: shield_breaks=%d wheat_heals=%d healed=%d" % [counts["breaks"], counts["heals"], roundi(counts["healed"])])
 	get_tree().quit()
 
 

@@ -8,6 +8,8 @@ signal gold_changed(gold: int)
 signal died(gold_lost: int, xp_lost: int)
 signal respawned
 signal message(text: String)
+## The blade went through this area (attacks and skills); bosses' wheat gets cut.
+signal struck(center: Vector3, reach: float)
 
 const MOVE_SPEED: float = 6.0
 const DODGE_SPEED: float = 15.0
@@ -545,6 +547,7 @@ func _do_attack() -> void:
 		return
 	for e: Enemy in enemies_in_cone(ATTACK_RADIUS, ATTACK_HALF_ANGLE):
 		deal_damage(e, COMBO_MULTS[step], false, COMBO_KNOCKBACK[step])
+	struck.emit(global_position + forward() * ATTACK_RADIUS * 0.5, ATTACK_RADIUS * 0.6)
 	if step == COMBO_MULTS.size() - 1 and camera_rig:
 		camera_rig.shake(0.08, 0.1)
 

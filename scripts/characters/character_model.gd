@@ -370,8 +370,13 @@ func _apply_two_hand() -> void:
 	x = x.normalized()
 	var two_basis := Basis(x, axis, x.cross(axis))
 	# The other fist sits at "base" (0-1 along the weapon from the bottom of the handle).
+	# Weapons placed by "hold_point" (scythe) say it directly: "other_at" = where the other
+	# fist sits, as a fraction of the weapon length from the main grip (negative = lower).
 	var length: float = float(w.get("length", 0.8))
-	var base: Vector3 = Vector3(0, (float(_two_hand.get("base", 0.12)) - 0.5 + float(w.get("grip", 0.38))) * length, 0)
+	var base_y: float = (float(_two_hand.get("base", 0.12)) - 0.5 + float(w.get("grip", 0.38))) * length
+	if _two_hand.has("other_at"):
+		base_y = float(_two_hand["other_at"]) * length
+	var base: Vector3 = Vector3(0, base_y, 0)
 	var two_origin: Vector3 = other_g - two_basis * (base * sc)
 	var q: Quaternion = one.basis.get_rotation_quaternion().slerp(two_basis.get_rotation_quaternion(), _two_w)
 	var g := Transform3D(Basis(q).scaled(Vector3.ONE * sc), one.origin.lerp(two_origin, _two_w))

@@ -585,7 +585,9 @@ func _build_enemy_zones() -> void:
 
 
 ## Bosses and guardians: {"id", "pos", "level", "yaw", "unless_flag", "flag_on_death",
-## "intro" (dialogue when the fight starts), "transform_line" (dialogue when it changes form)}.
+## "intro" (dialogue when the fight starts), "transform_line" (dialogue as it starts changing
+## form), "reborn_line" (dialogue once the new form is there), "power_spots" ([[x, z], ...]:
+## where the arena rises in favour of the true form, see BossGround)}.
 ## With "arena": {"gate": [[x,z], [x,z]]} the entrance closes while the boss fights.
 func _build_bosses() -> void:
 	for b: Dictionary in data.get("bosses", []):
@@ -597,6 +599,8 @@ func _build_bosses() -> void:
 		e.rotation_degrees.y = float(b.get("yaw", 0))
 		e.set_meta("intro", str(b.get("intro", "")))
 		e.set_meta("transform_line", str(b.get("transform_line", "")))
+		e.set_meta("reborn_line", str(b.get("reborn_line", "")))
+		e.set_meta("power_spots", b.get("power_spots", []))
 		add_child(e)
 		var flag: String = str(b.get("flag_on_death", ""))
 		e.died.connect(func(dead: Enemy) -> void:

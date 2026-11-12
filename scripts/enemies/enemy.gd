@@ -16,8 +16,13 @@ signal died(enemy: Enemy)
 ## First time it notices the hero (bosses lock the arena).
 signal engaged(enemy: Enemy)
 signal hp_changed(enemy: Enemy)
+## Starts changing into another form (boss phase); `transformed` comes at the end.
+signal transforming(enemy: Enemy)
 ## Changed into another form (boss phase).
 signal transformed(enemy: Enemy)
+## Break shield (final bosses): broke / came back.
+signal shield_broken(enemy: Enemy)
+signal shield_restored(enemy: Enemy)
 ## An enemy it called in; whoever spawned this one should wire rewards for it.
 signal summoned(enemy: Enemy)
 
@@ -25,7 +30,9 @@ enum State { IDLE, CHASE, WINDUP, RECOVER, TRANSFORM, DEAD }
 
 const RECOVER_TIME: float = 0.45
 const PLAYER_RADIUS: float = 0.4
-const TRANSFORM_TIME: float = 2.2
+## Length of the form change scene (the moment the new body appears is SWAP_AT).
+const TRANSFORM_TIME: float = 4.4
+const SWAP_AT: float = 2.6
 
 var enemy_id: String = ""
 ## Form the enemy started as (quests count kills by this id).
@@ -70,6 +77,11 @@ var _path: PackedVector3Array = PackedVector3Array()
 var _path_timer: float = 0.0
 ## Meshy model (null = grey-box capsule).
 var model: CharacterModel
+## Final bosses: break shield and the arena on their side (see BreakShield, BossGround).
+var shield: BreakShield
+var ground: BossGround
+var _seek_cd: float = 0.0
+var _seek_time: float = 0.0
 
 
 func setup(id: String, lvl: int, player: Player) -> void:
@@ -131,6 +143,13 @@ func hp_ratio() -> float:
 func take_damage(amount: int, crit: bool, knockback: Vector3 = Vector3.ZERO) -> void:
 	if is_dead() or invulnerable:
 		return
+	if shield and shield.absorb(float(amount)):
+		ProtoVisuals.damage_number(get_parent(), global_position, str(amount), Color("#ffe39a"), false)
+		_flash()
+		if _state == State.IDLE:
+			_notice()
+		hp_changed.emit(self)
+		return
 	hp -= amount
 	if not is_boss:
 		_bar.set_ratio(hp_ratio())
@@ -158,11 +177,9 @@ func _physics_process(delta: float) -> void:
 	if is_dead():
 		return
 	if _state == State.TRANSFORM:
-		_timer -= delta
-		if _timer <= 0.0:
-			_finish_transform()
 		return
 	_cooldown -= delta
+	_seek_cd -= delta
 	for k: String in _attack_cds.keys():
 		_attack_cds[k] = float(_attack_cds[k]) - delta
 	if _dodge_time > 0.0:
@@ -190,8 +207,14 @@ func _physics_process(delta: float) -> void:
 				if dist > aggro * 1.6 and not is_boss:
 					_state = State.IDLE
 				else:
-					var a: Dictionary = _pick_attack(dist) if _cooldown <= 0.0 else {}
-					if not a.is_empty():
+					var heal_at: Vector3 = _heal_spot(dist, delta)
+					var a: Dictionary = _pick_attack(dist) if _cooldown <= 0.0 and (heal_at == Vector3.INF or dist < 2.5) else {}
+					if heal_at != Vector3.INF and a.is_empty():
+						var to_spot: Vector3 = heal_at - global_position
+						to_spot.y = 0.0
+						move = _steer_to(heal_at, to_spot) * speed * 1.15 * (1.0 - status.value("slow"))
+						_face(to_spot)
+					elif not a.is_empty():
 						_face(to)
 						_start_attack(a)
 					else:
@@ -448,24 +471,54 @@ func _check_phases() -> void:
 		return
 
 
+## The form change is a short scene (TRANSFORM_TIME seconds, the boss takes no damage):
+## the boss roars and pushes the hero back, glows gold inside a whirl of straw, the arena
+## turns in its favour (BossGround), the old body spins and shrinks, the new one grows out
+## of the whirl and lands with a slam, and the break shield closes around it.
 func _start_transform(new_id: String) -> void:
 	if new_id == "" or not Data.enemies.has(new_id):
 		return
 	_cancel_attack()
 	_state = State.TRANSFORM
-	_timer = TRANSFORM_TIME
 	invulnerable = true
 	set_meta("next_form", new_id)
+	transforming.emit(self)
+	if _target_alive() and target.camera_rig:
+		target.camera_rig.focus_on(self, TRANSFORM_TIME + 0.6)
+	var new_data: Dictionary = Data.enemies.get(new_id, {})
 	if model:
 		model.play_action("taunt")
 	Audio.play_sfx("roar", global_position)
-	var tw := create_tween().set_loops(5)
-	tw.tween_callback(_flash)
-	tw.tween_interval(0.35)
-	ProtoVisuals.flash_disc(get_parent(), global_position, 4.0, Color(1, 0.85, 0.4, 0.6), 0.8)
+	_push_hero_away(5.0, 4.0)
+	ProtoVisuals.flash_disc(get_parent(), global_position, 5.0, Color(1, 0.85, 0.4, 0.6), 0.8)
+	var whirl: CPUParticles3D = _straw_whirl()
+	var tw := create_tween()
+	# Golden glow builds up while the arena changes.
+	tw.tween_method(func(v: float) -> void:
+		if model:
+			model.set_tint(Color("#ffc94a"), v), 0.0, 0.75, 1.6)
+	tw.parallel().tween_callback(func() -> void: _raise_ground(new_data)).set_delay(0.5)
+	# The old body spins and shrinks into the whirl.
+	var spin_from: float = rotation.y
+	var body_scale: float = float(data.get("scale", 1.0))
+	tw.tween_method(func(v: float) -> void:
+		rotation.y = spin_from + v * TAU * 2.0
+		var k: float = 1.0 - 0.85 * v * v
+		if model:
+			model.scale = Vector3.ONE * body_scale * k
+		elif _visual:
+			_visual.scale = Vector3.ONE * k, 0.0, 1.0, SWAP_AT - 1.6)
+	tw.tween_callback(_swap_form)
+	tw.tween_interval(TRANSFORM_TIME - SWAP_AT)
+	tw.tween_callback(func() -> void:
+		if is_instance_valid(whirl):
+			whirl.emitting = false
+			get_tree().create_timer(1.5, false).timeout.connect(whirl.queue_free)
+		_end_transform())
 
 
-func _finish_transform() -> void:
+## Moment the new body appears (grows out of the whirl and lands with a slam).
+func _swap_form() -> void:
 	var new_id: String = str(get_meta("next_form", ""))
 	var keep_ratio: float = hp_ratio()
 	enemy_id = new_id
@@ -473,18 +526,161 @@ func _finish_transform() -> void:
 	speed = float(data.get("speed", speed))
 	var l: int = level - 1
 	var sc: Dictionary = Data.enemy_scaling
-	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l)
+	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l) * Session.diff("atk")
 	defense = float(data.get("def", 0)) * (1.0 + float(sc.get("def", 0.0)) * l)
 	hp = max_hp * keep_ratio
 	_attack_cds.clear()
 	_used_once.clear()
 	_build_body()
-	ProtoVisuals.flash_disc(get_parent(), global_position, 5.0, Color(1, 0.9, 0.5, 0.7), 0.6)
+	var s: float = float(data.get("scale", 1.0))
+	var body: Node3D = model if model else _visual
+	var full: Vector3 = body.scale
+	body.scale = full * 0.15
+	create_tween().tween_property(body, "scale", full, 0.7).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	if model:
+		model.play_action("slam")
+		create_tween().tween_method(func(v: float) -> void:
+			if is_instance_valid(model):
+				model.set_tint(Color("#ffc94a"), v), 0.7, 0.0, 1.2)
+	Audio.play_sfx("slam", global_position)
+	Audio.play_sfx("roar", global_position, 0.8)
+	ProtoVisuals.flash_disc(get_parent(), global_position, 1.5 * s, Color(1, 0.9, 0.5, 0.6), 0.5)
+	_push_hero_away(5.0, 3.5)
+	if _target_alive() and target.camera_rig:
+		target.camera_rig.shake(0.35, 0.4)
+	hp_changed.emit(self)
+
+
+func _end_transform() -> void:
+	if data.has("shield"):
+		_add_shield(data["shield"])
 	invulnerable = false
 	_state = State.CHASE
 	_cooldown = 1.0
 	transformed.emit(self)
 	hp_changed.emit(self)
+
+
+## The arena turns in the boss's favour: "power_ground" of the new form + the
+## "power_spots" the map gave this boss (e.g. wheat patches for the Scarecrow).
+func _raise_ground(new_data: Dictionary) -> void:
+	var cfg: Dictionary = new_data.get("power_ground", {})
+	var spots: Array = get_meta("power_spots", [])
+	if cfg.is_empty() or spots.is_empty() or is_instance_valid(ground):
+		return
+	ground = BossGround.new()
+	ground.name = "BossGround"
+	get_parent().add_child(ground)
+	ground.setup(self, spots, cfg)
+	ground.sprout(2.4)
+	ground.healed.connect(func(amount: float) -> void:
+		ProtoVisuals.damage_number(get_parent(), global_position + Vector3(0, 0.5, 0), "+%d" % roundi(amount), Color("#7dff8a"), true)
+		Audio.play_sfx("rest", global_position, 0.9))
+	if _target_alive():
+		target.struck.connect(ground.cut_at)
+	tree_exiting.connect(func() -> void:
+		if is_instance_valid(ground):
+			ground.queue_free())
+
+
+func _add_shield(cfg: Dictionary) -> void:
+	if is_instance_valid(shield):
+		shield.queue_free()
+	shield = BreakShield.new()
+	shield.name = "BreakShield"
+	add_child(shield)
+	var s: float = float(data.get("scale", 1.0))
+	shield.setup(max_hp, cfg, 0.75 * s, 2.0 * s)
+	shield.changed.connect(func() -> void: hp_changed.emit(self))
+	shield.broken.connect(func() -> void:
+		status.apply("stun", float(cfg.get("stun", 2.5)))
+		if _state == State.WINDUP:
+			_cancel_attack()
+		_flash()
+		Audio.play_sfx("crit", global_position, 0.7)
+		ProtoVisuals.flash_disc(get_parent(), global_position, 2.0 * s, Color(1, 1, 1, 0.6), 0.4)
+		if _target_alive() and target.camera_rig:
+			target.camera_rig.shake(0.25, 0.25)
+		shield_broken.emit(self))
+	shield.restored.connect(func() -> void:
+		Audio.play_sfx("roar", global_position, 1.1)
+		shield_restored.emit(self))
+
+
+## Pushes the hero out of the way (no damage), e.g. when the boss changes form.
+func _push_hero_away(push_speed: float, within: float) -> void:
+	if not _target_alive():
+		return
+	var away: Vector3 = target.global_position - global_position
+	away.y = 0.0
+	if away.length() > within:
+		return
+	if away.length() < 0.1:
+		away = -_forward()
+	target.start_forced_move(away.normalized() * push_speed, 0.35)
+
+
+## Straw spinning up around the boss while it changes form.
+func _straw_whirl() -> CPUParticles3D:
+	var p := CPUParticles3D.new()
+	var straw := BoxMesh.new()
+	straw.size = Vector3(0.04, 0.32, 0.04)
+	p.mesh = straw
+	p.material_override = ProtoVisuals.material(Color("#e8b84a"), true)
+	p.amount = 90
+	p.lifetime = 1.4
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_RING
+	p.emission_ring_axis = Vector3.UP
+	p.emission_ring_radius = 1.8
+	p.emission_ring_inner_radius = 0.8
+	p.emission_ring_height = 0.2
+	p.direction = Vector3.UP
+	p.spread = 10.0
+	p.gravity = Vector3(0, 1.5, 0)
+	p.initial_velocity_min = 1.0
+	p.initial_velocity_max = 2.5
+	p.tangential_accel_min = 7.0
+	p.tangential_accel_max = 10.0
+	p.radial_accel_min = -2.5
+	p.radial_accel_max = -1.0
+	p.angular_velocity_min = -360.0
+	p.angular_velocity_max = 360.0
+	p.particle_flag_rotate_y = true
+	p.scale_amount_min = 0.7
+	p.scale_amount_max = 1.4
+	add_child(p)
+	p.position.y = 0.2
+	p.emitting = true
+	return p
+
+
+## Heals a fraction of the max health (wheat). Returns how much it healed.
+func heal(fraction: float) -> float:
+	if is_dead():
+		return 0.0
+	var before: float = hp
+	hp = minf(max_hp, hp + max_hp * fraction)
+	hp_changed.emit(self)
+	return hp - before
+
+
+## A ripe patch to walk to when hurt ("seek_below" of power_ground), or Vector3.INF.
+## It goes for one for a few seconds, then gives up for a while.
+func _heal_spot(hero_dist: float, delta: float) -> Vector3:
+	if not is_instance_valid(ground) or invulnerable:
+		return Vector3.INF
+	if hp_ratio() > float(ground.cfg.get("seek_below", 0.8)) or _seek_cd > 0.0 or status.has("stun"):
+		_seek_time = 0.0
+		return Vector3.INF
+	var spot: Vector3 = ground.nearest_ready(global_position, 14.0)
+	if spot == Vector3.INF:
+		return Vector3.INF
+	_seek_time += delta
+	if _seek_time > 5.0 or (hero_dist < 2.0 and _rng.randf() < 0.01):
+		_seek_time = 0.0
+		_seek_cd = float(ground.cfg.get("seek_cooldown", 6.0))
+		return Vector3.INF
+	return spot
 
 
 # --- Body -------------------------------------------------------------------------

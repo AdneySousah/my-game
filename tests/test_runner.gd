@@ -593,10 +593,34 @@ func _boss_test() -> void:
 		check(not main.hud.is_in_dialogue() and main.map.arena_closed(), "second try skips the opening talk")
 		gorvan.take_damage(roundi(gorvan.max_hp * 0.55), false)
 		check(gorvan.invulnerable, "Gorvan is untouchable while transforming")
-		for i: int in 160:
+		await _frames(2)
+		check(main.hud.is_in_dialogue(), "Gorvan talks as he starts changing")
+		await _finish_dialogue(main)
+		for i: int in 400:
 			await get_tree().physics_frame
+			if not gorvan.invulnerable:
+				break
+		check(main.hud.is_in_dialogue(), "Lio reacts to the new form")
 		await _finish_dialogue(main)
 		check(gorvan.enemy_id == "espantalho" and gorvan.base_id == "gorvan", "Gorvan becomes the Colossal Scarecrow")
+		# True form: wheat rises in the arena and a break shield covers it.
+		check(is_instance_valid(gorvan.ground) and gorvan.ground.ready_count() == 5, "the arena sprouts 5 wheat patches")
+		check(is_instance_valid(gorvan.shield) and gorvan.shield.is_up(), "the Scarecrow has a break shield")
+		var hp_before: float = gorvan.hp
+		gorvan.take_damage(10, false)
+		check(is_equal_approx(gorvan.hp, hp_before) and gorvan.shield.value < gorvan.shield.max_value, "while shielded the hits wear the shield, not the health")
+		gorvan.take_damage(roundi(gorvan.shield.max_value), false)
+		check(not gorvan.shield.is_up() and gorvan.status.has("stun"), "a broken shield stuns the boss")
+		gorvan.take_damage(10, false)
+		check(gorvan.hp < hp_before, "with the shield broken it takes damage")
+		var spot: Vector3 = gorvan.ground.nearest_ready(gorvan.global_position, 80.0)
+		main.player.struck.emit(spot, 1.0)
+		check(gorvan.ground.ready_count() == 4, "the hero's blade cuts a wheat patch")
+		hp_before = gorvan.hp
+		spot = gorvan.ground.nearest_ready(gorvan.global_position, 80.0)
+		gorvan.global_position = spot
+		await _frames(3)
+		check(gorvan.hp > hp_before + gorvan.max_hp * 0.1 and gorvan.ground.ready_count() == 3, "walking over wheat heals the Scarecrow 15%")
 		gorvan.take_damage(1000000, false)
 		await _frames(5)
 		check(Session.has_flag("gorvan_defeated") and not main.map.arena_closed(), "victory opens the arena")
@@ -730,8 +754,7 @@ func _audio_test() -> void:
 		check(Audio.current_music() == "chefe", "boss music when Gorvan fights")
 		g.take_damage(100000000, false)
 		check(not g.is_dead() and g.invulnerable, "a huge hit does not skip the Scarecrow form")
-		await _frames(160)
-		await _finish_dialogue(main)
+		await _through_transform(main, g)
 		g.take_damage(100000000, false)
 		await _frames(3)
 		check(Audio.current_music() == "vitoria", "victory music after the boss")
@@ -1195,6 +1218,19 @@ func _talk(main: Main, npc_id: String) -> void:
 	main.talk_to_nearby()
 	await _frames(1)
 	await _finish_dialogue(main)
+
+
+## Plays a boss form change to the end (both talks) and breaks its shield.
+func _through_transform(main: Main, boss: Enemy) -> void:
+	await _frames(2)
+	await _finish_dialogue(main)
+	for i: int in 400:
+		await get_tree().physics_frame
+		if not boss.invulnerable:
+			break
+	await _finish_dialogue(main)
+	if is_instance_valid(boss.shield) and boss.shield.is_up():
+		boss.take_damage(roundi(boss.shield.max_value) + 1, false)
 
 
 func _finish_dialogue(main: Main) -> void:

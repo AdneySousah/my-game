@@ -302,7 +302,12 @@ func _update_boss_bar() -> void:
 	_boss_name.text = _boss.display_name()
 	_boss_bar.max_value = _boss.max_hp
 	_boss_bar.value = maxf(_boss.hp, 0.0)
-	_boss_bar.text = "%d%%" % roundi(maxf(_boss.hp_ratio(), 0.0) * 100.0)
+	var sh: BreakShield = _boss.shield
+	_boss_bar.shield_ratio = sh.ratio() if is_instance_valid(sh) else 0.0
+	if is_instance_valid(sh) and sh.is_up():
+		_boss_bar.text = tr("HUD_BOSS_SHIELDED") % roundi(maxf(_boss.hp_ratio(), 0.0) * 100.0)
+	else:
+		_boss_bar.text = "%d%%" % roundi(maxf(_boss.hp_ratio(), 0.0) * 100.0)
 
 
 ## "" hides it. "talk" turns the attack button into a speech balloon (out of a fight);

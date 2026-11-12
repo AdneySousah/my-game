@@ -19,7 +19,7 @@ HUD_SKILL_EQUIPPED,Botão %d,Button %d
 PANEL_ATTRIBUTES,Atributos,Attributes
 PANEL_POINTS,Pontos livres: %d,Free points: %d
 PANEL_CLOSE,Fechar,Close
-PANEL_SKILLS,Skills — escolha o botão de cada uma,Skills — pick a button for each
+PANEL_SKILLS,Skills,Skills
 ATTR_STR,Força,Strength
 ATTR_VIT,Vitalidade,Vitality
 ATTR_AGI,Agilidade,Agility
@@ -149,6 +149,152 @@ STAT_EVADE,Esquiva,Evasion
 STAT_CDR,Recarga das skills,Skill cooldown
 STAT_SKILL_DMG,Dano das skills,Skill damage
 STAT_STAMINA_REGEN,Recuperação de fôlego,Stamina recovery
+SMITH_TITLE,Forja do Tobias,Tobias's Forge
+SMITH_GOLD,%d de ouro,%d gold
+SMITH_TAB_ENHANCE,Fortalecer,Strengthen
+SMITH_TAB_GEMS,Encaixes e gemas,Sockets and gems
+SMITH_TAB_CRAFT,Criar,Craft
+SMITH_TAB_DISASSEMBLE,Desmontar,Disassemble
+SMITH_PICK_PIECE,Suas peças (equipadas primeiro),Your pieces (worn first)
+SMITH_PICK_RECIPE,O que o Tobias sabe fazer,What Tobias can make
+SMITH_NO_PIECES,Você não tem equipamentos.,You have no gear.
+SMITH_NO_BAG_PIECES,Nenhuma peça na mochila para desmontar.,No piece in the bag to take apart.
+SMITH_BROKEN,Quebrada,Broken
+SMITH_BROKEN_INFO,Esta peça quebrou e não dá bônus. O Tobias consegue restaurar.,This piece broke and gives no bonus. Tobias can restore it.
+SMITH_RESTORE,Restaurar,Restore
+SMITH_MAX,Esta peça já está no +20.,This piece is already +20.
+SMITH_CHANCE,Chance de dar certo: %d%%,Chance of success: %d%%
+SMITH_RISK_BREAK,"Se falhar, a peça quebra (dá para restaurar).","If it fails, the piece breaks (it can be restored)."
+SMITH_RISK_VANISH,"Se falhar, a peça some para sempre!","If it fails, the piece is gone for good!"
+SMITH_USE,Usar %s (você tem %d),Use %s (you have %d)
+SMITH_ENHANCE,Fortalecer,Strengthen
+SMITH_COST,Custo:,Cost:
+SMITH_GOLD_COST,%d de ouro,%d gold
+SMITH_SOCKET_EMPTY,Vazio,Empty
+SMITH_SOCKET_LOCKED,Fechado,Closed
+SMITH_GEM_REMOVE,Toque numa gema encaixada para tirar (%d de ouro).,Tap a set gem to take it out (%d gold).
+SMITH_OPEN_SOCKET,Abrir encaixe: %s (você tem %d) · %d%%,Open socket: %s (you have %d) · %d%%
+SMITH_NEED_DRILL,"Para abrir encaixes, precisa de uma Broca de Engaste.",To open sockets you need a Socket Drill.
+SMITH_NO_GEMS,Você não tem gemas na mochila.,You have no gems in the bag.
+SMITH_GEM_SET_BTN,Encaixar gema,Set gem
+SMITH_GEM_MERGE,Juntar %d → 1 (%d de ouro),Merge %d → 1 (%d gold)
+SMITH_RANDOM_SOCKETS,Encaixes: sorteados ao criar (0 a 3).,Sockets: rolled when made (0 to 3).
+SMITH_CRAFT,Criar,Craft
+SMITH_FULL,Nunca foi usada: devolve todos os materiais.,Never worn: gives back all materials.
+SMITH_HALF,Já foi usada: devolve metade dos materiais.,Already worn: gives back half the materials.
+SMITH_RETURNS,Devolve: %s,Gives back: %s
+SMITH_GONE_WARN,A peça deixa de existir.,The piece will be gone.
+SMITH_DISASSEMBLE,Desmontar,Disassemble
+SMITH_CANT,Não dá para fazer isso.,That can't be done.
+SMITH_NO_GOLD,Ouro insuficiente.,Not enough gold.
+SMITH_NO_MATS,Faltam materiais.,Missing materials.
+SMITH_CRAFTED,Pronto! A peça nova está na mochila.,Done! The new piece is in your bag.
+SMITH_BROKEN_FIRST,Restaure a peça antes de fortalecer.,Restore the piece before strengthening it.
+SMITH_ENHANCE_OK,Deu certo! A peça ficou mais forte.,Success! The piece got stronger.
+SMITH_ENHANCE_FAIL,Não deu certo. A peça continua igual.,It failed. The piece is unchanged.
+SMITH_ENHANCE_BROKE,Falhou e a peça quebrou!,It failed and the piece broke!
+SMITH_ENHANCE_VANISHED,Falhou e a peça se desfez...,It failed and the piece crumbled...
+SMITH_ENHANCE_SAVED,"Falhou, mas o Amuleto protegeu a peça.","It failed, but the Amulet protected the piece."
+SMITH_RESTORED,Peça restaurada.,Piece restored.
+SMITH_SOCKETS_FULL,Esta peça já tem 3 encaixes.,This piece already has 3 sockets.
+SMITH_SOCKET_OK,Encaixe aberto!,Socket opened!
+SMITH_SOCKET_FAIL,A broca falhou e se quebrou.,The drill failed and broke.
+SMITH_NO_SOCKET,Não há encaixe livre.,No free socket.
+SMITH_GEM_SET,Gema encaixada.,Gem set.
+SMITH_GEM_REMOVED,Gema de volta na mochila.,Gem back in the bag.
+SMITH_GEM_TOP,Esta gema já está no nível máximo.,This gem is already at the top tier.
+SMITH_GEM_MERGED,As gemas viraram uma maior!,The gems became a bigger one!
+SMITH_TAKE_OFF_FIRST,Tire a peça antes de desmontar.,Take the piece off before taking it apart.
+SMITH_TAKEN_APART,Peça desmontada.,Piece taken apart.
+ITEMTYPE_GEM,Gema,Gem
+HUD_DEBUG_KIT,+kit forja (F2),+forge kit (F2)
+HUD_DEBUG_KIT_GOT,Kit de teste: ouro e materiais da forja.,Test kit: gold and forge materials.
+SHOP_TITLE,Loja,Shop
+SHOP_CELESTE,Armazém da Dona Celeste,Mrs. Celeste's Store
+SHOP_TAB_BUY,Comprar,Buy
+SHOP_TAB_SELL,Vender,Sell
+SHOP_TAB_SPECIAL,Loja especial,Special shop
+SHOP_GOODS,O que a Dona Celeste vende,What Mrs. Celeste sells
+SHOP_YOUR_BAG,Sua mochila (toque para vender),Your bag (tap to sell)
+SHOP_NOTHING_TO_SELL,Nada na mochila que dê para vender.,Nothing in the bag you can sell.
+SHOP_AMOUNT,Quantidade: %d,Amount: %d
+SHOP_BUY,Comprar,Buy
+SHOP_SELL,Vender,Sell
+SHOP_YOU_GET,Você recebe:,You get:
+SHOP_BOUGHT,Comprado! Está na mochila.,Bought! It is in your bag.
+SHOP_SOLD,Vendido.,Sold.
+SHOP_CANT_SELL,Isso não dá para vender.,That can't be sold.
+STORE_NOTE,Compras com dinheiro real pelo Google Play.,Real-money purchases through Google Play.
+STORE_TEST_NOTE,Loja de teste: nenhuma cobrança é feita.,Test shop: nothing is charged.
+STORE_XP_ACTIVE,Bônus de XP ativo: faltam %d min.,XP bonus active: %d min left.
+STORE_WAIT,Abrindo a compra...,Opening the purchase...
+STORE_THANKS,Obrigado! A compra já está com você.,Thank you! The purchase is yours.
+STORE_GOT,Compra recebida: %s,Purchase received: %s
+STORE_UNAVAILABLE,A loja especial não está disponível aqui.,The special shop is not available here.
+STORE_ERROR,Não foi possível concluir a compra.,The purchase could not be completed.
+STORE_CANCELED,Compra cancelada.,Purchase cancelled.
+STORE_PENDING,Pagamento pendente: o item chega quando o pagamento for aprovado.,Payment pending: the item arrives when the payment is approved.
+STORE_OURO_5000,Saco de ouro,Bag of gold
+STORE_OURO_5000_DESC,5.000 de ouro.,"5,000 gold."
+STORE_OURO_30000,Baú de ouro,Chest of gold
+STORE_OURO_30000_DESC,30.000 de ouro (20% a mais).,"30,000 gold (20% more)."
+STORE_XP_BOOST,Pergaminho do saber,Scroll of learning
+STORE_XP_BOOST_DESC,+50% de XP dos inimigos por 1 hora (o tempo corre mesmo com o jogo fechado).,+50% XP from enemies for 1 hour (time runs even with the game closed).
+STORE_KIT_POCOES,Kit de poções,Potion kit
+STORE_KIT_POCOES_DESC,"10 de vida média, 10 de fôlego médio e 3 tônicos.","10 medium health, 10 medium stamina and 3 tonics."
+HUD_ROUTINE,Rotina (R),Routine (R)
+ROUTINE_TITLE,Rotina,Routine
+ROUTINE_TAB_DAILY,Diárias,Dailies
+ROUTINE_TAB_LOGIN,Login,Login
+ROUTINE_TAB_ACHIEVEMENTS,Conquistas,Achievements
+ROUTINE_DAILY_NOTE,"5 missões por dia, sorteadas pelo seu nível. Renovam à meia-noite.","5 missions a day, drawn by your level. They renew at midnight."
+ROUTINE_PROGRESS,Progresso:,Progress:
+ROUTINE_CLAIM,Pegar prêmio,Collect
+ROUTINE_CLAIMED,Recebido,Collected
+ROUTINE_LOGIN_NOTE,Entre um dia por vez e ganhe um prêmio (%d de %d dias). Dias 6 e 7 de cada semana têm Broca e Amuleto; o 28º dá um Trevo Real.,Come back one day at a time for a prize (%d of %d days). Days 6 and 7 of each week give a Drill and an Amulet; day 28 gives a Royal Clover.
+ROUTINE_DAY,Dia %d,Day %d
+ROUTINE_LOGIN_CLAIM,Pegar o prêmio do dia %d,Collect the prize of day %d
+ROUTINE_LOGIN_TOMORROW,Volte amanhã para o próximo prêmio,Come back tomorrow for the next prize
+ROUTINE_TITLE_NOW,Título em uso: %s. Cada conquista libera um título; use um por vez.,Title in use: %s. Each achievement unlocks a title; wear one at a time.
+ROUTINE_NO_TITLE,nenhum,none
+ROUTINE_TITLE_USE,Usar título,Use title
+ROUTINE_TITLE_ON,Em uso,In use
+ROUTINE_CLOCK_BACK,O relógio do aparelho voltou no tempo. Os prêmios ficam bloqueados até a data voltar ao normal.,The device clock went back in time. Prizes stay locked until the date is right again.
+ROUTINE_ACH_GOT,Conquista! Novo título: %s,Achievement! New title: %s
+DAILY_KILL_ANY,Derrote %d inimigos,Defeat %d enemies
+DAILY_KILL,Derrote %d: %s,Defeat %d: %s
+DAILY_GATHER,Junte %d %s,Gather %d %s
+DAILY_EVENT_POTION,Beba %d poções,Drink %d potions
+DAILY_EVENT_ENHANCE,Fortaleça %d vez no ferreiro,Strengthen %d time at the smith
+DAILY_EVENT_BUY,Compre %d vez na loja,Buy %d time at the shop
+DAILY_EVENT_CRAFT,Crie %d peça no ferreiro,Craft %d piece at the smith
+ACH_LEVEL,Chegue ao nível %d,Reach level %d
+ACH_PLUS,Fortaleça uma peça até +%d,Strengthen a piece to +%d
+ACH_LOGIN,Entre no jogo em %d dias,Play on %d days
+ACH_DAILY,Complete %d missões diárias,Complete %d daily missions
+ACH_FLAG_GOLEM_DEFEATED,Derrote o Golem guardião da mina,Defeat the mine's guardian Golem
+ACH_FLAG_GORVAN_DEFEATED,"Derrote Gorvan, o Arauto da Colheita","Defeat Gorvan, Herald of the Harvest"
+DIFF_CHOOSE,Escolha a dificuldade,Choose the difficulty
+DIFF_EASY,Fácil,Easy
+DIFF_NORMAL,Normal,Normal
+DIFF_HARD,Difícil,Hard
+DIFF_EASY_DESC,Inimigos com 25% menos vida e dano; perder uma luta custa metade.,Enemies have 25% less health and damage; losing a fight costs half.
+DIFF_NORMAL_DESC,Como o jogo foi pensado.,As the game was designed.
+DIFF_HARD_DESC,Inimigos 40% mais fortes; 25% mais XP e mais itens.,Enemies 40% stronger; 25% more XP and more items.
+DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumentar.","You can lower it later (in Options, in a town), but not raise it."
+DIFF_NOW,Dificuldade: %s,Difficulty: %s
+DIFF_LOWER,Mudar para %s,Change to %s
+DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town
+HUD_DEBUG_TIME_GOT,Teste: +3 horas (agora %.1f h).,Test: +3 hours (now %.1f h).
+HUD_MENU_STORE,Loja,Shop
+HUD_MENU_ROUTINE,Rotina,Routine
+HUD_MENU_BAG,Mochila,Bag
+HUD_MENU_QUESTS,Missões,Quests
+HUD_OPEN_TAP,Abrir,Open
+HUD_PICK_UP_TAP,Pegar,Pick up
+HUD_SHIELD_BROKEN,Escudo quebrado! Ataque agora!,Shield broken! Strike now!
+HUD_SHIELD_BACK,O escudo voltou!,The shield is back!
+HUD_BOSS_SHIELDED,%d%% · escudo,%d%% · shield
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -367,7 +513,9 @@ DLG_GORVAN_INTRO_1,"Ora, ora! Um ratinho de Pradoluz no meu celeiro. Veio catar 
 DLG_GORVAN_INTRO_2,Vim buscar a comida da minha vila. Toda. Pode embrulhar pra viagem?,I came for my village's food. All of it. Could you wrap it to go?
 DLG_GORVAN_INTRO_3,Hohoho! O tributo pertence ao Soberano Alado. E quem mexe no que é do céu... vira adubo!,Hohoho! The tribute belongs to the Winged Sovereign. And whoever touches what is heaven's... becomes fertilizer!
 DLG_GORVAN_TRANSFORM_1,Chega de brincadeira! Vamos ver se você corta palha tão bem quanto corta piada!,Enough games! Let's see if you cut straw as well as you crack jokes!
-DLG_GORVAN_TRANSFORM_2,Ele virou um espantalho gigante?! Isso não estava no treino do Bram!,He turned into a giant scarecrow?! That was not in Bram's training!
+DLG_GORVAN_TRANSFORM_2,"Levanta, colheita! Teu senhor tem fome!","Rise, harvest! Your master is hungry!"
+DLG_GORVAN_REBORN_1,Ele virou um espantalho gigante?! Isso não estava no treino do Bram!,He turned into a giant scarecrow?! That was not in Bram's training!
+DLG_GORVAN_REBORN_2,"Esse brilho dourado é um escudo... e o trigo que brotou cura ele. Primeiro quebro o escudo, e corto o trigo antes que ele chegue lá!","That golden glow is a shield... and the wheat that sprouted heals him. Break the shield first, and cut the wheat before he gets to it!"
 DLG_MAIN_05_MARTA_1,Lio! As carroças voltaram cheias! A vila inteira está na praça!,Lio! The carts came back full! The whole village is in the square!
 DLG_MAIN_05_MARTA_2,Eu disse que voltava antes do jantar. Bom... de algum jantar.,I said I'd be back before dinner. Well... some dinner.
 DLG_MAIN_05_MARTA_3,"Todo arranhado... e eu nunca tive tanto orgulho de você. Vem, hoje tem pão de verdade.","All scratched up... and I've never been so proud of you. Come, there's real bread today."
@@ -411,160 +559,6 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-SMITH_TITLE,Forja do Tobias,Tobias's Forge
-SMITH_GOLD,%d de ouro,%d gold
-SMITH_TAB_ENHANCE,Fortalecer,Strengthen
-SMITH_TAB_GEMS,Encaixes e gemas,Sockets and gems
-SMITH_TAB_CRAFT,Criar,Craft
-SMITH_TAB_DISASSEMBLE,Desmontar,Disassemble
-SMITH_PICK_PIECE,Suas peças (equipadas primeiro),Your pieces (worn first)
-SMITH_PICK_RECIPE,O que o Tobias sabe fazer,What Tobias can make
-SMITH_NO_PIECES,Você não tem equipamentos.,You have no gear.
-SMITH_NO_BAG_PIECES,Nenhuma peça na mochila para desmontar.,No piece in the bag to take apart.
-SMITH_BROKEN,Quebrada,Broken
-SMITH_BROKEN_INFO,Esta peça quebrou e não dá bônus. O Tobias consegue restaurar.,This piece broke and gives no bonus. Tobias can restore it.
-SMITH_RESTORE,Restaurar,Restore
-SMITH_MAX,Esta peça já está no +20.,This piece is already +20.
-SMITH_CHANCE,Chance de dar certo: %d%%,Chance of success: %d%%
-SMITH_RISK_BREAK,"Se falhar, a peça quebra (dá para restaurar).","If it fails, the piece breaks (it can be restored)."
-SMITH_RISK_VANISH,"Se falhar, a peça some para sempre!","If it fails, the piece is gone for good!"
-SMITH_USE,Usar %s (você tem %d),Use %s (you have %d)
-SMITH_ENHANCE,Fortalecer,Strengthen
-SMITH_COST,Custo:,Cost:
-SMITH_GOLD_COST,%d de ouro,%d gold
-SMITH_SOCKET_EMPTY,Vazio,Empty
-SMITH_SOCKET_LOCKED,Fechado,Closed
-SMITH_GEM_REMOVE,Toque numa gema encaixada para tirar (%d de ouro).,Tap a set gem to take it out (%d gold).
-SMITH_OPEN_SOCKET,Abrir encaixe: %s (você tem %d) · %d%%,Open socket: %s (you have %d) · %d%%
-SMITH_NEED_DRILL,"Para abrir encaixes, precisa de uma Broca de Engaste.",To open sockets you need a Socket Drill.
-SMITH_NO_GEMS,Você não tem gemas na mochila.,You have no gems in the bag.
-SMITH_GEM_SET_BTN,Encaixar gema,Set gem
-SMITH_GEM_MERGE,Juntar %d → 1 (%d de ouro),Merge %d → 1 (%d gold)
-SMITH_RANDOM_SOCKETS,Encaixes: sorteados ao criar (0 a 3).,Sockets: rolled when made (0 to 3).
-SMITH_CRAFT,Criar,Craft
-SMITH_FULL,Nunca foi usada: devolve todos os materiais.,Never worn: gives back all materials.
-SMITH_HALF,Já foi usada: devolve metade dos materiais.,Already worn: gives back half the materials.
-SMITH_RETURNS,Devolve: %s,Gives back: %s
-SMITH_GONE_WARN,A peça deixa de existir.,The piece will be gone.
-SMITH_DISASSEMBLE,Desmontar,Disassemble
-SMITH_CANT,Não dá para fazer isso.,That can't be done.
-SMITH_NO_GOLD,Ouro insuficiente.,Not enough gold.
-SMITH_NO_MATS,Faltam materiais.,Missing materials.
-SMITH_CRAFTED,Pronto! A peça nova está na mochila.,Done! The new piece is in your bag.
-SMITH_BROKEN_FIRST,Restaure a peça antes de fortalecer.,Restore the piece before strengthening it.
-SMITH_ENHANCE_OK,Deu certo! A peça ficou mais forte.,Success! The piece got stronger.
-SMITH_ENHANCE_FAIL,Não deu certo. A peça continua igual.,It failed. The piece is unchanged.
-SMITH_ENHANCE_BROKE,Falhou e a peça quebrou!,It failed and the piece broke!
-SMITH_ENHANCE_VANISHED,Falhou e a peça se desfez...,It failed and the piece crumbled...
-SMITH_ENHANCE_SAVED,"Falhou, mas o Amuleto protegeu a peça.","It failed, but the Amulet protected the piece."
-SMITH_RESTORED,Peça restaurada.,Piece restored.
-SMITH_SOCKETS_FULL,Esta peça já tem 3 encaixes.,This piece already has 3 sockets.
-SMITH_SOCKET_OK,Encaixe aberto!,Socket opened!
-SMITH_SOCKET_FAIL,A broca falhou e se quebrou.,The drill failed and broke.
-SMITH_NO_SOCKET,Não há encaixe livre.,No free socket.
-SMITH_GEM_SET,Gema encaixada.,Gem set.
-SMITH_GEM_REMOVED,Gema de volta na mochila.,Gem back in the bag.
-SMITH_GEM_TOP,Esta gema já está no nível máximo.,This gem is already at the top tier.
-SMITH_GEM_MERGED,As gemas viraram uma maior!,The gems became a bigger one!
-SMITH_TAKE_OFF_FIRST,Tire a peça antes de desmontar.,Take the piece off before taking it apart.
-SMITH_TAKEN_APART,Peça desmontada.,Piece taken apart.
-ITEMTYPE_GEM,Gema,Gem
-HUD_DEBUG_KIT,+kit forja (F2),+forge kit (F2)
-HUD_DEBUG_KIT_GOT,Kit de teste: ouro e materiais da forja.,Test kit: gold and forge materials.
-SHOP_TITLE,Loja,Shop
-SHOP_CELESTE,Armazém da Dona Celeste,Mrs. Celeste's Store
-SHOP_TAB_BUY,Comprar,Buy
-SHOP_TAB_SELL,Vender,Sell
-SHOP_TAB_SPECIAL,Loja especial,Special shop
-SHOP_GOODS,O que a Dona Celeste vende,What Mrs. Celeste sells
-SHOP_YOUR_BAG,Sua mochila (toque para vender),Your bag (tap to sell)
-SHOP_NOTHING_TO_SELL,Nada na mochila que dê para vender.,Nothing in the bag you can sell.
-SHOP_AMOUNT,Quantidade: %d,Amount: %d
-SHOP_BUY,Comprar,Buy
-SHOP_SELL,Vender,Sell
-SHOP_YOU_GET,Você recebe:,You get:
-SHOP_BOUGHT,Comprado! Está na mochila.,Bought! It is in your bag.
-SHOP_SOLD,Vendido.,Sold.
-SHOP_CANT_SELL,Isso não dá para vender.,That can't be sold.
-STORE_NOTE,Compras com dinheiro real pelo Google Play.,Real-money purchases through Google Play.
-STORE_TEST_NOTE,Loja de teste: nenhuma cobrança é feita.,Test shop: nothing is charged.
-STORE_XP_ACTIVE,Bônus de XP ativo: faltam %d min.,XP bonus active: %d min left.
-STORE_WAIT,Abrindo a compra...,Opening the purchase...
-STORE_THANKS,Obrigado! A compra já está com você.,Thank you! The purchase is yours.
-STORE_GOT,Compra recebida: %s,Purchase received: %s
-STORE_UNAVAILABLE,A loja especial não está disponível aqui.,The special shop is not available here.
-STORE_ERROR,Não foi possível concluir a compra.,The purchase could not be completed.
-STORE_CANCELED,Compra cancelada.,Purchase cancelled.
-STORE_PENDING,Pagamento pendente: o item chega quando o pagamento for aprovado.,Payment pending: the item arrives when the payment is approved.
-STORE_OURO_5000,Saco de ouro,Bag of gold
-STORE_OURO_5000_DESC,5.000 de ouro.,"5,000 gold."
-STORE_OURO_30000,Baú de ouro,Chest of gold
-STORE_OURO_30000_DESC,30.000 de ouro (20% a mais).,"30,000 gold (20% more)."
-STORE_XP_BOOST,Pergaminho do saber,Scroll of learning
-STORE_XP_BOOST_DESC,+50% de XP dos inimigos por 1 hora (o tempo corre mesmo com o jogo fechado).,+50% XP from enemies for 1 hour (time runs even with the game closed).
-STORE_KIT_POCOES,Kit de poções,Potion kit
-STORE_KIT_POCOES_DESC,"10 de vida média, 10 de fôlego médio e 3 tônicos.","10 medium health, 10 medium stamina and 3 tonics."
-HUD_ROUTINE,Rotina (R),Routine (R)
-ROUTINE_TITLE,Rotina,Routine
-ROUTINE_TAB_DAILY,Diárias,Dailies
-ROUTINE_TAB_LOGIN,Login,Login
-ROUTINE_TAB_ACHIEVEMENTS,Conquistas,Achievements
-ROUTINE_DAILY_NOTE,"5 missões por dia, sorteadas pelo seu nível. Renovam à meia-noite.","5 missions a day, drawn by your level. They renew at midnight."
-ROUTINE_PROGRESS,Progresso:,Progress:
-ROUTINE_CLAIM,Pegar prêmio,Collect
-ROUTINE_CLAIMED,Recebido,Collected
-ROUTINE_LOGIN_NOTE,Entre um dia por vez e ganhe um prêmio (%d de %d dias). Dias 6 e 7 de cada semana têm Broca e Amuleto; o 28º dá um Trevo Real.,Come back one day at a time for a prize (%d of %d days). Days 6 and 7 of each week give a Drill and an Amulet; day 28 gives a Royal Clover.
-ROUTINE_DAY,Dia %d,Day %d
-ROUTINE_LOGIN_CLAIM,Pegar o prêmio do dia %d,Collect the prize of day %d
-ROUTINE_LOGIN_TOMORROW,Volte amanhã para o próximo prêmio,Come back tomorrow for the next prize
-ROUTINE_TITLE_NOW,Título em uso: %s. Cada conquista libera um título; use um por vez.,Title in use: %s. Each achievement unlocks a title; wear one at a time.
-ROUTINE_NO_TITLE,nenhum,none
-ROUTINE_TITLE_USE,Usar título,Use title
-ROUTINE_TITLE_ON,Em uso,In use
-ROUTINE_CLOCK_BACK,O relógio do aparelho voltou no tempo. Os prêmios ficam bloqueados até a data voltar ao normal.,The device clock went back in time. Prizes stay locked until the date is right again.
-ROUTINE_ACH_GOT,Conquista! Novo título: %s,Achievement! New title: %s
-DAILY_KILL_ANY,Derrote %d inimigos,Defeat %d enemies
-DAILY_KILL,Derrote %d: %s,Defeat %d: %s
-DAILY_GATHER,Junte %d %s,Gather %d %s
-DAILY_EVENT_POTION,Beba %d poções,Drink %d potions
-DAILY_EVENT_ENHANCE,Fortaleça %d vez no ferreiro,Strengthen %d time at the smith
-DAILY_EVENT_BUY,Compre %d vez na loja,Buy %d time at the shop
-DAILY_EVENT_CRAFT,Crie %d peça no ferreiro,Craft %d piece at the smith
-ACH_LEVEL,Chegue ao nível %d,Reach level %d
-ACH_PLUS,Fortaleça uma peça até +%d,Strengthen a piece to +%d
-ACH_LOGIN,Entre no jogo em %d dias,Play on %d days
-ACH_DAILY,Complete %d missões diárias,Complete %d daily missions
-ACH_FLAG_GOLEM_DEFEATED,Derrote o Golem guardião da mina,Defeat the mine's guardian Golem
-ACH_FLAG_GORVAN_DEFEATED,"Derrote Gorvan, o Arauto da Colheita","Defeat Gorvan, Herald of the Harvest"
-TITLE_DEFENSOR,Defensor de Pradoluz,Defender of Pradoluz
-TITLE_CACADOR_ORCS,Caçador de Orcs,Orc Hunter
-TITLE_QUEBRA_OSSOS,Quebra-ossos,Bonebreaker
-TITLE_DESPERTA_PEDRAS,Desperta-pedras,Stonewaker
-TITLE_FIM_DO_TRIBUTO,Fim do Tributo,End of the Tribute
-TITLE_APRENDIZ_HEROI,Aprendiz de herói,Hero's Apprentice
-TITLE_MAO_FERREIRO,Mão de ferreiro,Smith's Hand
-TITLE_MESTRE_FORJA,Mestre da forja,Forge Master
-TITLE_FIEL,Fiel,Faithful
-TITLE_TRABALHADOR,Trabalhador,Hard Worker
-DIFF_CHOOSE,Escolha a dificuldade,Choose the difficulty
-DIFF_EASY,Fácil,Easy
-DIFF_NORMAL,Normal,Normal
-DIFF_HARD,Difícil,Hard
-DIFF_EASY_DESC,Inimigos com 25% menos vida e dano; perder uma luta custa metade.,Enemies have 25% less health and damage; losing a fight costs half.
-DIFF_NORMAL_DESC,Como o jogo foi pensado.,As the game was designed.
-DIFF_HARD_DESC,Inimigos 40% mais fortes; 25% mais XP e mais itens.,Enemies 40% stronger; 25% more XP and more items.
-DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumentar.","You can lower it later (in Options, in a town), but not raise it."
-DIFF_NOW,Dificuldade: %s,Difficulty: %s
-DIFF_LOWER,Mudar para %s,Change to %s
-DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town
-HUD_DEBUG_TIME_GOT,Teste: +3 horas (agora %.1f h).,Test: +3 hours (now %.1f h).
-HUD_MENU_STORE,Loja,Shop
-HUD_MENU_ROUTINE,Rotina,Routine
-HUD_MENU_BAG,Mochila,Bag
-HUD_MENU_QUESTS,Missões,Quests
-HUD_OPEN_TAP,Abrir,Open
-HUD_PICK_UP_TAP,Pegar,Pick up
-OPT_SHOW_FPS,Mostrar quadros por segundo,Show frames per second
-OPT_FPS_LIMIT,Limite de quadros,Frame limit
-OPT_ON,Ligado,On
-OPT_OFF,Desligado,Off
+SKILLS_PICK_HINT,Toque no + de uma skill para ver o que ela faz e escolher o botão.,Tap the + on a skill to see what it does and pick its button.
+SKILLS_PICK_SLOT,Colocar no botão:,Put it on button:
+SKILLS_LOCKED_AT,abre no nível %d,unlocks at level %d

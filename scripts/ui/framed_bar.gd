@@ -14,6 +14,12 @@ var value: float = 1.0:
 	set(v):
 		value = v
 		queue_redraw()
+## Break shield over the bar (bosses): 0 = none, 1 = full width.
+var shield_ratio: float = 0.0:
+	set(v):
+		shield_ratio = v
+		queue_redraw()
+var shield_color: Color = Color("#ffe08a")
 var text: String = "":
 	set(v):
 		text = v
@@ -37,6 +43,11 @@ func _draw() -> void:
 		draw_rect(fill, fill_color)
 		draw_rect(Rect2(fill.position, Vector2(fill.size.x, fill.size.y * 0.4)), Color(1, 1, 1, 0.22))
 		draw_rect(Rect2(fill.position + Vector2(0, fill.size.y * 0.75), Vector2(fill.size.x, fill.size.y * 0.25)), Color(0, 0, 0, 0.18))
+	if shield_ratio > 0.0:
+		# A bright band over the top half of the groove, with a dark edge so it reads over red.
+		var band := Rect2(r.position, Vector2(r.size.x * clampf(shield_ratio, 0.0, 1.0), r.size.y * 0.55))
+		draw_rect(band, shield_color)
+		draw_rect(Rect2(band.position + Vector2(0, band.size.y - 2.0), Vector2(band.size.x, 2.0)), Color(0, 0, 0, 0.35))
 	if text != "":
 		var font: Font = ThemeDB.fallback_font
 		var fs: int = int(clampf(r.size.y * 1.05, 10, 18))

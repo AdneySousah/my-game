@@ -431,7 +431,12 @@ func _on_boss_spawned(e: Enemy) -> void:
 			_boss_line(intro), CONNECT_ONE_SHOT)
 	var line: String = str(e.get_meta("transform_line", ""))
 	if line != "":
-		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(line), CONNECT_ONE_SHOT)
+		e.transforming.connect(func(_b: Enemy) -> void: _boss_line(line), CONNECT_ONE_SHOT)
+	var reborn: String = str(e.get_meta("reborn_line", ""))
+	if reborn != "":
+		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(reborn), CONNECT_ONE_SHOT)
+	e.shield_broken.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BROKEN"), 2.2))
+	e.shield_restored.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BACK"), 1.8))
 
 
 func _boss_line(dialogue_id: String) -> void:

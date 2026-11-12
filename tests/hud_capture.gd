@@ -1,6 +1,7 @@
 extends Node
 ## Photos of the HUD: the top shortcuts, the speech balloon next to an NPC, the
-## special shop opened from the top and the options with the frame settings (needs a window).
+## special shop opened from the top, the options with the frame settings and the skills
+## screen (needs a window).
 ##   godot --path . --resolution 1280x720 res://tests/hud_capture.tscn -- <output_dir>
 
 var _out: String = ""
@@ -35,6 +36,25 @@ func _ready() -> void:
 	# 4) Options with the frame settings.
 	main.hud.call("_open_panel", main.hud.get("_options_panel"))
 	await _wait(0.5)
+	await _snap()
+	main.hud.get("_options_panel").hide()
+	main.hud.get("_options_panel").closed.emit()
+	# 5) Skills screen: the 8 skills with "+", then one chosen with the 4 buttons.
+	while main.player.stats.level < 14:
+		main.player.stats.add_xp(main.player.stats.xp_needed() - main.player.stats.xp)
+	main.player.skills.refresh_unlocks(false)
+	main.hud.open_skills()
+	await _wait(0.5)
+	await _snap()
+	var panel: SkillsPanel = main.hud.get("_skills_panel")
+	panel.call("_select", "golpe_sismico")
+	await _wait(0.3)
+	await _snap()
+	panel.call("_put_on", 2)
+	await _wait(0.3)
+	await _snap()
+	panel.call("_select", "salto_devastador")
+	await _wait(0.3)
 	await _snap()
 	print("CAPTURE_OK %d shots -> %s" % [_shot, _out])
 	get_tree().quit()

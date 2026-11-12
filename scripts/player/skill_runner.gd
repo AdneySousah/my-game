@@ -79,6 +79,8 @@ func use_slot(slot: int) -> bool:
 		return false
 	_cooldowns[id] = float(s.get("cooldown", 1.0)) * player.stats.cooldown_mult()
 	_execute(s)
+	if str(s.get("type", "")) != "buff":
+		player.struck.emit(player.global_position, float(s.get("radius", 2.5)))
 	return true
 
 

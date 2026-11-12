@@ -232,8 +232,20 @@
           "DLG_GORVAN_TRANSFORM_1"
         ],
         [
-          "lio",
+          "gorvan",
           "DLG_GORVAN_TRANSFORM_2"
+        ]
+      ]
+    },
+    "gorvan_reborn": {
+      "lines": [
+        [
+          "lio",
+          "DLG_GORVAN_REBORN_1"
+        ],
+        [
+          "lio",
+          "DLG_GORVAN_REBORN_2"
         ]
       ]
     },

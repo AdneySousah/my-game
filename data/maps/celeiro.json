@@ -66,7 +66,15 @@
     {"id": "env_viga_mina", "pos": [0, 13]},
     {"id": "env_viga_mina", "pos": [0, 19]},
     {"id": "prp_trigo", "pos": [-10, -14]},
-    {"id": "prp_trigo", "pos": [10, -14]}
+    {"id": "prp_trigo", "pos": [10, -14]},
+    {"id": "prp_trigo", "pos": [-17, -11]},
+    {"id": "prp_trigo", "pos": [17, -11]},
+    {"id": "prp_trigo", "pos": [-17, -2]},
+    {"id": "prp_trigo", "pos": [17, -2]},
+    {"id": "prp_trigo", "pos": [-7, -20.5]},
+    {"id": "prp_trigo", "pos": [7, -20.5]},
+    {"id": "prp_trigo", "pos": [-17, 9]},
+    {"id": "prp_trigo", "pos": [17, 9]}
   ],
   "arena": {"gate": [[-4, 11.4], [4, 11.4]]},
   "bosses": [
@@ -78,7 +86,9 @@
       "unless_flag": "gorvan_defeated",
       "flag_on_death": "gorvan_defeated",
       "intro": "gorvan_intro",
-      "transform_line": "gorvan_transform"
+      "transform_line": "gorvan_transform",
+      "reborn_line": "gorvan_reborn",
+      "power_spots": [[-9, -11], [9, -11], [-11, 0], [11, 0], [0, -16]]
     }
   ],
   "chests": [

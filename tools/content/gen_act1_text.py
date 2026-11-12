@@ -88,7 +88,11 @@ DIALOGUES = {
     ],
     "gorvan_transform": [
         ("gorvan", "Chega de brincadeira! Vamos ver se você corta palha tão bem quanto corta piada!", "Enough games! Let's see if you cut straw as well as you crack jokes!"),
+        ("gorvan", "Levanta, colheita! Teu senhor tem fome!", "Rise, harvest! Your master is hungry!"),
+    ],
+    "gorvan_reborn": [
         ("lio", "Ele virou um espantalho gigante?! Isso não estava no treino do Bram!", "He turned into a giant scarecrow?! That was not in Bram's training!"),
+        ("lio", "Esse brilho dourado é um escudo... e o trigo que brotou cura ele. Primeiro quebro o escudo, e corto o trigo antes que ele chegue lá!", "That golden glow is a shield... and the wheat that sprouted heals him. Break the shield first, and cut the wheat before he gets to it!"),
     ],
     "main_05_marta": [
         ("marta", "Lio! As carroças voltaram cheias! A vila inteira está na praça!", "Lio! The carts came back full! The whole village is in the square!"),

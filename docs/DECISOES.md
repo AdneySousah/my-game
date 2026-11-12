@@ -231,3 +231,24 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - **Ataque que não aparecia:** o golpe usava só 0,8 s de uma animação de 7,7 s, tocado devagar dentro do tempo do aviso (0,45 s). Na tela só dava para ver o fim do movimento, com a picareta parada. Agora o aviso dura 0,6 s e a animação vai 1,6x mais rápida: ele ergue a picareta acima da cabeça e desce numa picaretada à frente, terminando com a ponta para baixo, no momento do dano.
 - **Pegada:** ganhou os ossos dos dedos; a mão fecha no cabo e o cabo sai do punho inclinado para a frente, como se segura uma picareta (o golpe é de uma mão só, então a outra fica livre).
 - Ferramenta: `character_preview` aceita `ataque!:tempo:aviso` para ver o golpe de um inimigo exatamente como no jogo.
+
+## Gorvan, Espantalho e as regras dos chefes finais (12/11/2026)
+- **Foice na mão (Gorvan e Espantalho):** os dois ganharam os ossos dos dedos (Blender, sem créditos do Meshy; os 24 ossos originais iguais). A foice antes ficava solta, longe da mão e de lado; agora o cabo atravessa o punho fechado, uns 40% acima da ponta de baixo. Nos golpes (ceifar, girar, golpe pesado e a pancada no chão do Espantalho) ele segura com as duas mãos: a de baixo perto do fim do cabo e a de cima ~45 cm acima (`two_hand` com `other_at`, para armas presas por `hold_point`).
+- O dano dos golpes agora cai no momento em que a foice bate: golpe pesado do Gorvan aos 1,55 s (antes 1,3 s, com a foice ainda no alto) e a pancada do Espantalho aos 1,68 s, quando a lâmina finca no chão à frente (a animação é cortada logo depois, antes de a foice virar para trás).
+- **Troca de forma (50% de vida) virou uma cena de ~4,4 s**, sem dano no chefe:
+  1. O Gorvan fala primeiro ("Levanta, colheita! Teu senhor tem fome!"), com o jogo parado.
+  2. Ruge e empurra o herói para trás (sem dano); a câmera se aproxima e olha para ele.
+  3. Fica dourado dentro de um redemoinho de palha, e o trigo brota pela arena.
+  4. Gira e encolhe dentro do redemoinho; o Espantalho cresce de dentro dele e cai com uma pancada no chão (tremor de tela).
+  5. O escudo dourado fecha em volta dele, e o Lio comenta o que está vendo (escudo e trigo), para o jogador entender a regra nova.
+- **Regra para todo chefe final (Arauto) — vale para os próximos:**
+  - **Escudo de quebra** na forma verdadeira: enquanto o escudo está de pé, os golpes gastam o escudo e a vida não desce (números amarelos). Quando quebra: aviso "Escudo quebrado! Ataque agora!", o chefe fica atordoado 2,5 s e leva dano por 10 s; depois o escudo volta inteiro. Na barra do chefe o escudo aparece como uma faixa clara por cima da vida. Configuração: `shield` em `data/enemies/enemies.json` (`amount` = escudo em fração da vida máxima, `broken_time`, `stun`).
+  - **Arena a favor do chefe** quando ele mostra a forma verdadeira: o ambiente muda de acordo com o tema dele. No Espantalho, 5 moitas de trigo brotam no celeiro; quando ele passa por cima de uma, recupera **15% da vida** e a moita seca (volta em 40 s). Abaixo de 80% de vida ele vai atrás do trigo de propósito (por até 5 s, depois desiste por 8 s). O herói **corta** a moita atacando ou usando skill perto dela — é a resposta do jogador. Configuração: `power_ground` na forma (`heal`, `regrow`, `seek_below`...) e `power_spots` no chefe do mapa (onde nascem). Próximos Arautos: trocar o trigo pelo que combinar com cada um (ex.: poças, brasas, gelo), sempre com uma forma de o jogador negar a vantagem.
+  - A fala da troca de forma fica dividida: `transform_line` (o chefe, no começo) e `reborn_line` (o herói, no fim).
+- **Equilíbrio** (robô do `boss_sim`, com poções e peças): antes a luta no nível 12 levava ~48 s; agora 60–135 s, sem mortes, vida mínima ~33–50%. O tempo depende de quantas vezes ele come o trigo (0 a 4 no teste); o robô não corta trigo de propósito, então quem joga e corta o trigo termina mais rápido. A primeira forma (Gorvan) ficou igual, sem escudo.
+- Ferramenta nova: `tests/transform_capture.tscn` tira fotos da cena de troca de forma, do escudo, da quebra e da cura no trigo.
+
+## Tela de skills nova (12/11/2026)
+- Pedido do dono: em vez de uma lista com botões "1 2 3 4" em cada skill, a tela mostra as 8 skills como os ícones redondos (os mesmos dos botões de ataque), 4 por linha, com um "+" dourado no canto. As trancadas aparecem escuras, com cadeado e o nível em que abrem.
+- Tocando numa skill, aparece embaixo a descrição (nome, o que faz, fôlego e recarga) e os 4 botões com o ícone do que está em cada um; tocar num deles coloca a skill ali (se ela já estava em outro botão, as duas trocam de lugar). O número dourado no canto do ícone mostra em qual botão cada skill está.
+- Peça reutilizável: `SkillIconView` (ícone redondo com moldura, "+", número, cadeado e brilho de escolhido). Fotos: `hud_capture` agora termina na tela de skills.

@@ -30,6 +30,7 @@ var _frame: Texture2D
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_frame = GameTheme.tex("ui_botao_redondo")
+	UiGlyphs.texture("talk")
 	custom_minimum_size = Vector2(radius, radius) * 2.0
 	size = custom_minimum_size
 

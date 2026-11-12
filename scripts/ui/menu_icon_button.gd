@@ -5,7 +5,7 @@ extends Control
 
 signal pressed
 
-const RADIUS: float = 30.0
+const RADIUS: float = 34.0
 
 ## Glyph id for `UiGlyphs` (used when `icon` is null).
 var glyph: String = ""
@@ -25,6 +25,7 @@ var _touch_index: int = -1
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_frame = GameTheme.tex("ui_botao_redondo")
+	UiGlyphs.texture(glyph)
 	custom_minimum_size = Vector2(RADIUS * 2.0 + 12.0, RADIUS * 2.0 + 20.0)
 	size = custom_minimum_size
 
@@ -72,7 +73,7 @@ func _draw() -> void:
 		var inner: float = r * 0.68
 		draw_texture_rect(icon, Rect2(c - Vector2(inner, inner), Vector2(inner, inner) * 2.0), false)
 	else:
-		UiGlyphs.draw(self, glyph, c, r * 0.6)
+		UiGlyphs.draw(self, glyph, c, r * 0.7)
 	if caption != "":
 		var font: Font = ThemeDB.fallback_font
 		var fs: int = 14

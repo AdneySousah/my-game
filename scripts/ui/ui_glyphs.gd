@@ -1,15 +1,32 @@
 class_name UiGlyphs
 extends RefCounted
-## Small menu pictures drawn with shapes (speech balloon, bag, quest scroll, daily
-## calendar, special shop gem). Used inside the round buttons until painted icons exist.
+## Small menu pictures (speech balloon, bag, quest scroll, daily calendar, special shop).
+## A painted icon in assets/ui/menu/<id>.png wins; without it the picture is drawn with
+## shapes. Call `texture()` once outside `_draw` (in `_ready`) so it is loaded in time.
 
 const INK: Color = Color("#3a2414")
 const CREAM: Color = Color("#fff3d6")
 const GOLD: Color = Color("#ffcf4a")
+const MENU_DIR: String = "res://assets/ui/menu/"
+
+static var _textures: Dictionary = {}
+
+
+## Painted icon for `id`, or null when there is none (then `draw` uses shapes).
+static func texture(id: String) -> Texture2D:
+	if not _textures.has(id):
+		var path: String = MENU_DIR + id + ".png"
+		_textures[id] = load(path) if ResourceLoader.exists(path) else null
+	return _textures[id]
 
 
 ## Draws glyph `id` on `ci`, centred at `c`, fitting a circle of radius `r`.
 static func draw(ci: CanvasItem, id: String, c: Vector2, r: float, tint: Color = Color.WHITE) -> void:
+	var tex: Texture2D = _textures.get(id)
+	if tex:
+		var half: float = r * 1.08
+		ci.draw_texture_rect(tex, Rect2(c - Vector2(half, half), Vector2(half, half) * 2.0), false, tint)
+		return
 	match id:
 		"talk": _talk(ci, c, r, tint)
 		"bag": _bag(ci, c, r, tint)

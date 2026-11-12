@@ -2650,6 +2650,26 @@
         "2026-11-11: 2026-11-11: imagem aprovada pelo dono; modelo no jogo esperando o teste",
         "2026-11-11: 2026-11-11: modelo aprovado pelo dono no jogo"
       ]
+    },
+    {
+      "id": "ui_menu",
+      "category": "ui",
+      "phase": 7,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha 4x4 de ícones de menu (loja, rotina, mochila, missões, falar, mapa, opções, habilidades, atributos, equipamento, conquistas, viagem, presente, título, forja, portal)",
+      "file": "assets/ui/menu/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d048-c53b-745a-831e-dbc4d36e68b4",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: aprovado pelo dono; 5 ícones recortados (store, routine, bag, quests, talk) com scripts/tools/icons_prepare.gd"
+      ]
     }
   ]
 }

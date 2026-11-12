@@ -17,6 +17,11 @@ const GLOW_RANGE: float = 0.32
 ## A glow changes slowly from pixel to pixel; a bigger jump is the item's edge.
 const GLOW_STEP: float = 0.03
 
+## Sheets that are not items go to their own folder (menu shortcuts: assets/ui/menu).
+const OTHER_DST: Dictionary = {"ui_menu": "res://assets/ui/menu/"}
+## Sheets whose icons sit on a raised dark tile with a black rim: the tile goes too.
+const TILED: Array[String] = ["ui_menu"]
+
 ## Sheet -> item ids, row by row (left to right). Ids that are not items yet are kept
 ## for the next stages (gems, Act 2 materials, equipment).
 const SHEETS: Dictionary = {
@@ -44,15 +49,25 @@ const SHEETS: Dictionary = {
 		"eq_espada_lendario", "eq_elmo_lendario", "eq_peitoral_lendario", "eq_luvas_lendario",
 		"eq_calca_lendario", "eq_botas_lendario", "eq_pulseira_lendario", "eq_cinto_lendario",
 	],
+	# "" = not used yet (map, options, skills, attributes, equipment, achievements,
+	# travel, gift, title, forge, portal); the anvil and the portal need a better cut.
+	"ui_menu": [
+		"store", "routine", "bag", "quests",
+		"talk", "", "", "",
+		"", "", "", "",
+		"", "", "", "",
+	],
 }
 
 
 func _init() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
-	var out: String = args[0] if args.size() > 0 else ProjectSettings.globalize_path(DST)
-	DirAccess.make_dir_recursive_absolute(out)
+	var custom_out: String = args[0] if args.size() > 0 else ""
 	var made: int = 0
+	var out: String = ""
 	for sheet: String in SHEETS:
+		out = custom_out if custom_out != "" else ProjectSettings.globalize_path(str(OTHER_DST.get(sheet, DST)))
+		DirAccess.make_dir_recursive_absolute(out)
 		var path: String = ProjectSettings.globalize_path(SRC + sheet + ".png")
 		if not FileAccess.file_exists(path):
 			push_warning("missing sheet " + path)
@@ -63,8 +78,10 @@ func _init() -> void:
 		var cw: int = img.get_width() / GRID
 		var ch: int = img.get_height() / GRID
 		for i: int in ids.size():
+			if str(ids[i]) == "":
+				continue
 			var cell: Image = img.get_region(Rect2i((i % GRID) * cw, (i / GRID) * ch, cw, ch))
-			var icon: Image = _cut(cell)
+			var icon: Image = _cut(cell, sheet in TILED)
 			icon.save_png(out.path_join(str(ids[i]) + ".png"))
 			made += 1
 	print("ICONS_OK %d -> %s" % [made, out])
@@ -73,10 +90,12 @@ func _init() -> void:
 
 ## Removes the background around the item (flood fill from the cell border, so dark
 ## parts inside the item stay), softens glows, trims and fits it into SIZE x SIZE.
-func _cut(cell: Image) -> Image:
+func _cut(cell: Image, tiled: bool = false) -> Image:
 	var w: int = cell.get_width()
 	var h: int = cell.get_height()
 	var palette: Array[Color] = _background_palette(cell)
+	if tiled:
+		_add_tile_colors(cell, palette)
 	var bg_lum: float = 0.0
 	for c: Color in palette:
 		bg_lum = maxf(bg_lum, c.get_luminance())
@@ -124,7 +143,7 @@ func _cut(cell: Image) -> Image:
 				# Undo the blend with the background so the glow keeps its colour.
 				var col: Color = bg_ref + (c - bg_ref) / a
 				cell.set_pixel(x, y, Color(clampf(col.r, 0, 1), clampf(col.g, 0, 1), clampf(col.b, 0, 1), a))
-	_drop_edge_specks(cell, bg_ref)
+	_drop_edge_specks(cell, bg_ref, tiled)
 	for y: int in h:
 		for x: int in w:
 			if cell.get_pixel(x, y).a > 0.04:
@@ -144,7 +163,7 @@ func _cut(cell: Image) -> Image:
 
 ## Clears small loose bits that touch the cell edges (the rounded tile borders of
 ## the sheet). Sparkles near the item are kept because they do not reach the edge.
-func _drop_edge_specks(cell: Image, bg_ref: Color) -> void:
+func _drop_edge_specks(cell: Image, bg_ref: Color, tiled: bool = false) -> void:
 	var w: int = cell.get_width()
 	var h: int = cell.get_height()
 	var seen := PackedByteArray()
@@ -175,9 +194,38 @@ func _drop_edge_specks(cell: Image, bg_ref: Color) -> void:
 			for p: Vector2i in comp:
 				bb = bb.expand(p)
 			var density: float = float(comp.size()) / float(maxi(1, bb.size.x * bb.size.y))
-			if touches and (comp.size() < small or density < 0.12):
+			# Tiled sheets: the light bevel of the tile is left as a long thin line.
+			var thin_line: bool = tiled and maxi(bb.size.x, bb.size.y) >= w / 4 					and (mini(bb.size.x, bb.size.y) <= 10 or density < 0.2)
+			# ...and bits of it in the outer band of the cell (the tile edge).
+			var band: float = 0.24
+			var in_band: bool = bb.end.y < h * band or bb.position.y > h * (1.0 - band) 					or bb.end.x < w * band or bb.position.x > w * (1.0 - band)
+			if tiled and in_band and comp.size() < small:
+				thin_line = true
+			if thin_line or (touches and (comp.size() < small or density < 0.12)):
 				for p: Vector2i in comp:
 					cell.set_pixelv(p, Color(bg_ref, 0.0))
+
+
+## Walks in from the middle of each side and keeps every dark grey on the way (the gap,
+## the tile's black rim and the tile itself) until the picture starts.
+func _add_tile_colors(cell: Image, palette: Array[Color]) -> void:
+	var w: int = cell.get_width()
+	var h: int = cell.get_height()
+	var walks: Array = [[Vector2i(0, h / 2), Vector2i.RIGHT], [Vector2i(w - 1, h / 2), Vector2i.LEFT],
+		[Vector2i(w / 2, 0), Vector2i.DOWN], [Vector2i(w / 2, h - 1), Vector2i.UP]]
+	for walk: Array in walks:
+		var p: Vector2i = walk[0]
+		var d: Vector2i = walk[1]
+		# Only the outer part of the cell: the gap, the rim and the tile's light bevel.
+		for i: int in int(w * 0.22):
+			var c: Color = cell.get_pixelv(p)
+			# Chroma, not HSV saturation: near-black pixels have a meaningless saturation.
+			var chroma: float = maxf(c.r, maxf(c.g, c.b)) - minf(c.r, minf(c.g, c.b))
+			if c.get_luminance() >= 0.36 or chroma > 0.1:
+				break
+			if not _is_background(c, palette):
+				palette.append(c)
+			p += d
 
 
 ## Background colours: the cell border (gap between tiles) and the tile corner.

@@ -94,7 +94,7 @@
     },
     "bandido_estrada": {
       "name": "ENEMY_BANDIDO_ESTRADA",
-      "model": "enm_bandido",
+      "model": "enm_bandido_estrada",
       "hp": 70,
       "atk": 10,
       "def": 5,
@@ -120,7 +120,7 @@
     },
     "orc_saqueador": {
       "name": "ENEMY_ORC_SAQUEADOR",
-      "model": "enm_orc",
+      "model": "enm_orc_saqueador",
       "hp": 165,
       "atk": 16,
       "def": 9,

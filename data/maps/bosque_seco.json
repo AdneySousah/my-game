@@ -61,7 +61,6 @@
     }
   ],
   "props": [
-    {"id": "prp_placa", "pos": [3, 48], "rot": 0},
     {"id": "prp_carroca", "pos": [16, 6], "rot": 60},
     {"id": "prp_caixa", "pos": [18, 3]},
     {"id": "prp_caixa", "pos": [19.4, 4.4]},
@@ -71,7 +70,11 @@
     {"id": "prp_cerca_quebrada", "pos": [10, 12], "rot": -20},
     {"id": "prp_tronco_caido", "pos": [-18, -8], "rot": 40},
     {"id": "prp_toco", "pos": [-10, -18]},
-    {"id": "prp_placa", "pos": [4, -48], "rot": 180}
+    {"id": "prp_placa_estrada", "pos": [3.5, 47], "rot": 10},
+    {"id": "prp_tenda", "pos": [20, 12], "rot": 200},
+    {"id": "prp_tenda", "pos": [24, 4], "rot": 250},
+    {"id": "prp_carroca_quebrada", "pos": [8, -2], "rot": 30},
+    {"id": "prp_placa_estrada", "pos": [4.5, -47], "rot": 170}
   ],
   "lines": [
     {
@@ -131,21 +134,21 @@
   ],
   "scatter": [
     {
-      "ids": ["prp_arvore_torta", "prp_arvore_torta", "prp_arvore", "prp_pinheiro", "prp_toco"],
+      "ids": ["prp_arvore_seca", "prp_arvore_torta", "prp_arvore_seca", "prp_arvore", "prp_toco"],
       "count": 75,
       "rect": [-43, -47, 43, 47],
       "spacing": 5,
       "seed": 72
     },
     {
-      "ids": ["prp_tronco_caido", "prp_toco", "prp_pedra", "prp_arbusto", "prp_rochedo"],
+      "ids": ["prp_tronco_caido", "prp_arbusto_seco", "prp_pedra", "prp_arbusto_seco", "prp_rochedo"],
       "count": 45,
       "rect": [-43, -47, 43, 47],
       "spacing": 4,
       "seed": 73
     },
     {
-      "ids": ["prp_pedrinhas", "prp_arbusto", "prp_pedrinhas"],
+      "ids": ["prp_capim_seco", "prp_arbusto_seco", "prp_capim_seco", "prp_pedrinhas"],
       "count": 50,
       "rect": [-43, -47, 43, 47],
       "spacing": 2.5,

@@ -187,6 +187,8 @@
       "attack": { "anim": "Heavy_Hammer_Swing", "strike": 1.3, "end": 1.83, "speed": 1.0 , "hands": { "Left": "grip" } }
     }
   },
+  "enm_bandido_estrada": {"base": "enm_bandido", "texture": "res://assets/enemies/enm_bandido_estrada/enm_bandido_estrada.png"},
+  "enm_orc_saqueador": {"base": "enm_orc", "texture": "res://assets/enemies/enm_orc_saqueador/enm_orc_saqueador.png"},
   "enm_esqueleto": {
     "scene": "res://assets/enemies/enm_esqueleto/enm_esqueleto.glb",
     "anim_sources": [

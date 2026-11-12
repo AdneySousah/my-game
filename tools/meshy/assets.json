@@ -2710,6 +2710,266 @@
       "notes": [
         "2026-11-12: 2026-11-12: aprovado pelo dono; destaque 1024x500 em PT e EN com o nome do jogo (tests/store_art.tscn)"
       ]
+    },
+    {
+      "id": "prp_arvore_seca",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_arvore_seca/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-867e-70e6-af15-d9148ea71549",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-2432-71ff-b2a5-a47fa527362b",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_arbusto_seco",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_arbusto_seco/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-879a-747f-9a2a-75fcdd3b3a7a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-28f1-7388-a8c6-f5cd155c48ee",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_capim_seco",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_capim_seco/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8883-7230-8387-3b8b7ebdfb78",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-2cf9-7040-b296-bc8ddcf40048",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_arenito",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_arenito/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8965-71a4-97c6-eaf6edd2ed49",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-319e-717b-92e8-6edaaef135ad",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_arenito_pequeno",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_arenito_pequeno/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8a47-71eb-83f9-dd999ef7f7ea",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-3565-72d6-b25f-7f15dde31303",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_carroca_quebrada",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_carroca_quebrada/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8b3c-70dc-9b03-7ac35175c276",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-3ab9-7515-b1cc-7c740e5fa7d6",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_tenda",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_tenda/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8c36-7434-8fc8-96d21a698564",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-3e42-7252-b2be-7b4855166d81",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "prp_placa_estrada",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 peça de cenário seco (imagem nano-banana + Image to 3D)",
+      "file": "assets/props/prp_placa_estrada/",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8d18-715f-8454-4b63f5ddcfc9",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d0d1-4215-719e-90d1-832a80495549",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: imagem aprovada pelo dono; 3D no Bosque Seco e na Estepe"
+      ]
+    },
+    {
+      "id": "enm_bandido_estrada",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 nova textura (conceito image-to-image + Retexture + rig + animações)",
+      "file": "assets/enemies/enm_bandido_estrada/",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-8e14-7358-a223-13f9df49e4ee",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d0d1-476a-7650-bf02-a6cc1f60579a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Retexture com UV original; usa esqueleto, animações e pegada do enm_bandido (characters.json base)"
+      ]
+    },
+    {
+      "id": "enm_orc_saqueador",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.1 nova textura (conceito image-to-image + Retexture + rig + animações)",
+      "file": "assets/enemies/enm_orc_saqueador/",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d0cc-92a0-75a5-a9c3-d0a1e683d1f2",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d0d1-4d8d-7350-b0ca-4f5f2d69dfc6",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Retexture com UV original; usa esqueleto, animações e marreta do enm_orc (characters.json base)"
+      ]
     }
   ]
 }

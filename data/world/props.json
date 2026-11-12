@@ -214,6 +214,14 @@
       "scene": "res://assets/props/prp_rochedo/prp_rochedo.glb",
       "scale": 0.2,
       "collision": { "type": "cylinder", "radius": 1.3}
-    }
+    },
+    "prp_arvore_seca": { "scene": "res://assets/props/prp_arvore_seca/prp_arvore_seca.glb", "wind": { "sway": 0.08, "flutter": 0.0 }, "scale": 0.6, "collision": { "type": "cylinder", "radius": 0.35}},
+    "prp_arbusto_seco": { "scene": "res://assets/props/prp_arbusto_seco/prp_arbusto_seco.glb", "wind": { "sway": 0.08, "flutter": 0.02 }, "scale": 3.7, "collision": null},
+    "prp_capim_seco": { "scene": "res://assets/props/prp_capim_seco/prp_capim_seco.glb", "wind": { "sway": 0.2, "flutter": 0.02 }, "scale": 1.5, "collision": null},
+    "prp_arenito": { "scene": "res://assets/props/prp_arenito/prp_arenito.glb", "scale": 8.7, "collision": { "type": "cylinder", "radius": 1.0}},
+    "prp_arenito_pequeno": { "scene": "res://assets/props/prp_arenito_pequeno/prp_arenito_pequeno.glb", "scale": 1.1, "collision": { "type": "box"}},
+    "prp_carroca_quebrada": { "scene": "res://assets/props/prp_carroca_quebrada/prp_carroca_quebrada.glb", "scale": 1.1, "collision": { "type": "box"}},
+    "prp_tenda": { "scene": "res://assets/props/prp_tenda/prp_tenda.glb", "scale": 2.0, "collision": { "type": "box"}},
+    "prp_placa_estrada": { "scene": "res://assets/props/prp_placa_estrada/prp_placa_estrada.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.15}}
   }
 }

@@ -62,7 +62,30 @@ static func config_for(id: String) -> Dictionary:
 		var parsed: Variant = JSON.parse_string(text)
 		if parsed is Dictionary:
 			_configs = parsed
-	return _configs.get(id, {})
+	var cfg: Dictionary = _configs.get(id, {})
+	# "base": another entry it copies (a Retexture variant only adds "texture").
+	if cfg.has("base"):
+		var merged: Dictionary = config_for(str(cfg["base"])).duplicate(true)
+		for k: String in cfg:
+			if k != "base":
+				merged[k] = cfg[k]
+		return merged
+	return cfg
+
+
+## Puts `tex` as the colour picture of every material of the model (copies, not shared).
+func _swap_texture(tex: Texture2D) -> void:
+	if tex == null:
+		return
+	for mi: MeshInstance3D in _meshes:
+		if mi.mesh == null:
+			continue
+		for i: int in mi.mesh.get_surface_count():
+			var src: Material = mi.get_active_material(i)
+			if src is BaseMaterial3D:
+				var m: BaseMaterial3D = (src as BaseMaterial3D).duplicate()
+				m.albedo_texture = tex
+				mi.set_surface_override_material(i, m)
 
 
 func _ready() -> void:
@@ -78,6 +101,10 @@ func _ready() -> void:
 	skeleton = model.find_children("*", "Skeleton3D", true, false)[0]
 	for n: Node in model.find_children("*", "MeshInstance3D", true, false):
 		_meshes.append(n as MeshInstance3D)
+	# Variant made with Meshy Retexture (same UVs): only the picture changes, so the
+	# skeleton, animations, fingers and weapon grip are the original's.
+	if config.has("texture"):
+		_swap_texture(load(str(config["texture"])) as Texture2D)
 	ToonStyle.apply(model)
 	_overlay = ToonStyle.flash_overlay()
 	for mi: MeshInstance3D in _meshes:

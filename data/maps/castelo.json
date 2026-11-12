@@ -1,0 +1,76 @@
+{
+  "_comment": "Castelo Ermo (Fase 6.3c, níveis 42-44): o castelo do Brannoc no alto dos Picos, alcançado pelo túnel da Mina de Gelo. Pátio externo com a guarda gelada; no pátio do trono, o Brannoc (2 formas). Depois da luta: a cena do Bento e o salto de 2 anos.",
+  "id": "castelo",
+  "name": "MAP_CASTELO",
+  "size": [84, 100],
+  "seed": 191,
+  "biome": {"snow": 1.0},
+  "ground": "#cdd6df",
+  "grass": {"count": 80, "root": "#a9b8a8", "tip": "#f2f6f8"},
+  "sky": "#6f7f9c",
+  "ambient": 0.55,
+  "sun": 0.9,
+  "sun_color": "#cfdcff",
+  "patches": {"color": "#e9eef3", "count": 140},
+  "spawns": {"from_mina_gelo": [0, 42, 0]},
+  "exits": [
+    {"to": "mina_gelo", "spawn": "from_castelo", "pos": [0, 48], "size": [6, 2], "label": "MAP_MINA_GELO", "model": "env_entrada_mina_gelo", "model_pos": [0, 50], "model_rot": 180}
+  ],
+  "rest_points": [
+    {"id": "castelo_tunel", "name": "REST_CASTELO_TUNEL", "pos": [7, 38], "kind": "fogueira"},
+    {"id": "castelo_patio", "name": "REST_CASTELO_PATIO", "pos": [-8, -2], "kind": "fogueira"}
+  ],
+  "chests": [
+    {"id": "castelo_bau_1", "pos": [-32, 22], "yaw": 90, "gold": 2400, "items": {"pot_vida_g": 4, "trevo": 1, "gema_rubi_3": 1}},
+    {"id": "castelo_bau_2", "pos": [32, 4], "yaw": -90, "gold": 2600, "items": {"pot_folego_g": 3, "broca_real": 1, "eq_botas_epico": 1}}
+  ],
+  "paths": [
+    {"points": [[0, 48], [0, 30], [-8, 16], [4, 2], [0, -12], [0, -26]], "width": 3.6, "color": "#aeb8c4"}
+  ],
+  "props": [
+    {"id": "env_trono_gelo", "pos": [0, -42], "rot": 0},
+    {"id": "prp_estandarte_gelo", "pos": [-7, -40]},
+    {"id": "prp_estandarte_gelo", "pos": [7, -40]},
+    {"id": "prp_estandarte_gelo", "pos": [-8, -15]},
+    {"id": "prp_estandarte_gelo", "pos": [8, -15]},
+    {"id": "prp_estandarte_gelo", "pos": [-6, 30]},
+    {"id": "prp_estandarte_gelo", "pos": [6, 30]},
+    {"id": "prp_braseiro_frio", "pos": [-16, -26]},
+    {"id": "prp_braseiro_frio", "pos": [16, -26]},
+    {"id": "prp_braseiro_frio", "pos": [-14, 10]},
+    {"id": "prp_braseiro_frio", "pos": [14, 10]},
+    {"id": "env_muralha_torre", "pos": [-40, -46]},
+    {"id": "env_muralha_torre", "pos": [40, -46]},
+    {"id": "env_muralha_torre", "pos": [-40, 44]},
+    {"id": "env_muralha_torre", "pos": [40, 44]},
+    {"id": "env_muralha_torre", "pos": [-40, -14]},
+    {"id": "env_muralha_torre", "pos": [40, -14]},
+    {"id": "prp_estatua_alada", "pos": [-24, 20], "rot": 90},
+    {"id": "prp_estatua_alada", "pos": [24, 20], "rot": -90},
+    {"id": "prp_cristal_gelo", "pos": [-26, 34]},
+    {"id": "prp_cristal_gelo", "pos": [26, -4], "rot": 120}
+  ],
+  "walls": [
+    {"id": "env_muralha", "from": [-38, 46], "to": [-4, 46]},
+    {"id": "env_muralha", "from": [4, 46], "to": [38, 46]},
+    {"id": "env_muralha", "from": [41, 42], "to": [41, -44]},
+    {"id": "env_muralha", "from": [38, -48], "to": [-38, -48]},
+    {"id": "env_muralha", "from": [-41, -44], "to": [-41, 42]},
+    {"id": "env_muralha", "from": [-38, -14], "to": [-8, -14]},
+    {"id": "env_muralha", "from": [8, -14], "to": [38, -14]}
+  ],
+  "scatter": [
+    {"ids": ["prp_rochedo", "prp_pedra", "prp_barril", "prp_caixa"], "count": 18, "rect": [-36, -10, 36, 42], "spacing": 7, "seed": 192},
+    {"ids": ["prp_pedrinhas", "prp_pedra"], "count": 30, "rect": [-36, -10, 36, 42], "spacing": 4, "seed": 193},
+    {"ids": ["prp_pedrinhas"], "count": 10, "rect": [-34, -46, 34, -18], "spacing": 5, "seed": 194}
+  ],
+  "enemy_zones": [
+    {"pos": [-16, 26], "radius": 10, "max": 5, "types": {"morto_gelo": 3, "orc_neve": 2}, "level": [42, 43], "respawn": 25},
+    {"pos": [18, 12], "radius": 10, "max": 4, "types": {"golem_gelo": 2, "morto_gelo": 2}, "level": [43, 44], "respawn": 25},
+    {"pos": [-18, 0], "radius": 8, "max": 4, "types": {"orc_neve": 2, "morto_gelo": 2}, "level": [43, 44], "respawn": 25}
+  ],
+  "arena": {"gate": [[-8, -14], [8, -14]]},
+  "bosses": [
+    {"id": "brannoc", "pos": [0, -28], "level": 44, "yaw": 0, "unless_flag": "brannoc_defeated", "flag_on_death": "brannoc_defeated", "intro": "brannoc_intro", "transform_line": "brannoc_transform", "reborn_line": "brannoc_reborn", "power_spots": [[-10, -22], [10, -22], [-12, -34], [12, -34], [0, -38]]}
+  ]
+}

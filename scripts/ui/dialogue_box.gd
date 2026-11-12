@@ -91,8 +91,13 @@ func _show_line() -> void:
 	_shown = 0.0
 	_last_count = 0
 	_voice.pitch = float(npc.get("voice", 1.0))
-	if not _portraits.has(_speaker):
+	# "portrait_after": {"flag", "portrait"} swaps the face after a story moment
+	# (Lio after the two-year jump).
+	var alt: Dictionary = npc.get("portrait_after", {})
+	if not _portraits.has(_speaker) or not alt.is_empty():
 		var p: String = str(npc.get("portrait", ""))
+		if not alt.is_empty() and Session.has_flag(str(alt.get("flag", ""))):
+			p = str(alt.get("portrait", p))
 		_portraits[_speaker] = GameTheme.tex(p) if p != "" else null
 	_layout()
 	queue_redraw()

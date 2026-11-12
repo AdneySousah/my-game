@@ -125,6 +125,18 @@
       "rewards": { "xp": 12000, "gold": 3000, "items": { "pot_vida_g": 5, "eq_elmo_epico": 1, "gema_safira_3": 1 } }
     },
     {
+      "id": "main_12", "type": "main", "name": "QUEST_MAIN_12", "auto": true,
+      "requires": ["main_11"], "min_level": 40,
+      "steps": [
+        { "type": "talk", "npc": "bento", "dialogue": "main_12_bento", "text": "OBJ_TALK_BENTO_CASTLE" },
+        { "type": "reach", "map": "castelo", "pos": [0, 36], "radius": 8, "text": "OBJ_REACH_CASTELO", "dialogue": "main_12_castle" },
+        { "type": "kill", "enemy": "brannoc", "count": 1, "map": "castelo", "pos": [0, -28], "text": "OBJ_KILL_BRANNOC", "skip_if_flag": "brannoc_defeated" },
+        { "type": "talk", "npc": "osk", "dialogue": "main_12_osk", "text": "OBJ_TALK_OSK_AFTER" }
+      ],
+      "set_flag": "act3_done", "end_note": "QUEST_ACT3_DONE",
+      "rewards": { "xp": 15000, "gold": 4000, "items": { "pot_vida_g": 6, "eq_espada_epico": 1, "trevo_real": 1 } }
+    },
+    {
       "id": "side_moveis", "type": "side", "name": "QUEST_SIDE_MOVEIS", "giver": "osk", "offer": "side_moveis_offer",
       "requires": ["main_10"], "min_level": 32,
       "steps": [

@@ -4876,6 +4876,270 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "boss_brannoc",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Brannoc, Arauto do Frio",
+      "file": "assets/enemies/boss_brannoc/boss_brannoc.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-85a1-7215-ae8c-4468a93b4ed6",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-7d79-73f8-ab9b-9cc23a6828d9",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1d2-65f7-7183-933d-adcb82a4a335",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 24,
+          "task_id": "01a1d1d4-09e1-72cf-8ecf-f2f5c2750325",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_brannoc_gelo",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Brannoc, Gigante de Gelo",
+      "file": "assets/enemies/boss_brannoc_gelo/boss_brannoc_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-8940-747a-9a92-c551f4c2a773",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-83f1-71f9-8ca5-c905dc62b5ce",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1d2-7343-713b-8e38-2b7e6421eb4c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 21,
+          "task_id": "01a1d1d4-0baf-7515-b19d-4ca7d146f54f",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "hero_lio_adulto",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lio com 21 anos (salto de 2 anos)",
+      "file": "assets/characters/hero_lio_adulto/hero_lio_adulto.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-8ccb-77ec-96b0-916da4a6fc15",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-8a1e-7645-abb0-6725e16acc06",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d1d2-81b7-7162-ac28-8b2265ee245e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_machado_brannoc",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Machado do Brannoc",
+      "file": "assets/weapons/wpn_machado_brannoc/wpn_machado_brannoc.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1cc-8bdd-73bf-973f-8102d1578231",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-8f8a-76d9-ad2a-d22a95ae0c18",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_trono_gelo",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Trono de gelo",
+      "file": "assets/environment/env_trono_gelo/env_trono_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1cc-9133-72b0-a4dd-3044ad2d5d45",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-93bb-73c3-a7ed-08cd3c632664",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_tumulo_bento",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Túmulo do Bento",
+      "file": "assets/props/prp_tumulo_bento/prp_tumulo_bento.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1cc-9224-7440-8202-6627cec20603",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-97c9-72dc-b97c-064bf6e1409b",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_estandarte_gelo",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Estandarte do castelo",
+      "file": "assets/props/prp_estandarte_gelo/prp_estandarte_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1cc-9316-76f8-bc34-a04691a2ecca",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1cf-9b45-7513-9d38-173e6d149217",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_ato3c",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Carregamento do castelo e retratos (Lio adulto, Brannoc)",
+      "file": "assets/ui/ui_ato3c/ui_ato3c.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-93f6-72b1-bd3e-b7bd150c6da4",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cf-9f7a-712a-81c3-d2bba9c64458",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cf-a4b4-7377-bd12-4d9024d5ca9b",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pro_bento",
+      "category": "pro",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cena do Bento e salto de 2 anos (4 painéis)",
+      "file": "assets/story/pro_bento/pro_bento.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-da80-7392-ae18-59f486d0aa97",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-dfff-724d-85a0-5dd0f48afd4c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-e419-72f6-ba95-0cda62758409",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d1cc-e71e-724a-a26c-2c6775e06034",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

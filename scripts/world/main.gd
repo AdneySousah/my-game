@@ -298,6 +298,27 @@ func _on_enemy_killed(e: Enemy) -> void:
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
 	_drop_loot(e)
+	if str(e.data.get("after_story", "")) != "":
+		_after_story.call_deferred(e.data.duplicate())
+
+
+## Illustrated story scene after a boss ("after_story" in enemies.json, scenes in
+## data/story.json), then a story flag and a trip to another map (e.g. Bento's death and
+## the two-year jump after Brannoc).
+func _after_story(d: Dictionary) -> void:
+	await get_tree().create_timer(1.6, false).timeout
+	var s: StoryOverlay = StoryOverlay.play(get_tree(), str(d["after_story"]))
+	await s.finished
+	if str(d.get("after_flag", "")) != "":
+		Session.set_flag(str(d["after_flag"]))
+	player.set_skin(Session.skin)
+	player.rest()
+	_refresh_quest_world()
+	var to: Array = d.get("after_map", [])
+	if to.size() >= 2:
+		load_map(str(to[0]), str(to[1]))
+	else:
+		save_now()
 
 
 func _on_rest_reached(point: RestPoint) -> void:

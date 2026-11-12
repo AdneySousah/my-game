@@ -21,7 +21,7 @@
   "npcs": [
     {"id": "osk", "pos": [-10, 5], "yaw": 50},
     {"id": "brunhild", "pos": [12, 3], "yaw": -50},
-    {"id": "bento", "pos": [-3, 10], "yaw": 160, "if_flag": "act2_done"}
+    {"id": "bento", "pos": [-3, 10], "yaw": 160, "if_flag": "act2_done", "unless_flag": "brannoc_defeated"}
   ],
   "rest_points": [
     {"id": "hrimvald_pedra", "name": "REST_HRIMVALD_PEDRA", "pos": [0, 18], "kind": "pedra"}
@@ -31,7 +31,9 @@
     {"points": [[-20, 8], [-8, 8], [8, 8], [20, 8]], "width": 3.0, "color": "#cfd6dc"}
   ],
   "props": [
-    {"id": "prp_lenha_trancada", "pos": [0, -2]},
+    {"id": "prp_lenha_trancada", "pos": [0, -2], "unless_flag": "brannoc_defeated"},
+    {"id": "prp_fogueira", "pos": [0, -2], "if_flag": "brannoc_defeated"},
+    {"id": "prp_tumulo_bento", "pos": [-20, -23], "rot": 30, "if_flag": "brannoc_defeated"},
     {"id": "env_casa_nordica", "pos": [-18, -12], "rot": 30},
     {"id": "env_casa_nordica", "pos": [-7, -18], "rot": 10},
     {"id": "env_casa_nordica", "pos": [8, -18], "rot": -10},
@@ -44,10 +46,14 @@
     {"id": "env_torre_madeira", "pos": [26, -26], "rot": 90},
     {"id": "env_torre_madeira", "pos": [-26, 26], "rot": 180},
     {"id": "env_torre_madeira", "pos": [26, 26], "rot": -90},
-    {"id": "prp_braseiro_frio", "pos": [-5, 2]},
-    {"id": "prp_braseiro_frio", "pos": [5, 2]},
-    {"id": "prp_braseiro_frio", "pos": [-4, 22]},
-    {"id": "prp_braseiro_frio", "pos": [4, 22]},
+    {"id": "prp_braseiro_frio", "pos": [-5, 2], "unless_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro_frio", "pos": [5, 2], "unless_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro_frio", "pos": [-4, 22], "unless_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro_frio", "pos": [4, 22], "unless_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro", "pos": [-5, 2], "if_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro", "pos": [5, 2], "if_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro", "pos": [-4, 22], "if_flag": "brannoc_defeated"},
+    {"id": "prp_braseiro", "pos": [4, 22], "if_flag": "brannoc_defeated"},
     {"id": "prp_bigorna", "pos": [13.5, 0.5], "rot": 20},
     {"id": "prp_barril", "pos": [10, 0]},
     {"id": "prp_caixa", "pos": [-12, 2.5]},

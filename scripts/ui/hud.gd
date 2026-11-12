@@ -692,6 +692,7 @@ func _refresh() -> void:
 		return
 	var s: Stats = player.stats
 	_status.level = s.level
+	_status.set_portrait("ui_retrato_lio_adulto" if Session.has_flag("time_skip") else "ui_retrato_lio")
 	_status.hp_max = player.max_hp()
 	_status.hp = player.hp
 	_status.xp_max = maxi(1, s.xp_needed())

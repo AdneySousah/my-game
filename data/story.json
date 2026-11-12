@@ -1,0 +1,13 @@
+{
+  "_comment": "Cenas ilustradas dentro do jogo (StoryOverlay). Painéis em assets/story/<image>.webp; textos em tools/content/gen_act1_text.py. Disparadas por \"after_story\" de um chefe em enemies.json.",
+  "bento": {
+    "music": "prologo",
+    "panels": [
+      {"image": "sto_bento_1", "text": "STO_BENTO_1"},
+      {"image": "sto_bento_2", "text": "STO_BENTO_2"},
+      {"image": "sto_bento_3", "text": "STO_BENTO_3"},
+      {"image": "sto_bento_4", "text": "STO_BENTO_4"}
+    ],
+    "end_text": "STO_BENTO_LATER"
+  }
+}

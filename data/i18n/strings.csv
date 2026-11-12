@@ -423,6 +423,14 @@ REST_HRIMVALD_PEDRA,Pedra de Passagem de Hrimvald,Hrimvald Waystone
 ENEMY_ORC_NEVE,Orc da neve,Snow orc
 ENEMY_GOLEM_GELO,Golem de gelo,Ice golem
 ENEMY_MORTO_GELO,Morto congelado,Frozen dead
+MAP_PICOS,Picos Uivantes,Howling Peaks
+MAP_MINA_GELO,Mina de Gelo Esquecida,Forgotten Ice Mine
+MAP_CASTELO,Castelo Ermo,Lonely Castle
+REST_PICOS_BASE,Base da Montanha,Mountain Foot
+REST_PICOS_CRISTA,Abrigo da Crista,Ridge Shelter
+REST_MINA_GELO_ENTRADA,Boca da Mina Gelada,Frozen Mine Mouth
+REST_MINA_GELO_FUNDO,Galeria Congelada,Frozen Gallery
+ENEMY_GUARDIAO_GELO,Guardião de Gelo,Ice Guardian
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -463,6 +471,17 @@ QUEST_MAIN_10,Rumo ao frio,Into the Cold
 QUEST_ACT3_SOON,Hrimvald precisa de você: os Picos Uivantes e a Mina de Gelo chegam na próxima versão,Hrimvald needs you: the Howling Peaks and the Ice Mine arrive in the next version
 QUEST_SIDE_MOVEIS,Os móveis do Osk,Osk's Furniture
 QUEST_MAIN_11,A mina debaixo da montanha,The Mine Beneath the Mountain
+QUEST_MAIN_12,O Arauto do Frio,The Herald of Cold
+QUEST_ACT3_DONE,Fim do Ato 3 — Hrimvald está aquecida. O Ato 4 (Lys'Thaël) vem nas próximas versões,End of Act 3 — Hrimvald is warm again. Act 4 (Lys'Thaël) comes in the next versions
+OBJ_TALK_BENTO_CASTLE,Fale com o Bento,Talk to Bento
+OBJ_REACH_CASTELO,Suba ao Castelo Ermo pelo túnel no fundo da Mina de Gelo,Climb to the Lonely Castle through the tunnel at the bottom of the Ice Mine
+OBJ_KILL_BRANNOC,"Derrote o Brannoc, Arauto do Frio","Defeat Brannoc, Herald of Cold"
+OBJ_TALK_OSK_AFTER,Fale com o Velho Osk em Hrimvald,Talk to Old Osk in Hrimvald
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
 QUEST_ACT3_SOON2,O túnel para o Castelo Ermo está aberto: o Brannoc chega na próxima versão,The tunnel to the Lonely Castle is open: Brannoc arrives in the next version
 OBJ_TALK_BRUNHILD_CASTLE,Pergunte à Brunhild como chegar ao castelo,Ask Brunhild how to reach the castle
 OBJ_REACH_PICOS,"Suba aos Picos Uivantes, ao norte de Hrimvald","Climb the Howling Peaks, north of Hrimvald"
@@ -871,6 +890,27 @@ DLG_MAIN_11_BENTO_3,E o Severin de novo. Desta vez ninguém caiu. Acho que ele e
 DLG_MAIN_11_BENTO_4,"Então o castelo está logo ali. Lio... quando você for, eu vou junto. Não discute.","Then the castle is right there. Lio... when you go, I'm going with you. Don't argue."
 DLG_MAIN_11_BENTO_5,"Bento, lá vai ser perigoso de verdade.","Bento, it's going to be really dangerous there."
 DLG_MAIN_11_BENTO_6,Por isso mesmo. Alguém tem que garantir que você coma antes de salvar o mundo.,That's exactly why. Someone has to make sure you eat before saving the world.
+DLG_MAIN_12_BENTO_1,"Arrumei a mochila: pão de casca, sopa em pote e um cachecol extra. Vamos acabar com esse inverno?","Packed the bag: bark bread, soup in a jar and an extra scarf. Shall we end this winter?"
+DLG_MAIN_12_BENTO_2,Bento... promete que fica atrás de mim o tempo todo?,Bento... promise you'll stay behind me the whole time?
+DLG_MAIN_12_BENTO_3,"Prometo ficar perto. Atrás é com você. Vamos, o túnel da mina sobe direto para o castelo.","I promise to stay close. Behind is up to you. Come on, the mine tunnel goes straight up to the castle."
+DLG_MAIN_12_CASTLE_1,Castelo Ermo. Nem os estandartes balançam aqui. Até o vento tem medo dele.,The Lonely Castle. Not even the banners move here. Even the wind is afraid of him.
+DLG_MAIN_12_CASTLE_2,"Lá no fundo, perto do trono. Aquele velho de capa é o Brannoc. Lio... cuidado com o machado.","Down there, by the throne. That old man in the cloak is Brannoc. Lio... watch out for the axe."
+DLG_BRANNOC_INTRO_1,"Então é você. O menino que derrubou a Colheita e a Sede, e agora quer derreter o meu inverno.","So it's you. The boy who toppled Harvest and Thirst, and now wants to melt my winter."
+DLG_BRANNOC_INTRO_2,"Seu inverno está matando gente que só quer se aquecer. Abra a jaula, Brannoc.","Your winter is killing people who only want to keep warm. Open the cage, Brannoc."
+DLG_BRANNOC_INTRO_3,O frio ensina. Quem tem fome de calor aprende a obedecer. Foi o céu que me deu essa lição.,Cold teaches. Those hungry for warmth learn to obey. The sky gave me that lesson.
+DLG_BRANNOC_INTRO_4,"Isso não é lição, é maldade! Ele tem netos, sabia? O Osk queimou a própria cama!","That's no lesson, it's cruelty! He has grandkids, you know? Osk burned his own bed!"
+DLG_BRANNOC_INTRO_5,Então que os dois congelem juntos.,Then you can both freeze together.
+DLG_BRANNOC_TRANSFORM_1,Chega! Vocês querem ver o verdadeiro inverno?,Enough! You want to see the true winter?
+DLG_BRANNOC_TRANSFORM_2,"Gelo antigo, levanta! Que esta montanha inteira se curve!","Ancient ice, rise! Let this whole mountain bow!"
+DLG_BRANNOC_REBORN_1,Ele virou um gigante de gelo! E esse brilho de novo... um escudo.,He turned into an ice giant! And that glow again... a shield.
+DLG_BRANNOC_REBORN_2,"Lio, os cristais! Ele está tirando força deles! Quebra os cristais!","Lio, the crystals! He's drawing strength from them! Smash the crystals!"
+DLG_MAIN_12_OSK_1,Rapaz... dois anos. O povo achou que você não ia voltar.,Lad... two years. The people thought you'd never come back.
+DLG_MAIN_12_OSK_2,Eu precisava ficar mais forte. Na próxima vez que alguém entrar na frente de um golpe por mim... vai ser porque eu deixei de ser lento.,I needed to get stronger. The next time someone steps in front of a blow for me... it won't be because I was too slow.
+DLG_MAIN_12_OSK_3,Todo inverno a gente acende uma fogueira no túmulo dele. A cidade inteira faz sopa nesse dia. Do jeito que ele gostaria.,Every winter we light a fire at his grave. The whole town makes soup that day. The way he would have liked.
+DLG_MAIN_12_OSK_4,Ele ia reclamar do sal. E depois pedir mais um prato.,He'd complain about the salt. And then ask for another bowl.
+DLG_MAIN_12_OSK_5,Chegou um mensageiro dos elfos de Lys'Thaël. A floresta deles está morrendo em silêncio. Pediram por você.,A messenger came from the elves of Lys'Thaël. Their forest is dying in silence. They asked for you.
+DLG_OSK_IDLE_FINAL_1,Os netos já brigam por lugar perto da lareira. Tem barulho melhor que esse?,The grandkids already fight over a spot by the fireplace. Is there any sound better than that?
+DLG_BRUNHILD_IDLE_FINAL_1,Carvão à vontade e um herói de volta. Essa bigorna nunca cantou tão alto. Bora melhorar essa espada?,Coal galore and a hero back home. This anvil never sang so loud. Shall we improve that sword?
 DLG_SIDE_MOVEIS_OFFER_1,Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.,Lad... may I ask one more thing? All that's left to burn is my front door.
 DLG_SIDE_MOVEIS_OFFER_2,"Tem galhos secos caídos no pinheiral, debaixo da neve. Quatro feixes e meus netos passam a semana quentinhos.","There are dry branches fallen in the pine woods, under the snow. Four bundles and my grandkids stay warm all week."
 DLG_SIDE_MOVEIS_OFFER_3,Quatro feixes de galho. E a porta continua no lugar. Combinado.,Four bundles of branches. And the door stays where it is. Deal.
@@ -899,11 +939,8 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-MAP_PICOS,Picos Uivantes,Howling Peaks
-MAP_MINA_GELO,Mina de Gelo Esquecida,Forgotten Ice Mine
-MAP_CASTELO,Castelo Ermo,Lonely Castle
-REST_PICOS_BASE,Base da Montanha,Mountain Foot
-REST_PICOS_CRISTA,Abrigo da Crista,Ridge Shelter
-REST_MINA_GELO_ENTRADA,Boca da Mina Gelada,Frozen Mine Mouth
-REST_MINA_GELO_FUNDO,Galeria Congelada,Frozen Gallery
-ENEMY_GUARDIAO_GELO,Guardião de Gelo,Ice Guardian
+REST_CASTELO_TUNEL,Boca do Túnel,Tunnel Mouth
+REST_CASTELO_PATIO,Pátio Gelado,Frozen Court
+ENEMY_BRANNOC,"Brannoc, Arauto do Frio","Brannoc, Herald of Cold"
+ENEMY_BRANNOC_GELO,"Brannoc, Gigante de Gelo","Brannoc, Ice Giant"
+NPC_BRANNOC,Brannoc,Brannoc

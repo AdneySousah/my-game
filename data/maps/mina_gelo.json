@@ -16,7 +16,7 @@
   "spawns": {"from_picos": [0, 34, 0], "from_castelo": [0, -37, 180]},
   "exits": [
     {"to": "picos", "spawn": "from_mina_gelo", "pos": [0, 40], "size": [6, 2], "label": "MAP_PICOS"},
-    {"to": "castelo", "spawn": "from_mina_gelo", "pos": [0, -43.5], "size": [7, 2], "label": "MAP_CASTELO", "model": "env_viga_mina", "model_pos": [0, -41.6], "if_flag": "castelo_open", "locked_label": "MAP_ROAD_CLOSED"}
+    {"to": "castelo", "spawn": "from_mina_gelo", "pos": [0, -43.5], "size": [7, 2], "label": "MAP_CASTELO", "model": "env_viga_mina", "model_pos": [0, -41.6], "if_flag": "act3_mine", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "rest_points": [
     {"id": "mina_gelo_entrada", "name": "REST_MINA_GELO_ENTRADA", "pos": [6, 28], "kind": "fogueira"},

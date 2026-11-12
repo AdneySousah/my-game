@@ -314,3 +314,24 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - **Missão 11 "A mina debaixo da montanha"**: Brunhild → Picos → duelo → Guardião → Bento.
   - Termina com `act3_mine`.
   - O Bento decide ir junto ao castelo: é a preparação para a cena do Ato 3.
+
+## Fase 6.3c: Castelo Ermo, Brannoc, Bento e o salto de 2 anos (12/11/2026)
+- **Castelo Ermo** (42–44): chega-se pelo túnel do fundo da Mina de Gelo, que abre com `act3_mine`. Tem um pátio externo com a guarda gelada e o pátio do trono como arena.
+- **Brannoc, Arauto do Frio:**
+  - forma 1: velho senhor com machado de duas mãos; corta, gira, avança e chama 2 orcs da neve;
+  - forma 2: **Gigante de Gelo**, com soco, pancada em círculo e espinhos de gelo (barragem);
+  - escudo de quebra, e a **arena a favor** são 5 cristais de gelo que curam 15% (o herói quebra os cristais);
+  - no `boss_sim` (nível 44, peças épicas e poções): 91 s, sem mortes, vida mínima de 39%, 4 quebras de escudo.
+- **Cena do Bento** (pedido do GDD): quando o Gigante cai, toca uma cena ilustrada de 4 painéis no estilo do prólogo (`StoryOverlay`, configurada em `data/story.json`):
+  1. o Bento entra na frente do golpe;
+  2. a despedida, em que ele pede para o Lio guardar o cachecol;
+  3. Hrimvald com as chaminés acesas e o túmulo na colina;
+  4. o treino sozinho nas montanhas;
+  - termina com "Dois anos depois...".
+  - Como funciona: o chefe tem `after_story`/`after_flag`/`after_map` em enemies.json, que liga a flag `time_skip` e leva o herói de volta a Hrimvald.
+- **Salto de 2 anos:**
+  - com `time_skip`, o Lio usa o modelo `hero_lio_adulto`: um pouco mais alto, cicatriz na bochecha, cabelo preso e o cachecol vermelho do Bento. Usa as mesmas animações;
+  - o retrato do Lio muda no HUD e nos diálogos (`portrait_after` no npcs.json);
+  - as skins compradas continuam com o rosto jovem; quando uma está vestida, ela tem prioridade.
+- **Hrimvald depois:** braseiros e fogueira acesos, a jaula de lenha some, o túmulo do Bento aparece na colina e o Bento sai da cidade. O Osk e a Brunhild ganham falas novas.
+- **Missão 12 "O Arauto do Frio"** fecha o Ato 3 (`act3_done`). O Osk conta do mensageiro dos elfos de Lys'Thaël, gancho do Ato 4.

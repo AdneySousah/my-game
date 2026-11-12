@@ -543,6 +543,8 @@ func _build_props() -> void:
 	for item: Dictionary in data.get("props", []):
 		if item.has("if_flag") and not Session.has_flag(str(item["if_flag"])):
 			continue
+		if item.has("unless_flag") and Session.has_flag(str(item["unless_flag"])):
+			continue
 		var pos: Vector3 = _v(item["pos"])
 		PropFactory.spawn(self, str(item["id"]), pos, float(item.get("rot", 0)), float(item.get("scale", 1.0)))
 		_clear_spots.append(pos)

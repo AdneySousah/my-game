@@ -5,7 +5,8 @@
       "name": "NPC_LIO",
       "color": "#f2c14e",
       "voice": 1.0,
-      "portrait": "ui_retrato_lio"
+      "portrait": "ui_retrato_lio",
+      "portrait_after": {"flag": "time_skip", "portrait": "ui_retrato_lio_adulto"}
     },
     "marta": {
       "name": "NPC_MARTA",
@@ -211,7 +212,7 @@
       "color": "#8c5e3c",
       "voice": 0.7,
       "portrait": "ui_retrato_osk",
-      "talk": [{"if_flag": "act3_hrimvald", "dialogue": "osk_idle_after"}, {"dialogue": "osk_idle"}],
+      "talk": [{"if_flag": "brannoc_defeated", "dialogue": "osk_idle_final"}, {"if_flag": "act3_hrimvald", "dialogue": "osk_idle_after"}, {"dialogue": "osk_idle"}],
       "barks": ["BARK_OSK_1"],
       "model": "npc_osk"
     },
@@ -221,9 +222,15 @@
       "color": "#c8323c",
       "voice": 1.05,
       "portrait": "ui_retrato_brunhild",
-      "talk": [{"dialogue": "brunhild_idle"}],
+      "talk": [{"if_flag": "brannoc_defeated", "dialogue": "brunhild_idle_final"}, {"dialogue": "brunhild_idle"}],
       "barks": ["BARK_BRUNHILD_1"],
       "model": "npc_brunhild"
+    },
+    "brannoc": {
+      "name": "NPC_BRANNOC",
+      "color": "#5c6f8a",
+      "voice": 0.65,
+      "portrait": "ui_retrato_brannoc"
     },
     "sahra": {
       "name": "NPC_SAHRA",

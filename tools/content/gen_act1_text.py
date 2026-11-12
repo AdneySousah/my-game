@@ -350,6 +350,44 @@ DIALOGUES = {
         ("lio", "Bento, lá vai ser perigoso de verdade.", "Bento, it's going to be really dangerous there."),
         ("bento", "Por isso mesmo. Alguém tem que garantir que você coma antes de salvar o mundo.", "That's exactly why. Someone has to make sure you eat before saving the world."),
     ],
+    # --- Ato 3, missão 12: O Arauto do Frio ---
+    "main_12_bento": [
+        ("bento", "Arrumei a mochila: pão de casca, sopa em pote e um cachecol extra. Vamos acabar com esse inverno?", "Packed the bag: bark bread, soup in a jar and an extra scarf. Shall we end this winter?"),
+        ("lio", "Bento... promete que fica atrás de mim o tempo todo?", "Bento... promise you'll stay behind me the whole time?"),
+        ("bento", "Prometo ficar perto. Atrás é com você. Vamos, o túnel da mina sobe direto para o castelo.", "I promise to stay close. Behind is up to you. Come on, the mine tunnel goes straight up to the castle."),
+    ],
+    "main_12_castle": [
+        ("lio", "Castelo Ermo. Nem os estandartes balançam aqui. Até o vento tem medo dele.", "The Lonely Castle. Not even the banners move here. Even the wind is afraid of him."),
+        ("bento", "Lá no fundo, perto do trono. Aquele velho de capa é o Brannoc. Lio... cuidado com o machado.", "Down there, by the throne. That old man in the cloak is Brannoc. Lio... watch out for the axe."),
+    ],
+    "brannoc_intro": [
+        ("brannoc", "Então é você. O menino que derrubou a Colheita e a Sede, e agora quer derreter o meu inverno.", "So it's you. The boy who toppled Harvest and Thirst, and now wants to melt my winter."),
+        ("lio", "Seu inverno está matando gente que só quer se aquecer. Abra a jaula, Brannoc.", "Your winter is killing people who only want to keep warm. Open the cage, Brannoc."),
+        ("brannoc", "O frio ensina. Quem tem fome de calor aprende a obedecer. Foi o céu que me deu essa lição.", "Cold teaches. Those hungry for warmth learn to obey. The sky gave me that lesson."),
+        ("bento", "Isso não é lição, é maldade! Ele tem netos, sabia? O Osk queimou a própria cama!", "That's no lesson, it's cruelty! He has grandkids, you know? Osk burned his own bed!"),
+        ("brannoc", "Então que os dois congelem juntos.", "Then you can both freeze together."),
+    ],
+    "brannoc_transform": [
+        ("brannoc", "Chega! Vocês querem ver o verdadeiro inverno?", "Enough! You want to see the true winter?"),
+        ("brannoc", "Gelo antigo, levanta! Que esta montanha inteira se curve!", "Ancient ice, rise! Let this whole mountain bow!"),
+    ],
+    "brannoc_reborn": [
+        ("lio", "Ele virou um gigante de gelo! E esse brilho de novo... um escudo.", "He turned into an ice giant! And that glow again... a shield."),
+        ("bento", "Lio, os cristais! Ele está tirando força deles! Quebra os cristais!", "Lio, the crystals! He's drawing strength from them! Smash the crystals!"),
+    ],
+    "main_12_osk": [
+        ("osk", "Rapaz... dois anos. O povo achou que você não ia voltar.", "Lad... two years. The people thought you'd never come back."),
+        ("lio", "Eu precisava ficar mais forte. Na próxima vez que alguém entrar na frente de um golpe por mim... vai ser porque eu deixei de ser lento.", "I needed to get stronger. The next time someone steps in front of a blow for me... it won't be because I was too slow."),
+        ("osk", "Todo inverno a gente acende uma fogueira no túmulo dele. A cidade inteira faz sopa nesse dia. Do jeito que ele gostaria.", "Every winter we light a fire at his grave. The whole town makes soup that day. The way he would have liked."),
+        ("lio", "Ele ia reclamar do sal. E depois pedir mais um prato.", "He'd complain about the salt. And then ask for another bowl."),
+        ("osk", "Chegou um mensageiro dos elfos de Lys'Thaël. A floresta deles está morrendo em silêncio. Pediram por você.", "A messenger came from the elves of Lys'Thaël. Their forest is dying in silence. They asked for you."),
+    ],
+    "osk_idle_final": [
+        ("osk", "Os netos já brigam por lugar perto da lareira. Tem barulho melhor que esse?", "The grandkids already fight over a spot by the fireplace. Is there any sound better than that?"),
+    ],
+    "brunhild_idle_final": [
+        ("brunhild", "Carvão à vontade e um herói de volta. Essa bigorna nunca cantou tão alto. Bora melhorar essa espada?", "Coal galore and a hero back home. This anvil never sang so loud. Shall we improve that sword?"),
+    ],
     # --- Secundária: Os móveis do Osk (Pinheiral, Osk) ---
     "side_moveis_offer": [
         ("osk", "Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.", "Lad... may I ask one more thing? All that's left to burn is my front door."),
@@ -465,6 +503,17 @@ TEXTS = {
     "QUEST_ACT3_SOON": ("Hrimvald precisa de você: os Picos Uivantes e a Mina de Gelo chegam na próxima versão", "Hrimvald needs you: the Howling Peaks and the Ice Mine arrive in the next version"),
     "QUEST_SIDE_MOVEIS": ("Os móveis do Osk", "Osk's Furniture"),
     "QUEST_MAIN_11": ("A mina debaixo da montanha", "The Mine Beneath the Mountain"),
+    "QUEST_MAIN_12": ("O Arauto do Frio", "The Herald of Cold"),
+    "QUEST_ACT3_DONE": ("Fim do Ato 3 — Hrimvald está aquecida. O Ato 4 (Lys'Thaël) vem nas próximas versões", "End of Act 3 — Hrimvald is warm again. Act 4 (Lys'Thaël) comes in the next versions"),
+    "OBJ_TALK_BENTO_CASTLE": ("Fale com o Bento", "Talk to Bento"),
+    "OBJ_REACH_CASTELO": ("Suba ao Castelo Ermo pelo túnel no fundo da Mina de Gelo", "Climb to the Lonely Castle through the tunnel at the bottom of the Ice Mine"),
+    "OBJ_KILL_BRANNOC": ("Derrote o Brannoc, Arauto do Frio", "Defeat Brannoc, Herald of Cold"),
+    "OBJ_TALK_OSK_AFTER": ("Fale com o Velho Osk em Hrimvald", "Talk to Old Osk in Hrimvald"),
+    "STO_BENTO_1": ("No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.", "With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."),
+    "STO_BENTO_2": ("\"Não chora, Lio... come direito, tá? E guarda o meu cachecol.\" O gelo do Arauto se partiu. O coração de Bento parou.", "\"Don't cry, Lio... eat properly, okay? And keep my scarf.\" The Herald's ice shattered. Bento's heart stopped."),
+    "STO_BENTO_3": ("Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.", "That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."),
+    "STO_BENTO_4": ("Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.", "Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."),
+    "STO_BENTO_LATER": ("Dois anos depois...", "Two years later..."),
     "QUEST_ACT3_SOON2": ("O túnel para o Castelo Ermo está aberto: o Brannoc chega na próxima versão", "The tunnel to the Lonely Castle is open: Brannoc arrives in the next version"),
     "OBJ_TALK_BRUNHILD_CASTLE": ("Pergunte à Brunhild como chegar ao castelo", "Ask Brunhild how to reach the castle"),
     "OBJ_REACH_PICOS": ("Suba aos Picos Uivantes, ao norte de Hrimvald", "Climb the Howling Peaks, north of Hrimvald"),

@@ -24,6 +24,7 @@ var defeated_text: String = ""
 
 var _ring: Texture2D
 var _portrait: Texture2D
+var _portrait_id: String = ""
 var _touch: int = -1
 var _pulse: float = 0.0
 
@@ -33,7 +34,16 @@ func _ready() -> void:
 	custom_minimum_size = Vector2(340, 170)
 	size = custom_minimum_size
 	_ring = GameTheme.tex("ui_botao_redondo")
-	_portrait = GameTheme.tex("ui_retrato_lio")
+	set_portrait("ui_retrato_lio")
+
+
+## Face in the ring (changes after the two-year jump). Loads outside _draw.
+func set_portrait(id: String) -> void:
+	if id == _portrait_id:
+		return
+	_portrait_id = id
+	_portrait = GameTheme.tex(id)
+	queue_redraw()
 
 
 func _process(delta: float) -> void:

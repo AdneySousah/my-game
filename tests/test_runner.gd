@@ -22,6 +22,7 @@ func _ready() -> void:
 	await _duel_test()
 	await _tower_test()
 	await _north_test()
+	await _castle_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -608,6 +609,50 @@ func _north_test() -> void:
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
+
+
+## 6.3c: the Lonely Castle with Brannoc; after him, Bento's scene, the two-year jump
+## (older Lio, new portrait) and Hrimvald warm again.
+func _castle_test() -> void:
+	Session.reset()
+	Session.set_flag("act3_mine")
+	Main.start_map = "castelo"
+	Main.start_spawn = "from_mina_gelo"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var bran: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "brannoc":
+			bran = n as Enemy
+	check(bran != null, "Brannoc waits in the Lonely Castle")
+	check(ResourceLoader.exists("res://assets/story/sto_bento_4.webp"), "Bento's story panels exist")
+	# The story scene after the ice giant, skipped like a player tapping "Pular".
+	main._after_story(Data.enemies["brannoc_gelo"].duplicate())
+	var overlay: StoryOverlay = null
+	for i: int in 300:
+		await _frames(1)
+		for c: Node in get_tree().root.get_children():
+			if c is StoryOverlay:
+				overlay = c as StoryOverlay
+		if overlay:
+			break
+	check(overlay != null, "Bento's illustrated scene plays after Brannoc")
+	if overlay:
+		check(get_tree().paused, "the game pauses during the story scene")
+		overlay._finish()
+	for i: int in 400:
+		await _frames(1)
+		if Session.has_flag("time_skip") and main.map and main.map.map_id == "hrimvald" and not main.get("_changing"):
+			break
+	check(Session.has_flag("time_skip"), "the two-year jump happens")
+	check(main.player.model.character_id == "hero_lio_adulto", "Lio looks two years older")
+	check(main.map.map_id == "hrimvald", "the jump ends back in Hrimvald")
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
 
 
 ## Premium pass doubles XP and gold and adds 10% to attributes; a bought skin swaps the

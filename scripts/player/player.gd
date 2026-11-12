@@ -188,6 +188,9 @@ func look_id() -> String:
 static func current_look() -> String:
 	if Session.skin != "" and not CharacterModel.config_for(Session.skin).is_empty():
 		return Session.skin
+	# After the two-year jump (Act 3) Lio is 21 and looks older.
+	if Session.has_flag("time_skip") and not CharacterModel.config_for("hero_lio_adulto").is_empty():
+		return "hero_lio_adulto"
 	return "hero_lio"
 
 

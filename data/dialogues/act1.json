@@ -1037,6 +1037,122 @@
         ]
       ]
     },
+    "main_12_bento": {
+      "lines": [
+        [
+          "bento",
+          "DLG_MAIN_12_BENTO_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_12_BENTO_2"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_12_BENTO_3"
+        ]
+      ]
+    },
+    "main_12_castle": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_12_CASTLE_1"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_12_CASTLE_2"
+        ]
+      ]
+    },
+    "brannoc_intro": {
+      "lines": [
+        [
+          "brannoc",
+          "DLG_BRANNOC_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_BRANNOC_INTRO_2"
+        ],
+        [
+          "brannoc",
+          "DLG_BRANNOC_INTRO_3"
+        ],
+        [
+          "bento",
+          "DLG_BRANNOC_INTRO_4"
+        ],
+        [
+          "brannoc",
+          "DLG_BRANNOC_INTRO_5"
+        ]
+      ]
+    },
+    "brannoc_transform": {
+      "lines": [
+        [
+          "brannoc",
+          "DLG_BRANNOC_TRANSFORM_1"
+        ],
+        [
+          "brannoc",
+          "DLG_BRANNOC_TRANSFORM_2"
+        ]
+      ]
+    },
+    "brannoc_reborn": {
+      "lines": [
+        [
+          "lio",
+          "DLG_BRANNOC_REBORN_1"
+        ],
+        [
+          "bento",
+          "DLG_BRANNOC_REBORN_2"
+        ]
+      ]
+    },
+    "main_12_osk": {
+      "lines": [
+        [
+          "osk",
+          "DLG_MAIN_12_OSK_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_12_OSK_2"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_12_OSK_3"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_12_OSK_4"
+        ],
+        [
+          "osk",
+          "DLG_MAIN_12_OSK_5"
+        ]
+      ]
+    },
+    "osk_idle_final": {
+      "lines": [
+        [
+          "osk",
+          "DLG_OSK_IDLE_FINAL_1"
+        ]
+      ]
+    },
+    "brunhild_idle_final": {
+      "lines": [
+        [
+          "brunhild",
+          "DLG_BRUNHILD_IDLE_FINAL_1"
+        ]
+      ]
+    },
     "side_moveis_offer": {
       "lines": [
         [

@@ -20,6 +20,8 @@ func _ready() -> void:
 	await _road_test()
 	await _ambience_test()
 	await _duel_test()
+	await _tower_test()
+	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
 	await _save_test()
@@ -519,6 +521,77 @@ func _duel_test() -> void:
 	Main.start_spawn = "start"
 
 
+## Sunken Tower: opens after the ruins, Sahra waits in the court and becomes the sand
+## warrior with a shield and water jars that heal her.
+func _tower_test() -> void:
+	Session.reset()
+	Session.set_flag("act2_ruins")
+	Main.start_map = "torre"
+	Main.start_spawn = "from_ruinas"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	check(main.map.map_id == "torre", "the Sunken Tower loads")
+	var sahra: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "sahra":
+			sahra = n as Enemy
+	check(sahra != null, "Sahra waits in the tower court")
+	check(ResourceLoader.exists("res://assets/loading/load_torre.webp"), "the tower has loading art")
+	if sahra:
+		sahra.take_damage(sahra.max_hp * 0.55, false)
+		var changed: bool = false
+		for i: int in 600:
+			await _frames(1)
+			if main.hud.is_in_dialogue():
+				await _finish_dialogue(main)
+			if sahra.enemy_id == "sahra_areia" and not sahra.invulnerable:
+				changed = true
+				break
+		check(changed, "Sahra turns into the sand warrior at half health")
+		check(is_instance_valid(sahra.shield), "the sand warrior has a break shield")
+		check(is_instance_valid(sahra.ground) and sahra.ground.ready_count() == 5, "5 water jars rise in the court")
+	main.queue_free()
+	get_tree().paused = false
+	await _frames(2)
+	Main.start_spawn = "start"
+
+
+## Premium pass doubles XP and gold and adds 10% to attributes; a bought skin swaps the
+## hero's model and stays worn.
+func _premium_skin_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var p: Player = main.player
+	var atk_before: float = p.stats.get_stat("atk")
+	var e := Enemy.new()
+	e.setup("bandido", p.stats.level, p)
+	var xp_plain: int = main.xp_for_kill(e)
+	main._on_store_granted(Store.product("premium_7d"))
+	await _frames(2)
+	check(Session.premium_left() > 6.9 * 86400.0, "the 7-day pass is active")
+	check(main.xp_for_kill(e) == xp_plain * 2, "premium doubles XP (%d -> %d)" % [xp_plain, main.xp_for_kill(e)])
+	check(is_equal_approx(p.stats.attr_total("str"), p.stats.attributes["str"] * 1.1), "premium adds 10% to attributes")
+	check(p.stats.get_stat("atk") > atk_before, "premium raises attack")
+	e.free()
+	main._on_store_granted(Store.product("skin_sol"))
+	await _frames(2)
+	check(Session.skins_owned.has("hero_skin_sol") and p.model.character_id == "hero_skin_sol", "the Sun Knight look is worn")
+	check(p.look_id() == "hero_skin_sol", "screens follow the worn look")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.skin == "hero_skin_sol", "the worn look is saved")
+	p.set_skin("")
+	check(p.model.character_id == "hero_lio", "taking the look off brings Lio back")
+	main.queue_free()
+	await _frames(2)
+	Session.reset()
+
+
 ## Quest pickups of the current map are not inside a prop (rock, tree, cart).
 func _check_pickup_spots(main: Main) -> void:
 	var blocked: Array = []
@@ -814,7 +887,8 @@ func _save_test() -> void:
 	Main.start_spawn = "start"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	add_child(main)
-	await _frames(5)
+	await _wait_map(main, "pradoluz")
+	await _frames(2)
 	while main.player.stats.level < 7:
 		main.player.stats.add_xp(main.player.stats.xp_needed() - main.player.stats.xp)
 	main.player.stats.spend_point("str")
@@ -836,7 +910,8 @@ func _save_test() -> void:
 	check(not SaveGame.pending.is_empty(), "save loads")
 	main = load(Game.MAIN_SCENE).instantiate()
 	add_child(main)
-	await _frames(5)
+	await _wait_map(main, "pradoluz")
+	await _frames(2)
 	var p: Player = main.player
 	check(p.stats.level == 7 and p.gold == gold_saved and int(p.stats.attributes["str"]) == str_saved, "level, gold and attributes come back")
 	check(p.skills.equipped[0] == "investida", "equipped skills come back")

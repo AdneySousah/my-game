@@ -248,6 +248,37 @@ DIALOGUES = {
         ("nadira", "A Ordem serve aos Arautos. Se ele estava lá, a Sahra sabe que você vem.", "The Order serves the Heralds. If he was there, Sahra knows you're coming."),
         ("nadira", "Descanse. E treine. A Torre Afundada não vai ser mais gentil que ele.", "Rest. And train. The Sunken Tower won't be any kinder than he was."),
     ],
+    # --- Ato 2, missão 9: A Arauta da Sede ---
+    "main_09_nadira": [
+        ("nadira", "Você voltou inteiro. Bom. Achei o caminho da Torre Afundada: a leste das Ruínas, depois do muro quebrado.", "You came back in one piece. Good. I found the way to the Sunken Tower: east of the Ruins, past the broken wall."),
+        ("nadira", "A Sahra guarda lá a chave dos poços. E toda a água que ela tirou da cidade, em jarros lacrados.", "Sahra keeps the key to the wells there. And all the water she took from the city, in sealed jars."),
+        ("lio", "Uma vilã que coleciona jarros de água. O Bram nunca vai acreditar.", "A villain who collects water jars. Bram will never believe it."),
+        ("nadira", "Não ria. Dizem que quando ela se irrita, vira areia. E areia não sangra.", "Don't laugh. They say that when she gets angry, she turns into sand. And sand doesn't bleed."),
+    ],
+    "main_09_tower": [
+        ("lio", "Olha o tamanho disso... a torre inteira está afundando na areia.", "Look at the size of it... the whole tower is sinking into the sand."),
+        ("lio", "E esses jarros... cada um é a água de uma família de Qaressa. Ela vai devolver tudo. Gota por gota.", "And these jars... each one is a Qaressa family's water. She's giving it all back. Drop by drop."),
+    ],
+    "sahra_intro": [
+        ("sahra", "Um cliente! Que raridade aqui em cima. Veio comprar água, querido? Para você, faço preço de amigo.", "A customer! How rare up here. Come to buy water, dear? For you, a friend's price."),
+        ("lio", "Vim buscar a chave dos poços. De graça.", "I came for the key to the wells. For free."),
+        ("sahra", "De graça? Nada no deserto é de graça. Nem a sombra. Nem a sua vida.", "For free? Nothing in the desert is free. Not the shade. Not your life."),
+        ("sahra", "O Soberano Alado me deu a sede deste povo para guardar. E eu cobro juros.", "The Winged Sovereign gave me this people's thirst to keep. And I charge interest."),
+    ],
+    "sahra_transform": [
+        ("sahra", "Você suja minhas sedas e ainda quer desconto? Chega de negociar!", "You stain my silks and still want a discount? No more bargaining!"),
+        ("sahra", "Areia, venha a mim! Mostre a ele o que é sede de verdade!", "Sand, come to me! Show him what true thirst is!"),
+    ],
+    "sahra_reborn": [
+        ("lio", "Ela virou uma guerreira de areia! E sumiu no chão... ela pode aparecer atrás de mim!", "She turned into a sand warrior! And she sank into the ground... she can pop up behind me!"),
+        ("lio", "Escudo de novo... e os jarros de água que brotaram curam ela. Quebro o escudo e quebro os jarros antes que ela beba!", "A shield again... and the water jars that sprouted heal her. Break the shield and smash the jars before she drinks!"),
+    ],
+    "main_09_return": [
+        ("nadira", "Ouviu isso? Os poços... a água está subindo! O povo está dançando na praça!", "Did you hear that? The wells... the water is rising! People are dancing in the square!"),
+        ("lio", "A chave estava no colar dela. Achei que ia ser mais difícil abrir um cadeado de ouro do céu.", "The key was on her necklace. I thought opening a sky-gold lock would be harder."),
+        ("nadira", "Você derrubou dois Arautos, garoto. A Ordem Celeste não vai deixar barato.", "You've brought down two Heralds, kid. The Celestial Order won't let this go."),
+        ("nadira", "Mas hoje Qaressa bebe de graça. Hoje a gente comemora.", "But today Qaressa drinks for free. Today we celebrate."),
+    ],
     # --- Conversas fora de missão ---
     "marta_idle_fed": [
         ("marta", "A despensa está cheia pela primeira vez em anos. Come mais um pedaço!", "The pantry is full for the first time in years. Have another slice!"),
@@ -336,7 +367,13 @@ TEXTS = {
     "QUEST_MAIN_06": ("Mais cinco desses", "Five More Like Him"),
     "QUEST_MORE_SOON": ("Fim do Ato 1 — a estrada do nordeste leva ao deserto de Qaressa", "End of Act 1 — the north-east road leads to the desert of Qaressa"),
     "QUEST_ACT2_SOON": ("Fale com a Nadira: as Ruínas de Ammar, a leste das dunas, estão abertas", "Talk to Nadira: the Ruins of Ammar, east of the dunes, are open"),
-    "QUEST_ACT2_SOON2": ("A Torre Afundada e a Arauta Sahra chegam na próxima versão", "The Sunken Tower and Herald Sahra arrive in the next version"),
+    "QUEST_ACT2_SOON2": ("Fale com a Nadira: o caminho para a Torre Afundada está aberto", "Talk to Nadira: the way to the Sunken Tower is open"),
+    "QUEST_MAIN_09": ("A Arauta da Sede", "The Herald of Thirst"),
+    "QUEST_ACT2_DONE": ("Fim do Ato 2 — os poços de Qaressa estão abertos. O Ato 3 vem nas próximas versões", "End of Act 2 — Qaressa's wells are open. Act 3 comes in the next versions"),
+    "OBJ_TALK_NADIRA_TOWER": ("Pergunte à Nadira sobre a Torre Afundada", "Ask Nadira about the Sunken Tower"),
+    "OBJ_REACH_TOWER": ("Chegue à Torre Afundada, a leste das Ruínas", "Reach the Sunken Tower, east of the Ruins"),
+    "OBJ_KILL_SAHRA": ("Derrote a Arauta Sahra no pátio da torre", "Defeat Herald Sahra in the tower court"),
+    "OBJ_RETURN_NADIRA_TOWER": ("Volte para a Nadira em Qaressa", "Go back to Nadira in Qaressa"),
     "OBJ_KILL_GOLEM": ("Derrote o Golem de pedra no fundo da mina", "Defeat the stone golem in the depths of the mine"),
     "OBJ_KILL_GORVAN": ("Derrote Gorvan no Celeiro do Tributo", "Defeat Gorvan in the Tribute Granary"),
     "OBJ_RETURN_VILLAGE": ("Volte para a Marta em Pradoluz", "Return to Marta in Pradoluz"),

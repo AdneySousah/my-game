@@ -143,4 +143,6 @@ func _finish() -> void:
 	t2.tween_interval(1.6)
 	t2.tween_property(later, "modulate:a", 0.0, 0.8)
 	await t2.finished
+	var ls: LoadingScreen = LoadingScreen.open(get_tree(), Main.start_map)
+	await ls.wait_shown()
 	get_tree().change_scene_to_file(Game.MAIN_SCENE)

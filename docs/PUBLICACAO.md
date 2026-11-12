@@ -36,8 +36,15 @@ Menu do app: **Monetizar com o Google Play** → **Produtos** → **Produtos ún
 | `trevo_real` | Trevo Real | O fortalecimento dá certo sempre. | R$ 6,90 |
 | `broca_real` | Broca Real | Abre um encaixe sempre (até 3). | R$ 4,90 |
 | `amuleto` | Amuleto de Proteção | Se o fortalecimento falhar, o equipamento não quebra nem some. | R$ 3,90 |
+| `premium_7d` | Passe premium — 7 dias | XP em dobro, ouro dos inimigos e baús em dobro e +10% em todos os atributos por 7 dias. | R$ 15,00 |
+| `premium_14d` | Passe premium — 14 dias | O mesmo passe, por 14 dias. | R$ 20,00 |
+| `premium_30d` | Passe premium — 30 dias | O mesmo passe, por 30 dias. | R$ 25,00 |
+| `skin_sol` | Visual: Cavaleiro do Sol | Armadura branca e dourada, cabelo novo e a Lâmina Solar (só aparência). | R$ 9,90 |
+| `skin_tempestade` | Visual: Lâmina da Tempestade | Couro azul com raios, cabelo prateado e a Lâmina da Tempestade (só aparência). | R$ 9,90 |
 
-Se o Console pedir a versão em inglês, use: Bag of gold / Chest of gold / Scroll of learning / Potion kit / Royal Clover / Royal Drill / Protection Amulet.
+Se o Console pedir a versão em inglês, use: Bag of gold / Chest of gold / Scroll of learning / Potion kit / Royal Clover / Royal Drill / Protection Amulet / Premium pass — 7 days / Premium pass — 14 days / Premium pass — 30 days / Look: Sun Knight / Look: Storm Blade.
+
+Os 5 últimos (passe e visuais) entraram na 0.2.0. Todos são do mesmo tipo dos outros ("Comprar", consumível); o jogo guarda o passe e os visuais no save.
 
 ## 4. Comprar de teste sem pagar
 1. **Gerenciar conta** (fora do app) → **Teste de licença** → adicione o seu e-mail → resposta **RESPOND_NORMALLY** → salvar.

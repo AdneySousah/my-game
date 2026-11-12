@@ -21,6 +21,8 @@ var defeated_time_left: float = 0.0
 var gear: Dictionary = {}
 ## Potion buffs: stat ("atk", "def", "speed") -> {"amount": fraction, "time": seconds left}.
 var buffs: Dictionary = {}
+## Multiplier on every attribute (premium pass = 1.1), set by the Player.
+var attr_mult: float = 1.0
 
 
 func _init() -> void:
@@ -93,7 +95,7 @@ func get_stat(stat: String) -> float:
 	value += float(p.get("growth_per_level", {}).get(stat, 0.0)) * (level - 1)
 	var effects: Dictionary = p.get("attribute_effects", {})
 	for a: String in ATTRIBUTES:
-		value += float(effects.get(a, {}).get(stat, 0.0)) * attributes[a]
+		value += float(effects.get(a, {}).get(stat, 0.0)) * attr_total(a)
 	value += float(gear.get(stat, 0.0))
 	if stat == "atk":
 		value *= 1.0 + atk_buff + buff("atk")
@@ -107,6 +109,11 @@ func get_stat(stat: String) -> float:
 	if defeated_time_left > 0.0 and stat in ["max_hp", "atk", "def"]:
 		value *= float(p.get("death", {}).get("defeated_mult", 0.95))
 	return value
+
+
+## Attribute value with bonuses (premium pass), as used by the stats.
+func attr_total(a: String) -> float:
+	return float(attributes.get(a, 0)) * attr_mult
 
 
 ## Active potion buff for a stat (0 if none).

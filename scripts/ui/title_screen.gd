@@ -89,6 +89,8 @@ func _layout() -> void:
 func _continue() -> void:
 	SaveGame.load_game()
 	SaveGame.active = true
+	var ls: LoadingScreen = LoadingScreen.open(get_tree(), str(SaveGame.pending.get("map", Main.start_map)))
+	await ls.wait_shown()
 	get_tree().change_scene_to_file(Game.MAIN_SCENE)
 
 

@@ -87,6 +87,18 @@
       "rewards": { "xp": 5200, "gold": 1200, "items": { "pot_vida_g": 3, "eq_luvas_epico": 1 } }
     },
     {
+      "id": "main_09", "type": "main", "name": "QUEST_MAIN_09", "auto": true,
+      "requires": ["main_08"], "min_level": 24,
+      "steps": [
+        { "type": "talk", "npc": "nadira", "dialogue": "main_09_nadira", "text": "OBJ_TALK_NADIRA_TOWER" },
+        { "type": "reach", "map": "torre", "pos": [0, 32], "radius": 8, "text": "OBJ_REACH_TOWER", "dialogue": "main_09_tower" },
+        { "type": "kill", "enemy": "sahra", "count": 1, "map": "torre", "pos": [0, -28], "text": "OBJ_KILL_SAHRA", "skip_if_flag": "sahra_defeated" },
+        { "type": "talk", "npc": "nadira", "dialogue": "main_09_return", "text": "OBJ_RETURN_NADIRA_TOWER" }
+      ],
+      "set_flag": "act2_done", "end_note": "QUEST_ACT2_DONE",
+      "rewards": { "xp": 8000, "gold": 2000, "items": { "pot_vida_g": 5, "eq_espada_epico": 1, "gema_rubi_3": 1 } }
+    },
+    {
       "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",
       "requires": ["main_01"], "min_level": 2,
       "steps": [

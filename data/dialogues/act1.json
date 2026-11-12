@@ -717,6 +717,102 @@
         ]
       ]
     },
+    "main_09_nadira": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_09_NADIRA_1"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_09_NADIRA_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_09_NADIRA_3"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_09_NADIRA_4"
+        ]
+      ]
+    },
+    "main_09_tower": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_09_TOWER_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_09_TOWER_2"
+        ]
+      ]
+    },
+    "sahra_intro": {
+      "lines": [
+        [
+          "sahra",
+          "DLG_SAHRA_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_SAHRA_INTRO_2"
+        ],
+        [
+          "sahra",
+          "DLG_SAHRA_INTRO_3"
+        ],
+        [
+          "sahra",
+          "DLG_SAHRA_INTRO_4"
+        ]
+      ]
+    },
+    "sahra_transform": {
+      "lines": [
+        [
+          "sahra",
+          "DLG_SAHRA_TRANSFORM_1"
+        ],
+        [
+          "sahra",
+          "DLG_SAHRA_TRANSFORM_2"
+        ]
+      ]
+    },
+    "sahra_reborn": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SAHRA_REBORN_1"
+        ],
+        [
+          "lio",
+          "DLG_SAHRA_REBORN_2"
+        ]
+      ]
+    },
+    "main_09_return": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_09_RETURN_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_09_RETURN_2"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_09_RETURN_3"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_09_RETURN_4"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

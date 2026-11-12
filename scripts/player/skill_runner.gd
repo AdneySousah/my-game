@@ -133,10 +133,12 @@ func _spin(s: Dictionary) -> void:
 	var interval: float = float(s.get("hit_interval", 0.2))
 	var radius: float = float(s.get("radius", 3.0))
 	player.lock(float(s.get("lock_time", 0.5)))
+	SkillVfx.sword_trail(player.model, _color(s), interval * hits + 0.3, 1.4)
 	for i: int in hits:
 		player.swing_sword(interval * 1.6, 180.0, -180.0)
-		ProtoVisuals.flash_disc(player.get_parent(), player.global_position, radius, _color(s))
+		SkillVfx.spin(player.get_parent(), player.global_position, player.rotation.y, radius, _color(s), i)
 		for e: Enemy in player.enemies_in_radius(player.global_position, radius):
+			SkillVfx.hit_sparks(player.get_parent(), e.global_position, _color(s))
 			player.deal_damage(e, float(s.get("dmg_mult", 1.0)), true, 2.0)
 		await _wait(interval)
 		if player.is_dead():
@@ -152,11 +154,14 @@ func _dash(s: Dictionary) -> void:
 	player.set_invulnerable(duration + 0.1)
 	player.lock(duration + float(s.get("lock_time", 0.3)))
 	player.swing_sword(duration, 0.0, 0.0)
+	SkillVfx.sword_trail(player.model, _color(s), duration + 0.2, 1.3)
+	SkillVfx.dash(player.get_parent(), player, player.forward(), duration, width, _color(s))
 	player.start_forced_move(player.forward() * speed, duration, func() -> void:
 		for e: Enemy in player.enemies_in_radius(player.global_position, width):
 			if hit.has(e):
 				continue
 			hit[e] = true
+			SkillVfx.hit_sparks(player.get_parent(), e.global_position, _color(s), 10)
 			player.deal_damage(e, float(s.get("dmg_mult", 1.0)), true, 3.0)
 			_apply_status(e, s))
 
@@ -167,12 +172,26 @@ func _cone(s: Dictionary) -> void:
 	player.lock(float(s.get("lock_time", 0.5)))
 	var windup: float = float(s.get("windup", 0.25))
 	player.swing_sword(windup * 2.0, 90.0, -40.0)
+	SkillVfx.charge(player.get_parent(), player.global_position, _color(s), windup, 1.4)
+	SkillVfx.sword_trail(player.model, _color(s), windup * 2.0, 1.3)
 	await _wait(windup)
 	if player.is_dead():
 		return
-	var center: Vector3 = player.global_position + player.forward() * radius * 0.5
-	ProtoVisuals.flash_disc(player.get_parent(), center, radius * 0.55, _color(s), 0.4)
-	for e: Enemy in player.enemies_in_cone(radius, float(s.get("angle", 90.0)) * 0.5):
+	var parent: Node = player.get_parent()
+	var angle: float = float(s.get("angle", 90.0))
+	var vfx: String = str(s.get("vfx", ""))
+	match vfx:
+		"seismic":
+			SkillVfx.seismic(parent, player.global_position, player.rotation.y, radius, angle, _color(s))
+		"guard_break":
+			SkillVfx.guard_break(parent, player.global_position, player.rotation.y, radius, angle, _color(s))
+		_:
+			ProtoVisuals.flash_disc(parent, player.global_position + player.forward() * radius * 0.5, radius * 0.55, _color(s), 0.4)
+	for e: Enemy in player.enemies_in_cone(radius, angle * 0.5):
+		if vfx == "guard_break":
+			SkillVfx.shield_shatter(parent, e.global_position, e.global_position - player.global_position, _color(s))
+		else:
+			SkillVfx.hit_sparks(parent, e.global_position, _color(s))
 		player.deal_damage(e, float(s.get("dmg_mult", 1.0)), true, 3.0)
 		_apply_status(e, s)
 	if player.camera_rig:
@@ -183,8 +202,10 @@ func _buff(s: Dictionary) -> void:
 	player.lock(float(s.get("lock_time", 0.5)))
 	player.apply_atk_buff(float(s.get("buff_atk", 0.25)), float(s.get("buff_time", 8.0)))
 	var radius: float = float(s.get("radius", 6.0))
-	ProtoVisuals.flash_disc(player.get_parent(), player.global_position, radius, _color(s), 0.6)
+	SkillVfx.war_cry(player.get_parent(), player.global_position, radius, _color(s))
+	BuffAura.attach(player, _color(s))
 	for e: Enemy in player.enemies_in_radius(player.global_position, radius):
+		SkillVfx.weaken_mark(player.get_parent(), e.global_position, _color(s))
 		_apply_status(e, s)
 	if player.camera_rig:
 		player.camera_rig.shake(0.12, 0.3)
@@ -194,6 +215,8 @@ func _projectile(s: Dictionary) -> void:
 	_aim(float(s.get("range", 12.0)))
 	player.lock(float(s.get("lock_time", 0.35)))
 	player.swing_sword(0.3, -60.0, 60.0)
+	SkillVfx.sword_trail(player.model, _color(s), 0.35, 1.4)
+	SkillVfx.burst(player.get_parent(), player.global_position + player.forward() * 0.9 + Vector3(0, 1.0, 0), _color(s), 10, 5.0, 0.3, 0.16, 0.4, -4.0, 0.3)
 	var wave := SlashWave.new()
 	wave.player = player
 	wave.skill = s
@@ -210,12 +233,16 @@ func _leap(s: Dictionary) -> void:
 	offset.y = 0.0
 	to = player.global_position + offset.limit_length(distance)
 	player.lock(float(s.get("duration", 0.45)) + float(s.get("lock_time", 0.6)))
+	SkillVfx.leap_takeoff(player.get_parent(), player.global_position, _color(s))
+	SkillVfx.follow_trail(player, _color(s), float(s.get("duration", 0.45)))
+	SkillVfx.sword_trail(player.model, _color(s), float(s.get("duration", 0.45)) + 0.3, 1.3)
 	await player.leap_to(to, float(s.get("duration", 0.45)))
 	if player.is_dead():
 		return
 	var radius: float = float(s.get("radius", 3.5))
-	ProtoVisuals.flash_disc(player.get_parent(), player.global_position, radius, _color(s), 0.5)
+	SkillVfx.leap_landing(player.get_parent(), player.global_position, radius, _color(s))
 	for e: Enemy in player.enemies_in_radius(player.global_position, radius):
+		SkillVfx.hit_sparks(player.get_parent(), e.global_position, _color(s))
 		player.deal_damage(e, float(s.get("dmg_mult", 1.0)), true, 4.0)
 		_apply_status(e, s)
 	if player.camera_rig:
@@ -228,6 +255,8 @@ func _single(s: Dictionary) -> void:
 	player.lock(float(s.get("lock_time", 0.7)))
 	var windup: float = float(s.get("windup", 0.4))
 	player.swing_sword(windup * 1.5, 160.0, -20.0)
+	SkillVfx.charge(player.get_parent(), player.global_position, _color(s), windup, 1.8)
+	SkillVfx.sword_trail(player.model, _color(s), windup * 1.6, 1.5)
 	await _wait(windup)
 	if player.is_dead():
 		return
@@ -237,9 +266,10 @@ func _single(s: Dictionary) -> void:
 	if t == null:
 		return
 	var mult: float = float(s.get("dmg_mult", 1.0))
-	if t.hp_ratio() < float(s.get("execute_below", 0.0)):
+	var execute: bool = t.hp_ratio() < float(s.get("execute_below", 0.0))
+	if execute:
 		mult *= 1.0 + float(s.get("execute_bonus", 0.0))
-	ProtoVisuals.flash_disc(player.get_parent(), t.global_position, 1.4, _color(s), 0.5)
+	SkillVfx.judgment(player.get_parent(), t.global_position, _color(s), execute)
 	player.deal_damage(t, mult, true, 6.0)
 	if player.camera_rig:
 		player.camera_rig.shake(0.35, 0.2)

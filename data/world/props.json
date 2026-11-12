@@ -241,6 +241,10 @@
     "prp_estatua_alada": {"scene": "res://assets/props/prp_estatua_alada/prp_estatua_alada.glb", "scale": 4.2, "center_origin": true, "collision": {"type": "box"}},
     "prp_mural_ceu": {"scene": "res://assets/props/prp_mural_ceu/prp_mural_ceu.glb", "scale": 4.0, "center_origin": true, "collision": {"type": "box"}},
     "prp_braseiro": {"scene": "res://assets/props/prp_braseiro/prp_braseiro.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "light": {"color": "#ff9a4a", "energy": 1.6, "range": 6.0, "y": 1.3}},
-    "prp_sarcofago": {"scene": "res://assets/props/prp_sarcofago/prp_sarcofago.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "box"}}
+    "prp_sarcofago": {"scene": "res://assets/props/prp_sarcofago/prp_sarcofago.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "box"}},
+    "env_torre_afundada": {"scene": "res://assets/environment/env_torre_afundada/env_torre_afundada.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.5}},
+    "prp_jarro_agua": {"scene": "res://assets/props/prp_jarro_agua/prp_jarro_agua.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.5}},
+    "prp_poco_selado": {"scene": "res://assets/props/prp_poco_selado/prp_poco_selado.glb", "scale": 2.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.0}},
+    "env_escada_areia": {"scene": "res://assets/environment/env_escada_areia/env_escada_areia.glb", "scale": 5.0, "center_origin": true, "collision": null}
   }
 }

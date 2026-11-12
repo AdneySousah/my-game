@@ -3,6 +3,8 @@ extends SceneTree
 ## in assets/story: trims the paper border some panels come with, crops to 16:9 and
 ## saves a 1280x720 WebP (small files for mobile).
 ##   godot --headless --path . --script res://scripts/tools/story_prepare.gd
+## Loading-screen art uses the same steps:
+##   ... story_prepare.gd -- res://assets/_inbox/loading/ res://assets/loading/
 
 const SRC: String = "res://assets/_inbox/story/"
 const DST: String = "res://assets/story/"
@@ -10,17 +12,20 @@ const OUT_SIZE: Vector2i = Vector2i(1280, 720)
 
 
 func _initialize() -> void:
-	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(DST))
-	for f: String in DirAccess.get_files_at(SRC):
+	var args: PackedStringArray = OS.get_cmdline_user_args()
+	var src: String = args[0] if args.size() >= 2 else SRC
+	var dst: String = args[1] if args.size() >= 2 else DST
+	DirAccess.make_dir_recursive_absolute(ProjectSettings.globalize_path(dst))
+	for f: String in DirAccess.get_files_at(src):
 		if not f.ends_with(".png"):
 			continue
-		var img := Image.load_from_file(ProjectSettings.globalize_path(SRC + f))
+		var img := Image.load_from_file(ProjectSettings.globalize_path(src + f))
 		img.convert(Image.FORMAT_RGB8)
 		var r: Rect2i = _trim_border(img)
 		r = _fit_16_9(r)
 		img = img.get_region(r)
 		img.resize(OUT_SIZE.x, OUT_SIZE.y, Image.INTERPOLATE_LANCZOS)
-		var out: String = DST + f.get_basename() + ".webp"
+		var out: String = dst + f.get_basename() + ".webp"
 		img.save_webp(ProjectSettings.globalize_path(out), true, 0.88)
 		print("%s -> border %s -> %s" % [f, r, out])
 	quit()

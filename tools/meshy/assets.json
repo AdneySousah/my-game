@@ -4108,6 +4108,384 @@
       "notes": [
         "2026-11-12: 2026-11-12: Fase 6.2c Ruínas de Ammar e duelo com o Severin"
       ]
+    },
+    {
+      "id": "ui_loading",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Telas de carregamento (11 ilustrações + torre refeita)",
+      "file": "assets/ui/ui_loading/ui_loading.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14a-7095-7759-9f7b-ab3b3a82ea0c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14c-e339-7186-b2f2-8584b473fad0",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_lamina_solar",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lâmina Solar (skin)",
+      "file": "assets/weapons/wpn_lamina_solar/wpn_lamina_solar.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-48be-76f6-9515-561f77ebfe7b",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-cf28-7364-a904-1cac900633aa",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_lamina_tempestade",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lâmina da Tempestade (skin)",
+      "file": "assets/weapons/wpn_lamina_tempestade/wpn_lamina_tempestade.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-49b3-702f-ba94-4b5b9ded2328",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-d294-73f3-9b50-af37f191528c",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_torre_afundada",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Torre Afundada",
+      "file": "assets/environment/env_torre_afundada/env_torre_afundada.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-51ff-77c7-bd68-ec08cfd045b3",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-d7c0-7586-8d61-e74b4bdd009f",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_jarro_agua",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Jarro de água lacrado",
+      "file": "assets/props/prp_jarro_agua/prp_jarro_agua.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-52f3-72f7-98c6-f71636c64aa4",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-dba8-7703-8453-083982d3e1a4",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_poco_selado",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Poço lacrado",
+      "file": "assets/props/prp_poco_selado/prp_poco_selado.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-53ec-74c5-aa75-33f751e684d9",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-e107-703d-8f4b-781c0762f58a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_escada_areia",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Escada de arenito",
+      "file": "assets/environment/env_escada_areia/env_escada_areia.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d14b-54e2-700b-95e1-1d3f9daa8b1c",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-e57b-73f4-a72d-9a3d05d4d044",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retrato_sahra",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Retrato da Sahra",
+      "file": "assets/ui/ui_retrato_sahra/ui_retrato_sahra.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d15c-263b-73f7-a47b-f8b1a6544200",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "hero_skin_sol",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Skin Cavaleiro do Sol",
+      "file": "assets/characters/hero_skin_sol/hero_skin_sol.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d14b-41f7-70dd-b251-07d68ac34d31",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-b82f-71af-a9a6-4d8c39d15157",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d14f-d310-7767-beb1-7f7597e100cc",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "hero_skin_tempestade",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Skin Lâmina da Tempestade",
+      "file": "assets/characters/hero_skin_tempestade/hero_skin_tempestade.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d14b-4614-7600-a774-1fca1ef9c92e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-bdc4-738b-88ed-e28a1094a380",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d14f-f8b7-7567-96ff-ad51987134c9",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_sahra",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Sahra, Arauta da Sede",
+      "file": "assets/enemies/boss_sahra/boss_sahra.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14b-4a9f-740e-9f03-b3f804ab251d",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-c27a-7702-aa30-63c98752e707",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d150-062c-76b1-8aeb-55ddca745742",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 27,
+          "task_id": "01a1d152-7e54-7616-96ef-59cede436329",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_sahra_areia",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Sahra, Guerreira de Areia",
+      "file": "assets/enemies/boss_sahra_areia/boss_sahra_areia.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d14b-4e1a-7758-8faf-72baf79103f1",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d14d-c8dd-7370-b818-ab5432f5be89",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d150-147e-702e-9760-9aa0495adf0f",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 27,
+          "task_id": "01a1d151-f20a-71f6-b2fe-29827c5f8c0e",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

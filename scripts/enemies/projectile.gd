@@ -25,7 +25,20 @@ func setup(target: Player, dir: Vector3, speed: float, max_range: float, damage:
 
 func _ready() -> void:
 	rotation.y = atan2(-_dir.x, -_dir.z)
-	if _look == "crow":
+	if _look == "sand":
+		# Spinning blade of sand (Sahra).
+		var blade := TorusMesh.new()
+		blade.inner_radius = 0.18
+		blade.outer_radius = 0.42
+		var mi: MeshInstance3D = ProtoVisuals.mesh_instance(blade, Color("#f0c070"), true)
+		mi.scale = Vector3(1.0, 0.35, 1.0)
+		mi.name = "Spin"
+		add_child(mi)
+		var core := SphereMesh.new()
+		core.radius = 0.16
+		core.height = 0.32
+		add_child(ProtoVisuals.mesh_instance(core, Color("#2ec4b6"), true))
+	elif _look == "crow":
 		var body := SphereMesh.new()
 		body.radius = 0.28
 		body.height = 0.45
@@ -53,6 +66,9 @@ static func arrow_mesh() -> Node3D:
 
 
 func _physics_process(delta: float) -> void:
+	var spin: Node3D = get_node_or_null("Spin")
+	if spin:
+		spin.rotate_y(delta * 14.0)
 	var step: float = _speed * delta
 	global_position += _dir * step
 	_travelled += step

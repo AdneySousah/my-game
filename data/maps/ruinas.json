@@ -11,7 +11,7 @@
   "sun": 1.2,
   "sun_color": "#ffd9a8",
   "patches": {"color": "#c99c5c", "count": 140},
-  "spawns": {"from_dunas": [0, 44, 0]},
+  "spawns": {"from_dunas": [0, 44, 0], "from_torre": [37, 30, -90]},
   "exits": [
     {
       "to": "dunas",
@@ -21,7 +21,8 @@
       "label": "MAP_DUNAS",
       "model": "prp_portal",
       "model_pos": [0, 51.5]
-    }
+    },
+    {"to": "torre", "spawn": "from_ruinas", "pos": [44, 30], "size": [2, 8], "label": "MAP_TORRE", "model": "prp_portal", "model_pos": [45.5, 30], "model_rot": 90, "if_flag": "act2_ruins", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "rest_points": [
     {"id": "ruinas_entrada", "name": "REST_RUINAS_ENTRADA", "pos": [6, 38], "kind": "fogueira"},
@@ -71,7 +72,8 @@
   "walls": [
     {"id": "env_parede_ruina", "from": [-40, 46], "to": [-6, 46]},
     {"id": "env_parede_ruina", "from": [6, 46], "to": [40, 46]},
-    {"id": "env_parede_ruina", "from": [42, 44], "to": [42, -44]},
+    {"id": "env_parede_ruina", "from": [42, 44], "to": [42, 35]},
+    {"id": "env_parede_ruina", "from": [42, 25], "to": [42, -44]},
     {"id": "env_parede_ruina", "from": [40, -46], "to": [-40, -46]},
     {"id": "env_parede_ruina", "from": [-42, -44], "to": [-42, 44]},
     {"id": "env_parede_ruina", "from": [-20, -26], "to": [-7, -26]},

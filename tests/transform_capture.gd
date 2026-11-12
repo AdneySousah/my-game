@@ -2,7 +2,7 @@ extends Node
 ## Photos of a boss changing form (the Harvest Herald into the Scarecrow): the talk, the
 ## scene step by step, the new arena (wheat), the break shield, the shield breaking and
 ## the boss eating a wheat patch.
-##   godot --path . --resolution 1280x720 res://tests/transform_capture.tscn -- <output_dir>
+##   godot --path . --resolution 1280x720 res://tests/transform_capture.tscn -- <output_dir> [sahra]
 
 var _out: String = ""
 var _shot: int = 0
@@ -17,6 +17,11 @@ func _ready() -> void:
 	Session.set_flag("seen_gorvan_intro")
 	Main.start_map = "celeiro"
 	Main.start_spawn = "from_mina"
+	# Second argument "sahra": the Sunken Tower fight instead of Gorvan's.
+	if args.size() > 1 and args[1] == "sahra":
+		Session.set_flag("act2_ruins")
+		Main.start_map = "torre"
+		Main.start_spawn = "pos:0:-17:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	add_child(main)
 	await _wait(1.0)

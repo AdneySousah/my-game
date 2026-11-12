@@ -87,6 +87,10 @@ def analyse_hand(arm, mesh, side):
         js = [mcp_a, mcp_a + 0.45 * length, mcp_a + 0.75 * length, tip_a - 0.25 * k]
         joints[FINGERS[i]] = [[a, *fit(a)] for a in js]
     T = [p for p in P if p[1] < cent[0] - 1.8 * k and 0.5 * k < p[0] < 11.5 * k]
+    if len(T) < 5:
+        # Odd hands (bracelets, mitten-like thumbs): take the outermost points on the thumb side.
+        side_pts = sorted([p for p in P if 0.5 * k < p[0] < 11.5 * k], key=lambda p: p[1])
+        T = side_pts[:max(8, len(side_pts) // 8)]
     tip = max(T, key=lambda p: p[0] + 0.5 * palm_sign * p[2])
     fit = line_fit([p for p in T if p[0] > 3.0 * k])
     b = [2.0 * k, *fit(2.0 * k)]

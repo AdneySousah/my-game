@@ -259,3 +259,27 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Inimigo de outra região com Retexture mantendo o UV original: só a textura muda (`characters.json`: `"base"` + `"texture"`), então esqueleto, animações, dedos e pegada são os do original já aprovado (10 créditos em vez de ~50).
 - **Regra do XP das missões (pedido do dono de checar a curva):** em cada faixa de níveis, as missões dão ~40% do XP e os inimigos ~60%. O Ato 1 já passa disso (missões ≈ 94% do XP de 1→12), então missões novas no Ato 1 pagam em ouro e itens, não em XP. Na estrada (12→18) as 3 secundárias (Bram, Tobias, Bento) somam 1.950 de 4.460 XP (~44%).
 - Toda animação de personagem novo ou alterado é conferida com fotos (ações e mão na arma) antes de mostrar; o que não ficar bom vai para o Blender.
+
+## Fase 6.2d e melhorias do dono (12/11/2026)
+- **Torre Afundada** (níveis 25–28), a leste das Ruínas (abre com `act2_ruins`). Jarros de água roubada, poços lacrados e a torre meio enterrada no fundo. O pátio do norte é a arena da Sahra.
+- **Sahra, Arauta da Sede:** a primeira forma é a mercadora com a espada curva. Ela corta, faz combo, avança em linha, joga facas de areia (projétil `look: "sand"`) e chama 2 homens-lagarto abaixo de 80% de vida.
+  - **Forma verdadeira:** a Guerreira de Areia, com soco, pancada em círculo, colunas de areia (barragem) e o **mergulho na areia** (ataque com `"blink"`): ela afunda, aparece atrás do herói e bate.
+  - **Arena a favor:** 5 jarros de água brotam. Cada um cura 15% da vida dela, e o herói quebra os jarros atacando perto. As cores da cena de troca de forma vêm de `transform_fx`, na primeira forma.
+  - **Equilíbrio** (`boss_sim sahra 28` com peças e poções): 99 s, sem mortes, vida mínima de 36%, o escudo quebrou 5 vezes e ela se curou 2 vezes.
+- **Missão 9 "A Arauta da Sede"** fecha o Ato 2 (`act2_done`): os poços de Qaressa voltam a ter água.
+- **Telas de carregamento** (pedido do dono): ilustração de cada lugar no estilo do prólogo, com o nome, uma dica e uma barra.
+  - Aparece ao entrar no jogo (Continuar e depois do prólogo) e a cada troca de mapa.
+  - Fica pelo menos 1,3 s na tela para dar tempo de ver.
+  - O jogo fica parado durante o carregamento.
+- **Efeitos das skills:** cada uma das 8 tem efeito próprio, feito por código e leve para o celular. Também há o rastro da espada e a aura do Brado de Guerra.
+- **Tela de atributos nova:** ocupa a tela quase inteira.
+  - Mostra o herói em 3D (gira sozinho ou arrastando), o total de cada status com a parte que vem dos equipamentos, e uma barra por atributo com "+" e "!".
+  - O "!" mostra o antes → depois de +1 ponto.
+- **Ícones de efeito** ao lado do retrato, embaixo do ouro: passe premium, bônus de XP, Brado de Guerra, poções, "Derrotado" e efeitos negativos. Cada ícone mostra o tempo que falta, e tocar nele mostra o nome. O texto antigo de "Derrotado" saiu.
+- **Passe premium** (preços do dono): R$ 15 por 7 dias, R$ 20 por 14 dias e R$ 25 por 30 dias.
+  - Dá XP x2 (inimigos e missões), ouro x2 (inimigos e baús) e +10% em todos os atributos (força, vitalidade, agilidade e foco).
+  - Comprar de novo soma os dias. O tempo é real e corre com o jogo fechado.
+- **Visuais (skins):** Cavaleiro do Sol e Lâmina da Tempestade, cada um com roupa, cabelo e espada próprios. O preço de R$ 9,90 cada foi escolhido por mim, e dá para mudar no Play Console.
+  - São modelos novos com o mesmo esqueleto do herói (usam todas as animações dele) e ganharam os ossos dos dedos.
+  - A espada do visual aparece no lugar da espada equipada, mas os números continuam sendo os da arma equipada.
+  - O visual vestido fica salvo. Para trocar: Vestir/Tirar na loja especial, ou o botão "Visual" na tela de equipamentos.

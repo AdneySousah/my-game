@@ -95,6 +95,7 @@ func _ready() -> void:
 			spawn = "pos:%s:%s:%s" % [pos[0], pos[1], st.get("yaw", 0)]
 		SaveGame.pending = {}
 	Session.give_starter_gear()
+	player.set_skin(Session.skin)
 	Store.granted.connect(_on_store_granted)
 	Store.claim_waiting()
 	Session.routine.unlocked.connect(_on_achievement)
@@ -111,7 +112,17 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	_changing = true
 	# A duel's "cannot die" only lasts in its own map.
 	player.min_hp_ratio = 0.0
-	if with_fade:
+	# The real game shows a loading card with art of the destination (tests and tools
+	# that open Main directly keep the quick black fade).
+	var card: LoadingScreen = null
+	var was_paused: bool = get_tree().paused
+	if SaveGame.active or LoadingScreen.is_open():
+		card = LoadingScreen.open(get_tree(), map_id)
+		if with_fade:
+			Audio.play_sfx("door")
+		await card.wait_shown()
+		get_tree().paused = true
+	elif with_fade:
 		Audio.play_sfx("door")
 		await hud.fade(true)
 	if map:
@@ -149,8 +160,11 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	_refresh_quest_world()
 	Audio.play_music(Audio.music_for_map(map_id))
 	camera_rig.snap_to_target()
+	if card:
+		get_tree().paused = was_paused
+		await card.close()
 	hud.banner(tr(str(map.data.get("name", map_id))))
-	if with_fade:
+	if with_fade and card == null:
 		await hud.fade(false)
 	_changing = false
 	map_loaded.emit(map_id)
@@ -273,7 +287,7 @@ func xp_for_kill(e: Enemy) -> int:
 		mult = maxf(float(p.get("xp_min_mult", 0.1)), 1.0 - diff * float(p.get("xp_level_diff_penalty", 0.1)))
 	if Session.xp_boost_left() > 0.0:
 		mult *= 1.0 + float(Data.store.get("xp_boost", 0.5))
-	mult *= Session.diff("xp")
+	mult *= Session.diff("xp") * Session.premium_mult("xp")
 	return roundi(e.xp_reward * mult)
 
 
@@ -282,7 +296,7 @@ func _on_enemy_killed(e: Enemy) -> void:
 	quests.on_enemy_killed(e.base_id, Session.current_map)
 	Session.routine.on_event("kill", e.base_id)
 	player.stats.add_xp(xp_for_kill(e))
-	player.add_gold(e.gold_reward)
+	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
 	_drop_loot(e)
 
 
@@ -414,6 +428,13 @@ func _on_store_granted(p: Dictionary) -> void:
 		player.add_gold(int(g["gold"]))
 	if float(g.get("xp_boost_seconds", 0.0)) > 0.0:
 		Session.add_xp_boost(float(g["xp_boost_seconds"]))
+	if float(g.get("premium_days", 0.0)) > 0.0:
+		Session.add_premium(float(g["premium_days"]) * 86400.0)
+	if str(g.get("skin", "")) != "":
+		var skin: String = str(g["skin"])
+		if not Session.skins_owned.has(skin):
+			Session.skins_owned.append(skin)
+		player.set_skin(skin)
 	var items: Dictionary = g.get("items", {})
 	for id: String in items:
 		# Bought items always reach the hero, even with a full bag (they pile on top).
@@ -568,8 +589,9 @@ func _open_chest(c: Chest) -> void:
 	c.open()
 	Audio.play_sfx("coins", c.global_position)
 	if c.gold > 0:
-		player.add_gold(c.gold)
-		hud.toast(tr("HUD_GOLD_GOT") % c.gold, 1.4)
+		var gold: int = roundi(c.gold * Session.premium_mult("gold"))
+		player.add_gold(gold)
+		hud.toast(tr("HUD_GOLD_GOT") % gold, 1.4)
 	for id: String in c.items:
 		give_item(id, int(c.items[id]))
 	_near_chest = null

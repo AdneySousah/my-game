@@ -1,5 +1,5 @@
 {
-  "_comment": "As 8 skills do guerreiro (GDD 6.3). 'type' escolhe o comportamento em scripts/player/skill_runner.gd.",
+  "_comment": "As 8 skills do guerreiro (GDD 6.3). 'type' escolhe o comportamento em scripts/player/skill_runner.gd; 'vfx' (opcional, nas skills de cone) escolhe o efeito visual em scripts/combat/skill_vfx.gd; 'color' pinta os efeitos.",
   "skills": [
     {
       "id": "corte_giratorio", "name": "SKILL_CORTE_GIRATORIO", "desc": "SKILL_CORTE_GIRATORIO_DESC",
@@ -19,14 +19,14 @@
       "unlock_level": 8, "cooldown": 9.0, "stamina_cost": 25, "type": "cone",
       "radius": 5.0, "angle": 70.0, "dmg_mult": 2.0, "windup": 0.25,
       "status": "slow", "status_time": 3.0, "status_value": 0.5, "lock_time": 0.55,
-      "color": "#D9733F"
+      "color": "#D9733F", "vfx": "seismic"
     },
     {
       "id": "quebra_guarda", "name": "SKILL_QUEBRA_GUARDA", "desc": "SKILL_QUEBRA_GUARDA_DESC",
       "unlock_level": 12, "cooldown": 10.0, "stamina_cost": 25, "type": "cone",
       "radius": 2.8, "angle": 100.0, "dmg_mult": 2.4, "windup": 0.3,
       "status": "def_break", "status_time": 6.0, "status_value": 0.3, "lock_time": 0.6,
-      "color": "#C8323C"
+      "color": "#C8323C", "vfx": "guard_break"
     },
     {
       "id": "brado_de_guerra", "name": "SKILL_BRADO_DE_GUERRA", "desc": "SKILL_BRADO_DE_GUERRA_DESC",

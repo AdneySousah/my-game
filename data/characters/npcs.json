@@ -201,6 +201,12 @@
       "talk": [],
       "barks": [],
       "model": "boss_severin"
+    },
+    "sahra": {
+      "name": "NPC_SAHRA",
+      "color": "#9b5de5",
+      "voice": 1.15,
+      "portrait": "ui_retrato_sahra"
     }
   }
 }

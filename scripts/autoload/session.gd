@@ -28,6 +28,11 @@ var routine: Routine = Routine.new()
 var difficulty: String = "normal"
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
+## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
+var premium_until: float = 0.0
+## Hero looks (skins) bought in the special shop, and the one worn ("" = default).
+var skins_owned: Array = []
+var skin: String = ""
 ## Google Play purchase tokens already handed to this hero (saved with the reward, so a
 ## purchase that failed to be consumed is never given twice). Store keeps the last 100.
 var store_tokens: Array = []
@@ -51,6 +56,9 @@ func reset() -> void:
 	quick_slots = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 	rest_ready_at.clear()
 	xp_boost_until = 0.0
+	premium_until = 0.0
+	skins_owned = []
+	skin = ""
 	store_tokens = []
 	routine.reset()
 	difficulty = "normal"
@@ -113,6 +121,7 @@ func to_dict() -> Dictionary:
 		"quests": quests, "flags": flags, "tracked_quest": tracked_quest,
 		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
 		"quick_slots": quick_slots, "xp_boost_until": xp_boost_until,
+		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
 		"day_hour": day_hour,
@@ -142,6 +151,11 @@ func from_dict(d: Dictionary) -> void:
 	quick_slots.merge(d.get("quick_slots", {}), true)
 	rest_ready_at = d.get("rest_ready_at", {})
 	xp_boost_until = float(d.get("xp_boost_until", 0.0))
+	premium_until = float(d.get("premium_until", 0.0))
+	skins_owned = (d.get("skins_owned", []) as Array).duplicate()
+	skin = str(d.get("skin", ""))
+	if not skins_owned.has(skin):
+		skin = ""
 	store_tokens = (d.get("store_tokens", []) as Array).duplicate()
 	routine.from_dict(d.get("routine", {}))
 	day_hour = fposmod(float(d.get("day_hour", day_hour)), 24.0)
@@ -173,6 +187,22 @@ func xp_boost_left() -> float:
 ## Adds bonus time (a second pack while one is running adds up).
 func add_xp_boost(seconds: float) -> void:
 	xp_boost_until = maxf(xp_boost_until, Time.get_unix_time_from_system()) + seconds
+
+
+## Seconds of premium pass left (0 = none).
+func premium_left() -> float:
+	return maxf(0.0, premium_until - Time.get_unix_time_from_system())
+
+
+func add_premium(seconds: float) -> void:
+	premium_until = maxf(premium_until, Time.get_unix_time_from_system()) + seconds
+
+
+## Premium multiplier for "xp", "gold" or "attributes" (1.0 without the pass).
+func premium_mult(key: String) -> float:
+	if premium_left() <= 0.0:
+		return 1.0
+	return float((Data.store.get("premium", {}) as Dictionary).get(key, 1.0))
 
 
 ## Seconds until a rest point heals again (0 = ready).

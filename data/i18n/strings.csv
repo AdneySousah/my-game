@@ -389,7 +389,13 @@ QUEST_MAIN_05,O Arauto da Colheita,The Herald of the Harvest
 QUEST_MAIN_06,Mais cinco desses,Five More Like Him
 QUEST_MORE_SOON,Fim do Ato 1 — a estrada do nordeste leva ao deserto de Qaressa,End of Act 1 — the north-east road leads to the desert of Qaressa
 QUEST_ACT2_SOON,"Fale com a Nadira: as Ruínas de Ammar, a leste das dunas, estão abertas","Talk to Nadira: the Ruins of Ammar, east of the dunes, are open"
-QUEST_ACT2_SOON2,A Torre Afundada e a Arauta Sahra chegam na próxima versão,The Sunken Tower and Herald Sahra arrive in the next version
+QUEST_ACT2_SOON2,Fale com a Nadira: o caminho para a Torre Afundada está aberto,Talk to Nadira: the way to the Sunken Tower is open
+QUEST_MAIN_09,A Arauta da Sede,The Herald of Thirst
+QUEST_ACT2_DONE,Fim do Ato 2 — os poços de Qaressa estão abertos. O Ato 3 vem nas próximas versões,End of Act 2 — Qaressa's wells are open. Act 3 comes in the next versions
+OBJ_TALK_NADIRA_TOWER,Pergunte à Nadira sobre a Torre Afundada,Ask Nadira about the Sunken Tower
+OBJ_REACH_TOWER,"Chegue à Torre Afundada, a leste das Ruínas","Reach the Sunken Tower, east of the Ruins"
+OBJ_KILL_SAHRA,Derrote a Arauta Sahra no pátio da torre,Defeat Herald Sahra in the tower court
+OBJ_RETURN_NADIRA_TOWER,Volte para a Nadira em Qaressa,Go back to Nadira in Qaressa
 OBJ_KILL_GOLEM,Derrote o Golem de pedra no fundo da mina,Defeat the stone golem in the depths of the mine
 OBJ_KILL_GORVAN,Derrote Gorvan no Celeiro do Tributo,Defeat Gorvan in the Tribute Granary
 OBJ_RETURN_VILLAGE,Volte para a Marta em Pradoluz,Return to Marta in Pradoluz
@@ -713,6 +719,24 @@ DLG_MAIN_08_RETURN_1,Você está um trapo. O que houve?,You look like a rag. Wha
 DLG_MAIN_08_RETURN_2,Um cavaleiro da Ordem Celeste. Severin. Ele me derrubou como se eu fosse um saco de farinha.,A knight of the Celestial Order. Severin. He knocked me down like a sack of flour.
 DLG_MAIN_08_RETURN_3,"A Ordem serve aos Arautos. Se ele estava lá, a Sahra sabe que você vem.","The Order serves the Heralds. If he was there, Sahra knows you're coming."
 DLG_MAIN_08_RETURN_4,Descanse. E treine. A Torre Afundada não vai ser mais gentil que ele.,Rest. And train. The Sunken Tower won't be any kinder than he was.
+DLG_MAIN_09_NADIRA_1,"Você voltou inteiro. Bom. Achei o caminho da Torre Afundada: a leste das Ruínas, depois do muro quebrado.","You came back in one piece. Good. I found the way to the Sunken Tower: east of the Ruins, past the broken wall."
+DLG_MAIN_09_NADIRA_2,"A Sahra guarda lá a chave dos poços. E toda a água que ela tirou da cidade, em jarros lacrados.","Sahra keeps the key to the wells there. And all the water she took from the city, in sealed jars."
+DLG_MAIN_09_NADIRA_3,Uma vilã que coleciona jarros de água. O Bram nunca vai acreditar.,A villain who collects water jars. Bram will never believe it.
+DLG_MAIN_09_NADIRA_4,"Não ria. Dizem que quando ela se irrita, vira areia. E areia não sangra.","Don't laugh. They say that when she gets angry, she turns into sand. And sand doesn't bleed."
+DLG_MAIN_09_TOWER_1,Olha o tamanho disso... a torre inteira está afundando na areia.,Look at the size of it... the whole tower is sinking into the sand.
+DLG_MAIN_09_TOWER_2,E esses jarros... cada um é a água de uma família de Qaressa. Ela vai devolver tudo. Gota por gota.,And these jars... each one is a Qaressa family's water. She's giving it all back. Drop by drop.
+DLG_SAHRA_INTRO_1,"Um cliente! Que raridade aqui em cima. Veio comprar água, querido? Para você, faço preço de amigo.","A customer! How rare up here. Come to buy water, dear? For you, a friend's price."
+DLG_SAHRA_INTRO_2,Vim buscar a chave dos poços. De graça.,I came for the key to the wells. For free.
+DLG_SAHRA_INTRO_3,De graça? Nada no deserto é de graça. Nem a sombra. Nem a sua vida.,For free? Nothing in the desert is free. Not the shade. Not your life.
+DLG_SAHRA_INTRO_4,O Soberano Alado me deu a sede deste povo para guardar. E eu cobro juros.,The Winged Sovereign gave me this people's thirst to keep. And I charge interest.
+DLG_SAHRA_TRANSFORM_1,Você suja minhas sedas e ainda quer desconto? Chega de negociar!,You stain my silks and still want a discount? No more bargaining!
+DLG_SAHRA_TRANSFORM_2,"Areia, venha a mim! Mostre a ele o que é sede de verdade!","Sand, come to me! Show him what true thirst is!"
+DLG_SAHRA_REBORN_1,Ela virou uma guerreira de areia! E sumiu no chão... ela pode aparecer atrás de mim!,She turned into a sand warrior! And she sank into the ground... she can pop up behind me!
+DLG_SAHRA_REBORN_2,Escudo de novo... e os jarros de água que brotaram curam ela. Quebro o escudo e quebro os jarros antes que ela beba!,A shield again... and the water jars that sprouted heal her. Break the shield and smash the jars before she drinks!
+DLG_MAIN_09_RETURN_1,Ouviu isso? Os poços... a água está subindo! O povo está dançando na praça!,Did you hear that? The wells... the water is rising! People are dancing in the square!
+DLG_MAIN_09_RETURN_2,A chave estava no colar dela. Achei que ia ser mais difícil abrir um cadeado de ouro do céu.,The key was on her necklace. I thought opening a sky-gold lock would be harder.
+DLG_MAIN_09_RETURN_3,"Você derrubou dois Arautos, garoto. A Ordem Celeste não vai deixar barato.","You've brought down two Heralds, kid. The Celestial Order won't let this go."
+DLG_MAIN_09_RETURN_4,Mas hoje Qaressa bebe de graça. Hoje a gente comemora.,But today Qaressa drinks for free. Today we celebrate.
 DLG_MARTA_IDLE_FED_1,A despensa está cheia pela primeira vez em anos. Come mais um pedaço!,The pantry is full for the first time in years. Have another slice!
 DLG_BRAM_IDLE_FED_1,"Não fique se achando. Mas... bom trabalho, moleque.","Don't get cocky. But... good work, kid."
 DLG_CELESTE_IDLE_FED_1,"Prateleiras cheias de novo! Logo, logo eu reabro o armazém, querido.","Full shelves again! Very soon I'll reopen the store, dear."
@@ -730,3 +754,58 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+LOAD_LOADING,Carregando...,Loading...
+LOAD_TIP_1,"Dica: toque no retrato do herói para abrir atributos, skills e equipamentos.","Tip: tap the hero's portrait to open attributes, skills and gear."
+LOAD_TIP_2,Dica: pontos de descanso curam aos poucos e viram atalhos de viagem no mapa.,Tip: rest points heal you over time and become travel shortcuts on the map.
+LOAD_TIP_3,Dica: chefes com escudo dourado só perdem vida depois que o escudo quebra.,Tip: bosses with a golden shield only lose health after the shield breaks.
+LOAD_TIP_4,Dica: a esquiva deixa o herói intocável por um instante. Use contra golpes fortes!,Tip: dodging makes the hero untouchable for a moment. Use it against heavy blows!
+LOAD_TIP_5,Dica: o ferreiro melhora suas armas e encaixa gemas nas peças.,Tip: the blacksmith upgrades your weapons and sets gems into your gear.
+LOAD_TIP_6,Dica: inimigos muito abaixo do seu nível dão menos experiência.,Tip: enemies far below your level give less experience.
+LOAD_TIP_7,Dica: as missões diárias renovam todo dia e dão ouro e itens.,Tip: daily missions renew every day and give gold and items.
+LOAD_TIP_8,"Dica: poções de reforço aumentam ataque, defesa ou velocidade por um tempo.","Tip: boost potions raise attack, defense or speed for a while."
+LOAD_TIP_9,"Dica: segure Correr para ir mais rápido, mas fique de olho no fôlego.","Tip: hold Run to go faster, but keep an eye on your stamina."
+LOAD_TIP_10,Dica: converse com os moradores. Alguns têm missões e histórias para contar.,Tip: talk to the villagers. Some have quests and stories to tell.
+LOAD_TIP_11,Dica: você pode fazer carinho nos animais da cidade.,Tip: you can pet the animals in town.
+LOAD_TIP_12,Dica: os ícones ao lado do retrato mostram os efeitos ativos e quanto tempo falta. Toque neles!,Tip: the icons next to the portrait show active effects and how long they last. Tap them!
+MAP_TORRE,Torre Afundada,Sunken Tower
+REST_TORRE_ENTRADA,Acampamento da Duna,Dune Camp
+REST_TORRE_PATIO,Sombra do Poço,Well's Shade
+ENEMY_SAHRA,"Sahra, Arauta da Sede","Sahra, Herald of Thirst"
+ENEMY_SAHRA_AREIA,"Sahra, Guerreira de Areia","Sahra, Sand Warrior"
+NPC_SAHRA,Sahra,Sahra
+BUFF_PREMIUM,"Passe premium: XP x2, ouro x2 e +10% nos atributos","Premium pass: 2x XP, 2x gold and +10% attributes"
+BUFF_DEFEATED,"Derrotado: vida, ataque e defesa um pouco menores","Defeated: health, attack and defense a little lower"
+BUFF_POTION,Poção,Potion
+BUFF_STUN,Atordoado,Stunned
+BUFF_SLOW,Lento,Slowed
+BUFF_WEAKEN,Enfraquecido,Weakened
+BUFF_DEF_BREAK,Defesa quebrada,Broken defense
+STORE_PREMIUM_7,Passe premium — 7 dias,Premium pass — 7 days
+STORE_PREMIUM_14,Passe premium — 14 dias,Premium pass — 14 days
+STORE_PREMIUM_30,Passe premium — 30 dias,Premium pass — 30 days
+STORE_PREMIUM_DESC,"Experiência em dobro, ouro dos inimigos e baús em dobro e +10% em todos os atributos. Comprar de novo soma os dias.","Double experience, double gold from enemies and chests and +10% on every attribute. Buying again adds the days."
+STORE_PREMIUM_ACTIVE,Passe premium ativo: faltam %s,Premium pass active: %s left
+STORE_SKIN_SOL,Visual: Cavaleiro do Sol,Look: Sun Knight
+STORE_SKIN_SOL_DESC,"Armadura branca e dourada, cabelo novo e a Lâmina Solar. Só muda a aparência; fica guardado para sempre.","White and gold armor, new hair and the Sun Blade. Changes only the looks; yours to keep forever."
+STORE_SKIN_TEMPESTADE,Visual: Lâmina da Tempestade,Look: Storm Blade
+STORE_SKIN_TEMPESTADE_DESC,"Couro azul com raios, cabelo prateado e a Lâmina da Tempestade. Só muda a aparência; fica guardado para sempre.","Blue leather with lightning, silver hair and the Storm Blade. Changes only the looks; yours to keep forever."
+STORE_SKIN_WEAR,Vestir,Wear
+STORE_SKIN_REMOVE,Tirar,Take off
+ATTRS_TOTALS,Total do herói,Hero totals
+ATTRS_COL_TOTAL,Total,Total
+ATTRS_COL_GEAR,Equip.,Gear
+ATTRS_MAX_STAMINA,Fôlego máximo,Max stamina
+ATTRS_CDR,Redução de recarga,Cooldown reduction
+ATTRS_SPEND,Distribuir pontos,Spend points
+ATTRS_TIP,"Toque em ""+"" para subir um atributo e em ""!"" para ver o que ele muda antes.","Tap ""+"" to raise an attribute and ""!"" to see what it changes first."
+ATTRS_DRAG_HINT,Arraste para girar,Drag to turn
+ATTRS_NOTE_GEAR,"Equip.: o que vem dos equipamentos e títulos, já somado no total.","Gear: what comes from equipment and titles, already in the total."
+ATTRS_NOTE_BUFF,Em azul: com poção ou skill ativa.,In blue: a potion or skill is active.
+ATTRS_NOTE_DEFEATED,Em vermelho: enfraquecido pela derrota.,In red: weakened by defeat.
+ATTRS_PREVIEW_TITLE,+1 em %s,+1 %s
+ATTRS_EACH_POINT,Cada ponto dá: %s,Each point gives: %s
+ATTRS_AT_CAP,no máximo,at the cap
+ATTRS_RAISE,+1 em %s,+1 %s
+ATTRS_NO_POINTS,Sem pontos livres,No free points
+EQ_LOOK,Visual: %s (toque para trocar),Look: %s (tap to change)
+EQ_LOOK_DEFAULT,Padrão,Default

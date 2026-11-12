@@ -298,11 +298,24 @@ func _show_special() -> void:
 	_name.add_theme_color_override("font_color", Color("#ffd23f"))
 	_kind.text = tr("STORE_TEST_NOTE") if Store.mode == "test" else tr("STORE_NOTE")
 	var left: float = Session.xp_boost_left()
+	var lines: PackedStringArray = []
 	if left > 0.0:
-		_info.text = "[color=%s]%s[/color]" % [GearText.UP, tr("STORE_XP_ACTIVE") % ceili(left / 60.0)]
+		lines.append("[color=%s]%s[/color]" % [GearText.UP, tr("STORE_XP_ACTIVE") % ceili(left / 60.0)])
+	var prem: float = Session.premium_left()
+	if prem > 0.0:
+		lines.append("[color=%s]%s[/color]" % [GearText.UP, tr("STORE_PREMIUM_ACTIVE") % BuffBar.time_text(prem)])
+	if not lines.is_empty():
+		_info.text = "
+".join(lines)
+	# The list scrolls: it has more products than fit on a phone screen.
+	var scroll := ScrollContainer.new()
+	scroll.custom_minimum_size = Vector2(0, 400)
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	_actions.add_child(scroll)
 	var list := VBoxContainer.new()
 	list.add_theme_constant_override("separation", 6)
-	_actions.add_child(list)
+	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(list)
 	for p: Dictionary in Store.products:
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 10)
@@ -328,6 +341,17 @@ func _show_special() -> void:
 		d.custom_minimum_size = Vector2(560, 0)
 		texts.add_child(d)
 		var pid: String = str(p["id"])
+		var skin: String = str((p.get("grants", {}) as Dictionary).get("skin", ""))
+		if skin != "" and Session.skins_owned.has(skin):
+			# A look already bought: wear it or take it off (no second purchase).
+			var wearing: bool = Session.skin == skin
+			var wear := _button(tr("STORE_SKIN_REMOVE") if wearing else tr("STORE_SKIN_WEAR"), func() -> void:
+				if player:
+					player.set_skin("" if Session.skin == skin else skin)
+				_refresh())
+			wear.custom_minimum_size = Vector2(110, 44)
+			row.add_child(wear)
+			continue
 		var buy := _button(Store.price_text(pid), func() -> void:
 			_result = "STORE_WAIT"
 			_result_good = true

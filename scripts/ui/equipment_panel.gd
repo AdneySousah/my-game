@@ -25,6 +25,7 @@ var _unequip_btn: Button
 var _bag_title: Label
 var _bag_grid: GridContainer
 var _summary: Label
+var _look_btn: Button
 var _model: CharacterModel
 var _model_holder: Node3D
 
@@ -93,6 +94,9 @@ func _ready() -> void:
 	_summary.add_theme_font_size_override("font_size", 18)
 	_summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	root.add_child(_summary)
+	# Second slot: the bought look (skin) the hero wears over his gear.
+	_look_btn = _button("", _next_look)
+	root.add_child(_look_btn)
 	root.add_child(_button(tr("PANEL_CLOSE"), func() -> void:
 		hide()
 		closed.emit()))
@@ -165,8 +169,41 @@ func _refresh() -> void:
 		var st: Stats = player.stats
 		_summary.text = tr("STAT_SUMMARY") % [roundi(st.get_stat("max_hp")), roundi(st.get_stat("atk")),
 			roundi(st.get_stat("def")), st.get_stat("crit_chance") * 100.0]
+	if _model and _model.character_id != Player.current_look():
+		_make_model()
+	elif _model:
+		_model.set_weapon(Player.current_weapon_look())
+	_look_btn.visible = not Session.skins_owned.is_empty()
+	var look_name: String = tr("EQ_LOOK_DEFAULT")
+	for p: Dictionary in Store.products:
+		if str((p.get("grants", {}) as Dictionary).get("skin", "")) == Session.skin and Session.skin != "":
+			look_name = tr(str(p.get("name", "")))
+	_look_btn.text = tr("EQ_LOOK") % look_name
+
+
+## Puts the hero (with his current look and sword) in the little 3D window.
+func _make_model() -> void:
 	if _model:
-		_model.set_weapon(gear.weapon_model())
+		_model.queue_free()
+	_model = CharacterModel.create(Player.current_look())
+	if _model:
+		_model.ready.connect(func() -> void:
+			_model.set_weapon(Player.current_weapon_look())
+			_model.play_loop("combat_idle")
+			_model.set_weapon_drawn(true), CONNECT_ONE_SHOT)
+		_model_holder.add_child(_model)
+
+
+## Cycles the worn look: default -> each bought skin -> default.
+func _next_look() -> void:
+	var order: Array = [""] + Session.skins_owned
+	var i: int = order.find(Session.skin)
+	var next: String = str(order[(i + 1) % order.size()])
+	if player:
+		player.set_skin(next)
+	else:
+		Session.skin = next
+	_refresh()
 
 
 ## Bag pieces that fit the chosen slot.
@@ -265,13 +302,7 @@ func _build_preview() -> Control:
 	_model_holder = Node3D.new()
 	_model_holder.rotation_degrees.y = 200.0
 	vp.add_child(_model_holder)
-	_model = CharacterModel.create("hero_lio")
-	if _model:
-		_model.ready.connect(func() -> void:
-			_model.set_weapon(Session.gear.weapon_model())
-			_model.play_loop("combat_idle")
-			_model.set_weapon_drawn(true), CONNECT_ONE_SHOT)
-		_model_holder.add_child(_model)
+	_make_model()
 	box.gui_input.connect(func(ev: InputEvent) -> void:
 		if ev is InputEventScreenDrag:
 			_model_holder.rotation.y += (ev as InputEventScreenDrag).relative.x * 0.012

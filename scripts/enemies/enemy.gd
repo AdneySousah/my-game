@@ -365,6 +365,10 @@ func _begin_windup(windup: float) -> void:
 		_:
 			_attack_center = global_position + _forward() * radius * 0.9
 	_attack_center.y = 0.0
+	if a.has("blink") and _target_alive():
+		# Sinks into the sand and comes up behind the hero (Sahra's sand form).
+		_attack_center = _blink_spot(a["blink"])
+		_blink_to(_attack_center, windup)
 	_clear_telegraph()
 	match str(a.get("shape", "front")):
 		"summon":
@@ -490,17 +494,20 @@ func _start_transform(new_id: String) -> void:
 	if _target_alive() and target.camera_rig:
 		target.camera_rig.focus_on(self, TRANSFORM_TIME + 0.6)
 	var new_data: Dictionary = Data.enemies.get(new_id, {})
+	# Colours of the scene come from the old form: "transform_fx": {"color", "tint"}.
+	var fx: Dictionary = data.get("transform_fx", {})
+	set_meta("fx_tint", Color(str(fx.get("tint", "#ffc94a"))))
 	if model:
 		model.play_action("taunt")
 	Audio.play_sfx("roar", global_position)
 	_push_hero_away(5.0, 4.0)
 	ProtoVisuals.flash_disc(get_parent(), global_position, 5.0, Color(1, 0.85, 0.4, 0.6), 0.8)
-	var whirl: CPUParticles3D = _straw_whirl()
+	var whirl: CPUParticles3D = _straw_whirl(Color(str(fx.get("color", "#e8b84a"))))
 	var tw := create_tween()
 	# Golden glow builds up while the arena changes.
 	tw.tween_method(func(v: float) -> void:
 		if model:
-			model.set_tint(Color("#ffc94a"), v), 0.0, 0.75, 1.6)
+			model.set_tint(get_meta("fx_tint", Color("#ffc94a")), v), 0.0, 0.75, 1.6)
 	tw.parallel().tween_callback(func() -> void: _raise_ground(new_data)).set_delay(0.5)
 	# The old body spins and shrinks into the whirl.
 	var spin_from: float = rotation.y
@@ -545,7 +552,7 @@ func _swap_form() -> void:
 		model.play_action("slam")
 		create_tween().tween_method(func(v: float) -> void:
 			if is_instance_valid(model):
-				model.set_tint(Color("#ffc94a"), v), 0.7, 0.0, 1.2)
+				model.set_tint(get_meta("fx_tint", Color("#ffc94a")), v), 0.7, 0.0, 1.2)
 	Audio.play_sfx("slam", global_position)
 	Audio.play_sfx("roar", global_position, 0.8)
 	ProtoVisuals.flash_disc(get_parent(), global_position, 1.5 * s, Color(1, 0.9, 0.5, 0.6), 0.5)
@@ -611,6 +618,80 @@ func _add_shield(cfg: Dictionary) -> void:
 		shield_restored.emit(self))
 
 
+## Where a blink lands: behind the hero ("behind" metres), kept inside the arena (around
+## the middle of the boss's power spots, when it has them).
+func _blink_spot(cfg: Dictionary) -> Vector3:
+	var dest: Vector3 = target.global_position - target.forward() * float(cfg.get("behind", 2.0))
+	var spots: Array = get_meta("power_spots", [])
+	if not spots.is_empty():
+		var mid := Vector3.ZERO
+		for s: Variant in spots:
+			mid += Vector3(float(s[0]), 0.0, float(s[1]))
+		mid /= spots.size()
+		var off: Vector3 = dest - mid
+		off.y = 0.0
+		dest = mid + off.limit_length(float(cfg.get("max_from_center", 9.0)))
+	dest.y = 0.0
+	return dest
+
+
+## Sinks into the ground, moves under it and rises at `dest` within the windup.
+func _blink_to(dest: Vector3, windup: float) -> void:
+	var body: Node3D = model if model else _visual
+	if body == null:
+		return
+	var t: float = minf(0.45, windup * 0.35)
+	var base_y: float = body.position.y
+	var base_scale: Vector3 = body.scale
+	invulnerable = true
+	_sand_burst(global_position)
+	Audio.play_sfx("dodge", global_position, 0.7)
+	var tw := create_tween()
+	tw.tween_property(body, "position:y", base_y - 1.6, t).set_ease(Tween.EASE_IN)
+	tw.parallel().tween_property(body, "scale", base_scale * 0.5, t)
+	tw.tween_callback(func() -> void:
+		global_position = Vector3(dest.x, global_position.y, dest.z)
+		if _target_alive():
+			var to: Vector3 = target.global_position - global_position
+			to.y = 0.0
+			if to.length() > 0.05:
+				_attack_dir = to.normalized()
+				_face(_attack_dir)
+		_sand_burst(dest))
+	tw.tween_property(body, "position:y", base_y, t).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+	tw.parallel().tween_property(body, "scale", base_scale, t)
+	tw.tween_callback(func() -> void:
+		if _state != State.TRANSFORM and _state != State.DEAD:
+			invulnerable = false)
+
+
+## A puff of sand bursting out of the ground.
+func _sand_burst(at: Vector3) -> void:
+	var p := CPUParticles3D.new()
+	var grain := BoxMesh.new()
+	grain.size = Vector3(0.12, 0.12, 0.12)
+	p.mesh = grain
+	p.material_override = ProtoVisuals.material(Color("#e9b872"), true)
+	p.amount = 36
+	p.lifetime = 0.8
+	p.one_shot = true
+	p.explosiveness = 0.9
+	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_SPHERE
+	p.emission_sphere_radius = 0.8
+	p.direction = Vector3.UP
+	p.spread = 55.0
+	p.gravity = Vector3(0, -9.0, 0)
+	p.initial_velocity_min = 3.0
+	p.initial_velocity_max = 6.0
+	p.scale_amount_min = 0.6
+	p.scale_amount_max = 1.6
+	get_parent().add_child(p)
+	p.global_position = at + Vector3(0, 0.2, 0)
+	p.emitting = true
+	get_tree().create_timer(1.5, false).timeout.connect(p.queue_free)
+	ProtoVisuals.flash_disc(get_parent(), at, 1.6, Color(0.95, 0.75, 0.45, 0.55), 0.45)
+
+
 ## Pushes the hero out of the way (no damage), e.g. when the boss changes form.
 func _push_hero_away(push_speed: float, within: float) -> void:
 	if not _target_alive():
@@ -625,12 +706,12 @@ func _push_hero_away(push_speed: float, within: float) -> void:
 
 
 ## Straw spinning up around the boss while it changes form.
-func _straw_whirl() -> CPUParticles3D:
+func _straw_whirl(color: Color = Color("#e8b84a")) -> CPUParticles3D:
 	var p := CPUParticles3D.new()
 	var straw := BoxMesh.new()
 	straw.size = Vector3(0.04, 0.32, 0.04)
 	p.mesh = straw
-	p.material_override = ProtoVisuals.material(Color("#e8b84a"), true)
+	p.material_override = ProtoVisuals.material(color, true)
 	p.amount = 90
 	p.lifetime = 1.4
 	p.emission_shape = CPUParticles3D.EMISSION_SHAPE_RING

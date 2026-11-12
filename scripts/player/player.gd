@@ -82,7 +82,7 @@ func _ready() -> void:
 	shape.position.y = 0.9
 	add_child(shape)
 
-	model = CharacterModel.create("hero_lio")
+	model = CharacterModel.create(look_id())
 	if model:
 		add_child(model)
 		_visual = model
@@ -97,7 +97,7 @@ func _ready() -> void:
 	Session.gear.changed.connect(_on_gear_changed)
 	Session.routine.changed.connect(_on_title_maybe_changed)
 	if model:
-		model.set_weapon(Session.gear.weapon_model())
+		model.set_weapon(weapon_look())
 	status = StatusEffects.new()
 	add_child(status)
 	skills = SkillRunner.new()
@@ -117,6 +117,7 @@ func _physics_process(delta: float) -> void:
 	_lock -= delta
 	_combat_time -= delta
 	_tick_buff(delta)
+	_tick_premium()
 	_tick_potions(delta)
 	_tick_stamina(delta)
 	if _dead or _scripted:
@@ -178,6 +179,51 @@ func _physics_process(delta: float) -> void:
 
 
 # --- Public API used by skills, enemies and the HUD ---------------------------
+
+## Character id (characters.json) the hero looks like: the skin he wears, or Lio.
+func look_id() -> String:
+	return Player.current_look()
+
+
+static func current_look() -> String:
+	if Session.skin != "" and not CharacterModel.config_for(Session.skin).is_empty():
+		return Session.skin
+	return "hero_lio"
+
+
+## Sword shown in his hand: the skin's own sword ("skin_weapon") or the equipped one.
+func weapon_look() -> Dictionary:
+	return Player.current_weapon_look()
+
+
+static func current_weapon_look() -> Dictionary:
+	var gear_weapon: Dictionary = Session.gear.weapon_model()
+	var cfg: Dictionary = CharacterModel.config_for(current_look())
+	if cfg.has("skin_weapon") and not bool(gear_weapon.get("none", false)):
+		return cfg["skin_weapon"]
+	return gear_weapon
+
+
+## Wears a bought look ("" = default). Swaps the 3D model on the spot.
+func set_skin(id: String) -> void:
+	Session.skin = id if Session.skins_owned.has(id) else ""
+	if model == null or model.character_id == look_id():
+		return
+	var new_model: CharacterModel = CharacterModel.create(look_id())
+	if new_model == null:
+		return
+	var old: CharacterModel = model
+	new_model.transform = old.transform
+	remove_child(old)
+	old.queue_free()
+	model = new_model
+	_visual = model
+	add_child(model)
+	model.set_weapon(weapon_look())
+	model.play_loop("idle")
+	stats.stats_changed.emit()
+
+
 
 func is_dead() -> bool:
 	return _dead
@@ -630,6 +676,19 @@ func _tick_buff(delta: float) -> void:
 		stats.stats_changed.emit()
 
 
+## Premium pass: +10% on every attribute while it lasts.
+func _tick_premium() -> void:
+	var m: float = Session.premium_mult("attributes")
+	if not is_equal_approx(m, stats.attr_mult):
+		stats.attr_mult = m
+		stats.stats_changed.emit()
+
+
+## Seconds left on the war cry attack buff (0 = none).
+func atk_buff_left() -> float:
+	return maxf(0.0, _buff_time)
+
+
 func _body_color() -> Color:
 	return Color("#FF8C42") if _buff_time > 0.0 else BODY_COLOR
 
@@ -665,7 +724,7 @@ func _on_gear_changed() -> void:
 	stats.gear = _bonuses()
 	stats.stats_changed.emit()
 	if model:
-		model.set_weapon(Session.gear.weapon_model())
+		model.set_weapon(weapon_look())
 
 
 func _on_stats_changed() -> void:

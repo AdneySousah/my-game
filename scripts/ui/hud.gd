@@ -23,6 +23,7 @@ var _clock: DayClock
 var _full_map: FullMapPanel
 
 var _status: PortraitStatus
+var _buffs: BuffBar
 var _stamina_bar: FramedBar
 var _character_menu: CharacterMenu
 ## Skills unlocked since the skills panel was last opened (drives the "!" alert).
@@ -213,6 +214,7 @@ func _ready() -> void:
 
 func bind(p: Player) -> void:
 	player = p
+	_buffs.player = p
 	player.hp_changed.connect(func(_h: float, _m: float) -> void: _refresh())
 	player.gold_changed.connect(func(_g: int) -> void: _refresh())
 	player.message.connect(func(t: String) -> void: toast(t))
@@ -532,8 +534,8 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("potion_%d" % (i + 1)):
 				use_quick_potion(i)
 	_update_potion_buttons()
-	var dt: float = player.stats.defeated_time_left
-	_status.defeated_text = tr("HUD_DEFEATED") % int(ceilf(dt)) if dt > 0.0 else ""
+	# The "Derrotado" penalty shows as an icon in the buff row (BuffBar).
+	_status.defeated_text = ""
 
 
 # --- Build ----------------------------------------------------------------------
@@ -543,6 +545,11 @@ func _build_status(root: Control) -> void:
 	_status.position = Vector2(10, 8)
 	root.add_child(_status)
 	_status.tapped.connect(open_character_menu)
+	# Active effects (potions, war cry, premium...) beside the portrait, under the gold.
+	_buffs = BuffBar.new()
+	_buffs.position = _status.position + Vector2(PortraitStatus.CENTER.x + PortraitStatus.ARC_R + 16.0, 104.0)
+	root.add_child(_buffs)
+	_buffs.tapped.connect(func(t: String) -> void: toast(t, 1.6))
 	# Tracked quest: title and current objective under the portrait.
 	_tracker_bg = TrackerBackdrop.new()
 	_tracker_bg.position = Vector2(0, 172)

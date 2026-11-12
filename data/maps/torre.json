@@ -1,0 +1,89 @@
+{
+  "_comment": "Torre Afundada (Ato 2, níveis 25-28): torre antiga meio engolida pela areia, a leste das Ruínas. A Sahra guarda ali os jarros com a água que tirou dos poços de Qaressa. O pátio do norte é a arena dela; os jarros de água que brotam na luta curam a forma de areia, e o herói pode quebrá-los.",
+  "id": "torre",
+  "name": "MAP_TORRE",
+  "size": [84, 100],
+  "seed": 121,
+  "ground": "#d9a865",
+  "grass": {"count": 140, "root": "#b0904a", "tip": "#e0c886"},
+  "sky": "#e7a27c",
+  "ambient": 0.56,
+  "sun": 1.15,
+  "sun_color": "#ffc89a",
+  "patches": {"color": "#c08f55", "count": 150},
+  "spawns": {"from_ruinas": [0, 42, 0]},
+  "exits": [
+    {"to": "ruinas", "spawn": "from_torre", "pos": [0, 48], "size": [10, 2], "label": "MAP_RUINAS", "model": "prp_portal", "model_pos": [0, 49.5]}
+  ],
+  "rest_points": [
+    {"id": "torre_entrada", "name": "REST_TORRE_ENTRADA", "pos": [7, 36], "kind": "fogueira"},
+    {"id": "torre_patio", "name": "REST_TORRE_PATIO", "pos": [-7, -4], "kind": "fogueira"}
+  ],
+  "chests": [
+    {"id": "torre_bau_1", "pos": [-32, 26], "yaw": 90, "gold": 900, "items": {"pot_vida_g": 3, "broca": 1, "gema_rubi_2": 2}},
+    {"id": "torre_bau_2", "pos": [32, -2], "yaw": -90, "gold": 1000, "items": {"pot_folego_g": 2, "trevo": 1, "eq_peitoral_epico": 1}}
+  ],
+  "paths": [
+    {"points": [[0, 48], [0, 32], [-6, 18], [2, 4], [0, -10], [0, -24]], "width": 3.6, "color": "#bf9258"}
+  ],
+  "props": [
+    {"id": "env_torre_afundada", "pos": [0, -45], "rot": 0},
+    {"id": "env_escada_areia", "pos": [0, -10], "rot": 180},
+    {"id": "env_arco_ruina", "pos": [0, 30], "rot": 0},
+    {"id": "env_coluna_ruina", "pos": [-9, 22]},
+    {"id": "env_coluna_ruina", "pos": [9, 22], "rot": 90},
+    {"id": "env_coluna_ruina", "pos": [-16, 6], "rot": 40},
+    {"id": "env_coluna_ruina", "pos": [16, 6], "rot": 200},
+    {"id": "env_coluna_ruina", "pos": [-24, -30], "rot": 120},
+    {"id": "env_coluna_ruina", "pos": [24, -30], "rot": 300},
+    {"id": "prp_poco_selado", "pos": [-14, 30], "rot": 20},
+    {"id": "prp_poco_selado", "pos": [18, 14], "rot": -30},
+    {"id": "prp_poco_selado", "pos": [-20, -6], "rot": 70},
+    {"id": "prp_jarro_agua", "pos": [5, 26], "rot": 10},
+    {"id": "prp_jarro_agua", "pos": [6.4, 25], "rot": 80},
+    {"id": "prp_jarro_agua", "pos": [-12, 12], "rot": 200},
+    {"id": "prp_jarro_agua", "pos": [-13.2, 13.4], "rot": 30},
+    {"id": "prp_jarro_agua", "pos": [12, -6], "rot": 140},
+    {"id": "prp_braseiro", "pos": [-6, -13]},
+    {"id": "prp_braseiro", "pos": [6, -13]},
+    {"id": "prp_braseiro", "pos": [-16, -30]},
+    {"id": "prp_braseiro", "pos": [16, -30]},
+    {"id": "prp_estatua_alada", "pos": [-26, 18], "rot": 90},
+    {"id": "prp_estatua_alada", "pos": [26, 18], "rot": -90}
+  ],
+  "walls": [
+    {"id": "env_parede_ruina", "from": [-40, 46], "to": [-6, 46]},
+    {"id": "env_parede_ruina", "from": [6, 46], "to": [40, 46]},
+    {"id": "env_parede_ruina", "from": [42, 44], "to": [42, -46]},
+    {"id": "env_parede_ruina", "from": [40, -48], "to": [-40, -48]},
+    {"id": "env_parede_ruina", "from": [-42, -46], "to": [-42, 44]},
+    {"id": "env_parede_ruina", "from": [-40, -14], "to": [-7, -14]},
+    {"id": "env_parede_ruina", "from": [7, -14], "to": [40, -14]}
+  ],
+  "scatter": [
+    {"ids": ["prp_rocha_duna", "prp_arenito", "env_coluna_ruina"], "count": 16, "rect": [-38, -10, 38, 42], "spacing": 8, "seed": 122},
+    {"ids": ["prp_arenito_pequeno", "prp_capim_seco", "prp_jarro", "prp_arbusto_seco"], "count": 46, "rect": [-38, -10, 38, 42], "spacing": 3, "seed": 123},
+    {"ids": ["prp_arenito_pequeno", "prp_capim_seco"], "count": 12, "rect": [-36, -46, 36, -16], "spacing": 4, "seed": 124}
+  ],
+  "enemy_zones": [
+    {"pos": [-14, 20], "radius": 10, "max": 4, "types": {"homem_lagarto": 2, "bandido_deserto": 2}, "level": [25, 26], "respawn": 25},
+    {"pos": [16, 2], "radius": 9, "max": 4, "types": {"esqueleto_antigo": 3, "homem_lagarto": 1}, "level": [26, 27], "respawn": 25},
+    {"pos": [-22, -2], "radius": 8, "max": 3, "types": {"esqueleto_antigo": 2, "bandido_deserto": 1}, "level": [27, 28], "respawn": 25}
+  ],
+  "arena": {"gate": [[-7, -14], [7, -14]]},
+  "bosses": [
+    {
+      "id": "sahra",
+      "pos": [0, -28],
+      "level": 28,
+      "yaw": 0,
+      "unless_flag": "sahra_defeated",
+      "flag_on_death": "sahra_defeated",
+      "intro": "sahra_intro",
+      "transform_line": "sahra_transform",
+      "reborn_line": "sahra_reborn",
+      "power_spots": [[-9, -22], [9, -22], [-12, -33], [12, -33], [0, -36]]
+    }
+  ],
+  "ambience": {"flocks": [[-28, 34, 3]]}
+}

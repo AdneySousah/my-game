@@ -22,6 +22,10 @@ func has(effect: String) -> bool:
 	return _effects.has(effect)
 
 
+func time_left(effect: String) -> float:
+	return maxf(0.0, float(_effects.get(effect, {}).get("time", 0.0)))
+
+
 func value(effect: String) -> float:
 	return float(_effects.get(effect, {}).get("value", 0.0))
 

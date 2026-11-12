@@ -2,6 +2,46 @@
   "_comment": "Loja com dinheiro real (GDD 6.6). Os 'id' têm que ser iguais aos produtos criados no Google Play Console (Fase 7). price_brl = preço mostrado enquanto o Google Play não responde (no celular aparece o preço da loja). grants: o que o jogador recebe. Todos são consumíveis (dá para comprar de novo).",
   "products": [
     {
+      "id": "premium_7d",
+      "name": "STORE_PREMIUM_7",
+      "desc": "STORE_PREMIUM_DESC",
+      "price_brl": 15.0,
+      "icon": "trevo_real",
+      "grants": {"premium_days": 7}
+    },
+    {
+      "id": "premium_14d",
+      "name": "STORE_PREMIUM_14",
+      "desc": "STORE_PREMIUM_DESC",
+      "price_brl": 20.0,
+      "icon": "trevo_real",
+      "grants": {"premium_days": 14}
+    },
+    {
+      "id": "premium_30d",
+      "name": "STORE_PREMIUM_30",
+      "desc": "STORE_PREMIUM_DESC",
+      "price_brl": 25.0,
+      "icon": "trevo_real",
+      "grants": {"premium_days": 30}
+    },
+    {
+      "id": "skin_sol",
+      "name": "STORE_SKIN_SOL",
+      "desc": "STORE_SKIN_SOL_DESC",
+      "price_brl": 9.9,
+      "icon": "eq_espada_epico",
+      "grants": {"skin": "hero_skin_sol"}
+    },
+    {
+      "id": "skin_tempestade",
+      "name": "STORE_SKIN_TEMPESTADE",
+      "desc": "STORE_SKIN_TEMPESTADE_DESC",
+      "price_brl": 9.9,
+      "icon": "eq_espada_epico",
+      "grants": {"skin": "hero_skin_tempestade"}
+    },
+    {
       "id": "ouro_5000",
       "name": "STORE_OURO_5000",
       "desc": "STORE_OURO_5000_DESC",
@@ -60,5 +100,7 @@
       "grants": {"items": {"amuleto": 1}}
     }
   ],
-  "xp_boost": 0.5
+  "xp_boost": 0.5,
+  "_premium": "Passe premium (pedido do dono, 12/11/2026): enquanto dura, XP x2, ouro dos inimigos e baús x2 e +10% em todos os atributos.",
+  "premium": {"xp": 2.0, "gold": 2.0, "attributes": 1.1}
 }

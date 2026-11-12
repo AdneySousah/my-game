@@ -301,6 +301,7 @@ func _world_test() -> void:
 	main.player.global_position = Vector3(0, 0, -34)
 	await _wait_map(main, "campos")
 	check(main.map.map_id == "campos", "north exit of the village leads to the fields")
+	_check_pickup_spots(main)
 	await _frames(5)
 	check(get_tree().get_nodes_in_group("enemies").size() > 0, "the fields have enemies")
 	check(main.player.global_position.distance_to(Vector3(0, 0, 44)) < 1.5, "hero arrives at the fields entrance")
@@ -406,10 +407,14 @@ func _road_test() -> void:
 	for n: Node in get_tree().get_nodes_in_group("enemies"):
 		kinds[(n as Enemy).base_id] = true
 	check(kinds.has("bandido_estrada"), "road bandits live in the dry grove (got %s)" % [kinds.keys()])
+	_check_pickup_spots(main)
+	for id: String in ["side_estrada", "side_aco", "side_tempero"]:
+		check(not Data.quest(id).is_empty() and str(Data.quest(id).get("requires", [""])[0]) == "main_06", "road side quest %s opens after Act 1" % id)
 	main.player.global_position = Vector3(0, 0, -52)
 	await _wait_map(main, "estepe")
 	check(main.map.map_id == "estepe", "the grove leads to the stone steppe")
 	check(main.map.get("_locked_exits").size() == 1, "the dunes are closed (coming soon)")
+	_check_pickup_spots(main)
 	var signs: Array = main.map.find_children("*", "Label3D", true, false).filter(func(l: Node) -> bool: return (l as Label3D).text == tr("MAP_COMING_SOON"))
 	check(signs.size() == 1, "a sign says the dunes are coming soon")
 	main.load_map("floresta", "from_bosque_seco")
@@ -418,6 +423,22 @@ func _road_test() -> void:
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
+
+
+## Quest pickups of the current map are not inside a prop (rock, tree, cart).
+func _check_pickup_spots(main: Main) -> void:
+	var blocked: Array = []
+	for q: Dictionary in Data.quests:
+		for st: Dictionary in q.get("steps", []):
+			if str(st.get("type", "")) != "collect" or str(st.get("map", "")) != main.map.map_id:
+				continue
+			for pt: Array in st.get("points", []):
+				var p := Vector3(float(pt[0]), 0, float(pt[1]))
+				for n: Node in main.map.get_children():
+					var b := n as StaticBody3D
+					if b and str(b.name).begins_with("prp_") and Vector2(b.position.x - p.x, b.position.z - p.z).length() < 1.2:
+						blocked.append("%s %s" % [q["id"], pt])
+	check(blocked.is_empty(), "quest pickups in %s are reachable (blocked: %s)" % [main.map.map_id, blocked])
 
 
 ## NPCs, dialogue and the Act 1 quests (stage 4.2).

@@ -107,6 +107,25 @@
         { "type": "talk", "npc": "bram", "dialogue": "side_estrada_done", "text": "OBJ_RETURN_BRAM" }
       ],
       "rewards": { "xp": 600, "gold": 300, "items": { "pot_vida_m": 3, "eq_peitoral_raro": 1 } }
+    },
+    {
+      "id": "side_aco", "type": "side", "name": "QUEST_SIDE_ACO", "giver": "tobias", "offer": "side_aco_offer",
+      "requires": ["main_06"], "min_level": 13,
+      "steps": [
+        { "type": "kill", "enemy": "orc_saqueador", "count": 3, "map": "bosque_seco", "pos": [-8, -30], "text": "OBJ_KILL_RAIDERS" },
+        { "type": "collect", "map": "bosque_seco", "item": "ITEM_CAIXOTE_ACO", "points": [[18, -4], [11, 10], [27, 9]], "text": "OBJ_COLLECT_STEEL" },
+        { "type": "talk", "npc": "tobias", "dialogue": "side_aco_done", "text": "OBJ_RETURN_TOBIAS_STEEL" }
+      ],
+      "rewards": { "xp": 650, "gold": 280, "items": { "broca": 1, "trevo": 1 } }
+    },
+    {
+      "id": "side_tempero", "type": "side", "name": "QUEST_SIDE_TEMPERO", "giver": "bento", "offer": "side_tempero_offer",
+      "requires": ["main_06"], "min_level": 15,
+      "steps": [
+        { "type": "collect", "map": "estepe", "item": "ITEM_SALVIA_PEDRA", "points": [[-30, 20], [30, -30], [-22, -38], [34, 28]], "text": "OBJ_COLLECT_SAGE" },
+        { "type": "talk", "npc": "bento", "dialogue": "side_tempero_done", "text": "OBJ_RETURN_BENTO" }
+      ],
+      "rewards": { "xp": 700, "gold": 320, "items": { "pot_vida_m": 4, "eq_luvas_raro": 1 } }
     }
   ]
 }

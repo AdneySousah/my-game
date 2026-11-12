@@ -113,6 +113,7 @@ func _ready() -> void:
 	_build_walls()
 	_build_lines()
 	_build_props()
+	_keep_quest_spots_clear()
 	_build_scatter()
 	_build_grass()
 	_build_exits()
@@ -512,6 +513,15 @@ func _build_scatter() -> void:
 			PropFactory.spawn(self, id, pos, rng.randf_range(0, 360), rng.randf_range(0.85, 1.15))
 			_clear_spots.append(pos)
 			placed += 1
+
+
+## Things to pick up for quests in this map must not end up inside a rock or a tree.
+func _keep_quest_spots_clear() -> void:
+	for q: Dictionary in Data.quests:
+		for st: Dictionary in q.get("steps", []):
+			if str(st.get("type", "")) == "collect" and str(st.get("map", "")) == map_id:
+				for pt: Array in st.get("points", []):
+					_clear_spots.append(_v(pt))
 
 
 func _is_free(pos: Vector3, spacing: float) -> bool:

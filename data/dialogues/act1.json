@@ -481,6 +481,74 @@
         ]
       ]
     },
+    "side_aco_offer": {
+      "lines": [
+        [
+          "tobias",
+          "DLG_SIDE_ACO_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_ACO_OFFER_2"
+        ],
+        [
+          "tobias",
+          "DLG_SIDE_ACO_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_ACO_OFFER_4"
+        ]
+      ]
+    },
+    "side_aco_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_ACO_DONE_1"
+        ],
+        [
+          "tobias",
+          "DLG_SIDE_ACO_DONE_2"
+        ]
+      ]
+    },
+    "side_tempero_offer": {
+      "lines": [
+        [
+          "bento",
+          "DLG_SIDE_TEMPERO_OFFER_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_TEMPERO_OFFER_2"
+        ],
+        [
+          "bento",
+          "DLG_SIDE_TEMPERO_OFFER_3"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_TEMPERO_OFFER_4"
+        ]
+      ]
+    },
+    "side_tempero_done": {
+      "lines": [
+        [
+          "lio",
+          "DLG_SIDE_TEMPERO_DONE_1"
+        ],
+        [
+          "bento",
+          "DLG_SIDE_TEMPERO_DONE_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_TEMPERO_DONE_3"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

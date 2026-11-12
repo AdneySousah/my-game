@@ -252,3 +252,10 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Pedido do dono: em vez de uma lista com botões "1 2 3 4" em cada skill, a tela mostra as 8 skills como os ícones redondos (os mesmos dos botões de ataque), 4 por linha, com um "+" dourado no canto. As trancadas aparecem escuras, com cadeado e o nível em que abrem.
 - Tocando numa skill, aparece embaixo a descrição (nome, o que faz, fôlego e recarga) e os 4 botões com o ícone do que está em cada um; tocar num deles coloca a skill ali (se ela já estava em outro botão, as duas trocam de lugar). O número dourado no canto do ícone mostra em qual botão cada skill está.
 - Peça reutilizável: `SkillIconView` (ícone redondo com moldura, "+", número, cadeado e brilho de escolhido). Fotos: `hud_capture` agora termina na tela de skills.
+
+## Fase 6.1: estrada, bioma e curva de progressão (12/11/2026)
+- Caminho do Ato 1 como no GDD: Pradoluz → Campos de Pradoluz (1–3) → Floresta (3–8) → Mina e Celeiro; depois do Gorvan, Bosque Seco (12–15) → Estepe de Pedra (15–18) → Dunas de Ossos ("Em breve" até o Ato 2).
+- Bioma por shader: cada mapa tem `"biome": {"dry", "snow", "moss"}` (0 a 1) e as peças de cenário mudam de cor (folhas secas, neve por cima, musgo na pedra). Personagens nunca mudam. Mapas sem bioma continuam com o material de antes.
+- Inimigo de outra região com Retexture mantendo o UV original: só a textura muda (`characters.json`: `"base"` + `"texture"`), então esqueleto, animações, dedos e pegada são os do original já aprovado (10 créditos em vez de ~50).
+- **Regra do XP das missões (pedido do dono de checar a curva):** em cada faixa de níveis, as missões dão ~40% do XP e os inimigos ~60%. O Ato 1 já passa disso (missões ≈ 94% do XP de 1→12), então missões novas no Ato 1 pagam em ouro e itens, não em XP. Na estrada (12→18) as 3 secundárias (Bram, Tobias, Bento) somam 1.950 de 4.460 XP (~44%).
+- Toda animação de personagem novo ou alterado é conferida com fotos (ações e mão na arma) antes de mostrar; o que não ficar bom vai para o Blender.

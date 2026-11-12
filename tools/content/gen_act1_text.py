@@ -171,6 +171,29 @@ DIALOGUES = {
         ("bram", "Mentira. Tem um corte novo na sua bochecha.", "Liar. There's a new cut on your cheek."),
         ("bram", "Toma. Foi minha quando eu tinha a sua idade. Hoje fica melhor em você.", "Here. It was mine when I was your age. It suits you better now."),
     ],
+    # --- Secundária: O aço roubado (Bosque Seco, Tobias) ---
+    "side_aco_offer": [
+        ("tobias", "L-lio! A carroça de aço que vinha do sul n-não chegou. Os bandidos da estrada pegaram tudo.", "L-lio! The steel cart coming from the south n-never arrived. The road bandits took it all."),
+        ("lio", "No Bosque Seco? Vi umas tendas por lá.", "In the Withered Grove? I saw some tents out there."),
+        ("tobias", "Isso! Três caixotes. E t-tem uns orcs grandões ajudando eles agora.", "That's it! Three crates. And th-there are some big orcs helping them now."),
+        ("lio", "Orcs carregando aço pra bandido. Que mundo. Pode deixar.", "Orcs hauling steel for bandits. What a world. Leave it to me."),
+    ],
+    "side_aco_done": [
+        ("lio", "Três caixotes de aço. E os orcs vão pensar duas vezes antes de voltar.", "Three crates of steel. And the orcs will think twice before coming back."),
+        ("tobias", "Com isso eu f-forjo por um ano! Toma, uma broca e um trevo. Você vai precisar.", "With this I can f-forge for a year! Here, a drill and a clover. You'll need them."),
+    ],
+    # --- Secundária: Tempero da estepe (Estepe de Pedra, Bento) ---
+    "side_tempero_offer": [
+        ("bento", "Sócio, tenho um sonho. Um ensopado digno de rei. Mas falta a sálvia-de-pedra.", "Partner, I have a dream. A stew fit for a king. But it needs stone sage."),
+        ("lio", "E onde cresce essa sálvia?", "And where does this sage grow?"),
+        ("bento", "Na Estepe de Pedra, entre os arenitos. Quatro molhos! E... dizem que tem bandido por lá. Por isso você vai e eu fico.", "On the Stone Steppe, among the sandstone. Four bunches! And... they say there are bandits there. That's why you go and I stay."),
+        ("lio", "Corajoso como sempre.", "Brave as ever."),
+    ],
+    "side_tempero_done": [
+        ("lio", "Quatro molhos de sálvia-de-pedra. Cheiram a poeira.", "Four bunches of stone sage. They smell like dust."),
+        ("bento", "Cheiram a GLÓRIA! Prova esse caldo e depois me diz se não sou o melhor cozinheiro do reino.", "They smell like GLORY! Taste this broth and then tell me I'm not the best cook in the kingdom."),
+        ("lio", "...Tá, é o melhor. Não conta pra minha mãe.", "...Fine, it's the best. Don't tell my mom."),
+    ],
     # --- Conversas fora de missão ---
     "marta_idle_fed": [
         ("marta", "A despensa está cheia pela primeira vez em anos. Come mais um pedaço!", "The pantry is full for the first time in years. Have another slice!"),
@@ -261,6 +284,8 @@ TEXTS = {
     "QUEST_SIDE_JUCA": ("O sítio do Juca", "Juca's Farm"),
     "QUEST_SIDE_FARINHA": ("A farinha da Celeste", "Celeste's Flour"),
     "QUEST_SIDE_ESTRADA": ("A estrada do nordeste", "The North-East Road"),
+    "QUEST_SIDE_ACO": ("O aço roubado", "The Stolen Steel"),
+    "QUEST_SIDE_TEMPERO": ("Tempero da estepe", "Steppe Seasoning"),
     "OBJ_TALK_MARTA": ("Fale com a Marta", "Talk to Marta"),
     "OBJ_TALK_BRAM": ("Encontre o Mestre Bram no treino", "Meet Master Bram at training"),
     "OBJ_KILL_BANDIDOS": ("Derrote bandidos na floresta: %d/%d", "Defeat bandits in the forest: %d/%d"),
@@ -284,6 +309,11 @@ TEXTS = {
     "OBJ_RETURN_CELESTE": ("Leve a farinha para a Dona Celeste", "Bring the flour to Mrs. Celeste"),
     "OBJ_KILL_ROAD_BANDITS": ("Derrote bandidos da estrada no Bosque Seco: %d/%d", "Defeat road bandits in the Withered Grove: %d/%d"),
     "OBJ_RETURN_BRAM": ("Volte ao Mestre Bram", "Go back to Master Bram"),
+    "OBJ_KILL_RAIDERS": ("Derrote orcs saqueadores no Bosque Seco: %d/%d", "Defeat orc raiders in the Withered Grove: %d/%d"),
+    "OBJ_COLLECT_STEEL": ("Recupere os caixotes de aço no acampamento: %d/%d", "Recover the steel crates at the camp: %d/%d"),
+    "OBJ_RETURN_TOBIAS_STEEL": ("Leve o aço para o Tobias", "Bring the steel to Tobias"),
+    "OBJ_COLLECT_SAGE": ("Colha sálvia-de-pedra na Estepe: %d/%d", "Gather stone sage on the Steppe: %d/%d"),
+    "OBJ_RETURN_BENTO": ("Leve a sálvia para o Bento", "Bring the sage to Bento"),
     # Prólogo (um texto por ilustração, na ordem) e tela inicial
     "PRO_1": ("Há dezenove invernos, em Pradoluz, uma vila de fazendeiros esquecida pelo resto do mundo...", "Nineteen winters ago, in Pradoluz, a farming village the rest of the world had forgotten..."),
     "PRO_2": ("...nasceu um menino. E ele brilhava.", "...a boy was born. And he shone."),
@@ -356,6 +386,8 @@ TEXTS = {
     "ITEM_CAIXOTE_FERRO": ("Caixote de ferro", "Iron crate"),
     "ITEM_FERRADURA_SORTE": ("Ferradura da sorte", "Lucky horseshoe"),
     "ITEM_SACO_FARINHA": ("Saco de farinha", "Sack of flour"),
+    "ITEM_CAIXOTE_ACO": ("Caixote de aço", "Steel crate"),
+    "ITEM_SALVIA_PEDRA": ("Sálvia-de-pedra", "Stone sage"),
     "ITEM_EQ_ESPADA_APRENDIZ": ("Espada de aprendiz", "Apprentice sword"),
     "ITEM_EQ_ESPADA_COMUM": ("Espada de ferro", "Iron sword"),
     "ITEM_EQ_ELMO_COMUM": ("Elmo de ferro", "Iron helmet"),

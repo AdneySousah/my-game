@@ -51,6 +51,7 @@ func _register_inputs() -> void:
 	_action("interact", [KEY_E, KEY_F], [JOY_BUTTON_RIGHT_STICK])
 	_action("debug_level_up", [KEY_F1], [])
 	_action("debug_forge_kit", [KEY_F2], [])
+	_action("debug_time", [KEY_F3], [])
 
 
 func _action(action: String, keys: Array, buttons: Array, axes: Array = []) -> void:

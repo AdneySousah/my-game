@@ -1,12 +1,13 @@
 {
-  "_comment": "Peças de cenário do Meshy. 'scale' corrige o tamanho estimado pelo Meshy (personagens ~1,9 m no jogo). 'collision': cylinder (raio em metros, já com a escala) ou box (caixa do modelo); null = sem colisão. 'light' acende uma luz. Peças com mais de 2,2 m ficam transparentes quando escondem o herói.",
+  "_comment": "Peças de cenário do Meshy. 'scale' corrige o tamanho estimado pelo Meshy (personagens ~1,9 m no jogo). 'collision': cylinder (raio em metros, já com a escala) ou box (caixa do modelo); null = sem colisão. 'light' acende uma luz. Peças com mais de 2,2 m ficam transparentes quando escondem o herói. 'wind' faz a planta balançar com o vento (sway = metros que a copa anda, flutter = tremor das folhas). 'night': true na luz = lampião que acende mais à noite.",
   "props": {
     "prp_arvore": {
       "scene": "res://assets/props/prp_arvore/prp_arvore.glb",
+      "wind": { "sway": 0.26, "flutter": 0.03 },
       "scale": 0.55,
       "collision": { "type": "cylinder", "radius": 0.45}
     },
-    "prp_arbusto": { "scene": "res://assets/props/prp_arbusto/prp_arbusto.glb", "scale": 3.0, "collision": null},
+    "prp_arbusto": { "scene": "res://assets/props/prp_arbusto/prp_arbusto.glb", "wind": { "sway": 0.1, "flutter": 0.025 }, "scale": 3.0, "collision": null},
     "prp_pedra": {
       "scene": "res://assets/props/prp_pedra/prp_pedra.glb",
       "scale": 1.0,
@@ -68,7 +69,7 @@
       "scale": 1.1,
       "collision": { "type": "box" }
     },
-    "prp_trigo": { "scene": "res://assets/props/prp_trigo/prp_trigo.glb", "scale": 0.6, "collision": null},
+    "prp_trigo": { "scene": "res://assets/props/prp_trigo/prp_trigo.glb", "wind": { "sway": 0.32, "flutter": 0.02 }, "scale": 0.6, "collision": null},
     "prp_espantalho": {
       "scene": "res://assets/props/prp_espantalho/prp_espantalho.glb",
       "scale": 1.1,
@@ -95,7 +96,7 @@
       "scene": "res://assets/props/prp_lampiao/prp_lampiao.glb",
       "scale": 3.0,
       "collision": { "type": "cylinder", "radius": 0.2},
-      "light": { "color": "#ffd27a", "energy": 1.2, "range": 5.0, "y": 2.0}
+      "light": { "color": "#ffd27a", "energy": 1.2, "range": 5.0, "y": 2.0, "night": true}
     },
     "prp_banco": {
       "scene": "res://assets/props/prp_banco/prp_banco.glb",
@@ -109,11 +110,13 @@
     },
     "prp_pinheiro": {
       "scene": "res://assets/props/prp_pinheiro/prp_pinheiro.glb",
+      "wind": { "sway": 0.18, "flutter": 0.012 },
       "scale": 0.38,
       "collision": { "type": "cylinder", "radius": 0.5}
     },
     "prp_arvore_torta": {
       "scene": "res://assets/props/prp_arvore_torta/prp_arvore_torta.glb",
+      "wind": { "sway": 0.22, "flutter": 0.025 },
       "scale": 0.9,
       "collision": { "type": "cylinder", "radius": 0.45}
     },
@@ -128,7 +131,7 @@
       "collision": { "type": "cylinder", "radius": 0.5}
     },
     "prp_cogumelos": { "scene": "res://assets/props/prp_cogumelos/prp_cogumelos.glb", "scale": 5.0, "collision": null},
-    "prp_flores": { "scene": "res://assets/props/prp_flores/prp_flores.glb", "scale": 2.5, "collision": null},
+    "prp_flores": { "scene": "res://assets/props/prp_flores/prp_flores.glb", "wind": { "sway": 0.13, "flutter": 0.015 }, "scale": 2.5, "collision": null},
     "prp_pedrinhas": { "scene": "res://assets/props/prp_pedrinhas/prp_pedrinhas.glb", "scale": 4.0, "collision": null},
     "prp_cerca_quebrada": {
       "scene": "res://assets/props/prp_cerca_quebrada/prp_cerca_quebrada.glb",
@@ -206,7 +209,7 @@
       "collision": null,
       "light": { "color": "#5fe8ff", "energy": 1.8, "range": 6.0, "y": 1.8}
     },
-    "prp_junco": { "scene": "res://assets/props/prp_junco/prp_junco.glb", "scale": 0.7, "collision": null},
+    "prp_junco": { "scene": "res://assets/props/prp_junco/prp_junco.glb", "wind": { "sway": 0.26, "flutter": 0.012 }, "scale": 0.7, "collision": null},
     "prp_rochedo": {
       "scene": "res://assets/props/prp_rochedo/prp_rochedo.glb",
       "scale": 0.2,

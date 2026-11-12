@@ -51,3 +51,14 @@ locale/translations=PackedStringArray("res://data/i18n/strings.pt_BR.translation
 renderer/rendering_method="mobile"
 renderer/rendering_method.mobile="mobile"
 textures/vram_compression/import_etc2_astc=true
+
+[shader_globals]
+
+wind_dir={
+"type": "vec2",
+"value": Vector2(1, 0.35)
+}
+wind_strength={
+"type": "float",
+"value": 1.0
+}

@@ -1,0 +1,19 @@
+{
+  "_comment": "Dia e noite e vento. Um dia inteiro (24 h do jogo) dura 'cycle_minutes' minutos reais: com 60, escurece devagar por ~30 min e clareia por ~30 min. 'keys' = como fica a luz em cada hora; entre duas horas a luz muda aos poucos. sun/amb = força do sol e da luz ambiente (1 = como o mapa foi feito); *_color = cor para onde a luz vai, com a força em *_mix (0 = cor do mapa, 1 = essa cor); elev/yaw = altura e direção do sol (ou da lua) em graus; night = quanto os lampiões acendem (0 a 1). Mapas com \"indoor\": true (celeiro, mina) não têm dia, noite nem vento.",
+  "cycle_minutes": 60,
+  "start_hour": 9,
+  "wind": { "dir": [1.0, 0.35], "strength": 1.0 },
+  "keys": [
+    { "h": 0,    "sun": 0.32, "sun_color": "#8ea4ff", "sun_mix": 0.85, "amb": 0.6,  "amb_color": "#5d6cb0", "amb_mix": 0.8,  "sky": "#141d3a", "sky_mix": 0.92, "elev": 55, "yaw": 150, "night": 1.0 },
+    { "h": 3.5,  "sun": 0.3,  "sun_color": "#8ea4ff", "sun_mix": 0.85, "amb": 0.6,  "amb_color": "#5d6cb0", "amb_mix": 0.8,  "sky": "#141d3a", "sky_mix": 0.9,  "elev": 45, "yaw": 175, "night": 1.0 },
+    { "h": 5.5,  "sun": 0.45, "sun_color": "#ffad8a", "sun_mix": 0.7,  "amb": 0.7,  "amb_color": "#b59ac8", "amb_mix": 0.55, "sky": "#e89a8c", "sky_mix": 0.65, "elev": 32, "yaw": -110, "night": 0.6 },
+    { "h": 7,    "sun": 0.85, "sun_color": "#ffd6a8", "sun_mix": 0.45, "amb": 0.9,  "amb_color": "#e6d6ee", "amb_mix": 0.3,  "sky": "#ffd2b0", "sky_mix": 0.25, "elev": 38, "yaw": -85, "night": 0.0 },
+    { "h": 9.5,  "sun": 1.0,  "sun_color": "#ffffff", "sun_mix": 0.0,  "amb": 1.0,  "amb_color": "#ffffff", "amb_mix": 0.0,  "sky": "#ffffff", "sky_mix": 0.0,  "elev": 50, "yaw": -55, "night": 0.0 },
+    { "h": 12.5, "sun": 1.05, "sun_color": "#ffffff", "sun_mix": 0.0,  "amb": 1.0,  "amb_color": "#ffffff", "amb_mix": 0.0,  "sky": "#ffffff", "sky_mix": 0.0,  "elev": 62, "yaw": -20, "night": 0.0 },
+    { "h": 15.5, "sun": 1.0,  "sun_color": "#fff4e0", "sun_mix": 0.3,  "amb": 1.0,  "amb_color": "#ffffff", "amb_mix": 0.0,  "sky": "#ffffff", "sky_mix": 0.0,  "elev": 50, "yaw": 20, "night": 0.0 },
+    { "h": 17.5, "sun": 0.85, "sun_color": "#ffb36b", "sun_mix": 0.55, "amb": 0.85, "amb_color": "#f0c4a8", "amb_mix": 0.35, "sky": "#ffb27a", "sky_mix": 0.45, "elev": 38, "yaw": 55, "night": 0.1 },
+    { "h": 19,   "sun": 0.55, "sun_color": "#ff7d55", "sun_mix": 0.75, "amb": 0.72, "amb_color": "#b08ab8", "amb_mix": 0.55, "sky": "#c8607a", "sky_mix": 0.7,  "elev": 32, "yaw": 80, "night": 0.5 },
+    { "h": 20.5, "sun": 0.35, "sun_color": "#8ea4ff", "sun_mix": 0.85, "amb": 0.62, "amb_color": "#5d6cb0", "amb_mix": 0.75, "sky": "#1c2548", "sky_mix": 0.88, "elev": 40, "yaw": 125, "night": 1.0 },
+    { "h": 24,   "sun": 0.32, "sun_color": "#8ea4ff", "sun_mix": 0.85, "amb": 0.6,  "amb_color": "#5d6cb0", "amb_mix": 0.8,  "sky": "#141d3a", "sky_mix": 0.92, "elev": 55, "yaw": 150, "night": 1.0 }
+  ]
+}

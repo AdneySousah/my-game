@@ -35,7 +35,11 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 	var model: Node3D = (load(str(p["scene"])) as PackedScene).instantiate()
 	model.scale = Vector3.ONE * float(p.get("scale", 1.0)) * extra_scale
 	body.add_child(model)
-	ToonStyle.apply(model)
+	var wind: Variant = p.get("wind")
+	if wind is Dictionary:
+		ToonStyle.apply_wind(model, wind, _aabb(model, body).size.y)
+	else:
+		ToonStyle.apply(model)
 	var col: Variant = p.get("collision")
 	if col is Dictionary:
 		var shape := CollisionShape3D.new()
@@ -64,6 +68,10 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 		omni.position.y = float(light.get("y", 1.0)) * extra_scale
 		omni.shadow_enabled = false
 		body.add_child(omni)
+		# Lamps glow brighter at night (DayNight); campfires stay the same.
+		if bool(light.get("night", false)):
+			omni.add_to_group("night_lights")
+			omni.set_meta("base_energy", omni.light_energy)
 	return body
 
 

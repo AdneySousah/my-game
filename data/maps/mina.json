@@ -5,6 +5,7 @@
   "size": [64, 90],
   "seed": 51,
   "ground": "#4d4035",
+  "indoor": true,
   "sky": "#0e0c12",
   "ambient": 0.45,
   "ambient_color": "#8a7a9a",

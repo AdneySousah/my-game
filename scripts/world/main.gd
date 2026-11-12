@@ -157,6 +157,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 func _physics_process(delta: float) -> void:
 	if map == null or _changing or player.is_dead():
 		return
+	Session.advance_time(delta)
 	_autosave_timer += delta
 	if _autosave_timer >= 30.0:
 		save_now()

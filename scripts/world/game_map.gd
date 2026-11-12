@@ -109,6 +109,7 @@ func _ready() -> void:
 	_build_lines()
 	_build_props()
 	_build_scatter()
+	_build_grass()
 	_build_exits()
 	_build_enemy_zones()
 	_build_bosses.call_deferred()
@@ -162,6 +163,54 @@ func _build_environment() -> void:
 	sun.light_energy = float(data.get("sun", 1.1))
 	sun.shadow_enabled = true
 	add_child(sun)
+	# Outdoors: day and night, and wind. Indoors (barn, mine): still air, fixed light.
+	var wind: Dictionary = Data.daynight.get("wind", {})
+	var wd: Array = wind.get("dir", [1.0, 0.35])
+	RenderingServer.global_shader_parameter_set("wind_dir", Vector2(float(wd[0]), float(wd[1])))
+	RenderingServer.global_shader_parameter_set("wind_strength", 0.0 if is_indoor() else float(wind.get("strength", 1.0)))
+	if not is_indoor():
+		var cycle := DayNight.new()
+		cycle.name = "DayNight"
+		cycle.setup(env, sun)
+		add_child(cycle)
+
+
+## Barn and mine: no sky, so no day/night and no wind.
+func is_indoor() -> bool:
+	return bool(data.get("indoor", false))
+
+
+## Grass tufts on the open ground ("grass" in the map JSON) and wind streaks (outdoors).
+func _build_grass() -> void:
+	if is_indoor():
+		return
+	var streaks := WindStreaks.new()
+	streaks.name = "WindStreaks"
+	streaks.target = player
+	add_child(streaks)
+	var cfg: Variant = data.get("grass")
+	if not (cfg is Dictionary):
+		return
+	var size: Array = data.get("size", [80, 80])
+	var field := GrassField.new()
+	field.name = "Grass"
+	add_child(field)
+	field.build(cfg, Vector2(float(size[0]), float(size[1])), _grass_free, int(data.get("seed", 1)) + 7)
+
+
+func _grass_free(p: Vector3) -> bool:
+	for seg: Array in _path_segments:
+		if _dist_to_segment(p, seg[0], seg[1]) < float(seg[2]) * 0.5 + 0.3:
+			return false
+	for r: Dictionary in data.get("rivers", []):
+		var pts: Array = r.get("points", [])
+		for i: int in range(pts.size() - 1):
+			if _dist_to_segment(p, _v(pts[i]), _v(pts[i + 1])) < float(r.get("width", 6.0)) * 0.5 + 0.4:
+				return false
+	for s: Vector3 in _clear_spots:
+		if s.distance_to(p) < 1.0:
+			return false
+	return true
 
 
 func _build_ground() -> void:

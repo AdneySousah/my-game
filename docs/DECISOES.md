@@ -209,3 +209,12 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - **Bandido de espada:** ganhou os ossos dos dedos e a mesma pegada do Lio (mão fechada, cabo atravessando a palma).
 - **Arqueiro:** o tiro antigo estava quebrado nesse personagem (curvado, olhando para o chão, arco para baixo). O novo junta duas animações do Meshy (puxar a flecha e soltar, 1,7 s) e foi girado 90° no Blender, porque o Meshy mira para o lado esquerdo. A mão esquerda fecha no arco, com a corda virada para o arqueiro; a direita fica na pose "draw" e segura uma flecha do momento em que pega até soltar. A flecha voa no momento em que ele solta (1,15 s do clipe).
 - A corda do arco não estica (ela faz parte do modelo do arco, que é uma peça só).
+
+## Vento, grama e dia/noite (12/11/2026)
+- **Vento:** árvores, pinheiros, arbustos, flores, juncos e o trigo balançam (shader `assets/shaders/toon_wind.gdshader`, mesmo visual "desenho" das outras peças). A base fica parada e a copa anda; o vento vem em ondas que atravessam o mapa e em rajadas. Quanto cada planta balança: campo `wind` em `data/world/props.json`.
+- **Grama:** tufos de grama baixos nos campos abertos (Pradoluz, floresta e arena), longe das trilhas e dos rios, balançando com o mesmo vento. Tudo num desenho só (leve no celular). Quantidade e cores: campo `grass` do mapa.
+- **Linhas de vento:** de vez em quando passam linhas brancas finas perto do herói, ondulando (algumas fazem um laço), na direção do vento.
+- **Dia e noite:** um dia inteiro dura 60 minutos reais (escurece aos poucos por ~30 min e clareia por ~30 min). A luz muda sem saltos: manhã dourada, meio-dia como o mapa foi feito, entardecer laranja/rosado e noite azul (escura, mas dá para jogar). O sol (e de noite a lua) muda de posição, então as sombras giram. Lampiões acendem mais à noite; fogueiras ficam iguais. A hora fica salva no jogo e um jogo novo começa às 9h. Tudo em `data/world/daynight.json`.
+- Celeiro e mina são lugares fechados (`"indoor": true` no mapa): sem dia/noite e sem vento.
+- **Relógio:** ao lado do minimapa, um mostrador de 24 horas (sol em cima = meio-dia, lua embaixo = meia-noite) com o céu da hora dentro, um ponteiro e a hora escrita embaixo.
+- Nas versões de teste, **F3** adianta 3 horas (para ver a noite sem esperar).

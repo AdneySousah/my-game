@@ -19,6 +19,7 @@ var _banner: Label
 var _banner_tween: Tween
 var _fade: ColorRect
 var _minimap: Minimap
+var _clock: DayClock
 var _full_map: FullMapPanel
 
 var _status: PortraitStatus
@@ -162,6 +163,8 @@ func _ready() -> void:
 
 	_minimap = Minimap.new()
 	root.add_child(_minimap)
+	_clock = DayClock.new()
+	root.add_child(_clock)
 	_minimap.tapped.connect(func() -> void: _open_panel(_full_map))
 	_full_map = FullMapPanel.new()
 	root.add_child(_full_map)
@@ -454,6 +457,9 @@ func _input(event: InputEvent) -> void:
 		_debug_level_up()
 	elif event.is_action_pressed("debug_forge_kit") and OS.is_debug_build():
 		_debug_forge_kit()
+	elif event.is_action_pressed("debug_time") and OS.is_debug_build():
+		Session.day_hour = fposmod(Session.day_hour + 3.0, 24.0)
+		toast(tr("HUD_DEBUG_TIME_GOT") % Session.day_hour)
 
 
 func _process(delta: float) -> void:
@@ -555,6 +561,9 @@ func _layout() -> void:
 	_joystick.size = Vector2(vp.x * 0.45, vp.y * 0.65)
 	if _minimap:
 		_minimap.position = Vector2(vp.x - Minimap.FRAME_SIZE - 6, 50)
+	if _clock:
+		# Under the minimap's left side, a little smaller than it.
+		_clock.position = _minimap.position + Vector2(-6.0, Minimap.FRAME_SIZE - DayClock.SIZE - 8.0)
 	var attack_c := Vector2(vp.x - 130, vp.y - 120)
 	_attack_btn.set_center(attack_c)
 	# Skills in an arc around the attack button, spaced so circles never overlap.

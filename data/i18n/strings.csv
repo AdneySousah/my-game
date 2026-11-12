@@ -557,3 +557,4 @@ DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumenta
 DIFF_NOW,Dificuldade: %s,Difficulty: %s
 DIFF_LOWER,Mudar para %s,Change to %s
 DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town
+HUD_DEBUG_TIME_GOT,Teste: +3 horas (agora %.1f h).,Test: +3 hours (now %.1f h).

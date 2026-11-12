@@ -5,6 +5,7 @@
   "size": [76, 76],
   "seed": 7,
   "ground": "#7BC950",
+  "grass": { "count": 2500, "root": "#62ad44", "tip": "#b4e679" },
   "patches": { "color": "#68b543", "count": 60},
   "spawns": { "start": [0, 3, 0] },
   "rest_points": [

@@ -28,6 +28,8 @@ var routine: Routine = Routine.new()
 var difficulty: String = "normal"
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
+## Time of day, 0-24 (DayNight; a whole day lasts data/world/daynight.json cycle_minutes).
+var day_hour: float = 9.0
 ## Sword every new hero starts with.
 const STARTER_WEAPON: String = "eq_espada_aprendiz"
 ## Potion chosen for each quick slot on the screen (data/items "quick_slots").
@@ -48,6 +50,13 @@ func reset() -> void:
 	xp_boost_until = 0.0
 	routine.reset()
 	difficulty = "normal"
+	day_hour = float(Data.daynight.get("start_hour", 9.0))
+
+
+## Moves the clock on (called every physics frame while playing).
+func advance_time(delta: float) -> void:
+	var minutes: float = maxf(float(Data.daynight.get("cycle_minutes", 60.0)), 0.1)
+	day_hour = fposmod(day_hour + delta * 24.0 / (minutes * 60.0), 24.0)
 
 
 func activate_point(point_id: String, map_id: String, name_key: String) -> bool:
@@ -101,6 +110,7 @@ func to_dict() -> Dictionary:
 		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
 		"quick_slots": quick_slots, "xp_boost_until": xp_boost_until,
 		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
+		"day_hour": day_hour,
 	}.duplicate(true)
 
 
@@ -128,6 +138,7 @@ func from_dict(d: Dictionary) -> void:
 	rest_ready_at = d.get("rest_ready_at", {})
 	xp_boost_until = float(d.get("xp_boost_until", 0.0))
 	routine.from_dict(d.get("routine", {}))
+	day_hour = fposmod(float(d.get("day_hour", day_hour)), 24.0)
 	difficulty = str(d.get("difficulty", "normal"))
 	if not ["easy", "normal", "hard"].has(difficulty):
 		difficulty = "normal"

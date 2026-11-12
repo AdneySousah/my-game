@@ -5,6 +5,7 @@
   "size": [100, 112],
   "seed": 31,
   "ground": "#5aa043",
+  "grass": { "count": 4500, "root": "#4c9038", "tip": "#9fd963" },
   "sky": "#7fc4e8",
   "ambient": 0.5,
   "sun": 1.0,

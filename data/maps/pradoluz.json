@@ -6,6 +6,7 @@
   "size": [72, 72],
   "seed": 11,
   "ground": "#7BC950",
+  "grass": { "count": 3500, "root": "#62ad44", "tip": "#b4e679" },
   "patches": { "color": "#6cbc45", "count": 70},
   "spawns": { "start": [-7, -3, 200], "from_floresta": [0, -28, 180] },
   "exits": [

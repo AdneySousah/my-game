@@ -40,7 +40,11 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] Teste interno no celular (12/11/2026): compras de teste, atalhos no topo com ícones pintados (6 créditos), balão de fala no botão de ataque, limite de 60 quadros e 3D em até 1080 linhas. Aprovado
   - [x] Ficha da loja, conteúdo do app e ícone novo (12/11/2026); teste fechado enviado para revisão
   - [ ] 12 testadores por 14 dias seguidos e pedido de produção
-- [ ] Fase 6 — expansão: plano em `docs/FASE6_PLANO.md` (6 etapas, ~4.400 créditos), aguardando aprovação da etapa 6.1
+- [ ] Fase 6 — expansão: plano em `docs/FASE6_PLANO.md`
+  - [x] 6.1 Estrada: Campos de Pradoluz, Bosque Seco, Estepe de Pedra, shader de bioma, 5 secundárias (170 créditos). Em teste
+  - [x] 6.2a Figurantes: 6 moradores, cachorro, gato, vaca, pássaros, carinho e pesca (~255 créditos). Em teste
+  - [~] 6.2b Ato 2 começo: Qaressa, Dunas de Ossos, Zahir, Nadira, homem-lagarto, saqueador, missão 7 (~350 créditos). Em teste
+  - [ ] 6.2c Ruínas de Ammar, esqueleto antigo, 1º duelo com o Severin, Torre Afundada e a Sahra
 
 ## Pendências para depois do jogo concluído
 

@@ -44,11 +44,12 @@
           "range": 11.0,
           "min_range": 3.0,
           "width": 0.45,
-          "windup": 0.8,
+          "windup": 0.3,
           "speed": 15.0,
           "cooldown": 2.0,
           "anim": "shoot",
-          "look": "arrow"
+          "look": "arrow",
+          "dodge_after": {"distance": 3.2}
         },
         {"id": "kick", "shape": "front", "range": 1.6, "radius": 1.1, "windup": 0.5, "cooldown": 1.5, "damage": 0.7}
       ],
@@ -74,7 +75,7 @@
       "speed": 2.4,
       "aggro_range": 14.0,
       "attacks": [
-        {"id": "smash", "shape": "ground_target", "range": 3.0, "radius": 2.2, "windup": 1.0, "cooldown": 2.6}
+        {"id": "smash", "shape": "ground_target", "range": 3.0, "radius": 2.2, "windup": 1.0, "cooldown": 1.6}
       ],
       "drops": [
         {"item": "mat_couro_orc", "chance": 0.5},

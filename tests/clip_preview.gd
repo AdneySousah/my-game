@@ -2,7 +2,7 @@ extends Node3D
 ## Shows clips straight from a Meshy GLB (no import needed, works with files in assets/_inbox)
 ## on a game character, frame by frame: one row per clip. For choosing new animations.
 ##   godot --path . --resolution 900x900 res://tests/clip_preview.tscn -- <id> <out.png> <file.glb> [view=side|front|back|3q] [armed=1] [zoom=1] "Clip@t1,t2,..." ...
-## zoom=1 follows the weapon hand up close.
+## zoom=1 follows the weapon hand up close; far=<factor> moves the camera back (big characters).
 ## "Clip" may be part of the clip name (e.g. Run_02). Times in seconds; "Clip@6" = 6 frames
 ## spread over the whole clip.
 
@@ -17,10 +17,13 @@ func _ready() -> void:
 	var view: String = "3q"
 	var armed: bool = false
 	var zoom: bool = false
+	var far: float = 1.0
 	var specs: Array[String] = []
 	for a: String in args.slice(3):
 		if a.begins_with("view="):
 			view = a.substr(5)
+		elif a.begins_with("far="):
+			far = float(a.substr(4))
 		elif a.begins_with("zoom="):
 			zoom = a.substr(5) == "1"
 		elif a.begins_with("armed="):
@@ -71,7 +74,7 @@ func _ready() -> void:
 	cam.fov = 35
 	add_child(cam)
 	var eye: Vector3 = {"side": Vector3(3.2, 1.2, 0.0), "front": Vector3(0.0, 1.3, -3.2), "back": Vector3(0.0, 1.3, 3.2), "3q": Vector3(2.0, 1.5, -2.6)}[view]
-	cam.look_at_from_position(eye, Vector3(0, 0.75, 0))
+	cam.look_at_from_position(eye * far, Vector3(0, 0.75 * far, 0))
 
 	var rows: Array = []
 	var cols: int = 1

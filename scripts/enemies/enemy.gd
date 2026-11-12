@@ -48,6 +48,9 @@ var _state: State = State.IDLE
 var _timer: float = 0.0
 var _cooldown: float = 0.0
 var _knockback: Vector3 = Vector3.ZERO
+## Roll after a shot (archers): time left and speed.
+var _dodge_time: float = 0.0
+var _dodge_vel: Vector3 = Vector3.ZERO
 var _attack: Dictionary = {}
 var _attack_center: Vector3 = Vector3.ZERO
 var _attack_dir: Vector3 = Vector3.FORWARD
@@ -162,6 +165,14 @@ func _physics_process(delta: float) -> void:
 	_cooldown -= delta
 	for k: String in _attack_cds.keys():
 		_attack_cds[k] = float(_attack_cds[k]) - delta
+	if _dodge_time > 0.0:
+		# Rolling away after a shot (archers): no thinking until it ends.
+		_dodge_time -= delta
+		velocity = _dodge_vel + _knockback
+		velocity.y = 0.0
+		move_and_slide()
+		global_position.y = 0.0
+		return
 	var stunned: bool = status.has("stun")
 	if stunned and _state == State.WINDUP:
 		_cancel_attack()
@@ -202,7 +213,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	global_position.y = 0.0
 	if model and _state != State.WINDUP and not stunned:
-		model.update_locomotion(move.length(), _state != State.IDLE)
+		var backward: bool = move.length() > 0.2 and move.normalized().dot(_forward()) < -0.3
+		model.update_locomotion(move.length(), _state != State.IDLE, backward)
 
 
 # --- Movement and attack choice -----------------------------------------------------
@@ -361,6 +373,8 @@ func _resolve_attack() -> void:
 				Audio.play_sfx("slam", _attack_center)
 				ProtoVisuals.flash_disc(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(1, 0.6, 0.3, 0.5))
 	_clear_telegraph()
+	if a.has("dodge_after") and _target_alive():
+		_dodge_after_shot(a["dodge_after"])
 	if _barrage_left > 0 and _target_alive():
 		_barrage_left -= 1
 		_begin_windup(float(a.get("interval", 0.5)))
@@ -368,6 +382,24 @@ func _resolve_attack() -> void:
 	_state = State.RECOVER
 	_timer = float(a.get("recover", RECOVER_TIME))
 	_cooldown = float(a.get("cooldown", data.get("attack_cooldown", 1.5)))
+
+
+## Rolls sideways (a little away from the hero) right after shooting: "dodge_after":
+## {"distance": metres}. Uses the "dodge" action of the model.
+func _dodge_after_shot(cfg: Dictionary) -> void:
+	if model == null:
+		return
+	var to: Vector3 = target.global_position - global_position
+	to.y = 0.0
+	var away: Vector3 = -to.normalized() if to.length() > 0.01 else -_forward()
+	var side := Vector3(-away.z, 0.0, away.x) * (1.0 if _rng.randf() < 0.5 else -1.0)
+	var dir: Vector3 = (side * 0.85 + away * 0.45).normalized()
+	_face(dir)
+	var dur: float = model.play_action("dodge")
+	if dur <= 0.0:
+		return
+	_dodge_time = dur
+	_dodge_vel = dir * float(cfg.get("distance", 3.0)) / dur
 
 
 func _summon(a: Dictionary) -> void:

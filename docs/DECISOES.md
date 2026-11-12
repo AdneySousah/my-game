@@ -218,3 +218,11 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - Celeiro e mina são lugares fechados (`"indoor": true` no mapa): sem dia/noite e sem vento.
 - **Relógio:** ao lado do minimapa, um mostrador de 24 horas (sol em cima = meio-dia, lua embaixo = meia-noite) com o céu da hora dentro, um ponteiro e a hora escrita embaixo.
 - Nas versões de teste, **F3** adianta 3 horas (para ver a noite sem esperar).
+
+## Orc e arqueiro (12/11/2026)
+- **Orc:** ganhou os ossos dos dedos; a mão fecha na clava e o cabo atravessa o punho (antes a clava ficava de lado). O golpe é de marreta, com as duas mãos juntas perto da base do cabo: a animação do Meshy deixa as mãos a ~1 m uma da outra, então os dois braços são dobrados por código (`TwoHandIK`) até os punhos se encontrarem no cabo, e a cabeça da clava fica na ponta, depois da mão de cima. Fora do golpe ele carrega a clava só na direita. Configuração: `two_hand` na arma (`spacing` = distância entre os punhos, `meet` = onde as mãos se encontram, `base` = onde fica a mão de baixo no cabo); serve para qualquer arma de duas mãos.
+- **Orc parado depois do golpe:** entre um golpe e outro ele esperava 2,6 s na pose de "parado tranquilo", por isso parecia travado. Agora espera 1,6 s numa postura de luta (agachado com a clava apontada para o herói, a mesma postura de combate do Lio).
+- **Arqueiro:**
+  - Quando se afasta do herói para ter distância, anda de costas (a caminhada tocada ao contrário), sem gastar créditos. Se quiser algo ainda mais real, o Meshy tem "Walk Backward with Bow" (3 créditos).
+  - Depois de cada flecha ele rola para o lado, um pouco para longe do herói (~3 m), com o mesmo rolamento do Lio. Distância: `dodge_after` no ataque em `data/enemies/enemies.json`.
+  - O tiro carrega 0,5 s mais rápido: o aviso no chão dura 0,3 s (antes 0,8 s) e a animação de puxar a corda foi acelerada para caber nesse tempo.

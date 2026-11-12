@@ -32,6 +32,12 @@ var _action_hands: Dictionary = {}
 var _arrow: Node3D
 var _arrow_cfg: Dictionary = {}
 var _arrow_anim: String = ""
+## Two-handed weapons ("two_hand" in the weapon config): during the listed actions the
+## weapon runs from the main hand to the other one, so both hands hold the handle.
+var _two_hand: Dictionary = {}
+var _two_w: float = 0.0
+var _pivot_rest: Transform3D = Transform3D.IDENTITY
+var _two_ik: TwoHandIK
 
 static var _libraries: Dictionary = {}
 static var _configs: Dictionary = {}
@@ -82,6 +88,7 @@ func _ready() -> void:
 	anim.root_node = anim.get_path_to(model)
 	anim.add_animation_library("", _library())
 	_hands = HandPose.create_for(skeleton, config.get("hand_poses", {}))
+	skeleton.skeleton_updated.connect(_apply_two_hand)
 	_attach_weapon()
 	_update_hands()
 	if _hands:
@@ -95,6 +102,11 @@ func _process(delta: float) -> void:
 		_action_hands = {}
 		_update_hands()
 	_update_arrow()
+	if not _two_hand.is_empty():
+		var want: float = 1.0 if is_busy() and _two_hand.get("actions", []).has(_current) else 0.0
+		_two_w = move_toward(_two_w, want, delta / 0.15)
+		if _two_ik:
+			_two_ik.weight = _two_w
 
 
 ## Plays a one-shot action (attack, skill, dodge...). `speed_mult` scales it (attack speed).
@@ -129,13 +141,15 @@ func play_loop(action: String, speed: float = 1.0) -> void:
 	var blend: float = float(a.get("blend", MOVE_BLEND))
 	if _current != action:
 		blend = maxf(blend, float(_action(_current).get("blend", MOVE_BLEND)) * 0.7)
-	anim.play(str(a["anim"]), blend, speed)
+	# "reverse": plays the clip backwards (e.g. walking backwards with the walk clip).
+	anim.play(str(a["anim"]), blend, -speed if bool(a.get("reverse", false)) else speed)
 	_current = action
 
 
 ## Call every frame with the character's ground speed. Movement interrupts the tail
-## of an action; standing still lets the action finish first.
-func update_locomotion(ground_speed: float, in_combat: bool = false) -> void:
+## of an action; standing still lets the action finish first. `backward` = walking away
+## while facing forward (archers keeping distance): uses "walk_back" when it exists.
+func update_locomotion(ground_speed: float, in_combat: bool = false, backward: bool = false) -> void:
 	var moving: bool = ground_speed > 0.2
 	if is_busy() and not moving:
 		return
@@ -148,6 +162,8 @@ func update_locomotion(ground_speed: float, in_combat: bool = false) -> void:
 			play_loop("sit")
 		else:
 			play_loop("combat_idle" if in_combat else "idle")
+	elif backward and not _action("walk_back").is_empty():
+		play_loop("walk_back", clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
 	elif ground_speed < 3.0:
 		play_loop(_pick(prefix + "walk", "walk"), clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
 	else:
@@ -313,10 +329,74 @@ func _attach_weapon() -> void:
 	if w.is_empty() or bool(w.get("none", false)) or not ResourceLoader.exists(str(w.get("scene", ""))):
 		return
 	_hand_weapon = _mount_weapon(w, str(w.get("bone", "RightHand")), w.get("rotation_deg", [0, 0, 0]), w.get("offset", [0, 0, 0]))
+	_pivot_rest = _hand_weapon.transform
+	_two_hand = w.get("two_hand", {})
+	_setup_two_hand_ik(w)
 	var sheath: Dictionary = w.get("sheath", {})
 	if not sheath.is_empty():
 		_back_weapon = _mount_weapon(w, str(sheath.get("bone", "Spine")), sheath.get("rotation_deg", [0, 0, 0]), sheath.get("offset", [0, 0, 0]))
 		_back_weapon.visible = not _drawn
+
+
+## After the final pose of each frame: blends the weapon between "held in the main hand"
+## and "held with both hands" (both fists together near the base of the handle).
+func _apply_two_hand() -> void:
+	if _two_hand.is_empty() or _hand_weapon == null or not is_instance_valid(_hand_weapon):
+		return
+	if _two_w <= 0.001:
+		_hand_weapon.transform = _pivot_rest
+		return
+	var w: Dictionary = config.get("weapon", {}).duplicate()
+	w.merge(_weapon_cfg, true)
+	var attach_g: Transform3D = skeleton.global_transform * skeleton.get_bone_global_pose(skeleton.find_bone(str(w.get("bone", "RightHand"))))
+	var one: Transform3D = attach_g * _pivot_rest
+	var world_scale: float = maxf(skeleton.global_basis.get_scale().x, 0.0001)
+	var cs: float = float(config.get("scale", 1.0))
+	var off: Array = _two_hand.get("offset", [0, 0, 0])
+	var other_local: Vector3 = Vector3(float(off[0]), float(off[1]), float(off[2])) / world_scale * cs
+	var other_bone: int = skeleton.find_bone(str(_two_hand.get("bone", "LeftHand")))
+	var other_g: Vector3 = skeleton.global_transform * (skeleton.get_bone_global_pose(other_bone) * other_local)
+	var main_g: Vector3 = one.origin
+	# The head points past the main hand: the other hand holds the handle near its base.
+	var axis: Vector3 = main_g - other_g
+	if axis.length() < 0.05:
+		return
+	axis = axis.normalized()
+	var sc: float = one.basis.get_scale().x
+	var x: Vector3 = one.basis.x.normalized()
+	x = x - axis * x.dot(axis)
+	if x.length() < 0.01:
+		x = one.basis.z.normalized() - axis * one.basis.z.normalized().dot(axis)
+	x = x.normalized()
+	var two_basis := Basis(x, axis, x.cross(axis))
+	# The other fist sits at "base" (0-1 along the weapon from the bottom of the handle).
+	var length: float = float(w.get("length", 0.8))
+	var base: Vector3 = Vector3(0, (float(_two_hand.get("base", 0.12)) - 0.5 + float(w.get("grip", 0.38))) * length, 0)
+	var two_origin: Vector3 = other_g - two_basis * (base * sc)
+	var q: Quaternion = one.basis.get_rotation_quaternion().slerp(two_basis.get_rotation_quaternion(), _two_w)
+	var g := Transform3D(Basis(q).scaled(Vector3.ONE * sc), one.origin.lerp(two_origin, _two_w))
+	_hand_weapon.transform = attach_g.affine_inverse() * g
+
+
+## Sledgehammer grip: TwoHandIK bends both arms so the fists meet on the handle.
+func _setup_two_hand_ik(w: Dictionary) -> void:
+	if _two_hand.is_empty():
+		if _two_ik:
+			_two_ik.weight = 0.0
+		return
+	if _two_ik == null:
+		_two_ik = TwoHandIK.new()
+		_two_ik.name = "TwoHandIK"
+		skeleton.add_child(_two_ik)
+	var world_scale: float = maxf(skeleton.global_basis.get_scale().x, 0.0001)
+	var cs: float = float(config.get("scale", 1.0))
+	var off: Array = _two_hand.get("offset", [0, 0, 0])
+	_two_ik.main_side = "Left" if str(w.get("bone", "RightHand")).begins_with("Left") else "Right"
+	_two_ik.other_side = "Left" if str(_two_hand.get("bone", "LeftHand")).begins_with("Left") else "Right"
+	_two_ik.main_grip = _pivot_rest.origin
+	_two_ik.other_grip = Vector3(float(off[0]), float(off[1]), float(off[2])) / world_scale * cs
+	_two_ik.spacing = float(_two_hand.get("spacing", 0.25)) / world_scale * cs
+	_two_ik.meet = float(_two_hand.get("meet", 0.35))
 
 
 ## Swaps the weapon model: `override` replaces keys of the character's "weapon" config

@@ -14,8 +14,12 @@ func _ready() -> void:
 	var args: PackedStringArray = OS.get_cmdline_user_args()
 	# Optional first argument "char=<id>" (default hero_lio); the camera follows its weapon hand.
 	var char_id: String = "hero_lio"
-	if args[0].begins_with("char="):
-		char_id = args[0].substr(5)
+	var far: float = 1.0
+	while args[0].begins_with("char=") or args[0].begins_with("far="):
+		if args[0].begins_with("char="):
+			char_id = args[0].substr(5)
+		else:
+			far = float(args[0].substr(4))
 		args = args.slice(1)
 	var out: String = args[0]
 	var action: String = args[1]
@@ -63,7 +67,7 @@ func _ready() -> void:
 		if knuckle >= 0:
 			hand = hand.lerp(sk.global_transform * sk.get_bone_global_pose(knuckle).origin, 0.8)
 		for view: Vector3 in VIEWS:
-			cam.look_at_from_position(hand + view, hand)
+			cam.look_at_from_position(hand + view * far, hand)
 			await get_tree().process_frame
 			await RenderingServer.frame_post_draw
 			var img: Image = get_viewport().get_texture().get_image()

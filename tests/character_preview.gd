@@ -2,6 +2,7 @@ extends Node3D
 ## Renders a character (CharacterModel) in several actions, for checking animations
 ## and the weapon grip. Optional weapon rotation override to try angles quickly.
 ##   godot --path . --resolution 1600x400 res://tests/character_preview.tscn -- <id> <out.png> [rx,ry,rz] [action:t ...]
+## Special shots: "turn:deg" turns the character, "far:factor" moves the camera back.
 
 const DEFAULT_SHOTS: Array[String] = ["idle:0.5", "attack_0:0.2", "attack_2:0.15", "corte_giratorio:0.2"]
 
@@ -53,6 +54,11 @@ func _ready() -> void:
 		# "turn:deg" rotates the character (e.g. turn:180 shows the back), no picture.
 		if parts[0] == "turn":
 			model.rotation_degrees.y = float(parts[1])
+			continue
+		# "far:factor" moves the camera back (big characters), no picture.
+		if parts[0] == "far":
+			var f: float = float(parts[1])
+			cam.look_at_from_position(Vector3(1.8, 1.5, -2.6) * f, Vector3(0, 0.8 * f, 0))
 			continue
 		if model.config.get("actions", {}).get(parts[0], {}).get("loop", false):
 			model.set_weapon_drawn(parts[0].begins_with("combat"))

@@ -79,7 +79,7 @@ if floor:
 R = mathutils.Matrix.Translation((0, 0, -drop)) @ mathutils.Matrix.Rotation(math.radians(turn), 4, "Z")
 root = next(b for b in arm.pose.bones if b.parent is None)
 rest = root.bone.matrix_local
-new = bpy.data.actions.new(new_name)
+new = bpy.data.actions.new("__clip_tool_new")
 arm.animation_data.action = new
 for i, pose in enumerate(frames):
     for pb in arm.pose.bones:
@@ -95,6 +95,7 @@ for i, pose in enumerate(frames):
         pb.keyframe_insert("scale", frame=i + 1)
 for act in [a for a in bpy.data.actions if a != new]:
     bpy.data.actions.remove(act)
+new.name = new_name  # after removing the sources, so the name is free (no ".001")
 sc.frame_start, sc.frame_end = 1, len(frames)
 arm.select_set(True)
 bpy.context.view_layer.objects.active = arm

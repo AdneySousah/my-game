@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="Herdeiro dos Céus"
-config/version="0.1.2"
+config/version="0.1.4"
 run/main_scene="res://scenes/boot/boot.tscn"
 config/features=PackedStringArray("4.7", "Mobile")
-config/icon="res://icon.svg"
+config/icon="res://assets/app/icon_512.png"
 
 [autoload]
 

@@ -2670,6 +2670,46 @@
       "notes": [
         "2026-11-12: 2026-11-12: aprovado pelo dono; 5 ícones recortados (store, routine, bag, quests, talk) com scripts/tools/icons_prepare.gd"
       ]
+    },
+    {
+      "id": "ui_loja_icone",
+      "category": "ui",
+      "phase": 7,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Ícone do app (image-to-image de ref_lio + espada aprendiz)",
+      "file": "docs/loja/icone_512.png e assets/app/",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 9,
+          "task_id": "01a1d070-aef0-72fc-a78c-68d3e8e8b2e3",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: aprovado pelo dono; ícone da loja e do app (tests/store_art.tscn)"
+      ]
+    },
+    {
+      "id": "ui_loja_destaque",
+      "category": "ui",
+      "phase": 7,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Imagem de destaque 1024x500 da Play Store (image-to-image de ref_lio + ref_pradoluz + espada)",
+      "file": "docs/loja/",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 9,
+          "task_id": "01a1d070-b424-73c0-af95-58adb89c4df7",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: aprovado pelo dono; destaque 1024x500 em PT e EN com o nome do jogo (tests/store_art.tscn)"
+      ]
     }
   ]
 }

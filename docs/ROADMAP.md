@@ -29,10 +29,11 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [x] 4.4 Áudio: sistema de som (música, efeitos, vozes com volume), efeitos CC0 e músicas orquestrais CC-BY provisórias; troca pela ElevenLabs depois. Aprovado
   - [x] 4.6 Ajustes do teste do dono: descanso cura aos poucos e só de 10 em 10 min; inimigos contornam obstáculos; seta no chão até o objetivo da missão, distância no rastreador, toque no rastreador abre o diário. Aprovado
   - [x] 4.5 Prólogo e save: tela inicial, prólogo em 8 ilustrações com texto, save local criptografado com cópia de segurança (Meshy: 54 créditos), aprovado
-- [ ] Fase 5 — sistemas (plano em `docs/FASE5_PLANO.md`, aprovado em 11/11/2026, sem visual de conjunto de armadura)
+- [x] Fase 5 — sistemas concluída (12/11/2026; plano em `docs/FASE5_PLANO.md`, sem visual de conjunto de armadura); testada e aprovada pelo dono
   - [x] 5.1 Itens e inventário: mochila de 60 espaços, raridade, detalhes, drops de itens, baús nos mapas, recompensas de missão em itens. Aprovado
   - [x] 5.2 Poções: 3 atalhos na tela (vida, fôlego, reforço) com quantidade e recarga, poções P/M/G e tônicos; chefes reequilibrados. Aprovado
   - [x] 5.3 Equipamentos: 9 espaços (espada, 5 de armadura, 2 pulseiras, cinto), 33 peças em 4 raridades, tela com o Lio em 3D, comparação, conjunto do Sol Alado, peças em baús, missões e chefes. Ajustes do 1º teste feitos (mão vazia sem espada, pegada, "!" no menu, teclas, créditos, molduras) e 4 espadas do Meshy na mão (Meshy: 72 créditos). Aprovado
-  - [ ] 5.4 Ferreiro (Tobias): fortalecer +1 a +20 com Trevo e Amuleto, quebrar/restaurar, encaixes com Broca, gemas em 5 níveis (juntar 3 → 1), criar as 32 peças, desmontar 100%/50%. Pronto; o dono testa no fim da Fase 5
-  - [ ] 5.5 Lojas: loja de ouro da Dona Celeste (comprar/vender), loja especial com dinheiro real (camada Store; loja de teste no PC; Google Play na Fase 7), Pergaminho do saber (+50% XP). Pronto; o dono testa no fim da Fase 5
-  - [ ] 5.6 Rotina e metas: 5 diárias por nível, calendário de login de 28 dias com proteção do relógio, 10 conquistas com títulos, dificuldade no Novo jogo (diminuir só na cidade). Pronto; o dono testa no fim da Fase 5
+  - [x] 5.4 Ferreiro (Tobias): fortalecer +1 a +20 com Trevo e Amuleto, quebrar/restaurar, encaixes com Broca, gemas em 5 níveis (juntar 3 → 1), criar as 32 peças, desmontar 100%/50%. Aprovado
+  - [x] 5.5 Lojas: loja de ouro da Dona Celeste (comprar/vender), loja especial com dinheiro real (camada Store; loja de teste no PC; Google Play na Fase 7), Pergaminho do saber (+50% XP). Aprovado
+  - [x] 5.6 Rotina e metas: 5 diárias por nível, calendário de login de 28 dias com proteção do relógio, 10 conquistas com títulos, dificuldade no Novo jogo (diminuir só na cidade). Aprovado
+- [ ] Fase 7 (adiantada antes da Fase 6) — versão Android e loja do Google Play: Java 17, Android SDK 36 e modelos do Godot instalados; plugin de compras 3.3.0; chave de upload fora do projeto; pacote `com.adneysousah.herdeirodosceus`; build por `tools/build/build_android.sh`. Passo a passo do dono em `docs/PUBLICACAO.md`. Inglês mantido, sem espanhol.

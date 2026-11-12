@@ -26,8 +26,6 @@ var products: Array[Dictionary] = []
 ## Product id -> price text from Google Play ("R$ 4,90").
 var _play_prices: Dictionary = {}
 var _play: Object = null
-## Purchase tokens already handed out, so a retry never gives twice.
-var _given_tokens: Dictionary = {}
 ## Paid purchases found while nobody could receive them (e.g. on the title screen):
 ## [{"product": {...}, "token": "..."}]. The game claims them when it starts.
 var _waiting: Array[Dictionary] = []
@@ -68,9 +66,9 @@ func claim_waiting() -> void:
 	_waiting.clear()
 	for w: Dictionary in list:
 		var token: String = str(w["token"])
-		if _given_tokens.has(token):
+		if _given(token):
 			continue
-		_given_tokens[token] = true
+		_mark_given(token)
 		granted.emit(w["product"])
 		if _play:
 			_play.call("consume_purchase", token)
@@ -113,12 +111,32 @@ func _start_play() -> bool:
 	_play.connect("query_product_details_response", _on_play_details)
 	_play.connect("query_purchases_response", _on_play_purchases)
 	_play.connect("on_purchase_updated", _on_play_purchases)
+	_play.connect("disconnected", _on_play_lost)
+	_play.connect("connect_error", func(_code: int, _msg: String) -> void: _on_play_lost())
 	_play.call("start_connection")
 	return true
 
 
+## Tries to reach Google Play again a little later (no network, Play Store updating...).
+func _on_play_lost() -> void:
+	await get_tree().create_timer(15.0, true, false, true).timeout
+	if _play and int(_play.call("get_connection_state")) != 2:
+		_play.call("start_connection")
+
+
+func _given(token: String) -> bool:
+	return Session.store_tokens.has(token)
+
+
+## Remembered in the save (Main saves right after `granted`), the last 100 only.
+func _mark_given(token: String) -> void:
+	Session.store_tokens.append(token)
+	while Session.store_tokens.size() > 100:
+		Session.store_tokens.pop_front()
+
+
 func _on_play_connected() -> void:
-	var ids: Array[String] = []
+	var ids: PackedStringArray = []
 	for p: Dictionary in products:
 		ids.append(str(p["id"]))
 	_play.call("query_product_details", ids, 0)
@@ -151,7 +169,9 @@ func _on_play_purchases(res: Dictionary) -> void:
 		if int(pur.get("purchase_state", 0)) != PLAY_PURCHASED:
 			failed.emit("", "STORE_PENDING")
 			continue
-		if _given_tokens.has(token):
+		if _given(token):
+			# Handed out before but not consumed (the game closed in between): consume now.
+			_play.call("consume_purchase", token)
 			continue
 		if granted.get_connections().is_empty():
 			for pid: Variant in pur.get("product_ids", []):
@@ -162,7 +182,7 @@ func _on_play_purchases(res: Dictionary) -> void:
 		for pid: Variant in pur.get("product_ids", []):
 			var p: Dictionary = product(str(pid))
 			if not p.is_empty():
-				_given_tokens[token] = true
+				_mark_given(token)
 				granted.emit(p)
 		# Main saved the reward before this line runs (signals are synchronous).
 		_play.call("consume_purchase", token)

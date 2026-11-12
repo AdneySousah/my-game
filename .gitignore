@@ -2,7 +2,7 @@
 .godot/
 .import/
 *.translation
-export_presets.cfg
+# export_presets.cfg is committed: the signing passwords never go in it (see tools/build/build_android.sh)
 /android/
 /build/
 *.tmp

@@ -61,6 +61,19 @@
       "rewards": { "xp": 300, "gold": 100 }
     },
     {
+      "id": "main_07", "type": "main", "name": "QUEST_MAIN_07", "auto": true,
+      "requires": ["main_06"], "min_level": 15,
+      "steps": [
+        { "type": "reach", "map": "qaressa", "pos": [0, 26], "radius": 8, "text": "OBJ_REACH_QARESSA" },
+        { "type": "talk", "npc": "zahir", "dialogue": "main_07_zahir", "text": "OBJ_TALK_ZAHIR" },
+        { "type": "talk", "npc": "nadira", "dialogue": "main_07_nadira", "text": "OBJ_TALK_NADIRA" },
+        { "type": "kill", "enemy": "homem_lagarto", "count": 5, "map": "dunas", "pos": [-22, 22], "text": "OBJ_KILL_LIZARDMEN" },
+        { "type": "talk", "npc": "nadira", "dialogue": "main_07_nadira_done", "text": "OBJ_RETURN_NADIRA" }
+      ],
+      "set_flag": "act2_qaressa", "end_note": "QUEST_ACT2_SOON",
+      "rewards": { "xp": 2400, "gold": 600, "items": { "pot_vida_m": 5, "eq_peitoral_raro": 1 } }
+    },
+    {
       "id": "side_trigo", "type": "side", "name": "QUEST_SIDE_TRIGO", "giver": "nina", "offer": "side_trigo_offer",
       "requires": ["main_01"], "min_level": 2,
       "steps": [

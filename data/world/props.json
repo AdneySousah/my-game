@@ -222,6 +222,18 @@
     "prp_arenito_pequeno": { "scene": "res://assets/props/prp_arenito_pequeno/prp_arenito_pequeno.glb", "scale": 1.1, "collision": { "type": "box"}},
     "prp_carroca_quebrada": { "scene": "res://assets/props/prp_carroca_quebrada/prp_carroca_quebrada.glb", "scale": 1.1, "collision": { "type": "box"}},
     "prp_tenda": { "scene": "res://assets/props/prp_tenda/prp_tenda.glb", "scale": 2.0, "collision": { "type": "box"}},
-    "prp_placa_estrada": { "scene": "res://assets/props/prp_placa_estrada/prp_placa_estrada.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.15}}
+    "prp_placa_estrada": { "scene": "res://assets/props/prp_placa_estrada/prp_placa_estrada.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.15}},
+    "env_casa_adobe": {"scene": "res://assets/environment/env_casa_adobe/env_casa_adobe.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "box"}},
+    "env_casa_adobe_alta": {"scene": "res://assets/environment/env_casa_adobe_alta/env_casa_adobe_alta.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}},
+    "env_muralha_adobe": {"scene": "res://assets/environment/env_muralha_adobe/env_muralha_adobe.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}, "tile_length": 5.9},
+    "env_portao_adobe": {"scene": "res://assets/environment/env_portao_adobe/env_portao_adobe.glb", "scale": 8.0, "center_origin": true, "collision": null},
+    "prp_palmeira": {"scene": "res://assets/props/prp_palmeira/prp_palmeira.glb", "wind": {"sway": 0.22, "flutter": 0.03}, "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.35}},
+    "prp_tenda_mercado": {"scene": "res://assets/props/prp_tenda_mercado/prp_tenda_mercado.glb", "scale": 3.0, "center_origin": true, "collision": {"type": "box"}},
+    "prp_poco_lacrado": {"scene": "res://assets/props/prp_poco_lacrado/prp_poco_lacrado.glb", "scale": 2.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.9}},
+    "prp_cacto": {"scene": "res://assets/props/prp_cacto/prp_cacto.glb", "wind": {"sway": 0.03, "flutter": 0.0}, "scale": 2.2, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.35}},
+    "prp_jarro": {"scene": "res://assets/props/prp_jarro/prp_jarro.glb", "scale": 1.1, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.45}},
+    "prp_ossos_gigantes": {"scene": "res://assets/props/prp_ossos_gigantes/prp_ossos_gigantes.glb", "scale": 7.0, "center_origin": true, "collision": {"type": "box"}},
+    "prp_rocha_duna": {"scene": "res://assets/props/prp_rocha_duna/prp_rocha_duna.glb", "scale": 4.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.2}},
+    "prp_lanterna_deserto": {"scene": "res://assets/props/prp_lanterna_deserto/prp_lanterna_deserto.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.15}, "light": {"color": "#ffc36a", "energy": 1.2, "range": 5.0, "y": 1.8, "night": true}}
   }
 }

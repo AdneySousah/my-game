@@ -1,0 +1,113 @@
+{
+  "_comment": "Qaressa (Ato 2): cidade do deserto em volta de um oásis com os poços lacrados pela Arauta da Sede. Sul: Dunas de Ossos. Zahir (loja) e Nadira (ferreira).",
+  "id": "qaressa",
+  "name": "MAP_QARESSA",
+  "safe": true,
+  "size": [80, 80],
+  "seed": 91,
+  "ground": "#e9c27e",
+  "grass": {"count": 500, "root": "#b99a4f", "tip": "#e6d48e"},
+  "sky": "#9fd6f2",
+  "ambient": 0.62,
+  "sun": 1.3,
+  "sun_color": "#fff0cc",
+  "patches": {"color": "#f2d398", "count": 90},
+  "spawns": {"start": [0, 26, 0], "from_dunas": [0, 30, 0]},
+  "exits": [
+    {
+      "to": "dunas",
+      "spawn": "from_qaressa",
+      "pos": [0, 36],
+      "size": [8, 2],
+      "label": "MAP_DUNAS",
+      "model": "env_portao_adobe",
+      "model_pos": [0, 33],
+      "model_rot": 180
+    }
+  ],
+  "npcs": [
+    {"id": "zahir", "pos": [-9, 6], "yaw": 40},
+    {"id": "nadira", "pos": [11, 4], "yaw": -50}
+  ],
+  "rest_points": [
+    {"id": "qaressa_pedra", "name": "REST_QARESSA_PEDRA", "pos": [0, 18], "kind": "pedra"}
+  ],
+  "rivers": [
+    {
+      "points": [[-7, -3], [0, -6], [7, -3]],
+      "width": 8,
+      "bank_ids": ["prp_junco", "prp_palmeira", "prp_junco"],
+      "bank_spacing": 3.0
+    }
+  ],
+  "paths": [
+    {"points": [[0, 36], [0, 18], [0, 6]], "width": 3.6, "color": "#d9a96a"},
+    {"points": [[-20, 8], [-8, 8], [8, 8], [20, 8]], "width": 3.0, "color": "#d9a96a"}
+  ],
+  "props": [
+    {"id": "env_casa_adobe", "pos": [-18, -12], "rot": 30},
+    {"id": "env_casa_adobe_alta", "pos": [-8, -18], "rot": 10},
+    {"id": "env_casa_adobe", "pos": [8, -18], "rot": -10},
+    {"id": "env_casa_adobe_alta", "pos": [18, -12], "rot": -30},
+    {"id": "env_casa_adobe", "pos": [-22, 2], "rot": 80},
+    {"id": "env_casa_adobe_alta", "pos": [22, 2], "rot": -80},
+    {"id": "env_casa_adobe", "pos": [-18, 18], "rot": 140},
+    {"id": "env_casa_adobe", "pos": [18, 18], "rot": -140},
+    {"id": "prp_tenda_mercado", "pos": [-12, 6], "rot": 70},
+    {"id": "prp_tenda_mercado", "pos": [-6, 12], "rot": 160},
+    {"id": "prp_tenda_mercado", "pos": [6, 12], "rot": 200},
+    {"id": "prp_tenda_mercado", "pos": [14, 8], "rot": -70},
+    {"id": "prp_bigorna", "pos": [12.5, 2], "rot": 20},
+    {"id": "prp_poco_lacrado", "pos": [-10, -8]},
+    {"id": "prp_poco_lacrado", "pos": [10, -8]},
+    {"id": "prp_jarro", "pos": [-13.5, 8]},
+    {"id": "prp_jarro", "pos": [15.5, 6], "rot": 90},
+    {"id": "prp_jarro", "pos": [-20, -6], "rot": 40},
+    {"id": "prp_lanterna_deserto", "pos": [-3, 20]},
+    {"id": "prp_lanterna_deserto", "pos": [3, 20], "rot": 180},
+    {"id": "prp_lanterna_deserto", "pos": [-15, 10]},
+    {"id": "prp_lanterna_deserto", "pos": [16, 12]},
+    {"id": "prp_palmeira", "pos": [-4, 2]},
+    {"id": "prp_palmeira", "pos": [5, 1], "rot": 90},
+    {"id": "prp_palmeira", "pos": [-25, 14]},
+    {"id": "prp_palmeira", "pos": [25, -6]},
+    {"id": "prp_palmeira", "pos": [-26, -18]},
+    {"id": "prp_barril", "pos": [9.5, 3.5]},
+    {"id": "prp_caixa", "pos": [-10.5, 4]}
+  ],
+  "walls": [
+    {"id": "env_muralha_adobe", "from": [-30, 32], "to": [-4.5, 32]},
+    {"id": "env_muralha_adobe", "from": [4.5, 32], "to": [30, 32]},
+    {"id": "env_muralha_adobe", "from": [30, 30], "to": [30, -28]},
+    {"id": "env_muralha_adobe", "from": [28, -30], "to": [-28, -30]},
+    {"id": "env_muralha_adobe", "from": [-30, -28], "to": [-30, 30]}
+  ],
+  "scatter": [
+    {
+      "ids": ["prp_palmeira", "prp_cacto", "prp_jarro"],
+      "count": 18,
+      "rect": [-27, -27, 27, 28],
+      "spacing": 6,
+      "seed": 92
+    },
+    {
+      "ids": ["prp_arbusto_seco", "prp_arenito_pequeno", "prp_capim_seco"],
+      "count": 25,
+      "rect": [-27, -27, 27, 28],
+      "spacing": 3,
+      "seed": 93
+    }
+  ],
+  "ambience": {
+    "villagers": 6,
+    "spots": [[0, 8], [-8, 10], [8, 10], [-14, -2], [14, -2], [0, 16], [-18, 8], [18, 8], [-6, -12], [6, -12]],
+    "homes": [[-17, -9.5], [-8, -15], [8, -15], [17, -9.5], [-19, 4]],
+    "fish": [[-2, -1.5, 180]],
+    "animals": [
+      {"kind": "gato", "pos": [-12, 9]},
+      {"kind": "cachorro", "pos": [10, 14]}
+    ],
+    "perches": [[-18, 4.2, -12], [18, 4.2, -12], [-22, 4.2, 2], [22, 4.2, 2], [-3, 2.4, 20]],
+    "perch_birds": 3
+  }
+}

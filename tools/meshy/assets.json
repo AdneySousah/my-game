@@ -3306,6 +3306,478 @@
       "notes": [
         "2026-11-12: 2026-11-12: figurantes da Fase 6.2a (dono pediu para ir criando e testar no celular)"
       ]
+    },
+    {
+      "id": "env_casa_adobe",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/environment/env_casa_adobe/env_casa_adobe.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2267-7234-b720-4acf0b5b47b2",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-0b09-75d2-b3a4-2bfa31d2c575",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "env_casa_adobe_alta",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/environment/env_casa_adobe_alta/env_casa_adobe_alta.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-236f-74d6-8e5c-74f7308855c8",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-0fd1-75ee-a269-209564dc498c",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "env_muralha_adobe",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/environment/env_muralha_adobe/env_muralha_adobe.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-246c-7360-ad55-eb378889a253",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-1477-7391-aba2-ad096f01ef69",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "env_portao_adobe",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/environment/env_portao_adobe/env_portao_adobe.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2563-743b-a3da-55af15760373",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-194f-770c-8358-c8f601a57017",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_palmeira",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_palmeira/prp_palmeira.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-264f-74c5-b683-57ec22bcef4e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-1d7c-768a-bb13-161adc362db8",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_tenda_mercado",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_tenda_mercado/prp_tenda_mercado.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2752-74e0-8a7c-f17e6205c17e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-230e-74a4-b262-c563718412dc",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_poco_lacrado",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_poco_lacrado/prp_poco_lacrado.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2835-73be-a78a-025c175b842b",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-2770-7130-a99f-a4728b78e8d7",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_cacto",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_cacto/prp_cacto.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2922-701b-b654-0f65092776e7",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-2b40-745c-a4bf-c9e9172951f4",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_jarro",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_jarro/prp_jarro.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2a07-768f-ac50-4757e5629109",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-30c0-704f-8af0-841038f14cd0",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_ossos_gigantes",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_ossos_gigantes/prp_ossos_gigantes.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2b0c-7132-abf9-022ed8a31f19",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-3427-76d6-b435-642b69dbe345",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_rocha_duna",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_rocha_duna/prp_rocha_duna.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2bf2-7275-9341-189be8212df5",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-3867-76f2-b8d4-a3874283400d",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "prp_lanterna_deserto",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b Qaressa/Dunas (imagem nano-banana + Image to 3D t2)",
+      "file": "assets/props/prp_lanterna_deserto/prp_lanterna_deserto.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2ce1-7599-b5eb-57551934a6e4",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-3e65-7316-97f9-ea3e5893763a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "npc_zahir",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b NPC de serviço de Qaressa",
+      "file": "assets/npcs/npc_zahir/npc_zahir.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-2dc8-73f3-bb50-2968e4620ead",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-41e6-7011-ab5d-608092ac554f",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d114-53e3-7043-b1ac-f6f9c9c2fe1a",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "npc_nadira",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b NPC de serviço de Qaressa",
+      "file": "assets/npcs/npc_nadira/npc_nadira.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-30f5-76df-b533-2460208d117f",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d112-4724-7535-8043-c4ca5c2f67a1",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d114-6924-7685-b184-4e82b2e5c4ef",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "enm_homem_lagarto",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b inimigo das Dunas",
+      "file": "assets/enemies/enm_homem_lagarto/enm_homem_lagarto.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-3608-700f-a213-ff7385077aab",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d112-0831-742a-aa21-42175197976f",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d114-a4d7-7449-9449-8c969ae2535f",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d118-1212-7477-91ba-a9583ec9162a",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "animation",
+          "credits": 15,
+          "task_id": "01a1d119-524f-7241-a0a3-96beaecacd6c",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "enm_bandido_deserto",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b inimigo das Dunas",
+      "file": "assets/enemies/enm_bandido_deserto/enm_bandido_deserto.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d110-3993-7190-933d-22708a1f0699",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": "01a1d112-4e7f-724c-8649-6ef3c614eed2",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
+    },
+    {
+      "id": "wpn_lanca_osso",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Fase 6.2b lança de osso do homem-lagarto",
+      "file": "assets/weapons/wpn_lanca_osso/wpn_lanca_osso.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d114-aafe-71a7-ba67-5d0c8fbbc9c9",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d118-1e43-771b-862a-b9e6a2dae0ac",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": [
+        "2026-11-12: 2026-11-12: Fase 6.2b (Qaressa e Dunas de Ossos); dono pediu para ir criando e testar no celular"
+      ]
     }
   ]
 }

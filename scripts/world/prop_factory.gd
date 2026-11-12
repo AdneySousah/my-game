@@ -35,6 +35,10 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 	var model: Node3D = (load(str(p["scene"])) as PackedScene).instantiate()
 	model.scale = Vector3.ONE * float(p.get("scale", 1.0)) * extra_scale
 	body.add_child(model)
+	# "center_origin": Meshy models made without auto_size have the origin in the middle;
+	# lift them so they stand on the ground.
+	if bool(p.get("center_origin", false)):
+		model.position.y = -_aabb(model, body).position.y
 	var wind: Variant = p.get("wind")
 	if wind is Dictionary:
 		ToonStyle.apply_wind(model, wind, _aabb(model, body).size.y)

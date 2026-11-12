@@ -31,8 +31,8 @@
       "label": "MAP_DUNAS",
       "model": "prp_portal",
       "model_pos": [0, -53.5],
-      "if_flag": "act2_open",
-      "locked_label": "MAP_COMING_SOON"
+      "if_flag": "act1_done",
+      "locked_label": "MAP_ROAD_CLOSED"
     }
   ],
   "chests": [

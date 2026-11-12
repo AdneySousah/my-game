@@ -549,6 +549,82 @@
         ]
       ]
     },
+    "main_07_zahir": {
+      "lines": [
+        [
+          "zahir",
+          "DLG_MAIN_07_ZAHIR_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_07_ZAHIR_2"
+        ],
+        [
+          "zahir",
+          "DLG_MAIN_07_ZAHIR_3"
+        ],
+        [
+          "zahir",
+          "DLG_MAIN_07_ZAHIR_4"
+        ]
+      ]
+    },
+    "main_07_nadira": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_07_NADIRA_2"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_3"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_07_NADIRA_5"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_6"
+        ]
+      ]
+    },
+    "main_07_nadira_done": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_DONE_1"
+        ],
+        [
+          "nadira",
+          "DLG_MAIN_07_NADIRA_DONE_2"
+        ]
+      ]
+    },
+    "zahir_idle": {
+      "lines": [
+        [
+          "zahir",
+          "DLG_ZAHIR_IDLE_1"
+        ]
+      ]
+    },
+    "nadira_idle": {
+      "lines": [
+        [
+          "nadira",
+          "DLG_NADIRA_IDLE_1"
+        ]
+      ]
+    },
     "marta_idle_fed": {
       "lines": [
         [

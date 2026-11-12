@@ -311,6 +311,45 @@ REST_ESTEPE_PEDRA,Pedra do Viajante,Traveler's Stone
 REST_ESTEPE_MIRANTE,Mirante das Dunas,Dune Lookout
 ENEMY_BANDIDO_ESTRADA,Bandido da estrada,Road bandit
 ENEMY_ORC_SAQUEADOR,Orc saqueador,Orc raider
+AMB_MORNING_HAPPY_1,Bom dia! O sol hoje veio caprichado.,Good morning! The sun really showed up today.
+AMB_MORNING_HAPPY_2,Cheirinho de pão no ar... ou é sonho meu?,Smell of bread in the air... or am I dreaming?
+AMB_MORNING_TIRED_1,Cedo demais pra existir.,Too early to exist.
+AMB_MORNING_TIRED_2,*bocejo* Já é de manhã?,*yawn* Morning already?
+AMB_MORNING_GRUMPY_1,O galo cantou às quatro. QUATRO.,The rooster crowed at four. FOUR.
+AMB_MORNING_GRUMPY_2,Nem vem falar comigo antes do chá.,Don't talk to me before my tea.
+AMB_AFTERNOON_HAPPY_1,Dia bonito pra não fazer nada.,Lovely day to do nothing.
+AMB_AFTERNOON_HAPPY_2,"Ô, herói! Tudo certo por aí?","Hey, hero! All good out there?"
+AMB_AFTERNOON_TIRED_1,Esse calor derrete até a vontade.,This heat melts even my will.
+AMB_AFTERNOON_TIRED_2,Só mais um pouquinho e eu sento.,Just a little more and I'll sit down.
+AMB_AFTERNOON_GRUMPY_1,Hmpf. Turista com espada.,Hmph. Tourist with a sword.
+AMB_AFTERNOON_GRUMPY_2,"Sai da frente, tô com pressa.","Out of the way, I'm in a hurry."
+AMB_EVENING_HAPPY_1,"Que pôr do sol, hein?","What a sunset, huh?"
+AMB_EVENING_HAPPY_2,Hoje o jantar é sopa. De novo. Oba!,Soup for dinner. Again. Yay!
+AMB_EVENING_TIRED_1,Meus pés pedem cama.,My feet are begging for bed.
+AMB_EVENING_TIRED_2,Que dia comprido...,What a long day...
+AMB_EVENING_GRUMPY_1,Escureceu e ninguém acendeu o lampião.,It's dark and nobody lit the lamp.
+AMB_EVENING_GRUMPY_2,Amanhã eu reclamo mais.,Tomorrow I'll complain some more.
+AMB_NIGHT_1,"Já é tarde, vou pra casa.","It's late, I'm heading home."
+AMB_FISH_1,Shhh... você vai espantar os peixes.,Shhh... you'll scare the fish.
+AMB_FISH_2,"Hoje sai um peixão, eu sinto.","Today I'll catch a big one, I can feel it."
+AMB_FISH_3,Três horas e nem uma beliscada.,Three hours and not a single nibble.
+AMB_PET_DOG_1,Quem é um bom garoto? É você!,Who's a good boy? You are!
+AMB_PET_DOG_2,"Calma, calma! Não precisa lamber a mão toda.","Easy, easy! No need to lick my whole hand."
+AMB_PET_DOG_3,Esse rabo vai sair voando de tanto abanar.,That tail's going to fly off from all the wagging.
+AMB_PET_CAT_1,Ronrona feito chaleira.,Purring like a kettle.
+AMB_PET_CAT_2,Ele deixou! Isso é quase uma honra.,He allowed it! That's almost an honor.
+AMB_PET_CAT_3,Atrás da orelha é o ponto certo.,Behind the ear is the sweet spot.
+AMB_PET_COW_1,Ela parece gostar de você... ou do seu cheiro de pão.,She seems to like you... or your bread smell.
+AMB_PET_COW_2,Muuu pra você também.,Moo to you too.
+AMB_PET_COW_3,"Vaca calma, vila feliz.","Calm cow, happy village."
+HUD_PET,Acariciar,Pet
+MAP_QARESSA,Qaressa,Qaressa
+REST_QARESSA_PEDRA,Pedra de Passagem de Qaressa,Qaressa Waystone
+REST_DUNAS_OASIS,Oásis Esquecido,Forgotten Oasis
+REST_DUNAS_COSTELAS,Sombra das Costelas,Shade of the Ribs
+ENEMY_BANDIDO_DESERTO,Saqueador do deserto,Desert raider
+ENEMY_HOMEM_LAGARTO,Homem-lagarto,Lizardman
+SHOP_ZAHIR,Bazar do Zahir,Zahir's Bazaar
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -319,6 +358,10 @@ NPC_CELESTE,Dona Celeste,Mrs. Celeste
 NPC_TOBIAS,Tobias,Tobias
 NPC_NINA,Nina,Nina
 NPC_JUCA,Velho Juca,Old Juca
+NPC_ZAHIR,Zahir,Zahir
+NPC_NADIRA,Nadira,Nadira
+BARK_ZAHIR_1,Água fresquinha! Quase de graça!,Fresh water! Almost free!
+BARK_NADIRA_1,Cuidado com as faíscas.,Mind the sparks.
 BARK_MARTA_1,"Cuidado na estrada, filho!","Careful on the road, son!"
 BARK_MARTA_2,Já comeu hoje?,Have you eaten today?
 BARK_BRAM_1,"Guarda alta, moleque!","Guard up, kid!"
@@ -333,10 +376,12 @@ BARK_JUCA_2,No meu tempo...,Back in my day...
 QUEST_MAIN_01,Mais um dia em Pradoluz,Another Day in Pradoluz
 QUEST_MAIN_02,A lição do caolho,The One-Eyed Lesson
 QUEST_MAIN_03,Um cozinheiro na floresta,A Cook in the Woods
+QUEST_MAIN_07,A cidade da sede,The Thirsty City
 QUEST_MAIN_04,Os corvos da mina,The Crows of the Mine
 QUEST_MAIN_05,O Arauto da Colheita,The Herald of the Harvest
 QUEST_MAIN_06,Mais cinco desses,Five More Like Him
-QUEST_MORE_SOON,"Fim do Ato 1 — a estrada do nordeste, depois da floresta, está aberta",End of Act 1 — the north-east road past the forest is open
+QUEST_MORE_SOON,Fim do Ato 1 — a estrada do nordeste leva ao deserto de Qaressa,End of Act 1 — the north-east road leads to the desert of Qaressa
+QUEST_ACT2_SOON,As Ruínas de Ammar chegam na próxima versão,The Ruins of Ammar arrive in the next version
 OBJ_KILL_GOLEM,Derrote o Golem de pedra no fundo da mina,Defeat the stone golem in the depths of the mine
 OBJ_KILL_GORVAN,Derrote Gorvan no Celeiro do Tributo,Defeat Gorvan in the Tribute Granary
 OBJ_RETURN_VILLAGE,Volte para a Marta em Pradoluz,Return to Marta in Pradoluz
@@ -371,6 +416,11 @@ OBJ_RETURN_JUCA,Leve a ferradura para o Velho Juca,Bring the horseshoe to Old Ju
 OBJ_COLLECT_FLOUR,Recolha os sacos de farinha nos Campos: %d/%d,Pick up the flour sacks in the Fields: %d/%d
 OBJ_RETURN_CELESTE,Leve a farinha para a Dona Celeste,Bring the flour to Mrs. Celeste
 OBJ_KILL_ROAD_BANDITS,Derrote bandidos da estrada no Bosque Seco: %d/%d,Defeat road bandits in the Withered Grove: %d/%d
+OBJ_REACH_QARESSA,Atravesse as Dunas de Ossos até Qaressa,Cross the Bone Dunes to Qaressa
+OBJ_TALK_ZAHIR,Fale com Zahir no mercado,Talk to Zahir at the market
+OBJ_TALK_NADIRA,"Fale com Nadira, a ferreira","Talk to Nadira, the blacksmith"
+OBJ_KILL_LIZARDMEN,Derrote homens-lagarto nas Dunas: %d/%d,Defeat lizardmen in the Dunes: %d/%d
+OBJ_RETURN_NADIRA,Leve as escamas para a Nadira,Bring the scales to Nadira
 OBJ_KILL_RAIDERS,Derrote orcs saqueadores no Bosque Seco: %d/%d,Defeat orc raiders in the Withered Grove: %d/%d
 OBJ_COLLECT_STEEL,Recupere os caixotes de aço no acampamento: %d/%d,Recover the steel crates at the camp: %d/%d
 OBJ_RETURN_TOBIAS_STEEL,Leve o aço para o Tobias,Bring the steel to Tobias
@@ -476,6 +526,9 @@ ITEM_EQ_RARO_DESC,"Aço bem trabalhado, com detalhes azuis.",Well-worked steel w
 ITEM_EQ_EPICO_DESC,Runas antigas brilham no metal escuro.,Ancient runes glow on the dark metal.
 ITEM_EQ_LENDARIO_DESC,Dizem que foi forjada com a luz do céu.,They say it was forged with the light of the sky.
 ITEM_MAT_LINGOTE_ACO,Lingote de aço,Steel ingot
+ITEM_MAT_SEDA_DESERTO,Seda do deserto,Desert silk
+ITEM_MAT_ESCAMA_DUNA,Escama de duna,Dune scale
+ITEM_MAT_CRISTAL_AREIA,Cristal de areia,Sand crystal
 ITEM_MAT_LINGOTE_ACO_DESC,O ferreiro usa para fortalecer e restaurar equipamentos.,The smith uses it to strengthen and restore gear.
 ITEM_GEMA_RUBI_1,Rubi I,Ruby I
 ITEM_GEMA_RUBI_2,Rubi II,Ruby II
@@ -614,6 +667,20 @@ DLG_SIDE_TEMPERO_OFFER_4,Corajoso como sempre.,Brave as ever.
 DLG_SIDE_TEMPERO_DONE_1,Quatro molhos de sálvia-de-pedra. Cheiram a poeira.,Four bunches of stone sage. They smell like dust.
 DLG_SIDE_TEMPERO_DONE_2,Cheiram a GLÓRIA! Prova esse caldo e depois me diz se não sou o melhor cozinheiro do reino.,They smell like GLORY! Taste this broth and then tell me I'm not the best cook in the kingdom.
 DLG_SIDE_TEMPERO_DONE_3,"...Tá, é o melhor. Não conta pra minha mãe.","...Fine, it's the best. Don't tell my mom."
+DLG_MAIN_07_ZAHIR_1,"Viajante! Bem-vindo a Qaressa, a joia do deserto! Água? Tenho. Só que custa um olho... e o outro de entrada.","Traveler! Welcome to Qaressa, jewel of the desert! Water? I have some. It costs an arm... and a leg as a deposit."
+DLG_MAIN_07_ZAHIR_2,Vocês vivem em volta de um oásis e a água custa ouro?,You live around an oasis and water costs gold?
+DLG_MAIN_07_ZAHIR_3,"Shhh! A Arauta Sahra lacrou todos os poços. Quem quer beber, compra dela. Eu só... revendo. Com uma margenzinha.",Shhh! Herald Sahra sealed every well. Whoever wants a drink buys from her. I just... resell. With a tiny margin.
+DLG_MAIN_07_ZAHIR_4,"Se quer saber mais, fale com a Nadira, a ferreira. Foi ela que tentou quebrar o cadeado do poço grande.","If you want to know more, talk to Nadira, the blacksmith. She's the one who tried to break the big well's lock."
+DLG_MAIN_07_NADIRA_1,Um forasteiro com cara de quem vai arrumar confusão. Gostei.,An outsider who looks like he's about to cause trouble. I like it.
+DLG_MAIN_07_NADIRA_2,Ouvi dizer que você tentou abrir um poço.,I heard you tried to open a well.
+DLG_MAIN_07_NADIRA_3,"Tentei. O cadeado é de ouro do céu: nenhum martelo daqui arranha. A chave fica com a Sahra, na Torre Afundada.",I tried. The lock is sky-gold: no hammer here even scratches it. Sahra keeps the key in the Sunken Tower.
+DLG_MAIN_07_NADIRA_4,Mas a torre só abre com os selos das Ruínas de Ammar. E as ruínas estão cheias de coisa que não devia estar viva.,But the tower only opens with the seals from the Ruins of Ammar. And the ruins are full of things that shouldn't be alive.
+DLG_MAIN_07_NADIRA_5,Coisas mortas que andam. Minha especialidade nova.,Dead things that walk. My new specialty.
+DLG_MAIN_07_NADIRA_6,"Antes, me traga escamas dos homens-lagarto das dunas. Com elas eu faço armadura que aguenta o sol daqui.","First, bring me scales from the lizardmen in the dunes. With them I make armor that can take this sun."
+DLG_MAIN_07_NADIRA_DONE_1,Escamas boas. Grossas. Isso vai virar couraça.,Good scales. Thick. These will become armor.
+DLG_MAIN_07_NADIRA_DONE_2,"As Ruínas de Ammar ficam a leste das dunas. Ainda estamos limpando o caminho, então descanse e se prepare.","The Ruins of Ammar lie east of the dunes. We're still clearing the way, so rest and get ready."
+DLG_ZAHIR_IDLE_1,"Preço especial pra você, amigo! Bem... especial pra mim, mas você entendeu.","Special price for you, friend! Well... special for me, but you get it."
+DLG_NADIRA_IDLE_1,"Fogo, martelo e paciência. O resto é conversa.","Fire, hammer and patience. The rest is just talk."
 DLG_MARTA_IDLE_FED_1,A despensa está cheia pela primeira vez em anos. Come mais um pedaço!,The pantry is full for the first time in years. Have another slice!
 DLG_BRAM_IDLE_FED_1,"Não fique se achando. Mas... bom trabalho, moleque.","Don't get cocky. But... good work, kid."
 DLG_CELESTE_IDLE_FED_1,"Prateleiras cheias de novo! Logo, logo eu reabro o armazém, querido.","Full shelves again! Very soon I'll reopen the store, dear."
@@ -631,35 +698,3 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-AMB_MORNING_HAPPY_1,Bom dia! O sol hoje veio caprichado.,Good morning! The sun really showed up today.
-AMB_MORNING_HAPPY_2,Cheirinho de pão no ar... ou é sonho meu?,Smell of bread in the air... or am I dreaming?
-AMB_MORNING_TIRED_1,Cedo demais pra existir.,Too early to exist.
-AMB_MORNING_TIRED_2,*bocejo* Já é de manhã?,*yawn* Morning already?
-AMB_MORNING_GRUMPY_1,O galo cantou às quatro. QUATRO.,The rooster crowed at four. FOUR.
-AMB_MORNING_GRUMPY_2,Nem vem falar comigo antes do chá.,Don't talk to me before my tea.
-AMB_AFTERNOON_HAPPY_1,Dia bonito pra não fazer nada.,Lovely day to do nothing.
-AMB_AFTERNOON_HAPPY_2,"Ô, herói! Tudo certo por aí?","Hey, hero! All good out there?"
-AMB_AFTERNOON_TIRED_1,Esse calor derrete até a vontade.,This heat melts even my will.
-AMB_AFTERNOON_TIRED_2,Só mais um pouquinho e eu sento.,Just a little more and I'll sit down.
-AMB_AFTERNOON_GRUMPY_1,Hmpf. Turista com espada.,Hmph. Tourist with a sword.
-AMB_AFTERNOON_GRUMPY_2,"Sai da frente, tô com pressa.","Out of the way, I'm in a hurry."
-AMB_EVENING_HAPPY_1,"Que pôr do sol, hein?","What a sunset, huh?"
-AMB_EVENING_HAPPY_2,Hoje o jantar é sopa. De novo. Oba!,Soup for dinner. Again. Yay!
-AMB_EVENING_TIRED_1,Meus pés pedem cama.,My feet are begging for bed.
-AMB_EVENING_TIRED_2,Que dia comprido...,What a long day...
-AMB_EVENING_GRUMPY_1,Escureceu e ninguém acendeu o lampião.,It's dark and nobody lit the lamp.
-AMB_EVENING_GRUMPY_2,Amanhã eu reclamo mais.,Tomorrow I'll complain some more.
-AMB_NIGHT_1,"Já é tarde, vou pra casa.","It's late, I'm heading home."
-AMB_FISH_1,Shhh... você vai espantar os peixes.,Shhh... you'll scare the fish.
-AMB_FISH_2,"Hoje sai um peixão, eu sinto.","Today I'll catch a big one, I can feel it."
-AMB_FISH_3,Três horas e nem uma beliscada.,Three hours and not a single nibble.
-AMB_PET_DOG_1,Quem é um bom garoto? É você!,Who's a good boy? You are!
-AMB_PET_DOG_2,"Calma, calma! Não precisa lamber a mão toda.","Easy, easy! No need to lick my whole hand."
-AMB_PET_DOG_3,Esse rabo vai sair voando de tanto abanar.,That tail's going to fly off from all the wagging.
-AMB_PET_CAT_1,Ronrona feito chaleira.,Purring like a kettle.
-AMB_PET_CAT_2,Ele deixou! Isso é quase uma honra.,He allowed it! That's almost an honor.
-AMB_PET_CAT_3,Atrás da orelha é o ponto certo.,Behind the ear is the sweet spot.
-AMB_PET_COW_1,Ela parece gostar de você... ou do seu cheiro de pão.,She seems to like you... or your bread smell.
-AMB_PET_COW_2,Muuu pra você também.,Moo to you too.
-AMB_PET_COW_3,"Vaca calma, vila feliz.","Calm cow, happy village."
-HUD_PET,Acariciar,Pet

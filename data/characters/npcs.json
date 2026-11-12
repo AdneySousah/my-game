@@ -160,6 +160,38 @@
       "color": "#2f6b3a",
       "voice": 0.95,
       "portrait": "ui_retrato_gorvan"
+    },
+    "zahir": {
+      "name": "NPC_ZAHIR",
+      "service": "shop",
+      "color": "#9b5de5",
+      "voice": 0.95,
+      "portrait": "ui_retrato_zahir",
+      "talk": [
+        {
+          "dialogue": "zahir_idle"
+        }
+      ],
+      "barks": [
+        "BARK_ZAHIR_1"
+      ],
+      "model": "npc_zahir"
+    },
+    "nadira": {
+      "name": "NPC_NADIRA",
+      "service": "smith",
+      "color": "#2ec4b6",
+      "voice": 1.1,
+      "portrait": "ui_retrato_nadira",
+      "talk": [
+        {
+          "dialogue": "nadira_idle"
+        }
+      ],
+      "barks": [
+        "BARK_NADIRA_1"
+      ],
+      "model": "npc_nadira"
     }
   }
 }

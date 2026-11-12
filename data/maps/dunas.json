@@ -1,0 +1,183 @@
+{
+  "_comment": "Dunas de Ossos (Ato 2, níveis 18-22): deserto aberto entre a Estepe de Pedra (norte) e Qaressa (sul). Costelas gigantes enterradas, rochas esculpidas pelo vento, homens-lagarto e saqueadores do deserto.",
+  "id": "dunas",
+  "name": "MAP_DUNAS",
+  "size": [110, 110],
+  "seed": 101,
+  "ground": "#e3b56f",
+  "grass": {"count": 300, "root": "#b99a4f", "tip": "#e6d48e"},
+  "sky": "#a8d8f0",
+  "ambient": 0.62,
+  "sun": 1.35,
+  "sun_color": "#fff2d0",
+  "patches": {"color": "#efc88a", "count": 160},
+  "spawns": {"from_estepe": [0, -49, 180], "from_qaressa": [0, 49, 0]},
+  "exits": [
+    {
+      "to": "estepe",
+      "spawn": "from_dunas",
+      "pos": [0, -55],
+      "size": [10, 2],
+      "label": "MAP_ESTEPE",
+      "model": "prp_portal",
+      "model_pos": [0, -56.5]
+    },
+    {
+      "to": "qaressa",
+      "spawn": "from_dunas",
+      "pos": [0, 55],
+      "size": [10, 2],
+      "label": "MAP_QARESSA",
+      "model": "prp_portal",
+      "model_pos": [0, 56.5]
+    }
+  ],
+  "chests": [
+    {
+      "id": "dunas_bau_1",
+      "pos": [-34, -10],
+      "yaw": 70,
+      "gold": 520,
+      "items": {"pot_vida_m": 3, "pot_folego_m": 3, "gema_topazio_1": 2}
+    },
+    {
+      "id": "dunas_bau_2",
+      "pos": [36, 24],
+      "yaw": -110,
+      "gold": 640,
+      "items": {"pot_vida_g": 2, "trevo": 1, "eq_cinto_raro": 1}
+    }
+  ],
+  "rest_points": [
+    {"id": "dunas_oasis", "name": "REST_DUNAS_OASIS", "pos": [-8, -32], "kind": "fogueira"},
+    {"id": "dunas_costelas", "name": "REST_DUNAS_COSTELAS", "pos": [8, 22], "kind": "fogueira"}
+  ],
+  "paths": [
+    {
+      "points": [[0, -55], [0, -40], [-10, -24], [-6, -6], [10, 6], [12, 22], [2, 40], [0, 55]],
+      "width": 3.4,
+      "color": "#d6a865"
+    }
+  ],
+  "props": [
+    {"id": "prp_ossos_gigantes", "pos": [20, -14], "rot": 30, "scale": 1.0},
+    {"id": "prp_ossos_gigantes", "pos": [-24, 18], "rot": -60, "scale": 1.0},
+    {"id": "prp_ossos_gigantes", "pos": [28, 36], "rot": 110, "scale": 0.8},
+    {"id": "prp_tenda", "pos": [16, 4], "rot": 200},
+    {"id": "prp_tenda", "pos": [22, 8], "rot": 240},
+    {"id": "prp_carroca_quebrada", "pos": [-12, -8], "rot": 40},
+    {"id": "prp_jarro", "pos": [-10, -10.5]},
+    {"id": "prp_placa_estrada", "pos": [4, -50], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [4, 50], "rot": 190},
+    {"id": "prp_palmeira", "pos": [-12, -34]},
+    {"id": "prp_palmeira", "pos": [-4, -36], "rot": 120}
+  ],
+  "rivers": [
+    {
+      "points": [[-11, -29], [-6, -28]],
+      "width": 4,
+      "bank_ids": ["prp_junco", "prp_palmeira"],
+      "bank_spacing": 2.5
+    }
+  ],
+  "lines": [
+    {
+      "ids": ["prp_rocha_duna", "prp_arenito", "prp_arenito"],
+      "spacing": 3.4,
+      "scale": [1.4, 2.2],
+      "jitter": 0.6,
+      "points": [[-52, -52], [-52, 52]],
+      "seed": 31,
+      "solid": true
+    },
+    {
+      "ids": ["prp_rocha_duna", "prp_arenito", "prp_arenito"],
+      "spacing": 3.4,
+      "scale": [1.4, 2.2],
+      "jitter": 0.6,
+      "points": [[52, -52], [52, 52]],
+      "seed": 32,
+      "solid": true
+    },
+    {
+      "ids": ["prp_arenito", "prp_rocha_duna"],
+      "spacing": 3.0,
+      "scale": [1.4, 2.0],
+      "jitter": 0.5,
+      "points": [[-50, -53], [-6, -53]],
+      "seed": 33,
+      "solid": true
+    },
+    {
+      "ids": ["prp_arenito", "prp_rocha_duna"],
+      "spacing": 3.0,
+      "scale": [1.4, 2.0],
+      "jitter": 0.5,
+      "points": [[6, -53], [50, -53]],
+      "seed": 34,
+      "solid": true
+    },
+    {
+      "ids": ["prp_arenito", "prp_rocha_duna"],
+      "spacing": 3.0,
+      "scale": [1.4, 2.0],
+      "jitter": 0.5,
+      "points": [[-50, 53], [-6, 53]],
+      "seed": 35,
+      "solid": true
+    },
+    {
+      "ids": ["prp_arenito", "prp_rocha_duna"],
+      "spacing": 3.0,
+      "scale": [1.4, 2.0],
+      "jitter": 0.5,
+      "points": [[6, 53], [50, 53]],
+      "seed": 36,
+      "solid": true
+    }
+  ],
+  "scatter": [
+    {
+      "ids": ["prp_rocha_duna", "prp_arenito", "prp_cacto", "prp_cacto"],
+      "count": 55,
+      "rect": [-48, -50, 48, 50],
+      "spacing": 7,
+      "seed": 102
+    },
+    {
+      "ids": ["prp_arenito_pequeno", "prp_capim_seco", "prp_arbusto_seco"],
+      "count": 60,
+      "rect": [-48, -50, 48, 50],
+      "spacing": 3,
+      "seed": 103
+    }
+  ],
+  "enemy_zones": [
+    {
+      "pos": [-6, -16],
+      "radius": 10,
+      "max": 4,
+      "types": {"bandido_deserto": 3, "arqueiro": 1},
+      "level": [18, 19],
+      "respawn": 25
+    },
+    {
+      "pos": [18, 6],
+      "radius": 10,
+      "max": 5,
+      "types": {"bandido_deserto": 2, "homem_lagarto": 2},
+      "level": [19, 20],
+      "respawn": 25
+    },
+    {"pos": [-22, 22], "radius": 9, "max": 4, "types": {"homem_lagarto": 3}, "level": [20, 21], "respawn": 25},
+    {
+      "pos": [10, 36],
+      "radius": 9,
+      "max": 4,
+      "types": {"homem_lagarto": 2, "bandido_deserto": 2},
+      "level": [21, 22],
+      "respawn": 25
+    }
+  ],
+  "ambience": {"flocks": [[-30, -36, 3]]}
+}

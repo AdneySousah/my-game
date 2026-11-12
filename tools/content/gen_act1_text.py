@@ -318,6 +318,38 @@ DIALOGUES = {
     "bento_idle_hrimvald": [
         ("bento", "Sopa de raiz, sopa de casca, sopa de sola de bota... aqui a gente inventa. O importante é estar quente.", "Root soup, bark soup, boot-sole soup... here we improvise. What matters is that it's hot."),
     ],
+    # --- Ato 3, missão 11: A mina debaixo da montanha ---
+    "main_11_brunhild": [
+        ("brunhild", "Quer chegar no Brannoc? O castelo dele fica no alto dos Picos Uivantes. A ponte foi derrubada há anos.", "Want to reach Brannoc? His castle sits high on the Howling Peaks. The bridge was knocked down years ago."),
+        ("brunhild", "Mas meu avô cavava na Mina de Gelo, debaixo da montanha. Dizem que os túneis vão até os porões do castelo.", "But my grandfather dug in the Ice Mine, under the mountain. They say the tunnels reach the castle cellars."),
+        ("lio", "Uma mina esquecida, congelada e provavelmente cheia de monstros. Meu tipo de atalho.", "A forgotten, frozen mine, probably full of monsters. My kind of shortcut."),
+        ("brunhild", "A entrada fica no fim da crista, ao norte da cidade. Volte inteiro, ouviu? Eu acabei de afiar essa espada.", "The entrance is at the end of the ridge, north of town. Come back in one piece, you hear? I just sharpened that sword."),
+    ],
+    "main_11_peaks": [
+        ("lio", "Esse vento parece que grita. Agora entendi o nome: Picos Uivantes.", "This wind sounds like it's screaming. Now I get the name: the Howling Peaks."),
+        ("lio", "A entrada da mina deve estar depois daquela crista. E tem alguém parado lá em cima...", "The mine entrance must be past that ridge. And someone is standing up there..."),
+    ],
+    "severin2_intro": [
+        ("severin", "Eu sabia que você viria por aqui. Garotos teimosos sempre escolhem o caminho mais difícil.", "I knew you'd come this way. Stubborn boys always pick the hardest path."),
+        ("lio", "Severin. Veio me mandar de volta pra casa de novo?", "Severin. Here to send me home again?"),
+        ("severin", "O Brannoc é duro, mas mantém Hrimvald de pé. Sem ordem, aquele povo se mata por um pedaço de lenha.", "Brannoc is harsh, but he keeps Hrimvald standing. Without order, those people would kill each other over a log."),
+        ("lio", "Eles estão morrendo de frio olhando pra uma jaula cheia de lenha. Isso é ordem pra você?", "They're freezing to death staring at a cage full of firewood. Is that order to you?"),
+        ("severin", "...Levante a espada. Desta vez eu não vou segurar.", "...Raise your sword. This time I won't hold back."),
+    ],
+    "severin2_duel_end": [
+        ("severin", "Hah... hah... Você ficou mais forte. Muito mais forte.", "Hah... hah... You've grown stronger. Much stronger."),
+        ("lio", "E você ficou mais lento. Ou está pensando demais no que eu disse?", "And you've gotten slower. Or are you thinking too much about what I said?"),
+        ("severin", "Empate. Por hoje. Não confunda isso com eu concordar com você.", "A draw. For today. Don't mistake that for me agreeing with you."),
+        ("severin", "Vá para a mina, se quiser. O que está lá embaixo não é problema meu.", "Go to the mine, if you want. Whatever is down there isn't my problem."),
+    ],
+    "main_11_bento": [
+        ("bento", "Lio! Você voltou! E coberto de gelo... senta aqui, a sopa de casca de pinheiro está quase boa.", "Lio! You're back! And covered in ice... sit here, the pine-bark soup is almost good."),
+        ("lio", "Atravessei a mina inteira. No fundo tinha um gigante de gelo guardando um túnel que sobe para o castelo.", "I crossed the whole mine. At the bottom there was an ice giant guarding a tunnel that goes up to the castle."),
+        ("lio", "E o Severin de novo. Desta vez ninguém caiu. Acho que ele está começando a duvidar dos Arautos.", "And Severin again. This time nobody fell. I think he's starting to doubt the Heralds."),
+        ("bento", "Então o castelo está logo ali. Lio... quando você for, eu vou junto. Não discute.", "Then the castle is right there. Lio... when you go, I'm going with you. Don't argue."),
+        ("lio", "Bento, lá vai ser perigoso de verdade.", "Bento, it's going to be really dangerous there."),
+        ("bento", "Por isso mesmo. Alguém tem que garantir que você coma antes de salvar o mundo.", "That's exactly why. Someone has to make sure you eat before saving the world."),
+    ],
     # --- Secundária: Os móveis do Osk (Pinheiral, Osk) ---
     "side_moveis_offer": [
         ("osk", "Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.", "Lad... may I ask one more thing? All that's left to burn is my front door."),
@@ -432,6 +464,13 @@ TEXTS = {
     "QUEST_MAIN_10": ("Rumo ao frio", "Into the Cold"),
     "QUEST_ACT3_SOON": ("Hrimvald precisa de você: os Picos Uivantes e a Mina de Gelo chegam na próxima versão", "Hrimvald needs you: the Howling Peaks and the Ice Mine arrive in the next version"),
     "QUEST_SIDE_MOVEIS": ("Os móveis do Osk", "Osk's Furniture"),
+    "QUEST_MAIN_11": ("A mina debaixo da montanha", "The Mine Beneath the Mountain"),
+    "QUEST_ACT3_SOON2": ("O túnel para o Castelo Ermo está aberto: o Brannoc chega na próxima versão", "The tunnel to the Lonely Castle is open: Brannoc arrives in the next version"),
+    "OBJ_TALK_BRUNHILD_CASTLE": ("Pergunte à Brunhild como chegar ao castelo", "Ask Brunhild how to reach the castle"),
+    "OBJ_REACH_PICOS": ("Suba aos Picos Uivantes, ao norte de Hrimvald", "Climb the Howling Peaks, north of Hrimvald"),
+    "OBJ_DUEL_SEVERIN_2": ("Enfrente o Severin na crista", "Face Severin on the ridge"),
+    "OBJ_KILL_ICE_GUARDIAN": ("Derrote o Guardião de Gelo no fundo da Mina de Gelo", "Defeat the Ice Guardian deep in the Ice Mine"),
+    "OBJ_RETURN_BENTO_HRIMVALD": ("Volte para o Bento em Hrimvald", "Go back to Bento in Hrimvald"),
     "QUEST_SIDE_CARVAO": ("Carvão roubado", "Stolen Coal"),
     "OBJ_TALK_NADIRA_NORTH": ("Fale com a Nadira sobre o norte", "Talk to Nadira about the north"),
     "OBJ_REACH_HRIMVALD": ("Chegue a Hrimvald: Dunas (oeste) → Deserto Rochoso → Planalto Frio → Pinheiral", "Reach Hrimvald: Dunes (west) → Rocky Desert → Cold Highlands → Pine Woods"),

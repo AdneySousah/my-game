@@ -582,8 +582,29 @@ func _north_test() -> void:
 		ids[str(n.get("npc_id"))] = true
 	check(ids.has("osk") and ids.has("brunhild") and ids.has("bento"), "Osk, Brunhild and Bento are in Hrimvald (got %s)" % [ids.keys()])
 	check(str(Data.npc("brunhild").get("service", "")) == "smith", "Brunhild is the Hrimvald smith")
-	for m: String in ["deserto_rochoso", "planalto", "pinheiral", "hrimvald"]:
+	for m: String in ["deserto_rochoso", "planalto", "pinheiral", "hrimvald", "picos", "mina_gelo"]:
 		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
+	# 6.3b: Severin's second duel on the Howling Peaks and the Ice Guardian in the mine.
+	main.load_map("picos", "from_hrimvald")
+	await _wait_map(main, "picos")
+	await _frames(6)
+	var sev: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "severin_2":
+			sev = n as Enemy
+	check(sev != null, "Severin waits on the Howling Peaks")
+	if sev:
+		sev.take_damage(100000, false)
+		check(not sev.is_dead() and sev.hp_ratio() >= 0.499, "the second duel cannot be won outright (hp %.2f)" % sev.hp_ratio())
+	main.load_map("mina_gelo", "from_picos")
+	await _wait_map(main, "mina_gelo")
+	await _frames(6)
+	var guard: bool = false
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "guardiao_gelo":
+			guard = true
+	check(guard, "the Ice Guardian waits deep in the ice mine")
+	get_tree().paused = false
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"

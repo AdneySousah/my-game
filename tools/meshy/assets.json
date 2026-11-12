@@ -4780,6 +4780,102 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "prp_cristal_gelo",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cristal de gelo",
+      "file": "assets/props/prp_cristal_gelo/prp_cristal_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1ba-aa72-74ab-af5a-11b37d983ca3",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1bb-23a3-733d-8e92-e9aa8ba18337",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_rocha_gelo",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Pico de rocha gelada",
+      "file": "assets/environment/env_rocha_gelo/env_rocha_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1ba-ab8e-73d7-a110-3628aaab4d22",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1bb-2827-7328-8ff9-5c86f91d93cf",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_entrada_mina_gelo",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Entrada da Mina de Gelo",
+      "file": "assets/environment/env_entrada_mina_gelo/env_entrada_mina_gelo.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d1ba-ac68-71a3-80a8-3cd30a6be818",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d1bb-2b85-703b-80b6-dff698601629",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato3b",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Carregamento: Picos e Mina de Gelo",
+      "file": "assets/ui/ui_loading_ato3b/ui_loading_ato3b.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1ba-ad5e-7004-9c7b-936a32d51b5e",
+          "date": "2026-11-12"
+        },
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": "01a1d1ba-ae40-768a-8687-ae4f2cf76257",
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

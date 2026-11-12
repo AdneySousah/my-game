@@ -24,6 +24,9 @@ func _ready() -> void:
 		# Starts at the arena gate of the Sunken Tower.
 		Main.start_map = "torre"
 		Main.start_spawn = "pos:0:-17:180"
+	elif boss_id == "guardiao_gelo":
+		Main.start_map = "mina_gelo"
+		Main.start_spawn = "pos:0:-22:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	if boss_id == "golem":
 		Session.flags.erase("golem_defeated")
@@ -39,7 +42,7 @@ func _ready() -> void:
 		player.stats.spend_point("str" if n % 5 < 3 else "vit")
 		n += 1
 	player.rest()
-	if potions and boss_id == "sahra":
+	if potions and boss_id in ["sahra", "guardiao_gelo"]:
 		Session.add_item("pot_vida_m", 6)
 		Session.add_item("pot_vida_g", 3)
 		Session.add_item("pot_folego_m", 3)
@@ -55,6 +58,9 @@ func _ready() -> void:
 		if boss_id == "gorvan":
 			pieces[0] = "eq_espada_raro"
 			pieces[2] = "eq_peitoral_raro"
+		elif boss_id == "guardiao_gelo":
+			pieces = ["eq_espada_epico", "eq_elmo_epico", "eq_peitoral_epico", "eq_luvas_epico",
+				"eq_calca_epico", "eq_botas_epico", "eq_cinto_epico", "eq_pulseira_epico"]
 		elif boss_id == "sahra":
 			# By the Sunken Tower: rare set from the road quests, epic sword, chest and gloves.
 			pieces = ["eq_espada_epico", "eq_elmo_raro", "eq_peitoral_epico", "eq_luvas_epico",

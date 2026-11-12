@@ -1,0 +1,101 @@
+{
+  "_comment": "Mina de Gelo Esquecida (Fase 6.3b, níveis 39-42): mina antiga debaixo dos Picos, toda congelada. Leva por baixo da montanha até o Castelo Ermo do Brannoc (Fase 6.3c). No fundo, o Guardião de Gelo.",
+  "id": "mina_gelo",
+  "name": "MAP_MINA_GELO",
+  "size": [64, 90],
+  "seed": 181,
+  "biome": {"snow": 0.8},
+  "ground": "#5c6c80",
+  "indoor": true,
+  "sky": "#0b1018",
+  "ambient": 0.5,
+  "ambient_color": "#8aa6c8",
+  "sun": 0.3,
+  "sun_color": "#a8c8ff",
+  "patches": {"color": "#7f93aa", "count": 80},
+  "spawns": {"from_picos": [0, 34, 0], "from_castelo": [0, -37, 180]},
+  "exits": [
+    {"to": "picos", "spawn": "from_mina_gelo", "pos": [0, 40], "size": [6, 2], "label": "MAP_PICOS"},
+    {"to": "castelo", "spawn": "from_mina_gelo", "pos": [0, -43.5], "size": [7, 2], "label": "MAP_CASTELO", "model": "env_viga_mina", "model_pos": [0, -41.6], "if_flag": "castelo_open", "locked_label": "MAP_ROAD_CLOSED"}
+  ],
+  "rest_points": [
+    {"id": "mina_gelo_entrada", "name": "REST_MINA_GELO_ENTRADA", "pos": [6, 28], "kind": "fogueira"},
+    {"id": "mina_gelo_fundo", "name": "REST_MINA_GELO_FUNDO", "pos": [-6, -8], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 40], [0, -36]], "width": 2.2, "color": "#6d7f94"}
+  ],
+  "walls": [
+    {"from": [-12, 38], "to": [-12, 18]},
+    {"from": [12, 38], "to": [12, 18]},
+    {"from": [-12, 18], "to": [-4, 18]},
+    {"from": [4, 18], "to": [12, 18]},
+    {"from": [-4, 18], "to": [-4, 10]},
+    {"from": [4, 18], "to": [4, 10]},
+    {"from": [-18, 10], "to": [-4, 10]},
+    {"from": [4, 10], "to": [18, 10]},
+    {"from": [-18, 10], "to": [-18, -14]},
+    {"from": [18, 10], "to": [18, -14]},
+    {"from": [-18, -14], "to": [-4, -14]},
+    {"from": [4, -14], "to": [18, -14]},
+    {"from": [-4, -14], "to": [-4, -20]},
+    {"from": [4, -14], "to": [4, -20]},
+    {"from": [-20, -20], "to": [-4, -20]},
+    {"from": [4, -20], "to": [20, -20]},
+    {"from": [-20, -20], "to": [-20, -42]},
+    {"from": [20, -20], "to": [20, -42]},
+    {"from": [-20, -42], "to": [-3.5, -42]},
+    {"from": [3.5, -42], "to": [20, -42]}
+  ],
+  "props": [
+    {"id": "env_entrada_mina_gelo", "pos": [0, 43], "rot": 180},
+    {"id": "prp_lampiao_mina", "pos": [-3, 33]},
+    {"id": "prp_lampiao_mina", "pos": [3.4, 22]},
+    {"id": "prp_trilho", "pos": [-7, 30], "rot": 90},
+    {"id": "prp_trilho", "pos": [-7, 26], "rot": 90},
+    {"id": "prp_trilho", "pos": [-7, 22], "rot": 90},
+    {"id": "prp_carrinho_mina", "pos": [-7, 24], "rot": 90},
+    {"id": "prp_barril", "pos": [9, 34]},
+    {"id": "prp_barril", "pos": [9.6, 32.8]},
+    {"id": "prp_caixa", "pos": [-9.5, 35]},
+    {"id": "env_viga_mina", "pos": [0, 16]},
+    {"id": "env_viga_mina", "pos": [0, 12]},
+    {"id": "prp_lampiao_mina", "pos": [-14, 6]},
+    {"id": "prp_lampiao_mina", "pos": [14, -9]},
+    {"id": "prp_lampiao_mina", "pos": [-2.5, -11]},
+    {"id": "prp_cristal_gelo", "pos": [-14, -4]},
+    {"id": "prp_cristal_gelo", "pos": [13, 4]},
+    {"id": "prp_cristal_gelo", "pos": [10, -11]},
+    {"id": "prp_cristal_gelo", "pos": [-15, 1]},
+    {"id": "prp_cristal_gelo", "pos": [15, 7]},
+    {"id": "prp_cristal_gelo", "pos": [15, -2]},
+    {"id": "prp_trilho", "pos": [10, 2], "rot": 0},
+    {"id": "prp_carrinho_mina", "pos": [8, 2], "rot": 0},
+    {"id": "prp_pedrinhas", "pos": [-10, -2]},
+    {"id": "prp_pedrinhas", "pos": [6, 6]},
+    {"id": "env_viga_mina", "pos": [0, -16]},
+    {"id": "env_portao_mina", "pos": [-8.5, -18.2], "rot": 0},
+    {"id": "prp_lampiao_mina", "pos": [-16, -24]},
+    {"id": "prp_lampiao_mina", "pos": [16, -24]},
+    {"id": "prp_lampiao_mina", "pos": [-16, -38]},
+    {"id": "prp_lampiao_mina", "pos": [16, -38]},
+    {"id": "prp_cristal_gelo", "pos": [-17, -31]},
+    {"id": "prp_cristal_gelo", "pos": [17, -31]},
+    {"id": "prp_cristal_gelo", "pos": [-6, -39]},
+    {"id": "prp_cristal_gelo", "pos": [6, -39]},
+    {"id": "prp_cristal_gelo", "pos": [-12, -36]},
+    {"id": "prp_cristal_gelo", "pos": [12, -36]}
+  ],
+  "enemy_zones": [
+    {"pos": [0, 26], "radius": 5, "max": 3, "types": {"morto_gelo": 2, "orc_neve": 1}, "level": [39, 40], "respawn": 30},
+    {"pos": [0, -2], "radius": 9, "max": 5, "types": {"morto_gelo": 2, "golem_gelo": 1, "orc_neve": 1}, "level": [40, 41], "respawn": 30},
+    {"pos": [0, -26], "radius": 5, "max": 2, "types": {"morto_gelo": 2}, "level": [41, 42], "respawn": 40}
+  ],
+  "bosses": [
+    {"id": "guardiao_gelo", "pos": [0, -35], "level": 42, "yaw": 180, "unless_flag": "guardiao_gelo_defeated", "flag_on_death": "guardiao_gelo_defeated"}
+  ],
+  "chests": [
+    {"id": "mina_gelo_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 1900, "items": {"pot_vida_g": 4, "pot_forca": 1, "eq_pulseira_epico": 1, "mat_lingote_aco": 6}},
+    {"id": "mina_gelo_bau_2", "pos": [16, -34], "yaw": -90, "gold": 2100, "items": {"trevo_real": 1, "mat_cristal_gelo": 4, "eq_espada_epico": 1, "gema_ametista_3": 1}}
+  ]
+}

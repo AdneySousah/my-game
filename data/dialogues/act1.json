@@ -933,6 +933,110 @@
         ]
       ]
     },
+    "main_11_brunhild": {
+      "lines": [
+        [
+          "brunhild",
+          "DLG_MAIN_11_BRUNHILD_1"
+        ],
+        [
+          "brunhild",
+          "DLG_MAIN_11_BRUNHILD_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_11_BRUNHILD_3"
+        ],
+        [
+          "brunhild",
+          "DLG_MAIN_11_BRUNHILD_4"
+        ]
+      ]
+    },
+    "main_11_peaks": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_11_PEAKS_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_11_PEAKS_2"
+        ]
+      ]
+    },
+    "severin2_intro": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN2_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN2_INTRO_2"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN2_INTRO_3"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN2_INTRO_4"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN2_INTRO_5"
+        ]
+      ]
+    },
+    "severin2_duel_end": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN2_DUEL_END_1"
+        ],
+        [
+          "lio",
+          "DLG_SEVERIN2_DUEL_END_2"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN2_DUEL_END_3"
+        ],
+        [
+          "severin",
+          "DLG_SEVERIN2_DUEL_END_4"
+        ]
+      ]
+    },
+    "main_11_bento": {
+      "lines": [
+        [
+          "bento",
+          "DLG_MAIN_11_BENTO_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_11_BENTO_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_11_BENTO_3"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_11_BENTO_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_11_BENTO_5"
+        ],
+        [
+          "bento",
+          "DLG_MAIN_11_BENTO_6"
+        ]
+      ]
+    },
     "side_moveis_offer": {
       "lines": [
         [

@@ -409,6 +409,20 @@ ATTRS_RAISE,+1 em %s,+1 %s
 ATTRS_NO_POINTS,Sem pontos livres,No free points
 EQ_LOOK,Visual: %s (toque para trocar),Look: %s (tap to change)
 EQ_LOOK_DEFAULT,Padrão,Default
+MAP_DESERTO_ROCHOSO,Deserto Rochoso,Rocky Desert
+MAP_PLANALTO,Planalto Frio,Cold Highlands
+MAP_PINHEIRAL,Pinheiral Nevado,Snowy Pine Woods
+MAP_HRIMVALD,Hrimvald,Hrimvald
+REST_DESERTO_PILAR,Pilar Vermelho,Red Pillar
+REST_DESERTO_CUME,Cume Seco,Dry Ridge
+REST_PLANALTO_MARCO,Marco de Pedra,Stone Cairn
+REST_PLANALTO_VENTO,Passo do Vento,Wind Pass
+REST_PINHEIRAL_TRILHA,Trilha dos Pinheiros,Pine Trail
+REST_PINHEIRAL_RIACHO,Riacho Congelado,Frozen Brook
+REST_HRIMVALD_PEDRA,Pedra de Passagem de Hrimvald,Hrimvald Waystone
+ENEMY_ORC_NEVE,Orc da neve,Snow orc
+ENEMY_GOLEM_GELO,Golem de gelo,Ice golem
+ENEMY_MORTO_GELO,Morto congelado,Frozen dead
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -448,6 +462,13 @@ QUEST_MAIN_09,A Arauta da Sede,The Herald of Thirst
 QUEST_MAIN_10,Rumo ao frio,Into the Cold
 QUEST_ACT3_SOON,Hrimvald precisa de você: os Picos Uivantes e a Mina de Gelo chegam na próxima versão,Hrimvald needs you: the Howling Peaks and the Ice Mine arrive in the next version
 QUEST_SIDE_MOVEIS,Os móveis do Osk,Osk's Furniture
+QUEST_MAIN_11,A mina debaixo da montanha,The Mine Beneath the Mountain
+QUEST_ACT3_SOON2,O túnel para o Castelo Ermo está aberto: o Brannoc chega na próxima versão,The tunnel to the Lonely Castle is open: Brannoc arrives in the next version
+OBJ_TALK_BRUNHILD_CASTLE,Pergunte à Brunhild como chegar ao castelo,Ask Brunhild how to reach the castle
+OBJ_REACH_PICOS,"Suba aos Picos Uivantes, ao norte de Hrimvald","Climb the Howling Peaks, north of Hrimvald"
+OBJ_DUEL_SEVERIN_2,Enfrente o Severin na crista,Face Severin on the ridge
+OBJ_KILL_ICE_GUARDIAN,Derrote o Guardião de Gelo no fundo da Mina de Gelo,Defeat the Ice Guardian deep in the Ice Mine
+OBJ_RETURN_BENTO_HRIMVALD,Volte para o Bento em Hrimvald,Go back to Bento in Hrimvald
 QUEST_SIDE_CARVAO,Carvão roubado,Stolen Coal
 OBJ_TALK_NADIRA_NORTH,Fale com a Nadira sobre o norte,Talk to Nadira about the north
 OBJ_REACH_HRIMVALD,Chegue a Hrimvald: Dunas (oeste) → Deserto Rochoso → Planalto Frio → Pinheiral,Reach Hrimvald: Dunes (west) → Rocky Desert → Cold Highlands → Pine Woods
@@ -829,6 +850,27 @@ DLG_OSK_IDLE_1,Os netos dormem abraçados no cachorro. É o único cobertor que 
 DLG_OSK_IDLE_AFTER_1,O fogo voltou a uma casa: a minha. Graças a você e àquele seu amigo da sopa.,Fire came back to one house: mine. Thanks to you and that soup friend of yours.
 DLG_BRUNHILD_IDLE_1,Forja sem carvão é só um banquinho de ferro. Mas eu dou meu jeito. Quer melhorar essa espada?,A forge without coal is just an iron stool. But I manage. Want to improve that sword?
 DLG_BENTO_IDLE_HRIMVALD_1,"Sopa de raiz, sopa de casca, sopa de sola de bota... aqui a gente inventa. O importante é estar quente.","Root soup, bark soup, boot-sole soup... here we improvise. What matters is that it's hot."
+DLG_MAIN_11_BRUNHILD_1,Quer chegar no Brannoc? O castelo dele fica no alto dos Picos Uivantes. A ponte foi derrubada há anos.,Want to reach Brannoc? His castle sits high on the Howling Peaks. The bridge was knocked down years ago.
+DLG_MAIN_11_BRUNHILD_2,"Mas meu avô cavava na Mina de Gelo, debaixo da montanha. Dizem que os túneis vão até os porões do castelo.","But my grandfather dug in the Ice Mine, under the mountain. They say the tunnels reach the castle cellars."
+DLG_MAIN_11_BRUNHILD_3,"Uma mina esquecida, congelada e provavelmente cheia de monstros. Meu tipo de atalho.","A forgotten, frozen mine, probably full of monsters. My kind of shortcut."
+DLG_MAIN_11_BRUNHILD_4,"A entrada fica no fim da crista, ao norte da cidade. Volte inteiro, ouviu? Eu acabei de afiar essa espada.","The entrance is at the end of the ridge, north of town. Come back in one piece, you hear? I just sharpened that sword."
+DLG_MAIN_11_PEAKS_1,Esse vento parece que grita. Agora entendi o nome: Picos Uivantes.,This wind sounds like it's screaming. Now I get the name: the Howling Peaks.
+DLG_MAIN_11_PEAKS_2,A entrada da mina deve estar depois daquela crista. E tem alguém parado lá em cima...,The mine entrance must be past that ridge. And someone is standing up there...
+DLG_SEVERIN2_INTRO_1,Eu sabia que você viria por aqui. Garotos teimosos sempre escolhem o caminho mais difícil.,I knew you'd come this way. Stubborn boys always pick the hardest path.
+DLG_SEVERIN2_INTRO_2,Severin. Veio me mandar de volta pra casa de novo?,Severin. Here to send me home again?
+DLG_SEVERIN2_INTRO_3,"O Brannoc é duro, mas mantém Hrimvald de pé. Sem ordem, aquele povo se mata por um pedaço de lenha.","Brannoc is harsh, but he keeps Hrimvald standing. Without order, those people would kill each other over a log."
+DLG_SEVERIN2_INTRO_4,Eles estão morrendo de frio olhando pra uma jaula cheia de lenha. Isso é ordem pra você?,They're freezing to death staring at a cage full of firewood. Is that order to you?
+DLG_SEVERIN2_INTRO_5,...Levante a espada. Desta vez eu não vou segurar.,...Raise your sword. This time I won't hold back.
+DLG_SEVERIN2_DUEL_END_1,Hah... hah... Você ficou mais forte. Muito mais forte.,Hah... hah... You've grown stronger. Much stronger.
+DLG_SEVERIN2_DUEL_END_2,E você ficou mais lento. Ou está pensando demais no que eu disse?,And you've gotten slower. Or are you thinking too much about what I said?
+DLG_SEVERIN2_DUEL_END_3,Empate. Por hoje. Não confunda isso com eu concordar com você.,A draw. For today. Don't mistake that for me agreeing with you.
+DLG_SEVERIN2_DUEL_END_4,"Vá para a mina, se quiser. O que está lá embaixo não é problema meu.","Go to the mine, if you want. Whatever is down there isn't my problem."
+DLG_MAIN_11_BENTO_1,"Lio! Você voltou! E coberto de gelo... senta aqui, a sopa de casca de pinheiro está quase boa.","Lio! You're back! And covered in ice... sit here, the pine-bark soup is almost good."
+DLG_MAIN_11_BENTO_2,Atravessei a mina inteira. No fundo tinha um gigante de gelo guardando um túnel que sobe para o castelo.,I crossed the whole mine. At the bottom there was an ice giant guarding a tunnel that goes up to the castle.
+DLG_MAIN_11_BENTO_3,E o Severin de novo. Desta vez ninguém caiu. Acho que ele está começando a duvidar dos Arautos.,And Severin again. This time nobody fell. I think he's starting to doubt the Heralds.
+DLG_MAIN_11_BENTO_4,"Então o castelo está logo ali. Lio... quando você for, eu vou junto. Não discute.","Then the castle is right there. Lio... when you go, I'm going with you. Don't argue."
+DLG_MAIN_11_BENTO_5,"Bento, lá vai ser perigoso de verdade.","Bento, it's going to be really dangerous there."
+DLG_MAIN_11_BENTO_6,Por isso mesmo. Alguém tem que garantir que você coma antes de salvar o mundo.,That's exactly why. Someone has to make sure you eat before saving the world.
 DLG_SIDE_MOVEIS_OFFER_1,Rapaz... posso pedir mais uma coisa? Sobrou só a porta da casa pra queimar.,Lad... may I ask one more thing? All that's left to burn is my front door.
 DLG_SIDE_MOVEIS_OFFER_2,"Tem galhos secos caídos no pinheiral, debaixo da neve. Quatro feixes e meus netos passam a semana quentinhos.","There are dry branches fallen in the pine woods, under the snow. Four bundles and my grandkids stay warm all week."
 DLG_SIDE_MOVEIS_OFFER_3,Quatro feixes de galho. E a porta continua no lugar. Combinado.,Four bundles of branches. And the door stays where it is. Deal.
@@ -857,21 +899,11 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-MAP_DESERTO_ROCHOSO,Deserto Rochoso,Rocky Desert
-MAP_PLANALTO,Planalto Frio,Cold Highlands
-MAP_PINHEIRAL,Pinheiral Nevado,Snowy Pine Woods
-MAP_HRIMVALD,Hrimvald,Hrimvald
-REST_DESERTO_PILAR,Pilar Vermelho,Red Pillar
-REST_DESERTO_CUME,Cume Seco,Dry Ridge
-REST_PLANALTO_MARCO,Marco de Pedra,Stone Cairn
-REST_PLANALTO_VENTO,Passo do Vento,Wind Pass
-REST_PINHEIRAL_TRILHA,Trilha dos Pinheiros,Pine Trail
-REST_PINHEIRAL_RIACHO,Riacho Congelado,Frozen Brook
-REST_HRIMVALD_PEDRA,Pedra de Passagem de Hrimvald,Hrimvald Waystone
-ENEMY_ORC_NEVE,Orc da neve,Snow orc
-ENEMY_GOLEM_GELO,Golem de gelo,Ice golem
-ENEMY_MORTO_GELO,Morto congelado,Frozen dead
-ITEM_MAT_PELE_NEVE,Pele de orc da neve,Snow orc hide
-ITEM_MAT_CRISTAL_GELO,Cristal de gelo eterno,Everfrost crystal
-NPC_OSK,Velho Osk,Old Osk
-NPC_BRUNHILD,Brunhild,Brunhild
+MAP_PICOS,Picos Uivantes,Howling Peaks
+MAP_MINA_GELO,Mina de Gelo Esquecida,Forgotten Ice Mine
+MAP_CASTELO,Castelo Ermo,Lonely Castle
+REST_PICOS_BASE,Base da Montanha,Mountain Foot
+REST_PICOS_CRISTA,Abrigo da Crista,Ridge Shelter
+REST_MINA_GELO_ENTRADA,Boca da Mina Gelada,Frozen Mine Mouth
+REST_MINA_GELO_FUNDO,Galeria Congelada,Frozen Gallery
+ENEMY_GUARDIAO_GELO,Guardião de Gelo,Ice Guardian

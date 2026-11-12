@@ -112,6 +112,19 @@
       "rewards": { "xp": 9500, "gold": 2400, "items": { "pot_vida_g": 4, "eq_peitoral_epico": 1 } }
     },
     {
+      "id": "main_11", "type": "main", "name": "QUEST_MAIN_11", "auto": true,
+      "requires": ["main_10"], "min_level": 36,
+      "steps": [
+        { "type": "talk", "npc": "brunhild", "dialogue": "main_11_brunhild", "text": "OBJ_TALK_BRUNHILD_CASTLE" },
+        { "type": "reach", "map": "picos", "pos": [0, 30], "radius": 8, "text": "OBJ_REACH_PICOS", "dialogue": "main_11_peaks" },
+        { "type": "kill", "enemy": "severin_2", "count": 1, "map": "picos", "pos": [0, -32], "text": "OBJ_DUEL_SEVERIN_2", "skip_if_flag": "severin_duel_2" },
+        { "type": "kill", "enemy": "guardiao_gelo", "count": 1, "map": "mina_gelo", "pos": [0, -35], "text": "OBJ_KILL_ICE_GUARDIAN", "skip_if_flag": "guardiao_gelo_defeated" },
+        { "type": "talk", "npc": "bento", "dialogue": "main_11_bento", "text": "OBJ_RETURN_BENTO_HRIMVALD" }
+      ],
+      "set_flag": "act3_mine", "end_note": "QUEST_ACT3_SOON2",
+      "rewards": { "xp": 12000, "gold": 3000, "items": { "pot_vida_g": 5, "eq_elmo_epico": 1, "gema_safira_3": 1 } }
+    },
+    {
       "id": "side_moveis", "type": "side", "name": "QUEST_SIDE_MOVEIS", "giver": "osk", "offer": "side_moveis_offer",
       "requires": ["main_10"], "min_level": 32,
       "steps": [

@@ -13,9 +13,10 @@
   "sun": 1.0,
   "sun_color": "#e6eeff",
   "patches": {"color": "#f6f9fb", "count": 90},
-  "spawns": {"start": [0, 26, 0], "from_pinheiral": [0, 30, 0]},
+  "spawns": {"start": [0, 26, 0], "from_pinheiral": [0, 30, 0], "from_picos": [0, -26, 180]},
   "exits": [
-    {"to": "pinheiral", "spawn": "from_hrimvald", "pos": [0, 36], "size": [8, 2], "label": "MAP_PINHEIRAL", "model": "env_portao_cidade", "model_pos": [0, 30], "model_rot": 180}
+    {"to": "pinheiral", "spawn": "from_hrimvald", "pos": [0, 36], "size": [8, 2], "label": "MAP_PINHEIRAL", "model": "env_portao_cidade", "model_pos": [0, 30], "model_rot": 180},
+    {"to": "picos", "spawn": "from_hrimvald", "pos": [0, -34], "size": [8, 2], "label": "MAP_PICOS", "model": "env_portao_cidade", "model_pos": [0, -30], "if_flag": "act3_hrimvald", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "npcs": [
     {"id": "osk", "pos": [-10, 5], "yaw": 50},
@@ -61,7 +62,8 @@
     {"id": "env_muralha", "from": [-30, 32], "to": [-4.5, 32]},
     {"id": "env_muralha", "from": [4.5, 32], "to": [30, 32]},
     {"id": "env_muralha", "from": [30, 30], "to": [30, -28]},
-    {"id": "env_muralha", "from": [28, -30], "to": [-28, -30]},
+    {"id": "env_muralha", "from": [28, -30], "to": [4.5, -30]},
+    {"id": "env_muralha", "from": [-4.5, -30], "to": [-28, -30]},
     {"id": "env_muralha", "from": [-30, -28], "to": [-30, 30]}
   ],
   "scatter": [

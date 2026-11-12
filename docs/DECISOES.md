@@ -298,3 +298,19 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - Secundária **"Os móveis do Osk"**: 4 feixes de galhos no Pinheiral. Dá só ouro e itens, sem XP.
   - Secundária **"Carvão roubado"**: 8 orcs da neve no Planalto, a pedido da Brunhild.
 - **Próximo (6.3b e 6.3c):** Picos Uivantes, Mina de Gelo Esquecida, 2º duelo com o Severin (empate), Castelo Ermo, Brannoc em 2 formas (Gigante de Gelo, com chão que congela), a morte do Bento (ilustrações) e o salto de 2 anos com o Lio mais velho.
+
+## Fase 6.3b: Picos Uivantes, Mina de Gelo e o 2º duelo (12/11/2026)
+- **Picos Uivantes** (37–40): ficam ao norte de Hrimvald. A saída norte da cidade abre com `act3_hrimvald`. São cristas de rocha gelada (peça nova `env_rocha_gelo`) com cristais de gelo que brilham.
+  - O caminho termina numa crista fechada por rochas, onde o Severin espera.
+- **2º duelo com o Severin (empate)**, `severin_2`:
+  - a luta para quando ele chega a 50% de vida ou o herói a 25%;
+  - ele está mais rápido e ganhou um avanço em linha;
+  - na fala final, ele admite o empate e começa a hesitar sobre os Arautos;
+  - a flag `severin_duel_2` abre a entrada da mina.
+- **Mina de Gelo Esquecida** (39–42): masmorra com os mesmos corredores da Mina dos Corvos, congelada.
+  - Tem cristais de gelo, os inimigos do frio e o **Guardião de Gelo** no fundo: o golem de gelo em tamanho de chefe. Ele chama 2 mortos congelados abaixo de 60% de vida.
+  - No `boss_sim` (nível 42, com peças épicas e poções) o robô venceu em 51 s com vida mínima de 53%; depois disso a vida do Guardião subiu de 2.200 para 2.600.
+  - A saída do fundo vai para o Castelo Ermo e fica fechada até a 6.3c (`castelo_open`).
+- **Missão 11 "A mina debaixo da montanha"**: Brunhild → Picos → duelo → Guardião → Bento.
+  - Termina com `act3_mine`.
+  - O Bento decide ir junto ao castelo: é a preparação para a cena do Ato 3.

@@ -1,0 +1,64 @@
+{
+  "_comment": "Picos Uivantes (Fase 6.3b, níveis 37-40): cristas geladas e vento forte ao norte de Hrimvald. O Severin espera na crista, antes da entrada da Mina de Gelo Esquecida (2º duelo: empate).",
+  "id": "picos",
+  "name": "MAP_PICOS",
+  "size": [104, 104],
+  "seed": 171,
+  "biome": {"snow": 1.0},
+  "ground": "#dfe7ee",
+  "grass": {"count": 200, "root": "#a9b8a8", "tip": "#f2f6f8"},
+  "sky": "#9fb0c8",
+  "ambient": 0.6,
+  "sun": 1.05,
+  "sun_color": "#e3ecff",
+  "patches": {"color": "#c9d6e2", "count": 170},
+  "spawns": {"from_hrimvald": [0, 46, 0], "from_mina_gelo": [0, -40, 180]},
+  "exits": [
+    {"to": "hrimvald", "spawn": "from_picos", "pos": [0, 52], "size": [10, 2], "label": "MAP_HRIMVALD", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "mina_gelo", "spawn": "from_picos", "pos": [0, -48], "size": [6, 2], "label": "MAP_MINA_GELO", "model": "env_entrada_mina_gelo", "model_pos": [0, -50], "if_flag": "severin_duel_2", "locked_label": "MAP_ROAD_CLOSED"}
+  ],
+  "chests": [
+    {"id": "picos_bau_1", "pos": [-32, 18], "yaw": 90, "gold": 1700, "items": {"pot_vida_g": 4, "pot_pedra": 1, "gema_safira_3": 1}},
+    {"id": "picos_bau_2", "pos": [32, 2], "yaw": -90, "gold": 1800, "items": {"pot_folego_g": 3, "trevo": 1, "eq_cinto_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "picos_base", "name": "REST_PICOS_BASE", "pos": [-6, 34], "kind": "fogueira"},
+    {"id": "picos_crista", "name": "REST_PICOS_CRISTA", "pos": [8, -8], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-12, 22], [-4, 8], [8, -6], [0, -20], [0, -46]], "width": 3.4, "color": "#c5d0da"}
+  ],
+  "props": [
+    {"id": "prp_cristal_gelo", "pos": [-20, 6], "rot": 20},
+    {"id": "prp_cristal_gelo", "pos": [22, 18], "rot": 140},
+    {"id": "prp_cristal_gelo", "pos": [-10, -34], "rot": 60},
+    {"id": "prp_cristal_gelo", "pos": [12, -38], "rot": 200},
+    {"id": "env_rocha_gelo", "pos": [-30, -30]},
+    {"id": "env_rocha_gelo", "pos": [30, -32], "rot": 90},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10}
+  ],
+  "lines": [
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 1711, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 1712, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[-46, -50], [-5, -50]], "seed": 1713, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.5, "scale": [0.9, 1.3], "jitter": 0.5, "points": [[5, -50], [46, -50]], "seed": 1714, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro"], "spacing": 3.0, "scale": [1.3, 1.9], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 1715, "solid": true},
+    {"ids": ["prp_rochedo", "prp_pinheiro"], "spacing": 3.0, "scale": [1.3, 1.9], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 1716, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.0, "scale": [0.8, 1.1], "jitter": 0.3, "points": [[-46, -20], [-8, -20]], "seed": 1717, "solid": true},
+    {"ids": ["env_rocha_gelo", "prp_rochedo"], "spacing": 4.0, "scale": [0.8, 1.1], "jitter": 0.3, "points": [[8, -20], [46, -20]], "seed": 1718, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_rochedo", "prp_pinheiro", "prp_pedra", "prp_cristal_gelo"], "count": 50, "rect": [-45, -18, 45, 46], "spacing": 6, "seed": 172},
+    {"ids": ["prp_pedrinhas", "prp_toco", "prp_pedra"], "count": 40, "rect": [-45, -18, 45, 46], "spacing": 4, "seed": 173},
+    {"ids": ["prp_pedrinhas", "prp_pedra"], "count": 14, "rect": [-40, -46, 40, -24], "spacing": 4, "seed": 174}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 24], "radius": 11, "max": 5, "types": {"morto_gelo": 2, "orc_neve": 2}, "level": [37, 38], "respawn": 25},
+    {"pos": [22, 10], "radius": 11, "max": 5, "types": {"golem_gelo": 2, "orc_neve": 2}, "level": [38, 39], "respawn": 25},
+    {"pos": [-20, -4], "radius": 10, "max": 5, "types": {"morto_gelo": 3, "golem_gelo": 1}, "level": [39, 40], "respawn": 25}
+  ],
+  "arena": {"gate": [[-8, -20], [8, -20]]},
+  "bosses": [
+    {"id": "severin_2", "pos": [0, -32], "level": 40, "yaw": 0, "unless_flag": "severin_duel_2", "intro": "severin2_intro"}
+  ]
+}

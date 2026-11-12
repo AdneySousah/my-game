@@ -249,6 +249,9 @@
     "env_casa_nordica": {"scene": "res://assets/environment/env_casa_nordica/env_casa_nordica.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}},
     "env_torre_madeira": {"scene": "res://assets/environment/env_torre_madeira/env_torre_madeira.glb", "scale": 6.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.4}},
     "prp_lenha_trancada": {"scene": "res://assets/props/prp_lenha_trancada/prp_lenha_trancada.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "box"}},
-    "prp_braseiro_frio": {"scene": "res://assets/props/prp_braseiro_frio/prp_braseiro_frio.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}}
+    "prp_braseiro_frio": {"scene": "res://assets/props/prp_braseiro_frio/prp_braseiro_frio.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}},
+    "prp_cristal_gelo": {"scene": "res://assets/props/prp_cristal_gelo/prp_cristal_gelo.glb", "scale": 1.8, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#7fe0ff", "energy": 1.2, "range": 5.0, "y": 1.0}},
+    "env_rocha_gelo": {"scene": "res://assets/environment/env_rocha_gelo/env_rocha_gelo.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.8}},
+    "env_entrada_mina_gelo": {"scene": "res://assets/environment/env_entrada_mina_gelo/env_entrada_mina_gelo.glb", "scale": 5.0, "center_origin": true, "collision": null}
   }
 }

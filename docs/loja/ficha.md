@@ -5,7 +5,16 @@ Onde colar: Play Console → app → **Crescer usuários → Presença na loja �
 Imagens (nesta pasta):
 - Ícone do app (512×512): `icone_512.png`
 - Imagem de destaque (1024×500): `destaque_pt.png` (português) e `destaque_en.png` (inglês)
-- Capturas de tela do telefone (1920×1080, use as 6 nesta ordem): `foto_1.png` … `foto_6.png`
+- Capturas de tela do telefone (1920×1080, use as 8 nesta ordem): `foto_1.png` … `foto_8.png`. Refeitas em 13/11 com o jogo maior:
+  1. o Anjo Dourado voando em Pradoluz;
+  2. luta com skill na beira do rio da floresta;
+  3. a Sahra na forma de areia, no alto da torre;
+  4. o Vaelor Corrompido na Cidadela Celeste;
+  5. um Procurado nos campos;
+  6. o mapa-múndi da viagem;
+  7. o oásis de Qaressa;
+  8. a lista de visuais.
+  No Play Console, apague as 6 fotos antigas e envie as 8 novas.
 
 ---
 

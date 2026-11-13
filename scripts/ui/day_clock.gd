@@ -4,20 +4,20 @@ extends Control
 ## the bottom = midnight), the sky colour of the moment inside and a hand pointing at the
 ## time. The hour is written underneath.
 
-const SIZE: float = 74.0
+const SIZE: float = 52.0
 
 var _label: Label
 
 
 func _ready() -> void:
-	custom_minimum_size = Vector2(SIZE, SIZE + 22.0)
+	custom_minimum_size = Vector2(SIZE, SIZE + 16.0)
 	size = custom_minimum_size
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_label = Label.new()
 	_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	_label.position = Vector2(0, SIZE - 4.0)
-	_label.size = Vector2(SIZE, 24)
-	_label.add_theme_font_size_override("font_size", 17)
+	_label.position = Vector2(-8.0, SIZE - 5.0)
+	_label.size = Vector2(SIZE + 16.0, 20)
+	_label.add_theme_font_size_override("font_size", 14)
 	_label.add_theme_color_override("font_color", Color("#fff4d6"))
 	_label.add_theme_color_override("font_outline_color", Color(0.1, 0.07, 0.05))
 	_label.add_theme_constant_override("outline_size", 5)

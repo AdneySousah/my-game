@@ -1,5 +1,6 @@
 {
   "_comment": "Cenas ilustradas dentro do jogo (StoryOverlay). Painéis em assets/story/<image>.webp; textos em tools/content/gen_act1_text.py. Disparadas por \"after_story\" de um chefe em enemies.json.",
+  "despertar": {"music": "prologo", "panels": [{"image": "sto_despertar_1", "text": "STO_DESPERTAR_1"}, {"image": "sto_despertar_2", "text": "STO_DESPERTAR_2"}, {"image": "sto_despertar_3", "text": "STO_DESPERTAR_3"}, {"image": "sto_despertar_4", "text": "STO_DESPERTAR_4"}], "end_text": "STO_DESPERTAR_LATER"},
   "bento": {
     "music": "prologo",
     "panels": [

@@ -35,6 +35,7 @@ func _ready() -> void:
 	await _postgame_test()
 	await _owner_1311_test()
 	await _packs_looks_test()
+	await _guard_awaken_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1122,6 +1123,147 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8: Defend (block), parry (enemy pushed back and dizzy with stars), the Awakening
+## (opened by the story scene after Sahra; holding Attack 3 s; +50% stats, golden hair and
+## aura; the Attack button's rim) and the compact HUD.
+func _guard_awaken_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var p: Player = main.player
+	var g: HeroGuard = p.guard
+	check(CharacterModel.config_for("enm_orc").get("actions", {}).has("stagger") and CharacterModel.config_for("boss_vaelor").get("actions", {}).has("dizzy"), "every rigged enemy gets the shared stagger and dizzy reactions")
+	check(not CharacterModel.config_for("npc_marta").get("actions", {}).has("stagger"), "villagers do not get the enemy reactions")
+	check(not CharacterModel.config_for("hero_lio").get("actions", {}).get("parry", {}).is_empty(), "the hero has guard and parry animations")
+	# Locked before the two-year jump: no bar, no button.
+	g.add_fury(50.0)
+	check(not g.unlocked() and g.fury == 0.0, "the Awakening is locked at the start of the game")
+	var sahra: Dictionary = Data.enemies["sahra_areia"]
+	check(str(sahra.get("after_story", "")) == "despertar" and str(sahra.get("after_flag", "")) == str(HeroGuard.awaken_rules().get("unlock_flag", "")), "beating Sahra (second city) plays the Awakening scene and unlocks it")
+	var story_text: String = FileAccess.get_file_as_string("res://data/story.json")
+	var story: Dictionary = JSON.parse_string(story_text)
+	var panels: Array = (story.get("despertar", {}) as Dictionary).get("panels", [])
+	var art_ok: bool = panels.size() == 4
+	for pn: Dictionary in panels:
+		art_ok = art_ok and ResourceLoader.exists("res://assets/story/%s.webp" % pn["image"]) and tr(str(pn["text"])) != str(pn["text"])
+	check(art_ok, "the Awakening scene has 4 illustrated panels with text")
+	Session.set_flag("sahra_defeated")
+	check(g.unlocked(), "a save that had already beaten Sahra gets the Awakening too")
+	var e: Enemy = main.spawn_enemy("bandido", p.global_position + Vector3(0, 0, -1.2))
+	await _frames(3)
+	p.face_towards(e.global_position)
+	e.call("_face", p.global_position - e.global_position)
+	var slash: Dictionary = (e.data["attacks"] as Array)[0]
+	# Parry: the blow does nothing, the bandit is pushed back and dizzy.
+	e.set("_attack", slash)
+	e.set("_attack_center", e.global_position + (p.global_position - e.global_position).normalized() * 0.9)
+	g.set("_parry_window", 0.3)
+	var hp0: float = p.hp
+	e.call("_resolve_attack")
+	check(p.hp == hp0 and e.status.has("stun"), "a parried blow does no damage and leaves the enemy dizzy")
+	check((e.get("_knockback") as Vector3).length() > 3.0, "the parried enemy is pushed back")
+	check(g.fury > 0.0, "a parry fills the Awakening bar")
+	await _frames(4)
+	check(e.get_node_or_null("DizzyStars") != null, "stars turn over the dizzy enemy's head")
+	# Block: holding Defend takes most of the damage away and costs fôlego.
+	var e2: Enemy = main.spawn_enemy("bandido", p.global_position + Vector3(0, 0, -1.2))
+	await _frames(3)
+	e2.call("_face", p.global_position - e2.global_position)
+	e2.set("_attack", slash)
+	e2.set("_attack_center", e2.global_position + (p.global_position - e2.global_position).normalized() * 0.9)
+	var full: float = 0.0
+	var blocked: float = 0.0
+	for i: int in 6:
+		p.set("_invulnerable", 0.0)
+		p.hp = p.max_hp()
+		g.guarding = false
+		e2.call("_resolve_attack")
+		full += p.max_hp() - p.hp
+		p.hp = p.max_hp()
+		g.guarding = true
+		p.stamina = p.max_stamina()
+		p.set("_invulnerable", 0.0)
+		e2.call("_resolve_attack")
+		blocked += p.max_hp() - p.hp
+	g.guarding = false
+	check(full > 0.0 and blocked < full * 0.5, "blocking takes most of the damage away (%.0f vs %.0f)" % [blocked, full])
+	# An area slam cannot be blocked.
+	var orc: Enemy = main.spawn_enemy("orc", p.global_position + Vector3(1.5, 0, 0))
+	await _frames(3)
+	orc.set("_attack", (orc.data["attacks"] as Array)[0])
+	orc.set("_attack_center", p.global_position)
+	g.guarding = true
+	g.set("_parry_window", 0.3)
+	p.hp = p.max_hp()
+	p.set_invulnerable(0.0)
+	p.set("_invulnerable", 0.0)
+	orc.call("_resolve_attack")
+	check(p.hp < p.max_hp() and not orc.status.has("stun"), "area slams must be dodged, not blocked")
+	g.guarding = false
+	# The Awakening: light full, hold Attack 3 s → +50% stats, golden hair, aura.
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	var atk0: float = p.stats.get_stat("atk")
+	p.set("_lock", 0.0)
+	p.status.clear()
+	await _frames(2)
+	Input.action_press("attack")
+	await _frames(40)
+	check(not g.is_awakened() and g.hold_ratio() == 0.0, "holding Attack without the light full does nothing")
+	Input.action_release("attack")
+	g.fury = float(HeroGuard.awaken_rules().get("max", 100.0))
+	await _frames(2)
+	check(g.can_awaken(), "a full bar lets the hero awaken")
+	Input.action_press("attack")
+	await _frames(60)
+	var mid: float = g.hold_ratio()
+	check(mid > 0.2 and mid < 0.6 and main.hud.get("_attack_btn").ring_ratio == mid, "holding Attack fills the red rim of the Attack button")
+	await _frames(150)
+	Input.action_release("attack")
+	check(g.is_awakened(), "3 seconds holding Attack awakens the hero")
+	await _frames(2)
+	check(is_equal_approx(p.stats.get_stat("atk"), atk0 * 1.5), "the Awakening gives +50%% attack")
+	check(p.model.is_hair_glowing() and p.get_node_or_null("AwakenAura") != null, "the Awakening turns the hair gold and wraps the hero in an aura")
+	check(g.fury == 0.0, "awakening empties the bar")
+	var rim: float = main.hud.get("_attack_btn").ring_ratio
+	check(rim > 0.8 and rim <= 1.0, "while awakened, the Attack rim shows the time left")
+	g.tick(float(HeroGuard.awaken_rules().get("duration", 12.0)) + 0.1)
+	await _frames(2)
+	check(is_equal_approx(p.stats.get_stat("atk"), atk0) and not p.model.is_hair_glowing(), "after the Awakening everything goes back")
+	# HUD: Defend over the 4th skill, no Awaken button, nothing overlaps (minimap too).
+	await _frames(2)
+	var btns: Array[TouchActionButton] = []
+	for n: Node in main.hud.find_children("*", "Control", true, false):
+		var b: TouchActionButton = n as TouchActionButton
+		if b and b.is_visible_in_tree():
+			btns.append(b)
+	var actions: Array = btns.map(func(b: TouchActionButton) -> String: return b.action)
+	check(actions.has("guard") and not actions.has("awaken"), "Defend is on the screen and the Awakening has no button of its own")
+	var gb: TouchActionButton = btns[actions.find("guard")]
+	var s4: TouchActionButton = btns[actions.find("skill_4")]
+	check(gb.position.y < s4.position.y and absf(gb.position.x + gb.radius - s4.position.x - s4.radius) < 2.0, "Defend sits right over the 4th skill")
+	var mm: Control = main.hud.get("_minimap")
+	var clock: Control = main.hud.get("_clock")
+	var gc: Vector2 = gb.position + Vector2(gb.radius, gb.radius)
+	for box: Control in [mm, clock]:
+		if box:
+			var rect := Rect2(box.position, box.size)
+			check(not rect.grow(-6.0).intersects(Rect2(gc - Vector2(gb.radius, gb.radius), Vector2(gb.radius, gb.radius) * 2.0)), "Defend does not cover the %s" % box.name)
+	var clash: String = ""
+	for i: int in btns.size():
+		for j: int in range(i + 1, btns.size()):
+			var ci: Vector2 = btns[i].position + Vector2(btns[i].radius, btns[i].radius)
+			var cj: Vector2 = btns[j].position + Vector2(btns[j].radius, btns[j].radius)
+			if ci.distance_to(cj) < btns[i].radius + btns[j].radius + 4.0:
+				clash += " %s/%s" % [btns[i].action, btns[j].action]
+	check(clash == "", "no touch buttons overlap:" + clash)
+	main.queue_free()
+	await _frames(3)
+
+
 func _packs_looks_test() -> void:
 	Session.reset()
 	Main.start_map = "pradoluz"

@@ -85,8 +85,32 @@ static func config_for(id: String) -> Dictionary:
 			var acts: Dictionary = (merged.get("actions", {}) as Dictionary).duplicate(true)
 			acts.merge(cfg["extra_actions"], true)
 			merged["actions"] = acts
-		return merged
-	return cfg
+		return _with_shared(id, merged)
+	return _with_shared(id, cfg)
+
+
+## Every rigged enemy gets the shared reactions (Fase 8: pushed back when its blow is
+## parried, then dizzy), unless it already has its own action with that name.
+static func _with_shared(id: String, cfg: Dictionary) -> Dictionary:
+	var shared: Dictionary = _configs.get("_shared_reactions", {})
+	if shared.is_empty() or not cfg.has("anim_sources"):
+		return cfg
+	var match_prefix: bool = false
+	for p: Variant in shared.get("prefixes", []):
+		if id.begins_with(str(p)):
+			match_prefix = true
+	if not match_prefix:
+		return cfg
+	var out: Dictionary = cfg.duplicate()
+	var sources: Array = (cfg["anim_sources"] as Array).duplicate()
+	sources.append(shared["source"])
+	out["anim_sources"] = sources
+	var acts: Dictionary = (cfg.get("actions", {}) as Dictionary).duplicate()
+	for k: String in shared.get("actions", {}):
+		if not acts.has(k):
+			acts[k] = shared["actions"][k]
+	out["actions"] = acts
+	return out
 
 
 ## Clothes and hair in other colours (villagers): {"hue": 0..1, "sat": multiplier}.
@@ -118,6 +142,70 @@ func _apply_recolor() -> void:
 			m.set_shader_parameter("hue_shift", float(recolor.get("hue", 0.0)))
 			m.set_shader_parameter("sat_mult", float(recolor.get("sat", 1.0)))
 			mi.set_surface_override_material(i, m)
+
+
+## Awakening (Fase 8): the hair glows gold while `on`. The original materials come back
+## when it ends. The neck height follows the Head bone (the body bends in the animation).
+var _glow_mats: Array[ShaderMaterial] = []
+var _glow_saved: Array = []
+var _glow_t: float = 0.0
+static var _glow_shader: Shader
+
+
+func set_hair_glow(on: bool, color: Color = Color("#ffe27a")) -> void:
+	if on == not _glow_mats.is_empty():
+		return
+	if not on:
+		for s: Array in _glow_saved:
+			(s[0] as MeshInstance3D).set_surface_override_material(int(s[1]), s[2])
+		_glow_saved.clear()
+		_glow_mats.clear()
+		return
+	if _glow_shader == null:
+		_glow_shader = load("res://assets/shaders/awaken_hair.gdshader")
+	for mi: MeshInstance3D in _meshes:
+		if mi.mesh == null:
+			continue
+		for i: int in mi.mesh.get_surface_count():
+			var src: BaseMaterial3D = mi.get_active_material(i) as BaseMaterial3D
+			if src == null:
+				continue
+			var m := ShaderMaterial.new()
+			m.shader = _glow_shader
+			m.set_shader_parameter("albedo_color", src.albedo_color)
+			m.set_shader_parameter("use_texture", src.albedo_texture != null)
+			if src.albedo_texture:
+				m.set_shader_parameter("albedo_tex", src.albedo_texture)
+			if src.transparency == BaseMaterial3D.TRANSPARENCY_ALPHA_SCISSOR:
+				m.set_shader_parameter("alpha_scissor", src.alpha_scissor_threshold)
+			m.set_shader_parameter("rim", ToonStyle.RIM)
+			m.set_shader_parameter("rim_tint", ToonStyle.RIM_TINT)
+			m.set_shader_parameter("glow_color", color)
+			_glow_saved.append([mi, i, mi.get_surface_override_material(i)])
+			mi.set_surface_override_material(i, m)
+			_glow_mats.append(m)
+	_update_hair_glow(0.0)
+
+
+func is_hair_glowing() -> bool:
+	return not _glow_mats.is_empty()
+
+
+func _update_hair_glow(delta: float) -> void:
+	if _glow_mats.is_empty() or skeleton == null:
+		return
+	_glow_t += delta
+	var head: int = skeleton.find_bone("Head")
+	if head < 0:
+		return
+	var neck_world: Vector3 = skeleton.global_transform * skeleton.get_bone_global_pose(head).origin
+	var i: int = 0
+	for s: Array in _glow_saved:
+		var mi: MeshInstance3D = s[0]
+		var local: Vector3 = mi.global_transform.affine_inverse() * neck_world
+		_glow_mats[i].set_shader_parameter("neck_y", local.y)
+		_glow_mats[i].set_shader_parameter("pulse", 0.5 + 0.5 * sin(_glow_t * 6.0))
+		i += 1
 
 
 ## Puts `tex` as the colour picture of every material of the model (copies, not shared).
@@ -208,6 +296,7 @@ func _process(delta: float) -> void:
 		_root.rotation.x = lerpf(_root.rotation.x, _move_ratio * float(_float.get("lean", 0.22)), minf(1.0, delta * 6.0))
 	if _wings:
 		_wings.effort = _move_ratio
+	_update_hair_glow(delta)
 	if not _action_hands.is_empty() and not is_busy():
 		_action_hands = {}
 		_update_hands()

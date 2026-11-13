@@ -496,7 +496,7 @@
     },
     "sahra_areia": {
       "music": "arauto",
-      "name": "ENEMY_SAHRA_AREIA", "model": "boss_sahra_areia", "boss": true, "hp": 3400, "atk": 24, "def": 14, "speed": 2.4, "aggro_range": 16.0, "no_flinch": true, "knockback_resist": 1.0,
+      "name": "ENEMY_SAHRA_AREIA", "after_story": "despertar", "after_flag": "despertar", "model": "boss_sahra_areia", "boss": true, "hp": 3400, "atk": 24, "def": 14, "speed": 2.4, "aggro_range": 16.0, "no_flinch": true, "knockback_resist": 1.0,
       "attacks": [
         {"id": "punch", "shape": "front", "range": 3.4, "radius": 3.0, "windup": 0.9, "cooldown": 1.8, "damage": 1.2, "anim": "attack"},
         {"status": {"id": "stun", "time": 1.0, "value": 0}, "id": "slam", "shape": "circle", "range": 4.2, "radius": 4.2, "windup": 1.2, "cooldown": 2.4, "own_cooldown": 6.0, "damage": 1.5, "anim": "slam"},

@@ -1,5 +1,6 @@
 {
   "_comment": "Modelos 3D dos personagens (Fase 3). 'actions' liga cada ação do jogo a um trecho de animação do Meshy: start/end em segundos do clipe, speed = velocidade. 'strike' = momento do golpe no clipe (usado para sincronizar o aviso dos inimigos). Tempos medidos com tests/anim_analyze.gd.",
+  "_shared_reactions": {"_comment": "Fase 8: reações que todo inimigo com esqueleto do Meshy usa (mesmo esqueleto de 24 ossos). 'stagger' = empurrado para trás ao ser aparado; 'dizzy' = curvado e tonto (o corpo balança por código e aparecem estrelinhas).", "prefixes": ["enm_", "boss_"], "source": {"path": "res://assets/characters/shared/react_stagger.glb"}, "actions": {"stagger": {"anim": "React_Stagger", "start": 0.0, "end": 0.7, "speed": 1.3}, "dizzy": {"anim": "React_Stagger", "start": 0.3, "end": 0.36, "speed": 0.03}}},
   "hero_lio": {
     "scene": "res://assets/characters/hero/hero_lio/hero_lio.glb",
     "anim_sources": [
@@ -9,7 +10,11 @@
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_walk.glb", "rename": "Walk" },
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_run.glb", "rename": "Run" },
       { "path": "res://assets/characters/hero/hero_lio/hero_lio_sit.glb" },
-      { "path": "res://assets/characters/hero/hero_lio/hero_lio_pet.glb" }
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_pet.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_parry.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_guard.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_awaken.glb" },
+      { "path": "res://assets/characters/hero/hero_lio/hero_lio_kneel.glb" }
     ],
     "scale": 1.2,
     "move_anim_speed": { "walk": 1.6, "run": 6.0, "combat_walk": 1.6, "combat_run": 6.5, "sprint": 7.0 },
@@ -48,6 +53,11 @@
       "attack_1": { "anim": "Triple_Combo_Attack", "start": 1.2, "end": 1.9, "speed": 2.2 },
       "attack_2": { "anim": "Triple_Combo_Attack", "start": 1.9, "end": 3.0, "speed": 2.2 },
       "dodge": { "anim": "Roll_Dodge", "start": 0.15, "end": 1.6, "speed": 3.6, "keep_weapon": true },
+      "guard_in": { "anim": "Parry", "start": 0.0, "end": 0.5, "speed": 2.2 },
+      "guard": { "anim": "Guard", "loop": true },
+      "parry": { "anim": "Parry", "start": 0.3, "end": 1.2, "speed": 1.6 },
+      "awaken": { "anim": "Awaken", "start": 0.0, "end": 2.6, "speed": 1.4 },
+      "kneel": { "anim": "Kneel", "start": 0.0, "end": 1.1, "speed": 1.0 },
       "hit": { "anim": "Hit_Reaction", "start": 0.0, "end": 0.7, "speed": 1.6, "keep_weapon": true },
       "dead": { "anim": "Dead", "start": 0.0, "end": 2.95, "speed": 1.3, "keep_weapon": true },
       "corte_giratorio": { "anim": "Axe_Spin_Attack", "start": 0.55, "end": 1.8, "speed": 2.0 },

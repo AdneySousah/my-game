@@ -190,9 +190,9 @@ func _build_environment() -> void:
 	# Sun shadows follow the graphics quality (off on "low").
 	sun.shadow_enabled = Game.q("shadow") > 0.0
 	add_child(sun)
-	Game.quality_changed.connect(func() -> void:
-		if is_instance_valid(sun):
-			sun.shadow_enabled = Game.q("shadow") > 0.0)
+	_sun = sun
+	# A method (not a lambda): it lets go by itself when the map is freed.
+	Game.quality_changed.connect(_on_quality_changed)
 	# Outdoors: day and night, and wind. Indoors (barn, mine): still air, fixed light.
 	var wind: Dictionary = Data.daynight.get("wind", {})
 	var wd: Array = wind.get("dir", [1.0, 0.35])
@@ -1260,3 +1260,11 @@ func _exit_tree() -> void:
 		NavigationServer3D.free_rid(_nav_region)
 		_nav_region = RID()
 	nav_ready = false
+
+
+var _sun: DirectionalLight3D
+
+
+func _on_quality_changed() -> void:
+	if is_instance_valid(_sun):
+		_sun.shadow_enabled = Game.q("shadow") > 0.0

@@ -33,6 +33,8 @@ var camera_rig: CameraRig
 var respawn_point: Vector3 = Vector3.ZERO
 var status: StatusEffects
 var skills: SkillRunner
+## Defend button, parry and the Awakening (Fase 8).
+var guard: HeroGuard
 
 var _lock: float = 0.0
 var _combo_step: int = 0
@@ -115,6 +117,9 @@ func _ready() -> void:
 	skills = SkillRunner.new()
 	skills.player = self
 	add_child(skills)
+	guard = HeroGuard.new()
+	guard.player = self
+	add_child(guard)
 	hp = max_hp()
 	stamina = max_stamina()
 	mp = max_mp()
@@ -135,6 +140,7 @@ func _physics_process(delta: float) -> void:
 	_tick_stamina(delta)
 	_tick_mp(delta)
 	_tick_poison(delta)
+	guard.tick(delta)
 	if _dead or _scripted:
 		return
 	if status.has("stun"):
@@ -157,7 +163,12 @@ func _physics_process(delta: float) -> void:
 	# charge tears the hero free).
 	var rooted: bool = status.has("root")
 	if Input.is_action_just_pressed("dodge") and not rooted:
+		guard.guarding = false
 		_try_dodge(dir)
+		return
+	# Defend (hold), parry (tap in time) and the Awakening button.
+	if guard.physics(delta, dir):
+		_sprinting = false
 		return
 	if Input.is_action_just_pressed("attack"):
 		_queued_attack = true
@@ -346,6 +357,16 @@ func _tick_mp(delta: float) -> void:
 	mp = minf(max_mp(), mp + stats.get_stat("mp_regen") * delta)
 
 
+## Keeps the hero "in a fight" for at least `seconds` (weapon out, combat music).
+func mark_combat(seconds: float) -> void:
+	_combat_time = maxf(_combat_time, seconds)
+
+
+## Public turn used by the guard: towards `dir`, at the hero's usual turning speed.
+func turn_towards(dir: Vector3, delta: float) -> void:
+	_turn_towards(dir, delta)
+
+
 ## Hit something or was hit in the last few seconds.
 func in_combat() -> bool:
 	return _combat_time > 0.0
@@ -363,6 +384,11 @@ func spend_stamina(cost: float) -> bool:
 	stamina -= cost
 	_regen_pause = float(_stamina_rules().get("regen_delay", 0.8))
 	return true
+
+
+## Not dead, not in a cutscene and not pushed by a scripted move.
+func is_controllable() -> bool:
+	return not _dead and not _scripted and _forced_time <= 0.0
 
 
 func can_act() -> bool:
@@ -522,11 +548,18 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var m: float = mult * (1.0 - clampf(status.value("weaken"), 0.0, 0.8))
 	if is_skill:
 		m *= 1.0 + stats.get_stat("skill_dmg")
+	# Dizzy (parried) or stunned enemies take more (Fase 8).
+	if enemy.status and enemy.status.has("stun"):
+		m *= float(HeroGuard.rules().get("dizzy_damage_mult", 1.3))
 	var res: Dictionary = Damage.compute(stats.get_stat("atk"), m, enemy.get_defense(),
 		stats.get_stat("crit_chance"), stats.crit_multiplier(), _rng)
 	var push: Vector3 = enemy.global_position - global_position
 	push.y = 0.0
 	enemy.take_damage(res["amount"], res["crit"], push.normalized() * knockback)
+	var ar: Dictionary = HeroGuard.awaken_rules()
+	guard.add_fury(float(ar.get("gain_skill_hit" if is_skill else "gain_hit", 0.4)))
+	if enemy.is_dead():
+		guard.add_fury(float(ar.get("gain_boss_kill" if enemy.is_boss else "gain_kill", 1.0)))
 	# Basic attacks bring MP back, so the skills keep coming in a long fight.
 	if not is_skill:
 		mp = minf(max_mp(), mp + float(_mana_rules().get("hit_gain", 3.0)))
@@ -554,9 +587,11 @@ func receive_attack(atk_value: float) -> bool:
 	Audio.play_sfx("hurt", global_position)
 	ProtoVisuals.damage_number(get_parent(), global_position, str(res["amount"]), Color("#ff5a5a"))
 	_combat_time = 3.0
+	guard.add_fury(float(HeroGuard.awaken_rules().get("gain_hurt", 0.5)))
 	if model:
 		model.flash(Color("#ff5a5a"))
-		if _lock <= 0.0 and _forced_time <= 0.0 and not model.is_busy():
+		# Blocking: he stays in guard (no flinch).
+		if _lock <= 0.0 and _forced_time <= 0.0 and not model.is_busy() and not guard.guarding:
 			model.play_action("hit")
 	else:
 		_body_mat.albedo_color = Color("#ff5a5a")

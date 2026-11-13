@@ -59,6 +59,17 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
   - [~] 6.7 Correções do teste no celular (missão dos orcs, sair da casa, joystick e Espantalho travados), casas por dentro e bordas das cidades fechadas, corrida nova, vasos com "Pegar", itens com ícone, MP para as skills, 3 atalhos de poção, até 3 missões na lateral, mapa-múndi na viagem, dificuldade Extrema, placa de dificuldade e quadro de missões nas masmorras, Procurado diário em cada cidade (~21 créditos). Em teste na 0.3.1
   - [~] Melhorias do dono (12/11/2026), na 0.2.0: telas de carregamento com ilustração de cada lugar, efeitos visuais das 8 skills, tela de atributos nova (herói em 3D, totais, prévia do +1), ícones de efeitos ao lado do retrato, passe premium (7/14/30 dias) e 2 visuais à venda (Cavaleiro do Sol e Lâmina da Tempestade). Em teste
 
+## Fase 8 — Novas mecânicas (pedido do dono, 13/11/2026)
+Plano completo, custos do Meshy e ordem em [FASE8.md](FASE8.md).
+- [x] 8A Combate: Defesa e aparar (inimigo empurrado e tonto com estrelinhas), Despertar liberado pela cena depois da Sahra (segurar Atacar 3 s: cabelo dourado, aura, +50% por 12 s), HUD mais compacto; 42 créditos
+- [ ] 8B Covis do Ferreiro Andarilho: 5 conjuntos de chefe com combos, licenças (`licenca_covil_10`)
+- [ ] 8C Runas e elementos
+- [ ] 8D Pesca e fogueira
+- [ ] 8E Bestiário e Maestria
+- [ ] 8F Casa do herói
+- [ ] 8G Eventos do mundo
+- [ ] 8H Fenda sem fim
+
 ## Pendências para depois do jogo concluído
 
 ### Ambientação: moradores e animais (pedido do dono, 12/11/2026)

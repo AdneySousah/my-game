@@ -623,6 +623,38 @@
    "variants": 1,
    "prompt_influence": 0.4,
    "seconds": 0.5
+  },
+  {
+   "id": "parry",
+   "kind": "sfx",
+   "prompt": "perfect sword parry: bright metallic clang of two steel blades with a shimmering ring that fades, satisfying",
+   "variants": 2,
+   "prompt_influence": 0.45,
+   "seconds": 0.9
+  },
+  {
+   "id": "block",
+   "kind": "sfx",
+   "prompt": "sword blocking a heavy blow: short dull metallic thud, no ring",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.5
+  },
+  {
+   "id": "awaken",
+   "kind": "sfx",
+   "prompt": "heroic power-up: golden energy surging, rising whoosh with a deep boom and crackling sparks, epic fantasy",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 2.2
+  },
+  {
+   "id": "dizzy",
+   "kind": "sfx",
+   "prompt": "cartoon dizzy: soft little twinkling chimes spinning, short, gentle",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.0
   }
  ]
 }

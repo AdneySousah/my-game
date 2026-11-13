@@ -14,6 +14,12 @@ var color: Color = Color(1, 1, 1, 0.35)
 ## Skill picture drawn inside the golden ring (null = show `text`).
 var icon: Texture2D
 var cooldown_ratio: float = 0.0
+## A rim that fills around the frame (0..1), e.g. the Attack button's Awakening rim.
+var ring_ratio: float = 0.0
+var ring_color: Color = Color(1, 0.2, 0.15)
+var ring_width: float = 6.0
+## Where the rim runs, as a share of the radius (0.8 = just inside the frame, on the glass).
+var ring_at: float = 0.9
 var disabled: bool = false
 ## Drawn darker when the action cannot be paid for (e.g. not enough fôlego).
 var dimmed: bool = false
@@ -112,6 +118,12 @@ func _draw() -> void:
 			var a: float = start + TAU * cooldown_ratio * float(i) / steps
 			pts.append(c + Vector2(cos(a), sin(a)) * inner)
 		draw_colored_polygon(pts, Color(0, 0, 0, 0.6))
+	if ring_ratio > 0.0:
+		# Starts at the top and goes clockwise, over the frame's edge.
+		var rr: float = r * ring_at
+		var a0: float = -PI * 0.5
+		draw_arc(c, rr, a0, a0 + TAU * ring_ratio, maxi(8, int(64 * ring_ratio)), Color(0, 0, 0, 0.55), ring_width + 3.0, true)
+		draw_arc(c, rr, a0, a0 + TAU * ring_ratio, maxi(8, int(64 * ring_ratio)), ring_color, ring_width, true)
 	var font: Font = ThemeDB.fallback_font
 	var fs: int = int(clampf(radius * 0.3, 12, 24))
 	var w: float = radius * 2.0

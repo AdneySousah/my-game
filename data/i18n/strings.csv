@@ -5,6 +5,9 @@ HUD_DEFEATED,Derrotado: -5%% (%ds),Defeated: -5%% (%ds)
 HUD_ATTACK,Atacar,Attack
 HUD_DODGE,Esquiva,Dodge
 HUD_SPRINT,Correr,Run
+HUD_GUARD,Defesa,Guard
+HUD_PARRY,Aparado!,Parried!
+HUD_GUARD_BROKEN,Guarda quebrada!,Guard broken!
 HUD_NO_STAMINA,Sem fôlego!,Out of stamina!
 SKILL_COST,%d de MP · recarga %ds,%d MP · %ds cooldown
 HUD_ATTRIBUTES,Atributos (C),Attributes (C)
@@ -431,20 +434,10 @@ REST_PICOS_CRISTA,Abrigo da Crista,Ridge Shelter
 REST_MINA_GELO_ENTRADA,Boca da Mina Gelada,Frozen Mine Mouth
 REST_MINA_GELO_FUNDO,Galeria Congelada,Frozen Gallery
 ENEMY_GUARDIAO_GELO,Guardião de Gelo,Ice Guardian
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 REST_CASTELO_TUNEL,Boca do Túnel,Tunnel Mouth
 REST_CASTELO_PATIO,Pátio Gelado,Frozen Court
 ENEMY_BRANNOC,"Brannoc, Arauto do Frio","Brannoc, Herald of Cold"
 ENEMY_BRANNOC_GELO,"Brannoc, Gigante de Gelo","Brannoc, Ice Giant"
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 MAP_VALE_DEGELO,Vale do Degelo,Thaw Valley
 MAP_MATA_UMIDA,Mata Úmida,Damp Woods
 MAP_BORDAS_PANTANO,Bordas do Pântano,Swamp's Edge
@@ -462,13 +455,6 @@ ENEMY_MORTO_PANTANO,Morto do pântano,Swamp dead
 ENEMY_CULTISTA,Cultista do silêncio,Cultist of Silence
 SHOP_ELARION,Loja do Elarion,Elarion's Shop
 BUFF_POISON,Envenenado,Poisoned
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 MAP_TORRE_VIGIA,Torre do Vigia Élfico,Elven Watcher's Tower
 MAP_TOPO_TORRE,Topo da Torre,Tower Top
 REST_PANTANO_RAIZ,Raiz Ponte,Bridge Root
@@ -480,36 +466,6 @@ ENEMY_VELYRA,"Velyra, Arauta do Silêncio","Velyra, Herald of Silence"
 ENEMY_VELYRA_DRIADE,Dríade de Espinhos,Thorn Dryad
 REST_TOPO_TORRE,Alto da Escada,Top of the Stairs
 BUFF_ROOT,Preso pelas raízes,Rooted
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 MAP_ESTRADA_REAL,Estrada Real,Royal Road
 MAP_ARREDORES,Arredores da Capital,Capital Outskirts
 MAP_ALTAREA,Altaréa,Altaréa
@@ -523,28 +479,8 @@ ENEMY_GUARDA_LEI,Guarda da Lei,Law guard
 ENEMY_ARQUEIRO_LEI,Arqueiro da Lei,Law marksman
 ENEMY_CARCEREIRO,Carcereiro,Jailer
 SHOP_AURELIO,Loja do Aurélio,Aurélio's Shop
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 RARITY_MYTHIC,Mítico,Mythic
 RARITY_CELESTIAL,Celestial,Celestial
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 SMITH_USE_SHORT,Usar (%d),Use (%d)
 SMITH_OPEN_SOCKET_SHORT,Abrir encaixe · %d%%,Open socket · %d%%
 SMITH_NEEDS,Precisa:,Needs:
@@ -559,32 +495,6 @@ ENEMY_CASSIAN,"Cassian, Arauto da Lei","Cassian, Herald of the Law"
 ENEMY_CASSIAN_COLOSSO,Colosso de Armadura,Armored Colossus
 REST_CASTELO_ARAUTO_PORTAO,Portão do Castelo,Castle Gate
 REST_CASTELO_ARAUTO_PATIO,Pátio das Correntes,Courtyard of Chains
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 SMITH_CONFIRM_WORN,Esta peça está equipada. Tem certeza que quer desmontar? Ela sai do corpo e deixa de existir.,This piece is being worn. Are you sure you want to take it apart? It comes off and will be gone.
 SMITH_CONFIRM_YES,"Sim, desmontar","Yes, take apart"
 SMITH_CONFIRM_NO,Cancelar,Cancel
@@ -604,25 +514,6 @@ ENEMY_VIGIA_CELESTE,Vigia Celeste,Celestial Watcher
 ENEMY_VAELOR,"Vaelor, Senhor dos Céus","Vaelor, Lord of the Skies"
 ENEMY_VAELOR_DESMASCARADO,Vaelor Desmascarado,Vaelor Unmasked
 ENEMY_VAELOR_CORROMPIDO,Vaelor Corrompido,Vaelor Corrupted
-STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
-STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
-STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
-STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
-STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
-STO_FINAL_END,A história continua...,The story continues...
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 CREDITS_THANKS,Obrigado por jogar!,Thank you for playing!
 CREDITS_STORY,"Uma história de um herdeiro, cinco cidades e um céu que precisava ser libertado.","A story of an heir, five cities and a sky that needed to be set free."
 CREDITS_ENGINE,Feito com Godot Engine.,Made with Godot Engine.
@@ -633,25 +524,6 @@ OFFER_TITLE,Oferta de boas-vindas!,Welcome offer!
 OFFER_TEXT,"Passe premium de 7 dias por %s, só na sua primeira compra: experiência em dobro, ouro em dobro e +10%% em todos os atributos.","7-day premium pass for %s, only on your first purchase: double experience, double gold and +10%% on every attribute."
 OFFER_BUY,Quero! (%s),I want it! (%s)
 OFFER_LATER,Agora não,Not now
-STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
-STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
-STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
-STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
-STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
-STO_FINAL_END,A história continua...,The story continues...
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 DUNGEON_INFERNAL_SIGN,Modo Infernal,Infernal Mode
 DUNGEON_INFERNAL_DONE,Modo Infernal! O chefe voltou no nível %d.,Infernal Mode! The boss is back at level %d.
 HUD_INFERNAL,Infernal (E),Infernal (E)
@@ -675,49 +547,11 @@ HUD_MP,MP,MP
 STAT_MAX_MP,MP,MP
 STAT_MP_REGEN,Recuperação de MP,MP recovery
 ATTRS_MAX_MP,MP máximo,Max MP
-STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
-STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
-STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
-STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
-STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
-STO_FINAL_END,A história continua...,The story continues...
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 HUD_QUESTS_HEADER,Missões (%d),Quests (%d)
 TRAVEL_YOU_ARE_HERE,Você está aqui,You are here
 DIFF_EXTREME,Extrema,Extreme
 DIFF_EXTREME_DESC,Inimigos 80% mais fortes e o mundo não espera: os monstros sobem de nível com o tempo de jogo (na metade do ritmo médio do herói).,Enemies 80% stronger and the world won't wait: monsters level up with the time played (at half the hero's average pace).
 EXTREME_WORLD_UP,O mundo ficou mais perigoso: monstros agora no nível %d ou mais.,The world grew more dangerous: monsters are now level %d or higher.
-STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
-STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
-STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
-STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
-STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
-STO_FINAL_END,A história continua...,The story continues...
-STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
-STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
-STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
-STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
-STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
-STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
-STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
-STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
-STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
-STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
-STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
-STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
-STO_BENTO_LATER,Dois anos depois...,Two years later...
 DTIER_0,Normal,Normal
 DTIER_1,Desafio,Challenge
 DTIER_2,Pesadelo,Nightmare
@@ -772,6 +606,14 @@ BAG_PACK_NO_ROOM,Esvazie espaço antes de tirar esta mochila.,Free some space be
 ITEMTYPE_BACKPACK,Mochila,Backpack
 STORE_MOCHILA_30,Mochila Real (+30 espaços),Royal Backpack (+30 slots)
 STORE_MOCHILA_30_DESC,Uma mochila grande que aumenta a mochila do herói em 30 espaços. Dá para vestir até 6 mochilas.,A big backpack that adds 30 slots to the hero's bag. Up to 6 backpacks can be worn.
+EQ_LOOKS_TITLE,Escolha o visual,Choose a look
+EQ_LOOK_NONE,Sem visual (roupa do Lio),No look (Lio's own clothes)
+STORE_SKIN_ANJO,Visual: Anjo Dourado,Look: Golden Angel
+STORE_SKIN_ANJO_DESC,"Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre.","Shining golden armor, wings that really beat and Lio floating instead of walking. Only changes the look; yours forever."
+OPT_QUALITY,Gráficos,Graphics
+OPT_Q_LOW,Baixo,Low
+OPT_Q_MEDIUM,Médio,Medium
+OPT_Q_HIGH,Alto,High
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -903,6 +745,11 @@ OBJ_TALK_BENTO_CASTLE,Fale com o Bento,Talk to Bento
 OBJ_REACH_CASTELO,Suba ao Castelo Ermo pelo túnel no fundo da Mina de Gelo,Climb to the Lonely Castle through the tunnel at the bottom of the Ice Mine
 OBJ_KILL_BRANNOC,"Derrote o Brannoc, Arauto do Frio","Defeat Brannoc, Herald of Cold"
 OBJ_TALK_OSK_AFTER,Fale com o Velho Osk em Hrimvald,Talk to Old Osk in Hrimvald
+STO_DESPERTAR_1,"No alto da torre, a tempestade da Sahra engoliu tudo. A espada escapou da mão de Lio. A areia enchia os olhos, a boca, o peito.","At the top of the tower, Sahra's storm swallowed everything. The sword slipped from Lio's hand. Sand filled his eyes, his mouth, his chest."
+STO_DESPERTAR_2,"Então veio um calor antigo, o mesmo da noite em que ele nasceu e iluminou Pradoluz inteira. O cabelo de Lio virou ouro. A tempestade se abriu.","Then came an old warmth, the same as the night he was born and lit up all of Pradoluz. Lio's hair turned to gold. The storm split open."
+STO_DESPERTAR_3,"""Essa luz..."" Sahra recuou, tremendo. ""Eu já vi essa luz. No céu, no dia em que o Soberano chegou. Quem é você, menino?""","""That light..."" Sahra backed away, trembling. ""I have seen that light before. In the sky, the day the Sovereign came. Who are you, boy?"""
+STO_DESPERTAR_4,"Quando a luz se apagou, Lio mal ficava de pé. Mas agora ele sabia: tinha alguma coisa dentro dele. E ela ia voltar.","When the light faded, Lio could barely stand. But now he knew: there was something inside him. And it would come back."
+STO_DESPERTAR_LATER,"Despertar liberado! Lutando, a luz dentro de Lio se acumula em volta do botão Atacar. Cheia, segure Atacar por 3 segundos.","Awakening unlocked! While fighting, the light inside Lio gathers around the Attack button. When it is full, hold Attack for 3 seconds."
 STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
 STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
 STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
@@ -1558,11 +1405,3 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-EQ_LOOKS_TITLE,Escolha o visual,Choose a look
-EQ_LOOK_NONE,Sem visual (roupa do Lio),No look (Lio's own clothes)
-STORE_SKIN_ANJO,Visual: Anjo Dourado,Look: Golden Angel
-STORE_SKIN_ANJO_DESC,"Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre.","Shining golden armor, wings that really beat and Lio floating instead of walking. Only changes the look; yours forever."
-OPT_QUALITY,Gráficos,Graphics
-OPT_Q_LOW,Baixo,Low
-OPT_Q_MEDIUM,Médio,Medium
-OPT_Q_HIGH,Alto,High

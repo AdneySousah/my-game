@@ -246,6 +246,7 @@ func _physics_process(delta: float) -> void:
 	var stunned: bool = status.has("stun")
 	if stunned and _state == State.WINDUP:
 		_cancel_attack()
+	_update_dizzy(stunned, delta)
 	var move: Vector3 = Vector3.ZERO
 	if not stunned and _target_alive():
 		var to: Vector3 = target.global_position - global_position
@@ -300,6 +301,33 @@ func _physics_process(delta: float) -> void:
 		var backward: bool = move.length() > 0.2 and move.normalized().dot(_forward()) < -0.3
 		# The walk follows how fast it really goes, so it never walks on the spot.
 		model.update_locomotion(minf(move.length(), real.length()), _state != State.IDLE, backward)
+
+
+## Stars turning over the head and the body swaying while stunned (any stun).
+var _stars: DizzyStars
+var _sway_t: float = 0.0
+
+
+func _update_dizzy(stunned: bool, delta: float) -> void:
+	if stunned and _stars == null:
+		_stars = DizzyStars.new()
+		_stars.name = "DizzyStars"
+		_stars.position.y = _bar.position.y - 0.15
+		add_child(_stars)
+	elif not stunned and _stars != null:
+		_stars.queue_free()
+		_stars = null
+	var holder: Node3D = model if model else _visual
+	if holder == null:
+		return
+	if stunned:
+		_sway_t += delta
+		holder.rotation.z = sin(_sway_t * 5.5) * 0.09
+		holder.rotation.x = cos(_sway_t * 4.0) * 0.05
+	elif _sway_t > 0.0:
+		_sway_t = 0.0
+		holder.rotation.z = 0.0
+		holder.rotation.x = 0.0
 
 
 # --- Movement and attack choice -----------------------------------------------------
@@ -477,11 +505,12 @@ func _resolve_attack() -> void:
 	var dmg: float = atk * float(a.get("damage", 1.0)) * (1.0 - status.value("weaken"))
 	var p: Vector3 = target.global_position
 	p.y = 0.0
+	var parried: bool = false
 	match str(a.get("shape", "front")):
 		"line":
 			if Telegraph.in_line(p, _attack_center, _attack_dir, float(a.get("length", 4.0)), float(a.get("width", 1.0)) + PLAYER_RADIUS * 2.0):
-				if target.receive_attack(dmg):
-					_hit_status(a)
+				# A charge can be blocked from the front, never parried.
+				parried = _land_hit(a, dmg, false, not bool(a.get("unblockable", false)))
 			if bool(data.get("boss", false)):
 				var end: Vector3 = _attack_center + _attack_dir * float(a.get("length", 4.0))
 				SkillVfx.boss_impact(get_parent(), end, 2.0, Color(str(data.get("color", "#ffb060"))))
@@ -496,8 +525,10 @@ func _resolve_attack() -> void:
 			_summon(a)
 		_:
 			if p.distance_to(_attack_center) <= float(a.get("radius", 1.2)) + PLAYER_RADIUS:
-				if target.receive_attack(dmg):
-					_hit_status(a)
+				# A blow in front ("front") can be parried or blocked; area attacks (circle,
+				# ground_target, barrage) must be dodged.
+				var front: bool = str(a.get("shape", "front")) == "front" and not bool(a.get("unblockable", false))
+				parried = _land_hit(a, dmg, front, front)
 			if float(a.get("radius", 1.2)) >= 2.0:
 				Audio.play_sfx("slam", _attack_center)
 				if bool(data.get("boss", false)):
@@ -506,6 +537,9 @@ func _resolve_attack() -> void:
 				else:
 					ProtoVisuals.flash_disc(get_parent(), _attack_center, float(a.get("radius", 1.2)), Color(1, 0.6, 0.3, 0.5))
 	_clear_telegraph()
+	if parried:
+		on_parried()
+		return
 	if a.has("dodge_after") and _target_alive():
 		_dodge_after_shot(a["dodge_after"])
 	if _barrage_left > 0 and _target_alive():
@@ -515,6 +549,46 @@ func _resolve_attack() -> void:
 	_state = State.RECOVER
 	_timer = float(a.get("recover", RECOVER_TIME))
 	_cooldown = float(a.get("cooldown", data.get("attack_cooldown", 1.5)))
+
+
+## The blow reaches the hero: he may parry it (true: nothing lands), block it (less damage,
+## no status) or take it in full.
+func _land_hit(a: Dictionary, dmg: float, parryable: bool, blockable: bool) -> bool:
+	var g: int = target.guard.against(self, parryable, blockable) if target.guard else 0
+	if g == 2:
+		return true
+	if g == 1:
+		target.receive_attack(dmg * (1.0 - HeroGuard.block_reduction()))
+		return false
+	if target.receive_attack(dmg):
+		_hit_status(a)
+	return false
+
+
+## Its blow was parried (Fase 8): pushed back off balance, then dizzy with stars over the
+## head for a moment ("dizzy_time" in progression.json → guard; shorter for bosses).
+func on_parried() -> void:
+	_clear_telegraph()
+	_barrage_left = 0
+	var r: Dictionary = HeroGuard.rules()
+	var t: float = float(r.get("dizzy_time_boss" if is_boss else "dizzy_time", 2.0))
+	_state = State.RECOVER
+	_timer = t
+	_cooldown = maxf(_cooldown, 0.6)
+	var away: Vector3 = global_position - target.global_position
+	away.y = 0.0
+	if away.length() > 0.01:
+		_knockback += away.normalized() * float(r.get("push", 6.0)) * (0.35 if is_boss else 1.0)
+	status.apply("stun", t)
+	Audio.play_sfx("dizzy", global_position + Vector3(0, 2.0, 0))
+	if model == null:
+		return
+	var d: float = model.play_action("stagger")
+	var dizzy_for: float = maxf(0.3, t - d)
+	get_tree().create_timer(d, false).timeout.connect(func() -> void:
+		if is_instance_valid(self) and not is_dead() and status.has("stun") and model:
+			# The "dizzy" piece lasts 2 s at its own speed; stretched to what is left.
+			model.play_action("dizzy", 2.0 / dizzy_for))
 
 
 ## "status" of an attack that landed: {"id": "stun|slow|weaken|poison", "time", "value"}.
@@ -919,6 +993,9 @@ func _build_body() -> void:
 func _die() -> void:
 	_state = State.DEAD
 	_clear_telegraph()
+	if _stars:
+		_stars.queue_free()
+		_stars = null
 	remove_from_group("enemies")
 	remove_from_group("bosses")
 	collision_layer = 0

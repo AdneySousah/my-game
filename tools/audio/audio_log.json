@@ -1920,5 +1920,89 @@
   "version": 1,
   "approved": "assets\\audio\\sfx\\el\\ui_close_1.ogg",
   "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "parry",
+  "version": 1,
+  "kind": "sfx",
+  "file": "parry_1.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "parry",
+  "version": 2,
+  "kind": "sfx",
+  "file": "parry_2.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "block",
+  "version": 1,
+  "kind": "sfx",
+  "file": "block_1.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "block",
+  "version": 2,
+  "kind": "sfx",
+  "file": "block_2.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "awaken",
+  "version": 1,
+  "kind": "sfx",
+  "file": "awaken_1.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "dizzy",
+  "version": 1,
+  "kind": "sfx",
+  "file": "dizzy_1.mp3",
+  "date": "2026-11-13 15:45",
+  "estimate": 200
+ },
+ {
+  "id": "parry",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\parry_1.ogg",
+  "date": "2026-11-13 15:46"
+ },
+ {
+  "id": "parry",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\parry_2.ogg",
+  "date": "2026-11-13 15:46"
+ },
+ {
+  "id": "block",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\block_1.ogg",
+  "date": "2026-11-13 15:46"
+ },
+ {
+  "id": "block",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\block_2.ogg",
+  "date": "2026-11-13 15:46"
+ },
+ {
+  "id": "awaken",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\awaken_1.ogg",
+  "date": "2026-11-13 15:46"
+ },
+ {
+  "id": "dizzy",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\dizzy_1.ogg",
+  "date": "2026-11-13 15:46"
  }
 ]

@@ -820,6 +820,11 @@ TEXTS = {
     "OBJ_REACH_CASTELO": ("Suba ao Castelo Ermo pelo túnel no fundo da Mina de Gelo", "Climb to the Lonely Castle through the tunnel at the bottom of the Ice Mine"),
     "OBJ_KILL_BRANNOC": ("Derrote o Brannoc, Arauto do Frio", "Defeat Brannoc, Herald of Cold"),
     "OBJ_TALK_OSK_AFTER": ("Fale com o Velho Osk em Hrimvald", "Talk to Old Osk in Hrimvald"),
+    "STO_DESPERTAR_1": ("No alto da torre, a tempestade da Sahra engoliu tudo. A espada escapou da mão de Lio. A areia enchia os olhos, a boca, o peito.", "At the top of the tower, Sahra's storm swallowed everything. The sword slipped from Lio's hand. Sand filled his eyes, his mouth, his chest."),
+    "STO_DESPERTAR_2": ("Então veio um calor antigo, o mesmo da noite em que ele nasceu e iluminou Pradoluz inteira. O cabelo de Lio virou ouro. A tempestade se abriu.", "Then came an old warmth, the same as the night he was born and lit up all of Pradoluz. Lio's hair turned to gold. The storm split open."),
+    "STO_DESPERTAR_3": ("\"Essa luz...\" Sahra recuou, tremendo. \"Eu já vi essa luz. No céu, no dia em que o Soberano chegou. Quem é você, menino?\"", "\"That light...\" Sahra backed away, trembling. \"I have seen that light before. In the sky, the day the Sovereign came. Who are you, boy?\""),
+    "STO_DESPERTAR_4": ("Quando a luz se apagou, Lio mal ficava de pé. Mas agora ele sabia: tinha alguma coisa dentro dele. E ela ia voltar.", "When the light faded, Lio could barely stand. But now he knew: there was something inside him. And it would come back."),
+    "STO_DESPERTAR_LATER": ("Despertar liberado! Lutando, a luz dentro de Lio se acumula em volta do botão Atacar. Cheia, segure Atacar por 3 segundos.", "Awakening unlocked! While fighting, the light inside Lio gathers around the Attack button. When it is full, hold Attack for 3 seconds."),
     "STO_BENTO_1": ("No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.", "With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."),
     "STO_BENTO_2": ("\"Não chora, Lio... come direito, tá? E guarda o meu cachecol.\" O gelo do Arauto se partiu. O coração de Bento parou.", "\"Don't cry, Lio... eat properly, okay? And keep my scarf.\" The Herald's ice shattered. Bento's heart stopped."),
     "STO_BENTO_3": ("Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.", "That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."),
@@ -1118,7 +1123,9 @@ TEXTS = {
     "ITEM_GEMA_AMETISTA_DESC": ("Num encaixe de equipamento, aumenta defesa. Três iguais viram uma do nível seguinte no ferreiro.", "In a gear socket, raises defense. Three of a kind become one of the next tier at the smith."),
 }
 
-PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_", "PRO_", "TITLE_", "OPT_")
+# Keys made only by this script (old ones that left TEXTS are dropped). Other keys of the
+# CSV are kept as they are; keys this script writes replace any copy already there.
+PREFIXES = ("DLG_", "BARK_", "NPC_", "QUEST_", "OBJ_", "ITEM_", "PRO_", "TITLE_")
 
 
 def main() -> None:
@@ -1139,7 +1146,15 @@ def main() -> None:
 
     cpath = ROOT / "data" / "i18n" / "strings.csv"
     rows = list(csv.reader(io.StringIO(cpath.read_text(encoding="utf-8"))))
-    header, body = rows[0], [r for r in rows[1:] if r and not r[0].startswith(PREFIXES)]
+    header, body = rows[0], []
+    seen = set()
+    for r in rows[1:]:
+        # Drop generated keys (written again below) and repeated rows (an older version of
+        # this script added the STO_ scenes again on every run).
+        if not r or r[0].startswith(PREFIXES) or r[0] in texts or r[0] in seen:
+            continue
+        seen.add(r[0])
+        body.append(r)
     for key, (pt, en) in texts.items():
         # Line breaks go in the CSV as the two characters \n (the game turns them back).
         body.append([key, pt.replace("\n", "\\n"), en.replace("\n", "\\n")])

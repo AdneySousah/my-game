@@ -15,6 +15,9 @@ var unspent_points: int = 0
 var attributes: Dictionary = {}
 ## Extra attack fraction from buffs (e.g. Brado de Guerra = 0.25).
 var atk_buff: float = 0.0
+## The Awakening (Fase 8): every stat times this while it lasts (1.0 = off).
+var awaken_mult: float = 1.0
+const AWAKEN_STATS: Array[String] = ["atk", "def", "max_hp", "max_mp", "max_stamina", "mp_regen", "crit_chance", "crit_dmg", "atk_speed", "evade"]
 ## Seconds left on the "Derrotado" debuff.
 var defeated_time_left: float = 0.0
 ## Flat bonuses of the equipment worn (stat -> amount), set by the Player.
@@ -103,6 +106,8 @@ func get_stat(stat: String) -> float:
 		value *= 1.0 + buff("def")
 	elif stat == "atk_speed":
 		value += buff("speed")
+	if awaken_mult != 1.0 and stat in AWAKEN_STATS:
+		value *= awaken_mult
 	var caps: Dictionary = p.get("stat_caps", {})
 	if caps.has(stat):
 		value = minf(value, float(caps[stat]))

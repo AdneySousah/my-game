@@ -6,8 +6,9 @@ extends Control
 signal tapped
 
 ## Radius of the visible map; the ornate frame (hole = 25% of its width) is drawn around it.
-const RADIUS_PX: float = 62.0
-const FRAME_SIZE: float = 260.0
+## Smaller since 13/11 (owner: the frame took too much room on a phone).
+const RADIUS_PX: float = 50.0
+const FRAME_SIZE: float = 200.0
 const WORLD_RADIUS: float = 34.0
 
 var main: Main

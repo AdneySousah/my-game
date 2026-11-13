@@ -7312,6 +7312,60 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "hero_lio_anims_fase8",
+      "category": "hero",
+      "phase": 8,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Block1, Block3, Hit_Reaction_1, Mummy_Stagger_inplace, Charged_Spell_Cast, Kneel_on_One_Knee_and_Stand",
+      "file": "assets/characters/hero_lio_anims_fase8/hero_lio_anims_fase8.glb",
+      "tasks": [
+        {
+          "type": "animation",
+          "credits": 18,
+          "task_id": "01a1d631-a1e9-74f4-8a65-a9f5a03fb5ba",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pro_despertar",
+      "category": "pro",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Cena do Despertar do Herdeiro depois da Sahra (4 painéis, image-to-image nano-banana-2 com sto_bento_1 e fotos da Sahra)",
+      "file": "assets/story/pro_despertar/pro_despertar.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d649-4dbc-7333-b990-5baf5d013124",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d649-54e7-7190-bbda-e3d825c83133",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d649-5a0c-74f8-8a11-03b7b2b89b86",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d649-5ee3-772c-84b7-0dd1b53284e2",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

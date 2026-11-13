@@ -166,6 +166,7 @@ func _register_inputs() -> void:
 	_action("attack", [KEY_J], [JOY_BUTTON_X])
 	_action("dodge", [KEY_SPACE], [JOY_BUTTON_A])
 	_action("sprint", [KEY_SHIFT], [JOY_BUTTON_LEFT_STICK])
+	_action("guard", [KEY_Q], [])
 	_action("skill_1", [KEY_1, KEY_U], [JOY_BUTTON_Y])
 	_action("skill_2", [KEY_2, KEY_I], [JOY_BUTTON_B])
 	_action("skill_3", [KEY_3, KEY_O], [JOY_BUTTON_LEFT_SHOULDER])

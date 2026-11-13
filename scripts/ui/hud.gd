@@ -42,6 +42,10 @@ var _board_panel: BoardPanel
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
+## Fase 8: Defend (hold / parry), over the 4th skill. The Awakening has no button: the
+## Attack button's rim shows it (charge, 3-second hold, time left).
+var _guard_btn: TouchActionButton
+var _pulse_t: float = 0.0
 var _skill_btns: Array[TouchActionButton] = []
 var _attributes_panel: AttributesPanel
 var _skills_panel: SkillsPanel
@@ -565,6 +569,7 @@ func _process(delta: float) -> void:
 	_status.mp = player.mp
 	_dodge_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("dodge_cost", 25))
 	_sprint_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("sprint_min_to_start", 15)) and not player.is_sprinting()
+	_update_guard_buttons(delta)
 	for i: int in _skill_btns.size():
 		var btn: TouchActionButton = _skill_btns[i]
 		btn.dimmed = not player.skills.affordable(i)
@@ -578,6 +583,36 @@ func _process(delta: float) -> void:
 	_update_potion_buttons()
 	# The "Derrotado" penalty shows as an icon in the buff row (BuffBar).
 	_status.defeated_text = ""
+
+
+func _update_guard_buttons(delta: float) -> void:
+	var g: HeroGuard = player.guard
+	if g == null:
+		return
+	_guard_btn.dimmed = player.stamina < float(HeroGuard.rules().get("block_stamina", 12))
+	# The Attack button's rim: thin gold while the light charges, glowing when full, red
+	# while Attack is held (3 s to awaken), then the time left of the Awakening.
+	_pulse_t += delta
+	var btn: TouchActionButton = _attack_btn
+	if not g.unlocked():
+		btn.ring_ratio = 0.0
+	elif g.is_awakened():
+		btn.ring_ratio = g.duration_ratio()
+		btn.ring_color = Color(1.0, 0.25 + 0.1 * sin(_pulse_t * 8.0), 0.12)
+		btn.ring_width = 7.0
+		btn.ring_at = 0.9
+	elif g.hold_ratio() > 0.0:
+		btn.ring_ratio = g.hold_ratio()
+		btn.ring_color = Color(1.0, 0.18, 0.12)
+		btn.ring_width = 7.0
+		btn.ring_at = 0.9
+	else:
+		var full: bool = g.fury_ratio() >= 1.0
+		btn.ring_ratio = g.fury_ratio()
+		# On the dark glass inside the gold frame, so it shows.
+		btn.ring_color = Color(1.0, 0.92, 0.45, 0.85 + (0.15 * sin(_pulse_t * 5.0) if full else 0.0))
+		btn.ring_width = 7.0 if full else 6.0
+		btn.ring_at = 0.66
 
 
 # --- Build ----------------------------------------------------------------------
@@ -626,6 +661,7 @@ func _build_controls(root: Control) -> void:
 	_attack_btn = _touch("attack", ATTACK_RADIUS, tr("HUD_ATTACK"), Color(0.85, 0.3, 0.25, 0.55))
 	_dodge_btn = _touch("dodge", DODGE_RADIUS, tr("HUD_DODGE"), Color(0.3, 0.6, 0.9, 0.5))
 	_sprint_btn = _touch("sprint", DODGE_RADIUS, tr("HUD_SPRINT"), Color(0.55, 0.75, 0.2, 0.5))
+	_guard_btn = _touch("guard", DODGE_RADIUS, tr("HUD_GUARD"), Color(0.78, 0.8, 0.9, 0.5))
 	for i: int in Game.SKILL_SLOTS:
 		_skill_btns.append(_touch("skill_%d" % (i + 1), SKILL_RADIUS, "", Color(1, 1, 1, 0.3)))
 	for i: int in 3:
@@ -659,10 +695,10 @@ func _layout() -> void:
 	_joystick.position = Vector2(0, vp.y * 0.52)
 	_joystick.size = Vector2(vp.x * 0.45, vp.y * 0.48)
 	if _minimap:
-		_minimap.position = Vector2(vp.x - Minimap.FRAME_SIZE - 6, 50)
+		_minimap.position = Vector2(vp.x - Minimap.FRAME_SIZE - 4, 4)
 	if _clock:
 		# Under the minimap's left side, a little smaller than it.
-		_clock.position = _minimap.position + Vector2(-6.0, Minimap.FRAME_SIZE - DayClock.SIZE - 8.0)
+		_clock.position = _minimap.position + Vector2(-4.0, Minimap.FRAME_SIZE - DayClock.SIZE - 18.0)
 	var attack_c := Vector2(vp.x - 130, vp.y - 120)
 	_attack_btn.set_center(attack_c)
 	# Skills in an arc around the attack button, spaced so circles never overlap.
@@ -670,8 +706,11 @@ func _layout() -> void:
 	for i: int in _skill_btns.size():
 		var a: float = deg_to_rad(angles[i])
 		_skill_btns[i].set_center(attack_c + Vector2(cos(a), sin(a)) * 165.0)
-	_dodge_btn.set_center(attack_c + Vector2(-270, 40))
-	_sprint_btn.set_center(attack_c + Vector2(-275, -60))
+	_dodge_btn.set_center(attack_c + Vector2(-262, 42))
+	_sprint_btn.set_center(attack_c + Vector2(-264, -58))
+	# Defend right over the 4th skill (owner, 13/11), under the minimap.
+	var top_skill: Vector2 = attack_c + Vector2(cos(deg_to_rad(angles[3])), sin(deg_to_rad(angles[3]))) * 165.0
+	_guard_btn.set_center(top_skill + Vector2(0, -(SKILL_RADIUS + DODGE_RADIUS + 8.0)))
 	# Potions: a row just above the stamina bar, in the middle of the screen.
 	for i: int in _potion_btns.size():
 		_potion_btns[i].set_center(Vector2(vp.x * 0.5 + (i - 1) * 84.0, vp.y - 98.0))
@@ -683,9 +722,9 @@ func _layout() -> void:
 	if _stamina_bar:
 		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:
-		_debug_btn.position = Vector2(vp.x - _debug_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 60)
+		_debug_btn.position = Vector2(10, 300)
 	if _debug_kit_btn:
-		_debug_kit_btn.position = Vector2(vp.x - _debug_kit_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 112)
+		_debug_kit_btn.position = Vector2(10, 352)
 
 
 func _button(text: String, cb: Callable) -> Button:

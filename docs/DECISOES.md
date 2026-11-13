@@ -699,3 +699,29 @@ O dono e um amigo viram quedas de quadros em celulares mais antigos.
   - Pradoluz: 130 quadros por segundo no Alto, 188 no Baixo;
   - Floresta (23 monstros): 126 → 158 no Baixo.
   - Num celular os números são bem menores, mas a proporção de ganho é parecida.
+
+## Fase 8A — Defesa, aparar e Despertar (13/11/2026)
+Pedido do dono: novas mecânicas (plano completo em `docs/FASE8.md`). A parte A é o combate.
+- **Sem escudo:** o Lio continua com uma espada só e ganha o botão **Defesa**. Escudo mudaria todas as animações e os visuais.
+  - **Segurar:** golpe de frente perde 70% do dano e gasta 12 de fôlego. Sem fôlego, a guarda quebra e ele fica tonto 0,8 s.
+  - **Apertar até 0,3 s antes do golpe (aparar):** o golpe não pega, o herói ganha 15 de MP e o inimigo é empurrado para trás. Depois o inimigo fica tonto, com estrelinhas na cabeça e o corpo balançando: 2 s nos comuns, 1 s nos chefes. Tonto, leva +30% de dano.
+  - **O que dá para aparar:** golpes de frente (inclusive dos chefes). Investidas só dá para segurar. Golpes em área (círculo, chão marcado, chuva) só esquivando. `"unblockable": true` num ataque tira a defesa.
+- **Animações:** 18 créditos (Block3 para guarda e aparar, Hit_Reaction_1 para o desequilíbrio, Charged_Spell_Cast para o Despertar e Kneel para a fogueira).
+  - O desequilíbrio e a tontura servem para **todos os inimigos com esqueleto**. Ficam em `characters.json` → `_shared_reactions` (mesmo esqueleto do Meshy), sem gerar animação por monstro.
+- **Despertar (mudado pelo dono no mesmo dia):**
+  - **História:** a cena ilustrada "O Despertar do Herdeiro" (4 painéis, 24 créditos) toca ao vencer a Sahra, Arauto da 2ª cidade. Na tempestade de areia, volta a mesma luz dourada da noite em que Lio nasceu. A Sahra reconhece a luz do Soberano no céu, o que prepara a reviravolta de Vaelor ser o pai dele.
+  - **Liberação:** flag `despertar`. Saves que já tinham vencido a Sahra (`sahra_defeated`) também liberam.
+  - **Sem botão próprio:** a luz enche lutando (pouco com golpes, +10 ao aparar, +40 ao vencer chefe; fora de luta esvazia aos poucos). Cheia, **segurar Atacar por 3 s** desperta.
+  - **A borda do botão Atacar mostra tudo:**
+    - dourada por dentro enquanto a luz enche;
+    - vermelha por fora enquanto segura;
+    - vermelha esvaziando com o tempo que resta.
+  - **Efeito:** cabelo dourado com brilho (shader `awaken_hair`, só acima do pescoço e sem a pele), aura dourada (`AwakenAura`) e **+50% em todos os status por 12 s**.
+- **HUD mais compacto (pedido do dono):**
+  - Correr e Esquiva voltam para o lugar de antes.
+  - **Defesa** fica em cima da 4ª skill.
+  - O minimapa diminuiu (moldura de 260 para 200 px) e subiu para o topo, e o relógio diminuiu (74 para 52 px).
+  - O teste confere que nenhum botão de toque encosta em outro nem no minimapa.
+- **Gerador de textos** (`gen_act1_text.py`): duplicava as falas das cenas a cada vez que rodava e apagava as chaves `OPT_` feitas à mão, como "Gráficos". Agora só troca as chaves dele e tira as repetidas.
+- **Sons novos** do ElevenLabs: aparar, defesa, despertar e tontura.
+- **Teclado:** Q = Defesa; segurar J (Atacar) 3 s = Despertar.

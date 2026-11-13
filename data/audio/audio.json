@@ -456,6 +456,10 @@
       ],
       "gap": 0.3
     },
+    "parry": {"files": ["el/parry_1.ogg", "el/parry_2.ogg"], "volume_db": -3, "pitch": [0.95, 1.05], "gap": 0.1},
+    "block": {"files": ["el/block_1.ogg", "el/block_2.ogg"], "volume_db": -6, "pitch": [0.9, 1.1], "gap": 0.08},
+    "awaken": {"files": ["el/awaken_1.ogg"], "volume_db": -2, "pitch": [1.0, 1.0], "gap": 1.0},
+    "dizzy": {"files": ["el/dizzy_1.ogg"], "volume_db": -12, "pitch": [0.95, 1.1], "gap": 0.6},
     "shield_break": {
       "files": [
         "el/shield_break_1.ogg"

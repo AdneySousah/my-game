@@ -10,7 +10,9 @@ signal changed
 ## Session is created before Data finishes loading).
 var capacity: int:
 	get:
-		return base_capacity() + backpack_bonus()
+		return fixed_capacity if fixed_capacity > 0 else base_capacity() + backpack_bonus()
+## A chest with its own size (the house chest, Fase 8F); 0 = the hero's bag.
+var fixed_capacity: int = 0
 ## Extra backpacks worn (item ids, at most "backpack_slots"; owner, 13/11): each one adds
 ## its "bag_bonus" slots (+10 from the merchants, +30 from the special shop).
 var backpacks: Array[String] = []

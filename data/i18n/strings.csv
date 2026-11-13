@@ -1668,3 +1668,29 @@ BS_BRANCH_HP,Vida,Health
 BS_BRANCH_HP_FX,+1% de vida máxima por ponto,+1% max health per point
 BS_BRANCH_UTIL,Precisão,Precision
 BS_BRANCH_UTIL_FX,"+0,4% de chance de crítico por ponto",+0.4% critical chance per point
+MAP_CASA_HEROI,Minha casa,My house
+HM_SIGN_SALE,À venda: %d de ouro,For sale: %d gold
+HM_SIGN_OWNED,Minha casa,My house
+HUD_HOME_BUY,Ver a casa (E),See the house (E)
+HUD_HOME_BUY_TAP,Ver a casa,See the house
+HUD_STORAGE,Baú (E),Chest (E)
+HUD_STORAGE_TAP,Baú,Chest
+HUD_SLEEP,Dormir (E),Sleep (E)
+HUD_SLEEP_TAP,Dormir,Sleep
+HM_OWNED,A casa já é sua.,The house is already yours.
+HM_NO_GOLD,Ouro insuficiente.,Not enough gold.
+HM_BOUGHT,A casa é sua!,The house is yours!
+HM_SLEPT_TODAY,Você já dormiu hoje. Volte amanhã.,You already slept today. Come back tomorrow.
+HM_RESTED_BANNER,Descansado: +%d%% de XP por %d min,Rested: +%d%% XP for %d min
+HM_RESTED,Descansado,Rested
+HM_STORAGE_TITLE,Baú da casa,House chest
+HM_STORAGE_HINT,Toque num item para passá-lo para o outro lado.,Tap an item to move it to the other side.
+HM_STORAGE_BAG,Mochila %d/%d,Bag %d/%d
+HM_STORAGE_CHEST,Baú %d/%d,Chest %d/%d
+HM_STORAGE_FULL,Não cabe do outro lado.,There is no room on the other side.
+HM_STORAGE_PUT,Guardado: %s,Stored: %s
+HM_STORAGE_TOOK,Pegou: %s,Taken: %s
+HM_BUY_TITLE,Casa à venda,House for sale
+HM_BUY_DESC,Uma casa só sua em Pradoluz. Dentro tem um baú com %d espaços para guardar itens e uma cama: dormir nela 1 vez por dia dá +%d%% de XP por %d min. Tem também um suporte que mostra suas melhores armas e pedestais com estatuetas douradas dos Procurados e dos chefes dos Covis que você vencer.,A house of your own in Pradoluz. Inside there is a chest with %d slots to store items and a bed: sleeping in it once a day gives +%d%% XP for %d min. There is also a rack showing your best weapons and pedestals with gold statuettes of the Wanted bosses and Lair bosses you defeat.
+HM_BUY_PRICE,Preço: %d de ouro (você tem %d),Price: %d gold (you have %d)
+HM_BUY,Comprar,Buy

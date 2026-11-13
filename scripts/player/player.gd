@@ -151,6 +151,7 @@ func _physics_process(delta: float) -> void:
 	_tick_mp(delta)
 	_tick_poison(delta)
 	_tick_food(delta)
+	Home.tick(delta)
 	guard.tick(delta)
 	if _dead or _scripted:
 		return

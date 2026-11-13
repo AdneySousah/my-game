@@ -59,6 +59,9 @@ func _collect() -> void:
 	if Session.food_id != "" and Session.food_left > 0.0:
 		var fi: Dictionary = Data.item(Session.food_id)
 		_items.append({"name": str(fi.get("name", "")), "time": Session.food_left, "item": Session.food_id, "color": Color("#e0a050")})
+	# A night in the hero's bed (Fase 8F).
+	if Session.rested_left > 0.0:
+		_items.append({"name": "HM_RESTED", "time": Session.rested_left, "glyph": "Zz", "color": Color("#7fa8ff")})
 	if s.defeated_time_left > 0.0:
 		_items.append({"name": "BUFF_DEFEATED", "time": s.defeated_time_left, "glyph": "!", "color": Color("#ff7a7a"), "debuff": true})
 	for e: String in ["stun", "root", "slow", "weaken", "poison", "def_break"]:

@@ -39,6 +39,8 @@ var runes: Dictionary = {}
 var fishing: Dictionary = {}
 ## Bestiary pages and the Mastery rules (Fase 8E, see Bestiary).
 var bestiary: Dictionary = {}
+## The hero's house (Fase 8F).
+var home: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -54,6 +56,7 @@ func _ready() -> void:
 	runes = _load_json("res://data/skills/runes.json")
 	fishing = _load_json("res://data/world/fishing.json")
 	bestiary = _load_json("res://data/world/bestiary.json")
+	home = _load_json("res://data/world/home.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])

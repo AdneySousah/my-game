@@ -18,6 +18,10 @@ var chests: Array[Chest] = []
 ## Enterable houses: [{"body", "floors", "key"}]. Pots inside a house: Node3D list.
 var houses: Array[Dictionary] = []
 var vases: Array[Node3D] = []
+## The hero's house inside (Fase 8F; the map's "home" block) and, in the city, the sign
+## floating over the house for sale.
+var home_decor: HomeDecor
+var home_sign: Label3D
 ## "Resetar masmorra" sign (dungeons with a boss), or null.
 var reset_sign: DungeonSign
 ## Dungeon difficulty signs, quest boards and wanted posters in this map (DungeonSign).
@@ -139,6 +143,7 @@ func _ready() -> void:
 	_build_enemy_zones()
 	_build_bosses.call_deferred()
 	_build_reset_sign()
+	_build_home()
 	_bake_navigation.call_deferred()
 
 
@@ -703,7 +708,10 @@ func _build_props() -> void:
 		# Homes in towns can be entered ("interior": number of floors in props.json).
 		var floors: int = int(PropFactory.config(str(item["id"])).get("interior", 0))
 		if floors > 0 and bool(data.get("safe", false)) and body != null:
-			houses.append({"body": body, "floors": floors, "key": "%s#%d" % [map_id, index]})
+			var home: bool = bool(item.get("home", false))
+			houses.append({"body": body, "floors": floors, "key": "%s#%d" % [map_id, index], "home": home})
+			if home:
+				_home_sign(body)
 	# Pots inside houses: touch one to pick up something small ("vases": [[x, z], ...]).
 	var v: int = 0
 	for p: Array in data.get("vases", []):
@@ -718,6 +726,49 @@ func _build_props() -> void:
 	# Invisible walls ("barriers": [[[x, z], [x, z]], ...]), e.g. the open side of a room.
 	for bar: Array in data.get("barriers", []):
 		_invisible_wall(_v(bar[0]), _v(bar[1]), 1.0)
+
+
+## The hero's house (Fase 8F): the chest, the rack and the trophies inside.
+func _build_home() -> void:
+	if not data.has("home"):
+		return
+	home_decor = HomeDecor.new()
+	home_decor.cfg = data["home"]
+	add_child(home_decor)
+
+
+## A sign over the house for sale in the city ("À venda: 15.000 de ouro"), or over the
+## hero's own house once bought.
+func _home_sign(body: StaticBody3D) -> void:
+	home_sign = Label3D.new()
+	home_sign.name = "HomeSign"
+	home_sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	home_sign.pixel_size = 0.008
+	home_sign.font_size = 56
+	home_sign.outline_size = 14
+	# Always on top (the camera looks down: a sign over the roof would be off the screen).
+	home_sign.no_depth_test = true
+	home_sign.render_priority = 2
+	body.add_child(home_sign)
+	# On the side of the house facing the camera, a bit over the door height.
+	var half: float = 2.0
+	for c: Node in body.get_children():
+		var cs := c as CollisionShape3D
+		if cs and cs.shape is BoxShape3D:
+			half = maxf((cs.shape as BoxShape3D).size.x, (cs.shape as BoxShape3D).size.z) * 0.5
+	home_sign.global_position = body.global_position + Vector3(0.7, 0, 1.0).normalized() * half * 0.8 + Vector3(0, 2.4, 0)
+	refresh_home_sign()
+
+
+func refresh_home_sign() -> void:
+	if home_sign == null:
+		return
+	if Session.home_owned:
+		home_sign.text = tr("HM_SIGN_OWNED")
+		home_sign.modulate = Color("#ffe39a")
+	else:
+		home_sign.text = tr("HM_SIGN_SALE") % Home.price()
+		home_sign.modulate = Color("#ffffff")
 
 
 ## The enterable house the hero stands next to (within `margin` of its walls), or {}.

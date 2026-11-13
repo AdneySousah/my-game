@@ -7492,6 +7492,30 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "prp_suporte_armas",
+      "category": "prp",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "suporte de armas de madeira da casa do herói (Fase 8F)",
+      "file": "assets/props/prp_suporte_armas/prp_suporte_armas.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d70d-a21b-765e-8f0c-baf3f9ce949d",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d70d-f459-7166-9864-ee974c4f3f64",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

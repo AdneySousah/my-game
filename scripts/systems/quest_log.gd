@@ -303,7 +303,7 @@ func _complete(id: String) -> void:
 		Session.tracked_quest = ""
 	var r: Dictionary = q.get("rewards", {})
 	if player:
-		player.stats.add_xp(roundi(int(r.get("xp", 0)) * Session.premium_mult("xp")))
+		player.stats.add_xp(roundi(int(r.get("xp", 0)) * Session.premium_mult("xp") * Home.xp_mult()))
 		player.add_gold(int(r.get("gold", 0)))
 	var items: Dictionary = r.get("items", {})
 	for item_id: String in items:

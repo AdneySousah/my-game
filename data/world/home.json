@@ -1,0 +1,21 @@
+{
+  "_comment": "Casa do herói (Fase 8F). A casa é a peça de Pradoluz marcada com \"home\": true em data/maps/pradoluz.json; comprada com ouro (price), leva ao mapa casa_heroi. storage: espaços do baú. rest: dormir na cama 1 vez por dia dá 'Descansado' (xp_bonus a mais de XP por minutes minutos de jogo) e acorda às wake_hour. rack: armas mostradas no suporte (as melhores que o herói tem, sem repetir). trophies: estatuetas douradas (Procurados vencidos e chefes dos covis), na ordem das posições do mapa.",
+  "city": "pradoluz",
+  "price": 15000,
+  "map": "casa_heroi",
+  "storage": 40,
+  "rest": {"xp_bonus": 0.10, "minutes": 30, "wake_hour": 7.0},
+  "rack": 5,
+  "trophies": [
+    {"id": "procurado_pradoluz", "kind": "wanted"},
+    {"id": "procurado_qaressa", "kind": "wanted"},
+    {"id": "procurado_hrimvald", "kind": "wanted"},
+    {"id": "procurado_lysthael", "kind": "wanted"},
+    {"id": "procurado_altarea", "kind": "wanted"},
+    {"id": "gorvan", "kind": "covil"},
+    {"id": "sahra", "kind": "covil"},
+    {"id": "brannoc", "kind": "covil"},
+    {"id": "velyra", "kind": "covil"},
+    {"id": "vaelor", "kind": "covil"}
+  ]
+}

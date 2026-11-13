@@ -48,7 +48,7 @@
     {"id": "prp_feno", "pos": [10.5, 14.2], "if_flag": "gorvan_defeated"},
     {"id": "prp_carroca", "pos": [-11, 14], "rot": 30, "if_flag": "gorvan_defeated"},
     {"id": "env_casa_pequena", "pos": [-10, -7], "rot": 20},
-    {"id": "env_casa_media", "pos": [10, -8], "rot": -20},
+    {"id": "env_casa_media", "pos": [10, -8], "rot": -20, "home": true},
     {"id": "env_casa_pequena", "pos": [-15, 12], "rot": 75},
     {"id": "env_casa_media", "pos": [14, 14], "rot": 200},
     {"id": "env_casa_pequena", "pos": [-4, 22], "rot": 160},

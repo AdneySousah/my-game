@@ -137,7 +137,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 		map_id = str(r.get("map", "pradoluz"))
 		spawn = "pos:%f:%f:%f" % [float(r.get("x", 0.0)), float(r.get("z", 0.0)), float(r.get("yaw", 0.0))]
 	# Going in or out of a house is a quick fade, no loading card.
-	var quick: bool = map_id.begins_with("interior_") or Session.current_map.begins_with("interior_")
+	var quick: bool = map_id.begins_with("interior_") or Session.current_map.begins_with("interior_") or map_id == Home.map_id() or Session.current_map == Home.map_id()
 	# A duel's "cannot die" only lasts in its own map.
 	player.min_hp_ratio = 0.0
 	# The real game shows a loading card with art of the destination (tests and tools
@@ -320,6 +320,13 @@ func talk_to_nearby() -> void:
 		hud.toast(tr("DUNGEON_INFERNAL_DONE") % map.infernal_level() if hell else tr("DUNGEON_RESET_DONE"), 2.5)
 		save_now()
 		return
+	# Fase 8F: the chest and the bed of the hero's house.
+	if _near_npc == null and _interact_kind == "storage" and not _talking and not _changing:
+		hud.open_storage()
+		return
+	if _near_npc == null and _interact_kind == "sleep" and not _talking and not _changing:
+		sleep_in_bed()
+		return
 	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
 		_pet(_near_animal)
 		return
@@ -422,7 +429,7 @@ func xp_for_kill(e: Enemy) -> int:
 		mult = maxf(float(p.get("xp_min_mult", 0.1)), 1.0 - diff * float(p.get("xp_level_diff_penalty", 0.1)))
 	if Session.xp_boost_left() > 0.0:
 		mult *= 1.0 + float(Data.store.get("xp_boost", 0.5))
-	mult *= Session.diff("xp") * Session.premium_mult("xp")
+	mult *= Session.diff("xp") * Session.premium_mult("xp") * Home.xp_mult()
 	return roundi(e.xp_reward * mult)
 
 
@@ -467,6 +474,7 @@ func _bounty_kill(e: Enemy) -> void:
 	if e.has_meta("wanted_city"):
 		var city: String = str(e.get_meta("wanted_city"))
 		var prize: Dictionary = Bounties.wanted_done(city, e.level)
+		Home.add_trophy(e.base_id)
 		player.add_gold(int(prize["gold"]))
 		hud.loot_gold(int(prize["gold"]))
 		for id: String in prize["items"]:
@@ -513,6 +521,7 @@ func enter_covil(id: String) -> bool:
 
 func _covil_prize(e: Enemy) -> void:
 	var prize: Dictionary = Covis.reward(str(e.get_meta("covil")))
+	Home.add_trophy(str(e.get_meta("covil")))
 	for id: String in prize:
 		give_item(id, int(prize[id]))
 	hud.banner(tr("CV_WON"))
@@ -523,10 +532,49 @@ func _covil_prize(e: Enemy) -> void:
 ## Walks into a town house: one floor = "interior_casa", two = "interior_terreo" (with the
 ## bedroom upstairs). The way out brings the hero back to where he went in.
 func enter_house(h: Dictionary) -> void:
+	# The hero's house (Fase 8F): for sale until bought, then his own room.
+	if bool(h.get("home", false)) and not Session.home_owned:
+		hud.open_home_buy()
+		return
 	var out: Vector3 = player.global_position
 	Session.house_return = {"map": map.map_id, "x": out.x, "z": out.z, "yaw": player.rotation_degrees.y + 180.0, "key": str(h.get("key", ""))}
 	_near_house = {}
+	if bool(h.get("home", false)):
+		load_map(Home.map_id(), "door")
+		return
 	load_map("interior_terreo" if int(h.get("floors", 1)) >= 2 else "interior_casa", "door")
+
+
+## Buys the hero's house (the "Comprar" of the sale window).
+func buy_home() -> bool:
+	if not Home.buy(player):
+		return false
+	if map:
+		map.refresh_home_sign()
+	hud.banner(tr("HM_BOUGHT"))
+	Audio.play_sfx("quest")
+	save_now()
+	return true
+
+
+## The bed: a night's sleep (once a day) heals everything, wakes up in the morning and
+## gives "Descansado" (more XP for a while).
+func sleep_in_bed() -> void:
+	if _changing or _talking:
+		return
+	if Home.slept_today():
+		hud.toast(tr("HM_SLEPT_TODAY"), 2.5)
+		return
+	_changing = true
+	await hud.fade(true, 0.6)
+	Home.sleep()
+	player.rest()
+	Audio.play_sfx("rest", player.global_position)
+	await get_tree().create_timer(0.9).timeout
+	await hud.fade(false, 0.6)
+	_changing = false
+	hud.banner(tr("HM_RESTED_BANNER") % [roundi(float(Home.rest_cfg().get("xp_bonus", 0.1)) * 100.0), int(Home.rest_cfg().get("minutes", 30))])
+	save_now()
 
 
 static func houses_cfg() -> Dictionary:
@@ -716,6 +764,12 @@ func _update_quest_contacts() -> void:
 				_near_animal = an
 				break
 	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("pick" if _near_vase else (_near_sign.kind if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else ""))))))
+	# The house for sale says "Comprar casa" (Fase 8F).
+	if kind == "enter" and bool(_near_house.get("home", false)) and not Session.home_owned:
+		kind = "home_buy"
+	# Inside the hero's house: the chest and the bed.
+	if kind == "" and not _talking and not _petting and map.home_decor:
+		kind = map.home_decor.spot_near(pos)
 	# Fase 8D: nothing else near — a campfire to cook at, or water to fish in.
 	if kind == "" and not _talking and not _petting and not is_instance_valid(fishing) and not player.in_combat():
 		if _at_point and _at_point.kind == "fogueira":

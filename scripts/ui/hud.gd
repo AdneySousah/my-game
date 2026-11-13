@@ -44,6 +44,8 @@ var _covil_panel: CovilPanel
 ## Bestiary and Mastery windows (Fase 8E), from the portrait menu.
 var _bestiary_panel: BestiaryPanel
 var _mastery_panel: MasteryPanel
+var _storage_panel: StoragePanel
+var _home_buy_panel: HomeBuyPanel
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
@@ -150,6 +152,20 @@ func _ready() -> void:
 	_bestiary_panel = BestiaryPanel.new()
 	root.add_child(_bestiary_panel)
 	_bestiary_panel.closed.connect(_on_panel_closed)
+	_storage_panel = StoragePanel.new()
+	root.add_child(_storage_panel)
+	_storage_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			if _main.map and _main.map.home_decor:
+				_main.map.home_decor.refresh_rack()
+			_main.save_now())
+	_home_buy_panel = HomeBuyPanel.new()
+	root.add_child(_home_buy_panel)
+	_home_buy_panel.closed.connect(_on_panel_closed)
+	_home_buy_panel.buy_requested.connect(func() -> void:
+		if _main:
+			_main.buy_home())
 	_mastery_panel = MasteryPanel.new()
 	root.add_child(_mastery_panel)
 	_mastery_panel.closed.connect(func() -> void:
@@ -386,7 +402,8 @@ func show_interact_button(kind: String) -> void:
 	_talk_btn.visible = kind != "" and not kind in ["talk", "pet", "fish", "cook"]
 	if _talk_btn.visible:
 		var key: String = {"open": "HUD_OPEN", "reset": "HUD_RESET", "infernal": "HUD_INFERNAL", "enter": "HUD_ENTER",
-			"tier": "HUD_TIER", "board": "HUD_BOARD", "wanted": "HUD_WANTED"}.get(kind, "HUD_PICK_UP")
+			"tier": "HUD_TIER", "board": "HUD_BOARD", "wanted": "HUD_WANTED", "home_buy": "HUD_HOME_BUY",
+			"storage": "HUD_STORAGE", "sleep": "HUD_SLEEP"}.get(kind, "HUD_PICK_UP")
 		# Phones have no E key: the button shows just the word.
 		_talk_btn.text = tr(key + "_TAP") if Game.is_mobile() else tr(key)
 	_update_talk_mode()
@@ -488,6 +505,18 @@ func open_covil(covil_id: String) -> void:
 
 func covil_panel() -> CovilPanel:
 	return _covil_panel
+
+
+## The chest of the hero's house (Fase 8F).
+func open_storage() -> void:
+	_storage_panel.player = player
+	_open_panel(_storage_panel)
+
+
+## The house for sale in Pradoluz (Fase 8F).
+func open_home_buy() -> void:
+	_home_buy_panel.player = player
+	_open_panel(_home_buy_panel)
 
 
 func open_cook() -> void:
@@ -930,6 +959,8 @@ func _open_panel(panel: Control) -> void:
 	_covil_panel.hide()
 	_bestiary_panel.hide()
 	_mastery_panel.hide()
+	_storage_panel.hide()
+	_home_buy_panel.hide()
 	_talk_btn.hide()
 	_interact_shown = false
 	_update_talk_mode()

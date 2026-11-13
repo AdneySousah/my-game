@@ -857,3 +857,13 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
   - **Aviso:** o botão "Maestria" do menu ganha "!" quando há ponto para gastar.
 - **Dados:** `data/world/bestiary.json` sai de `tools/content/gen_bestiary.py`, com as chaves `BS_*`. O progresso fica em `Session.kills`, `mastery_xp`, `mastery_points` e `mastery_spent`.
 - **Meshy:** sem créditos novos; os ícones vieram na folha da parte D.
+
+## Fase 8F — Casa do herói (13/11/2026)
+- **Compra:** a casa média de Pradoluz perto do centro (marcada com `"home": true` no mapa) fica "À venda: 15000 de ouro". Perto dela aparece "Ver a casa", que abre a janela com o que tem dentro e o botão Comprar. Depois de comprada, a placa vira "Minha casa" e o botão vira "Entrar".
+- **Cômodo:** mapa `casa_heroi`, do mesmo tamanho da casa térrea. As paredes da direita e da frente ficam baixas, porque a câmera olha desse lado; assim a cama e o baú não somem atrás da parede.
+- **Baú:** 40 espaços próprios (`Session.home_chest`). Na janela, a mochila fica à esquerda e o baú à direita; tocar num item passa a pilha inteira, ou o que couber, para o outro lado. Peças de equipamento guardam o +nível e as gemas.
+- **Cama:** dormir 1 vez por dia (dia real) cura tudo, acorda às 7 h e dá **"Descansado"**: +10% de XP (monstros e missões) por 30 min de jogo, com ícone "Zz" ao lado do retrato.
+- **Suporte de armas:** modelo novo do Meshy. Mostra até 5 armas do herói, sem repetir e das melhores para as piores: a da mão, as da mochila e as do baú. As espadas ficam de ponta para baixo.
+- **Troféus:** 10 pedestais de pedra com aro dourado. Na fila de trás ficam os 5 Procurados e na da frente os 5 chefes dos Covis. Cada um vencido vira uma estatueta dourada do próprio monstro; os que faltam mostram "?". O nome e quantas vezes foi vencido aparecem só no pedestal mais perto do herói.
+- **Dados:** `data/world/home.json` (preço, baú, cama, suporte, troféus) e `data/maps/casa_heroi.json` (bloco `home` com as posições). Lógica em `Home`, móveis em `HomeDecor` e janelas `StoragePanel` e `HomeBuyPanel`.
+- **Meshy:** `prp_suporte_armas`, 18 créditos (imagem 3 + modelo 15). O baú usa o `prp_bau` e a cama o `prp_cama`, que já existiam.

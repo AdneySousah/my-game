@@ -1,0 +1,46 @@
+{
+  "_comment": "Casa do herói por dentro (Fase 8F): mesmo cômodo da casa térrea, com as paredes da direita e da frente baixas (a câmera olha desse lado, e a cama e o baú ficam à direita). 'home' diz onde ficam o baú, a cama (área para dormir), o suporte de armas e os pedestais dos troféus ([x, z, altura]; a ordem é a de data/world/home.json: fila de trás = Procurados, da frente = chefes dos covis). A saída volta para a rua.",
+  "id": "casa_heroi",
+  "name": "MAP_CASA_HEROI",
+  "safe": true,
+  "indoor": true,
+  "size": [14, 10.5],
+  "seed": 402,
+  "ground": "#a07548",
+  "sky": "#050302",
+  "ambient": 0.75,
+  "ambient_color": "#ffe2bf",
+  "sun": 0.55,
+  "sun_color": "#ffd9a8",
+  "spawns": {"door": [0, 3.3, 0]},
+  "exits": [
+    {"to": "__return", "spawn": "", "pos": [0, 4.9], "size": [4.4, 1.2], "label": "MAP_EXIT_HOUSE"}
+  ],
+  "walls": [
+    {"id": "env_parede_casa", "from": [-6.5, -4.5], "to": [6.5, -4.5], "height": 2.0},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-6.5, -4.5], "height": 2.0},
+    {"id": "env_parede_casa", "from": [6.5, -4.5], "to": [6.5, 4.5], "height": 0.35},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-2.4, 4.5], "height": 0.35},
+    {"id": "env_parede_casa", "from": [2.4, 4.5], "to": [6.5, 4.5], "height": 0.35}
+  ],
+  "barriers": [],
+  "props": [
+    {"id": "prp_cama", "pos": [5.0, -2.4], "rot": 90},
+    {"id": "prp_tapete", "pos": [0.6, 0.4]},
+    {"id": "prp_mesa", "pos": [2.6, 1.6], "rot": 20},
+    {"id": "prp_lampiao", "pos": [-2.9, -3.8]},
+    {"id": "prp_lampiao", "pos": [2.9, -3.8]}
+  ],
+  "vases": [[5.6, 3.4]],
+  "home": {
+    "chest": [5.5, 0.9, -90],
+    "bed": [5.0, -2.4],
+    "rack": [0, -3.9, 0],
+    "trophies": [
+      [-5.8, -3.2, 0.75], [-5.8, -1.6, 0.75], [-5.8, 0.0, 0.75], [-5.8, 1.6, 0.75], [-5.8, 3.2, 0.75],
+      [-4.7, -3.2, 0.4], [-4.7, -1.6, 0.4], [-4.7, 0.0, 0.4], [-4.7, 1.6, 0.4], [-4.7, 3.2, 0.4]
+    ]
+  },
+  "patches": {"color": "#000000", "count": 0},
+  "room": {"floor": "#9a6438", "floor_size": [13.2, 9.4]}
+}

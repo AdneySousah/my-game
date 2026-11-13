@@ -49,6 +49,7 @@ func _ready() -> void:
 	await _fishing_test()
 	await _boss_zone_test()
 	await _bestiary_test()
+	await _home_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1136,6 +1137,84 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8F: the hero's house (bought with gold in Pradoluz), its chest (moves stacks and
+## gear pieces both ways, 40 slots, saved), the bed (once a day, more XP while rested),
+## the trophies (only wanted bosses and lair bosses) and the weapon rack, and the room.
+func _home_test() -> void:
+	Session.reset()
+	check(Home.price() == 15000 and Home.storage_size() == 40 and Session.home_chest.capacity == 40, "the house costs 15000 gold and its chest has 40 slots")
+	# Chest moves.
+	Session.inventory.add("pot_vida_m", 7)
+	Session.inventory.add("eq_espada_epico", 1)
+	var uid: int = int(Session.inventory.slots[1]["uid"])
+	check(Home.move(Session.inventory, 0, Session.home_chest) == 7 and Session.home_chest.count("pot_vida_m") == 7 and Session.inventory.count("pot_vida_m") == 0, "a stack goes into the chest whole")
+	check(Home.move(Session.inventory, 0, Session.home_chest) == 1 and int(Session.home_chest.find_uid(uid).get("uid", 0)) == uid, "a gear piece goes into the chest keeping its id")
+	check(Home.move(Session.home_chest, 0, Session.inventory) == 7 and Session.inventory.count("pot_vida_m") == 7, "and comes back to the bag")
+	for i: int in 39:
+		Session.home_chest.add("eq_espada_comum", 1)
+	check(Session.home_chest.free_slots() == 0 and Home.move(Session.inventory, 0, Session.home_chest) == 0 and Session.inventory.count("pot_vida_m") == 7, "a full chest takes nothing more")
+	# Rack: the best weapons, one of each, best first, at most 5.
+	Session.inventory.add("eq_espada_celestial", 1)
+	Session.inventory.add("eq_arma_gorvan_raro", 1)
+	var rack: Array[String] = Home.rack_weapons()
+	check(rack.size() == 4 and rack[0] == "eq_espada_celestial" and rack[1] == "eq_espada_epico" and rack.has("eq_espada_comum"), "the rack shows each weapon once, best first, the chest's too")
+	# Trophies.
+	Home.add_trophy("procurado_qaressa")
+	Home.add_trophy("gorvan")
+	Home.add_trophy("orc")
+	check(Home.trophy_count("procurado_qaressa") == 1 and Home.trophy_count("gorvan") == 1 and not Session.trophies.has("orc"), "only wanted bosses and lair bosses become trophies")
+	# Bed.
+	check(Home.xp_mult() == 1.0 and Home.sleep() and is_equal_approx(Home.xp_mult(), 1.1) and is_equal_approx(Session.rested_left, 1800.0), "sleeping gives +10%% XP for 30 minutes")
+	check(not Home.sleep() and Home.slept_today(), "only once a day")
+	Home.tick(1800.0)
+	check(Home.xp_mult() == 1.0, "the rest wears off with time played")
+	Session.rested_left = 300.0
+	Session.home_owned = true
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.home_owned and Session.home_chest.slots.size() == 40 and Session.home_chest.capacity == 40 and Home.trophy_count("gorvan") == 1 and is_equal_approx(Session.rested_left, 300.0) and Home.slept_today(), "the house, its chest, trophies and rest are saved")
+	check(Session.inventory.next_uid > uid, "new gear pieces never reuse an id kept in the chest")
+	# In town: the house for sale, buying it, going in.
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var homes: Array = main.map.houses.filter(func(h: Dictionary) -> bool: return bool(h.get("home", false)))
+	check(homes.size() == 1 and main.map.home_sign != null and main.map.home_sign.text.contains("15000"), "Pradoluz has one house for sale, with its sign")
+	var p: Player = main.player
+	check(not main.buy_home() and not Session.home_owned, "it cannot be bought without the gold")
+	p.add_gold(16000)
+	check(main.buy_home() and Session.home_owned and p.gold == 1000 and main.map.home_sign.text == tr("HM_SIGN_OWNED"), "buying it takes 15000 gold and the sign changes")
+	Session.inventory.add("eq_espada_lendario", 1)
+	Session.trophies = {"gorvan": 2}
+	main.enter_house(homes[0])
+	await _frames(40)
+	var hd: HomeDecor = main.map.home_decor if main.map else null
+	check(Session.current_map == "casa_heroi" and hd != null, "the house leads to the hero's own room")
+	if hd:
+		check(hd.spot_near(hd.chest_pos + Vector3(1.2, 0, 0)) == "storage" and hd.spot_near(hd.bed_pos + Vector3(-1.5, 0, 0)) == "sleep", "the chest and the bed can be used")
+		var slots: Node = hd.find_child("RackWeapons", true, false)
+		check(slots != null and slots.get_child_count() == 1, "the rack holds the hero's weapon")
+		check(hd.find_child("Trophy_gorvan", true, false).find_children("*", "CharacterModel", true, false).size() == 1 and hd.find_child("Trophy_sahra", true, false).find_children("*", "CharacterModel", true, false).is_empty(), "a statuette for each boss beaten, none for the others")
+	# Rested: more XP per monster.
+	var e: Enemy = main.spawn_enemy("bandido", p.global_position + Vector3(0, 0, -30))
+	await _frames(2)
+	Session.rested_left = 0.0
+	var xp0: int = main.xp_for_kill(e)
+	Session.rested_left = 100.0
+	check(main.xp_for_kill(e) > xp0, "monsters give more XP while rested")
+	Session.rested_left = 0.0
+	main.hud.open_storage()
+	await _frames(2)
+	check((main.hud.get("_storage_panel") as Control).visible, "the chest window opens")
+	(main.hud.get("_storage_panel") as Control).hide()
+	main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8E: the Bestiary (defeats per page, boss forms count for the boss, marks give more
 ## damage, the weakness shows from the first mark, saved) and Mastery (XP at the level cap
 ## turns into points, spending them adds stats) and both windows.

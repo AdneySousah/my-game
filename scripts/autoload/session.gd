@@ -50,6 +50,13 @@ var kills: Dictionary = {}
 var mastery_xp: int = 0
 var mastery_points: int = 0
 var mastery_spent: Dictionary = {}
+## The hero's house (Fase 8F): bought or not, its chest, the gold statuettes won (enemy id
+## -> times beaten), the day of the last night slept and the "Descansado" seconds left.
+var home_owned: bool = false
+var home_chest: Inventory = _new_chest()
+var trophies: Dictionary = {}
+var rested_day: String = ""
+var rested_left: float = 0.0
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
 ## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
@@ -110,7 +117,19 @@ func reset() -> void:
 	mastery_xp = 0
 	mastery_points = 0
 	mastery_spent = {}
+	home_owned = false
+	home_chest.clear()
+	home_chest.fixed_capacity = Home.storage_size() if not Data.home.is_empty() else 40
+	trophies = {}
+	rested_day = ""
+	rested_left = 0.0
 	day_hour = float(Data.daynight.get("start_hour", 9.0))
+
+
+static func _new_chest() -> Inventory:
+	var c := Inventory.new()
+	c.fixed_capacity = 40
+	return c
 
 
 ## Moves the clock on (called every physics frame while playing).
@@ -174,6 +193,7 @@ func to_dict() -> Dictionary:
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "play_seconds": play_seconds,
 		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "skill_runes": skill_runes, "food_id": food_id, "food_left": food_left, "kills": kills, "mastery_xp": mastery_xp, "mastery_points": mastery_points, "mastery_spent": mastery_spent, "rest_ready_at": rest_ready_at,
+		"home_owned": home_owned, "home_chest": home_chest.to_array(), "trophies": trophies, "rested_day": rested_day, "rested_left": rested_left,
 		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
@@ -201,6 +221,12 @@ func from_dict(d: Dictionary) -> void:
 	for slot: String in gear.slots:
 		top = maxi(top, int(gear.slots[slot]["uid"]) + 1)
 	inventory.next_uid = maxi(inventory.next_uid, top)
+	home_owned = bool(d.get("home_owned", false))
+	home_chest.from_array(d.get("home_chest", []))
+	inventory.next_uid = maxi(inventory.next_uid, home_chest.next_uid)
+	trophies = (d.get("trophies", {}) as Dictionary).duplicate()
+	rested_day = str(d.get("rested_day", ""))
+	rested_left = float(d.get("rested_left", 0.0))
 	# Saves from before equipment (5.2 and older) get the apprentice sword.
 	if not d.has("gear"):
 		give_starter_gear()

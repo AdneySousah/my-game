@@ -428,6 +428,7 @@ func xp_for_kill(e: Enemy) -> int:
 
 func _on_enemy_killed(e: Enemy) -> void:
 	kills += 1
+	Bestiary.add_kill(e.base_id)
 	quests.on_enemy_killed(e.base_id, Session.current_map)
 	Session.routine.on_event("kill", e.base_id)
 	player.stats.add_xp(xp_for_kill(e))

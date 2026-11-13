@@ -566,6 +566,8 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 		var em: Dictionary = runes.hit_mult(skills.last_skill, enemy)
 		m *= float(em["mult"])
 		tag = str(em["tag"])
+	# Bestiary marks: more damage to a monster defeated many times (Fase 8E).
+	m *= 1.0 + Bestiary.bonus(enemy.base_id)
 	# Dizzy (parried) or stunned enemies take more (Fase 8).
 	if enemy.status and enemy.status.has("stun"):
 		m *= float(HeroGuard.rules().get("dizzy_damage_mult", 1.3))
@@ -946,6 +948,10 @@ func _bonuses() -> Dictionary:
 	var t: Dictionary = Session.routine.title_bonus()
 	for k: String in t:
 		b[k] = float(b.get(k, 0.0)) + float(t[k])
+	# Mastery points (Fase 8E).
+	var ms: Dictionary = Bestiary.bonuses()
+	for k: String in ms:
+		b[k] = float(b.get(k, 0.0)) + float(ms[k])
 	# The meal eaten at a campfire (Fase 8D).
 	if Session.food_id != "" and Session.food_left > 0.0:
 		var f: Dictionary = (Data.item(Session.food_id).get("food", {}) as Dictionary).get("bonus", {})
@@ -995,6 +1001,12 @@ func _on_title_maybe_changed() -> void:
 
 
 ## Equipment changed: new bonuses and the sword in hand.
+## Recomputes everything worn, eaten and learned (Mastery points) into the stats.
+func refresh_bonuses() -> void:
+	stats.gear = _bonuses()
+	stats.stats_changed.emit()
+
+
 func _on_gear_changed() -> void:
 	stats.gear = _bonuses()
 	stats.stats_changed.emit()

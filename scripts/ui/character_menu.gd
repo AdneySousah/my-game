@@ -12,6 +12,7 @@ var _attr_btn: Button
 var _skills_btn: Button
 var _equip_btn: Button
 var _routine_btn: Button
+var _mastery_btn: Button
 var _exit_btn: Button
 ## "Sair para o menu" was tapped once; the next tap leaves.
 var _exit_armed: bool = false
@@ -43,6 +44,9 @@ func _ready() -> void:
 	_item(grid, "quests").text = tr("HUD_QUESTS")
 	_item(grid, "map").text = tr("HUD_MAP")
 	_item(grid, "options").text = tr("OPT_MENU")
+	_item(grid, "bestiary").text = tr("BS_TITLE")
+	_mastery_btn = _item(grid, "mastery")
+	_mastery_btn.text = tr("BS_MASTERY")
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 10)
 	box.add_child(row)
@@ -91,6 +95,7 @@ func open_with(level: int, points: int, new_skills: bool, new_gear: bool = false
 	_set_alert(_skills_btn, new_skills)
 	_set_alert(_equip_btn, new_gear)
 	_set_alert(_routine_btn, routine)
+	_set_alert(_mastery_btn, Session.mastery_points > 0)
 	_exit_armed = false
 	_exit_btn.text = tr("MENU_EXIT")
 	show()

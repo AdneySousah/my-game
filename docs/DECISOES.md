@@ -838,3 +838,22 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 - **Gerador:** tudo sai de `tools/content/gen_fishing.py`: itens, `data/world/fishing.json`, drops e loja (entradas marcadas com `gen`) e chaves `FS_*`.
 - **Meshy:** 6 créditos, uma folha com ingredientes, panela e comidas, mais livro, estrela e chave para as partes E e F.
 - **Testes:** `test_runner` ganhou `-- --only=<nome>`, que roda um teste só.
+
+## Correção: Golens repetidos na mina (13/11/2026)
+- **Sintoma (relato do dono):** na luta com o Golem apareceram 4 Golens.
+- **Causa:** as zonas de monstros repõem o alvo das missões de "derrote X" perto do ponto da missão (regra da caçada aos orcs). Elas não sabiam que o Golem é chefe do mapa (fica fora da zona) e criavam outro a cada 1,5 s. O mesmo valia para todas as missões de chefe.
+- **Correção:** a zona nunca cria chefes nem duelos e nunca passa de 2 do tipo pedido. Há um teste para isso (`_boss_zone_test`).
+
+## Fase 8E — Bestiário e Maestria (13/11/2026)
+- **Bestiário:**
+  - O menu do retrato ganhou o botão "Bestiário". São 35 fichas; as formas dos chefes contam para o chefe.
+  - **Lista:** à esquerda, com estrelas dos marcos; quem ainda não foi derrotado aparece como "???".
+  - **Ficha:** o monstro girando em 3D (sombra preta enquanto desconhecido), o texto da família, onde aparece (tirado dos mapas pelo gerador), quantos foram derrotados, o bônus e o próximo marco.
+  - **Fraqueza e resistência:** aparecem a partir do 1º marco.
+  - **Marcos:** 50/200/1000 derrotas (chefes: 1/5/20), que dão +2/4/6% de dano contra aquele monstro.
+- **Maestria:**
+  - **Pontos:** no nível máximo, a XP passa a encher a barra da Maestria. Cada barra (a XP do último nível) vale 1 ponto.
+  - **Ramos:** Ataque (+1% ataque), Defesa (+1% defesa), Vida (+1% vida) e Precisão (+0,4% crítico) por ponto, sem limite.
+  - **Aviso:** o botão "Maestria" do menu ganha "!" quando há ponto para gastar.
+- **Dados:** `data/world/bestiary.json` sai de `tools/content/gen_bestiary.py`, com as chaves `BS_*`. O progresso fica em `Session.kills`, `mastery_xp`, `mastery_points` e `mastery_spent`.
+- **Meshy:** sem créditos novos; os ícones vieram na folha da parte D.

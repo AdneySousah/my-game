@@ -1623,3 +1623,48 @@ FS_NO_ACTIVE,Nenhuma comida ativa.,No active meal.
 FS_ANY_FISH,Peixe comum,Common fish
 FS_MINUTES,%d min,%d min
 FS_PEIXE_COMUM_DESC,"Tilápia, truta, carpa ou bagre.","Tilapia, trout, carp or catfish."
+BS_TITLE,Bestiário,Bestiary
+BS_UNKNOWN,???,???
+BS_UNKNOWN_TEXT,Ainda não enfrentado. Derrote um para conhecer.,Not met yet. Defeat one to learn about it.
+BS_KILLS,Derrotados: %d,Defeated: %d
+BS_NEXT,Próximo marco: %d (+%d%% de dano contra ele),Next mark: %d (+%d%% damage against it)
+BS_MAXED,Todos os marcos alcançados.,Every mark reached.
+BS_BONUS,Bônus: +%d%% de dano contra ele,Bonus: +%d%% damage against it
+BS_WHERE,Onde aparece: %s,Where: %s
+BS_WEAK,Fraco a: %s,Weak to: %s
+BS_RESIST,Resiste a: %s,Resists: %s
+BS_NONE,nada,nothing
+BS_HIDDEN,Fraqueza: derrote mais para descobrir.,Weakness: defeat more to find out.
+BS_PROGRESS,%d de %d conhecidos,%d of %d known
+BS_MASTERY,Maestria,Mastery
+BS_MASTERY_LOCKED,"A Maestria abre no nível %d. Depois dele, a XP continua valendo pontos para sempre.","Mastery opens at level %d. After it, XP keeps turning into points forever."
+BS_MASTERY_INFO,Cada barra cheia de XP dá 1 ponto. Escolha onde gastar:,Each full XP bar gives 1 point. Choose where to spend it:
+BS_MASTERY_POINTS,Pontos para gastar: %d,Points to spend: %d
+BS_MASTERY_RANK,Nível %d · agora %s,Rank %d · now %s
+BS_FAM_BANDIDOS,Gente que perdeu tudo para os Arautos e resolveu tirar dos outros. Fogem quando a luta aperta.,People who lost everything to the Heralds and now take from others. They run when the fight turns.
+BS_FAM_ARQUEIROS,Atiram de longe e rolam para o lado depois de cada flecha. Chegue perto rápido.,They shoot from afar and roll aside after each arrow. Close in fast.
+BS_FAM_ORCS,Fortes e lentos. O golpe no chão avisa antes: saia do círculo.,Strong and slow. Their ground slam warns you first: step out of the circle.
+BS_FAM_ESQUELETOS,Mineiros e soldados que nunca descansaram. A luz os desfaz.,Miners and soldiers who never found rest. Light undoes them.
+BS_FAM_GOLENS,"Pedra e gelo que ganharam vida perto das minas. Batem devagar, mas muito forte.","Stone and ice brought to life near the mines. Slow blows, but very hard ones."
+BS_FAM_GUARDIOES,Sentinelas antigas que protegem o caminho até um Arauto.,Ancient sentinels guarding the way to a Herald.
+BS_FAM_LAGARTOS,Caçadores rápidos do deserto e do pântano. Avançam em linha reta com a lança.,Quick hunters of the desert and the swamp. They charge straight with the spear.
+BS_FAM_MORTOS,Os que o frio ou a lama não deixaram partir. O fogo e a luz os assustam.,Those the cold or the mud would not let go. Fire and light scare them.
+BS_FAM_CULTISTAS,Seguidores da fé no Soberano. Lançam esferas de energia de longe.,Followers of the faith in the Sovereign. They throw energy orbs from afar.
+BS_FAM_GUARDAS,"A lei de ferro da capital: escudos, flechas e grilhões.","The capital's iron law: shields, arrows and shackles."
+BS_FAM_CELESTES,Soldados de luz da Cidadela. O raio atravessa a armadura deles.,Soldiers of light from the Citadel. Lightning goes through their armor.
+BS_FAM_PROCURADOS,"Feras marcadas no cartaz de Procurado da cidade. Um por dia, sempre mais forte que você.","Beasts on the city's Wanted poster. One a day, always stronger than you."
+BS_FAM_GORVAN,Arauto da Colheita. Tomou o trigo de Pradoluz e virou um espantalho gigante.,Herald of the Harvest. Took Pradoluz's wheat and became a giant scarecrow.
+BS_FAM_SEVERIN,"O cavaleiro da lei que caça Lio pelo continente. Rival, nunca inimigo de verdade.","The knight of the law who hunts Lio across the land. A rival, never truly an enemy."
+BS_FAM_SAHRA,Arauta da Areia. Vendia a água de Qaressa a peso de ouro.,Herald of the Sand. Sold Qaressa's water for its weight in gold.
+BS_FAM_BRANNOC,Arauto do Frio. Deixou Hrimvald congelar para provar sua força.,Herald of the Cold. Let Hrimvald freeze to prove his strength.
+BS_FAM_VELYRA,Arauta do Silêncio. Proibiu as canções de Lys'Thaël.,Herald of Silence. Forbade the songs of Lys'Thaël.
+BS_FAM_CASSIAN,Arauto da Lei. Transformou a capital numa prisão.,Herald of the Law. Turned the capital into a prison.
+BS_FAM_VAELOR,"O Soberano Alado, que se declarou deus. Há um segredo por trás da máscara.","The Winged Sovereign, who called himself a god. There is a secret behind the mask."
+BS_BRANCH_ATK,Ataque,Attack
+BS_BRANCH_ATK_FX,+1% de ataque por ponto,+1% attack per point
+BS_BRANCH_DEF,Defesa,Defense
+BS_BRANCH_DEF_FX,+1% de defesa por ponto,+1% defense per point
+BS_BRANCH_HP,Vida,Health
+BS_BRANCH_HP_FX,+1% de vida máxima por ponto,+1% max health per point
+BS_BRANCH_UTIL,Precisão,Precision
+BS_BRANCH_UTIL_FX,"+0,4% de chance de crítico por ponto",+0.4% critical chance per point

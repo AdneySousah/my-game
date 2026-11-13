@@ -1,0 +1,341 @@
+{
+  "_comment": "Bestiário e Maestria (Fase 8E). Gerado por tools/content/gen_bestiary.py; não editar à mão. Cada ficha: marcos de abates ('kills') e o bônus de dano contra o monstro em cada marco ('bonus'); a fraqueza aparece no 1º marco. 'forms': formas de chefe que contam para o chefe.",
+  "entries": [
+    {
+      "id": "bandido",
+      "family": "bandidos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_bandido",
+      "maps": ["arena", "campos", "floresta", "mina"]
+    },
+    {
+      "id": "arqueiro",
+      "family": "arqueiros",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_arqueiro",
+      "maps": ["bosque_seco", "campos", "dunas", "estepe", "floresta", "mina"]
+    },
+    {
+      "id": "orc",
+      "family": "orcs",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_orc",
+      "maps": ["arena", "floresta", "mina"]
+    },
+    {
+      "id": "esqueleto",
+      "family": "esqueletos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_esqueleto",
+      "maps": ["mina"]
+    },
+    {
+      "id": "bandido_estrada",
+      "family": "bandidos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_bandido_estrada",
+      "maps": ["bosque_seco", "estepe", "planalto"]
+    },
+    {
+      "id": "orc_saqueador",
+      "family": "orcs",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_orc_saqueador",
+      "maps": ["bosque_seco", "deserto_rochoso", "estepe"]
+    },
+    {
+      "id": "golem",
+      "family": "golens",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_golem",
+      "maps": ["mina"]
+    },
+    {
+      "id": "gorvan",
+      "family": "gorvan",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_gorvan",
+      "maps": ["celeiro"]
+    },
+    {
+      "id": "bandido_deserto",
+      "family": "bandidos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_bandido_deserto",
+      "maps": ["deserto_rochoso", "dunas", "ruinas", "torre"]
+    },
+    {
+      "id": "homem_lagarto",
+      "family": "lagartos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_homem_lagarto",
+      "maps": ["deserto_rochoso", "dunas", "ruinas", "torre"]
+    },
+    {
+      "id": "esqueleto_antigo",
+      "family": "esqueletos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_esqueleto_antigo",
+      "maps": ["deserto_rochoso", "ruinas", "torre"]
+    },
+    {
+      "id": "severin",
+      "family": "severin",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_severin",
+      "maps": ["pantano", "picos", "ruinas"]
+    },
+    {
+      "id": "sahra",
+      "family": "sahra",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_sahra",
+      "maps": ["torre"]
+    },
+    {
+      "id": "orc_neve",
+      "family": "orcs",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_orc_neve",
+      "maps": ["castelo", "mina_gelo", "picos", "pinheiral", "planalto", "vale_degelo"]
+    },
+    {
+      "id": "morto_gelo",
+      "family": "mortos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_morto_gelo",
+      "maps": ["castelo", "mina_gelo", "picos", "pinheiral", "vale_degelo"]
+    },
+    {
+      "id": "golem_gelo",
+      "family": "golens",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_golem_gelo",
+      "maps": ["castelo", "mina_gelo", "picos", "pinheiral", "planalto"]
+    },
+    {
+      "id": "guardiao_gelo",
+      "family": "guardioes",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_golem_gelo",
+      "maps": ["mina_gelo"]
+    },
+    {
+      "id": "brannoc",
+      "family": "brannoc",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_brannoc",
+      "maps": ["castelo"]
+    },
+    {
+      "id": "lagarto_pantano",
+      "family": "lagartos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_lagarto_pantano",
+      "maps": ["bordas_pantano", "mata_umida", "pantano", "torre_vigia", "vale_degelo"]
+    },
+    {
+      "id": "morto_pantano",
+      "family": "mortos",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_morto_pantano",
+      "maps": ["bordas_pantano", "mata_umida", "pantano", "torre_vigia"]
+    },
+    {
+      "id": "cultista",
+      "family": "cultistas",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_cultista",
+      "maps": ["bordas_pantano", "estrada_real", "mata_umida", "pantano", "torre_vigia", "vale_degelo"]
+    },
+    {
+      "id": "guardiao_espinhos",
+      "family": "guardioes",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_guardiao_espinhos",
+      "maps": ["torre_vigia"]
+    },
+    {
+      "id": "velyra",
+      "family": "velyra",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_velyra",
+      "maps": ["topo_torre"]
+    },
+    {
+      "id": "guarda_lei",
+      "family": "guardas",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_guarda_lei",
+      "maps": ["arredores", "castelo_arauto", "estrada_real"]
+    },
+    {
+      "id": "arqueiro_lei",
+      "family": "guardas",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_arqueiro_lei",
+      "maps": ["arredores", "castelo_arauto", "estrada_real"]
+    },
+    {
+      "id": "carcereiro",
+      "family": "guardas",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_carcereiro",
+      "maps": ["arredores", "castelo_arauto"]
+    },
+    {
+      "id": "cassian",
+      "family": "cassian",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_cassian",
+      "maps": ["castelo_arauto"]
+    },
+    {
+      "id": "sentinela_celeste",
+      "family": "celestes",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_sentinela_celeste",
+      "maps": ["escadaria_ceu"]
+    },
+    {
+      "id": "vigia_celeste",
+      "family": "celestes",
+      "boss": false,
+      "kills": [50, 200, 1000],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_vigia_celeste",
+      "maps": ["escadaria_ceu"]
+    },
+    {
+      "id": "vaelor",
+      "family": "vaelor",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_vaelor",
+      "maps": ["cidadela"]
+    },
+    {
+      "id": "procurado_pradoluz",
+      "family": "procurados",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_golem",
+      "maps": ["floresta", "campos"]
+    },
+    {
+      "id": "procurado_qaressa",
+      "family": "procurados",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_sahra_areia",
+      "maps": ["dunas", "deserto_rochoso"]
+    },
+    {
+      "id": "procurado_hrimvald",
+      "family": "procurados",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_golem_gelo",
+      "maps": ["pinheiral", "planalto"]
+    },
+    {
+      "id": "procurado_lysthael",
+      "family": "procurados",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "enm_guardiao_espinhos",
+      "maps": ["mata_umida", "bordas_pantano"]
+    },
+    {
+      "id": "procurado_altarea",
+      "family": "procurados",
+      "boss": true,
+      "kills": [1, 5, 20],
+      "bonus": [0.02, 0.04, 0.06],
+      "model": "boss_cassian",
+      "maps": ["estrada_real", "arredores"]
+    }
+  ],
+  "forms": {
+    "espantalho": "gorvan",
+    "sahra_areia": "sahra",
+    "brannoc_gelo": "brannoc",
+    "velyra_driade": "velyra",
+    "cassian_colosso": "cassian",
+    "vaelor_desmascarado": "vaelor",
+    "vaelor_corrompido": "vaelor",
+    "severin_2": "severin",
+    "severin_3": "severin"
+  },
+  "mastery": {
+    "_comment": "Depois do nível máximo a XP enche a barra da Maestria: cada xp_per_point_mult × a XP do último nível vale 1 ponto, gasto num dos ramos (sem limite).",
+    "xp_per_point_mult": 1.0,
+    "branches": {
+      "atk": {"stat": "atk_pct", "per": 0.01},
+      "def": {"stat": "def_pct", "per": 0.01},
+      "hp": {"stat": "max_hp_pct", "per": 0.01},
+      "util": {"stat": "crit_chance", "per": 0.004}
+    }
+  }
+}

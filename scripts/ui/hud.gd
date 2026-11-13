@@ -41,6 +41,9 @@ var _loot: LootFeed
 var _board_panel: BoardPanel
 ## The Wandering Smith's window (Fase 8B).
 var _covil_panel: CovilPanel
+## Bestiary and Mastery windows (Fase 8E), from the portrait menu.
+var _bestiary_panel: BestiaryPanel
+var _mastery_panel: MasteryPanel
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
@@ -144,6 +147,15 @@ func _ready() -> void:
 	root.add_child(_board_panel)
 	_covil_panel = CovilPanel.new()
 	root.add_child(_covil_panel)
+	_bestiary_panel = BestiaryPanel.new()
+	root.add_child(_bestiary_panel)
+	_bestiary_panel.closed.connect(_on_panel_closed)
+	_mastery_panel = MasteryPanel.new()
+	root.add_child(_mastery_panel)
+	_mastery_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			_main.save_now())
 	_covil_panel.closed.connect(func() -> void:
 		_on_panel_closed()
 		if _main:
@@ -916,6 +928,8 @@ func _open_panel(panel: Control) -> void:
 	_routine_panel.hide()
 	_board_panel.hide()
 	_covil_panel.hide()
+	_bestiary_panel.hide()
+	_mastery_panel.hide()
 	_talk_btn.hide()
 	_interact_shown = false
 	_update_talk_mode()
@@ -945,6 +959,10 @@ func _on_character_choice(what: String) -> void:
 		"routine": open_routine()
 		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
+		"bestiary": _open_panel(_bestiary_panel)
+		"mastery":
+			_mastery_panel.player = player
+			_open_panel(_mastery_panel)
 		"save":
 			save_requested.emit()
 		"exit":

@@ -48,6 +48,7 @@ func _ready() -> void:
 	await _runes_test()
 	await _fishing_test()
 	await _boss_zone_test()
+	await _bestiary_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1135,6 +1136,66 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8E: the Bestiary (defeats per page, boss forms count for the boss, marks give more
+## damage, the weakness shows from the first mark, saved) and Mastery (XP at the level cap
+## turns into points, spending them adds stats) and both windows.
+func _bestiary_test() -> void:
+	Session.reset()
+	var ok_models: bool = true
+	for e: Dictionary in Bestiary.entries():
+		ok_models = ok_models and not CharacterModel.config_for(str(e["model"])).is_empty() and tr("BS_FAM_" + str(e["family"]).to_upper()) != "BS_FAM_" + str(e["family"]).to_upper()
+	check(Bestiary.entries().size() == 35 and ok_models, "35 bestiary pages, each with a 3D model and a text")
+	check(Bestiary.bonus("orc") == 0.0 and not Bestiary.known("orc"), "an unmet monster is unknown and gives nothing")
+	for i: int in 50:
+		Bestiary.add_kill("orc")
+	check(Bestiary.tier("orc") == 1 and is_equal_approx(Bestiary.bonus("orc"), 0.02) and Bestiary.revealed("orc"), "50 orcs: first mark, +2%% damage and the weakness shows")
+	Bestiary.add_kill("espantalho")
+	check(Bestiary.kills("gorvan") == 1 and Bestiary.tier("gorvan") == 1, "a boss's last form counts for the boss (1 defeat = first mark)")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Bestiary.kills("orc") == 50, "the bestiary is saved")
+	# In a fight: the mark adds damage, kills are counted.
+	Main.start_map = "campos"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	await _frames(2)
+	var p: Player = main.player
+	var b: Enemy = main.spawn_enemy("bandido", p.global_position + Vector3(0, 0, -1.5))
+	await _frames(2)
+	b.hp = 1.0
+	p.deal_damage(b, 3.0, false)
+	await _frames(2)
+	check(Bestiary.kills("bandido") == 1, "each defeat is counted on its page")
+	# Mastery.
+	while not p.stats.is_max_level():
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
+	var per: int = Bestiary.xp_per_point()
+	p.stats.add_xp(per * 2 + 10)
+	check(Session.mastery_points == 2 and Session.mastery_xp == 10, "at the level cap, XP turns into Mastery points")
+	var atk0: float = p.stats.get_stat("atk")
+	check(Bestiary.spend("atk") and Bestiary.spend("atk") and not Bestiary.spend("atk"), "points are spent one by one, while there are any")
+	p.refresh_bonuses()
+	check(p.stats.get_stat("atk") > atk0 * 1.015, "2 points in Attack give +2%% attack")
+	# Windows.
+	main.hud.call("_on_character_choice", "bestiary")
+	await _frames(3)
+	var bp: BestiaryPanel = main.hud.get("_bestiary_panel")
+	check(bp.visible and str(bp.get("_selected")) != "", "the Bestiary opens from the portrait menu")
+	bp.hide()
+	main.hud.call("_on_panel_closed")
+	main.hud.call("_on_character_choice", "mastery")
+	await _frames(2)
+	check((main.hud.get("_mastery_panel") as Control).visible, "the Mastery window opens from the portrait menu")
+	(main.hud.get("_mastery_panel") as Control).hide()
+	main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(3)
+
+
 ## Owner, 13/11: on the quest "beat the Golem" the mine's monster zone kept adding Golems
 ## (4 at the fight). Zones never add a boss, and never more than 2 of a hunted kind.
 func _boss_zone_test() -> void:

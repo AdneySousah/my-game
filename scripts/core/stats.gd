@@ -43,7 +43,12 @@ func is_max_level() -> bool:
 
 
 func add_xp(amount: int) -> void:
-	if amount <= 0 or is_max_level():
+	if amount <= 0:
+		return
+	# At the level cap the XP goes to the Mastery bar (Fase 8E).
+	if is_max_level():
+		Bestiary.add_xp(amount)
+		xp_changed.emit(xp, xp_needed())
 		return
 	xp += amount
 	while not is_max_level() and xp >= xp_needed():

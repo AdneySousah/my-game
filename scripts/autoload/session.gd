@@ -44,6 +44,12 @@ var skill_runes: Dictionary = {}
 ## The meal eaten (Fase 8D): its item id and the seconds its bonus still lasts.
 var food_id: String = ""
 var food_left: float = 0.0
+## Bestiary and Mastery (Fase 8E): defeats per monster page; XP past the level cap,
+## Mastery points to spend and the ones spent per branch.
+var kills: Dictionary = {}
+var mastery_xp: int = 0
+var mastery_points: int = 0
+var mastery_spent: Dictionary = {}
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
 ## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
@@ -100,6 +106,10 @@ func reset() -> void:
 	skill_runes = {}
 	food_id = ""
 	food_left = 0.0
+	kills = {}
+	mastery_xp = 0
+	mastery_points = 0
+	mastery_spent = {}
 	day_hour = float(Data.daynight.get("start_hour", 9.0))
 
 
@@ -163,7 +173,7 @@ func to_dict() -> Dictionary:
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "play_seconds": play_seconds,
-		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "skill_runes": skill_runes, "food_id": food_id, "food_left": food_left, "rest_ready_at": rest_ready_at,
+		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "skill_runes": skill_runes, "food_id": food_id, "food_left": food_left, "kills": kills, "mastery_xp": mastery_xp, "mastery_points": mastery_points, "mastery_spent": mastery_spent, "rest_ready_at": rest_ready_at,
 		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
@@ -221,6 +231,10 @@ func from_dict(d: Dictionary) -> void:
 	skill_runes = (d.get("skill_runes", {}) as Dictionary).duplicate()
 	food_id = str(d.get("food_id", ""))
 	food_left = float(d.get("food_left", 0.0))
+	kills = (d.get("kills", {}) as Dictionary).duplicate()
+	mastery_xp = int(d.get("mastery_xp", 0))
+	mastery_points = int(d.get("mastery_points", 0))
+	mastery_spent = (d.get("mastery_spent", {}) as Dictionary).duplicate()
 	if not ["easy", "normal", "hard", "extreme"].has(difficulty):
 		difficulty = "normal"
 	# JSON brings numbers back as floats; quest counters are ints.

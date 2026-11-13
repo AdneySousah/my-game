@@ -65,7 +65,7 @@ Plano completo, custos do Meshy e ordem em [FASE8.md](FASE8.md).
 - [x] 8B Covis do Ferreiro Andarilho: NPC nas 5 cidades, 5 covis (seg/qua/sex/dom, 10 entradas grátis por dia + licenças `licenca_covil_10`), 5 conjuntos rara/épica com combos; 89 créditos
 - [x] 8C Runas e elementos: 1 encaixe por skill, 6 runas em 3 níveis com fusão, fraqueza e resistência em todos os inimigos ("Fraco!"); sem créditos novos
 - [x] 8D Pesca e fogueira: pescar sentado na margem (fisgar e puxar com tensão), 7 peixes por água e hora, 9 comidas com bônus na fogueira; 6 créditos
-- [ ] 8E Bestiário e Maestria
+- [x] 8E Bestiário e Maestria: 35 fichas com modelo 3D, marcos de abates com bônus de dano e fraqueza; Maestria com 4 ramos depois do nível 100; sem créditos novos
 - [ ] 8F Casa do herói
 - [ ] 8G Eventos do mundo
 - [ ] 8H Fenda sem fim

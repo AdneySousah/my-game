@@ -1,0 +1,18 @@
+{
+  "_comment": "Eventos do mundo (Fase 8G). Só nos campos (mapas sem 'safe', fora das masmorras e covis), no máximo 1 por vez, e só no jogo de verdade (testes e ferramentas que abrem o Main direto não sorteiam). A cada check_seconds de jogo num campo, chance de começar um; depois de um evento, cooldown_seconds sem nenhum. first_delay: tempo no mapa antes do primeiro sorteio. night: horas da noite [começo, fim] (horda e estrelas só de noite). Sair do mapa encerra o evento. weight: peso no sorteio. level_plus: níveis acima do maior nível das zonas do mapa.",
+  "check_seconds": 45,
+  "chance": 0.18,
+  "cooldown_seconds": 420,
+  "first_delay": 60,
+  "min_hero_level": 3,
+  "night": [19.0, 5.0],
+  "events": {
+    "horde": {"weight": 3, "night": true, "waves": [4, 6, 8], "level_plus": 1, "radius": [8.0, 11.0], "leave_radius": 30.0,
+      "chest": {"gold_per_level": 45, "gems": 2, "rune_chance": 0.6, "items": {"trevo": 1, "pot_vida_m": 2}}},
+    "caravan": {"weight": 3, "speed": 2.4, "near": 9.0, "minutes": 7, "ambushes": [0.3, 0.65], "ambush_count": 4, "level_plus": 1, "min_length": 40.0,
+      "reward": {"gold_per_level": 35, "items": {"pot_vida_m": 3, "pot_mana_m": 2}, "rune_chance": 0.3}},
+    "errant": {"weight": 2, "minutes": 10, "level_plus": 3, "hp_mult": 12.0, "atk_mult": 1.5, "scale": 1.7, "gold_mult": 15.0, "xp_mult": 10.0, "tint": "#b05cff",
+      "items": {"mat_insignia_chefe": 3}, "rune_chance": 1.0},
+    "stars": {"weight": 2, "night": true, "seconds": 90, "shards": 14, "radius": 13.0, "linger": 40}
+  }
+}

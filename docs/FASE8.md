@@ -14,7 +14,7 @@ Tudo é feito por dados em `data/` como o resto do jogo. Cada parte tem seus tes
 | D | Pesca e fogueira | Pescar nos lagos e rios, peixes por lugar e hora, cozinhar comidas com bônus | 6 cr (feito) |
 | E | Bestiário e Maestria | Ficha de cada monstro com bônus por abates; pontos depois do nível 100 | 0 cr (feito) |
 | F | Casa do herói | Casa em Pradoluz com baú, troféus, armas expostas e cama (bônus de XP) | 18 cr (feito) |
-| G | Eventos do mundo | Horda noturna, caravana, chefe errante, chuva de estrelas | ~10 cr |
+| G | Eventos do mundo | Horda noturna, caravana, chefe errante, chuva de estrelas | 6 cr (feito; ícones da H na mesma folha) |
 | H | Fenda sem fim | Andares aleatórios, bênçãos a cada 5 andares, recorde | ~30 cr |
 
 **Total estimado: ~260 créditos, ~340 com folga para refazer o que não ficar bom.** Saldo em 13/11: **962 créditos**. Não precisa recarregar.

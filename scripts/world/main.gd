@@ -14,6 +14,7 @@ static var start_spawn: String = "start"
 
 var player: Player
 var camera_rig: CameraRig
+var events: WorldEvents
 var hud: Hud
 var map: GameMap
 var quests: QuestLog
@@ -66,6 +67,13 @@ func _ready() -> void:
 	hud.bind(player)
 	hud.travel_requested.connect(travel_to_point)
 	hud.set_main(self)
+
+	# World events in the fields (Fase 8G): drawn by themselves only in the real game.
+	events = WorldEvents.new()
+	events.name = "WorldEvents"
+	events.main = self
+	events.auto = SaveGame.active
+	add_child(events)
 
 	quests = QuestLog.new()
 	quests.name = "QuestLog"
@@ -131,6 +139,8 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	if _changing:
 		return
 	_changing = true
+	if events:
+		events.on_map_left()
 	# Leaving a house: back to the street, where the hero went in.
 	if map_id == "__return":
 		var r: Dictionary = Session.house_return

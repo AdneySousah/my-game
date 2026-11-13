@@ -867,3 +867,13 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 - **Troféus:** 10 pedestais de pedra com aro dourado. Na fila de trás ficam os 5 Procurados e na da frente os 5 chefes dos Covis. Cada um vencido vira uma estatueta dourada do próprio monstro; os que faltam mostram "?". O nome e quantas vezes foi vencido aparecem só no pedestal mais perto do herói.
 - **Dados:** `data/world/home.json` (preço, baú, cama, suporte, troféus) e `data/maps/casa_heroi.json` (bloco `home` com as posições). Lógica em `Home`, móveis em `HomeDecor` e janelas `StoragePanel` e `HomeBuyPanel`.
 - **Meshy:** `prp_suporte_armas`, 18 créditos (imagem 3 + modelo 15). O baú usa o `prp_bau` e a cama o `prp_cama`, que já existiam.
+
+## Fase 8G — Eventos do mundo (13/11/2026)
+- **Quando:** só nos campos (fora de cidades, casas, masmorras e covis), no máximo 1 por vez e a partir do nível 3. A cada 45 s de jogo num campo há 18% de chance de começar um, depois de 1 min no mapa e 7 min sem evento. Horda e chuva de estrelas só acontecem de noite (19 h às 5 h). Sair do mapa encerra o evento. Testes e ferramentas que abrem o `Main` direto nunca sorteiam.
+- **Aviso:** a frase do evento aparece no meio da tela. Embaixo do minimapa fica uma faixa com o ícone, o texto curto e uma barra de progresso, no mesmo estilo da lista de missões.
+- **Horda noturna:** 3 ondas (4, 6 e 8 monstros do próprio mapa, 1 nível acima das zonas) vêm de todos os lados. Depois da última, aparece um baú com ouro, 2 gemas, Trevo, poções e 60% de chance de runa. Afastar-se 30 m desiste.
+- **Caravana:** um comerciante puxando uma carroça percorre a estrada maior do mapa, saindo da ponta mais perto do herói. Ele só anda com o herói a até 9 m e sem inimigos vivos, e há 2 emboscadas (a 30% e a 65% do caminho). No fim paga ouro e poções, com 30% de chance de runa. São 7 min de limite.
+- **Chefe errante:** um monstro do mapa 1,7x maior, roxo, com 12x de vida e 1,5x de ataque e nome "<monstro> Errante". Ele percorre as zonas do mapa por 10 min e tem barra de chefe. Vencê-lo dá 15x o ouro, 10x a XP, 3 Insígnias de Chefe e uma runa.
+- **Chuva de estrelas:** por 90 s caem 14 fragmentos brilhantes perto do herói, que ficam 40 s no chão. Passar por cima pega um **Fragmento Estelar**. Na mochila, **"Fundir (10)"** transforma 10 fragmentos numa runa aleatória de nível I.
+- **Dados:** `data/world/events.json`. Lógica em `WorldEvents` (no `Main`) e nos eventos `HordeEvent`, `CaravanEvent`, `ErrantEvent` e `StarEvent` (`scripts/world/events/`). A faixa é a `EventBar`. O monstro errante usa `Enemy.make_errant` e `roam_points`.
+- **Meshy:** 1 folha de ícones (6 créditos) com o fragmento, os 4 eventos e, já prontos para a parte H, 10 ícones de bênçãos e o portal da Fenda.

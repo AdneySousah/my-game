@@ -50,6 +50,7 @@ func _ready() -> void:
 	await _boss_zone_test()
 	await _bestiary_test()
 	await _home_test()
+	await _events_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1137,6 +1138,124 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8G: world events — only in fields, horde and stars only at night, never drawn by
+## themselves outside the real game; the horde's waves and chest, the caravan that walks
+## only with the hero near and pays at the road's end, the wandering boss and its prize,
+## the star shards and fusing 10 into a rune; leaving the map ends an event.
+func _events_test() -> void:
+	Session.reset()
+	check(WorldEvents.is_night(21.0) and WorldEvents.is_night(3.0) and not WorldEvents.is_night(12.0), "night is from 19h to 5h")
+	Main.start_map = "campos"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var p: Player = main.player
+	while p.stats.level < 10:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
+	p.min_hp_ratio = 1.0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	var ev: WorldEvents = main.events
+	check(ev != null and not ev.auto and WorldEvents.field_ok(main.map), "the fields have events; tests never get one by chance")
+	Session.day_hour = 12.0
+	var day: Array[String] = ev.available(main.map)
+	Session.day_hour = 22.0
+	var night: Array[String] = ev.available(main.map)
+	check(not day.has("horde") and not day.has("stars") and day.has("caravan") and day.has("errant") and night.has("horde") and night.has("stars"), "horde and star shower only at night; caravan and wandering boss any time")
+	# Horde: 3 waves, then a chest.
+	check(ev.start("horde") and not ev.start("stars"), "one event at a time")
+	var gold0: int = p.gold
+	var waves: int = 0
+	for i: int in 3:
+		await _frames(150)
+		var mobs: int = 0
+		for n: Node in get_tree().get_nodes_in_group("enemies"):
+			var e := n as Enemy
+			if e and e.has_meta("event") and not e.is_dead():
+				mobs += 1
+				e.take_damage(int(e.max_hp) + 10, false)
+		if mobs > 0:
+			waves += 1
+	await _frames(150)
+	var chest: Chest = null
+	for c: Chest in main.map.chests:
+		if c.chest_id == HordeEvent.CHEST_ID:
+			chest = c
+	check(waves == 3 and ev.current == null and chest != null and chest.gold > 0 and not chest.opened, "the horde comes in 3 waves and leaves a chest")
+	if chest:
+		main.call("_open_chest", chest)
+		check(p.gold > gold0, "the horde chest pays")
+	# Caravan: walks only with the hero near; pays at the road's end.
+	Session.day_hour = 12.0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	await _frames(2)
+	p.global_position = Vector3(0, 0, 44)
+	check(ev.start("caravan"), "a caravan starts on the field's road")
+	var cv: CaravanEvent = ev.current as CaravanEvent
+	await _frames(60)
+	var moved: float = cv.progress()
+	p.global_position = cv.caravan_position() + Vector3(30, 0, 0)
+	await _frames(30)
+	var at: float = cv.progress()
+	await _frames(60)
+	check(moved > 0.0 and is_equal_approx(cv.progress(), at), "the caravan walks with the hero near and waits when he is far")
+	var gold1: int = p.gold
+	for i: int in 400:
+		if ev.current == null:
+			break
+		for n: Node in get_tree().get_nodes_in_group("enemies"):
+			var e := n as Enemy
+			if e and e.has_meta("event") and not e.is_dead():
+				e.take_damage(int(e.max_hp) + 10, false)
+		if cv.caravan_position() != Vector3.INF:
+			# Beside it, a step ahead (never back into the field's exit behind it).
+			p.global_position = cv.caravan_position() + Vector3(2.0, 0, -1.0)
+		await _frames(30)
+	check(ev.current == null and p.gold > gold1, "the caravan reaches the road's end and pays (ambushes on the way)")
+	await _frames(4)
+	# Wandering boss.
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	await _frames(2)
+	check(ev.start("errant"), "a wandering boss appears")
+	var er: ErrantEvent = ev.current as ErrantEvent
+	var boss: Enemy = er.boss
+	var plain: float = float(Data.enemies[boss.base_id]["hp"])
+	check(boss.is_boss and boss.max_hp > plain * 10.0 and boss.display_name().contains(tr(str(Data.enemies[boss.base_id]["name"]))) and boss.roam_points.size() >= 2, "it is a big, tough version of a field monster with its own name and a round to walk")
+	var ins0: int = Session.inventory.count("mat_insignia_chefe")
+	boss.take_damage(int(boss.max_hp) + 10, false)
+	await _frames(4)
+	check(ev.current == null and Session.inventory.count("mat_insignia_chefe") >= ins0 + 3, "beating it gives boss insignias")
+	# Star shower.
+	Session.day_hour = 22.0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	check(ev.start("stars"), "a star shower starts at night")
+	var st: StarEvent = ev.current as StarEvent
+	await _frames(100)
+	var got: bool = false
+	for s: Node in st.find_children("StarShard", "Node3D", true, false):
+		if bool(s.get_meta("landed", false)):
+			p.global_position = (s as Node3D).global_position
+			await _frames(4)
+			got = Session.inventory.count("mat_fragmento_estelar") > 0
+			break
+	check(got, "walking over a fallen shard picks it up")
+	# Leaving the map ends it.
+	await main.load_map("pradoluz", "from_campos")
+	await _frames(10)
+	check(ev.current == null and not main.hud.event_bar().visible, "leaving the map ends the event")
+	# Fusing.
+	Session.inventory.add("mat_fragmento_estelar", 12)
+	var n0: int = Session.inventory.count("mat_fragmento_estelar")
+	var rune: String = InventoryPanel.fuse("mat_fragmento_estelar")
+	check(rune.begins_with("runa_") and Session.inventory.count("mat_fragmento_estelar") == n0 - 10 and Session.inventory.count(rune) >= 1, "10 star shards fuse into a rune")
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8F: the hero's house (bought with gold in Pradoluz), its chest (moves stacks and
 ## gear pieces both ways, 40 slots, saved), the bed (once a day, more XP while rested),
 ## the trophies (only wanted bosses and lair bosses) and the weapon rack, and the room.

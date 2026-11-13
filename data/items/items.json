@@ -162,6 +162,7 @@
     "mat_selo_lei":        { "name": "ITEM_MAT_SELO_LEI", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "rare", "stack": 999, "price": 40, "color": "#e6c14a", "glyph": "L" },
     "mat_corrente":        { "name": "ITEM_MAT_CORRENTE", "desc": "ITEM_MAT_DESC", "type": "material", "rarity": "common", "stack": 999, "price": 20, "color": "#7d8590", "glyph": "C" },
     "mat_insignia_chefe":  { "name": "ITEM_MAT_INSIGNIA_CHEFE", "desc": "ITEM_MAT_INSIGNIA_CHEFE_DESC", "type": "material", "rarity": "epic", "stack": 999, "price": 150, "color": "#c0392b", "glyph": "I" },
+    "mat_fragmento_estelar": { "name": "ITEM_MAT_FRAGMENTO_ESTELAR", "desc": "ITEM_MAT_FRAGMENTO_ESTELAR_DESC", "type": "material", "rarity": "epic", "stack": 999, "price": 60, "color": "#ffe9a8", "glyph": "*", "fuse": {"need": 10, "gives": "rune"} },
     "mat_essencia_infernal": { "name": "ITEM_MAT_ESSENCIA_INFERNAL", "desc": "ITEM_MAT_ESSENCIA_INFERNAL_DESC", "type": "material", "rarity": "legendary", "stack": 999, "price": 300, "color": "#ff3b1f", "glyph": "E" },
     "gema_rubi_1": {"name": "ITEM_GEMA_RUBI_1", "desc": "ITEM_GEMA_RUBI_DESC", "type": "gem", "rarity": "common", "stack": 99, "price": 20, "gem_type": "rubi", "gem_level": 1, "stats": {"atk": 5}, "icon": "gema_rubi", "color": "#e8433f", "glyph": "R"},
     "gema_rubi_2": {"name": "ITEM_GEMA_RUBI_2", "desc": "ITEM_GEMA_RUBI_DESC", "type": "gem", "rarity": "common", "stack": 99, "price": 60, "gem_type": "rubi", "gem_level": 2, "stats": {"atk": 10}, "icon": "gema_rubi", "color": "#e8433f", "glyph": "R"},

@@ -225,7 +225,12 @@ func _show_details() -> void:
 	_pack_btn.visible = has and str(item.get("type", "")) == "backpack"
 	var potion: bool = has and str(item.get("type", "")) == "potion"
 	# Campfire meals are eaten from the bag too (Fase 8D).
-	_use_btn.visible = potion or (has and str(item.get("type", "")) == "food")
+	_use_btn.visible = potion or (has and str(item.get("type", "")) == "food") or (has and item.has("fuse"))
+	_use_btn.text = (tr("EV_FUSE") % int((item.get("fuse", {}) as Dictionary).get("need", 10))) if has and item.has("fuse") else tr("BAG_USE")
+	if has and item.has("fuse"):
+		_use_btn.disabled = Session.inventory.count(_selected) < int((item.get("fuse", {}) as Dictionary).get("need", 10))
+	else:
+		_use_btn.disabled = false
 	_quick_row.visible = potion
 	if potion:
 		for i: int in _quick_btns.size():
@@ -254,10 +259,35 @@ func _equip_chosen() -> void:
 
 func _use_selected() -> void:
 	if player and _selected != "":
+		# Star Shards (Fase 8G): 10 fuse into a random rune.
+		if Data.item(_selected).has("fuse"):
+			var rune: String = fuse(_selected)
+			if rune != "":
+				Audio.play_sfx("level_up")
+				_owned.text = tr("EV_FUSED") % tr(str(Data.item(rune).get("name", rune)))
+			return
 		if str(Data.item(_selected).get("type", "")) == "food":
 			player.eat(_selected)
 			return
 		player.use_potion(_selected)
+
+
+## Fuses `need` of an item with "fuse" into what it gives (a random level 1 rune).
+## Returns the item made ("" if not enough or no room).
+static func fuse(id: String) -> String:
+	var f: Dictionary = Data.item(id).get("fuse", {})
+	var need: int = int(f.get("need", 10))
+	if f.is_empty() or Session.inventory.count(id) < need:
+		return ""
+	var list: Array = Runes.kinds()
+	if list.is_empty():
+		return ""
+	var rune: String = Runes.item_id(str(list[randi_range(0, list.size() - 1)]), 1)
+	if Session.inventory.free_slots() <= 0 and Session.inventory.count(id) > need and Session.inventory.count(rune) == 0:
+		return ""
+	Session.inventory.remove(id, need)
+	Session.inventory.add(rune, 1)
+	return rune
 
 
 func _set_quick(i: int) -> void:

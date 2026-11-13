@@ -116,6 +116,12 @@ const SHEETS: Dictionary = {
 		"comida_truta_ervas", "comida_bagre_picante", "comida_peixe_lua", "comida_sopa_gelo",
 		"comida_banquete_sol", "ui_bestiario", "ui_maestria", "ui_chave_casa",
 	],
+	"ui_itens_eventos": [
+		"mat_fragmento_estelar", "ui_ev_horde", "ui_ev_caravan", "ui_ev_errant",
+		"ui_ev_stars", "ui_bless_mana", "ui_bless_vampiro", "ui_bless_furia",
+		"ui_bless_escudo", "ui_bless_vento", "ui_bless_tempo", "ui_bless_critico",
+		"ui_bless_vida", "ui_bless_ouro", "ui_bless_combo", "ui_fenda",
+	],
 	"ui_itens_mochilas": [
 		"mochila_couro", "mochila_real", "ui_skin_anjo", "ui_skin_sol",
 		"ui_skin_tempestade", "", "", "",

@@ -67,7 +67,7 @@ Plano completo, custos do Meshy e ordem em [FASE8.md](FASE8.md).
 - [x] 8D Pesca e fogueira: pescar sentado na margem (fisgar e puxar com tensão), 7 peixes por água e hora, 9 comidas com bônus na fogueira; 6 créditos
 - [x] 8E Bestiário e Maestria: 35 fichas com modelo 3D, marcos de abates com bônus de dano e fraqueza; Maestria com 4 ramos depois do nível 100; sem créditos novos
 - [x] 8F Casa do herói: comprada por 15000 de ouro em Pradoluz, baú de 40 espaços, cama com "Descansado" (+10% de XP por 30 min, 1 vez por dia), suporte com as melhores armas e estatuetas douradas dos Procurados e chefes dos Covis; 18 créditos
-- [ ] 8G Eventos do mundo
+- [x] 8G Eventos do mundo: horda noturna com baú, caravana para escoltar, chefe errante e chuva de estrelas (Fragmento Estelar, 10 viram runa), 1 por vez nos campos; 6 créditos (com os ícones da Fenda)
 - [ ] 8H Fenda sem fim
 
 ## Pendências para depois do jogo concluído

@@ -1694,3 +1694,27 @@ HM_BUY_TITLE,Casa à venda,House for sale
 HM_BUY_DESC,Uma casa só sua em Pradoluz. Dentro tem um baú com %d espaços para guardar itens e uma cama: dormir nela 1 vez por dia dá +%d%% de XP por %d min. Tem também um suporte que mostra suas melhores armas e pedestais com estatuetas douradas dos Procurados e dos chefes dos Covis que você vencer.,A house of your own in Pradoluz. Inside there is a chest with %d slots to store items and a bed: sleeping in it once a day gives +%d%% XP for %d min. There is also a rack showing your best weapons and pedestals with gold statuettes of the Wanted bosses and Lair bosses you defeat.
 HM_BUY_PRICE,Preço: %d de ouro (você tem %d),Price: %d gold (you have %d)
 HM_BUY,Comprar,Buy
+ITEM_MAT_FRAGMENTO_ESTELAR,Fragmento Estelar,Star Shard
+ITEM_MAT_FRAGMENTO_ESTELAR_DESC,Caiu do céu numa chuva de estrelas. Junte 10 e funda na mochila: viram uma runa.,It fell from the sky in a star shower. Gather 10 and fuse them in the bag: they become a rune.
+EV_FUSE,Fundir (%d),Fuse (%d)
+EV_FUSED,Os fragmentos viraram: %s,The shards became: %s
+EV_START_HORDE,Horda noturna! Monstros vêm de todos os lados,Night horde! Monsters coming from all sides
+EV_START_CARAVAN,Uma caravana precisa de escolta pela estrada,A caravan needs an escort down the road
+EV_START_ERRANT,Um monstro gigante anda por estes campos,A giant monster roams these fields
+EV_START_STARS,Chuva de estrelas! Pegue os fragmentos que caírem,Star shower! Pick up the shards that fall
+EV_HORDE_STATUS,Horda noturna: onda %d/%d,Night horde: wave %d/%d
+EV_HORDE_WAVE,Onda %d de %d,Wave %d of %d
+EV_HORDE_WON,A horda acabou! Um baú apareceu,The horde is over! A chest appeared
+EV_HORDE_LEFT,Você fugiu da horda.,You ran from the horde.
+EV_CARAVAN_NAME,Caravana,Caravan
+EV_CARAVAN_STATUS,Caravana: %d%% · %s,Caravan: %d%% · %s
+EV_CARAVAN_WAIT,A caravana só anda com você por perto.,The caravan only moves with you close by.
+EV_CARAVAN_AMBUSH,Emboscada!,Ambush!
+EV_CARAVAN_WON,A caravana chegou! O comerciante pagou a escolta,The caravan made it! The merchant paid for the escort
+EV_CARAVAN_LOST,A caravana desistiu da viagem.,The caravan gave up the trip.
+EV_ERRANT_NAME,%s Errante,Wandering %s
+EV_ERRANT_STATUS,%s · %s,%s · %s
+EV_ERRANT_WON,O monstro errante caiu!,The wandering monster fell!
+EV_ERRANT_GONE,O monstro errante foi embora.,The wandering monster went away.
+EV_STARS_STATUS,Fragmentos: %d · %s,Shards: %d · %s
+EV_STARS_END,A chuva de estrelas passou (%d fragmentos).,The star shower is over (%d shards).

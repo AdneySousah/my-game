@@ -52,6 +52,11 @@ var is_boss: bool = false
 ## Infernal Mode (post-game): red tint, double gold, drops rolled again (Main).
 var infernal: bool = false
 var invulnerable: bool = false
+## A wandering world boss (Fase 8G): its own name ("Orc Errante") and the points it walks
+## between while it has not seen the hero.
+var name_override: String = ""
+var roam_points: PackedVector3Array = PackedVector3Array()
+var _roam_i: int = 0
 
 var _state: State = State.IDLE
 var _timer: float = 0.0
@@ -158,7 +163,28 @@ func _ready() -> void:
 
 
 func display_name() -> String:
+	if name_override != "":
+		return name_override
 	return tr(str(data.get("name", enemy_id)))
+
+
+## A monster grown into a wandering world boss (Fase 8G; data/world/events.json "errant"):
+## bigger, tinted, much tougher, worth much more. Called after setup, before the tree.
+func make_errant(cfg: Dictionary) -> void:
+	data = data.duplicate(true)
+	data["scale"] = float(data.get("scale", 1.0)) * float(cfg.get("scale", 1.7))
+	data["tint"] = str(cfg.get("tint", "#b05cff"))
+	data["tint_strength"] = 0.2
+	data["knockback_resist"] = 0.85
+	data["no_flinch"] = true
+	data["aggro_range"] = float(data.get("aggro_range", 12.0)) * 1.2
+	max_hp *= float(cfg.get("hp_mult", 12.0))
+	hp = max_hp
+	atk *= float(cfg.get("atk_mult", 1.5))
+	gold_reward = roundi(gold_reward * float(cfg.get("gold_mult", 15.0)))
+	xp_reward = roundi(xp_reward * float(cfg.get("xp_mult", 10.0)))
+	is_boss = true
+	name_override = tr("EV_ERRANT_NAME") % tr(str(data.get("name", enemy_id)))
 
 
 func is_dead() -> bool:
@@ -257,6 +283,8 @@ func _physics_process(delta: float) -> void:
 			State.IDLE:
 				if dist < aggro:
 					_notice()
+				elif not roam_points.is_empty():
+					move = _roam_move()
 			State.CHASE:
 				if dist > aggro * 1.6 and not is_boss:
 					_state = State.IDLE
@@ -301,6 +329,18 @@ func _physics_process(delta: float) -> void:
 		var backward: bool = move.length() > 0.2 and move.normalized().dot(_forward()) < -0.3
 		# The walk follows how fast it really goes, so it never walks on the spot.
 		model.update_locomotion(minf(move.length(), real.length()), _state != State.IDLE, backward)
+
+
+## Walking its round while it has not seen the hero (wandering world boss).
+func _roam_move() -> Vector3:
+	var goal: Vector3 = roam_points[_roam_i]
+	var to_p: Vector3 = goal - global_position
+	to_p.y = 0.0
+	if to_p.length() < 1.5:
+		_roam_i = (_roam_i + 1) % roam_points.size()
+		return Vector3.ZERO
+	_face(to_p)
+	return _steer_to(goal, to_p) * speed * 0.55
 
 
 ## Stars turning over the head and the body swaying while stunned (any stun).

@@ -25,6 +25,7 @@ var _banner_tween: Tween
 var _fade: ColorRect
 var _minimap: Minimap
 var _clock: DayClock
+var _event_bar: EventBar
 var _full_map: FullMapPanel
 
 var _status: PortraitStatus
@@ -246,6 +247,9 @@ func _ready() -> void:
 	# Behind the panels (they open in the middle and may be wide).
 	root.move_child(_minimap, _status.get_index())
 	root.move_child(_clock, _status.get_index())
+	_event_bar = EventBar.new()
+	root.add_child(_event_bar)
+	root.move_child(_event_bar, _status.get_index())
 	_minimap.tapped.connect(func() -> void: _open_panel(_full_map))
 	_full_map = FullMapPanel.new()
 	root.add_child(_full_map)
@@ -505,6 +509,16 @@ func open_covil(covil_id: String) -> void:
 
 func covil_panel() -> CovilPanel:
 	return _covil_panel
+
+
+## The world event going on (Fase 8G); an empty text hides it.
+func event_status(icon_id: String, text: String, ratio: float) -> void:
+	if _event_bar:
+		_event_bar.set_status(icon_id, text, ratio)
+
+
+func event_bar() -> EventBar:
+	return _event_bar
 
 
 ## The chest of the hero's house (Fase 8F).
@@ -836,6 +850,9 @@ func _layout() -> void:
 	if _clock:
 		# Under the minimap's left side, a little smaller than it.
 		_clock.position = _minimap.position + Vector2(-4.0, Minimap.FRAME_SIZE - DayClock.SIZE - 18.0)
+	if _event_bar:
+		# The world event under the minimap, over the Defend button (Fase 8G).
+		_event_bar.position = Vector2(vp.x - EventBar.WIDTH - 10.0, Minimap.FRAME_SIZE + 8.0)
 	var attack_c := Vector2(vp.x - 130, vp.y - 120)
 	_attack_btn.set_center(attack_c)
 	# Skills in an arc around the attack button, spaced so circles never overlap.

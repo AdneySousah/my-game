@@ -7516,6 +7516,24 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "ui_itens_eventos",
+      "category": "ui",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha 4x4: fragmento estelar, 4 eventos do mundo (horda, caravana, chefe errante, chuva de estrelas), 10 bênçãos da Fenda e o portal da Fenda",
+      "file": "assets/ui/ui_itens_eventos/ui_itens_eventos.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d73a-0b2c-773b-b5d8-8bfe8e89cbc4",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

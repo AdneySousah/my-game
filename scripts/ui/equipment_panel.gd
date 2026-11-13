@@ -26,6 +26,9 @@ var _bag_title: Label
 var _bag_grid: GridContainer
 var _summary: Label
 var _look_btn: Button
+## The list of looks opened from the look slot.
+var _looks: PanelContainer
+var _looks_box: VBoxContainer
 var _model: CharacterModel
 var _model_holder: Node3D
 
@@ -94,9 +97,21 @@ func _ready() -> void:
 	_summary.add_theme_font_size_override("font_size", 18)
 	_summary.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	root.add_child(_summary)
-	# Second slot: the bought look (skin) the hero wears over his gear.
-	_look_btn = _button("", _next_look)
+	# The look slot: shows the worn look (skin); tapping it lists the bought ones and
+	# "Sem visual" (owner, 13/11). The portraits change with it.
+	_look_btn = _button("", _open_looks)
 	root.add_child(_look_btn)
+	# A plain layer over the screen (a PanelContainer would stretch the list to its size).
+	var layer := Control.new()
+	layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(layer)
+	_looks = PanelContainer.new()
+	_looks.hide()
+	_looks.z_index = 10
+	layer.add_child(_looks)
+	_looks_box = VBoxContainer.new()
+	_looks_box.add_theme_constant_override("separation", 8)
+	_looks.add_child(_looks_box)
 	root.add_child(_button(tr("PANEL_CLOSE"), func() -> void:
 		hide()
 		closed.emit()))
@@ -174,11 +189,19 @@ func _refresh() -> void:
 	elif _model:
 		_model.set_weapon(Player.current_weapon_look())
 	_look_btn.visible = not Session.skins_owned.is_empty()
-	var look_name: String = tr("EQ_LOOK_DEFAULT")
+	_look_btn.text = tr("EQ_LOOK") % _look_name(Session.skin)
+
+
+## Name of a look as sold in the special shop ("" = Lio's own clothes).
+func _look_name(skin: String) -> String:
+	if skin == "":
+		return tr("EQ_LOOK_DEFAULT")
 	for p: Dictionary in Store.products:
-		if str((p.get("grants", {}) as Dictionary).get("skin", "")) == Session.skin and Session.skin != "":
-			look_name = tr(str(p.get("name", "")))
-	_look_btn.text = tr("EQ_LOOK") % look_name
+		if str((p.get("grants", {}) as Dictionary).get("skin", "")) == skin:
+			# The shop name is "Visual: Anjo Dourado"; the slot already says "Visual:".
+			var n: String = tr(str(p.get("name", "")))
+			return n.substr(n.find(":") + 1).strip_edges() if n.find(":") >= 0 else n
+	return skin
 
 
 ## Puts the hero (with his current look and sword) in the little 3D window.
@@ -194,16 +217,48 @@ func _make_model() -> void:
 		_model_holder.add_child(_model)
 
 
-## Cycles the worn look: default -> each bought skin -> default.
-func _next_look() -> void:
-	var order: Array = [""] + Session.skins_owned
-	var i: int = order.find(Session.skin)
-	var next: String = str(order[(i + 1) % order.size()])
+## The list of looks: each bought one (with its portrait) and "Sem visual".
+func _open_looks() -> void:
+	for c: Node in _looks_box.get_children():
+		_looks_box.remove_child(c)
+		c.queue_free()
+	var title := Label.new()
+	title.text = tr("EQ_LOOKS_TITLE")
+	title.add_theme_font_size_override("font_size", 22)
+	_looks_box.add_child(title)
+	for skin: String in Session.skins_owned + [""]:
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 10)
+		var pic := TextureRect.new()
+		pic.texture = GameTheme.tex(Player.portrait_for(skin))
+		pic.custom_minimum_size = Vector2(56, 56)
+		pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		row.add_child(pic)
+		var b: Button = _button(tr("EQ_LOOK_NONE") if skin == "" else _look_name(skin), func() -> void: _wear_look(skin))
+		b.custom_minimum_size = Vector2(340, 56)
+		b.disabled = skin == Session.skin
+		row.add_child(b)
+		_looks_box.add_child(row)
+	_looks_box.add_child(_button(tr("PANEL_CLOSE"), func() -> void: _looks.hide()))
+	_looks.show()
+	_looks.size = Vector2.ZERO
+	_looks.reset_size()
+	_looks.position = ((size - _looks.size) * 0.5).floor()
+
+
+func _wear_look(skin: String) -> void:
 	if player:
-		player.set_skin(next)
+		player.set_skin(skin)
 	else:
-		Session.skin = next
+		Session.skin = skin
+	_looks.hide()
+	Audio.play_sfx("metal")
 	_refresh()
+
+
+func looks_panel() -> PanelContainer:
+	return _looks
 
 
 ## Bag pieces that fit the chosen slot.

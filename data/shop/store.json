@@ -47,7 +47,7 @@
       "name": "STORE_SKIN_SOL",
       "desc": "STORE_SKIN_SOL_DESC",
       "price_brl": 9.9,
-      "icon": "eq_espada_epico",
+      "icon": "ui_skin_sol",
       "grants": {
         "skin": "hero_skin_sol"
       }
@@ -57,9 +57,19 @@
       "name": "STORE_SKIN_TEMPESTADE",
       "desc": "STORE_SKIN_TEMPESTADE_DESC",
       "price_brl": 9.9,
-      "icon": "eq_espada_epico",
+      "icon": "ui_skin_tempestade",
       "grants": {
         "skin": "hero_skin_tempestade"
+      }
+    },
+    {
+      "id": "skin_anjo",
+      "name": "STORE_SKIN_ANJO",
+      "desc": "STORE_SKIN_ANJO_DESC",
+      "price_brl": 9.9,
+      "icon": "ui_skin_anjo",
+      "grants": {
+        "skin": "hero_skin_anjo"
       }
     },
     {
@@ -141,6 +151,18 @@
       "grants": {
         "items": {
           "amuleto": 1
+        }
+      }
+    },
+    {
+      "id": "mochila_30",
+      "name": "STORE_MOCHILA_30",
+      "desc": "STORE_MOCHILA_30_DESC",
+      "price_brl": 1.99,
+      "icon": "mochila_real",
+      "grants": {
+        "items": {
+          "mochila_real": 1
         }
       }
     }

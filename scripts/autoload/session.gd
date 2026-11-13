@@ -145,6 +145,7 @@ func to_dict() -> Dictionary:
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
 		"quests": quests, "flags": flags, "tracked_quest": tracked_quest, "tracker_hidden": tracker_hidden,
 		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
+		"backpacks": inventory.backpacks,
 		"potion_slots": potion_slots, "xp_boost_until": xp_boost_until,
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
@@ -166,6 +167,8 @@ func from_dict(d: Dictionary) -> void:
 	vase_ready_at = (d.get("vase_ready_at", {}) as Dictionary).duplicate()
 	tracked_quest = str(d.get("tracked_quest", ""))
 	tracker_hidden = bool(d.get("tracker_hidden", false))
+	# Backpacks first: the bag may hold more than the base size.
+	inventory.backpacks.assign((d.get("backpacks", []) as Array).map(func(x: Variant) -> String: return str(x)))
 	inventory.from_array(d.get("inventory", []))
 	# Saves from before the bag (4.x) kept materials apart: move them in.
 	for key: String in (d.get("materials", {}) as Dictionary):

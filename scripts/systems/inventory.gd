@@ -6,11 +6,14 @@ extends RefCounted
 
 signal changed
 
-## Bag size (data/items "bag_size"); read when needed because Session is created
-## before Data finishes loading.
+## Bag size: data/items "bag_size" plus the extra backpacks worn (read when needed because
+## Session is created before Data finishes loading).
 var capacity: int:
 	get:
-		return int(Data.items_config.get("bag_size", 60)) if not Data.items_config.is_empty() else 60
+		return base_capacity() + backpack_bonus()
+## Extra backpacks worn (item ids, at most "backpack_slots"; owner, 13/11): each one adds
+## its "bag_bonus" slots (+10 from the merchants, +30 from the special shop).
+var backpacks: Array[String] = []
 ## Each slot: {"id": String, "count": int}. Empty slots are not stored. Equipment is
 ## never stacked: each piece is its own slot with "uid", "plus", "sockets", "gems", "worn".
 var slots: Array[Dictionary] = []
@@ -19,6 +22,47 @@ var next_uid: int = 1
 
 ## Chance of 0, 1, 2 or 3 sockets on a new piece (GDD 6.5).
 const SOCKET_CHANCES: Array[float] = [0.40, 0.35, 0.20, 0.05]
+
+
+func base_capacity() -> int:
+	return int(Data.items_config.get("bag_size", 60)) if not Data.items_config.is_empty() else 60
+
+
+func backpack_bonus() -> int:
+	var n: int = 0
+	for id: String in backpacks:
+		n += int(Data.item(id).get("bag_bonus", 0))
+	return n
+
+
+static func backpack_slots() -> int:
+	return int(Data.items_config.get("backpack_slots", 6))
+
+
+## Wears a backpack from the bag (frees its slot and adds its space). "" or the reason.
+func wear_backpack(id: String) -> String:
+	if str(Data.item(id).get("type", "")) != "backpack" or not has(id):
+		return "BAG_PACK_NONE"
+	if backpacks.size() >= backpack_slots():
+		return "BAG_PACK_FULL"
+	remove(id, 1)
+	backpacks.append(id)
+	changed.emit()
+	return ""
+
+
+## Takes off the backpack in slot `i` back into the bag, only if everything still fits.
+func remove_backpack(i: int) -> String:
+	if i < 0 or i >= backpacks.size():
+		return "BAG_PACK_NONE"
+	var bonus: int = int(Data.item(backpacks[i]).get("bag_bonus", 0))
+	if slots.size() + 1 > capacity - bonus:
+		return "BAG_PACK_NO_ROOM"
+	var id: String = backpacks[i]
+	backpacks.remove_at(i)
+	add(id, 1)
+	changed.emit()
+	return ""
 
 
 func count(id: String) -> int:
@@ -162,6 +206,7 @@ func free_slots() -> int:
 
 func clear() -> void:
 	slots.clear()
+	backpacks.clear()
 	next_uid = 1
 	changed.emit()
 

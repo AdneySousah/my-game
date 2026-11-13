@@ -80,6 +80,13 @@ const SHEETS: Dictionary = {
 		"", "", "", "",
 		"", "", "", "",
 	],
+	# 13/11: the extra backpacks and the special shop's looks.
+	"ui_itens_mochilas": [
+		"mochila_couro", "mochila_real", "ui_skin_anjo", "ui_skin_sol",
+		"ui_skin_tempestade", "", "", "",
+		"", "", "", "",
+		"", "", "", "",
+	],
 	# "" = not used yet (map, options, skills, attributes, equipment, achievements,
 	# travel, gift, title, forge, portal); the anvil and the portal need a better cut.
 	"ui_menu": [

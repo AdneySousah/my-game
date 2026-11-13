@@ -94,7 +94,10 @@ func _show_line() -> void:
 	# "portrait_after": {"flag", "portrait"} swaps the face after a story moment
 	# (Lio after the two-year jump).
 	var alt: Dictionary = npc.get("portrait_after", {})
-	if not _portraits.has(_speaker) or not alt.is_empty():
+	if _speaker == "lio":
+		# Lio's face follows the worn look (skins have their own portraits).
+		_portraits[_speaker] = GameTheme.tex(Player.portrait_id())
+	elif not _portraits.has(_speaker) or not alt.is_empty():
 		var p: String = str(npc.get("portrait", ""))
 		if not alt.is_empty() and Session.has_flag(str(alt.get("flag", ""))):
 			p = str(alt.get("portrait", p))

@@ -115,6 +115,7 @@
     "prp_tapete": {"scene": "res://assets/props/prp_tapete/prp_tapete.glb", "scale": 3.4, "center_origin": true, "collision": null},
     "prp_escada_interna": {"scene": "res://assets/props/prp_escada_interna/prp_escada_interna.glb", "scale": 3.0, "center_origin": true, "collision": null},
     "prp_vaso": {"scene": "res://assets/props/prp_vaso/prp_vaso.glb", "scale": 1.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.35}},
+    "prp_asa_anjo": {"scene": "res://assets/props/prp_asa_anjo/prp_asa_anjo.glb", "scale": 1.0, "center_origin": false},
     "prp_peixe": {"scene": "res://assets/props/prp_peixe/prp_peixe.glb", "scale": 0.45, "center_origin": true},
     "prp_vitoria_regia": {"scene": "res://assets/props/prp_vitoria_regia/prp_vitoria_regia.glb", "scale": 1.6, "center_origin": true},
     "prp_sapo": {"scene": "res://assets/props/prp_sapo/prp_sapo.glb", "scale": 0.32, "center_origin": true},

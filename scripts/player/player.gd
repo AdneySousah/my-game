@@ -219,6 +219,20 @@ static func current_look() -> String:
 
 
 ## Look of the set he wears complete (5 pieces), or "".
+## Face in the portraits (HUD and talks) for a look: the skin's own "portrait" in
+## characters.json, else Lio's (older after the two-year jump).
+static func portrait_for(skin: String) -> String:
+	if skin != "":
+		var p: String = str(CharacterModel.config_for(skin).get("portrait", ""))
+		if p != "":
+			return p
+	return "ui_retrato_lio_adulto" if Session.has_flag("time_skip") else "ui_retrato_lio"
+
+
+static func portrait_id() -> String:
+	return Player.portrait_for(Session.skin)
+
+
 static func set_look() -> String:
 	var sets: Dictionary = Data.items_config.get("sets", {})
 	var counts: Dictionary = Session.gear.set_counts()
@@ -246,6 +260,8 @@ static func current_weapon_look() -> Dictionary:
 func set_skin(id: String) -> void:
 	Session.skin = id if Session.skins_owned.has(id) else ""
 	refresh_look()
+	# The HUD redraws (the portrait follows the look).
+	hp_changed.emit(hp, max_hp())
 
 
 ## Puts on the model of the current look (skin, complete set or Lio) if it changed.

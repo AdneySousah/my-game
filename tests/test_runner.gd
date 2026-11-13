@@ -34,6 +34,7 @@ func _ready() -> void:
 	await _final_test()
 	await _postgame_test()
 	await _owner_1311_test()
+	await _packs_looks_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1112,6 +1113,62 @@ func _owner_1311_test() -> void:
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"
+	Session.reset()
+
+
+## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
+## special shop), the look slot with its list, portraits that follow the look, and the
+## golden angel look that flies with beating wings.
+func _packs_looks_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var p: Player = main.player
+	var inv: Inventory = Session.inventory
+	var base: int = inv.capacity
+	Session.add_item("mochila_couro", 1)
+	check(inv.wear_backpack("mochila_couro") == "" and inv.capacity == base + 10 and inv.count("mochila_couro") == 0, "a leather backpack adds 10 slots")
+	main._on_store_granted(Store.product("mochila_30"))
+	check(inv.wear_backpack("mochila_real") == "" and inv.capacity == base + 40, "the royal backpack from the special shop adds 30 more")
+	check(is_equal_approx(float(Store.product("mochila_30").get("price_brl", 0.0)), 1.99), "the royal backpack costs R$ 1,99")
+	for i: int in 4:
+		Session.add_item("mochila_couro", 1)
+		inv.wear_backpack("mochila_couro")
+	Session.add_item("mochila_couro", 1)
+	check(inv.backpacks.size() == 6 and inv.wear_backpack("mochila_couro") == "BAG_PACK_FULL", "at most 6 backpacks")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.inventory.backpacks.size() == 6 and Session.inventory.capacity == base + 80, "backpacks are saved")
+	inv = Session.inventory
+	check(inv.remove_backpack(0) == "" and inv.capacity == base + 70, "a backpack can be taken off when it is empty enough")
+	var sold: bool = false
+	for g: Dictionary in (Data.shop["merchants"]["celeste"]["goods"] as Array):
+		sold = sold or str(g["id"]) == "mochila_couro"
+	check(sold, "the merchant sells the leather backpack")
+	# Looks: the slot lists the bought ones; the portraits follow the look.
+	for skin: String in ["hero_skin_sol", "hero_skin_anjo"]:
+		Session.skins_owned.append(skin)
+	main.hud.open_equipment()
+	await _frames(2)
+	var eq: EquipmentPanel = main.hud.equipment_panel()
+	eq.call("_open_looks")
+	await _frames(2)
+	check(eq.looks_panel().visible, "the look slot opens the list of looks")
+	eq.call("_wear_look", "hero_skin_anjo")
+	await _frames(3)
+	check(Session.skin == "hero_skin_anjo" and p.model.character_id == "hero_skin_anjo", "picking a look from the list wears it")
+	check(Player.portrait_id() == "ui_retrato_skin_anjo" and ResourceLoader.exists("res://assets/ui/ui_retrato_skin_anjo.png"), "the portrait follows the look")
+	check(p.model.get("_wings") != null and not (p.model.get("_float") as Dictionary).is_empty(), "the angel has wings and floats")
+	eq.call("_wear_look", "")
+	await _frames(2)
+	check(Session.skin == "" and Player.portrait_id() == "ui_retrato_lio", "no look: Lio and his own portrait again")
+	eq.hide()
+	main.hud._on_panel_closed()
+	main.queue_free()
+	await _frames(2)
 	Session.reset()
 
 

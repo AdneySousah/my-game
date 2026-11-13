@@ -7204,6 +7204,114 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "hero_skin_anjo",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Visual pago: Lio anjo dourado (sem asas; asas separadas)",
+      "file": "assets/characters/hero_skin_anjo/hero_skin_anjo.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d53f-a7bb-73ba-8393-64dc1dea9490",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d541-73bd-7097-952a-f33121b79258",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d542-f957-71bf-81f3-2aad1518980b",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_asa_anjo",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Asa dourada do visual de anjo (animada por código)",
+      "file": "assets/props/prp_asa_anjo/prp_asa_anjo.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d53f-ad5f-75a6-b928-36ab4ae4d434",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d541-78ff-714d-b9b3-c2dbf742876e",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retratos_skins",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Retratos dos visuais Sol, Tempestade e Anjo",
+      "file": "assets/ui/ui_retratos_skins/ui_retratos_skins.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d53f-b05c-7175-92d0-0aa3a81e8bf9",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d53f-b3b3-7233-996f-f9ac0b087d36",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d541-7c10-728a-adc4-6788e60cca32",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d543-912b-7764-8eec-867b88131134",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_itens_mochilas",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha de ícones: mochilas e visual de anjo",
+      "file": "assets/ui/ui_itens_mochilas/ui_itens_mochilas.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d543-987d-7299-9ee6-2dc5512c38b5",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

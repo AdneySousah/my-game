@@ -6,6 +6,10 @@
       "name": "SHOP_CELESTE",
       "goods": [
         {
+          "id": "mochila_couro",
+          "buy": 3000
+        },
+        {
           "id": "pot_vida_p",
           "buy": 30
         },
@@ -139,6 +143,10 @@
       "name": "SHOP_ELARION",
       "goods": [
         {
+          "id": "mochila_couro",
+          "buy": 3000
+        },
+        {
           "id": "pot_vida_m",
           "buy": 80
         },
@@ -264,6 +272,10 @@
       "name": "SHOP_ZAHIR",
       "goods": [
         {
+          "id": "mochila_couro",
+          "buy": 3000
+        },
+        {
           "id": "pot_vida_m",
           "buy": 80
         },
@@ -388,6 +400,10 @@
     "aurelio": {
       "name": "SHOP_AURELIO",
       "goods": [
+        {
+          "id": "mochila_couro",
+          "buy": 3000
+        },
         {
           "id": "pot_vida_m",
           "buy": 80

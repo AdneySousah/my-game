@@ -26,6 +26,13 @@ var _drawn: bool = true
 ## Finger poses (null when the model has no finger bones).
 var _hands: HandPose
 var _tweak: PoseTweak
+## Root of the Meshy model (scaled, turned to face -Z).
+var _root: Node3D
+## "float" in characters.json: the look flies instead of walking.
+var _float: Dictionary = {}
+var _wings: AngelWings
+## 0..1: how fast the character moves (for the flying lean and the wing beats).
+var _move_ratio: float = 0.0
 var _sitting: bool = false
 ## Hand poses asked by the action now playing (cleared when it ends).
 var _action_hands: Dictionary = {}
@@ -156,11 +163,43 @@ func _ready() -> void:
 	_update_hands()
 	if _hands:
 		_hands.snap()
+	_root = model
+	_float = config.get("float", {})
+	if config.has("wings"):
+		_attach_wings(model)
 	play_loop("idle")
+
+
+## Wings on the upper back ("wings" in characters.json), following the chest bone.
+func _attach_wings(model: Node3D) -> void:
+	var w: Dictionary = config["wings"]
+	var bone: String = str(w.get("bone", "Spine02"))
+	var bi: int = skeleton.find_bone(bone)
+	if bi < 0:
+		return
+	var holder := BoneAttachment3D.new()
+	holder.bone_name = bone
+	skeleton.add_child(holder)
+	_wings = AngelWings.new()
+	_wings.cfg = w
+	holder.add_child(_wings)
+	# Placed once from the rest pose: on the spine, a little behind the back (Meshy
+	# models face +Z, so "behind" is -Z in the model).
+	var bone_global: Transform3D = skeleton.global_transform * skeleton.get_bone_global_rest(bi)
+	var back: Vector3 = model.global_basis * Vector3(0, float(w.get("up", 0.0)), float(w.get("back", -0.12)))
+	var want := Transform3D(model.global_basis, bone_global.origin + back)
+	# Local to the bone (the attachment follows the bone's pose every frame).
+	_wings.transform = bone_global.affine_inverse() * want
 
 
 func _process(delta: float) -> void:
 	_clock += delta
+	if not _float.is_empty() and _root:
+		# Floating look: hovers above the ground, bobbing, leaning forward when moving.
+		_root.position.y = float(_float.get("height", 0.3)) + sin(_clock * 2.4) * float(_float.get("bob", 0.06))
+		_root.rotation.x = lerpf(_root.rotation.x, _move_ratio * float(_float.get("lean", 0.22)), minf(1.0, delta * 6.0))
+	if _wings:
+		_wings.effort = _move_ratio
 	if not _action_hands.is_empty() and not is_busy():
 		_action_hands = {}
 		_update_hands()
@@ -220,6 +259,14 @@ func update_locomotion(ground_speed: float, in_combat: bool = false, backward: b
 		return
 	set_weapon_drawn(in_combat)
 	var speeds: Dictionary = config.get("move_anim_speed", {})
+	_move_ratio = clampf(ground_speed / 8.0, 0.0, 1.0)
+	if not _float.is_empty() and moving and not (backward and not _action("walk_back").is_empty()):
+		# Flying instead of walking: the hover pose ("float" action, or the idle) and the
+		# wings beat faster (owner, 13/11).
+		set_weapon_drawn(in_combat)
+		play_loop(_pick("float", "combat_idle" if in_combat else "idle"))
+		_busy_until = 0.0
+		return
 	# In combat, prefer the "combat_*" versions when the character has them.
 	var prefix: String = "combat_" if in_combat else ""
 	if not moving:

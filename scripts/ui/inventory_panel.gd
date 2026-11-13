@@ -2,7 +2,8 @@ class_name InventoryPanel
 extends PanelContainer
 ## The bag: a grid of slots (icon, amount, rarity border) and, on the right, the
 ## chosen item's details with "Usar" and "Pôr no atalho" for potions, or "Equipar"
-## and the equipment screen for gear.
+## and the equipment screen for gear. Under the grid: the 6 extra backpack slots (a worn
+## backpack adds its space; tap one to take it off; owner 13/11).
 
 signal closed
 signal open_equipment
@@ -29,6 +30,9 @@ var _detail_icon: Control
 var _info: RichTextLabel
 var _equip_btn: Button
 var _gear_btn: Button
+var _pack_btn: Button
+var _pack_row: HBoxContainer
+var _pack_label: Label
 
 
 func _ready() -> void:
@@ -53,7 +57,19 @@ func _ready() -> void:
 	_grid.add_theme_constant_override("h_separation", 6)
 	_grid.add_theme_constant_override("v_separation", 6)
 	scroll.add_child(_grid)
+	# Extra backpacks: "Mochilas: 2/6 (+40)" and the 6 slots.
+	_pack_row = HBoxContainer.new()
+	_pack_row.add_theme_constant_override("separation", 6)
+	_pack_label = _label(16)
+	_pack_label.custom_minimum_size = Vector2(170, 0)
+	_pack_row.add_child(_pack_label)
 
+	var left := VBoxContainer.new()
+	left.add_theme_constant_override("separation", 6)
+	row.remove_child(scroll)
+	left.add_child(scroll)
+	left.add_child(_pack_row)
+	row.add_child(left)
 	var detail := VBoxContainer.new()
 	detail.custom_minimum_size = Vector2(250, 0)
 	detail.add_theme_constant_override("separation", 6)
@@ -98,6 +114,14 @@ func _ready() -> void:
 	detail.add_child(_quick_row)
 	_equip_btn = _button(tr("EQ_EQUIP"), _equip_chosen)
 	detail.add_child(_equip_btn)
+	_pack_btn = _button(tr("BAG_PACK_WEAR"), func() -> void:
+		var why: String = Session.inventory.wear_backpack(_selected)
+		if why != "":
+			_owned.text = tr(why)
+			return
+		Audio.play_sfx("pickup")
+		_rebuild())
+	detail.add_child(_pack_btn)
 	_gear_btn = _button(tr("EQ_TITLE"), func() -> void:
 		hide()
 		open_equipment.emit())
@@ -150,7 +174,30 @@ func _rebuild() -> void:
 					break
 		if _selected_index < 0:
 			_selected = ""
+	_rebuild_packs()
 	_show_details()
+
+
+func _rebuild_packs() -> void:
+	var inv: Inventory = Session.inventory
+	for c: Node in _pack_row.get_children():
+		if c != _pack_label:
+			c.queue_free()
+	_pack_label.text = tr("BAG_PACKS") % [inv.backpacks.size(), Inventory.backpack_slots(), inv.backpack_bonus()]
+	for i: int in Inventory.backpack_slots():
+		var slot := ItemSlot.new()
+		slot.custom_minimum_size = Vector2(48, 48)
+		slot.item_id = inv.backpacks[i] if i < inv.backpacks.size() else ""
+		slot.amount = 1 if slot.item_id != "" else 0
+		slot.pressed.connect(func() -> void:
+			if i >= inv.backpacks.size():
+				return
+			var why: String = inv.remove_backpack(i)
+			_owned.text = tr(why) if why != "" else ""
+			if why == "":
+				Audio.play_sfx("pickup")
+			_rebuild())
+		_pack_row.add_child(slot)
 
 
 func _show_details() -> void:
@@ -175,6 +222,7 @@ func _show_details() -> void:
 	_gear_btn.visible = gear
 	if gear:
 		_equip_btn.disabled = Equipment.block_reason(piece, _level()) != ""
+	_pack_btn.visible = has and str(item.get("type", "")) == "backpack"
 	var potion: bool = has and str(item.get("type", "")) == "potion"
 	_use_btn.visible = potion
 	_quick_row.visible = potion

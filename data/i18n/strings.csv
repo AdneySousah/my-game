@@ -699,6 +699,79 @@ TRAVEL_YOU_ARE_HERE,Você está aqui,You are here
 DIFF_EXTREME,Extrema,Extreme
 DIFF_EXTREME_DESC,Inimigos 80% mais fortes e o mundo não espera: os monstros sobem de nível com o tempo de jogo (na metade do ritmo médio do herói).,Enemies 80% stronger and the world won't wait: monsters level up with the time played (at half the hero's average pace).
 EXTREME_WORLD_UP,O mundo ficou mais perigoso: monstros agora no nível %d ou mais.,The world grew more dangerous: monsters are now level %d or higher.
+STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
+STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
+STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
+STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
+STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
+STO_FINAL_END,A história continua...,The story continues...
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+DTIER_0,Normal,Normal
+DTIER_1,Desafio,Challenge
+DTIER_2,Pesadelo,Nightmare
+DTIER_0_DESC,Como a masmorra é.,The dungeon as it is.
+DTIER_1_DESC,Monstros com 50% mais vida e 30% mais dano. Itens caem 50% mais e o ouro rende 40% mais.,Monsters with 50% more health and 30% more damage. Items drop 50% more often and gold is 40% higher.
+DTIER_2_DESC,Monstros com mais que o dobro de vida e 70% mais dano. Itens caem o dobro e o ouro rende 80% mais.,Monsters with over double health and 70% more damage. Items drop twice as often and gold is 80% higher.
+DTIER_SIGN,Dificuldade: %s,Difficulty: %s
+DTIER_TITLE,Dificuldade: %s,Difficulty: %s
+DTIER_INFO,Escolha como a masmorra vai estar quando você entrar. Mais difícil = mais chance de itens.,Choose how the dungeon will be when you go in. Harder = better chance of items.
+BOARD_SIGN,Quadro de missões,Quest board
+BOARD_TITLE,Quadro: %s,Board: %s
+BOARD_LEFT,Missões que ainda dá para fazer hoje: %d,Jobs you can still do today: %d
+BOARD_ACTIVE,Missão em andamento:,Job in progress:
+BOARD_DONE_TODAY,Por hoje é só. Volte amanhã para novas missões.,That's all for today. Come back tomorrow for new jobs.
+BOARD_REWARD,Prêmio: %d de ouro e um item extra.,Reward: %d gold and one extra item.
+BOARD_ACCEPT,Aceitar,Accept
+BOARD_JOB_HUNT,Derrote %d monstros em %s,Defeat %d monsters in %s
+BOARD_JOB_HUNT_KIND,Derrote %d × %s em %s,Defeat %d × %s in %s
+BOARD_JOB_BOSS,Derrote %s em %s (o chefe volta ao aceitar),Defeat %s in %s (the boss comes back when you accept)
+BOARD_JOB_DONE,Missão do quadro concluída!,Board job done!
+WANTED_SIGN,Procurado,Wanted
+WANTED_TITLE,Procurado em %s,Wanted in %s
+WANTED_INFO,"Visto hoje em: %s. Mais forte que os Arautos, e fica mais forte junto com você. Um por dia.","Seen today in: %s. Stronger than the Heralds, and grows stronger with you. One a day."
+WANTED_REWARD,"Prêmio: muito ouro, Insígnias de Chefe, gemas, Trevo e Broca.","Reward: lots of gold, Boss Insignias, gems, a Clover and a Drill."
+WANTED_DONE,Você já derrotou o Procurado de hoje. Amanhã aparece outro.,You already beat today's wanted boss. Another shows up tomorrow.
+WANTED_BEATEN,Procurado derrotado!,Wanted boss defeated!
+WANTED_FOLLOWING,A seta agora leva ao Procurado.,The arrow now leads to the wanted boss.
+HUD_TIER,Dificuldade (E),Difficulty (E)
+HUD_TIER_TAP,Dificuldade,Difficulty
+HUD_BOARD,Quadro (E),Board (E)
+HUD_BOARD_TAP,Quadro,Board
+HUD_WANTED,Procurado (E),Wanted (E)
+HUD_WANTED_TAP,Procurado,Wanted
+ACH_WANTED,Derrote %d Procurados,Defeat %d wanted bosses
+ACH_BOARD,Conclua %d missões de quadro,Complete %d board jobs
+ENEMY_PROCURADO_PRADOLUZ,Colosso Musgoso,Mossy Colossus
+ENEMY_PROCURADO_QARESSA,Rainha Rubra das Dunas,Crimson Dune Queen
+ENEMY_PROCURADO_HRIMVALD,Titã do Gelo Eterno,Titan of Eternal Ice
+ENEMY_PROCURADO_LYSTHAEL,Fera dos Espinhos Antigos,Beast of the Ancient Thorns
+ENEMY_PROCURADO_ALTAREA,Juiz Sem Nome,The Nameless Judge
+MENU_SAVE,Salvar,Save
+MENU_EXIT,Sair para o menu,Exit to menu
+MENU_EXIT_CONFIRM,Toque de novo para sair,Tap again to exit
+MENU_SAVED,Jogo salvo!,Game saved!
+MENU_SAVE_OFF,Só dá para salvar no jogo aberto pela tela inicial.,You can only save a game started from the title screen.
+MENU_SAVE_NOT_NOW,Não dá para salvar agora.,Can't save right now.
+BAG_PACKS,Mochilas: %d/%d (+%d),Backpacks: %d/%d (+%d)
+BAG_PACK_WEAR,Vestir mochila,Wear backpack
+BAG_PACK_NONE,Escolha uma mochila.,Pick a backpack.
+BAG_PACK_FULL,Já está com 6 mochilas.,Already wearing 6 backpacks.
+BAG_PACK_NO_ROOM,Esvazie espaço antes de tirar esta mochila.,Free some space before taking this backpack off.
+ITEMTYPE_BACKPACK,Mochila,Backpack
+STORE_MOCHILA_30,Mochila Real (+30 espaços),Royal Backpack (+30 slots)
+STORE_MOCHILA_30_DESC,Uma mochila grande que aumenta a mochila do herói em 30 espaços. Dá para vestir até 6 mochilas.,A big backpack that adds 30 slots to the hero's bag. Up to 6 backpacks can be worn.
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -935,11 +1008,7 @@ OPT_SHOW_FPS,Mostrar quadros por segundo,Show frames per second
 OPT_FPS_LIMIT,Limite de quadros,Frame limit
 OPT_ON,Ligado,On
 OPT_OFF,Desligado,Off
-OPT_CREDITS_TEXT,"Músicas, ambientes e a maior parte dos efeitos sonoros gerados com ElevenLabs.
-Outros efeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).
-Modelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music, ambience and most sound effects made with ElevenLabs.
-Other sound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).
-Models, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
+OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
 TITLE_DEFENSOR,Defensor de Pradoluz,Defender of Pradoluz
@@ -985,6 +1054,10 @@ ITEM_POT_MANA_P,Poção de MP pequena,Small MP potion
 ITEM_POT_MANA_M,Poção de MP média,Medium MP potion
 ITEM_POT_MANA_G,Poção de MP grande,Large MP potion
 ITEM_POT_MANA_DESC,Recupera o MP para usar as skills.,Restores MP to use skills.
+ITEM_MOCHILA_COURO,Mochila de Couro,Leather Backpack
+ITEM_MOCHILA_COURO_DESC,Vista na mochila para ganhar 10 espaços. Dá para vestir até 6 mochilas.,Wear it in the bag for 10 more slots. Up to 6 backpacks can be worn.
+ITEM_MOCHILA_REAL,Mochila Real,Royal Backpack
+ITEM_MOCHILA_REAL_DESC,Vista na mochila para ganhar 30 espaços. Dá para vestir até 6 mochilas.,Wear it in the bag for 30 more slots. Up to 6 backpacks can be worn.
 ITEM_POT_FORCA,Tônico da força,Tonic of strength
 ITEM_POT_FORCA_DESC,+20% de ataque por 90 segundos.,+20% attack for 90 seconds.
 ITEM_POT_PEDRA,Tônico da pedra,Tonic of stone
@@ -1485,49 +1558,7 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-DTIER_0,Normal,Normal
-DTIER_1,Desafio,Challenge
-DTIER_2,Pesadelo,Nightmare
-DTIER_0_DESC,Como a masmorra é.,The dungeon as it is.
-DTIER_1_DESC,Monstros com 50% mais vida e 30% mais dano. Itens caem 50% mais e o ouro rende 40% mais.,Monsters with 50% more health and 30% more damage. Items drop 50% more often and gold is 40% higher.
-DTIER_2_DESC,Monstros com mais que o dobro de vida e 70% mais dano. Itens caem o dobro e o ouro rende 80% mais.,Monsters with over double health and 70% more damage. Items drop twice as often and gold is 80% higher.
-DTIER_SIGN,Dificuldade: %s,Difficulty: %s
-DTIER_TITLE,Dificuldade: %s,Difficulty: %s
-DTIER_INFO,Escolha como a masmorra vai estar quando você entrar. Mais difícil = mais chance de itens.,Choose how the dungeon will be when you go in. Harder = better chance of items.
-BOARD_SIGN,Quadro de missões,Quest board
-BOARD_TITLE,Quadro: %s,Board: %s
-BOARD_LEFT,Missões que ainda dá para fazer hoje: %d,Jobs you can still do today: %d
-BOARD_ACTIVE,Missão em andamento:,Job in progress:
-BOARD_DONE_TODAY,Por hoje é só. Volte amanhã para novas missões.,That's all for today. Come back tomorrow for new jobs.
-BOARD_REWARD,Prêmio: %d de ouro e um item extra.,Reward: %d gold and one extra item.
-BOARD_ACCEPT,Aceitar,Accept
-BOARD_JOB_HUNT,Derrote %d monstros em %s,Defeat %d monsters in %s
-BOARD_JOB_HUNT_KIND,Derrote %d × %s em %s,Defeat %d × %s in %s
-BOARD_JOB_BOSS,Derrote %s em %s (o chefe volta ao aceitar),Defeat %s in %s (the boss comes back when you accept)
-BOARD_JOB_DONE,Missão do quadro concluída!,Board job done!
-WANTED_SIGN,Procurado,Wanted
-WANTED_TITLE,Procurado em %s,Wanted in %s
-WANTED_INFO,"Visto hoje em: %s. Mais forte que os Arautos, e fica mais forte junto com você. Um por dia.","Seen today in: %s. Stronger than the Heralds, and grows stronger with you. One a day."
-WANTED_REWARD,"Prêmio: muito ouro, Insígnias de Chefe, gemas, Trevo e Broca.","Reward: lots of gold, Boss Insignias, gems, a Clover and a Drill."
-WANTED_DONE,Você já derrotou o Procurado de hoje. Amanhã aparece outro.,You already beat today's wanted boss. Another shows up tomorrow.
-WANTED_BEATEN,Procurado derrotado!,Wanted boss defeated!
-WANTED_FOLLOWING,A seta agora leva ao Procurado.,The arrow now leads to the wanted boss.
-HUD_TIER,Dificuldade (E),Difficulty (E)
-HUD_TIER_TAP,Dificuldade,Difficulty
-HUD_BOARD,Quadro (E),Board (E)
-HUD_BOARD_TAP,Quadro,Board
-HUD_WANTED,Procurado (E),Wanted (E)
-HUD_WANTED_TAP,Procurado,Wanted
-ACH_WANTED,Derrote %d Procurados,Defeat %d wanted bosses
-ACH_BOARD,Conclua %d missões de quadro,Complete %d board jobs
-ENEMY_PROCURADO_PRADOLUZ,Colosso Musgoso,Mossy Colossus
-ENEMY_PROCURADO_QARESSA,Rainha Rubra das Dunas,Crimson Dune Queen
-ENEMY_PROCURADO_HRIMVALD,Titã do Gelo Eterno,Titan of Eternal Ice
-ENEMY_PROCURADO_LYSTHAEL,Fera dos Espinhos Antigos,Beast of the Ancient Thorns
-ENEMY_PROCURADO_ALTAREA,Juiz Sem Nome,The Nameless Judge
-MENU_SAVE,Salvar,Save
-MENU_EXIT,Sair para o menu,Exit to menu
-MENU_EXIT_CONFIRM,Toque de novo para sair,Tap again to exit
-MENU_SAVED,Jogo salvo!,Game saved!
-MENU_SAVE_OFF,Só dá para salvar no jogo aberto pela tela inicial.,You can only save a game started from the title screen.
-MENU_SAVE_NOT_NOW,Não dá para salvar agora.,Can't save right now.
+EQ_LOOKS_TITLE,Escolha o visual,Choose a look
+EQ_LOOK_NONE,Sem visual (roupa do Lio),No look (Lio's own clothes)
+STORE_SKIN_ANJO,Visual: Anjo Dourado,Look: Golden Angel
+STORE_SKIN_ANJO_DESC,"Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre.","Shining golden armor, wings that really beat and Lio floating instead of walking. Only changes the look; yours forever."

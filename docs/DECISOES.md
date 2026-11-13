@@ -663,3 +663,18 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
 - **Herói:** som de morte, a música de derrota até reaparecer, beber poção, e escudo do chefe quebrando.
 - **Bichos:** o carinho no cachorro, no gato e na vaca tem o som de cada um.
 - **Créditos:** as músicas do Jonathan Shaw (CC-BY) saíram. O crédito agora é do ElevenLabs, e os efeitos CC0 que sobraram (skills) continuam creditados. A tela final do vídeo promocional (`tests/promo_video.gd`, da outra sessão) ainda mostra o crédito antigo e precisa ser trocada.
+
+## Mochilas extras e visuais (13/11/2026, versão 0.3.4)
+- **Mochilas extras:**
+  - Dá para vestir até **6** na tela da mochila (linha "Mochilas: x/6" com 6 encaixes; tocar num encaixe tira a mochila, se tudo ainda couber).
+  - **Mochila de Couro** (marrom, +10 espaços): vendida por **3.000 de ouro** nos 4 comerciantes.
+  - **Mochila Real** (roxa e dourada, +30 espaços): **R$ 1,99** na loja especial (`mochila_30`).
+  - A mochila base continua com 60 espaços.
+- **Visual na tela de equipamentos:** o encaixe "Visual" mostra o que está vestido. Tocar abre a lista dos visuais comprados (com o retrato de cada um) e "Sem visual". A loja especial continua vendendo; a troca agora fica aqui.
+- **Retratos por visual:** o retrato do HUD e o das falas do Lio mudam com o visual (campo `portrait` do visual em characters.json). Retratos novos do Sol, da Tempestade e do Anjo.
+- **Visual Anjo Dourado** (`skin_anjo`, R$ 9,90):
+  - armadura dourada e branca, com a Lâmina Solar;
+  - **asas separadas** (um modelo de asa do Meshy, espelhado), presas ao peito e batendo por código, douradas e brilhantes; batem mais rápido em movimento (`AngelWings`);
+  - **flutua no lugar de andar:** fica uns 30 cm acima do chão, balançando, e inclina para a frente ao se mover (`float` no visual).
+  - Custo no Meshy: ~74 créditos, somando modelo, esqueleto, asa, retratos e ícones.
+- Fotos: `res://tests/looks_capture.tscn -- <pasta>`.

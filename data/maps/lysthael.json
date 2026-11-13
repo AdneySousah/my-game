@@ -32,7 +32,7 @@
     {"points": [[0, -14], [0, -38]], "width": 3.0, "color": "#b9a27a"}
   ],
   "props": [
-    {"id": "env_arvore_mae", "pos": [0, -6], "rot": 0},
+    {"id": "env_arvore_mae", "pos": [0, -6], "rot": 0, "unless_flag": "velyra_defeated"},
     {"id": "env_casa_arvore", "pos": [-20, -12], "rot": 30},
     {"id": "env_casa_arvore", "pos": [20, -12], "rot": -30},
     {"id": "env_casa_arvore", "pos": [-24, 6], "rot": 80},
@@ -51,7 +51,8 @@
     {"id": "prp_banco", "pos": [-6, 16], "rot": 90},
     {"id": "prp_banco", "pos": [6, 16], "rot": -90},
     {"id": "prp_cogumelo_gigante", "pos": [-28, -22], "rot": 30},
-    {"id": "prp_cogumelo_gigante", "pos": [28, 18], "rot": 140}
+    {"id": "prp_cogumelo_gigante", "pos": [28, 18], "rot": 140},
+    {"id": "env_arvore_mae_florida", "pos": [0, -6], "rot": 0, "if_flag": "velyra_defeated"}
   ],
   "walls": [
     {"id": "env_cerca_elfica", "from": [-32, 36], "to": [-4.5, 36]},

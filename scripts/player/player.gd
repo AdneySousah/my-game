@@ -139,7 +139,10 @@ func _physics_process(delta: float) -> void:
 	var input: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	var dir: Vector3 = _camera_relative(input)
 
-	if Input.is_action_just_pressed("dodge"):
+	# Held by roots: no walking or rolling, but attacks and skills still work (a leap or a
+	# charge tears the hero free).
+	var rooted: bool = status.has("root")
+	if Input.is_action_just_pressed("dodge") and not rooted:
 		_try_dodge(dir)
 		return
 	if Input.is_action_just_pressed("attack"):
@@ -157,7 +160,7 @@ func _physics_process(delta: float) -> void:
 			_update_sprint(dir, delta)
 			var speed: float = MOVE_SPEED * (1.0 + stats.buff("speed")) * (float(_stamina_rules().get("sprint_speed_mult", 1.6)) if _sprinting else 1.0)
 			speed *= 1.0 - clampf(status.value("slow"), 0.0, 0.8)
-			velocity = dir * speed
+			velocity = Vector3.ZERO if rooted else dir * speed
 			if dir.length_squared() > 0.01:
 				face_direction(dir)
 	else:
@@ -278,13 +281,14 @@ func can_act() -> bool:
 
 
 ## A status from an enemy hit: "stun" (no moving or acting), "slow" (value = speed lost),
-## "weaken" (value = damage lost) or "poison" (value = fraction of max health per second).
+## "weaken" (value = damage lost), "poison" (value = fraction of max health per second) or
+## "root" (held in place: no walking or rolling, attacks and skills still work).
 func apply_status(effect: String, seconds: float, value: float = 0.0) -> void:
 	if _dead or seconds <= 0.0:
 		return
 	status.apply(effect, seconds, value)
-	var names: Dictionary = {"stun": "BUFF_STUN", "slow": "BUFF_SLOW", "weaken": "BUFF_WEAKEN", "poison": "BUFF_POISON"}
-	var colors: Dictionary = {"stun": Color("#ffe066"), "slow": Color("#7fd1ff"), "weaken": Color("#c08aff"), "poison": Color("#8ee04a")}
+	var names: Dictionary = {"stun": "BUFF_STUN", "slow": "BUFF_SLOW", "weaken": "BUFF_WEAKEN", "poison": "BUFF_POISON", "root": "BUFF_ROOT"}
+	var colors: Dictionary = {"stun": Color("#ffe066"), "slow": Color("#7fd1ff"), "weaken": Color("#c08aff"), "poison": Color("#8ee04a"), "root": Color("#a0703a")}
 	ProtoVisuals.damage_number(get_parent(), global_position + Vector3(0, 0.6, 0), tr(str(names.get(effect, effect))), colors.get(effect, Color.WHITE))
 	if model:
 		model.set_tint(colors.get(effect, Color.WHITE), 0.35)
@@ -347,6 +351,7 @@ func face_towards(point: Vector3) -> void:
 
 
 func start_forced_move(vel: Vector3, seconds: float, step: Callable = Callable()) -> void:
+	status.remove("root")
 	_forced_velocity = vel
 	_forced_time = seconds
 	_forced_step = step
@@ -354,6 +359,7 @@ func start_forced_move(vel: Vector3, seconds: float, step: Callable = Callable()
 
 ## Moves along an arc to `to` (used by Salto Devastador). Await the returned signal.
 func leap_to(to: Vector3, seconds: float) -> Signal:
+	status.remove("root")
 	_scripted = true
 	set_invulnerable(seconds + 0.1)
 	var from: Vector3 = global_position

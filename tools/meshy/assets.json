@@ -5578,6 +5578,216 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "boss_velyra",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "elf queen archer, thorn crown, white gown, leaf cape (archer anims)",
+      "file": "assets/enemies/boss_velyra/boss_velyra.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_velyra_driade",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "colossal thorn dryad, dark bark, violet cracks (frost giant anims)",
+      "file": "assets/enemies/boss_velyra_driade/boss_velyra_driade.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_arco_galho",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "living branch elven longbow",
+      "file": "assets/weapons/wpn_arco_galho/wpn_arco_galho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_flor_espinho",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "thorny violet flower bulb (power ground)",
+      "file": "assets/props/prp_flor_espinho/prp_flor_espinho.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_arvore_mae_florida",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "mother tree in full bloom",
+      "file": "assets/environment/env_arvore_mae_florida/env_arvore_mae_florida.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pro_velyra",
+      "category": "pro",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "story: dryad falls, tree blooms, elves sing",
+      "file": "assets/story/pro_velyra/pro_velyra.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 18,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato4c",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "loading: topo_torre",
+      "file": "assets/ui/ui_loading_ato4c/ui_loading_ato4c.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 6,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retrato_velyra",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Velyra portrait",
+      "file": "assets/ui/ui_retrato_velyra/ui_retrato_velyra.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

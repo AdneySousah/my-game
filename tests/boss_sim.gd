@@ -33,6 +33,9 @@ func _ready() -> void:
 	elif boss_id == "guardiao_espinhos":
 		Main.start_map = "torre_vigia"
 		Main.start_spawn = "pos:0:-22:180"
+	elif boss_id == "velyra":
+		Main.start_map = "topo_torre"
+		Main.start_spawn = "pos:0:8:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	if boss_id == "golem":
 		Session.flags.erase("golem_defeated")
@@ -48,7 +51,7 @@ func _ready() -> void:
 		player.stats.spend_point("str" if n % 5 < 3 else "vit")
 		n += 1
 	player.rest()
-	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos"]:
+	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra"]:
 		Session.add_item("pot_vida_m", 6)
 		Session.add_item("pot_vida_g", 3)
 		Session.add_item("pot_folego_m", 3)
@@ -64,7 +67,7 @@ func _ready() -> void:
 		if boss_id == "gorvan":
 			pieces[0] = "eq_espada_raro"
 			pieces[2] = "eq_peitoral_raro"
-		elif boss_id in ["guardiao_gelo", "brannoc", "guardiao_espinhos"]:
+		elif boss_id in ["guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra"]:
 			pieces = ["eq_espada_epico", "eq_elmo_epico", "eq_peitoral_epico", "eq_luvas_epico",
 				"eq_calca_epico", "eq_botas_epico", "eq_cinto_epico", "eq_pulseira_epico"]
 		elif boss_id == "sahra":

@@ -394,3 +394,41 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   4. Guardião de Espinhos;
   5. Bram, que veio até Lys'Thaël (aparece com `severin_duel_3` e sai de Pradoluz). Ele conta que o dedo do pai na neve tinha um corte limpo de faca: o Doran pode estar vivo.
 - **Próximo:** 6.4c, a Velyra em 2 formas (Dríade de Espinhos, raízes que prendem) no topo da torre e a Árvore-Mãe florescendo.
+
+## Fase 6.4c: a Velyra e a Árvore-Mãe florescendo (12/11/2026)
+- **Topo da Torre** (nível 56): plataforma octogonal a céu aberto, com cerca élfica, lanternas e raízes negras. Por fora, anéis de árvores do pântano lá embaixo. A saída abre com `act4_tower` (fim da missão 14).
+- **Velyra, Arauta do Silêncio** (forma 1): elfa arqueira com um arco de galho vivo.
+  - Usa as animações do arqueiro e a conjuração da Sahra, o que economizou créditos de animação.
+  - Mantém distância (`keep_distance`).
+  - Golpes:
+    - flecha com veneno;
+    - chuva de flechas que deixa lento;
+    - linha de cipós que prende;
+    - chute;
+    - chama 2 cultistas abaixo de 80% da vida.
+  - O 1º modelo tinha cabelo longo solto, e o esqueleto automático do Meshy prendia o cabelo aos braços (esticava quando ela levantava os braços). Tentei corrigir os pesos no Blender sem sucesso; refiz com o cabelo preso num coque trançado e a capa curta nos ombros (mais 23 créditos).
+  - **Regra para os próximos personagens:** nada de cabelo longo solto ou capa comprida perto dos braços.
+- **Dríade de Espinhos** (forma verdadeira, 50% da vida): gigante de casca e espinhos com rachaduras roxas. Usa as animações do Gigante de Gelo.
+  - Golpes:
+    - chicotada com veneno;
+    - pancada que atordoa;
+    - raízes que brotam do chão e prendem;
+    - "agarrar": um círculo grande sob o herói que prende por 2,2 s.
+  - Segue a regra dos Arautos:
+    - escudo de quebra;
+    - **flores de espinho** brotam na arena e curam 10% da vida quando ela passa por cima;
+    - o herói corta as flores atacando perto delas.
+- **Efeito novo "preso" (`root`):** o herói não anda nem rola, mas ainda ataca e usa skills. A **investida e o salto soltam na hora**: é a resposta do jogador às raízes. Aparece na barra de efeitos ("Preso pelas raízes"). O Lio explica as duas regras na fala depois da troca de forma.
+- **Depois da luta:** cena ilustrada "velyra" (3 painéis: a Dríade se desfaz, a Árvore-Mãe floresce, Lys'Thaël canta de novo) e volta a Lys'Thaël (`lysthael_bloom`).
+  - A Árvore-Mãe murcha some (`unless_flag: velyra_defeated`), e no lugar dela aparece a florida, com luz rosa.
+- **Missão 15 "A Arauta do Silêncio":**
+  1. subir ao topo da torre;
+  2. derrotar a Velyra;
+  3. falar com o Elarion sob a Árvore-Mãe, que conta do mensageiro de Altaréa (gancho do Ato 5, Cassian).
+  - Liga `act4_done`.
+- **Equilíbrio** (robô do `boss_sim`, nível 56, com poções e peças épicas): vence em 150–190 s, vida mínima 37–39%, sem mortes. No começo a luta passava de 5 min (as flores curavam 15% e o robô não as corta). Ficou assim:
+  - cura: 10%;
+  - espera de 12 s antes de procurar outra flor;
+  - vida: 3000 (Velyra) e 3300 (Dríade).
+- **Nomes que sumiam:** o gerador de falas é dono das chaves `NPC_`, e os nomes postos à mão no strings.csv (Sahra, Osk, Brunhild, Brannoc, Elarion, Faenor) eram apagados a cada rodada. Por isso a caixa de fala mostrava o código no lugar do nome. Agora ficam no `gen_act1_text.py`, e um teste confere que todo personagem tem nome.
+- `add_fingers.py`: plano B para mãos em que um dedo não recebe vértices (usa o dedo vizinho).

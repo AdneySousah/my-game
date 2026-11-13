@@ -34,5 +34,22 @@
         "text": "STO_SEVERIN_2"
       }
     ]
+  },
+  "velyra": {
+    "music": "vitoria",
+    "panels": [
+      {
+        "image": "sto_velyra_1",
+        "text": "STO_VELYRA_1"
+      },
+      {
+        "image": "sto_velyra_2",
+        "text": "STO_VELYRA_2"
+      },
+      {
+        "image": "sto_velyra_3",
+        "text": "STO_VELYRA_3"
+      }
+    ]
   }
 }

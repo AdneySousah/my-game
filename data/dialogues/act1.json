@@ -1341,6 +1341,82 @@
         ]
       ]
     },
+    "main_15_stairs": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_15_STAIRS_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_15_STAIRS_2"
+        ]
+      ]
+    },
+    "velyra_intro": {
+      "lines": [
+        [
+          "velyra",
+          "DLG_VELYRA_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_VELYRA_INTRO_2"
+        ],
+        [
+          "velyra",
+          "DLG_VELYRA_INTRO_3"
+        ],
+        [
+          "lio",
+          "DLG_VELYRA_INTRO_4"
+        ]
+      ]
+    },
+    "velyra_transform": {
+      "lines": [
+        [
+          "velyra",
+          "DLG_VELYRA_TRANSFORM_1"
+        ]
+      ]
+    },
+    "velyra_reborn": {
+      "lines": [
+        [
+          "lio",
+          "DLG_VELYRA_REBORN_1"
+        ],
+        [
+          "lio",
+          "DLG_VELYRA_REBORN_2"
+        ]
+      ]
+    },
+    "main_15_elarion": {
+      "lines": [
+        [
+          "elarion",
+          "DLG_MAIN_15_ELARION_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_15_ELARION_2"
+        ],
+        [
+          "elarion",
+          "DLG_MAIN_15_ELARION_3"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_15_ELARION_4"
+        ],
+        [
+          "elarion",
+          "DLG_MAIN_15_ELARION_5"
+        ]
+      ]
+    },
     "side_cantos_offer": {
       "lines": [
         [

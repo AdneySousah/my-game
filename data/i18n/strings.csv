@@ -462,10 +462,45 @@ ENEMY_MORTO_PANTANO,Morto do pântano,Swamp dead
 ENEMY_CULTISTA,Cultista do silêncio,Cultist of Silence
 SHOP_ELARION,Loja do Elarion,Elarion's Shop
 BUFF_POISON,Envenenado,Poisoned
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+MAP_TORRE_VIGIA,Torre do Vigia Élfico,Elven Watcher's Tower
+MAP_TOPO_TORRE,Topo da Torre,Tower Top
+REST_PANTANO_RAIZ,Raiz Ponte,Bridge Root
+REST_PANTANO_ILHA,Ilhota de Musgo,Moss Islet
+REST_TORRE_VIGIA_ENTRADA,Porta das Raízes,Root Door
+REST_TORRE_VIGIA_MEIO,Salão dos Cantores,Singers' Hall
+ENEMY_GUARDIAO_ESPINHOS,Guardião de Espinhos,Thorn Guardian
+ENEMY_VELYRA,"Velyra, Arauta do Silêncio","Velyra, Herald of Silence"
+ENEMY_VELYRA_DRIADE,Dríade de Espinhos,Thorn Dryad
+REST_TOPO_TORRE,Alto da Escada,Top of the Stairs
+BUFF_ROOT,Preso pelas raízes,Rooted
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
 NPC_BENTO,Bento,Bento
+NPC_SAHRA,Sahra,Sahra
+NPC_OSK,Osk,Osk
+NPC_BRUNHILD,Brunhild,Brunhild
+NPC_BRANNOC,Brannoc,Brannoc
+NPC_ELARION,Elarion,Elarion
+NPC_FAENOR,Faenor,Faenor
+NPC_VELYRA,Velyra,Velyra
 NPC_CELESTE,Dona Celeste,Mrs. Celeste
 NPC_TOBIAS,Tobias,Tobias
 NPC_NINA,Nina,Nina
@@ -505,6 +540,14 @@ QUEST_MAIN_11,A mina debaixo da montanha,The Mine Beneath the Mountain
 QUEST_MAIN_12,O Arauto do Frio,The Herald of Cold
 QUEST_MAIN_13,A floresta em silêncio,The Silent Forest
 QUEST_MAIN_14,O vigia e o segredo,The Watcher and the Secret
+QUEST_MAIN_15,A Arauta do Silêncio,The Herald of Silence
+QUEST_ACT5_SOON,"Altaréa, a capital do Arauto Cassian, chega na próxima versão","Altaréa, the capital of the Herald Cassian, arrives in the next version"
+OBJ_CLIMB_TOWER,Suba ao topo da Torre do Vigia,Climb to the top of the Watcher's Tower
+OBJ_KILL_VELYRA,"Derrote a Velyra, Arauta do Silêncio","Defeat Velyra, Herald of Silence"
+OBJ_TALK_ELARION_BLOOM,Fale com o Elarion sob a Árvore-Mãe,Talk to Elarion under the Mother Tree
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
 QUEST_ACT4_SOON2,A escada para o topo da Torre do Vigia está livre: a Velyra chega na próxima versão,The stairs to the top of the Watcher's Tower are clear: Velyra arrives in the next version
 OBJ_TALK_FAENOR_SWAMP,Fale com o Faenor sobre o pântano,Talk to Faenor about the swamp
 OBJ_REACH_PANTANO,"Entre no Pântano das Raízes, ao norte de Lys'Thaël","Enter the Swamp of Roots, north of Lys'Thaël"
@@ -1002,6 +1045,20 @@ DLG_MAIN_14_BRAM_4,"Na noite em que você nasceu, acharam só um dedo do seu pai
 DLG_MAIN_14_BRAM_5,"Eu vi aquele dedo, Lio. Não foi dente. Foi um corte limpo. De faca.","I saw that finger, Lio. It wasn't teeth. It was a clean cut. A knife."
 DLG_MAIN_14_BRAM_6,Então... meu pai...,Then... my father...
 DLG_MAIN_14_BRAM_7,"O Doran pode estar vivo. Não sei onde, nem por quê. Mas lobo nenhum corta assim.","Doran may be alive. I don't know where, or why. But no wolf cuts like that."
+DLG_MAIN_15_STAIRS_1,Quantos degraus... O Bento ia reclamar de cada um deles.,So many steps... Bento would have complained about every single one.
+DLG_MAIN_15_STAIRS_2,Lá em cima. Dá pra sentir a floresta sendo puxada pra ela.,Up there. I can feel the forest being pulled toward her.
+DLG_VELYRA_INTRO_1,Silêncio. Esta torre só ouve o vento.,Silence. This tower listens only to the wind.
+DLG_VELYRA_INTRO_2,E as crianças que você queria calar no pântano? Também eram vento?,And the children you wanted to silence in the swamp? Were they wind too?
+DLG_VELYRA_INTRO_3,"Canções acordam a floresta, e a floresta pertence aos deuses. Eu só devolvo a eles o que é deles.","Songs wake the forest, and the forest belongs to the gods. I only give back to them what is theirs."
+DLG_VELYRA_INTRO_4,Então eu vim pegar de volta.,Then I came to take it back.
+DLG_VELYRA_TRANSFORM_1,"Basta! Se você não se cala, a floresta inteira vai te engolir!","Enough! If you won't be silent, the whole forest will swallow you!"
+DLG_VELYRA_REBORN_1,Um escudo de casca... e essas flores roxas estão dando força pra ela. Corto as flores e quebro o escudo.,A shield of bark... and those purple flowers are feeding her. I cut the flowers and break the shield.
+DLG_VELYRA_REBORN_2,"E se as raízes me prenderem, uma investida ou um salto me solta.","And if the roots grab me, a charge or a leap will tear me free."
+DLG_MAIN_15_ELARION_1,Está ouvindo? A floresta está cantando de novo! Até as crianças voltaram para debaixo da Árvore-Mãe.,Do you hear it? The forest is singing again! Even the children are back under the Mother Tree.
+DLG_MAIN_15_ELARION_2,Ela ficou linda assim. Bem melhor que cinza.,She looks beautiful like this. Much better than grey.
+DLG_MAIN_15_ELARION_3,"Chegou um mensageiro de Altaréa, a capital. O Arauto Cassian fechou os portões e proibiu até as pessoas de se reunirem.","A messenger came from Altaréa, the capital. The Herald Cassian closed the gates and forbade people from even gathering."
+DLG_MAIN_15_ELARION_4,Mais um Arauto. Então é para lá que eu vou.,Another Herald. Then that's where I'm going.
+DLG_MAIN_15_ELARION_5,"Leve isto, com a gratidão de todo o povo de Lys'Thaël. E volte para ouvir a gente cantar.","Take this, with the gratitude of all of Lys'Thaël. And come back to hear us sing."
 DLG_SIDE_CANTOS_OFFER_1,"Antes da proibição, os bardos esconderam as partituras mais antigas na Mata Úmida. Se a Velyra achar, queima tudo.","Before the ban, the bards hid the oldest sheet music in the Damp Woods. If Velyra finds it, she'll burn it all."
 DLG_SIDE_CANTOS_OFFER_2,Traz as quatro? Um dia a gente vai cantar de novo. E eu quero estar com a letra certa.,Will you bring all four? One day we'll sing again. And I want to have the right lyrics.
 DLG_SIDE_CANTOS_OFFER_3,Quatro partituras na mata. Eu só não prometo cantar junto.,Four sheets in the woods. I just don't promise to sing along.
@@ -1039,10 +1096,3 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-MAP_TORRE_VIGIA,Torre do Vigia Élfico,Elven Watcher's Tower
-MAP_TOPO_TORRE,Topo da Torre,Tower Top
-REST_PANTANO_RAIZ,Raiz Ponte,Bridge Root
-REST_PANTANO_ILHA,Ilhota de Musgo,Moss Islet
-REST_TORRE_VIGIA_ENTRADA,Porta das Raízes,Root Door
-REST_TORRE_VIGIA_MEIO,Salão dos Cantores,Singers' Hall
-ENEMY_GUARDIAO_ESPINHOS,Guardião de Espinhos,Thorn Guardian

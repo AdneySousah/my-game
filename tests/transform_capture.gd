@@ -2,7 +2,7 @@ extends Node
 ## Photos of a boss changing form (the Harvest Herald into the Scarecrow): the talk, the
 ## scene step by step, the new arena (wheat), the break shield, the shield breaking and
 ## the boss eating a wheat patch.
-##   godot --path . --resolution 1280x720 res://tests/transform_capture.tscn -- <output_dir> [sahra|brannoc]
+##   godot --path . --resolution 1280x720 res://tests/transform_capture.tscn -- <output_dir> [sahra|brannoc|velyra]
 
 var _out: String = ""
 var _shot: int = 0
@@ -26,6 +26,10 @@ func _ready() -> void:
 		Session.set_flag("act3_mine")
 		Main.start_map = "castelo"
 		Main.start_spawn = "pos:0:-17:180"
+	elif args.size() > 1 and args[1] == "velyra":
+		Session.set_flag("act4_tower")
+		Main.start_map = "topo_torre"
+		Main.start_spawn = "pos:0:8:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	add_child(main)
 	await _wait(1.0)

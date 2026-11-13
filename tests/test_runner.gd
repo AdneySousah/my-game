@@ -26,6 +26,7 @@ func _ready() -> void:
 	await _elf_test()
 	await _swamp_test()
 	await _status_test()
+	await _velyra_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -794,8 +795,72 @@ func _status_test() -> void:
 	p.apply_status("poison", 1.0, 0.05)
 	await _frames(40)
 	check(p.hp < hp0, "poison drains health (%.0f -> %.0f)" % [hp0, p.hp])
+	p.status.remove("poison")
+	# Roots hold the hero in place, but attacks and skills still work; a charge breaks free.
+	p.apply_status("root", 3.0)
+	var start: Vector3 = p.global_position
+	Input.action_press("move_up")
+	await _frames(20)
+	Input.action_release("move_up")
+	check(p.global_position.distance_to(start) < 0.05, "a rooted hero cannot walk")
+	check(p.can_act(), "a rooted hero can still attack")
+	p.start_forced_move(Vector3.FORWARD * 4.0, 0.2)
+	check(not p.status.has("root"), "a charge tears the hero free of the roots")
 	main.queue_free()
 	await _frames(2)
+	Session.reset()
+
+
+## 6.4c: Velyra on top of the Watcher's Tower (archer, then the Thorn Dryad with a shield
+## and thorn flowers), the Mother Tree in bloom afterwards and quest 15.
+func _velyra_test() -> void:
+	# Every speaker's name has a text (the dialogue generator owns the NPC_ keys).
+	for id: String in Data.npcs:
+		var key: String = str((Data.npcs[id] as Dictionary).get("name", ""))
+		if key != "":
+			check(tr(key) != key, "%s has a name text (%s)" % [id, key])
+	Session.reset()
+	Session.set_flag("act4_tower")
+	check(Data.quest("main_15").get("requires", []) == ["main_14"], "quest 15 follows the watcher's secret")
+	var v: Dictionary = Data.enemies.get("velyra", {})
+	var d: Dictionary = Data.enemies.get("velyra_driade", {})
+	check(str((v.get("phases", [{}]) as Array)[0].get("become", "")) == "velyra_driade", "Velyra becomes the Thorn Dryad")
+	check(d.has("shield") and str(d.get("power_ground", {}).get("prop", "")) == "prp_flor_espinho", "the Dryad has a shield and thorn flowers")
+	var roots: bool = false
+	for a: Dictionary in d.get("attacks", []):
+		if str(a.get("status", {}).get("id", "")) == "root":
+			roots = true
+	check(roots, "the Dryad's roots hold the hero")
+	Main.start_map = "topo_torre"
+	Main.start_spawn = "from_torre_vigia"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var boss: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "velyra":
+			boss = n as Enemy
+	check(boss != null, "Velyra waits on top of the tower")
+	if boss:
+		check(boss.model != null and boss.model.character_id == "boss_velyra", "Velyra has her own model")
+	check(ResourceLoader.exists("res://assets/loading/load_topo_torre.webp"), "the tower top has loading art")
+	for i: int in [1, 2, 3]:
+		check(ResourceLoader.exists("res://assets/story/sto_velyra_%d.webp" % i), "panel sto_velyra_%d exists" % i)
+	# After her: the Mother Tree blooms in Lys'Thaël.
+	Session.set_flag("velyra_defeated")
+	main.load_map("lysthael", "start")
+	await _wait_map(main, "lysthael")
+	await _frames(4)
+	var names: Array = []
+	for c: Node in main.map.find_children("*", "", true, false):
+		names.append(str(c.name))
+	var bloom: bool = names.any(func(s: String) -> bool: return s.contains("env_arvore_mae_florida"))
+	var dry: bool = names.any(func(s: String) -> bool: return s.begins_with("env_arvore_mae") and not s.contains("florida"))
+	check(bloom and not dry, "the Mother Tree blooms after Velyra (bloom %s, withered %s)" % [bloom, dry])
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
 	Session.reset()
 
 

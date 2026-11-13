@@ -263,6 +263,8 @@
     "prp_arvore_pantano": {"scene": "res://assets/props/prp_arvore_pantano/prp_arvore_pantano.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "wind": {"sway": 0.08, "flutter": 0.01}},
     "prp_cogumelo_gigante": {"scene": "res://assets/props/prp_cogumelo_gigante/prp_cogumelo_gigante.glb", "scale": 2.2, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#5fe8d0", "energy": 0.9, "range": 4.0, "y": 1.2}},
     "prp_raiz_gigante": {"scale": 8.0, "scene": "res://assets/props/prp_raiz_gigante/prp_raiz_gigante.glb", "center_origin": true, "collision": {"type": "box"}},
-    "env_torre_vigia": {"scene": "res://assets/environment/env_torre_vigia/env_torre_vigia.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}}
+    "env_torre_vigia": {"scene": "res://assets/environment/env_torre_vigia/env_torre_vigia.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}},
+    "prp_flor_espinho": {"scene": "res://assets/props/prp_flor_espinho/prp_flor_espinho.glb", "scale": 1.8, "center_origin": true, "collision": null, "light": {"color": "#d36bff", "energy": 1.0, "range": 4.0, "y": 1.0}},
+    "env_arvore_mae_florida": {"scene": "res://assets/environment/env_arvore_mae_florida/env_arvore_mae_florida.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}, "light": {"color": "#ffd1ec", "energy": 1.4, "range": 14.0, "y": 8.0}}
   }
 }

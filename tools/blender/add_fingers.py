@@ -79,6 +79,11 @@ def analyse_hand(arm, mesh, side):
             groups[min(range(4), key=lambda i: abs(p[1] - cent[i]))].append(p)
         cent = [mean([p[1] for p in g]) if g else cent[i] for i, g in enumerate(groups)]
     joints = {}
+    for i in range(4):
+        if not groups[i]:
+            # Mitten-like hands (sleeves, vines): borrow the nearest finger that has points.
+            near = sorted((j for j in range(4) if groups[j]), key=lambda j: abs(j - i))
+            groups[i] = [(p[0], cent[i], p[2]) for p in groups[near[0]]]
     for i, g in enumerate(groups):
         tip_a = max(p[0] for p in g)
         fit = line_fit(g)

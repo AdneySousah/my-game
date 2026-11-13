@@ -162,6 +162,17 @@
       "rewards": { "xp": 19000, "gold": 5200, "items": { "pot_vida_g": 6, "eq_elmo_epico": 1, "trevo_real": 1 } }
     },
     {
+      "id": "main_15", "type": "main", "name": "QUEST_MAIN_15", "auto": true,
+      "requires": ["main_14"], "min_level": 52,
+      "steps": [
+        { "type": "reach", "map": "topo_torre", "pos": [0, 20], "radius": 7, "text": "OBJ_CLIMB_TOWER", "dialogue": "main_15_stairs" },
+        { "type": "kill", "enemy": "velyra", "count": 1, "map": "topo_torre", "pos": [0, -10], "text": "OBJ_KILL_VELYRA", "skip_if_flag": "velyra_defeated" },
+        { "type": "talk", "npc": "elarion", "dialogue": "main_15_elarion", "text": "OBJ_TALK_ELARION_BLOOM" }
+      ],
+      "set_flag": "act4_done", "end_note": "QUEST_ACT5_SOON",
+      "rewards": { "xp": 24000, "gold": 6500, "items": { "pot_vida_g": 8, "eq_espada_epico": 1, "trevo_real": 2, "broca_real": 1 } }
+    },
+    {
       "id": "side_cantos", "type": "side", "name": "QUEST_SIDE_CANTOS", "giver": "elarion", "offer": "side_cantos_offer",
       "requires": ["main_13"], "min_level": 46,
       "steps": [

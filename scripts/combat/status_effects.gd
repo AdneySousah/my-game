@@ -35,6 +35,12 @@ func clear() -> void:
 	changed.emit()
 
 
+## Ends one effect early (a charge tearing free of roots).
+func remove(effect: String) -> void:
+	if _effects.erase(effect):
+		changed.emit()
+
+
 func _process(delta: float) -> void:
 	if _effects.is_empty():
 		return

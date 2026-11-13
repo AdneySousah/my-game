@@ -682,3 +682,20 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - nas telas de equipamento e atributos o anjo não flutua, para não sair cortado (`float_in_place`);
   - pose de voo: ação `float` só do anjo (`extra_actions`), com uma perna dobrada para trás, a outra esticada para baixo e os pés apontados;
   - **virada de direção suave:** o herói gira até a direção do controle em vez de virar de uma vez (`TURN_RATE`), e inclina um pouco para dentro da curva.
+
+## Desempenho e qualidade gráfica (13/11/2026, versão 0.3.6)
+O dono e um amigo viram quedas de quadros em celulares mais antigos.
+- **Gráficos: Baixo / Médio / Alto** nas Opções. Na primeira vez o jogo escolhe pelo celular: menos de 3,5 GB de memória ou menos de 6 núcleos fica no Baixo (e começa em 30 quadros por segundo); até 5,5 GB, Médio; acima, Alto. No PC sempre começa no Alto.
+
+  | Nível | Resolução 3D | Sombras | Grama | Mata das cidades | Objetos soltos longe |
+  |---|---|---|---|---|---|
+  | Baixo | 720 linhas | desligadas | 30% | 45% | somem a 38 m |
+  | Médio | 900 linhas | 1024 | 65% | 75% | somem a 55 m |
+  | Alto | 1080 linhas | 2048 | 100% | 100% | sempre |
+
+  A resolução e as sombras mudam na hora; a grama e a mata, no próximo mapa (`Game.QUALITY`, `Game.q()`).
+- **Monstros longe descansam:** um monstro parado a mais de 28 m do herói (fora da tela) para de animar e só pensa 4 vezes por segundo. Os ajustes dos dedos guardam os ossos e param quando a pose já chegou.
+- **Medição no PC** (`res://tests/perf_bench.tscn`):
+  - Pradoluz: 130 quadros por segundo no Alto, 188 no Baixo;
+  - Floresta (23 monstros): 126 → 158 no Baixo.
+  - Num celular os números são bem menores, mas a proporção de ganho é parecida.

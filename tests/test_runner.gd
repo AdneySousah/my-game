@@ -1165,6 +1165,13 @@ func _packs_looks_test() -> void:
 	eq.call("_wear_look", "")
 	await _frames(2)
 	check(Session.skin == "" and Player.portrait_id() == "ui_retrato_lio", "no look: Lio and his own portrait again")
+	# Graphics quality (owner, 13/11): low turns shadows off and thins the grass.
+	var q_before: String = Game.quality
+	Game.set_quality("low")
+	check(is_equal_approx(Game.q("shadow"), 0.0) and Game.q("grass") < 0.5, "low graphics: no shadows, less grass")
+	Game.set_quality("high")
+	check(Game.q("shadow") > 0.0 and is_equal_approx(Game.q("grass"), 1.0), "high graphics: shadows and all the grass")
+	Game.set_quality(q_before)
 	eq.hide()
 	main.hud._on_panel_closed()
 	main.queue_free()

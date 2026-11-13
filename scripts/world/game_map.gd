@@ -187,8 +187,12 @@ func _build_environment() -> void:
 	sun.rotation_degrees = Vector3(-55, -35, 0)
 	sun.light_color = Color(str(data.get("sun_color", "#fff1d6")))
 	sun.light_energy = float(data.get("sun", 1.1))
-	sun.shadow_enabled = true
+	# Sun shadows follow the graphics quality (off on "low").
+	sun.shadow_enabled = Game.q("shadow") > 0.0
 	add_child(sun)
+	Game.quality_changed.connect(func() -> void:
+		if is_instance_valid(sun):
+			sun.shadow_enabled = Game.q("shadow") > 0.0)
 	# Outdoors: day and night, and wind. Indoors (barn, mine): still air, fixed light.
 	var wind: Dictionary = Data.daynight.get("wind", {})
 	var wd: Array = wind.get("dir", [1.0, 0.35])
@@ -229,7 +233,10 @@ func _build_grass() -> void:
 	var field := GrassField.new()
 	field.name = "Grass"
 	add_child(field)
-	field.build(cfg, Vector2(float(size[0]), float(size[1])), _grass_free, int(data.get("seed", 1)) + 7)
+	# Fewer tufts on lower graphics quality.
+	var gcfg: Dictionary = (cfg as Dictionary).duplicate()
+	gcfg["count"] = roundi(float(gcfg.get("count", 3000)) * Game.q("grass"))
+	field.build(gcfg, Vector2(float(size[0]), float(size[1])), _grass_free, int(data.get("seed", 1)) + 7)
 
 
 func _grass_free(p: Vector3) -> bool:
@@ -775,6 +782,9 @@ func _build_town_edge() -> void:
 			z += spacing
 			if _edge_rect.grow(1.8).has_point(Vector2(p.x, p.z)) or not _wood_free(p):
 				continue
+			# Lower graphics quality: a thinner wood, but the row along the walls stays.
+			if not _edge_rect.grow(6.0).has_point(Vector2(p.x, p.z)) and rng.randf() > Game.q("wood"):
+				continue
 			var id: String = str(ids[rng.randi() % ids.size()])
 			if not per_id.has(id):
 				per_id[id] = []
@@ -864,9 +874,22 @@ func _build_scatter() -> void:
 			if not _is_free(pos, keep_away):
 				continue
 			var id: String = str(ids[rng.randi() % ids.size()])
-			PropFactory.spawn(self, id, pos, rng.randf_range(0, 360), rng.randf_range(0.85, 1.15))
+			var body: StaticBody3D = PropFactory.spawn(self, id, pos, rng.randf_range(0, 360), rng.randf_range(0.85, 1.15))
+			_limit_draw(body)
 			_clear_spots.append(pos)
 			placed += 1
+
+
+## Lower graphics quality: small scattered things far from the camera are not drawn.
+func _limit_draw(node: Node) -> void:
+	var dist: float = Game.q("draw")
+	if node == null or dist <= 0.0:
+		return
+	for n: Node in node.find_children("*", "GeometryInstance3D", true, false):
+		var g := n as GeometryInstance3D
+		g.visibility_range_end = dist
+		g.visibility_range_end_margin = 4.0
+		g.visibility_range_fade_mode = GeometryInstance3D.VISIBILITY_RANGE_FADE_DISABLED
 
 
 ## Things to pick up for quests in this map must not end up inside a rock or a tree.

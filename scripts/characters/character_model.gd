@@ -369,6 +369,18 @@ func _pick(preferred: String, fallback: String) -> String:
 	return preferred if not _action(preferred).is_empty() else fallback
 
 
+## Far away and off the screen: the animation and the per-frame work stop (the pose
+## stays as it was). Back on when the character is near again.
+func set_resting(on: bool) -> void:
+	if anim:
+		anim.active = not on
+	set_process(not on)
+	if skeleton:
+		for m: Node in skeleton.get_children():
+			if m is SkeletonModifier3D:
+				(m as SkeletonModifier3D).active = not on
+
+
 func is_busy() -> bool:
 	return _clock < _busy_until
 

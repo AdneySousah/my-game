@@ -25,6 +25,10 @@ var _target: Dictionary = {"Right": "", "Left": ""}
 var _current: Dictionary = {}
 ## bone index -> rest rotation.
 var _rest: Dictionary = {}
+## [side, finger, joint index, bone index] for every finger bone, found once.
+var _joints: Array[Array] = []
+## Nothing moves once every finger reached its pose (until a new pose is asked for).
+var _settled: bool = false
 
 
 ## Returns null when the skeleton has no finger bones.
@@ -42,11 +46,14 @@ static func create_for(skel: Skeleton3D, poses: Dictionary) -> HandPose:
 				if i >= 0:
 					hp._rest[i] = skel.get_bone_rest(i).basis.get_rotation_quaternion()
 					hp._current[i] = Quaternion.IDENTITY
+					hp._joints.append([side, finger, (SEGMENTS[finger] as Array).find(seg), i])
 	return hp
 
 
 ## Moves one hand ("Right"/"Left") to a pose by name; "" = fingers at rest.
 func set_pose(side: String, pose: String) -> void:
+	if str(_target.get(side, "")) != pose:
+		_settled = false
 	_target[side] = pose
 
 
@@ -54,6 +61,7 @@ func set_pose(side: String, pose: String) -> void:
 func override_pose(pose: String, data: Dictionary) -> void:
 	_poses = _poses.duplicate()
 	_poses[pose] = data
+	_settled = false
 
 
 func get_pose(side: String) -> String:
@@ -73,18 +81,20 @@ func _step(t: float) -> void:
 	var skel: Skeleton3D = get_skeleton()
 	if skel == null:
 		return
-	for side: String in _target:
-		var pose: Dictionary = _poses.get(_target[side], {})
-		for finger: String in SEGMENTS:
-			var joints: Array = pose.get(finger, [])
-			var segs: Array = SEGMENTS[finger]
-			for k: int in segs.size():
-				var i: int = skel.find_bone(side + finger + str(segs[k]))
-				if i < 0:
-					continue
-				var goal: Quaternion = _joint(joints[k] if k < joints.size() else 0.0)
-				_current[i] = (_current[i] as Quaternion).slerp(goal, t)
-				skel.set_bone_pose_rotation(i, (_rest[i] as Quaternion) * (_current[i] as Quaternion))
+	var moving: bool = false
+	for j: Array in _joints:
+		var pose: Dictionary = _poses.get(_target[j[0]], {})
+		var joints: Array = pose.get(j[1], [])
+		var k: int = int(j[2])
+		var i: int = int(j[3])
+		var goal: Quaternion = _joint(joints[k] if k < joints.size() else 0.0)
+		var cur: Quaternion = _current[i]
+		if not _settled:
+			cur = cur.slerp(goal, t)
+			_current[i] = cur
+			moving = moving or cur.angle_to(goal) > 0.002
+		skel.set_bone_pose_rotation(i, (_rest[i] as Quaternion) * cur)
+	_settled = not moving
 
 
 static func _joint(v: Variant) -> Quaternion:

@@ -37,6 +37,11 @@ func _ready() -> void:
 	_diff_btn.custom_minimum_size = Vector2(0, 44)
 	_diff_btn.pressed.connect(_lower_difficulty)
 	diff_row.add_child(_diff_btn)
+	# Graphics quality: Baixo / Médio / Alto (owner, 13/11). Grass and the town wood
+	# change on the next map; resolution and shadows right away.
+	_toggle_row(box, "OPT_QUALITY", func() -> String:
+		return tr("OPT_Q_" + Game.quality.to_upper()),
+		func() -> void: Game.set_quality({"high": "low", "low": "medium", "medium": "high"}.get(Game.quality, "high")))
 	# Video: FPS counter (to check how smooth the game runs) and, on phones, 60 or 30.
 	_toggle_row(box, "OPT_SHOW_FPS", func() -> String:
 		return tr("OPT_ON") if Game.show_fps else tr("OPT_OFF"),

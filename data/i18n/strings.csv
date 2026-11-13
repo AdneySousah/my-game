@@ -1562,3 +1562,7 @@ EQ_LOOKS_TITLE,Escolha o visual,Choose a look
 EQ_LOOK_NONE,Sem visual (roupa do Lio),No look (Lio's own clothes)
 STORE_SKIN_ANJO,Visual: Anjo Dourado,Look: Golden Angel
 STORE_SKIN_ANJO_DESC,"Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre.","Shining golden armor, wings that really beat and Lio floating instead of walking. Only changes the look; yours forever."
+OPT_QUALITY,Gráficos,Graphics
+OPT_Q_LOW,Baixo,Low
+OPT_Q_MEDIUM,Médio,Medium
+OPT_Q_HIGH,Alto,High

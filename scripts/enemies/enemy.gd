@@ -82,6 +82,11 @@ var _stuck_time: float = 0.0
 var _detour: Vector3 = Vector3.ZERO
 var _detour_time: float = 0.0
 var _detour_side: float = 1.0
+## Beyond this distance from the hero an idle monster rests (see _physics_process).
+const FAR_DISTANCE: float = 28.0
+var _far: bool = false
+var _far_check: float = 0.0
+var _far_skip: float = 0.0
 ## Meshy model (null = grey-box capsule).
 var model: CharacterModel
 ## Final bosses: break shield and the arena on their side (see BreakShield, BossGround).
@@ -210,6 +215,22 @@ func _physics_process(delta: float) -> void:
 		return
 	if _state == State.TRANSFORM:
 		return
+	# Far from the hero (off the screen) and not fighting: no animation, and it only
+	# looks around a few times a second (older phones dropped frames; owner, 13/11).
+	_far_check -= delta
+	if _far_check <= 0.0:
+		_far_check = 0.4
+		var far: bool = _state == State.IDLE and not is_boss and _target_alive() 			and target.global_position.distance_to(global_position) > FAR_DISTANCE
+		if far != _far:
+			_far = far
+			if model:
+				model.set_resting(far)
+	if _far:
+		_far_skip += delta
+		if _far_skip < 0.25:
+			return
+		delta = _far_skip
+		_far_skip = 0.0
 	_cooldown -= delta
 	_seek_cd -= delta
 	for k: String in _attack_cds.keys():

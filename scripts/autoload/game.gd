@@ -21,6 +21,17 @@ const MOBILE_3D_HEIGHT: float = 1080.0
 ## 60 steps a second, so drawing faster (120 Hz screens) only made the hero stutter.
 var fps_limit: int = 60
 var show_fps: bool = false
+## Graphics quality (owner, 13/11: older phones dropped frames): "low", "medium" or
+## "high". The first time the game opens it picks one from the phone (see _auto_quality).
+var quality: String = "high"
+const QUALITY: Dictionary = {
+	# 3D pixels tall on phones, sun shadows (atlas size, 0 = off), grass and town-wood
+	# amounts, and how far small props are still drawn.
+	"low": {"height": 720.0, "shadow": 0, "grass": 0.3, "wood": 0.45, "draw": 38.0},
+	"medium": {"height": 900.0, "shadow": 1024, "grass": 0.65, "wood": 0.75, "draw": 55.0},
+	"high": {"height": 1080.0, "shadow": 2048, "grass": 1.0, "wood": 1.0, "draw": 0.0},
+}
+signal quality_changed
 
 var _fps_layer: CanvasLayer
 var _fps_label: Label
@@ -48,6 +59,9 @@ func apply_video() -> void:
 	if is_mobile():
 		Engine.max_fps = fps_limit
 	_apply_3d_scale()
+	var shadow: int = int(q("shadow"))
+	if shadow > 0:
+		RenderingServer.directional_shadow_atlas_set_size(shadow, true)
 	if show_fps and _fps_label == null:
 		_fps_layer = CanvasLayer.new()
 		_fps_layer.layer = 128
@@ -69,6 +83,31 @@ func set_fps_limit(v: int) -> void:
 	_save_video()
 
 
+func set_quality(q: String) -> void:
+	quality = q if QUALITY.has(q) else "high"
+	apply_video()
+	_save_video()
+	quality_changed.emit()
+
+
+## A number of the current quality ("height", "shadow", "grass", "wood", "draw").
+func q(key: String) -> float:
+	return float((QUALITY[quality] as Dictionary).get(key, 1.0))
+
+
+## First run: a guess from the phone's memory and cores (PC: high).
+func _auto_quality() -> String:
+	if not is_mobile():
+		return "high"
+	var ram_gb: float = float(OS.get_memory_info().get("physical", 0)) / 1073741824.0
+	var cores: int = OS.get_processor_count()
+	if (ram_gb > 0.0 and ram_gb < 3.5) or cores < 6:
+		return "low"
+	if ram_gb > 0.0 and ram_gb < 5.5:
+		return "medium"
+	return "high"
+
+
 func set_show_fps(on: bool) -> void:
 	show_fps = on
 	apply_video()
@@ -84,7 +123,7 @@ func _apply_3d_scale() -> void:
 	var px: Vector2i = DisplayServer.window_get_size()
 	var short_side: float = float(mini(px.x, px.y))
 	root.scaling_3d_mode = Viewport.SCALING_3D_MODE_BILINEAR
-	root.scaling_3d_scale = clampf(MOBILE_3D_HEIGHT / short_side, 0.5, 1.0) if short_side > 0.0 else 1.0
+	root.scaling_3d_scale = clampf(minf(MOBILE_3D_HEIGHT, q("height")) / short_side, 0.4, 1.0) if short_side > 0.0 else 1.0
 
 
 func _load_video() -> void:
@@ -92,6 +131,11 @@ func _load_video() -> void:
 	if cfg.load(SETTINGS) == OK:
 		fps_limit = int(cfg.get_value("video", "fps_limit", fps_limit))
 		show_fps = bool(cfg.get_value("video", "show_fps", show_fps))
+	var saved_q: String = str(cfg.get_value("video", "quality", "")) if cfg.has_section("video") else ""
+	quality = saved_q if QUALITY.has(saved_q) else _auto_quality()
+	if saved_q == "" and quality == "low":
+		# A weak phone also starts at 30 frames a second (smoother than an unsteady 60).
+		fps_limit = 30
 	if fps_limit != 30:
 		fps_limit = 60
 
@@ -101,6 +145,7 @@ func _save_video() -> void:
 	cfg.load(SETTINGS)
 	cfg.set_value("video", "fps_limit", fps_limit)
 	cfg.set_value("video", "show_fps", show_fps)
+	cfg.set_value("video", "quality", quality)
 	cfg.save(SETTINGS)
 
 

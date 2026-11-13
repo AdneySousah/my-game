@@ -102,9 +102,10 @@ func _keep_quest_targets() -> void:
 		var id: String = str(w["enemy"])
 		if not Data.enemies.has(id):
 			continue
+		# Only the ones really near the quest spot count (a monster may have wandered off).
 		var have: int = 0
 		for e: Enemy in _alive:
-			if e.base_id == id:
+			if e.base_id == id and Vector2(e.global_position.x - p.x, e.global_position.z - p.z).length() <= radius + 4.0:
 				have += 1
 		var away: Vector3 = global_position - player.global_position
 		away.y = 0.0

@@ -20,6 +20,9 @@ var houses: Array[Dictionary] = []
 var vases: Array[Node3D] = []
 ## "Resetar masmorra" sign (dungeons with a boss), or null.
 var reset_sign: DungeonSign
+## "Modo Infernal" sign next to it (only after the game is finished), or null.
+var infernal_sign: DungeonSign
+var zones: Array[EnemyZone] = []
 ## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
 var _locked_exits: Dictionary = {}
 ## True once the walkable area is baked (enemies then walk around obstacles).
@@ -720,6 +723,10 @@ func _build_enemy_zones() -> void:
 		zone.respawn_time = float(z.get("respawn", 15))
 		zone.follow_player = bool(z.get("follow_player", false))
 		zone.player = player
+		if infernal():
+			zone.infernal = true
+			zone.level_bonus = infernal_bonus()
+		zones.append(zone)
 		zone.position = _v(z["pos"])
 		zone.enemy_spawned.connect(func(e: Enemy) -> void:
 			e.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead)))
@@ -740,7 +747,10 @@ func _build_bosses() -> void:
 				continue
 			replay = true
 		var e := Enemy.new()
-		e.setup(str(b["id"]), int(b.get("level", 1)), player)
+		var hell: bool = replay and infernal()
+		e.setup(str(b["id"]), infernal_level() if hell else int(b.get("level", 1)), player)
+		if hell:
+			e.make_infernal()
 		e.position = _v(b["pos"])
 		e.rotation_degrees.y = float(b.get("yaw", 0))
 		e.set_meta("intro", str(b.get("intro", "")))
@@ -753,6 +763,11 @@ func _build_bosses() -> void:
 		e.died.connect(func(dead: Enemy) -> void:
 			if flag != "":
 				Session.set_flag(flag)
+			if dead.infernal:
+				Session.routine.on_event("infernal", map_id)
+				for z: EnemyZone in zones:
+					z.infernal = false
+					z.level_bonus = 0
 			Session.dungeon_resets.erase(map_id)
 			_open_arena()
 			refresh_reset_sign()
@@ -789,6 +804,11 @@ func _build_reset_sign() -> void:
 	reset_sign.set_meta("flag", str(boss["flag_on_death"]))
 	add_child(reset_sign)
 	reset_sign.position = at
+	if infernal_level() > 0:
+		infernal_sign = DungeonSign.new()
+		infernal_sign.infernal = true
+		add_child(infernal_sign)
+		infernal_sign.position = at + Vector3(3.6, 0, 0)
 	refresh_reset_sign()
 
 
@@ -797,13 +817,37 @@ func refresh_reset_sign() -> void:
 	if not is_instance_valid(reset_sign):
 		return
 	reset_sign.visible = Session.has_flag(str(reset_sign.get_meta("flag", ""))) and not Session.dungeon_resets.has(map_id)
+	if is_instance_valid(infernal_sign):
+		infernal_sign.visible = reset_sign.visible and Session.has_flag("game_complete")
 
 
-## Brings the boss back for another run.
-func reset_dungeon() -> void:
-	Session.dungeon_resets[map_id] = true
+## Brings the boss back for another run; with `hell`, in Infernal Mode (stronger boss and
+## monsters, better prizes) until the boss falls.
+func reset_dungeon(hell: bool = false) -> void:
+	Session.dungeon_resets[map_id] = "infernal" if hell else true
 	refresh_reset_sign()
+	if hell:
+		for z: EnemyZone in zones:
+			z.set_infernal(true, infernal_bonus())
 	_build_bosses()
+
+
+## This dungeon is in Infernal Mode right now.
+func infernal() -> bool:
+	return str(Session.dungeon_resets.get(map_id, "")) == "infernal"
+
+
+## Level of the boss in Infernal Mode (progression.json "infernal"), 0 = no Infernal here.
+func infernal_level() -> int:
+	return int(((Data.progression.get("infernal", {}) as Dictionary).get("levels", {}) as Dictionary).get(map_id, 0))
+
+
+## How much higher the monsters of this map are in Infernal Mode (same jump as the boss).
+func infernal_bonus() -> int:
+	for b: Dictionary in data.get("bosses", []):
+		if _resettable(b):
+			return maxi(0, infernal_level() - int(b.get("level", 1)))
+	return 0
 
 
 ## The hero fell: bosses go back to full health and their first form, the arena opens.

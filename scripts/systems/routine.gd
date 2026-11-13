@@ -130,7 +130,8 @@ func claim_login(player: Player) -> Dictionary:
 # --- Events and achievements --------------------------------------------------------------
 
 ## The game tells what happened: kind "kill" (enemy id), "gather" (item id, amount),
-## "event" ("potion", "enhance", "buy", "craft"), "level" and "plus" (value = amount).
+## "event" ("potion", "enhance", "buy", "craft"), "craft" (rarity made), "infernal" (map id of
+## an Infernal boss beaten), "level" and "plus" (value = amount).
 func on_event(kind: String, target: String = "", amount: int = 1) -> void:
 	if kind in ["level", "plus"]:
 		var key: String = kind + ":"

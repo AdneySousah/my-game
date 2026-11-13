@@ -12,6 +12,9 @@ var level_range: Vector2i = Vector2i(1, 1)
 var respawn_time: float = 15.0
 var follow_player: bool = false
 var player: Player
+## Infernal Mode: levels go up by this much and the monsters turn red.
+var level_bonus: int = 0
+var infernal: bool = false
 
 var _alive: Array[Enemy] = []
 var _timer: float = 0.0
@@ -55,13 +58,29 @@ func spawn(id: String = "", at: Vector3 = Vector3.INF) -> Enemy:
 	var level: int = _rng.randi_range(level_range.x, level_range.y)
 	if follow_player:
 		level = maxi(1, player.stats.level + _rng.randi_range(-1, 0))
+	level = mini(level + level_bonus, int(Data.progression.get("level_cap", 100)))
 	var e := Enemy.new()
 	e.setup(enemy_id, level, player)
+	if infernal:
+		e.make_infernal()
 	get_parent().add_child(e)
 	e.global_position = Vector3(pos.x, 0, pos.z)
 	_alive.append(e)
 	enemy_spawned.emit(e)
 	return e
+
+
+## Infernal Mode on or off: the monsters there now go away and the zone fills again.
+func set_infernal(on: bool, bonus: int) -> void:
+	infernal = on
+	level_bonus = bonus if on else 0
+	if not on:
+		return
+	for e: Variant in _alive:
+		if is_instance_valid(e) and not (e as Enemy).is_dead():
+			(e as Enemy).queue_free()
+	_alive.clear()
+	_fill.call_deferred()
 
 
 func _pick() -> String:

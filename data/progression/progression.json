@@ -7,6 +7,15 @@
     "normal": {"hp": 1.0, "atk": 1.0, "xp": 1.0, "drops": 1.0, "death": 1.0},
     "hard": {"hp": 1.4, "atk": 1.4, "xp": 1.25, "drops": 1.25, "death": 1.0}
   },
+  "infernal": {
+    "_comment": "Modo Infernal (pós-jogo, abre com game_complete): a placa da masmorra chama o chefe nesse nível; os monstros do mapa sobem a mesma diferença. Prêmios: drops rolados 2 vezes, ouro x2 e Essências Infernais (chefe: essence do mapa; monstro: mob_essence_chance).",
+    "levels": {"mina": 60, "celeiro": 62, "torre": 66, "mina_gelo": 72, "castelo": 76, "torre_vigia": 82, "topo_torre": 86, "castelo_arauto": 92, "cidadela": 100},
+    "essence": {"mina": 1, "celeiro": 1, "torre": 2, "mina_gelo": 2, "castelo": 3, "torre_vigia": 3, "topo_torre": 4, "castelo_arauto": 4, "cidadela": 6},
+    "mob_essence_chance": 0.06,
+    "drop_rolls": 2,
+    "gold_mult": 2.0,
+    "tint": "#ff3b1f"
+  },
   "level_cap": 100,
   "points_per_level": 5,
   "start_attributes": {

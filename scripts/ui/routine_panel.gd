@@ -212,6 +212,10 @@ func _ach_text(a: Dictionary) -> String:
 			return tr("DAILY_KILL") % [n, tr(str(Data.enemies.get(target, {}).get("name", target)))]
 		"flag":
 			return tr("ACH_FLAG_" + target.to_upper())
+		"craft":
+			return tr("ACH_CRAFT_" + target.to_upper())
+		"infernal" when target != "":
+			return tr("ACH_INFERNAL_" + target.to_upper())
 		_:
 			return tr("ACH_" + str(a.get("kind", "")).to_upper()) % n
 

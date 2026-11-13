@@ -150,6 +150,7 @@ func craft(item_id: String) -> Dictionary:
 	var piece: Dictionary = Session.inventory.slots.back()
 	piece["crafted"] = true
 	Session.routine.on_event("event", "craft")
+	Session.routine.on_event("craft", str(Data.item(item_id).get("rarity", "")))
 	return {"ok": true, "msg": "SMITH_CRAFTED", "piece": piece}
 
 

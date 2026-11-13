@@ -32,6 +32,7 @@ func _ready() -> void:
 	await _herald_castle_test()
 	await _houses_test()
 	await _final_test()
+	await _postgame_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -925,6 +926,74 @@ func _houses_test() -> void:
 	check(is_equal_approx(float(offer.get("price_brl", 0.0)), 4.99) and bool(offer.get("first_purchase_only", false)), "the welcome offer is the 7-day pass at R$ 4,99")
 	main.queue_free()
 	await _frames(2)
+	Session.reset()
+
+
+## 6.6 post-game: Infernal Mode at the dungeon sign (after the ending), Infernal Essences
+## for the mythic and celestial recipes, sets with their own look on Lio, new achievements.
+func _postgame_test() -> void:
+	Session.reset()
+	Session.set_flag("golem_defeated")
+	Main.start_map = "mina"
+	Main.start_spawn = "from_floresta"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	check(main.map.infernal_sign != null and not main.map.infernal_sign.visible, "Infernal Mode is hidden before the game is finished")
+	Session.set_flag("game_complete")
+	main.map.refresh_reset_sign()
+	check(main.map.infernal_sign.visible and main.map.reset_sign.visible, "after the ending the dungeon has the Infernal sign next to the reset")
+	var mob_lv0: int = 0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		if not (n as Enemy).is_boss:
+			mob_lv0 = maxi(mob_lv0, (n as Enemy).level)
+	main.map.reset_dungeon(true)
+	await _frames(4)
+	check(main.map.infernal() and not main.map.infernal_sign.visible, "the Infernal sign starts the Infernal run")
+	var boss: Enemy = null
+	var mob_ok: bool = false
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e: Enemy = n as Enemy
+		if e.is_boss:
+			boss = e
+		elif e.infernal and e.level >= mob_lv0 + 40:
+			mob_ok = true
+	check(boss != null and boss.level == 60 and boss.infernal, "the Golem comes back at level 60 in Infernal Mode")
+	check(mob_ok, "the mine's monsters come back stronger and red (were up to level %d)" % mob_lv0)
+	var ess0: int = Session.inventory.count("mat_essencia_infernal")
+	var ins0: int = Session.inventory.count("mat_insignia_chefe")
+	if boss:
+		boss.take_damage(100_000_000, false)
+		await _frames(30)
+	check(Session.inventory.count("mat_essencia_infernal") >= ess0 + 1, "an Infernal boss gives Infernal Essences")
+	check(Session.inventory.count("mat_insignia_chefe") >= ins0 + 4, "Infernal Mode rolls the drops twice (insignias %d -> %d)" % [ins0, Session.inventory.count("mat_insignia_chefe")])
+	check(not main.map.infernal() and Session.routine.is_unlocked("infernal_1"), "beating it ends the run and unlocks the first Infernal title")
+	check(int((Data.smith.get("recipes", {})["mythic"]["mats"] as Dictionary).get("mat_essencia_infernal", 0)) > 0 and int((Data.smith.get("recipes", {})["celestial"]["mats"] as Dictionary).get("mat_essencia_infernal", 0)) > 0, "mythic and celestial pieces need Infernal Essences")
+	# Sets: all 5 armor pieces change Lio's look; a bought skin still wins.
+	var p: Player = main.player
+	while p.stats.level < 80:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
+	for slot: String in ["elmo", "peitoral", "luvas", "calca", "botas"]:
+		Session.add_item("eq_%s_mitico" % slot, 1)
+		Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), p.stats.level)
+	await _frames(2)
+	check(int(Session.gear.set_counts().get("chama_rubra", 0)) == 5 and p.model.character_id == "hero_set_chama_rubra", "the full Crimson Flame set dresses Lio in its armor")
+	check(Session.gear.bonuses().get("skill_dmg", 0.0) > 0.0, "the 5-piece set bonus counts")
+	Session.skins_owned.append("hero_skin_sol")
+	p.set_skin("hero_skin_sol")
+	check(p.model.character_id == "hero_skin_sol", "a bought look still comes first")
+	p.set_skin("")
+	Session.gear.unequip(Session.inventory, "helmet")
+	await _frames(2)
+	check(p.model.character_id == "hero_lio", "with a piece off, Lio goes back to his own clothes")
+	for id: String in ["hero_set_sol_alado", "hero_set_chama_rubra", "hero_set_herdeiro_celeste"]:
+		check(not CharacterModel.config_for(id).is_empty() and ResourceLoader.exists(str(CharacterModel.config_for(id).get("scene", ""))), "%s has its model" % id)
+	var ach: Array = Routine.cfg().get("achievements", [])
+	check(ach.size() >= 27, "post-game achievements are there (%d)" % ach.size())
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
 	Session.reset()
 
 

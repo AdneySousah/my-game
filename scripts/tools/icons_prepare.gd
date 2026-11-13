@@ -63,6 +63,15 @@ const SHEETS: Dictionary = {
 		"", "", "", "",
 		"", "", "", "",
 	],
+	# Post-game (6.6): the Infernal Essence; the rest is kept for later (horn, lava stone,
+	# rune, burning feather, hourglass, skull ember, red chain, star, feather, sky crystal,
+	# pearl, void shard, key, sun and moon medals).
+	"ui_itens_materiais_3": [
+		"mat_essencia_infernal", "", "", "",
+		"", "", "", "",
+		"", "", "", "",
+		"", "", "", "",
+	],
 	# "" = not used yet (map, options, skills, attributes, equipment, achievements,
 	# travel, gift, title, forge, portal); the anvil and the portal need a better cut.
 	"ui_menu": [

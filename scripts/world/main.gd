@@ -228,10 +228,11 @@ func talk_to_nearby() -> void:
 		enter_house(_near_house)
 		return
 	if _near_sign and not _talking and not _changing:
-		map.reset_dungeon()
+		var hell: bool = _near_sign.infernal
+		map.reset_dungeon(hell)
 		_near_sign = null
-		Audio.play_sfx("skill_big")
-		hud.toast(tr("DUNGEON_RESET_DONE"), 2.0)
+		Audio.play_sfx("roar" if hell else "skill_big")
+		hud.toast(tr("DUNGEON_INFERNAL_DONE") % map.infernal_level() if hell else tr("DUNGEON_RESET_DONE"), 2.5)
 		save_now()
 		return
 	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
@@ -476,8 +477,9 @@ func _update_quest_contacts() -> void:
 			_near_chest = c
 			break
 	_near_sign = null
-	if is_instance_valid(map.reset_sign) and map.reset_sign.in_range(pos):
-		_near_sign = map.reset_sign
+	for sign: DungeonSign in [map.reset_sign, map.infernal_sign]:
+		if is_instance_valid(sign) and sign.in_range(pos) and (_near_sign == null or pos.distance_to(sign.global_position) < pos.distance_to(_near_sign.global_position)):
+			_near_sign = sign
 	_near_house = map.house_near(pos) if not map.houses.is_empty() else {}
 	for vase: Node3D in map.vases:
 		if vase.visible and Vector2(vase.global_position.x - pos.x, vase.global_position.z - pos.z).length() < 1.4:
@@ -489,7 +491,7 @@ func _update_quest_contacts() -> void:
 			if an and an.is_inside_tree() and an.can_pet(pos):
 				_near_animal = an
 				break
-	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("reset" if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else "")))))
+	var kind: String = "" if _talking or _petting else ("open" if _near_chest else (("infernal" if _near_sign.infernal else "reset") if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else "")))))
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)
@@ -515,7 +517,20 @@ func _drop_loot(e: Enemy) -> void:
 		map.add_child(burst)
 		burst.global_position = e.global_position
 	var base: Dictionary = Data.enemies.get(e.base_id, {})
-	for d: Dictionary in base.get("drops", []):
+	var hell: Dictionary = Data.progression.get("infernal", {})
+	if e.infernal:
+		# Infernal Mode: Infernal Essences (the boss always, monsters sometimes).
+		if e.is_boss:
+			give_item("mat_essencia_infernal", int((hell.get("essence", {}) as Dictionary).get(map.map_id, 1)))
+		elif randf() < float(hell.get("mob_essence_chance", 0.06)):
+			give_item("mat_essencia_infernal", 1)
+	var drops: Array = base.get("drops", [])
+	if e.infernal:
+		var rolled: Array = []
+		for i: int in int(hell.get("drop_rolls", 2)):
+			rolled.append_array(drops)
+		drops = rolled
+	for d: Dictionary in drops:
 		if randf() > float(d.get("chance", 1.0)) * Session.diff("drops"):
 			continue
 		if d.has("gem"):

@@ -604,6 +604,35 @@ ENEMY_VIGIA_CELESTE,Vigia Celeste,Celestial Watcher
 ENEMY_VAELOR,"Vaelor, Senhor dos Céus","Vaelor, Lord of the Skies"
 ENEMY_VAELOR_DESMASCARADO,Vaelor Desmascarado,Vaelor Unmasked
 ENEMY_VAELOR_CORROMPIDO,Vaelor Corrompido,Vaelor Corrupted
+STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
+STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
+STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
+STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
+STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
+STO_FINAL_END,A história continua...,The story continues...
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+CREDITS_THANKS,Obrigado por jogar!,Thank you for playing!
+CREDITS_STORY,"Uma história de um herdeiro, cinco cidades e um céu que precisava ser libertado.","A story of an heir, five cities and a sky that needed to be set free."
+CREDITS_ENGINE,Feito com Godot Engine.,Made with Godot Engine.
+CREDITS_TO_BE_CONTINUED,A história continua...,The story continues...
+STORE_PREMIUM_OFFER,Oferta de boas-vindas: passe premium 7 dias,Welcome offer: 7-day premium pass
+STORE_PREMIUM_OFFER_DESC,"Só na primeira compra! Experiência em dobro, ouro em dobro e +10% em todos os atributos por 7 dias.","First purchase only! Double experience, double gold and +10% on every attribute for 7 days."
+OFFER_TITLE,Oferta de boas-vindas!,Welcome offer!
+OFFER_TEXT,"Passe premium de 7 dias por %s, só na sua primeira compra: experiência em dobro, ouro em dobro e +10%% em todos os atributos.","7-day premium pass for %s, only on your first purchase: double experience, double gold and +10%% on every attribute."
+OFFER_BUY,Quero! (%s),I want it! (%s)
+OFFER_LATER,Agora não,Not now
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -853,6 +882,23 @@ TITLE_MAO_FERREIRO,Mão de ferreiro,Smith's Hand
 TITLE_MESTRE_FORJA,Mestre da forja,Forge Master
 TITLE_FIEL,Fiel,Faithful
 TITLE_TRABALHADOR,Trabalhador,Hard Worker
+TITLE_VENCEDOR_TORRE,Vencedor da Torre,Tower Victor
+TITLE_DERRUBA_GIGANTES,Derruba-gigantes,Giant Toppler
+TITLE_GUARDIAO_ARVORE,Guardião da Árvore-Mãe,Mother Tree Warden
+TITLE_FIM_JULGAMENTO,Fim do Julgamento,End of Judgment
+TITLE_HERDEIRO_CEUS,Herdeiro dos Céus,Heir of the Heavens
+TITLE_LENDA_PRADOLUZ,Lenda de Pradoluz,Legend of Pradoluz
+TITLE_VETERANO,Veterano,Veteran
+TITLE_CAMPEAO,Campeão,Champion
+TITLE_MESTRE_ARMAS,Mestre de armas,Weapon Master
+TITLE_LENDA_VIVA,Lenda viva,Living Legend
+TITLE_DESAFIANTE_INFERNO,Desafiante do Inferno,Hell Challenger
+TITLE_CACADOR_INFERNAL,Caçador infernal,Infernal Hunter
+TITLE_SENHOR_INFERNO,Senhor do Inferno,Lord of Hell
+TITLE_ALEM_DOS_CEUS,Além dos Céus,Beyond the Heavens
+TITLE_FORJA_RUBRA,Forja rubra,Crimson Forge
+TITLE_FORJA_CELESTE,Forja celeste,Celestial Forge
+TITLE_PERFEICAO,Perfeição,Perfection
 ITEM_POT_VIDA_P,Poção de vida pequena,Small health potion
 ITEM_POT_VIDA_M,Poção de vida média,Medium health potion
 ITEM_POT_VIDA_G,Poção de vida grande,Large health potion
@@ -936,6 +982,8 @@ ITEM_EQ_CINTO_CELESTIAL,Cinto do Herdeiro Celeste,Celestial Heir Belt
 ITEM_EQ_MITICO_DESC,O metal ainda pulsa como brasa viva.,The metal still pulses like a living ember.
 ITEM_EQ_CELESTIAL_DESC,Forjada para quem ousa desafiar os céus.,Forged for those who dare to defy the heavens.
 ITEM_MAT_INSIGNIA_CHEFE,Insígnia de Chefe,Boss Insignia
+ITEM_MAT_ESSENCIA_INFERNAL,Essência Infernal,Infernal Essence
+ITEM_MAT_ESSENCIA_INFERNAL_DESC,Cai no Modo Infernal das masmorras. O ferreiro pede para as peças míticas e celestiais.,Dropped in the dungeons' Infernal Mode. The smith asks for it for mythic and celestial pieces.
 ITEM_MAT_INSIGNIA_CHEFE_DESC,Cai dos chefes das masmorras. O ferreiro pede 10 para cada peça épica ou melhor.,Dropped by dungeon bosses. The smith asks for 10 for each epic or better piece.
 ITEM_EQ_ESPADA_APRENDIZ_DESC,A espada de treino que o Mestre Bram te deu.,The training sword Master Bram gave you.
 ITEM_EQ_COMUM_DESC,"Peça simples, feita por qualquer ferreiro.",A simple piece any smith can make.
@@ -1359,13 +1407,20 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-CREDITS_THANKS,Obrigado por jogar!,Thank you for playing!
-CREDITS_STORY,"Uma história de um herdeiro, cinco cidades e um céu que precisava ser libertado.","A story of an heir, five cities and a sky that needed to be set free."
-CREDITS_ENGINE,Feito com Godot Engine.,Made with Godot Engine.
-CREDITS_TO_BE_CONTINUED,A história continua...,The story continues...
-STORE_PREMIUM_OFFER,Oferta de boas-vindas: passe premium 7 dias,Welcome offer: 7-day premium pass
-STORE_PREMIUM_OFFER_DESC,"Só na primeira compra! Experiência em dobro, ouro em dobro e +10% em todos os atributos por 7 dias.","First purchase only! Double experience, double gold and +10% on every attribute for 7 days."
-OFFER_TITLE,Oferta de boas-vindas!,Welcome offer!
-OFFER_TEXT,"Passe premium de 7 dias por %s, só na sua primeira compra: experiência em dobro, ouro em dobro e +10%% em todos os atributos.","7-day premium pass for %s, only on your first purchase: double experience, double gold and +10%% on every attribute."
-OFFER_BUY,Quero! (%s),I want it! (%s)
-OFFER_LATER,Agora não,Not now
+DUNGEON_INFERNAL_SIGN,Modo Infernal,Infernal Mode
+DUNGEON_INFERNAL_DONE,Modo Infernal! O chefe voltou no nível %d.,Infernal Mode! The boss is back at level %d.
+HUD_INFERNAL,Infernal (E),Infernal (E)
+HUD_INFERNAL_TAP,Infernal,Infernal
+SET_CHAMA_RUBRA,Conjunto da Chama Rubra,Crimson Flame Set
+SET_HERDEIRO_CELESTE,Conjunto do Herdeiro Celeste,Celestial Heir Set
+SET_LOOK_HINT,"Com as 5 peças, o Lio veste a armadura do conjunto.","With all 5 pieces, Lio wears the set's armor."
+ACH_FLAG_SAHRA_DEFEATED,Derrote a Sahra no alto da Torre,Defeat Sahra at the top of the Tower
+ACH_FLAG_BRANNOC_DEFEATED,Derrote o Brannoc no Castelo,Defeat Brannoc in the Castle
+ACH_FLAG_VELYRA_DEFEATED,Derrote a Velyra no Topo da Torre,Defeat Velyra at the Top of the Tower
+ACH_FLAG_CASSIAN_DEFEATED,Derrote o Cassian no Castelo do Arauto,Defeat Cassian in the Herald's Castle
+ACH_FLAG_VAELOR_DEFEATED,Derrote o Vaelor na Cidadela Celeste,Defeat Vaelor in the Celestial Citadel
+ACH_FLAG_GAME_COMPLETE,Termine a história do jogo,Finish the game's story
+ACH_INFERNAL,Vença %d chefes no Modo Infernal,Beat %d bosses in Infernal Mode
+ACH_INFERNAL_CIDADELA,Vença o Vaelor no Modo Infernal (nível 100),Beat Vaelor in Infernal Mode (level 100)
+ACH_CRAFT_MYTHIC,Crie uma peça mítica na forja,Craft a mythic piece at the forge
+ACH_CRAFT_CELESTIAL,Crie uma peça celestial na forja,Craft a celestial piece at the forge

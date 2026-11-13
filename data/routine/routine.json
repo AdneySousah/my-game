@@ -132,6 +132,142 @@
       "amount": 20,
       "title": "TITLE_TRABALHADOR",
       "bonus": {"atk": 4}
+    },
+    {
+      "id": "sahra",
+      "kind": "flag",
+      "target": "sahra_defeated",
+      "amount": 1,
+      "title": "TITLE_VENCEDOR_TORRE",
+      "bonus": {"atk": 10}
+    },
+    {
+      "id": "brannoc",
+      "kind": "flag",
+      "target": "brannoc_defeated",
+      "amount": 1,
+      "title": "TITLE_DERRUBA_GIGANTES",
+      "bonus": {"max_hp": 150}
+    },
+    {
+      "id": "velyra",
+      "kind": "flag",
+      "target": "velyra_defeated",
+      "amount": 1,
+      "title": "TITLE_GUARDIAO_ARVORE",
+      "bonus": {"def": 15}
+    },
+    {
+      "id": "cassian",
+      "kind": "flag",
+      "target": "cassian_defeated",
+      "amount": 1,
+      "title": "TITLE_FIM_JULGAMENTO",
+      "bonus": {"atk": 15}
+    },
+    {
+      "id": "vaelor",
+      "kind": "flag",
+      "target": "vaelor_defeated",
+      "amount": 1,
+      "title": "TITLE_HERDEIRO_CEUS",
+      "bonus": {"atk": 20, "max_hp": 200}
+    },
+    {
+      "id": "fim_jogo",
+      "kind": "flag",
+      "target": "game_complete",
+      "amount": 1,
+      "title": "TITLE_LENDA_PRADOLUZ",
+      "bonus": {"crit_dmg": 0.1}
+    },
+    {
+      "id": "nivel_40",
+      "kind": "level",
+      "target": "",
+      "amount": 40,
+      "title": "TITLE_VETERANO",
+      "bonus": {"crit_chance": 0.01, "def": 8}
+    },
+    {
+      "id": "nivel_65",
+      "kind": "level",
+      "target": "",
+      "amount": 65,
+      "title": "TITLE_CAMPEAO",
+      "bonus": {"atk": 15}
+    },
+    {
+      "id": "nivel_80",
+      "kind": "level",
+      "target": "",
+      "amount": 80,
+      "title": "TITLE_MESTRE_ARMAS",
+      "bonus": {"atk": 20, "crit_chance": 0.01}
+    },
+    {
+      "id": "nivel_100",
+      "kind": "level",
+      "target": "",
+      "amount": 100,
+      "title": "TITLE_LENDA_VIVA",
+      "bonus": {"atk": 30, "crit_chance": 0.03}
+    },
+    {
+      "id": "infernal_1",
+      "kind": "infernal",
+      "target": "",
+      "amount": 1,
+      "title": "TITLE_DESAFIANTE_INFERNO",
+      "bonus": {"def": 10}
+    },
+    {
+      "id": "infernal_10",
+      "kind": "infernal",
+      "target": "",
+      "amount": 10,
+      "title": "TITLE_CACADOR_INFERNAL",
+      "bonus": {"atk": 20}
+    },
+    {
+      "id": "infernal_30",
+      "kind": "infernal",
+      "target": "",
+      "amount": 30,
+      "title": "TITLE_SENHOR_INFERNO",
+      "bonus": {"crit_dmg": 0.2}
+    },
+    {
+      "id": "infernal_vaelor",
+      "kind": "infernal",
+      "target": "cidadela",
+      "amount": 1,
+      "title": "TITLE_ALEM_DOS_CEUS",
+      "bonus": {"max_hp": 300}
+    },
+    {
+      "id": "forja_mitica",
+      "kind": "craft",
+      "target": "mythic",
+      "amount": 1,
+      "title": "TITLE_FORJA_RUBRA",
+      "bonus": {"atk": 12}
+    },
+    {
+      "id": "forja_celeste",
+      "kind": "craft",
+      "target": "celestial",
+      "amount": 1,
+      "title": "TITLE_FORJA_CELESTE",
+      "bonus": {"crit_dmg": 0.15}
+    },
+    {
+      "id": "mais_20",
+      "kind": "plus",
+      "target": "",
+      "amount": 20,
+      "title": "TITLE_PERFEICAO",
+      "bonus": {"crit_dmg": 0.2}
     }
   ]
 }

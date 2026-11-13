@@ -198,10 +198,25 @@ func look_id() -> String:
 static func current_look() -> String:
 	if Session.skin != "" and not CharacterModel.config_for(Session.skin).is_empty():
 		return Session.skin
+	# All 5 armor pieces of a set with its own look ("look" in items.json sets).
+	var set_look: String = Player.set_look()
+	if set_look != "":
+		return set_look
 	# After the two-year jump (Act 3) Lio is 21 and looks older.
 	if Session.has_flag("time_skip") and not CharacterModel.config_for("hero_lio_adulto").is_empty():
 		return "hero_lio_adulto"
 	return "hero_lio"
+
+
+## Look of the set he wears complete (5 pieces), or "".
+static func set_look() -> String:
+	var sets: Dictionary = Data.items_config.get("sets", {})
+	var counts: Dictionary = Session.gear.set_counts()
+	for set_id: String in counts:
+		var look: String = str((sets.get(set_id, {}) as Dictionary).get("look", ""))
+		if int(counts[set_id]) >= 5 and look != "" and not CharacterModel.config_for(look).is_empty():
+			return look
+	return ""
 
 
 ## Sword shown in his hand: the skin's own sword ("skin_weapon") or the equipped one.
@@ -220,6 +235,11 @@ static func current_weapon_look() -> Dictionary:
 ## Wears a bought look ("" = default). Swaps the 3D model on the spot.
 func set_skin(id: String) -> void:
 	Session.skin = id if Session.skins_owned.has(id) else ""
+	refresh_look()
+
+
+## Puts on the model of the current look (skin, complete set or Lio) if it changed.
+func refresh_look() -> void:
 	if model == null or model.character_id == look_id():
 		return
 	var new_model: CharacterModel = CharacterModel.create(look_id())
@@ -775,6 +795,7 @@ func _on_title_maybe_changed() -> void:
 func _on_gear_changed() -> void:
 	stats.gear = _bonuses()
 	stats.stats_changed.emit()
+	refresh_look()
 	if model:
 		model.set_weapon(weapon_look())
 

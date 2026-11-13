@@ -6946,6 +6946,114 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "hero_set_sol_alado",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lio adulto com o conjunto Sol Alado",
+      "file": "assets/characters/hero_set_sol_alado/hero_set_sol_alado.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d40f-f272-75f0-90d5-252eb9519512",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d410-b0e3-70fb-bfb4-a0ad0faab93e",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d412-4b6c-703c-b2a2-923b17ba51a3",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "hero_set_chama_rubra",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lio adulto com o conjunto Chama Rubra",
+      "file": "assets/characters/hero_set_chama_rubra/hero_set_chama_rubra.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d40f-f67d-758f-97b0-9115b8b0b856",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d410-b5f4-76e3-abdf-ad94e0d08d0e",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d412-58f7-725b-90e1-fe0d851b5409",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "hero_set_herdeiro_celeste",
+      "category": "hero",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lio adulto com o conjunto Herdeiro Celeste",
+      "file": "assets/characters/hero_set_herdeiro_celeste/hero_set_herdeiro_celeste.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d40f-f98e-77eb-9de6-f388f76f64db",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d410-bc9a-744f-b255-01bf8de996e6",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d412-732d-7725-9ca4-c35f40396e06",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_itens_materiais_3",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha de ícones 4x4: Essência Infernal e materiais futuros",
+      "file": "assets/ui/ui_itens_materiais_3/ui_itens_materiais_3.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d419-6a77-76b6-b2e6-82ca8d91ea6e",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

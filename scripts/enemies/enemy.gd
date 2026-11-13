@@ -49,6 +49,8 @@ var xp_reward: int = 0
 var target: Player
 var status: StatusEffects
 var is_boss: bool = false
+## Infernal Mode (post-game): red tint, double gold, drops rolled again (Main).
+var infernal: bool = false
 var invulnerable: bool = false
 
 var _state: State = State.IDLE
@@ -104,6 +106,20 @@ func setup(id: String, lvl: int, player: Player) -> void:
 	var gold_mult: float = 1.0 + float(sc.get("gold", 0.0)) * l
 	gold_reward = roundi(randi_range(int(data.get("gold_min", 1)), int(data.get("gold_max", 2))) * gold_mult)
 	xp_reward = roundi(Data.mob_xp_for(level) * float(data.get("xp_mult", 1.0)))
+
+
+## Called after setup, before entering the tree.
+func make_infernal() -> void:
+	infernal = true
+	gold_reward = roundi(gold_reward * float(_infernal_cfg().get("gold_mult", 2.0)))
+
+
+static func _infernal_cfg() -> Dictionary:
+	return Data.progression.get("infernal", {})
+
+
+static func _infernal_color() -> Color:
+	return Color(str(_infernal_cfg().get("tint", "#ff3b1f"))).darkened(0.3)
 
 
 func _ready() -> void:
@@ -591,6 +607,11 @@ func _end_transform() -> void:
 	invulnerable = false
 	_state = State.CHASE
 	_cooldown = 1.0
+	if infernal:
+		# The form-change glow fades to nothing; bring the red back once it is over.
+		get_tree().create_timer(0.6).timeout.connect(func() -> void:
+			if is_instance_valid(self) and not is_dead():
+				_on_status_changed())
 	transformed.emit(self)
 	hp_changed.emit(self)
 
@@ -818,6 +839,8 @@ func _build_body() -> void:
 		var body: MeshInstance3D = _visual.get_node("Body")
 		_body_mat = body.material_override
 	_bar.position.y = 2.2 * s
+	if infernal:
+		_on_status_changed.call_deferred()
 
 
 func _die() -> void:
@@ -866,6 +889,8 @@ func _status_color() -> Color:
 		return _base_color.lerp(Color("#7fd1ff"), 0.5)
 	if status.has("def_break"):
 		return _base_color.darkened(0.4)
+	if infernal:
+		return _infernal_color()
 	return _base_color
 
 
@@ -874,6 +899,6 @@ func _on_status_changed() -> void:
 		return
 	if model:
 		var c: Color = _status_color()
-		model.set_tint(c, 0.0 if c == _base_color else 0.35)
+		model.set_tint(c, 0.0 if c == _base_color else (0.55 if infernal and c == _infernal_color() else 0.35))
 		return
 	_body_mat.albedo_color = _status_color()

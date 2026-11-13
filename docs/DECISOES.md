@@ -570,4 +570,16 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - Depois vêm os **créditos** (`CreditsRoll`, dá para pular tocando) e a volta a Pradoluz.
   - A missão 18 termina falando com a Marta e liga `game_complete`. O jogo continua: masmorras, forja, rotina.
 - **Simulação** (nível 65, peças lendárias): vence em ~160 s, vida mínima 37%, sem mortes. A vida foi de 3000 para 2700.
-- **Pós-jogo** (Fase 6.6, ainda não feito): Modo Infernal nas masmorras e conjuntos lendários com visual.
+- **Pós-jogo** (Fase 6.6): feito na 0.3.0, ver abaixo.
+
+## Fase 6.6: pós-jogo (13/11/2026)
+- **Modo Infernal:** depois do final (`game_complete`), cada masmorra com chefe ganha uma segunda placa, vermelha, "Modo Infernal", ao lado da "Resetar masmorra".
+  - O chefe volta num nível alto: Golem 60, Gorvan 62, Sahra 66, Guardião do Gelo 72, Brannoc 76, Guardião de Espinhos 82, Velyra 86, Cassian 92 e Vaelor 100 (`progression.json` → `infernal.levels`).
+  - Os monstros do mapa sobem a mesma diferença de nível e ficam vermelhos, como o chefe.
+  - Prêmios: os drops do chefe e dos monstros saem 2 vezes (inclusive as Insígnias), o ouro dobra, e cai a **Essência Infernal** (o chefe dá de 1 a 6, conforme a masmorra; cada monstro tem 6% de chance de dar 1).
+  - O modo acaba quando o chefe cai; para outra rodada, é só usar a placa de novo.
+- **Essência Infernal** na forja: as peças míticas pedem 4 e as celestiais 8 (além das 10 Insígnias). Assim as duas últimas raridades ficam para o pós-jogo, que é quando o herói chega aos níveis 80 e 100.
+- **Conjuntos:** além do Sol Alado (lendário), as 5 peças de armadura míticas formam a **Chama Rubra** (ataque, crítico e dano das skills) e as celestiais o **Herdeiro Celeste** (vida, defesa, ataque, crítico e recarga).
+- **Visual do conjunto:** com as 5 peças de um conjunto, o Lio veste a armadura dele (3 modelos novos do Meshy, com o mesmo esqueleto e as animações do herói). Um visual comprado continua tendo prioridade; tirando uma peça, ele volta à roupa normal.
+- **17 conquistas novas:** os chefes Sahra, Brannoc, Velyra, Cassian e Vaelor, terminar o jogo, níveis 40/65/80/100, 1/10/30 chefes no Modo Infernal, o Vaelor nível 100, criar uma peça mítica e uma celestial, e chegar ao +20. Cada uma dá um título com bônus.
+- Fotos: `res://tests/postgame_capture.tscn -- <pasta>`.

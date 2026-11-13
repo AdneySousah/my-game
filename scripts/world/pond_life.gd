@@ -130,7 +130,9 @@ func _frog_hop(f: Dictionary, to: Vector3) -> void:
 		node.scale = Vector3(1.0 - 0.15 * sin(t * PI), 1.0 + 0.2 * sin(t * PI), 1.0), 0.0, 1.0, 0.45)
 	tw.tween_callback(func() -> void:
 		f["busy"] = false)
-	Audio.play_sfx("frog", global_position + to)
+	# Not every hop croaks, so the pond stays calm.
+	if _rng.randf() < 0.3:
+		Audio.play_sfx("frog", global_position + to)
 
 
 ## Scared by the hero: a hop into the water and a splash; back on a lily a while later.

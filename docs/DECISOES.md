@@ -636,3 +636,30 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - o fundo cinza dos ícones novos foi removido;
   - a corrida levanta a cabeça e endireita o tronco (`tweak` na ação `sprint`, aplicado por `PoseTweak`);
   - o menu do personagem ficou em duas colunas, com **Salvar** e **Sair para o menu** (que pede um segundo toque e salva antes de sair).
+
+## Áudio do ElevenLabs (13/11/2026, versão 0.3.3)
+- **Gerado no plano Creator:** 22 músicas (2 versões cada) e 57 efeitos (com variações), 62.834 créditos no total. Estilo aprovado pelo dono no primeiro lote (Pradoluz, luta, passos, golpes, pássaros, floresta).
+  - Por enquanto entrou a **versão 1 de cada música**; o dono pode trocar qualquer uma (`python -X utf8 tools/audio/eleven.py aprovar <id> 2`).
+  - Os efeitos entram com todas as variações, que tocam sorteadas.
+- **Música por lugar:**
+  - cada cidade tem a sua, calma (Pradoluz, Qaressa, Hrimvald, Lysthael, Altaréa), e as casas uma de caixinha de música;
+  - 5 de exploração por tipo de campo;
+  - 3 de ação para masmorras e Ruínas (mina, ruínas/torres, castelos);
+  - uma para o céu, outra para chefe e a "arauto" para as formas verdadeiras dos Arautos, o Vaelor e os Procurados (campo `music` em enemies.json);
+  - vitória e derrota.
+- **Música de luta:** nos campos abertos, quando um monstro persegue o herói a até 20 m, entra a `luta_campo`. Ela volta para a do mapa 4 s depois da luta. Cidades, casas e masmorras não trocam (`no_combat_music`).
+- **Ambiente:** som contínuo e baixo por mapa (`map_ambience`): floresta, campo, deserto, neve, pântano, mina, cidade, e lareira nas casas.
+  - Sons soltos tocam de vez em quando perto do herói (pássaros na floresta e nos campos, sapos no pântano), com intervalo de 6 a 24 s e nunca durante uma luta.
+  - Nos lagos, só 30% dos pulos dos sapos coaxam.
+- **Sem poluição sonora:** cada efeito tem um `gap` (tempo mínimo até tocar de novo): passos 0,12 s, golpes 0,04–0,06 s, dano de monstro 0,15 s, pássaro 3 s, sapo 1,5 s. Os ambientes ficam entre −6 e −16 dB.
+- **Passos por chão:** grama, pedra/madeira (casas, masmorras, céu), areia (deserto) e neve.
+- **Monstros:** dano e morte com som próprio por tipo (`enemy_sfx`):
+  - humanos e orcs;
+  - esqueletos e mortos (ossos);
+  - golens e guardiões (pedra);
+  - lagartos e cultistas;
+  - mortos do pântano;
+  - celestes (cristal quebrando).
+- **Herói:** som de morte, a música de derrota até reaparecer, beber poção, e escudo do chefe quebrando.
+- **Bichos:** o carinho no cachorro, no gato e na vaca tem o som de cada um.
+- **Créditos:** as músicas do Jonathan Shaw (CC-BY) saíram. O crédito agora é do ElevenLabs, e os efeitos CC0 que sobraram (skills) continuam creditados. A tela final do vídeo promocional (`tests/promo_video.gd`, da outra sessão) ainda mostra o crédito antigo e precisa ser trocada.

@@ -50,6 +50,8 @@ var _buff_time: float = 0.0
 var stamina: float = 0.0
 ## MP: what the skills cost (owner, 13/11). Fôlego stays for the dodge and the run.
 var mp: float = 0.0
+## Footstep sound of the current map (Main sets it: grass, stone, sand, snow).
+var step_sfx: String = "step"
 var _mp_pause: float = 0.0
 var _mp_left: float = 0.0
 var _mp_rate: float = 0.0
@@ -191,7 +193,7 @@ func _physics_process(delta: float) -> void:
 		_step_timer -= delta * spd
 		if _step_timer <= 0.0:
 			_step_timer = 1.9
-			Audio.play_sfx("step", global_position)
+			Audio.play_sfx(step_sfx, global_position)
 	else:
 		_step_timer = 0.4
 
@@ -578,7 +580,7 @@ func use_potion(item_id: String) -> bool:
 			_mp_rate = max_mp() * float(e.get("amount", 0.4)) / seconds
 		"buff":
 			stats.add_buff(str(e.get("stat", "atk")), float(e.get("amount", 0.1)), seconds)
-	Audio.play_sfx("pickup", global_position, 0.8)
+	Audio.play_sfx("potion", global_position)
 	Session.routine.on_event("event", "potion")
 	return true
 
@@ -731,6 +733,7 @@ func _do_attack() -> void:
 
 func _die() -> void:
 	_dead = true
+	Audio.play_sfx("hero_die", global_position)
 	hp = 0.0
 	_forced_time = 0.0
 	var death: Dictionary = Data.progression.get("death", {})

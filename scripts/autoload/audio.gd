@@ -4,7 +4,9 @@ extends Node
 ## - play_sfx("id") / play_sfx("id", position): sounds from data/audio/audio.json; with a
 ##   position they come from that point in the world (quieter far from the camera).
 ## - play_music("id"): crossfades to a looping track; stop_music() fades out.
-## Sounds are only ids here, so swapping in ElevenLabs files later only touches the JSON.
+## - play_ambience("id"): a quiet looping background (forest, desert, mine...), crossfaded.
+## Sounds are only ids here (files in data/audio/audio.json, made with the ElevenLabs).
+## The same sound never starts twice within its "gap" seconds, so busy fights stay clean.
 
 const SFX_DIR: String = "res://assets/audio/sfx/"
 const MUSIC_DIR: String = "res://assets/audio/music/"
@@ -24,6 +26,11 @@ var _pool3d: Array[AudioStreamPlayer3D] = []
 var _music_a: AudioStreamPlayer
 var _music_b: AudioStreamPlayer
 var _music_id: String = ""
+var _amb_a: AudioStreamPlayer
+var _amb_b: AudioStreamPlayer
+var _amb_id: String = ""
+## sfx id -> time (seconds) it last started; see "gap".
+var _last_played: Dictionary = {}
 var _rng := RandomNumberGenerator.new()
 
 
@@ -56,6 +63,10 @@ func _ready() -> void:
 			(n as BaseButton).pressed.connect(func() -> void: play_sfx("ui_click")))
 	_music_a = _music_player()
 	_music_b = _music_player()
+	_amb_a = _music_player()
+	_amb_b = _music_player()
+	_amb_a.bus = "SFX"
+	_amb_b.bus = "SFX"
 	_load_settings()
 
 
@@ -67,7 +78,8 @@ func _exit_tree() -> void:
 ## so the audio thread can let go of the music too.
 func silence() -> void:
 	_music_id = ""
-	for p: Node in [_music_a, _music_b] + _pool2d + _pool3d:
+	_amb_id = ""
+	for p: Node in [_music_a, _music_b, _amb_a, _amb_b] + _pool2d + _pool3d:
 		p.call("stop")
 		p.set("stream", null)
 	_streams.clear()
@@ -79,6 +91,10 @@ func play_sfx(id: String, at: Vector3 = Vector3.INF, pitch_mult: float = 1.0) ->
 	var files: Array = def.get("files", [])
 	if files.is_empty():
 		return
+	var now: float = Time.get_ticks_msec() / 1000.0
+	if now - float(_last_played.get(id, -99.0)) < float(def.get("gap", 0.05)):
+		return
+	_last_played[id] = now
 	var stream: AudioStream = _stream(SFX_DIR + str(files[_rng.randi() % files.size()]))
 	if stream == null:
 		return
@@ -105,8 +121,62 @@ func skill_sfx(skill_id: String) -> String:
 	return str((data.get("skill_sfx", {}) as Dictionary).get(skill_id, "skill"))
 
 
-func enemy_sfx(enemy_id: String) -> String:
-	return str((data.get("enemy_sfx", {}) as Dictionary).get(enemy_id, "enemy_hurt"))
+## Hurt or death sound of a monster kind ("hurt" / "die"), e.g. orc grunts, bones rattle.
+func enemy_sfx(enemy_id: String, kind: String = "hurt") -> String:
+	var v: Variant = (data.get("enemy_sfx", {}) as Dictionary).get(enemy_id, {})
+	if v is Dictionary:
+		return str((v as Dictionary).get(kind, "enemy_" + kind))
+	return str(v) if kind == "hurt" and str(v) != "" else "enemy_" + kind
+
+
+## Footstep sound of a map (grass, stone, sand, snow).
+func step_for_map(map_id: String) -> String:
+	return str((data.get("map_steps", {}) as Dictionary).get(map_id, "step"))
+
+
+## Ambience loop of a map ("" = none).
+func ambience_for_map(map_id: String) -> String:
+	return str((data.get("map_ambience", {}) as Dictionary).get(map_id, ""))
+
+
+## Music while a monster chases the hero in this map ("" = keep the map's own music,
+## e.g. towns and dungeons, whose music is already for action).
+func combat_music_for_map(map_id: String) -> String:
+	var no_switch: Array = data.get("no_combat_music", [])
+	if no_switch.has(map_id):
+		return ""
+	return str(data.get("combat_music", ""))
+
+
+## Loose sounds of an ambience (birds in the forest...): {"sfx": [...], "every": [min, max]}.
+func ambience_extras(amb_id: String) -> Dictionary:
+	return ((data.get("ambience", {}) as Dictionary).get(amb_id, {}) as Dictionary).get("extras", {})
+
+
+func current_ambience() -> String:
+	return _amb_id
+
+
+## Crossfades to a looping background sound ("" = silence).
+func play_ambience(id: String, fade: float = 2.0) -> void:
+	if id == _amb_id:
+		return
+	_amb_id = id
+	var old: AudioStreamPlayer = _amb_a if _amb_a.playing else _amb_b
+	var nxt: AudioStreamPlayer = _amb_b if old == _amb_a else _amb_a
+	if old.playing:
+		var tw := create_tween()
+		tw.tween_property(old, "volume_db", -50.0, fade)
+		tw.tween_callback(old.stop)
+	var def: Dictionary = (data.get("ambience", {}) as Dictionary).get(id, {})
+	var file: String = str(def.get("file", ""))
+	var stream: AudioStream = _stream(SFX_DIR + file) if file != "" else null
+	if stream == null:
+		return
+	nxt.stream = stream
+	nxt.volume_db = -50.0
+	nxt.play()
+	create_tween().tween_property(nxt, "volume_db", float(def.get("volume_db", -12.0)), fade)
 
 
 func music_for_map(map_id: String) -> String:

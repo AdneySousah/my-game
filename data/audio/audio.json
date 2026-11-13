@@ -1,45 +1,1133 @@
 {
-  "_comment": "Sons do jogo. sfx: id -> arquivos (sorteia um), volume em dB e faixa de tom (pitch). music: id -> arquivo. map_music: música de cada mapa. Fontes e licenças em docs/CREDITOS.md. Para trocar por sons da ElevenLabs depois, basta apontar os mesmos ids para os arquivos novos.",
+  "_comment": "Sons e músicas por id. Arquivos novos do ElevenLabs: músicas em assets/audio/music, efeitos em assets/audio/sfx/el (lista e textos em tools/audio/audio_list.json). gap = segundos mínimos entre duas vezes o mesmo som. map_music/map_ambience/map_steps por mapa; combat_music toca quando monstros perseguem o herói, menos nos mapas de no_combat_music (cidades, casas, masmorras). enemy_sfx: dano e morte por inimigo. ambience.extras: sons soltos de vez em quando perto do herói.",
   "sfx": {
-    "swing": { "files": ["swing_1.wav", "swing_2.wav", "swing_3.wav"], "volume_db": -8, "pitch": [0.95, 1.1] },
-    "hit": { "files": ["hit_1.ogg", "hit_2.ogg", "hit_3.ogg"], "volume_db": -6, "pitch": [0.9, 1.1] },
-    "crit": { "files": ["crit_1.ogg"], "volume_db": -4, "pitch": [1.0, 1.1] },
-    "hurt": { "files": ["hurt_1.ogg", "hurt_2.ogg"], "volume_db": -4, "pitch": [0.9, 1.0] },
-    "dodge": { "files": ["dodge_1.ogg", "dodge_2.ogg"], "volume_db": -6, "pitch": [0.9, 1.1] },
-    "enemy_hurt": { "files": ["enemy_hurt_1.ogg", "enemy_hurt_2.ogg"], "volume_db": -10, "pitch": [0.9, 1.15] },
-    "enemy_die": { "files": ["enemy_die_1.ogg"], "volume_db": -8, "pitch": [0.85, 1.1] },
-    "orc": { "files": ["orc_1.wav", "orc_2.wav"], "volume_db": -8, "pitch": [0.9, 1.05] },
-    "giant": { "files": ["giant_1.wav", "giant_2.wav"], "volume_db": -4, "pitch": [0.8, 0.95] },
-    "roar": { "files": ["roar_1.ogg", "roar_2.ogg"], "volume_db": -2, "pitch": [0.85, 0.95] },
-    "slam": { "files": ["slam_1.ogg", "slam_2.ogg"], "volume_db": -4, "pitch": [0.8, 1.0] },
-    "bones": { "files": ["bones_1.ogg", "bones_2.ogg"], "volume_db": -8, "pitch": [1.1, 1.3] },
-    "skill": { "files": ["magic_1.wav", "spell_1.wav"], "volume_db": -6, "pitch": [0.95, 1.1] },
-    "skill_big": { "files": ["spell_2.ogg", "spell_3.ogg"], "volume_db": -4, "pitch": [0.9, 1.0] },
-    "skill_fire": { "files": ["fire_1.ogg"], "volume_db": -4, "pitch": [0.95, 1.05] },
-    "metal": { "files": ["metal_1.ogg", "metal_2.ogg"], "volume_db": -6, "pitch": [0.95, 1.1] },
-    "shoot": { "files": ["swing_1.wav"], "volume_db": -10, "pitch": [1.5, 1.7] },
-    "coins": { "files": ["coins_1.ogg", "coins_2.ogg", "coin_1.wav"], "volume_db": -8, "pitch": [0.95, 1.1] },
-    "pickup": { "files": ["gem_1.ogg"], "volume_db": -6, "pitch": [1.0, 1.1] },
-    "level_up": { "files": ["spell_3.ogg"], "volume_db": -2, "pitch": [1.2, 1.2] },
-    "quest": { "files": ["gem_2.ogg"], "volume_db": -2, "pitch": [1.0, 1.0] },
-    "rest": { "files": ["spell_2.ogg"], "volume_db": -8, "pitch": [1.2, 1.3] },
-    "travel": { "files": ["spell_3.ogg"], "volume_db": -6, "pitch": [0.9, 0.9] },
-    "door": { "files": ["door_1.ogg"], "volume_db": -6, "pitch": [0.95, 1.05] },
-    "step": { "files": ["step_1.ogg", "step_2.ogg", "step_3.ogg", "step_4.ogg", "step_5.ogg", "step_6.ogg"], "volume_db": -18, "pitch": [0.9, 1.1] },
-    "unsheathe": { "files": ["unsheathe_1.wav"], "volume_db": -10, "pitch": [1.0, 1.1] },
-    "ui_click": { "files": ["ui_click.wav"], "volume_db": -6, "pitch": [1.0, 1.0] },
-    "ui_open": { "files": ["ui_open.wav"], "volume_db": -8, "pitch": [1.0, 1.0] },
-    "ui_close": { "files": ["ui_close.wav"], "volume_db": -8, "pitch": [1.0, 1.0] },
-    "page": { "files": ["page_1.ogg"], "volume_db": -8, "pitch": [1.0, 1.1] }
+    "swing": {
+      "files": [
+        "el/swing_1.ogg",
+        "el/swing_2.ogg",
+        "el/swing_3.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.1
+      ],
+      "gap": 0.06
+    },
+    "hit": {
+      "files": [
+        "el/hit_1.ogg",
+        "el/hit_metal_1.ogg",
+        "el/hit_stone_1.ogg",
+        "el/hit_2.ogg",
+        "el/hit_metal_2.ogg",
+        "el/hit_stone_2.ogg",
+        "el/hit_3.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.04
+    },
+    "crit": {
+      "files": [
+        "el/crit_1.ogg",
+        "el/crit_2.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.05
+    },
+    "hurt": {
+      "files": [
+        "el/hurt_1.ogg",
+        "el/hurt_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.25
+    },
+    "dodge": {
+      "files": [
+        "el/dodge_1.ogg",
+        "el/dodge_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.1
+      ],
+      "gap": 0.1
+    },
+    "enemy_hurt": {
+      "files": [
+        "el/human_hurt_1.ogg",
+        "el/human_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "enemy_die": {
+      "files": [
+        "el/human_die_1.ogg",
+        "el/human_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "orc": {
+      "files": [
+        "orc_1.wav",
+        "orc_2.wav"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.9,
+        1.05
+      ]
+    },
+    "giant": {
+      "files": [
+        "giant_1.wav",
+        "giant_2.wav"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.8,
+        0.95
+      ]
+    },
+    "roar": {
+      "files": [
+        "el/roar_1.ogg",
+        "el/roar_2.ogg"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.9,
+        1.0
+      ],
+      "gap": 0.6
+    },
+    "slam": {
+      "files": [
+        "slam_1.ogg",
+        "slam_2.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.8,
+        1.0
+      ]
+    },
+    "bones": {
+      "files": [
+        "bones_1.ogg",
+        "bones_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        1.1,
+        1.3
+      ]
+    },
+    "skill": {
+      "files": [
+        "magic_1.wav",
+        "spell_1.wav"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.95,
+        1.1
+      ]
+    },
+    "skill_big": {
+      "files": [
+        "spell_2.ogg",
+        "spell_3.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.9,
+        1.0
+      ]
+    },
+    "skill_fire": {
+      "files": [
+        "fire_1.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        0.95,
+        1.05
+      ]
+    },
+    "metal": {
+      "files": [
+        "el/forge_1.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.2
+    },
+    "shoot": {
+      "files": [
+        "swing_1.wav"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        1.5,
+        1.7
+      ]
+    },
+    "coins": {
+      "files": [
+        "el/coins_1.ogg",
+        "el/coins_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.1
+      ],
+      "gap": 0.08
+    },
+    "pickup": {
+      "files": [
+        "el/pickup_1.ogg",
+        "el/pickup_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.1
+      ],
+      "gap": 0.06
+    },
+    "level_up": {
+      "files": [
+        "el/level_up_1.ogg",
+        "el/level_up_2.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.5
+    },
+    "quest": {
+      "files": [
+        "el/quest_1.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.5
+    },
+    "rest": {
+      "files": [
+        "spell_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        1.2,
+        1.3
+      ]
+    },
+    "travel": {
+      "files": [
+        "el/travel_1.ogg"
+      ],
+      "volume_db": -4,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.5
+    },
+    "door": {
+      "files": [
+        "el/door_1.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.3
+    },
+    "step": {
+      "files": [
+        "el/step_grass_1.ogg",
+        "el/step_grass_2.ogg",
+        "el/step_grass_3.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.12
+    },
+    "unsheathe": {
+      "files": [
+        "unsheathe_1.wav"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        1.0,
+        1.1
+      ]
+    },
+    "ui_click": {
+      "files": [
+        "el/ui_click_1.ogg"
+      ],
+      "volume_db": -12,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.04
+    },
+    "ui_open": {
+      "files": [
+        "el/ui_open_1.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.08
+    },
+    "ui_close": {
+      "files": [
+        "el/ui_close_1.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.08
+    },
+    "page": {
+      "files": [
+        "page_1.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        1.0,
+        1.1
+      ]
+    },
+    "step_grass": {
+      "files": [
+        "el/step_grass_1.ogg",
+        "el/step_grass_2.ogg",
+        "el/step_grass_3.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.12
+    },
+    "step_stone": {
+      "files": [
+        "el/step_stone_1.ogg",
+        "el/step_stone_2.ogg",
+        "el/step_stone_3.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.12
+    },
+    "step_sand": {
+      "files": [
+        "el/step_sand_1.ogg",
+        "el/step_sand_2.ogg",
+        "el/step_sand_3.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.12
+    },
+    "step_snow": {
+      "files": [
+        "el/step_snow_1.ogg",
+        "el/step_snow_2.ogg",
+        "el/step_snow_3.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.12
+    },
+    "hit_metal": {
+      "files": [
+        "el/hit_metal_1.ogg",
+        "el/hit_metal_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.04
+    },
+    "hit_stone": {
+      "files": [
+        "el/hit_stone_1.ogg",
+        "el/hit_stone_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.04
+    },
+    "hero_die": {
+      "files": [
+        "el/hero_die_1.ogg",
+        "el/hero_die_2.ogg"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 1.0
+    },
+    "potion": {
+      "files": [
+        "el/potion_1.ogg",
+        "el/potion_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.3
+    },
+    "mana": {
+      "files": [
+        "el/mana_1.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.3
+    },
+    "shield_break": {
+      "files": [
+        "el/shield_break_1.ogg"
+      ],
+      "volume_db": -2,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 0.5
+    },
+    "human_hurt": {
+      "files": [
+        "el/human_hurt_1.ogg",
+        "el/human_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "human_die": {
+      "files": [
+        "el/human_die_1.ogg",
+        "el/human_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "orc_hurt": {
+      "files": [
+        "el/orc_hurt_1.ogg",
+        "el/orc_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "orc_die": {
+      "files": [
+        "el/orc_die_1.ogg",
+        "el/orc_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "bones_hurt": {
+      "files": [
+        "el/bones_hurt_1.ogg",
+        "el/bones_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "bones_die": {
+      "files": [
+        "el/bones_die_1.ogg",
+        "el/bones_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "golem_hurt": {
+      "files": [
+        "el/golem_hurt_1.ogg",
+        "el/golem_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "golem_die": {
+      "files": [
+        "el/golem_die_1.ogg",
+        "el/golem_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "lizard_hurt": {
+      "files": [
+        "el/lizard_hurt_1.ogg",
+        "el/lizard_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "lizard_die": {
+      "files": [
+        "el/lizard_die_1.ogg",
+        "el/lizard_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "cultist_hurt": {
+      "files": [
+        "el/cultist_hurt_1.ogg",
+        "el/cultist_hurt_2.ogg"
+      ],
+      "volume_db": -10,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 0.15
+    },
+    "cultist_die": {
+      "files": [
+        "el/cultist_die_1.ogg",
+        "el/cultist_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "undead_die": {
+      "files": [
+        "el/undead_die_1.ogg",
+        "el/undead_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "celestial_die": {
+      "files": [
+        "el/celestial_die_1.ogg",
+        "el/celestial_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "slime_die": {
+      "files": [
+        "el/slime_die_1.ogg",
+        "el/slime_die_2.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        0.9,
+        1.05
+      ],
+      "gap": 0.08
+    },
+    "bird": {
+      "files": [
+        "el/bird_1.ogg",
+        "el/bird_2.ogg",
+        "el/bird_3.ogg"
+      ],
+      "volume_db": -16,
+      "pitch": [
+        0.9,
+        1.15
+      ],
+      "gap": 3.0
+    },
+    "frog": {
+      "files": [
+        "el/frog_1.ogg",
+        "el/frog_2.ogg"
+      ],
+      "volume_db": -14,
+      "pitch": [
+        0.9,
+        1.1
+      ],
+      "gap": 1.5
+    },
+    "splash": {
+      "files": [
+        "el/splash_1.ogg",
+        "el/splash_2.ogg"
+      ],
+      "volume_db": -12,
+      "pitch": [
+        0.9,
+        1.15
+      ],
+      "gap": 0.3
+    },
+    "pet_dog": {
+      "files": [
+        "el/dog_happy_1.ogg",
+        "el/dog_happy_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 1.0
+    },
+    "pet_cow": {
+      "files": [
+        "el/cow_1.ogg",
+        "el/cow_2.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 1.0
+    },
+    "pet_cat": {
+      "files": [
+        "el/cat_1.ogg"
+      ],
+      "volume_db": -8,
+      "pitch": [
+        0.95,
+        1.05
+      ],
+      "gap": 1.0
+    },
+    "chest": {
+      "files": [
+        "el/chest_1.ogg"
+      ],
+      "volume_db": -6,
+      "pitch": [
+        1.0,
+        1.0
+      ],
+      "gap": 0.3
+    }
   },
   "music": {
-    "titulo": "titulo.mp3", "prologo": "prologo.mp3", "vila": "vila.mp3", "floresta": "floresta.mp3",
-    "mina": "mina.mp3", "chefe": "chefe.mp3", "vitoria": "vitoria.mp3"
+    "titulo": "titulo.mp3",
+    "prologo": "prologo.mp3",
+    "vila": "vila.mp3",
+    "cidade_deserto": "cidade_deserto.mp3",
+    "cidade_neve": "cidade_neve.mp3",
+    "cidade_elfica": "cidade_elfica.mp3",
+    "capital": "capital.mp3",
+    "casa": "casa.mp3",
+    "campo_verde": "campo_verde.mp3",
+    "campo_seco": "campo_seco.mp3",
+    "campo_deserto": "campo_deserto.mp3",
+    "campo_neve": "campo_neve.mp3",
+    "campo_pantano": "campo_pantano.mp3",
+    "luta_campo": "luta_campo.mp3",
+    "masmorra_mina": "masmorra_mina.mp3",
+    "masmorra_ruinas": "masmorra_ruinas.mp3",
+    "masmorra_castelo": "masmorra_castelo.mp3",
+    "ceu": "ceu.mp3",
+    "chefe": "chefe.mp3",
+    "arauto": "arauto.mp3",
+    "vitoria": "vitoria.mp3",
+    "derrota": "derrota.mp3"
   },
-  "map_music": { "pradoluz": "vila", "floresta": "floresta", "mina": "mina", "celeiro": "mina", "arena": "floresta", "campos": "floresta", "bosque_seco": "floresta", "estepe": "floresta", "qaressa": "vila", "dunas": "floresta", "deserto_rochoso": "floresta", "planalto": "floresta", "pinheiral": "floresta", "hrimvald": "vila", "torre": "mina", "vale_degelo": "floresta", "mata_umida": "floresta", "bordas_pantano": "floresta", "lysthael": "vila", "pantano": "floresta", "torre_vigia": "mina", "topo_torre": "chefe", "estrada_real": "floresta", "arredores": "floresta", "altarea": "vila", "castelo_arauto": "mina", "interior_casa": "vila", "interior_terreo": "vila", "interior_cima": "vila", "escadaria_ceu": "floresta", "cidadela": "chefe", "castelo": "mina", "mina_gelo": "mina", "picos": "floresta" },
+  "map_music": {
+    "pradoluz": "vila",
+    "qaressa": "cidade_deserto",
+    "hrimvald": "cidade_neve",
+    "lysthael": "cidade_elfica",
+    "altarea": "capital",
+    "interior_casa": "casa",
+    "interior_terreo": "casa",
+    "interior_cima": "casa",
+    "floresta": "campo_verde",
+    "campos": "campo_verde",
+    "estrada_real": "campo_verde",
+    "arredores": "campo_verde",
+    "arena": "campo_verde",
+    "bosque_seco": "campo_seco",
+    "estepe": "campo_seco",
+    "dunas": "campo_deserto",
+    "deserto_rochoso": "campo_deserto",
+    "planalto": "campo_neve",
+    "pinheiral": "campo_neve",
+    "picos": "campo_neve",
+    "vale_degelo": "campo_neve",
+    "mata_umida": "campo_pantano",
+    "bordas_pantano": "campo_pantano",
+    "pantano": "campo_pantano",
+    "mina": "masmorra_mina",
+    "mina_gelo": "masmorra_mina",
+    "celeiro": "masmorra_mina",
+    "ruinas": "masmorra_ruinas",
+    "torre": "masmorra_ruinas",
+    "torre_vigia": "masmorra_ruinas",
+    "topo_torre": "masmorra_ruinas",
+    "castelo": "masmorra_castelo",
+    "castelo_arauto": "masmorra_castelo",
+    "escadaria_ceu": "ceu",
+    "cidadela": "ceu"
+  },
   "skill_sfx": {
-    "corte_giratorio": "swing", "investida": "dodge", "golpe_sismico": "slam", "quebra_guarda": "metal",
-    "brado_de_guerra": "skill_big", "onda_de_corte": "skill", "salto_devastador": "slam", "julgamento": "skill_fire"
+    "corte_giratorio": "swing",
+    "investida": "dodge",
+    "golpe_sismico": "slam",
+    "quebra_guarda": "metal",
+    "brado_de_guerra": "skill_big",
+    "onda_de_corte": "skill",
+    "salto_devastador": "slam",
+    "julgamento": "skill_fire"
   },
-  "enemy_sfx": { "orc": "orc", "golem": "giant", "espantalho": "giant", "esqueleto": "bones", "orc_saqueador": "orc" }
+  "enemy_sfx": {
+    "bandido": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "arqueiro": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "bandido_estrada": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "bandido_deserto": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "guarda_lei": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "arqueiro_lei": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "carcereiro": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "severin": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "severin_2": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "severin_3": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "gorvan": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "brannoc": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "cassian": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "sahra": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "vaelor": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "vaelor_desmascarado": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "procurado_altarea": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "procurado_qaressa": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "sahra_areia": {
+      "hurt": "human_hurt",
+      "die": "human_die"
+    },
+    "orc": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "orc_saqueador": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "orc_neve": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "brannoc_gelo": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "vaelor_corrompido": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "cassian_colosso": {
+      "hurt": "orc_hurt",
+      "die": "orc_die"
+    },
+    "esqueleto": {
+      "hurt": "bones_hurt",
+      "die": "bones_die"
+    },
+    "esqueleto_antigo": {
+      "hurt": "bones_hurt",
+      "die": "bones_die"
+    },
+    "morto_gelo": {
+      "hurt": "bones_hurt",
+      "die": "bones_die"
+    },
+    "golem": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "golem_gelo": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "guardiao_gelo": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "espantalho": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "guardiao_espinhos": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "procurado_pradoluz": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "procurado_hrimvald": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "procurado_lysthael": {
+      "hurt": "golem_hurt",
+      "die": "golem_die"
+    },
+    "homem_lagarto": {
+      "hurt": "lizard_hurt",
+      "die": "lizard_die"
+    },
+    "lagarto_pantano": {
+      "hurt": "lizard_hurt",
+      "die": "lizard_die"
+    },
+    "cultista": {
+      "hurt": "cultist_hurt",
+      "die": "cultist_die"
+    },
+    "velyra": {
+      "hurt": "cultist_hurt",
+      "die": "cultist_die"
+    },
+    "velyra_driade": {
+      "hurt": "cultist_hurt",
+      "die": "cultist_die"
+    },
+    "morto_pantano": {
+      "hurt": "bones_hurt",
+      "die": "undead_die"
+    },
+    "sentinela_celeste": {
+      "hurt": "hit_metal",
+      "die": "celestial_die"
+    },
+    "vigia_celeste": {
+      "hurt": "hit_metal",
+      "die": "celestial_die"
+    }
+  },
+  "combat_music": "luta_campo",
+  "no_combat_music": [
+    "altarea",
+    "castelo",
+    "castelo_arauto",
+    "celeiro",
+    "cidadela",
+    "escadaria_ceu",
+    "hrimvald",
+    "interior_casa",
+    "interior_cima",
+    "interior_terreo",
+    "lysthael",
+    "mina",
+    "mina_gelo",
+    "pradoluz",
+    "qaressa",
+    "ruinas",
+    "topo_torre",
+    "torre",
+    "torre_vigia"
+  ],
+  "ambience": {
+    "floresta": {
+      "file": "el/amb_floresta_1.ogg",
+      "volume_db": -6,
+      "extras": {
+        "sfx": [
+          "bird"
+        ],
+        "every": [
+          6,
+          14
+        ]
+      }
+    },
+    "campo": {
+      "file": "el/amb_campo_1.ogg",
+      "volume_db": -8,
+      "extras": {
+        "sfx": [
+          "bird"
+        ],
+        "every": [
+          10,
+          20
+        ]
+      }
+    },
+    "deserto": {
+      "file": "el/amb_deserto_1.ogg",
+      "volume_db": -10
+    },
+    "neve": {
+      "file": "el/amb_neve_1.ogg",
+      "volume_db": -10
+    },
+    "pantano": {
+      "file": "el/amb_pantano_1.ogg",
+      "volume_db": -8,
+      "extras": {
+        "sfx": [
+          "frog"
+        ],
+        "every": [
+          7,
+          14
+        ]
+      }
+    },
+    "mina": {
+      "file": "el/amb_mina_1.ogg",
+      "volume_db": -8
+    },
+    "cidade": {
+      "file": "el/amb_cidade_1.ogg",
+      "volume_db": -12,
+      "extras": {
+        "sfx": [
+          "bird"
+        ],
+        "every": [
+          12,
+          24
+        ]
+      }
+    },
+    "casa": {
+      "file": "el/amb_fogueira_1.ogg",
+      "volume_db": -16
+    }
+  },
+  "map_ambience": {
+    "floresta": "floresta",
+    "lysthael": "floresta",
+    "mata_umida": "floresta",
+    "arena": "floresta",
+    "campos": "campo",
+    "estrada_real": "campo",
+    "arredores": "campo",
+    "estepe": "campo",
+    "bosque_seco": "campo",
+    "ruinas": "campo",
+    "dunas": "deserto",
+    "deserto_rochoso": "deserto",
+    "torre": "deserto",
+    "planalto": "neve",
+    "pinheiral": "neve",
+    "picos": "neve",
+    "vale_degelo": "neve",
+    "castelo": "neve",
+    "bordas_pantano": "pantano",
+    "pantano": "pantano",
+    "torre_vigia": "pantano",
+    "mina": "mina",
+    "mina_gelo": "mina",
+    "celeiro": "mina",
+    "castelo_arauto": "mina",
+    "pradoluz": "cidade",
+    "qaressa": "cidade",
+    "hrimvald": "cidade",
+    "altarea": "cidade",
+    "interior_casa": "casa",
+    "interior_terreo": "casa",
+    "interior_cima": "casa"
+  },
+  "map_steps": {
+    "interior_casa": "step_stone",
+    "interior_terreo": "step_stone",
+    "interior_cima": "step_stone",
+    "mina": "step_stone",
+    "mina_gelo": "step_stone",
+    "celeiro": "step_stone",
+    "ruinas": "step_stone",
+    "torre": "step_stone",
+    "torre_vigia": "step_stone",
+    "topo_torre": "step_stone",
+    "castelo": "step_stone",
+    "castelo_arauto": "step_stone",
+    "escadaria_ceu": "step_stone",
+    "cidadela": "step_stone",
+    "qaressa": "step_sand",
+    "dunas": "step_sand",
+    "deserto_rochoso": "step_sand",
+    "hrimvald": "step_snow",
+    "planalto": "step_snow",
+    "pinheiral": "step_snow",
+    "picos": "step_snow",
+    "vale_degelo": "step_snow"
+  }
 }

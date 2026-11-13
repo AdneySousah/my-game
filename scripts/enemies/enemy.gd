@@ -190,7 +190,7 @@ func take_damage(amount: int, crit: bool, knockback: Vector3 = Vector3.ZERO) -> 
 		Color("#ffd23f") if crit else Color.WHITE, crit)
 	_flash()
 	if _rng.randf() < 0.35:
-		Audio.play_sfx(Audio.enemy_sfx(base_id), global_position)
+		Audio.play_sfx(Audio.enemy_sfx(base_id, "hurt"), global_position)
 	if model and _state != State.WINDUP and not model.is_busy() and not bool(data.get("no_flinch", false)):
 		model.play_action("hit")
 	if _state == State.IDLE:
@@ -290,6 +290,11 @@ func _notice() -> void:
 		if is_boss:
 			Audio.play_sfx("roar", global_position)
 		engaged.emit(self)
+
+
+## Chasing or fighting the hero right now (the field music turns to battle music).
+func is_fighting() -> bool:
+	return not is_dead() and _state != State.IDLE and _target_alive()
 
 
 ## Wanted to move but barely moved for a while: slide along the wall it hit (or turn
@@ -898,7 +903,7 @@ func _die() -> void:
 	collision_layer = 0
 	collision_mask = 0
 	_bar.visible = false
-	Audio.play_sfx("enemy_die", global_position, 0.8 if is_boss else 1.0)
+	Audio.play_sfx(Audio.enemy_sfx(base_id, "die"), global_position, 0.85 if is_boss else 1.0)
 	died.emit(self)
 	var tw := create_tween()
 	if model:

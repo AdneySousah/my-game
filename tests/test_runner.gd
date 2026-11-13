@@ -1775,11 +1775,24 @@ func _audio_test() -> void:
 	add_child(main)
 	await _frames(5)
 	check(Audio.current_music() == "vila", "Pradoluz plays the village music (%s)" % Audio.current_music())
+	check(Audio.current_ambience() == "cidade", "the town has its quiet background sound")
+	# Every sound and track in the list has its file (ElevenLabs, 13/11).
+	var missing_audio: Array[String] = []
+	for id: String in Audio.data["music"]:
+		if not ResourceLoader.exists(Audio.MUSIC_DIR + str(Audio.data["music"][id])):
+			missing_audio.append(id)
+	for id: String in Audio.data["sfx"]:
+		for f: Variant in Audio.data["sfx"][id].get("files", []):
+			if not ResourceLoader.exists(Audio.SFX_DIR + str(f)):
+				missing_audio.append(str(f))
+	check(missing_audio.is_empty(), "every sound file exists (%s)" % [missing_audio])
+	check(Audio.enemy_sfx("orc", "die") == "orc_die" and Audio.enemy_sfx("esqueleto", "die") == "bones_die", "monsters die with their own sound")
 	Session.set_flag("golem_defeated")
 	main.load_map("celeiro", "from_mina")
 	await _wait_map(main, "celeiro")
 	await _frames(3)
-	check(Audio.current_music() == "mina", "the granary starts with the mine music")
+	check(Audio.current_music() == "masmorra_mina", "the granary starts with the mine music (%s)" % Audio.current_music())
+	check(Audio.current_ambience() == "mina" and main.player.step_sfx == "step_stone", "the granary sounds like a mine: cave background, steps on stone")
 	var g: Enemy = _find_boss("gorvan")
 	if g:
 		main.player.global_position = g.global_position + Vector3(0, 0, 6)
@@ -1789,6 +1802,7 @@ func _audio_test() -> void:
 		g.take_damage(100000000, false)
 		check(not g.is_dead() and g.invulnerable, "a huge hit does not skip the Scarecrow form")
 		await _through_transform(main, g)
+		check(Audio.current_music() == "arauto", "the Herald's true form has its own music")
 		g.take_damage(100000000, false)
 		await _frames(3)
 		check(Audio.current_music() == "vitoria", "victory music after the boss")

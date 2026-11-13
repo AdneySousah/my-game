@@ -1,0 +1,1924 @@
+[
+ {
+  "id": "vila",
+  "version": 1,
+  "kind": "music",
+  "file": "vila_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 1650
+ },
+ {
+  "id": "vila",
+  "version": 2,
+  "kind": "music",
+  "file": "vila_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 1650
+ },
+ {
+  "id": "luta_campo",
+  "version": 1,
+  "kind": "music",
+  "file": "luta_campo_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 1500
+ },
+ {
+  "id": "luta_campo",
+  "version": 2,
+  "kind": "music",
+  "file": "luta_campo_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 1500
+ },
+ {
+  "id": "step_grass",
+  "version": 1,
+  "kind": "sfx",
+  "file": "step_grass_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "step_grass",
+  "version": 2,
+  "kind": "sfx",
+  "file": "step_grass_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "step_grass",
+  "version": 3,
+  "kind": "sfx",
+  "file": "step_grass_3.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "swing",
+  "version": 1,
+  "kind": "sfx",
+  "file": "swing_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "swing",
+  "version": 2,
+  "kind": "sfx",
+  "file": "swing_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "swing",
+  "version": 3,
+  "kind": "sfx",
+  "file": "swing_3.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "hit",
+  "version": 1,
+  "kind": "sfx",
+  "file": "hit_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "hit",
+  "version": 2,
+  "kind": "sfx",
+  "file": "hit_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "hit",
+  "version": 3,
+  "kind": "sfx",
+  "file": "hit_3.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "bird",
+  "version": 1,
+  "kind": "sfx",
+  "file": "bird_1.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "bird",
+  "version": 2,
+  "kind": "sfx",
+  "file": "bird_2.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "bird",
+  "version": 3,
+  "kind": "sfx",
+  "file": "bird_3.mp3",
+  "date": "2026-11-13 09:56",
+  "estimate": 200
+ },
+ {
+  "id": "amb_floresta",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_floresta_1.mp3",
+  "date": "2026-11-13 09:57",
+  "estimate": 200
+ },
+ {
+  "id": "titulo",
+  "version": 1,
+  "kind": "music",
+  "file": "titulo_1.mp3",
+  "date": "2026-11-13 10:08",
+  "estimate": 1650
+ },
+ {
+  "id": "titulo",
+  "version": 2,
+  "kind": "music",
+  "file": "titulo_2.mp3",
+  "date": "2026-11-13 10:08",
+  "estimate": 1650
+ },
+ {
+  "id": "prologo",
+  "version": 1,
+  "kind": "music",
+  "file": "prologo_1.mp3",
+  "date": "2026-11-13 10:08",
+  "estimate": 1350
+ },
+ {
+  "id": "prologo",
+  "version": 2,
+  "kind": "music",
+  "file": "prologo_2.mp3",
+  "date": "2026-11-13 10:09",
+  "estimate": 1350
+ },
+ {
+  "id": "cidade_deserto",
+  "version": 1,
+  "kind": "music",
+  "file": "cidade_deserto_1.mp3",
+  "date": "2026-11-13 10:09",
+  "estimate": 1650
+ },
+ {
+  "id": "cidade_deserto",
+  "version": 2,
+  "kind": "music",
+  "file": "cidade_deserto_2.mp3",
+  "date": "2026-11-13 10:09",
+  "estimate": 1650
+ },
+ {
+  "id": "cidade_neve",
+  "version": 1,
+  "kind": "music",
+  "file": "cidade_neve_1.mp3",
+  "date": "2026-11-13 10:09",
+  "estimate": 1650
+ },
+ {
+  "id": "cidade_neve",
+  "version": 2,
+  "kind": "music",
+  "file": "cidade_neve_2.mp3",
+  "date": "2026-11-13 10:09",
+  "estimate": 1650
+ },
+ {
+  "id": "cidade_elfica",
+  "version": 1,
+  "kind": "music",
+  "file": "cidade_elfica_1.mp3",
+  "date": "2026-11-13 10:10",
+  "estimate": 1650
+ },
+ {
+  "id": "cidade_elfica",
+  "version": 2,
+  "kind": "music",
+  "file": "cidade_elfica_2.mp3",
+  "date": "2026-11-13 10:10",
+  "estimate": 1650
+ },
+ {
+  "id": "capital",
+  "version": 1,
+  "kind": "music",
+  "file": "capital_1.mp3",
+  "date": "2026-11-13 10:10",
+  "estimate": 1650
+ },
+ {
+  "id": "capital",
+  "version": 2,
+  "kind": "music",
+  "file": "capital_2.mp3",
+  "date": "2026-11-13 10:10",
+  "estimate": 1650
+ },
+ {
+  "id": "casa",
+  "version": 1,
+  "kind": "music",
+  "file": "casa_1.mp3",
+  "date": "2026-11-13 10:10",
+  "estimate": 1200
+ },
+ {
+  "id": "casa",
+  "version": 2,
+  "kind": "music",
+  "file": "casa_2.mp3",
+  "date": "2026-11-13 10:11",
+  "estimate": 1200
+ },
+ {
+  "id": "campo_verde",
+  "version": 1,
+  "kind": "music",
+  "file": "campo_verde_1.mp3",
+  "date": "2026-11-13 10:11",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_verde",
+  "version": 2,
+  "kind": "music",
+  "file": "campo_verde_2.mp3",
+  "date": "2026-11-13 10:11",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_seco",
+  "version": 1,
+  "kind": "music",
+  "file": "campo_seco_1.mp3",
+  "date": "2026-11-13 10:11",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_seco",
+  "version": 2,
+  "kind": "music",
+  "file": "campo_seco_2.mp3",
+  "date": "2026-11-13 10:11",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_deserto",
+  "version": 1,
+  "kind": "music",
+  "file": "campo_deserto_1.mp3",
+  "date": "2026-11-13 10:12",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_deserto",
+  "version": 2,
+  "kind": "music",
+  "file": "campo_deserto_2.mp3",
+  "date": "2026-11-13 10:12",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_neve",
+  "version": 1,
+  "kind": "music",
+  "file": "campo_neve_1.mp3",
+  "date": "2026-11-13 10:12",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_neve",
+  "version": 2,
+  "kind": "music",
+  "file": "campo_neve_2.mp3",
+  "date": "2026-11-13 10:12",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_pantano",
+  "version": 1,
+  "kind": "music",
+  "file": "campo_pantano_1.mp3",
+  "date": "2026-11-13 10:12",
+  "estimate": 1800
+ },
+ {
+  "id": "campo_pantano",
+  "version": 2,
+  "kind": "music",
+  "file": "campo_pantano_2.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1800
+ },
+ {
+  "id": "masmorra_mina",
+  "version": 1,
+  "kind": "music",
+  "file": "masmorra_mina_1.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1500
+ },
+ {
+  "id": "masmorra_mina",
+  "version": 2,
+  "kind": "music",
+  "file": "masmorra_mina_2.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1500
+ },
+ {
+  "id": "masmorra_ruinas",
+  "version": 1,
+  "kind": "music",
+  "file": "masmorra_ruinas_1.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1500
+ },
+ {
+  "id": "masmorra_ruinas",
+  "version": 2,
+  "kind": "music",
+  "file": "masmorra_ruinas_2.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1500
+ },
+ {
+  "id": "masmorra_castelo",
+  "version": 1,
+  "kind": "music",
+  "file": "masmorra_castelo_1.mp3",
+  "date": "2026-11-13 10:13",
+  "estimate": 1500
+ },
+ {
+  "id": "masmorra_castelo",
+  "version": 2,
+  "kind": "music",
+  "file": "masmorra_castelo_2.mp3",
+  "date": "2026-11-13 10:14",
+  "estimate": 1500
+ },
+ {
+  "id": "ceu",
+  "version": 1,
+  "kind": "music",
+  "file": "ceu_1.mp3",
+  "date": "2026-11-13 10:14",
+  "estimate": 1650
+ },
+ {
+  "id": "ceu",
+  "version": 2,
+  "kind": "music",
+  "file": "ceu_2.mp3",
+  "date": "2026-11-13 10:14",
+  "estimate": 1650
+ },
+ {
+  "id": "chefe",
+  "version": 1,
+  "kind": "music",
+  "file": "chefe_1.mp3",
+  "date": "2026-11-13 10:14",
+  "estimate": 1650
+ },
+ {
+  "id": "chefe",
+  "version": 2,
+  "kind": "music",
+  "file": "chefe_2.mp3",
+  "date": "2026-11-13 10:14",
+  "estimate": 1650
+ },
+ {
+  "id": "arauto",
+  "version": 1,
+  "kind": "music",
+  "file": "arauto_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 1800
+ },
+ {
+  "id": "arauto",
+  "version": 2,
+  "kind": "music",
+  "file": "arauto_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 1800
+ },
+ {
+  "id": "vitoria",
+  "version": 1,
+  "kind": "music",
+  "file": "vitoria_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 120
+ },
+ {
+  "id": "vitoria",
+  "version": 2,
+  "kind": "music",
+  "file": "vitoria_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 120
+ },
+ {
+  "id": "derrota",
+  "version": 1,
+  "kind": "music",
+  "file": "derrota_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 90
+ },
+ {
+  "id": "derrota",
+  "version": 2,
+  "kind": "music",
+  "file": "derrota_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 90
+ },
+ {
+  "id": "step_stone",
+  "version": 1,
+  "kind": "sfx",
+  "file": "step_stone_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_stone",
+  "version": 2,
+  "kind": "sfx",
+  "file": "step_stone_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_stone",
+  "version": 3,
+  "kind": "sfx",
+  "file": "step_stone_3.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_sand",
+  "version": 1,
+  "kind": "sfx",
+  "file": "step_sand_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_sand",
+  "version": 2,
+  "kind": "sfx",
+  "file": "step_sand_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_sand",
+  "version": 3,
+  "kind": "sfx",
+  "file": "step_sand_3.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_snow",
+  "version": 1,
+  "kind": "sfx",
+  "file": "step_snow_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_snow",
+  "version": 2,
+  "kind": "sfx",
+  "file": "step_snow_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "step_snow",
+  "version": 3,
+  "kind": "sfx",
+  "file": "step_snow_3.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "hurt_1.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "hurt_2.mp3",
+  "date": "2026-11-13 10:15",
+  "estimate": 200
+ },
+ {
+  "id": "hero_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "hero_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "hero_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "hero_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "dodge",
+  "version": 1,
+  "kind": "sfx",
+  "file": "dodge_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "dodge",
+  "version": 2,
+  "kind": "sfx",
+  "file": "dodge_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "potion",
+  "version": 1,
+  "kind": "sfx",
+  "file": "potion_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "potion",
+  "version": 2,
+  "kind": "sfx",
+  "file": "potion_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "mana",
+  "version": 1,
+  "kind": "sfx",
+  "file": "mana_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "level_up",
+  "version": 1,
+  "kind": "sfx",
+  "file": "level_up_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "level_up",
+  "version": 2,
+  "kind": "sfx",
+  "file": "level_up_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "hit_metal",
+  "version": 1,
+  "kind": "sfx",
+  "file": "hit_metal_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "hit_metal",
+  "version": 2,
+  "kind": "sfx",
+  "file": "hit_metal_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "hit_stone",
+  "version": 1,
+  "kind": "sfx",
+  "file": "hit_stone_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "hit_stone",
+  "version": 2,
+  "kind": "sfx",
+  "file": "hit_stone_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "crit",
+  "version": 1,
+  "kind": "sfx",
+  "file": "crit_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "crit",
+  "version": 2,
+  "kind": "sfx",
+  "file": "crit_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "shield_break",
+  "version": 1,
+  "kind": "sfx",
+  "file": "shield_break_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "human_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "human_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "human_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "human_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "human_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "human_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "human_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "human_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "orc_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "orc_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "orc_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "orc_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "orc_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "orc_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "orc_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "orc_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "bones_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "bones_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "bones_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "bones_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "bones_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "bones_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "bones_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "bones_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "golem_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "golem_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "golem_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "golem_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "golem_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "golem_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "golem_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "golem_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "lizard_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "lizard_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "lizard_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "lizard_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "lizard_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "lizard_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "lizard_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "lizard_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "cultist_hurt",
+  "version": 1,
+  "kind": "sfx",
+  "file": "cultist_hurt_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "cultist_hurt",
+  "version": 2,
+  "kind": "sfx",
+  "file": "cultist_hurt_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "cultist_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "cultist_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "cultist_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "cultist_die_2.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "undead_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "undead_die_1.mp3",
+  "date": "2026-11-13 10:16",
+  "estimate": 200
+ },
+ {
+  "id": "undead_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "undead_die_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "celestial_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "celestial_die_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "celestial_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "celestial_die_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "slime_die",
+  "version": 1,
+  "kind": "sfx",
+  "file": "slime_die_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "slime_die",
+  "version": 2,
+  "kind": "sfx",
+  "file": "slime_die_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "roar",
+  "version": 1,
+  "kind": "sfx",
+  "file": "roar_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "roar",
+  "version": 2,
+  "kind": "sfx",
+  "file": "roar_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "dog_happy",
+  "version": 1,
+  "kind": "sfx",
+  "file": "dog_happy_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "dog_happy",
+  "version": 2,
+  "kind": "sfx",
+  "file": "dog_happy_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "cow",
+  "version": 1,
+  "kind": "sfx",
+  "file": "cow_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "cow",
+  "version": 2,
+  "kind": "sfx",
+  "file": "cow_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "cat",
+  "version": 1,
+  "kind": "sfx",
+  "file": "cat_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "frog",
+  "version": 1,
+  "kind": "sfx",
+  "file": "frog_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "frog",
+  "version": 2,
+  "kind": "sfx",
+  "file": "frog_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "splash",
+  "version": 1,
+  "kind": "sfx",
+  "file": "splash_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "splash",
+  "version": 2,
+  "kind": "sfx",
+  "file": "splash_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_campo",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_campo_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_deserto",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_deserto_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_neve",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_neve_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_pantano",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_pantano_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_mina",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_mina_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_cidade",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_cidade_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_agua",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_agua_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "amb_fogueira",
+  "version": 1,
+  "kind": "sfx",
+  "file": "amb_fogueira_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "chest",
+  "version": 1,
+  "kind": "sfx",
+  "file": "chest_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "door",
+  "version": 1,
+  "kind": "sfx",
+  "file": "door_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "coins",
+  "version": 1,
+  "kind": "sfx",
+  "file": "coins_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "coins",
+  "version": 2,
+  "kind": "sfx",
+  "file": "coins_2.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "pickup",
+  "version": 1,
+  "kind": "sfx",
+  "file": "pickup_1.mp3",
+  "date": "2026-11-13 10:17",
+  "estimate": 200
+ },
+ {
+  "id": "pickup",
+  "version": 2,
+  "kind": "sfx",
+  "file": "pickup_2.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "quest",
+  "version": 1,
+  "kind": "sfx",
+  "file": "quest_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "travel",
+  "version": 1,
+  "kind": "sfx",
+  "file": "travel_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "forge",
+  "version": 1,
+  "kind": "sfx",
+  "file": "forge_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "ui_click",
+  "version": 1,
+  "kind": "sfx",
+  "file": "ui_click_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "ui_open",
+  "version": 1,
+  "kind": "sfx",
+  "file": "ui_open_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "ui_close",
+  "version": 1,
+  "kind": "sfx",
+  "file": "ui_close_1.mp3",
+  "date": "2026-11-13 10:18",
+  "estimate": 200
+ },
+ {
+  "id": "titulo",
+  "version": 1,
+  "approved": "assets\\audio\\music\\titulo.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "prologo",
+  "version": 1,
+  "approved": "assets\\audio\\music\\prologo.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "vila",
+  "version": 1,
+  "approved": "assets\\audio\\music\\vila.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cidade_deserto",
+  "version": 1,
+  "approved": "assets\\audio\\music\\cidade_deserto.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cidade_neve",
+  "version": 1,
+  "approved": "assets\\audio\\music\\cidade_neve.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cidade_elfica",
+  "version": 1,
+  "approved": "assets\\audio\\music\\cidade_elfica.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "capital",
+  "version": 1,
+  "approved": "assets\\audio\\music\\capital.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "casa",
+  "version": 1,
+  "approved": "assets\\audio\\music\\casa.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "campo_verde",
+  "version": 1,
+  "approved": "assets\\audio\\music\\campo_verde.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "campo_seco",
+  "version": 1,
+  "approved": "assets\\audio\\music\\campo_seco.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "campo_deserto",
+  "version": 1,
+  "approved": "assets\\audio\\music\\campo_deserto.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "campo_neve",
+  "version": 1,
+  "approved": "assets\\audio\\music\\campo_neve.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "campo_pantano",
+  "version": 1,
+  "approved": "assets\\audio\\music\\campo_pantano.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "luta_campo",
+  "version": 1,
+  "approved": "assets\\audio\\music\\luta_campo.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "masmorra_mina",
+  "version": 1,
+  "approved": "assets\\audio\\music\\masmorra_mina.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "masmorra_ruinas",
+  "version": 1,
+  "approved": "assets\\audio\\music\\masmorra_ruinas.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "masmorra_castelo",
+  "version": 1,
+  "approved": "assets\\audio\\music\\masmorra_castelo.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "ceu",
+  "version": 1,
+  "approved": "assets\\audio\\music\\ceu.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "chefe",
+  "version": 1,
+  "approved": "assets\\audio\\music\\chefe.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "arauto",
+  "version": 1,
+  "approved": "assets\\audio\\music\\arauto.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "vitoria",
+  "version": 1,
+  "approved": "assets\\audio\\music\\vitoria.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "derrota",
+  "version": 1,
+  "approved": "assets\\audio\\music\\derrota.mp3",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_grass",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\step_grass_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_grass",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\step_grass_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_grass",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\step_grass_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_stone",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\step_stone_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_stone",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\step_stone_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_stone",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\step_stone_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_sand",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\step_sand_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_sand",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\step_sand_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_sand",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\step_sand_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_snow",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\step_snow_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_snow",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\step_snow_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "step_snow",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\step_snow_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "swing",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\swing_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "swing",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\swing_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "swing",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\swing_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hero_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hero_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hero_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hero_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "dodge",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\dodge_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "dodge",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\dodge_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "potion",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\potion_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "potion",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\potion_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "mana",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\mana_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "level_up",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\level_up_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "level_up",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\level_up_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hit_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hit_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hit_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hit_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hit_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hit_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\hit_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit_metal",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hit_metal_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit_metal",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hit_metal_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit_stone",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\hit_stone_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "hit_stone",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\hit_stone_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "crit",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\crit_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "crit",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\crit_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "shield_break",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\shield_break_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "human_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\human_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "human_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\human_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "human_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\human_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "human_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\human_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "orc_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\orc_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "orc_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\orc_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "orc_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\orc_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "orc_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\orc_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bones_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\bones_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bones_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\bones_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bones_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\bones_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bones_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\bones_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "golem_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\golem_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "golem_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\golem_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "golem_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\golem_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "golem_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\golem_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "lizard_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\lizard_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "lizard_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\lizard_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "lizard_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\lizard_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "lizard_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\lizard_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cultist_hurt",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\cultist_hurt_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cultist_hurt",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\cultist_hurt_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cultist_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\cultist_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cultist_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\cultist_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "undead_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\undead_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "undead_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\undead_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "celestial_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\celestial_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "celestial_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\celestial_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "slime_die",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\slime_die_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "slime_die",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\slime_die_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "roar",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\roar_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "roar",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\roar_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bird",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\bird_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bird",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\bird_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "bird",
+  "version": 3,
+  "approved": "assets\\audio\\sfx\\el\\bird_3.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "dog_happy",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\dog_happy_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "dog_happy",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\dog_happy_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cow",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\cow_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cow",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\cow_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "cat",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\cat_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "frog",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\frog_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "frog",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\frog_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "splash",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\splash_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "splash",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\splash_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_floresta",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_floresta_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_campo",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_campo_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_deserto",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_deserto_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_neve",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_neve_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_pantano",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_pantano_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_mina",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_mina_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_cidade",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_cidade_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_agua",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_agua_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "amb_fogueira",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\amb_fogueira_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "chest",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\chest_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "door",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\door_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "coins",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\coins_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "coins",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\coins_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "pickup",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\pickup_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "pickup",
+  "version": 2,
+  "approved": "assets\\audio\\sfx\\el\\pickup_2.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "quest",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\quest_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "travel",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\travel_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "forge",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\forge_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "ui_click",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\ui_click_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "ui_open",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\ui_open_1.ogg",
+  "date": "2026-11-13 10:19"
+ },
+ {
+  "id": "ui_close",
+  "version": 1,
+  "approved": "assets\\audio\\sfx\\el\\ui_close_1.ogg",
+  "date": "2026-11-13 10:19"
+ }
+]

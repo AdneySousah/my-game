@@ -38,6 +38,10 @@ var _near_vase: Node3D
 ## The arrow leads to this city's wanted boss (the poster's "Seguir"), until it falls.
 var follow_wanted_city: String = ""
 var _world_check: float = 0.0
+var _fight_check: float = 0.0
+var _fight_music: bool = false
+var _fight_calm: float = 0.0
+var _amb_extra_timer: float = 5.0
 var _world_level_seen: int = 0
 var _autosave_timer: float = 0.0
 ## Seconds of healing left at the current rest point.
@@ -183,7 +187,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	map.exit_used.connect(func(to: String, sp: String) -> void: load_map(to, sp))
 	Session.current_map = map_id
 	_refresh_quest_world()
-	Audio.play_music(Audio.music_for_map(map_id))
+	_enter_map_audio(map_id)
 	camera_rig.snap_to_target()
 	if card:
 		get_tree().paused = was_paused
@@ -200,6 +204,56 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	if welcome_offer and OfferBanner.eligible():
 		welcome_offer = false
 		OfferBanner.show_on(get_tree())
+
+
+## The map's music, its quiet background sound and the hero's footsteps.
+func _enter_map_audio(map_id: String) -> void:
+	_fight_music = false
+	_fight_calm = 0.0
+	Audio.play_music(Audio.music_for_map(map_id))
+	Audio.play_ambience(Audio.ambience_for_map(map_id))
+	player.step_sfx = Audio.step_for_map(map_id)
+	_amb_extra_timer = randf_range(3.0, 8.0)
+
+
+## Battle music while monsters chase the hero in the open (back to the map's music a
+## few seconds after the fight), and now and then a loose sound of the place (a bird in
+## the forest) somewhere near the hero, never too often.
+func _tick_audio(delta: float) -> void:
+	_fight_check -= delta
+	if _fight_check <= 0.0:
+		_fight_check = 0.5
+		var map_music: String = Audio.music_for_map(map.map_id)
+		var battle: String = Audio.combat_music_for_map(map.map_id)
+		var cur: String = Audio.current_music()
+		# Boss, victory and defeat music are left alone.
+		if battle != "" and (cur == map_music or cur == battle):
+			var fighting: bool = false
+			for n: Node in get_tree().get_nodes_in_group("enemies"):
+				var e := n as Enemy
+				if e and e.is_fighting() and e.global_position.distance_to(player.global_position) < 20.0:
+					fighting = true
+					break
+			if fighting:
+				_fight_calm = 4.0
+				if not _fight_music:
+					_fight_music = true
+					Audio.play_music(battle, 0.8)
+			elif _fight_music:
+				_fight_calm -= 0.5
+				if _fight_calm <= 0.0:
+					_fight_music = false
+					Audio.play_music(map_music, 2.5)
+	_amb_extra_timer -= delta
+	if _amb_extra_timer <= 0.0:
+		var extras: Dictionary = Audio.ambience_extras(Audio.current_ambience())
+		var every: Array = extras.get("every", [6.0, 12.0])
+		_amb_extra_timer = randf_range(float(every[0]), float(every[1]))
+		var ids: Array = extras.get("sfx", [])
+		if not ids.is_empty() and not _fight_music:
+			var a: float = randf() * TAU
+			var at: Vector3 = player.global_position + Vector3(cos(a), 2.0, sin(a)) * randf_range(7.0, 14.0)
+			Audio.play_sfx(str(ids.pick_random()), at)
 
 
 ## Extreme difficulty: a short warning each time the monsters of the world level up.
@@ -222,6 +276,7 @@ func _physics_process(delta: float) -> void:
 	Session.advance_time(delta)
 	Session.play_seconds += delta
 	_check_world_level(delta)
+	_tick_audio(delta)
 	_autosave_timer += delta
 	if _autosave_timer >= 30.0:
 		save_now()
@@ -529,6 +584,8 @@ func _on_rest_reached(point: RestPoint) -> void:
 
 func _on_player_died(gold_lost: int, xp_lost: int) -> void:
 	hud.toast(tr("HUD_YOU_DIED") % [gold_lost, xp_lost], 2.5)
+	_fight_music = false
+	Audio.play_music("derrota", 0.5)
 	await get_tree().create_timer(RESPAWN_DELAY, false).timeout
 	if is_instance_valid(map):
 		map.reset_bosses()
@@ -706,7 +763,11 @@ func give_item(id: String, n: int = 1) -> void:
 ## Boss lines: a short talk when the fight starts and when it changes form.
 func _on_boss_spawned(e: Enemy) -> void:
 	# Boss music while it fights; a short victory theme when it falls.
-	e.engaged.connect(func(_b: Enemy) -> void: Audio.play_music("chefe", 0.6))
+	# "music" in enemies.json: the Heralds' true forms and the wanted bosses use "arauto".
+	e.engaged.connect(func(b: Enemy) -> void: Audio.play_music(str(b.data.get("music", "chefe")), 0.6))
+	e.transformed.connect(func(b: Enemy) -> void:
+		if b.data.has("music"):
+			Audio.play_music(str(b.data["music"]), 1.0))
 	e.died.connect(func(_b: Enemy) -> void: _victory_music())
 	var intro: String = str(e.get_meta("intro", ""))
 	# The opening talk plays once; retries after dying go straight to the fight.
@@ -739,7 +800,9 @@ func _on_boss_spawned(e: Enemy) -> void:
 		var check := func(_x: Variant = null, _y: Variant = null) -> void: _check_duel(e)
 		e.hp_changed.connect(check)
 		player.hp_changed.connect(check)
-	e.shield_broken.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BROKEN"), 2.2))
+	e.shield_broken.connect(func(b: Enemy) -> void:
+		Audio.play_sfx("shield_break", b.global_position)
+		hud.toast(tr("HUD_SHIELD_BROKEN"), 2.2))
 	e.shield_restored.connect(func(_b: Enemy) -> void: hud.toast(tr("HUD_SHIELD_BACK"), 1.8))
 
 
@@ -864,7 +927,7 @@ func _tick_rest(delta: float) -> void:
 
 func _open_chest(c: Chest) -> void:
 	c.open()
-	Audio.play_sfx("coins", c.global_position)
+	Audio.play_sfx("chest", c.global_position)
 	if c.gold > 0:
 		var gold: int = roundi(c.gold * Session.premium_mult("gold"))
 		player.add_gold(gold)

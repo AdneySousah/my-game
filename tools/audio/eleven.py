@@ -10,11 +10,12 @@ Comandos (rodar na pasta do projeto):
   python -X utf8 tools/audio/eleven.py custo <ids|--all>   quanto vai custar, sem gerar nada
   python -X utf8 tools/audio/eleven.py gen <ids|--music|--sfx|--all> [--force] [--yes]
   python -X utf8 tools/audio/eleven.py aprovar <id> <versão>
+  python -X utf8 tools/audio/eleven.py aprovar-tudo        música: versão 1; efeitos: todas as versões
   python -X utf8 tools/audio/eleven.py ouvir               refaz a página para ouvir tudo
 
 Os arquivos gerados vão para assets/_inbox/audio/<id>_<versão>.mp3 (o Godot e o git ignoram
-essa pasta). "aprovar" copia a versão escolhida para assets/audio/ (música em mp3, efeito em
-ogg). Gastos ficam em tools/audio/audio_log.json.
+essa pasta). "aprovar" copia a versão escolhida para assets/audio/ (música em music/<id>.mp3,
+efeito em sfx/el/<id>_<versão>.ogg). Gastos ficam em tools/audio/audio_log.json.
 """
 import json
 import os
@@ -31,7 +32,7 @@ LIST = ROOT / "tools" / "audio" / "audio_list.json"
 LOG = ROOT / "tools" / "audio" / "audio_log.json"
 INBOX = ROOT / "assets" / "_inbox" / "audio"
 MUSIC_DIR = ROOT / "assets" / "audio" / "music"
-SFX_DIR = ROOT / "assets" / "audio" / "sfx"
+SFX_DIR = ROOT / "assets" / "audio" / "sfx" / "el"
 API = "https://api.elevenlabs.io/v1"
 KEY_FILE = Path.home() / "Documents" / "HerdeiroDosCeus_chave" / "elevenlabs.txt"
 MUSIC_PER_MIN = 900
@@ -205,16 +206,31 @@ def cmd_approve(args: list) -> None:
         shutil.copyfile(src, dst)
     else:
         SFX_DIR.mkdir(parents=True, exist_ok=True)
-        k = 1
-        while (SFX_DIR / f"{it['id']}_{k}.ogg").exists():
-            k += 1
-        dst = SFX_DIR / f"{it['id']}_{k}.ogg"
+        dst = SFX_DIR / f"{it['id']}_{args[1]}.ogg"
         ff = shutil.which("ffmpeg")
         if not ff:
             sys.exit("ffmpeg não encontrado (precisa para converter em ogg).")
         subprocess.run([ff, "-y", "-loglevel", "error", "-i", str(src), "-c:a", "libvorbis", "-q:a", "5", str(dst)], check=True)
     log({"id": it["id"], "version": int(args[1]), "approved": str(dst.relative_to(ROOT)), "date": time.strftime("%Y-%m-%d %H:%M")})
     print(f"Aprovado: {dst.relative_to(ROOT)}")
+
+
+def cmd_approve_all() -> None:
+    """Music: version 1 (unless one was approved already); effects: every version (they are
+    variations played at random, e.g. 3 footsteps)."""
+    approved = {r["id"] for r in (json.loads(LOG.read_text(encoding="utf-8")) if LOG.exists() else []) if "approved" in r}
+    for it in items():
+        files = sorted(INBOX.glob(f"{it['id']}_*.mp3"), key=lambda f: int(f.stem.rsplit("_", 1)[1]))
+        if not files:
+            print(f"  (sem arquivo) {it['id']}")
+            continue
+        if it["kind"] == "music":
+            if it["id"] in approved:
+                continue
+            cmd_approve([it["id"], files[0].stem.rsplit("_", 1)[1]])
+        else:
+            for f in files:
+                cmd_approve([it["id"], f.stem.rsplit("_", 1)[1]])
 
 
 def cmd_listen() -> None:
@@ -250,6 +266,8 @@ def main() -> None:
         cmd_gen(args)
     elif cmd == "aprovar":
         cmd_approve(args)
+    elif cmd == "aprovar-tudo":
+        cmd_approve_all()
     elif cmd == "ouvir":
         cmd_listen()
     else:

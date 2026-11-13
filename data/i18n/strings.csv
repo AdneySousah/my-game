@@ -935,7 +935,11 @@ OPT_SHOW_FPS,Mostrar quadros por segundo,Show frames per second
 OPT_FPS_LIMIT,Limite de quadros,Frame limit
 OPT_ON,Ligado,On
 OPT_OFF,Desligado,Off
-OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
+OPT_CREDITS_TEXT,"Músicas, ambientes e a maior parte dos efeitos sonoros gerados com ElevenLabs.
+Outros efeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).
+Modelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music, ambience and most sound effects made with ElevenLabs.
+Other sound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).
+Models, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
 TITLE_DEFENSOR,Defensor de Pradoluz,Defender of Pradoluz

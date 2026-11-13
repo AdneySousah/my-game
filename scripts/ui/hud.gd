@@ -69,6 +69,12 @@ var _interact_kind: String = ""
 var _interact_shown: bool = false
 ## Near someone and out of a fight: the attack button turns into a speech balloon.
 var _talk_on_attack: bool = false
+## Fase 8D: the campfire window and the fishing bar (status, reel progress, line tension).
+var _cook_panel: CookPanel
+var _fish_box: VBoxContainer
+var _fish_label: Label
+var _fish_progress: ProgressBar
+var _fish_tension: ProgressBar
 ## Shortcuts at the top of the screen: "store", "routine", "bag", "quests".
 var _menu_btns: Dictionary = {}
 var _top_menu: HBoxContainer
@@ -150,6 +156,12 @@ func _ready() -> void:
 	_routine_panel = RoutinePanel.new()
 	root.add_child(_routine_panel)
 	_routine_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if _main:
+			_main.save_now())
+	_cook_panel = CookPanel.new()
+	root.add_child(_cook_panel)
+	_cook_panel.closed.connect(func() -> void:
 		_on_panel_closed()
 		if _main:
 			_main.save_now())
@@ -359,7 +371,7 @@ func _update_boss_bar() -> void:
 func show_interact_button(kind: String) -> void:
 	_interact_kind = kind
 	_interact_shown = kind != ""
-	_talk_btn.visible = kind != "" and kind != "talk" and kind != "pet"
+	_talk_btn.visible = kind != "" and not kind in ["talk", "pet", "fish", "cook"]
 	if _talk_btn.visible:
 		var key: String = {"open": "HUD_OPEN", "reset": "HUD_RESET", "infernal": "HUD_INFERNAL", "enter": "HUD_ENTER",
 			"tier": "HUD_TIER", "board": "HUD_BOARD", "wanted": "HUD_WANTED"}.get(kind, "HUD_PICK_UP")
@@ -378,7 +390,7 @@ func is_talk_on_attack() -> bool:
 
 
 func _update_talk_mode() -> void:
-	var want: bool = _interact_shown and _interact_kind in ["talk", "pet"] and player != null and not player.in_combat()
+	var want: bool = _interact_shown and _interact_kind in ["talk", "pet", "fish", "cook"] and player != null and not player.in_combat()
 	var glyph: String = _interact_kind if want else ""
 	if want == _talk_on_attack and _attack_btn.glyph == glyph:
 		return
@@ -464,6 +476,68 @@ func open_covil(covil_id: String) -> void:
 
 func covil_panel() -> CovilPanel:
 	return _covil_panel
+
+
+func open_cook() -> void:
+	_cook_panel.player = player
+	_open_panel(_cook_panel)
+
+
+func cook_panel() -> CookPanel:
+	return _cook_panel
+
+
+## The fishing bar over the potions: a line of text and, while reeling, the green
+## progress and the red tension (-1 hides a bar; empty text hides it all).
+func fishing_status(text: String, progress: float, tension: float) -> void:
+	if _fish_box == null:
+		_fish_box = VBoxContainer.new()
+		_fish_box.add_theme_constant_override("separation", 4)
+		_fish_box.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		_controls.add_child(_fish_box)
+		_fish_label = Label.new()
+		_fish_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		_fish_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		_fish_label.custom_minimum_size = Vector2(380, 0)
+		_fish_label.add_theme_font_size_override("font_size", 19)
+		_fish_label.add_theme_color_override("font_color", Color("#fff3d6"))
+		_fish_label.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.9))
+		_fish_label.add_theme_constant_override("outline_size", 6)
+		_fish_box.add_child(_fish_label)
+		for i: int in 2:
+			var b := ProgressBar.new()
+			b.custom_minimum_size = Vector2(380, 22)
+			b.max_value = 1.0
+			b.step = 0.001
+			b.show_percentage = false
+			var fill := StyleBoxFlat.new()
+			fill.bg_color = Color("#5ad16a") if i == 0 else Color("#ff6a3d")
+			fill.set_corner_radius_all(6)
+			var bg := StyleBoxFlat.new()
+			bg.bg_color = Color(0, 0, 0, 0.55)
+			bg.set_corner_radius_all(6)
+			b.add_theme_stylebox_override("fill", fill)
+			b.add_theme_stylebox_override("background", bg)
+			_fish_box.add_child(b)
+			if i == 0:
+				_fish_progress = b
+			else:
+				_fish_tension = b
+	_fish_box.visible = text != ""
+	_fish_label.text = text
+	_fish_progress.visible = progress >= 0.0
+	_fish_tension.visible = tension >= 0.0
+	if progress >= 0.0:
+		_fish_progress.value = progress
+	if tension >= 0.0:
+		_fish_tension.value = tension
+		# Danger: the tension bar flashes red near the top.
+		_fish_tension.modulate = Color(1, 1, 1) if tension < 0.75 else Color(1.4, 0.7, 0.7)
+	var vp: Vector2 = get_viewport().get_visible_rect().size
+	_fish_box.reset_size()
+	# Centred above the potions, narrow enough to stay clear of the right-hand buttons.
+	_fish_box.size.x = 380.0
+	_fish_box.position = Vector2((vp.x - 380.0) * 0.5 - 40.0, vp.y - 160.0 - _fish_box.size.y)
 
 
 func open_shop(merchant: String = "celeste") -> void:
@@ -838,6 +912,7 @@ func _open_panel(panel: Control) -> void:
 	_equip_panel.hide()
 	_smith_panel.hide()
 	_shop_panel.hide()
+	_cook_panel.hide()
 	_routine_panel.hide()
 	_board_panel.hide()
 	_covil_panel.hide()

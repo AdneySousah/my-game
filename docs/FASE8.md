@@ -11,7 +11,7 @@ Tudo é feito por dados em `data/` como o resto do jogo. Cada parte tem seus tes
 | A | Combate | Defesa e aparar, monstro tonto com estrelinhas, Despertar com história | 42 cr (feito) |
 | B | Covis do Ferreiro Andarilho | NPC novo em cada cidade, 5 covis de chefe, 5 conjuntos com combos, licenças | 89 cr (feito) |
 | C | Runas e elementos | 1 runa por skill, fogo/gelo/raio/sangue/luz/eco, fraquezas dos monstros | 0 cr (feito; ícones na folha da B) |
-| D | Pesca e fogueira | Pescar nos lagos e rios, peixes por lugar e hora, cozinhar comidas com bônus | ~55 cr |
+| D | Pesca e fogueira | Pescar nos lagos e rios, peixes por lugar e hora, cozinhar comidas com bônus | 6 cr (feito) |
 | E | Bestiário e Maestria | Ficha de cada monstro com bônus por abates; pontos depois do nível 100 | ~10 cr |
 | F | Casa do herói | Casa em Pradoluz com baú, troféus, armas expostas e cama (bônus de XP) | ~25 cr |
 | G | Eventos do mundo | Horda noturna, caravana, chefe errante, chuva de estrelas | ~10 cr |

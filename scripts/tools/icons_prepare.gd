@@ -108,6 +108,14 @@ const SHEETS: Dictionary = {
 		"runa_eco", "peixe_tilapia", "peixe_truta", "peixe_lua",
 		"peixe_bagre", "peixe_carpa", "peixe_gelo", "peixe_sol",
 	],
+	# Fase 8D: ingredients, the cooking pot, the nine meals; and the bestiary book, the
+	# mastery star and the house key for 8E/8F.
+	"ui_itens_comidas": [
+		"erva_silvestre", "carne_crua", "cogumelo", "ui_panela",
+		"comida_peixe_assado", "comida_espeto_carne", "comida_sopa_cogumelo", "comida_ensopado_peixe",
+		"comida_truta_ervas", "comida_bagre_picante", "comida_peixe_lua", "comida_sopa_gelo",
+		"comida_banquete_sol", "ui_bestiario", "ui_maestria", "ui_chave_casa",
+	],
 	"ui_itens_mochilas": [
 		"mochila_couro", "mochila_real", "ui_skin_anjo", "ui_skin_sol",
 		"ui_skin_tempestade", "", "", "",

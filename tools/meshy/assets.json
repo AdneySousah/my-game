@@ -7474,6 +7474,24 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "ui_itens_comidas",
+      "category": "ui",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha 4x4: erva, carne, cogumelo, panela, 9 comidas, livro do bestiário, estrela da maestria, chave da casa",
+      "file": "assets/ui/ui_itens_comidas/ui_itens_comidas.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d698-4644-731c-9ebb-c0a91b3e4cfb",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

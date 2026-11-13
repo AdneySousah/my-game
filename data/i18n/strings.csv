@@ -1575,3 +1575,51 @@ RN_WEAK,Fraco!,Weak!
 RN_RESIST,Resiste,Resists
 RN_ELEMENT,Elemento: %s,Element: %s
 RN_FROZEN,Congelado!,Frozen!
+FS_ITEM_PEIXE_TILAPIA,Tilápia Dourada,Golden Tilapia
+FS_ITEM_PEIXE_TRUTA,Truta Prateada,Silver Trout
+FS_ITEM_PEIXE_CARPA,Carpa Real,Royal Carp
+FS_ITEM_PEIXE_BAGRE,Bagre do Pântano,Swamp Catfish
+FS_ITEM_PEIXE_LUA,Peixe-Lua,Moonfish
+FS_ITEM_PEIXE_GELO,Peixe de Gelo,Ice Fish
+FS_ITEM_PEIXE_SOL,Peixe-Sol Lendário,Legendary Sunfish
+FS_ITEM_FISH_DESC,Um peixe fresco. Venda ou leve para a fogueira.,A fresh fish. Sell it or take it to a campfire.
+FS_ITEM_ERVA_SILVESTRE,Erva Silvestre,Wild Herbs
+FS_ITEM_CARNE_CRUA,Carne Crua,Raw Meat
+FS_ITEM_COGUMELO,Cogumelo da Mata,Forest Mushroom
+FS_ITEM_ING_DESC,Ingrediente para cozinhar na fogueira.,An ingredient to cook at a campfire.
+FS_ITEM_COMIDA_PEIXE_ASSADO,Peixe Assado,Grilled Fish
+FS_ITEM_COMIDA_PEIXE_ASSADO_DESC,+8% de vida máxima por 10 min.,+8% max health for 10 min.
+FS_ITEM_COMIDA_ESPETO_CARNE,Espeto de Carne,Meat Skewer
+FS_ITEM_COMIDA_ESPETO_CARNE_DESC,+8% de ataque por 10 min.,+8% attack for 10 min.
+FS_ITEM_COMIDA_SOPA_COGUMELO,Sopa de Cogumelos,Mushroom Soup
+FS_ITEM_COMIDA_SOPA_COGUMELO_DESC,+30% de recuperação de MP por 10 min.,+30% MP regeneration for 10 min.
+FS_ITEM_COMIDA_ENSOPADO_PEIXE,Ensopado de Peixe,Fish Stew
+FS_ITEM_COMIDA_ENSOPADO_PEIXE_DESC,+10% de defesa e +5% de vida por 10 min.,+10% defense and +5% health for 10 min.
+FS_ITEM_COMIDA_TRUTA_ERVAS,Truta com Ervas,Herb Trout
+FS_ITEM_COMIDA_TRUTA_ERVAS_DESC,+20% de fôlego por 10 min.,+20% stamina for 10 min.
+FS_ITEM_COMIDA_BAGRE_PICANTE,Bagre Picante,Spicy Catfish
+FS_ITEM_COMIDA_BAGRE_PICANTE_DESC,+6% de chance de crítico por 10 min.,+6% critical chance for 10 min.
+FS_ITEM_COMIDA_PEIXE_LUA,Peixe-Lua Glaceado,Glazed Moonfish
+FS_ITEM_COMIDA_PEIXE_LUA_DESC,+15% de dano das skills por 10 min.,+15% skill damage for 10 min.
+FS_ITEM_COMIDA_SOPA_GELO,Sopa Gelada,Frost Soup
+FS_ITEM_COMIDA_SOPA_GELO_DESC,+15% de defesa por 10 min.,+15% defense for 10 min.
+FS_ITEM_COMIDA_BANQUETE_SOL,Banquete do Sol,Sun Feast
+FS_ITEM_COMIDA_BANQUETE_SOL_DESC,+10% em todos os status por 20 min.,+10% to every stat for 20 min.
+FS_FISH,Pescar,Fish
+FS_WAIT,Esperando o peixe morder...,Waiting for a bite...
+FS_NOW,Agora! Toque em Atacar!,Now! Tap Attack!
+FS_REEL,Segure Atacar para puxar. Solte se a linha ficar vermelha!,Hold Attack to reel. Let go if the line turns red!
+FS_GOT,Pescou: %s!,Caught: %s!
+FS_ESCAPED,O peixe escapou...,The fish got away...
+FS_SNAPPED,A linha arrebentou!,The line snapped!
+FS_NOTHING,Nada mordeu.,Nothing bit.
+FS_COOK,Cozinhar,Cook
+FS_COOK_TITLE,Fogueira,Campfire
+FS_COOK_INFO,Cozinhe com peixes e ingredientes. Uma comida por vez: a nova troca a anterior.,Cook with fish and ingredients. One meal at a time: a new one replaces the old.
+FS_EAT,Comer,Eat
+FS_EATEN,Você comeu %s.,You ate %s.
+FS_ACTIVE,Comida ativa: %s (%s),Active meal: %s (%s)
+FS_NO_ACTIVE,Nenhuma comida ativa.,No active meal.
+FS_ANY_FISH,Peixe comum,Common fish
+FS_MINUTES,%d min,%d min
+FS_PEIXE_COMUM_DESC,"Tilápia, truta, carpa ou bagre.","Tilapia, trout, carp or catfish."

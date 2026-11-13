@@ -64,7 +64,7 @@ Plano completo, custos do Meshy e ordem em [FASE8.md](FASE8.md).
 - [x] 8A Combate: Defesa e aparar (inimigo empurrado e tonto com estrelinhas), Despertar liberado pela cena depois da Sahra (segurar Atacar 3 s: cabelo dourado, aura, +50% por 12 s), HUD mais compacto; 42 créditos
 - [x] 8B Covis do Ferreiro Andarilho: NPC nas 5 cidades, 5 covis (seg/qua/sex/dom, 10 entradas grátis por dia + licenças `licenca_covil_10`), 5 conjuntos rara/épica com combos; 89 créditos
 - [x] 8C Runas e elementos: 1 encaixe por skill, 6 runas em 3 níveis com fusão, fraqueza e resistência em todos os inimigos ("Fraco!"); sem créditos novos
-- [ ] 8D Pesca e fogueira
+- [x] 8D Pesca e fogueira: pescar sentado na margem (fisgar e puxar com tensão), 7 peixes por água e hora, 9 comidas com bônus na fogueira; 6 créditos
 - [ ] 8E Bestiário e Maestria
 - [ ] 8F Casa do herói
 - [ ] 8G Eventos do mundo

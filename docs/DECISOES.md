@@ -797,3 +797,44 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 
 - **Gerador:** tudo sai de `tools/content/gen_runes.py`: itens, `data/skills/runes.json`, elementos dos inimigos e chaves `RN_*`.
 - **Meshy:** nenhum crédito novo; os ícones vieram na folha da parte B.
+
+## Fase 8D — Pesca e fogueira (13/11/2026)
+- **Onde pescar:** perto de rio ou lago (até 2,2 m da margem) e fora de luta. O Atacar vira **Pescar**, com a figura de um peixe. Mapas com água: Pradoluz, Floresta, Qaressa, Dunas, Bordas do Pântano, Pântano e Vale do Degelo.
+- **Como pesca (`Fishing`):**
+  - O Lio senta na margem com a vara, como os moradores (a vara presa ao corpo serve para qualquer visual), e guarda a espada.
+  - A boia cai na água com a linha saindo da ponta da vara.
+  - Depois de 2,5 a 6 s a boia afunda e aparece um "!": é tocar Atacar em até 1 s para fisgar.
+  - Para puxar, segura-se Atacar: a barra verde enche e a vermelha (tensão) sobe, com puxões do peixe. Solta-se para baixar a tensão; tensão cheia arrebenta a linha.
+  - Andar ou rolar desiste.
+- **Peixes:**
+
+| Peixe | Onde e quando |
+|---|---|
+| Tilápia | rio, lago e oásis |
+| Truta | rio e gelo |
+| Carpa | lago e oásis |
+| Bagre | pântano |
+| Peixe-Lua | só de noite (19h–6h) |
+| Peixe de Gelo | gelo |
+| Peixe-Sol | lendário, 1,5% de dia em qualquer água |
+
+  - Peixes mais raros brigam mais e demoram mais para puxar.
+- **Fogueira:** em toda pedra de descanso tipo fogueira, o Atacar vira **Cozinhar** e abre a `CookPanel`.
+  - Cada receita mostra a comida, o bônus, os ingredientes como figura com tem/precisa e uma panela para cozinhar.
+  - "Comer" funciona ali e também na mochila.
+  - **Uma comida por vez**, que vale 10 min (o Banquete do Sol, 20 min); a nova troca a anterior.
+  - O bônus aparece na barra de efeitos e fica salvo.
+- **9 comidas:**
+  - **Peixe Assado:** qualquer peixe comum → +8% vida.
+  - **Espeto de Carne:** +8% ataque.
+  - **Sopa de Cogumelos:** +30% recuperação de MP.
+  - **Ensopado de Peixe:** +10% defesa e +5% vida.
+  - **Truta com Ervas:** +20% fôlego.
+  - **Bagre Picante:** +6% crítico.
+  - **Peixe-Lua Glaceado:** +15% dano de skill.
+  - **Sopa Gelada:** +15% defesa.
+  - **Banquete do Sol:** +10% em tudo.
+- **Ingredientes (erva, carne, cogumelo):** caem de monstros (orcs e lagartos dão carne; bandidos e cultistas, erva; esqueletos e mortos, cogumelo) e são vendidos pelos 4 comerciantes.
+- **Gerador:** tudo sai de `tools/content/gen_fishing.py`: itens, `data/world/fishing.json`, drops e loja (entradas marcadas com `gen`) e chaves `FS_*`.
+- **Meshy:** 6 créditos, uma folha com ingredientes, panela e comidas, mais livro, estrela e chave para as partes E e F.
+- **Testes:** `test_runner` ganhou `-- --only=<nome>`, que roda um teste só.

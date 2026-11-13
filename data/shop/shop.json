@@ -4,7 +4,7 @@
   "merchants": {
     "celeste": {
       "name": "SHOP_CELESTE",
-      "goods": [
+      "goods": [{"id": "erva_silvestre", "buy": 20, "gen": "fishing"}, {"id": "cogumelo", "buy": 25, "gen": "fishing"}, {"id": "carne_crua", "buy": 30, "gen": "fishing"}, 
         {
           "id": "mochila_couro",
           "buy": 3000
@@ -141,7 +141,7 @@
     },
     "elarion": {
       "name": "SHOP_ELARION",
-      "goods": [
+      "goods": [{"id": "erva_silvestre", "buy": 20, "gen": "fishing"}, {"id": "cogumelo", "buy": 25, "gen": "fishing"}, {"id": "carne_crua", "buy": 30, "gen": "fishing"}, 
         {
           "id": "mochila_couro",
           "buy": 3000
@@ -270,7 +270,7 @@
     },
     "zahir": {
       "name": "SHOP_ZAHIR",
-      "goods": [
+      "goods": [{"id": "erva_silvestre", "buy": 20, "gen": "fishing"}, {"id": "cogumelo", "buy": 25, "gen": "fishing"}, {"id": "carne_crua", "buy": 30, "gen": "fishing"}, 
         {
           "id": "mochila_couro",
           "buy": 3000
@@ -399,7 +399,7 @@
     },
     "aurelio": {
       "name": "SHOP_AURELIO",
-      "goods": [
+      "goods": [{"id": "erva_silvestre", "buy": 20, "gen": "fishing"}, {"id": "cogumelo", "buy": 25, "gen": "fishing"}, {"id": "carne_crua", "buy": 30, "gen": "fishing"}, 
         {
           "id": "mochila_couro",
           "buy": 3000

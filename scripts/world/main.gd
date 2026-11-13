@@ -323,6 +323,13 @@ func talk_to_nearby() -> void:
 	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
 		_pet(_near_animal)
 		return
+	# Fase 8D: at a campfire, cook; at the water, fish.
+	if _near_npc == null and _interact_kind == "cook" and not _talking and not _changing:
+		hud.open_cook()
+		return
+	if _near_npc == null and _interact_kind == "fish" and not _talking and not _changing:
+		start_fishing()
+		return
 	if _near_npc == null or _talking or _changing:
 		return
 	var npc: Npc = _near_npc
@@ -468,6 +475,27 @@ func _bounty_kill(e: Enemy) -> void:
 		if follow_wanted_city == city:
 			follow_wanted_city = ""
 		save_now()
+
+
+## Fishing now (Fase 8D), or null.
+var fishing: Fishing
+
+
+func start_fishing() -> bool:
+	if is_instance_valid(fishing) or not player.can_act():
+		return false
+	var spot: Dictionary = map.water_spot(player.global_position, float(Data.fishing.get("reach", 2.2)))
+	if spot.is_empty():
+		return false
+	var f := Fishing.new()
+	f.main = self
+	f.player = player
+	f.spot = spot["float"]
+	f.water = Fishing.water_of(map.map_id)
+	fishing = f
+	map.add_child(f)
+	f.finished.connect(func(_r: String, _fish: String) -> void: save_now())
+	return true
 
 
 ## Goes into a lair through its Wandering Smith (Fase 8B): pays the entry (a free one of
@@ -687,6 +715,14 @@ func _update_quest_contacts() -> void:
 				_near_animal = an
 				break
 	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("pick" if _near_vase else (_near_sign.kind if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else ""))))))
+	# Fase 8D: nothing else near — a campfire to cook at, or water to fish in.
+	if kind == "" and not _talking and not _petting and not is_instance_valid(fishing) and not player.in_combat():
+		if _at_point and _at_point.kind == "fogueira":
+			kind = "cook"
+		elif not map.water_paths.is_empty() and not map.water_spot(pos, float(Data.fishing.get("reach", 2.2))).is_empty():
+			kind = "fish"
+	if is_instance_valid(fishing):
+		kind = ""
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)

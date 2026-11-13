@@ -1,0 +1,50 @@
+{
+  "_comment": "Pesca e fogueira (Fase 8D). Gerado por tools/content/gen_fishing.py; não editar à mão. Perto da água (reach m da margem), fora de luta, o Atacar vira 'Pescar'. bite: segundos até o peixe morder; react: segundos para fisgar. Puxar: segurar Atacar enche o progresso (1/reel por s) e a tensão (tension_up × pull); soltar baixa a tensão (tension_down); o peixe dá puxões (surge). Tensão cheia arrebenta a linha. legendary: chance do peixe lendário (de dia, qualquer água). Comidas: 1 por vez, os bônus valem 'minutes' minutos.",
+  "reach": 2.2,
+  "bite": [2.5, 6.0],
+  "react": 1.0,
+  "tension_up": 0.42,
+  "tension_down": 0.6,
+  "surge": [0.08, 0.2],
+  "legendary": {"fish": "peixe_sol", "chance": 0.015},
+  "fish": {
+    "peixe_tilapia": {"pull": 0.5, "reel": 2.5},
+    "peixe_truta": {"pull": 0.65, "reel": 3.0},
+    "peixe_carpa": {"pull": 0.75, "reel": 3.5},
+    "peixe_bagre": {"pull": 0.85, "reel": 3.5},
+    "peixe_lua": {"pull": 0.9, "reel": 4.0},
+    "peixe_gelo": {"pull": 1.0, "reel": 4.0},
+    "peixe_sol": {"pull": 1.25, "reel": 5.0}
+  },
+  "common_fish": ["peixe_tilapia", "peixe_truta", "peixe_carpa", "peixe_bagre"],
+  "pools": {
+    "rio": [["peixe_tilapia", 50], ["peixe_truta", 35], ["peixe_lua", 12, "night"]],
+    "lago": [["peixe_tilapia", 45], ["peixe_carpa", 35], ["peixe_lua", 15, "night"]],
+    "oasis": [["peixe_tilapia", 50], ["peixe_carpa", 40], ["peixe_lua", 15, "night"]],
+    "pantano": [["peixe_bagre", 55], ["peixe_tilapia", 25], ["peixe_lua", 20, "night"]],
+    "gelo": [["peixe_truta", 50], ["peixe_gelo", 35], ["peixe_lua", 10, "night"]]
+  },
+  "maps": {
+    "pradoluz": "lago",
+    "floresta": "rio",
+    "qaressa": "oasis",
+    "dunas": "oasis",
+    "bordas_pantano": "pantano",
+    "pantano": "pantano",
+    "vale_degelo": "gelo"
+  },
+  "recipes": [
+    {"id": "comida_peixe_assado", "needs": {"peixe_comum": 1}},
+    {"id": "comida_espeto_carne", "needs": {"carne_crua": 2}},
+    {"id": "comida_sopa_cogumelo", "needs": {"cogumelo": 2, "erva_silvestre": 1}},
+    {"id": "comida_ensopado_peixe", "needs": {"peixe_comum": 2, "erva_silvestre": 1}},
+    {"id": "comida_truta_ervas", "needs": {"peixe_truta": 1, "erva_silvestre": 2}},
+    {"id": "comida_bagre_picante", "needs": {"peixe_bagre": 1, "carne_crua": 1}},
+    {"id": "comida_peixe_lua", "needs": {"peixe_lua": 1, "erva_silvestre": 1}},
+    {"id": "comida_sopa_gelo", "needs": {"peixe_gelo": 1, "cogumelo": 1}},
+    {
+      "id": "comida_banquete_sol",
+      "needs": {"peixe_sol": 1, "carne_crua": 1, "cogumelo": 1, "erva_silvestre": 1}
+    }
+  ]
+}

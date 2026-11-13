@@ -150,6 +150,7 @@ func _physics_process(delta: float) -> void:
 	_tick_stamina(delta)
 	_tick_mp(delta)
 	_tick_poison(delta)
+	_tick_food(delta)
 	guard.tick(delta)
 	if _dead or _scripted:
 		return
@@ -945,7 +946,45 @@ func _bonuses() -> Dictionary:
 	var t: Dictionary = Session.routine.title_bonus()
 	for k: String in t:
 		b[k] = float(b.get(k, 0.0)) + float(t[k])
+	# The meal eaten at a campfire (Fase 8D).
+	if Session.food_id != "" and Session.food_left > 0.0:
+		var f: Dictionary = (Data.item(Session.food_id).get("food", {}) as Dictionary).get("bonus", {})
+		for k: String in f:
+			b[k] = float(b.get(k, 0.0)) + float(f[k])
 	return b
+
+
+## Eats a campfire meal from the bag: its bonus for its minutes (one meal at a time).
+func eat(item_id: String) -> bool:
+	var food: Dictionary = Data.item(item_id).get("food", {})
+	if food.is_empty() or not Session.inventory.remove(item_id, 1):
+		return false
+	Session.food_id = item_id
+	Session.food_left = float(food.get("minutes", 10)) * 60.0
+	stats.gear = _bonuses()
+	stats.stats_changed.emit()
+	Audio.play_sfx("potion", global_position)
+	ProtoVisuals.damage_number(get_parent(), global_position + Vector3(0, 0.6, 0), tr(str(Data.item(item_id).get("name", item_id))), Color("#ffd27a"))
+	return true
+
+
+func _tick_food(delta: float) -> void:
+	if Session.food_left <= 0.0:
+		return
+	Session.food_left -= delta
+	if Session.food_left <= 0.0:
+		Session.food_left = 0.0
+		Session.food_id = ""
+		stats.gear = _bonuses()
+		stats.stats_changed.emit()
+
+
+## Holds the hero still for a scene of play (fishing): no walking, attacks or skills.
+func set_scripted(on: bool) -> void:
+	_scripted = on
+	if on:
+		velocity = Vector3.ZERO
+		_queued_attack = false
 
 
 func _on_title_maybe_changed() -> void:

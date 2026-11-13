@@ -56,6 +56,9 @@ func _collect() -> void:
 		var info: Dictionary = Data.item(item)
 		_items.append({"name": str(info.get("name", "BUFF_POTION")), "time": float(s.buffs[stat]["time"]),
 			"item": item, "color": Color(str(info.get("color", "#ffffff")))})
+	if Session.food_id != "" and Session.food_left > 0.0:
+		var fi: Dictionary = Data.item(Session.food_id)
+		_items.append({"name": str(fi.get("name", "")), "time": Session.food_left, "item": Session.food_id, "color": Color("#e0a050")})
 	if s.defeated_time_left > 0.0:
 		_items.append({"name": "BUFF_DEFEATED", "time": s.defeated_time_left, "glyph": "!", "color": Color("#ff7a7a"), "debuff": true})
 	for e: String in ["stun", "root", "slow", "weaken", "poison", "def_break"]:

@@ -35,6 +35,8 @@ var boards: Dictionary = {}
 var covis: Dictionary = {}
 ## Skill runes and elements (Fase 8C, see Runes).
 var runes: Dictionary = {}
+## Fishing and the campfire meals (Fase 8D, see Fishing / CookPanel).
+var fishing: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -48,6 +50,7 @@ func _ready() -> void:
 	boards = _load_json("res://data/world/boards.json")
 	covis = _load_json("res://data/world/covis.json")
 	runes = _load_json("res://data/skills/runes.json")
+	fishing = _load_json("res://data/world/fishing.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])

@@ -14,6 +14,14 @@ var _checks: int = 0
 
 func _ready() -> void:
 	TranslationServer.set_locale("pt_BR")
+	# "-- --only=fishing" runs just _fishing_test (quicker while working on one part).
+	for a: String in OS.get_cmdline_user_args():
+		if a.begins_with("--only="):
+			await call("_%s_test" % a.substr(7))
+			print("TESTS: %d checks, %d failures" % [_checks, _failures])
+			print("TESTS_RESULT=%s" % ("PASS" if _failures == 0 else "FAIL"))
+			get_tree().quit(1 if _failures > 0 else 0)
+			return
 	_unit_tests()
 	await _bot_test()
 	await _world_test()
@@ -38,6 +46,7 @@ func _ready() -> void:
 	await _guard_awaken_test()
 	await _covis_test()
 	await _runes_test()
+	await _fishing_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1125,6 +1134,122 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8D: fishing at the water (the button, the float, hooking, reeling, the catch and
+## the snapped line), which fish bite where and when, and the campfire meals.
+func _fishing_test() -> void:
+	Session.reset()
+	Session.day_hour = 10.0
+	var fr: Dictionary = Data.fishing
+	var icons_ok: bool = true
+	for f: String in fr.get("fish", {}):
+		icons_ok = icons_ok and ResourceLoader.exists("res://assets/ui/items/%s.png" % f)
+	for r: Dictionary in fr.get("recipes", []):
+		icons_ok = icons_ok and ResourceLoader.exists("res://assets/ui/items/%s.png" % r["id"]) and not (Data.item(str(r["id"])).get("food", {}) as Dictionary).is_empty()
+	check((fr.get("fish", {}) as Dictionary).size() == 7 and (fr.get("recipes", []) as Array).size() == 9 and icons_ok, "7 fish and 9 campfire meals, all with icons")
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	var night_fish: Dictionary = {}
+	var day_fish: Dictionary = {}
+	for i: int in 400:
+		day_fish[Fishing.pick_fish("pantano", 12.0, rng)] = true
+		night_fish[Fishing.pick_fish("pantano", 23.0, rng)] = true
+	check(not day_fish.has("peixe_lua") and night_fish.has("peixe_lua") and day_fish.has("peixe_bagre"), "the moonfish bites only at night; the swamp has catfish")
+	# At the river in Pradoluz.
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var p: Player = main.player
+	var w: Dictionary = main.map.water_paths[0]
+	var path: Array = w["path"]
+	var a: Vector3 = path[path.size() / 2]
+	var b: Vector3 = path[path.size() / 2 + 1]
+	var side: Vector3 = (b - a).cross(Vector3.UP).normalized()
+	var bank: Vector3 = Vector3.INF
+	for sgn: float in [1.0, -1.0]:
+		var test: Vector3 = a + side * sgn * (float(w["half"]) + 1.0)
+		test.y = 0.0
+		if not main.map.water_spot(test, 2.2).is_empty():
+			bank = test
+			break
+	check(bank != Vector3.INF, "there is a fishing spot on the river bank")
+	p.global_position = bank
+	p.set("_combat_time", 0.0)
+	await _frames(20)
+	check(str(main.get("_interact_kind")) == "fish" and main.hud.is_talk_on_attack(), "by the water, the Attack button turns into Pescar")
+	check(main.start_fishing() and is_instance_valid(main.fishing), "tapping it starts fishing")
+	var f: Fishing = main.fishing
+	await _frames(50)
+	check(f.step == Fishing.Step.WAIT and f.get("_float").visible, "the float lands in the water and waits")
+	# Reeling: the line snaps when the tension tops out.
+	f.step = Fishing.Step.REEL
+	f.fish = "peixe_tilapia"
+	f.tension = 0.995
+	f.progress = 0.1
+	Input.action_press("attack")
+	await _frames(6)
+	Input.action_release("attack")
+	check(not is_instance_valid(main.fishing) or main.fishing.step == Fishing.Step.DONE, "too much tension snaps the line")
+	await _frames(3)
+	check(not p.is_dead() and not bool(p.get("_scripted")), "after fishing the hero can move again")
+	# A catch (after the swing the held button made ends).
+	await _frames(40)
+	check(main.start_fishing(), "fishing can start again")
+	f = main.fishing
+	await _frames(3)
+	f.step = Fishing.Step.REEL
+	f.fish = "peixe_carpa"
+	f.tension = 0.0
+	f.progress = 0.97
+	Input.action_press("attack")
+	await _frames(8)
+	Input.action_release("attack")
+	await _frames(2)
+	check(Session.inventory.count("peixe_carpa") == 1, "reeling it all the way catches the fish")
+	# Moving gives up.
+	await _frames(40)
+	main.start_fishing()
+	await _frames(3)
+	Input.action_press("move_up")
+	await _frames(3)
+	Input.action_release("move_up")
+	await _frames(2)
+	check(not is_instance_valid(main.fishing), "walking away gives up fishing")
+	# The campfire.
+	var fire: RestPoint = null
+	for rp: RestPoint in main.map.rest_points.values():
+		if rp.kind == "fogueira":
+			fire = rp
+	if fire:
+		p.global_position = fire.global_position
+		await _frames(20)
+		check(str(main.get("_interact_kind")) == "cook", "at a campfire, the Attack button turns into Cozinhar")
+	Session.add_item("carne_crua", 2)
+	var recipe: Dictionary = {}
+	for r: Dictionary in fr.get("recipes", []):
+		if str(r["id"]) == "comida_espeto_carne":
+			recipe = r
+	check(CookPanel.can_cook(recipe) and CookPanel.cook(recipe) and Session.inventory.count("comida_espeto_carne") == 1 and Session.inventory.count("carne_crua") == 0, "2 raw meat cook a meat skewer")
+	var fish_recipe: Dictionary = (fr.get("recipes", []) as Array)[0]
+	check(CookPanel.can_cook(fish_recipe), "any common fish works for the grilled fish (the carp)")
+	var atk0: float = p.stats.get_stat("atk")
+	check(p.eat("comida_espeto_carne") and Session.food_left > 500.0, "eating the skewer starts its bonus for 10 minutes")
+	check(p.stats.get_stat("atk") > atk0 * 1.07, "the meat skewer gives +8%% attack")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.food_id == "comida_espeto_carne" and Session.food_left > 500.0, "the meal and its time are saved")
+	p.call("_tick_food", 9999.0)
+	check(Session.food_id == "" and is_equal_approx(p.stats.get_stat("atk"), atk0), "when the time ends the bonus goes away")
+	main.hud.open_cook()
+	await _frames(2)
+	check(main.hud.cook_panel().visible, "the campfire window opens")
+	main.hud.cook_panel().hide()
+	main.hud.call("_on_panel_closed")
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8C: skill runes (set, take off, merge, save) and elements (weak / resist), the
 ## six rune effects and the rune socket in the skills window.
 func _runes_test() -> void:

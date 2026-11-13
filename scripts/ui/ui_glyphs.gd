@@ -34,6 +34,8 @@ static func draw(ci: CanvasItem, id: String, c: Vector2, r: float, tint: Color =
 		"routine": _routine(ci, c, r, tint)
 		"store": _store(ci, c, r, tint)
 		"pet": _paw(ci, c, r, tint)
+		"fish": _paw(ci, c, r, tint)
+		"cook": _paw(ci, c, r, tint)
 
 
 static func _poly(ci: CanvasItem, pts: PackedVector2Array, fill: Color, line: Color, w: float) -> void:

@@ -224,7 +224,8 @@ func _show_details() -> void:
 		_equip_btn.disabled = Equipment.block_reason(piece, _level()) != ""
 	_pack_btn.visible = has and str(item.get("type", "")) == "backpack"
 	var potion: bool = has and str(item.get("type", "")) == "potion"
-	_use_btn.visible = potion
+	# Campfire meals are eaten from the bag too (Fase 8D).
+	_use_btn.visible = potion or (has and str(item.get("type", "")) == "food")
 	_quick_row.visible = potion
 	if potion:
 		for i: int in _quick_btns.size():
@@ -253,6 +254,9 @@ func _equip_chosen() -> void:
 
 func _use_selected() -> void:
 	if player and _selected != "":
+		if str(Data.item(_selected).get("type", "")) == "food":
+			player.eat(_selected)
+			return
 		player.use_potion(_selected)
 
 

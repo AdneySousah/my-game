@@ -1271,3 +1271,32 @@ var _sun: DirectionalLight3D
 func _on_quality_changed() -> void:
 	if is_instance_valid(_sun):
 		_sun.shadow_enabled = Game.q("shadow") > 0.0
+
+
+## Fishing (Fase 8D): the nearest water by `pos` within `reach` metres of its bank, as
+## {"float": a point on the water for the float, "edge": metres to the bank}; {} = none.
+func water_spot(pos: Vector3, reach: float) -> Dictionary:
+	var best: Dictionary = {}
+	var best_edge: float = reach
+	for w: Dictionary in water_paths:
+		var path: Array = w["path"]
+		var half: float = float(w["half"])
+		for i: int in range(path.size() - 1):
+			var a: Vector3 = path[i]
+			var b: Vector3 = path[i + 1]
+			var ab: Vector3 = b - a
+			ab.y = 0.0
+			var t: float = clampf((pos - a).dot(ab) / maxf(ab.length_squared(), 0.0001), 0.0, 1.0)
+			var c: Vector3 = a + ab * t
+			c.y = 0.0
+			var flat: Vector3 = pos - c
+			flat.y = 0.0
+			var edge: float = flat.length() - half
+			if edge < best_edge and edge > -0.5:
+				best_edge = edge
+				# The float lands a little way into the water from the bank.
+				var into: Vector3 = -flat.normalized() if flat.length() > 0.01 else Vector3.FORWARD
+				var at: Vector3 = pos + into * (maxf(edge, 0.0) + minf(0.9, half * 0.4))
+				at.y = 0.08
+				best = {"float": at, "edge": edge}
+	return best

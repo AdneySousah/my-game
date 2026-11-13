@@ -106,12 +106,14 @@ func _keep_quest_targets() -> void:
 		for e: Enemy in _alive:
 			if e.base_id == id:
 				have += 1
-		if have >= mini(int(w["left"]), 2) or _alive.size() >= max_alive + 2:
-			continue
 		var away: Vector3 = global_position - player.global_position
 		away.y = 0.0
-		var at: Vector3 = global_position + (away.normalized() if away.length() > 0.5 else Vector3.FORWARD) * radius * 0.8
-		spawn(id, at)
+		var dir: Vector3 = away.normalized() if away.length() > 0.5 else Vector3.FORWARD
+		# Fill up to 2 at once (each a little apart), on the far side from the hero.
+		while have < mini(int(w["left"]), 2) and _alive.size() < max_alive + 2:
+			var side := Vector3(-dir.z, 0, dir.x) * (have - 0.5) * 2.0
+			spawn(id, global_position + dir * radius * 0.7 + side)
+			have += 1
 		return
 
 

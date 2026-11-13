@@ -1,0 +1,628 @@
+{
+ "_comment": "Lista do audio gerado no ElevenLabs (docs/AUDIO.md). kind music = /v1/music (seconds = duracao), sfx = /v1/sound-generation (seconds 0,5 a 30; loop para ambientes). variants = quantas versoes gerar para o dono escolher. Gerar com: python tools/audio/eleven.py gen <id ...>.",
+ "music_model": "music_v1",
+ "sfx_model": "eleven_text_to_sound_v3",
+ "music": [
+  {
+   "id": "titulo",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Main title theme: hopeful and epic, a heroic flute melody over strings and soft choir, building to a warm brass swell, then calming down.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "prologo",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Gentle storytelling piece: harp and solo flute, a little sad and full of wonder, slow tempo.",
+   "seconds": 90,
+   "variants": 2
+  },
+  {
+   "id": "vila",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Calm farming village theme: acoustic guitar, flute and light strings, cheerful and peaceful morning feeling, slow to medium tempo.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "cidade_deserto",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Calm desert oasis town theme: oud, hand drums and soft strings, warm and relaxed, Middle Eastern scale, light and friendly.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "cidade_neve",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Calm snowy northern village theme: soft bells, low strings, wooden flute and gentle drums, cozy fireplace warmth in the cold.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "cidade_elfica",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Calm elven forest city theme: harp, airy flute, soft choir pads and chimes, magical, ethereal and serene.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "capital",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Calm royal capital city theme: noble strings, soft horns and harpsichord, elegant and stately but gentle.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "casa",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Cozy indoor house theme: music box, soft acoustic guitar and pizzicato strings, homely, quiet and warm.",
+   "seconds": 80,
+   "variants": 2
+  },
+  {
+   "id": "campo_verde",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Open field exploration theme: light adventure, strings, flute and light percussion, sunny meadows and forests, curious and bright.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "campo_seco",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Dry woodland and stone steppe exploration theme: adventurous, plucked strings, frame drum and dry wind textures, a bit mysterious.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "campo_deserto",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Desert dunes exploration theme: adventurous, oud and duduk melody, hand percussion, hot and vast open landscape.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "campo_neve",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Snowy mountains exploration theme: cold and wide, low strings, horns, glockenspiel shimmer, slow and majestic.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "campo_pantano",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Swamp and damp forest exploration theme: mysterious, low woodwinds, soft marimba and eerie pads, slow and curious.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "luta_campo",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Field battle theme: medium-fast action, driving taiko and snare drums, staccato strings and heroic brass hits, energetic but not too dark.",
+   "seconds": 100,
+   "variants": 2
+  },
+  {
+   "id": "masmorra_mina",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Dungeon action theme in an old mine: tense and fast, metallic percussion, low strings ostinato, dark brass stabs.",
+   "seconds": 100,
+   "variants": 2
+  },
+  {
+   "id": "masmorra_ruinas",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Dungeon action theme in ancient ruins and towers: fast, mysterious choir, tribal drums and urgent strings.",
+   "seconds": 100,
+   "variants": 2
+  },
+  {
+   "id": "masmorra_castelo",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Dungeon action theme in a dark castle: heavy and fast, pipe organ, pounding drums, dramatic strings and brass.",
+   "seconds": 100,
+   "variants": 2
+  },
+  {
+   "id": "ceu",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Celestial sky stairway theme: intense and glorious, choir, harp runs, bright brass and big drums, divine and dangerous.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "chefe",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Boss battle theme: fast and powerful, big drums, aggressive strings and brass, heroic counter-melody.",
+   "seconds": 110,
+   "variants": 2
+  },
+  {
+   "id": "arauto",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Final boss battle theme: epic and dark, full choir, pipe organ, huge drums and brass, desperate and heroic.",
+   "seconds": 120,
+   "variants": 2
+  },
+  {
+   "id": "vitoria",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Short victory fanfare after defeating a boss: bright brass and strings, triumphant ending.",
+   "seconds": 8,
+   "variants": 2
+  },
+  {
+   "id": "derrota",
+   "kind": "music",
+   "prompt": "Instrumental fantasy video game soundtrack for a cozy hand-painted action RPG, warm orchestral style, seamless loop, no vocals. Short sad defeat sting when the hero falls: slow strings and a soft low piano note, gentle and melancholic.",
+   "seconds": 6,
+   "variants": 2
+  }
+ ],
+ "sfx": [
+  {
+   "id": "step_grass",
+   "kind": "sfx",
+   "prompt": "single soft footstep on grass, light boy walking, close, clean",
+   "variants": 3,
+   "prompt_influence": 0.6,
+   "seconds": 0.6
+  },
+  {
+   "id": "step_stone",
+   "kind": "sfx",
+   "prompt": "single soft footstep on stone or wooden floor, light boots, close, clean",
+   "variants": 3,
+   "prompt_influence": 0.6,
+   "seconds": 0.6
+  },
+  {
+   "id": "step_sand",
+   "kind": "sfx",
+   "prompt": "single soft footstep on sand, light boots, close, clean",
+   "variants": 3,
+   "prompt_influence": 0.6,
+   "seconds": 0.6
+  },
+  {
+   "id": "step_snow",
+   "kind": "sfx",
+   "prompt": "single soft footstep crunching on snow, light boots, close, clean",
+   "variants": 3,
+   "prompt_influence": 0.6,
+   "seconds": 0.6
+  },
+  {
+   "id": "swing",
+   "kind": "sfx",
+   "prompt": "short sword swoosh through the air, fast and light, cartoon fantasy game",
+   "variants": 3,
+   "prompt_influence": 0.4,
+   "seconds": 0.6
+  },
+  {
+   "id": "hurt",
+   "kind": "sfx",
+   "prompt": "young hero grunts in pain when hit, short teen boy voice, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "hero_die",
+   "kind": "sfx",
+   "prompt": "young hero falls defeated, short pained gasp and body falling on the ground, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "dodge",
+   "kind": "sfx",
+   "prompt": "quick roll on the ground with cloth rustle, short whoosh",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "potion",
+   "kind": "sfx",
+   "prompt": "drinking a magic potion: cork pop, quick gulp and a soft sparkling chime",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.2
+  },
+  {
+   "id": "mana",
+   "kind": "sfx",
+   "prompt": "magic energy refilling, soft rising blue shimmer, short",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.0
+  },
+  {
+   "id": "level_up",
+   "kind": "sfx",
+   "prompt": "level up jingle: bright magical rising chime with sparkles, fantasy game",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "hit",
+   "kind": "sfx",
+   "prompt": "sword hitting flesh, short punchy impact, fantasy action game",
+   "variants": 3,
+   "prompt_influence": 0.4,
+   "seconds": 0.5
+  },
+  {
+   "id": "hit_metal",
+   "kind": "sfx",
+   "prompt": "sword hitting metal armor, short clang, fantasy action game",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.6
+  },
+  {
+   "id": "hit_stone",
+   "kind": "sfx",
+   "prompt": "sword hitting a stone golem, short rocky impact with small debris",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.6
+  },
+  {
+   "id": "crit",
+   "kind": "sfx",
+   "prompt": "critical hit: heavy sword slash impact with a sharp metallic ring",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.7
+  },
+  {
+   "id": "shield_break",
+   "kind": "sfx",
+   "prompt": "magic shield shattering like glass with a deep boom",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "human_hurt",
+   "kind": "sfx",
+   "prompt": "bandit man grunts in pain, short, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.7
+  },
+  {
+   "id": "human_die",
+   "kind": "sfx",
+   "prompt": "bandit man dies with a short groan and falls, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "orc_hurt",
+   "kind": "sfx",
+   "prompt": "big orc grunts in pain, deep growl, short",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.7
+  },
+  {
+   "id": "orc_die",
+   "kind": "sfx",
+   "prompt": "big orc dies with a deep roar fading out, falls heavily",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.8
+  },
+  {
+   "id": "bones_hurt",
+   "kind": "sfx",
+   "prompt": "skeleton hit, dry bones rattling, short",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.6
+  },
+  {
+   "id": "bones_die",
+   "kind": "sfx",
+   "prompt": "skeleton collapses into a pile of rattling bones",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "golem_hurt",
+   "kind": "sfx",
+   "prompt": "stone golem hit, deep rocky crack and low rumble",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "golem_die",
+   "kind": "sfx",
+   "prompt": "stone golem crumbles into rocks with a heavy rumble",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "lizard_hurt",
+   "kind": "sfx",
+   "prompt": "lizard man hisses in pain, short",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.7
+  },
+  {
+   "id": "lizard_die",
+   "kind": "sfx",
+   "prompt": "lizard man dies with a fading hiss and thud",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "cultist_hurt",
+   "kind": "sfx",
+   "prompt": "hooded cultist grunts in pain with a faint magical echo, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.7
+  },
+  {
+   "id": "cultist_die",
+   "kind": "sfx",
+   "prompt": "hooded cultist dies with a whisper fading into dark magic, no words",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.8
+  },
+  {
+   "id": "undead_die",
+   "kind": "sfx",
+   "prompt": "undead swamp creature dies with a gurgling moan and a splash",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.8
+  },
+  {
+   "id": "celestial_die",
+   "kind": "sfx",
+   "prompt": "celestial guardian of light shatters into bright crystal shards and fades",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.8
+  },
+  {
+   "id": "slime_die",
+   "kind": "sfx",
+   "prompt": "cute slime pops with a wet squish",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.0
+  },
+  {
+   "id": "roar",
+   "kind": "sfx",
+   "prompt": "big fantasy boss roars, powerful and menacing",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "bird",
+   "kind": "sfx",
+   "prompt": "single small songbird chirping in a forest, short, natural, distant",
+   "variants": 3,
+   "prompt_influence": 0.5,
+   "seconds": 1.5
+  },
+  {
+   "id": "dog_happy",
+   "kind": "sfx",
+   "prompt": "happy dog being petted: soft happy whine and a short playful bark",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "cow",
+   "kind": "sfx",
+   "prompt": "calm cow moo, natural, not too loud",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "cat",
+   "kind": "sfx",
+   "prompt": "cat purring and a soft meow",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "frog",
+   "kind": "sfx",
+   "prompt": "single frog croak by a pond, natural",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "splash",
+   "kind": "sfx",
+   "prompt": "small fish jumping out of water with a light splash",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "amb_floresta",
+   "kind": "sfx",
+   "prompt": "peaceful forest ambience, soft wind in leaves, distant birds, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_campo",
+   "kind": "sfx",
+   "prompt": "open meadow ambience, gentle wind over grass, insects, very calm, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_deserto",
+   "kind": "sfx",
+   "prompt": "desert ambience, warm dry wind and soft sand blowing, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_neve",
+   "kind": "sfx",
+   "prompt": "snowy mountain ambience, cold wind gusts, quiet, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_pantano",
+   "kind": "sfx",
+   "prompt": "swamp ambience, frogs and insects at a distance, water drips, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_mina",
+   "kind": "sfx",
+   "prompt": "underground mine ambience, water drips echo, low cave rumble, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_cidade",
+   "kind": "sfx",
+   "prompt": "small medieval village ambience, distant people chatting softly, chickens, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 20,
+   "loop": true
+  },
+  {
+   "id": "amb_agua",
+   "kind": "sfx",
+   "prompt": "gentle stream of water flowing, calm, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 15,
+   "loop": true
+  },
+  {
+   "id": "amb_fogueira",
+   "kind": "sfx",
+   "prompt": "campfire crackling softly, close, no music",
+   "variants": 1,
+   "prompt_influence": 0.5,
+   "seconds": 15,
+   "loop": true
+  },
+  {
+   "id": "chest",
+   "kind": "sfx",
+   "prompt": "wooden treasure chest opening with a creak and a magical sparkle",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "door",
+   "kind": "sfx",
+   "prompt": "wooden house door opening, short creak",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.0
+  },
+  {
+   "id": "coins",
+   "kind": "sfx",
+   "prompt": "a few gold coins clinking, short, fantasy game pickup",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.8
+  },
+  {
+   "id": "pickup",
+   "kind": "sfx",
+   "prompt": "item pickup, short soft pop with a sparkle, fantasy game UI",
+   "variants": 2,
+   "prompt_influence": 0.4,
+   "seconds": 0.5
+  },
+  {
+   "id": "quest",
+   "kind": "sfx",
+   "prompt": "quest complete jingle, short and joyful, harp and bells",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 2.0
+  },
+  {
+   "id": "travel",
+   "kind": "sfx",
+   "prompt": "magic teleport whoosh with shimmering sparkles",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.5
+  },
+  {
+   "id": "forge",
+   "kind": "sfx",
+   "prompt": "blacksmith hammer striking an anvil twice",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 1.2
+  },
+  {
+   "id": "ui_click",
+   "kind": "sfx",
+   "prompt": "soft wooden UI button click, short",
+   "variants": 1,
+   "prompt_influence": 0.6,
+   "seconds": 0.5
+  },
+  {
+   "id": "ui_open",
+   "kind": "sfx",
+   "prompt": "fantasy game menu opening, soft paper and wood whoosh",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 0.5
+  },
+  {
+   "id": "ui_close",
+   "kind": "sfx",
+   "prompt": "fantasy game menu closing, soft short whoosh down",
+   "variants": 1,
+   "prompt_influence": 0.4,
+   "seconds": 0.5
+  }
+ ]
+}

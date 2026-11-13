@@ -25,6 +25,7 @@ var _weapon_set: bool = false
 var _drawn: bool = true
 ## Finger poses (null when the model has no finger bones).
 var _hands: HandPose
+var _tweak: PoseTweak
 var _sitting: bool = false
 ## Hand poses asked by the action now playing (cleared when it ends).
 var _action_hands: Dictionary = {}
@@ -148,6 +149,8 @@ func _ready() -> void:
 	anim.root_node = anim.get_path_to(model)
 	anim.add_animation_library("", _library())
 	_hands = HandPose.create_for(skeleton, config.get("hand_poses", {}))
+	# Bone corrections of some actions ("tweak", e.g. the head up in the sprint).
+	_tweak = PoseTweak.create_for(skeleton, config.get("actions", {}))
 	skeleton.skeleton_updated.connect(_apply_two_hand)
 	_attach_weapon()
 	_update_hands()
@@ -204,6 +207,8 @@ func play_loop(action: String, speed: float = 1.0) -> void:
 	# "reverse": plays the clip backwards (e.g. walking backwards with the walk clip).
 	anim.play(str(a["anim"]), blend, -speed if bool(a.get("reverse", false)) else speed)
 	_current = action
+	if _tweak:
+		_tweak.set_action(action)
 
 
 ## Call every frame with the character's ground speed. Movement interrupts the tail
@@ -341,6 +346,8 @@ func _play_section(action: String, a: Dictionary, start: float, end: float, spee
 	var stop: float = length if end < 0.0 else minf(end, length)
 	anim.play_section(anim_name, start, stop, ACTION_BLEND, speed)
 	_current = action
+	if _tweak:
+		_tweak.set_action(action)
 	_action_hands = a.get("hands", {})
 	_update_hands()
 	_arrow_cfg = a.get("arrow", {})

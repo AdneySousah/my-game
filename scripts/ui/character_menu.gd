@@ -1,7 +1,8 @@
 class_name CharacterMenu
 extends PanelContainer
-## Opens when the portrait is tapped: Attributes, Skills, Quests and Map, with badges
-## showing what needs attention.
+## Opens when the portrait is tapped: Attributes, Skills, Equipment, Bag, Routine, Quests,
+## Map and Options in two columns, with badges showing what needs attention, and below them
+## "Salvar" (save now) and "Sair para o menu" (asks for a second tap; owner, 13/11).
 
 signal closed
 signal choose(what: String)
@@ -11,12 +12,15 @@ var _attr_btn: Button
 var _skills_btn: Button
 var _equip_btn: Button
 var _routine_btn: Button
+var _exit_btn: Button
+## "Sair para o menu" was tapped once; the next tap leaves.
+var _exit_armed: bool = false
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
-	custom_minimum_size = Vector2(420, 0)
+	custom_minimum_size = Vector2(640, 0)
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)
 	add_child(box)
@@ -24,16 +28,46 @@ func _ready() -> void:
 	_title.add_theme_font_size_override("font_size", 26)
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	box.add_child(_title)
-	_attr_btn = _item(box, "attributes")
-	_skills_btn = _item(box, "skills")
-	_equip_btn = _item(box, "equipment")
+	var grid := GridContainer.new()
+	grid.columns = 2
+	grid.add_theme_constant_override("h_separation", 10)
+	grid.add_theme_constant_override("v_separation", 10)
+	box.add_child(grid)
+	_attr_btn = _item(grid, "attributes")
+	_skills_btn = _item(grid, "skills")
+	_equip_btn = _item(grid, "equipment")
 	_equip_btn.text = tr("HUD_EQUIPMENT")
-	_item(box, "bag").text = tr("HUD_BAG")
-	_routine_btn = _item(box, "routine")
+	_item(grid, "bag").text = tr("HUD_BAG")
+	_routine_btn = _item(grid, "routine")
 	_routine_btn.text = tr("HUD_ROUTINE")
-	_item(box, "quests").text = tr("HUD_QUESTS")
-	_item(box, "map").text = tr("HUD_MAP")
-	_item(box, "options").text = tr("OPT_MENU")
+	_item(grid, "quests").text = tr("HUD_QUESTS")
+	_item(grid, "map").text = tr("HUD_MAP")
+	_item(grid, "options").text = tr("OPT_MENU")
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 10)
+	box.add_child(row)
+	var save := Button.new()
+	save.text = tr("MENU_SAVE")
+	save.focus_mode = Control.FOCUS_NONE
+	save.custom_minimum_size = Vector2(0, 52)
+	save.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	save.add_theme_font_size_override("font_size", 20)
+	save.pressed.connect(func() -> void: choose.emit("save"))
+	row.add_child(save)
+	_exit_btn = Button.new()
+	_exit_btn.text = tr("MENU_EXIT")
+	_exit_btn.focus_mode = Control.FOCUS_NONE
+	_exit_btn.custom_minimum_size = Vector2(0, 52)
+	_exit_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_exit_btn.add_theme_font_size_override("font_size", 20)
+	_exit_btn.pressed.connect(func() -> void:
+		if not _exit_armed:
+			_exit_armed = true
+			_exit_btn.text = tr("MENU_EXIT_CONFIRM")
+			return
+		hide()
+		choose.emit("exit"))
+	row.add_child(_exit_btn)
 	var close := Button.new()
 	close.text = tr("PANEL_CLOSE")
 	close.focus_mode = Control.FOCUS_NONE
@@ -57,6 +91,8 @@ func open_with(level: int, points: int, new_skills: bool, new_gear: bool = false
 	_set_alert(_skills_btn, new_skills)
 	_set_alert(_equip_btn, new_gear)
 	_set_alert(_routine_btn, routine)
+	_exit_armed = false
+	_exit_btn.text = tr("MENU_EXIT")
 	show()
 	reset_size()
 	GameTheme.place_center(self)
@@ -97,10 +133,10 @@ class AlertDot extends Control:
 		draw_string(font, Vector2(0, 23), "!", HORIZONTAL_ALIGNMENT_CENTER, 30, 22, Color.WHITE)
 
 
-func _item(box: VBoxContainer, what: String) -> Button:
+func _item(box: Container, what: String) -> Button:
 	var b := Button.new()
 	b.focus_mode = Control.FOCUS_NONE
-	b.custom_minimum_size = Vector2(0, 58)
+	b.custom_minimum_size = Vector2(300, 58)
 	b.add_theme_font_size_override("font_size", 22)
 	b.pressed.connect(func() -> void:
 		hide()

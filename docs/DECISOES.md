@@ -631,3 +631,8 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - Modelos novos do Meshy: peixe, vitória-régia e sapo (54 créditos).
   - Fotos: `res://tests/pond_capture.tscn -- <pasta> [mapa ...]`.
 - **Áudio com o ElevenLabs:** plano em `docs/AUDIO.md`.
+- **Ajustes do HUD (dono, 13/11, versão 0.3.2):**
+  - o MP divide o anel do retrato com a vida (vida à esquerda, MP à direita) e o número do MP fica embaixo do da vida (a barra azul de baixo saiu);
+  - o fundo cinza dos ícones novos foi removido;
+  - a corrida levanta a cabeça e endireita o tronco (`tweak` na ação `sprint`, aplicado por `PoseTweak`);
+  - o menu do personagem ficou em duas colunas, com **Salvar** e **Sair para o menu** (que pede um segundo toque e salva antes de sair).

@@ -13,6 +13,9 @@ signal travel_requested(point_id: String)
 signal interact_pressed
 ## The wanted poster's "Seguir": the arrow leads to that city's wanted boss.
 signal follow_wanted(city: String)
+## "Salvar" and "Sair para o menu" in the character menu.
+signal save_requested
+signal exit_requested
 
 var player: Player
 var _travel_btn: Button
@@ -27,7 +30,6 @@ var _full_map: FullMapPanel
 var _status: PortraitStatus
 var _buffs: BuffBar
 var _stamina_bar: FramedBar
-var _mp_bar: FramedBar
 var _character_menu: CharacterMenu
 ## Skills unlocked since the skills panel was last opened (drives the "!" alert).
 var _new_skills: bool = false
@@ -559,9 +561,8 @@ func _process(delta: float) -> void:
 	_stamina_bar.max_value = player.max_stamina()
 	_stamina_bar.value = player.stamina
 	_stamina_bar.text = "%d / %d" % [floori(player.stamina), roundi(player.max_stamina())]
-	_mp_bar.max_value = player.max_mp()
-	_mp_bar.value = player.mp
-	_mp_bar.text = "%s %d / %d" % [tr("HUD_MP"), floori(player.mp), roundi(player.max_mp())]
+	_status.mp_max = player.max_mp()
+	_status.mp = player.mp
 	_dodge_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("dodge_cost", 25))
 	_sprint_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("sprint_min_to_start", 15)) and not player.is_sprinting()
 	for i: int in _skill_btns.size():
@@ -588,7 +589,7 @@ func _build_status(root: Control) -> void:
 	_status.tapped.connect(open_character_menu)
 	# Active effects (potions, war cry, premium...) beside the portrait, under the gold.
 	_buffs = BuffBar.new()
-	_buffs.position = _status.position + Vector2(PortraitStatus.CENTER.x + PortraitStatus.ARC_R + 16.0, 104.0)
+	_buffs.position = _status.position + Vector2(PortraitStatus.CENTER.x + PortraitStatus.ARC_R + 16.0, 116.0)
 	root.add_child(_buffs)
 	_buffs.tapped.connect(func(t: String) -> void: toast(t, 1.6))
 	# Up to 3 quests under the portrait, each with "Seguir"; the header hides them.
@@ -600,13 +601,8 @@ func _build_status(root: Control) -> void:
 	# Stamina ("fôlego") centered at the bottom of the screen.
 	_stamina_bar = FramedBar.new()
 	_stamina_bar.fill_color = Color("#c6e04a")
-	_stamina_bar.size = Vector2(300, 36)
+	_stamina_bar.size = Vector2(380, 36)
 	root.add_child(_stamina_bar)
-	# MP for the skills, next to the fôlego (owner, 13/11).
-	_mp_bar = FramedBar.new()
-	_mp_bar.fill_color = Color("#4f8fff")
-	_mp_bar.size = Vector2(300, 36)
-	root.add_child(_mp_bar)
 	# Debug-only shortcut; exported release builds don't show it.
 	if OS.is_debug_build():
 		_debug_btn = _button(tr("HUD_DEBUG_LEVEL"), _debug_level_up)
@@ -685,9 +681,7 @@ func _layout() -> void:
 	if _boss_bar:
 		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 122)
 	if _stamina_bar:
-		var bars_w: float = _mp_bar.size.x + 12.0 + _stamina_bar.size.x
-		_mp_bar.position = Vector2((vp.x - bars_w) * 0.5, vp.y - _mp_bar.size.y - 14)
-		_stamina_bar.position = Vector2(_mp_bar.position.x + _mp_bar.size.x + 12.0, vp.y - _stamina_bar.size.y - 14)
+		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:
 		_debug_btn.position = Vector2(vp.x - _debug_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 60)
 	if _debug_kit_btn:
@@ -814,6 +808,11 @@ func _on_character_choice(what: String) -> void:
 		"routine": open_routine()
 		"options": _open_panel(_options_panel)
 		"map": _open_panel(_full_map)
+		"save":
+			save_requested.emit()
+		"exit":
+			_on_panel_closed()
+			exit_requested.emit()
 
 
 func _refresh_tracker() -> void:

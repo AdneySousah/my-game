@@ -69,6 +69,8 @@ func _ready() -> void:
 	add_child(quests)
 	hud.set_quests(quests)
 	hud.interact_pressed.connect(talk_to_nearby)
+	hud.save_requested.connect(manual_save)
+	hud.exit_requested.connect(exit_to_title)
 	hud.follow_wanted.connect(func(city: String) -> void:
 		follow_wanted_city = city
 		hud.toast(tr("WANTED_FOLLOWING"), 2.0))
@@ -794,6 +796,28 @@ func _boss_line(dialogue_id: String) -> void:
 	_talking = true
 	await hud.play_dialogue(dlg.get("lines", []))
 	_talking = false
+
+
+## The menu's "Salvar": saves now and says so (or why it cannot).
+func manual_save() -> bool:
+	if not SaveGame.active:
+		hud.toast(tr("MENU_SAVE_OFF"), 2.0)
+		return false
+	if _changing or player.is_dead():
+		hud.toast(tr("MENU_SAVE_NOT_NOW"), 2.0)
+		return false
+	save_now()
+	Audio.play_sfx("quest")
+	hud.toast(tr("MENU_SAVED"), 1.8)
+	return true
+
+
+## The menu's "Sair para o menu": saves and goes back to the title screen.
+func exit_to_title() -> void:
+	save_now()
+	get_tree().paused = false
+	Audio.play_music("titulo", 1.0)
+	get_tree().change_scene_to_file("res://scenes/ui/title.tscn")
 
 
 ## Saves the game (only in a real game started from the title screen).

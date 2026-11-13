@@ -1,7 +1,7 @@
 class_name PortraitStatus
 extends Control
-## Top-left status: the hero's portrait in a golden ring, health on the upper arc,
-## XP on the lower arc, level badge, gold, and a "!" alert when there is something
+## Top-left status: the hero's portrait in a golden ring; the upper arc is shared by health
+## (left half, red) and MP (right half, blue; owner 13/11), XP on the lower arc, level badge, gold, and a "!" alert when there is something
 ## to do (attribute points to spend or new skills). Tap it to open the character menu.
 
 signal tapped
@@ -12,9 +12,14 @@ const ARC_R: float = 64.0
 const ARC_W: float = 10.0
 const HP_COLOR: Color = Color("#e83f3f")
 const XP_COLOR: Color = Color("#5cc8ff")
+const MP_COLOR: Color = Color("#4f8fff")
+## Small gap at the top between the health and MP arcs (radians).
+const SPLIT_GAP: float = 0.06
 
 var hp: float = 1.0
 var hp_max: float = 1.0
+var mp: float = 1.0
+var mp_max: float = 1.0
 var xp: float = 0.0
 var xp_max: float = 1.0
 var level: int = 1
@@ -69,9 +74,14 @@ func _draw() -> void:
 	# Arc tracks (upper = health, lower = XP).
 	draw_arc(c, ARC_R, PI, TAU, 48, Color(0.05, 0.04, 0.04, 0.85), ARC_W + 4.0, true)
 	draw_arc(c, ARC_R, 0.0, PI, 48, Color(0.05, 0.04, 0.04, 0.85), ARC_W + 4.0, true)
+	# Health fills from the left up to the top; MP from the right up to the top.
+	var quarter: float = PI * 0.5 - SPLIT_GAP
 	var hp_ratio: float = clampf(hp / maxf(hp_max, 1.0), 0.0, 1.0)
 	if hp_ratio > 0.0:
-		draw_arc(c, ARC_R, PI, PI + PI * hp_ratio, 48, HP_COLOR, ARC_W, true)
+		draw_arc(c, ARC_R, PI, PI + quarter * hp_ratio, 32, HP_COLOR, ARC_W, true)
+	var mp_ratio: float = clampf(mp / maxf(mp_max, 1.0), 0.0, 1.0)
+	if mp_ratio > 0.0:
+		draw_arc(c, ARC_R, TAU, TAU - quarter * mp_ratio, 32, MP_COLOR, ARC_W, true)
 	var xp_ratio: float = clampf(xp / maxf(xp_max, 1.0), 0.0, 1.0)
 	if xp_ratio > 0.0:
 		draw_arc(c, ARC_R, PI, PI - PI * xp_ratio, 48, XP_COLOR, ARC_W, true)
@@ -98,10 +108,11 @@ func _draw() -> void:
 		_text(font, a + Vector2(-20, 8), "!", 40, 22, Color.WHITE)
 	# Numbers and gold to the right.
 	var x: float = c.x + ARC_R + 18.0
-	_text(font, Vector2(x, c.y - 18), "%d / %d" % [ceili(hp), roundi(hp_max)], -1, 20, Color("#ffb0a8"), HORIZONTAL_ALIGNMENT_LEFT)
-	_text(font, Vector2(x, c.y + 8), tr("HUD_GOLD") % gold, -1, 18, Color("#ffd23f"), HORIZONTAL_ALIGNMENT_LEFT)
+	_text(font, Vector2(x, c.y - 26), "%d / %d" % [ceili(hp), roundi(hp_max)], -1, 20, Color("#ffb0a8"), HORIZONTAL_ALIGNMENT_LEFT)
+	_text(font, Vector2(x, c.y - 4), "%d / %d" % [floori(mp), roundi(mp_max)], -1, 18, Color("#9cc4ff"), HORIZONTAL_ALIGNMENT_LEFT)
+	_text(font, Vector2(x, c.y + 20), tr("HUD_GOLD") % gold, -1, 18, Color("#ffd23f"), HORIZONTAL_ALIGNMENT_LEFT)
 	if defeated_text != "":
-		_text(font, Vector2(x, c.y + 32), defeated_text, -1, 16, Color("#ff7a7a"), HORIZONTAL_ALIGNMENT_LEFT)
+		_text(font, Vector2(x, c.y + 42), defeated_text, -1, 16, Color("#ff7a7a"), HORIZONTAL_ALIGNMENT_LEFT)
 
 
 func _text(font: Font, pos: Vector2, s: String, width: float, fs: int, col: Color, align: HorizontalAlignment = HORIZONTAL_ALIGNMENT_CENTER) -> void:

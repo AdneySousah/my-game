@@ -1102,6 +1102,13 @@ func _owner_1311_test() -> void:
 	check(tp.visible and tp.pins().has("pradoluz") and tp.pins().has("floresta"), "the travel window shows the world map with its places")
 	tp.hide()
 	main.hud._on_panel_closed()
+	# HUD fixes (owner, 13/11): MP shares the portrait ring with health, Save in the menu,
+	# and the sprint lifts the head.
+	await _frames(2)
+	var ps: PortraitStatus = main.hud._status
+	check(is_equal_approx(ps.mp_max, p.max_mp()) and is_equal_approx(ps.mp, p.mp), "the portrait shows MP next to health")
+	check(not main.manual_save(), "Save says no in a game not started from the title screen")
+	check(p.model.get("_tweak") != null, "the sprint has its head-up correction")
 	main.queue_free()
 	await _frames(2)
 	Main.start_spawn = "start"

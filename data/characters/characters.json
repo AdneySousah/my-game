@@ -41,7 +41,7 @@
       "combat_idle": { "anim": "Combat_Stance", "loop": true },
       "walk": { "anim": "Walk", "loop": true },
       "run": { "anim": "Run", "loop": true },
-      "sprint": { "anim": "Lean_Forward_Sprint_inplace", "loop": true },
+      "sprint": { "anim": "Lean_Forward_Sprint_inplace", "loop": true, "tweak": { "Spine01": [-12, 0, 0], "neck": [-12, 0, 0], "Head": [-18, 0, 0] } },
       "combat_run": { "anim": "Standard_Forward_Charge_inplace", "loop": true },
       "combat_walk": { "anim": "Walk_Fight_Forward_inplace", "loop": true },
       "attack_0": { "anim": "Triple_Combo_Attack", "start": 0.45, "end": 1.15, "speed": 2.2 },

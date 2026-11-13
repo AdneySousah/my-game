@@ -56,6 +56,13 @@ func _ready() -> void:
 	panel.call("_select", "salto_devastador")
 	await _wait(0.3)
 	await _snap()
+	panel.hide()
+	main.hud.call("_on_panel_closed")
+	# 9) The character menu with Save and Exit (13/11), MP spent a bit to show the ring.
+	main.player.mp = main.player.max_mp() * 0.55
+	main.hud.open_character_menu()
+	await _wait(0.5)
+	await _snap()
 	print("CAPTURE_OK %d shots -> %s" % [_shot, _out])
 	get_tree().quit()
 

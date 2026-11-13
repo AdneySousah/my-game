@@ -1521,3 +1521,9 @@ ENEMY_PROCURADO_QARESSA,Rainha Rubra das Dunas,Crimson Dune Queen
 ENEMY_PROCURADO_HRIMVALD,Titã do Gelo Eterno,Titan of Eternal Ice
 ENEMY_PROCURADO_LYSTHAEL,Fera dos Espinhos Antigos,Beast of the Ancient Thorns
 ENEMY_PROCURADO_ALTAREA,Juiz Sem Nome,The Nameless Judge
+MENU_SAVE,Salvar,Save
+MENU_EXIT,Sair para o menu,Exit to menu
+MENU_EXIT_CONFIRM,Toque de novo para sair,Tap again to exit
+MENU_SAVED,Jogo salvo!,Game saved!
+MENU_SAVE_OFF,Só dá para salvar no jogo aberto pela tela inicial.,You can only save a game started from the title screen.
+MENU_SAVE_NOT_NOW,Não dá para salvar agora.,Can't save right now.

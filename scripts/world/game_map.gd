@@ -15,6 +15,9 @@ var rest_points: Dictionary = {}
 ## npc_id -> Npc placed in this map.
 var npcs: Dictionary = {}
 var chests: Array[Chest] = []
+## Enterable houses: [{"body", "floors", "key"}]. Pots inside a house: Node3D list.
+var houses: Array[Dictionary] = []
+var vases: Array[Node3D] = []
 ## "Resetar masmorra" sign (dungeons with a boss), or null.
 var reset_sign: DungeonSign
 ## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
@@ -543,14 +546,56 @@ func _build_walls() -> void:
 
 
 func _build_props() -> void:
+	var index: int = 0
 	for item: Dictionary in data.get("props", []):
+		index += 1
 		if item.has("if_flag") and not Session.has_flag(str(item["if_flag"])):
 			continue
 		if item.has("unless_flag") and Session.has_flag(str(item["unless_flag"])):
 			continue
 		var pos: Vector3 = _v(item["pos"])
-		PropFactory.spawn(self, str(item["id"]), pos, float(item.get("rot", 0)), float(item.get("scale", 1.0)))
+		var body: StaticBody3D = PropFactory.spawn(self, str(item["id"]), pos, float(item.get("rot", 0)), float(item.get("scale", 1.0)))
 		_clear_spots.append(pos)
+		# Homes in towns can be entered ("interior": number of floors in props.json).
+		var floors: int = int(PropFactory.config(str(item["id"])).get("interior", 0))
+		if floors > 0 and bool(data.get("safe", false)) and body != null:
+			houses.append({"body": body, "floors": floors, "key": "%s#%d" % [map_id, index]})
+	# Pots inside houses: touch one to pick up something small ("vases": [[x, z], ...]).
+	var v: int = 0
+	for p: Array in data.get("vases", []):
+		var vase := Node3D.new()
+		vase.name = "Vase_%d" % v
+		add_child(vase)
+		vase.position = _v(p)
+		PropFactory.spawn(vase, "prp_vaso", Vector3.ZERO, 0.0)
+		vase.set_meta("index", v)
+		vases.append(vase)
+		v += 1
+	# Invisible walls ("barriers": [[[x, z], [x, z]], ...]), e.g. the open side of a room.
+	for bar: Array in data.get("barriers", []):
+		_invisible_wall(_v(bar[0]), _v(bar[1]), 1.0)
+
+
+## The enterable house the hero stands next to (within `margin` of its walls), or {}.
+func house_near(pos: Vector3, margin: float = 1.3) -> Dictionary:
+	for h: Dictionary in houses:
+		var body: StaticBody3D = h["body"]
+		if not is_instance_valid(body):
+			continue
+		var local: Vector3 = body.to_local(pos)
+		for c: Node in body.get_children():
+			var cs := c as CollisionShape3D
+			if cs == null:
+				continue
+			var lp: Vector3 = cs.transform.affine_inverse() * local
+			if cs.shape is BoxShape3D:
+				var half: Vector3 = (cs.shape as BoxShape3D).size * 0.5
+				if absf(lp.x) <= half.x + margin and absf(lp.z) <= half.z + margin:
+					return h
+			elif cs.shape is CylinderShape3D:
+				if Vector2(lp.x, lp.z).length() <= (cs.shape as CylinderShape3D).radius + margin:
+					return h
+	return {}
 
 
 ## Random props in a rectangle, kept off paths, spawns, exits and placed props.

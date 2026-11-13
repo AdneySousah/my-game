@@ -1617,6 +1617,122 @@
         ]
       ]
     },
+    "main_18_stairs": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_18_STAIRS_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_18_STAIRS_2"
+        ]
+      ]
+    },
+    "main_18_citadel": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_18_CITADEL_1"
+        ]
+      ]
+    },
+    "vaelor_intro": {
+      "lines": [
+        [
+          "vaelor",
+          "DLG_VAELOR_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_INTRO_2"
+        ],
+        [
+          "vaelor",
+          "DLG_VAELOR_INTRO_3"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_INTRO_4"
+        ]
+      ]
+    },
+    "vaelor_reveal": {
+      "lines": [
+        [
+          "lio",
+          "DLG_VAELOR_REVEAL_1"
+        ],
+        [
+          "vaelor",
+          "DLG_VAELOR_REVEAL_2"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_REVEAL_3"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_REVEAL_4"
+        ]
+      ]
+    },
+    "vaelor_doran": {
+      "lines": [
+        [
+          "doran",
+          "DLG_VAELOR_DORAN_1"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_DORAN_2"
+        ]
+      ]
+    },
+    "vaelor_void": {
+      "lines": [
+        [
+          "sem_rosto",
+          "DLG_VAELOR_VOID_1"
+        ]
+      ]
+    },
+    "vaelor_void_lio": {
+      "lines": [
+        [
+          "lio",
+          "DLG_VAELOR_VOID_LIO_1"
+        ],
+        [
+          "lio",
+          "DLG_VAELOR_VOID_LIO_2"
+        ]
+      ]
+    },
+    "main_18_end": {
+      "lines": [
+        [
+          "marta",
+          "DLG_MAIN_18_END_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_18_END_2"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_18_END_3"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_18_END_4"
+        ],
+        [
+          "marta",
+          "DLG_MAIN_18_END_5"
+        ]
+      ]
+    },
     "side_decretos_offer": {
       "lines": [
         [

@@ -45,6 +45,11 @@ func available() -> bool:
 	return mode != ""
 
 
+## The welcome offer ("first_purchase_only") is only for heroes who never bought anything.
+func first_purchase_open() -> bool:
+	return not Session.has_flag("store_bought") and Session.store_tokens.is_empty()
+
+
 func product(id: String) -> Dictionary:
 	for p: Dictionary in products:
 		if str(p.get("id", "")) == id:

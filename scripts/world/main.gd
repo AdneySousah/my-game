@@ -25,6 +25,12 @@ var _at_point: RestPoint
 var _near_npc: Npc
 var _near_chest: Chest
 var _near_sign: DungeonSign
+var _near_house: Dictionary = {}
+## Set by the title screen when the game starts: the welcome offer shows once after the
+## first map loads (never in tests or tools).
+static var welcome_offer: bool = false
+## data/world/houses.json (vase loot), read once.
+static var _houses_cfg: Dictionary = {}
 var _near_animal: Animal
 var _petting: bool = false
 var _interact_kind: String = ""
@@ -111,13 +117,20 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	if _changing:
 		return
 	_changing = true
+	# Leaving a house: back to the street, where the hero went in.
+	if map_id == "__return":
+		var r: Dictionary = Session.house_return
+		map_id = str(r.get("map", "pradoluz"))
+		spawn = "pos:%f:%f:%f" % [float(r.get("x", 0.0)), float(r.get("z", 0.0)), float(r.get("yaw", 0.0))]
+	# Going in or out of a house is a quick fade, no loading card.
+	var quick: bool = map_id.begins_with("interior_") or Session.current_map.begins_with("interior_")
 	# A duel's "cannot die" only lasts in its own map.
 	player.min_hp_ratio = 0.0
 	# The real game shows a loading card with art of the destination (tests and tools
 	# that open Main directly keep the quick black fade).
 	var card: LoadingScreen = null
 	var was_paused: bool = get_tree().paused
-	if SaveGame.active or LoadingScreen.is_open():
+	if (SaveGame.active or LoadingScreen.is_open()) and not quick:
 		card = LoadingScreen.open(get_tree(), map_id)
 		if with_fade:
 			Audio.play_sfx("door")
@@ -153,6 +166,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	player.respawn_point = pos
 	add_child(map)
 	move_child(map, 0)
+	_sync_vases()
 	map.enemy_killed.connect(_on_enemy_killed)
 	map.boss_spawned.connect(hud.track_boss)
 	map.boss_spawned.connect(_on_boss_spawned)
@@ -172,6 +186,10 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	_changing = false
 	map_loaded.emit(map_id)
 	save_now()
+	# Welcome offer once per game start (real game, first purchase only).
+	if welcome_offer and OfferBanner.eligible():
+		welcome_offer = false
+		OfferBanner.show_on(get_tree())
 
 
 ## Rest points: entering one activates it; leaving hides the travel button.
@@ -205,6 +223,9 @@ func _physics_process(delta: float) -> void:
 func talk_to_nearby() -> void:
 	if _near_chest and not _talking and not _changing:
 		_open_chest(_near_chest)
+		return
+	if not _near_house.is_empty() and _near_npc == null and not _talking and not _changing:
+		enter_house(_near_house)
 		return
 	if _near_sign and not _talking and not _changing:
 		map.reset_dungeon()
@@ -314,6 +335,56 @@ func _on_enemy_killed(e: Enemy) -> void:
 		_after_story.call_deferred(e.data.duplicate())
 
 
+## Walks into a town house: one floor = "interior_casa", two = "interior_terreo" (with the
+## bedroom upstairs). The way out brings the hero back to where he went in.
+func enter_house(h: Dictionary) -> void:
+	var out: Vector3 = player.global_position
+	Session.house_return = {"map": map.map_id, "x": out.x, "z": out.z, "yaw": player.rotation_degrees.y + 180.0, "key": str(h.get("key", ""))}
+	_near_house = {}
+	load_map("interior_terreo" if int(h.get("floors", 1)) >= 2 else "interior_casa", "door")
+
+
+static func houses_cfg() -> Dictionary:
+	if _houses_cfg.is_empty():
+		var f := FileAccess.open("res://data/world/houses.json", FileAccess.READ)
+		if f:
+			_houses_cfg = JSON.parse_string(f.get_as_text())
+	return _houses_cfg
+
+
+func _vase_key(vase: Node3D) -> String:
+	return "%s#%s#%d" % [str(Session.house_return.get("key", "")), map.map_id, int(vase.get_meta("index", 0))]
+
+
+## Pots already emptied stay hidden until they fill up again.
+func _sync_vases() -> void:
+	var now: float = Time.get_unix_time_from_system()
+	for vase: Node3D in map.vases:
+		vase.visible = float(Session.vase_ready_at.get(_vase_key(vase), 0.0)) <= now
+
+
+## Something small from a pot: potions or a few coins, by the hero's level.
+func _take_vase(vase: Node3D) -> void:
+	var cfg: Dictionary = houses_cfg()
+	vase.visible = false
+	Session.vase_ready_at[_vase_key(vase)] = Time.get_unix_time_from_system() + float(cfg.get("vase_refill_minutes", 30)) * 60.0
+	Audio.play_sfx("pickup", vase.global_position)
+	var table: Array = []
+	for tier: Dictionary in cfg.get("loot", []):
+		table = tier.get("pick", [])
+		if player.stats.level <= int(tier.get("max_level", 999)):
+			break
+	if table.is_empty():
+		return
+	var pick: Dictionary = table.pick_random()
+	if str(pick.get("item", "")) == "gold":
+		var g: int = randi_range(int(pick.get("min", 10)), int(pick.get("max", 30)))
+		player.add_gold(g)
+		hud.toast(tr("HOUSE_VASE_GOLD") % g, 1.4)
+	else:
+		give_item(str(pick["item"]), randi_range(int(pick.get("min", 1)), int(pick.get("max", 1))))
+
+
 ## Illustrated story scene after a boss ("after_story" in enemies.json, scenes in
 ## data/story.json), then a story flag and a trip to another map (e.g. Bento's death and
 ## the two-year jump after Brannoc).
@@ -321,6 +392,10 @@ func _after_story(d: Dictionary) -> void:
 	await get_tree().create_timer(1.6, false).timeout
 	var s: StoryOverlay = StoryOverlay.play(get_tree(), str(d["after_story"]))
 	await s.finished
+	# The last boss rolls the end credits ("after_credits" in enemies.json).
+	if bool(d.get("after_credits", false)):
+		var roll: CreditsRoll = CreditsRoll.play(get_tree())
+		await roll.finished
 	if str(d.get("after_flag", "")) != "":
 		Session.set_flag(str(d["after_flag"]))
 	player.set_skin(Session.skin)
@@ -403,6 +478,10 @@ func _update_quest_contacts() -> void:
 	_near_sign = null
 	if is_instance_valid(map.reset_sign) and map.reset_sign.in_range(pos):
 		_near_sign = map.reset_sign
+	_near_house = map.house_near(pos) if not map.houses.is_empty() else {}
+	for vase: Node3D in map.vases:
+		if vase.visible and Vector2(vase.global_position.x - pos.x, vase.global_position.z - pos.z).length() < 1.4:
+			_take_vase(vase)
 	_near_animal = null
 	if nearest == null and _near_chest == null:
 		for n: Node in get_tree().get_nodes_in_group("animals"):
@@ -410,7 +489,7 @@ func _update_quest_contacts() -> void:
 			if an and an.is_inside_tree() and an.can_pet(pos):
 				_near_animal = an
 				break
-	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("reset" if _near_sign else ("talk" if nearest else ("pet" if _near_animal else ""))))
+	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("reset" if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else "")))))
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)
@@ -460,6 +539,8 @@ func _on_achievement(a: Dictionary) -> void:
 ## A real-money purchase went through: give it to the hero and save at once.
 func _on_store_granted(p: Dictionary) -> void:
 	var g: Dictionary = p.get("grants", {})
+	# Any purchase closes the first-purchase offer.
+	Session.set_flag("store_bought")
 	if int(g.get("gold", 0)) > 0:
 		player.add_gold(int(g["gold"]))
 	if float(g.get("xp_boost_seconds", 0.0)) > 0.0:
@@ -516,12 +597,23 @@ func _on_boss_spawned(e: Enemy) -> void:
 			_boss_line(intro), CONNECT_ONE_SHOT)
 	# A boss fought again after a dungeon reset skips the talks.
 	var replay: bool = bool(e.get_meta("replay", false))
-	var line: String = "" if replay else str(e.get_meta("transform_line", ""))
-	if line != "":
-		e.transforming.connect(func(_b: Enemy) -> void: _boss_line(line), CONNECT_ONE_SHOT)
-	var reborn: String = "" if replay else str(e.get_meta("reborn_line", ""))
-	if reborn != "":
-		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(reborn), CONNECT_ONE_SHOT)
+	# Talks of each form change: the map's lines for the first one, then the new form's own
+	# "transform_line" / "reborn_line" in enemies.json (Vaelor changes twice).
+	if not replay:
+		e.transforming.connect(func(b: Enemy) -> void:
+			var l: String = str((Data.enemies.get(str(b.get_meta("next_form", "")), {}) as Dictionary).get("transform_line", ""))
+			if l == "" and not b.has_meta("said_transform"):
+				l = str(b.get_meta("transform_line", ""))
+			b.set_meta("said_transform", true)
+			if l != "":
+				_boss_line(l))
+		e.transformed.connect(func(b: Enemy) -> void:
+			var r: String = str(b.data.get("reborn_line", ""))
+			if r == "" and not b.has_meta("said_reborn"):
+				r = str(b.get_meta("reborn_line", ""))
+			b.set_meta("said_reborn", true)
+			if r != "":
+				_boss_line(r))
 	var duel: Dictionary = e.data.get("duel", {})
 	if not duel.is_empty():
 		player.min_hp_ratio = float(duel.get("hero_min_hp", 0.2))

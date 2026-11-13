@@ -38,6 +38,8 @@ var _clover: String = ""
 var _amulet: bool = false
 var _result: String = ""
 var _result_good: bool = true
+## Worn piece waiting for "are you sure?" before being taken apart (0 = none).
+var _confirm_uid: int = 0
 
 var _tab_btns: Dictionary = {}
 var _gold: Label
@@ -225,8 +227,8 @@ func _pieces() -> Array[Dictionary]:
 func _fill_pieces() -> void:
 	var list: Array[Dictionary] = _pieces()
 	if _tab == "disassemble":
-		list = list.filter(func(p: Dictionary) -> bool:
-			return Smith.worn_slot(int(p["uid"])) == "" and str(p["id"]) != Session.STARTER_WEAPON)
+		# Worn pieces show too (green mark); taking one apart asks first.
+		list = list.filter(func(p: Dictionary) -> bool: return str(p["id"]) != Session.STARTER_WEAPON)
 	_list_title.text = tr("SMITH_PICK_PIECE")
 	if Smith.find_piece(_uid).is_empty() or not list.any(func(p: Dictionary) -> bool: return int(p["uid"]) == _uid):
 		_uid = int(list[0]["uid"]) if not list.is_empty() else 0
@@ -239,6 +241,7 @@ func _fill_pieces() -> void:
 		var uid: int = int(p["uid"])
 		b.pressed.connect(func() -> void:
 			_uid = uid
+			_confirm_uid = 0
 			_result = ""
 			_refresh())
 
@@ -446,6 +449,7 @@ func _show_disassemble() -> void:
 		_name.text = tr("SMITH_NO_BAG_PIECES")
 		return
 	_show_piece_head(piece)
+	var worn_now: bool = Smith.worn_slot(_uid) != ""
 	var back: Dictionary = Smith.disassemble_returns(piece)
 	var rate: String = tr("SMITH_HALF") if bool(piece.get("worn", false)) else tr("SMITH_FULL")
 	_info.text = "%s\n[color=%s]%s[/color]" % [rate, GearText.DOWN, tr("SMITH_GONE_WARN")]
@@ -465,7 +469,32 @@ func _show_disassemble() -> void:
 		b.amount = int(back[id])
 		b.tooltip_text = tr(str(Data.item(id).get("name", id)))
 		flow.add_child(_with_caption(b, "x%d" % int(back[id]), "#fff3d6"))
+	if worn_now and _confirm_uid == _uid:
+		# Second step for a worn piece: "are you sure?".
+		var warn := _small(tr("SMITH_CONFIRM_WORN"))
+		warn.add_theme_color_override("font_color", Color(GearText.DOWN))
+		_actions.add_child(warn)
+		var row := HBoxContainer.new()
+		row.add_theme_constant_override("separation", 8)
+		_actions.add_child(row)
+		var yes := _button(tr("SMITH_CONFIRM_YES"), func() -> void:
+			var res: Dictionary = smith.disassemble(_uid, true)
+			_confirm_uid = 0
+			_uid = 0
+			_do(res))
+		yes.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(yes)
+		var no := _button(tr("SMITH_CONFIRM_NO"), func() -> void:
+			_confirm_uid = 0
+			_refresh())
+		no.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		row.add_child(no)
+		return
 	_action(tr("SMITH_DISASSEMBLE"), func() -> void:
+		if worn_now:
+			_confirm_uid = _uid
+			_refresh()
+			return
 		var res: Dictionary = smith.disassemble(_uid)
 		_uid = 0
 		_do(res))

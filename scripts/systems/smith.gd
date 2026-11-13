@@ -356,9 +356,14 @@ static func disassemble_returns(piece: Dictionary) -> Dictionary:
 	return out
 
 
-func disassemble(uid: int) -> Dictionary:
-	if worn_slot(uid) != "":
-		return {"ok": false, "msg": "SMITH_TAKE_OFF_FIRST"}
+## `force`: a worn piece is taken off first (the panel asks the hero before that).
+func disassemble(uid: int, force: bool = false) -> Dictionary:
+	var slot: String = worn_slot(uid)
+	if slot != "":
+		if not force:
+			return {"ok": false, "msg": "SMITH_TAKE_OFF_FIRST"}
+		if Session.inventory.free_slots() <= 0 or not Session.gear.unequip(Session.inventory, slot):
+			return {"ok": false, "msg": "HUD_BAG_FULL"}
 	var piece: Dictionary = Session.inventory.find_uid(uid)
 	if piece.is_empty() or str(piece.get("id", "")) == Session.STARTER_WEAPON:
 		return {"ok": false, "msg": "SMITH_CANT"}

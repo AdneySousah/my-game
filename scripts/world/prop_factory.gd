@@ -80,6 +80,11 @@ static func spawn(parent: Node, id: String, pos: Vector3, rot_deg: float = 0.0, 
 
 
 ## Length of one wall piece along its X axis (for tiling walls), in metres.
+## The props.json entry of a prop ({} when unknown).
+static func config(id: String) -> Dictionary:
+	return (data().get("props", {}) as Dictionary).get(id, {})
+
+
 static func tile_length(id: String) -> float:
 	var p: Dictionary = data().get("props", {}).get(id, {})
 	return float(p.get("tile_length", 4.0))

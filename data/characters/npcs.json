@@ -281,6 +281,9 @@
       "barks": ["BARK_MATIAS_1"],
       "model": "npc_matias"
     },
+    "vaelor": {"name": "NPC_VAELOR", "color": "#ffe08a", "voice": 0.6, "portrait": "ui_retrato_vaelor"},
+    "doran": {"name": "NPC_DORAN", "color": "#8a6a4a", "voice": 0.75, "portrait": "ui_retrato_doran"},
+    "sem_rosto": {"name": "NPC_SEM_ROSTO", "color": "#3a2050", "voice": 0.45},
     "cassian": {"name": "NPC_CASSIAN", "color": "#2b2b33", "voice": 0.7, "portrait": "ui_retrato_cassian"},
     "velyra": {
       "name": "NPC_VELYRA",

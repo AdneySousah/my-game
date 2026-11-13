@@ -319,7 +319,7 @@ func show_interact_button(kind: String) -> void:
 	_interact_shown = kind != ""
 	_talk_btn.visible = kind != "" and kind != "talk" and kind != "pet"
 	if _talk_btn.visible:
-		var key: String = "HUD_OPEN" if kind == "open" else ("HUD_RESET" if kind == "reset" else "HUD_PICK_UP")
+		var key: String = "HUD_OPEN" if kind == "open" else ("HUD_RESET" if kind == "reset" else ("HUD_ENTER" if kind == "enter" else "HUD_PICK_UP"))
 		# Phones have no E key: the button shows just the word.
 		_talk_btn.text = tr(key + "_TAP") if Game.is_mobile() else tr(key)
 	_update_talk_mode()

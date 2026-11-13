@@ -30,6 +30,8 @@ func _ready() -> void:
 	await _capital_test()
 	await _dungeon_reset_test()
 	await _herald_castle_test()
+	await _houses_test()
+	await _final_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -828,6 +830,14 @@ func _velyra_test() -> void:
 	for q: Dictionary in Data.quests:
 		if tr(str(q.get("name", ""))) == str(q.get("name", "")):
 			missing.append(str(q.get("name", "")))
+	# Text keys anywhere in the routine, shops and store (achievement titles and such).
+	var re := RegEx.new()
+	re.compile("\"((TITLE|ACH|DAILY|STORE|SHOP|ITEM|RARITY)_[A-Z0-9_]+)\"")
+	for src: Dictionary in [Data.routine, Data.shop, Data.store]:
+		for m: RegExMatch in re.search_all(JSON.stringify(src)):
+			var key: String = m.get_string(1)
+			if tr(key) == key and not missing.has(key):
+				missing.append(key)
 	check(missing.is_empty(), "every name has a text (missing %s)" % [missing])
 	Session.reset()
 	Session.set_flag("act4_tower")
@@ -867,6 +877,106 @@ func _velyra_test() -> void:
 	var bloom: bool = names.any(func(s: String) -> bool: return s.contains("env_arvore_mae_florida"))
 	var dry: bool = names.any(func(s: String) -> bool: return s.begins_with("env_arvore_mae") and not s.contains("florida"))
 	check(bloom and not dry, "the Mother Tree blooms after Velyra (bloom %s, withered %s)" % [bloom, dry])
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
+## Town houses can be entered (owner, 12/11): one floor or two (bedroom upstairs), pots
+## with small items, and the way out goes back to the street. Also the welcome offer.
+func _houses_test() -> void:
+	Session.reset()
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	check(not main.map.houses.is_empty(), "Pradoluz has houses to enter (%d)" % main.map.houses.size())
+	if not main.map.houses.is_empty():
+		var h: Dictionary = main.map.houses[0]
+		var body: StaticBody3D = h["body"]
+		check(not main.map.house_near(body.global_position + Vector3(0, 0, 0.5)).is_empty(), "standing at a house finds it")
+		var outside: Vector3 = main.player.global_position
+		main.enter_house({"floors": 2, "key": "test#1"})
+		await _wait_map(main, "interior_terreo")
+		await _frames(4)
+		check(Session.current_map == "interior_terreo" and main.map.vases.size() >= 2, "a two-floor house: kitchen and living room downstairs, with pots")
+		var vase: Node3D = main.map.vases[0]
+		var gold0: int = main.player.gold
+		var bag0: int = Session.inventory.slots.size()
+		main.player.global_position = vase.global_position + Vector3(0.5, 0, 0)
+		await _frames(4)
+		check(not vase.visible and (main.player.gold > gold0 or Session.inventory.slots.size() > bag0), "touching a pot gives something small")
+		main.load_map("interior_cima", "from_terreo")
+		await _wait_map(main, "interior_cima")
+		await _frames(3)
+		check(Session.current_map == "interior_cima", "the stairs lead to the bedroom upstairs")
+		main.load_map("__return", "")
+		await _wait_map(main, "pradoluz")
+		await _frames(3)
+		check(Session.current_map == "pradoluz" and main.player.global_position.distance_to(outside) < 1.0, "leaving puts the hero back on the street")
+	# Welcome offer: only before the first purchase.
+	check(Store.first_purchase_open(), "a new hero can see the welcome offer")
+	main._on_store_granted(Store.product("ouro_5000"))
+	check(not Store.first_purchase_open(), "after any purchase the welcome offer is gone")
+	var offer: Dictionary = Store.product("premium_7d_oferta")
+	check(is_equal_approx(float(offer.get("price_brl", 0.0)), 4.99) and bool(offer.get("first_purchase_only", false)), "the welcome offer is the 7-day pass at R$ 4,99")
+	main.queue_free()
+	await _frames(2)
+	Session.reset()
+
+
+## 6.5c: the Stairway to the Sky, the Celestial Citadel and Vaelor in three phases (masked
+## god, unmasked Doran, corrupted by the Faceless), then the ending and the credits.
+func _final_test() -> void:
+	Session.reset()
+	Session.set_flag("act5_stairs")
+	Session.set_flag("cassian_defeated")
+	check(Data.quest("main_18").get("requires", []) == ["main_17"], "quest 18 follows the gate and the judge")
+	check(str((Data.enemies["vaelor"]["phases"] as Array)[0]["become"]) == "vaelor_desmascarado" and str((Data.enemies["vaelor_desmascarado"]["phases"] as Array)[0]["become"]) == "vaelor_corrompido", "Vaelor has three phases")
+	check(bool(Data.enemies["vaelor_corrompido"].get("after_credits", false)), "the last form rolls the credits")
+	Main.start_map = "escadaria_ceu"
+	Main.start_spawn = "from_castelo_arauto"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("sentinela_celeste"), "celestial sentinels guard the stairway (got %s)" % [kinds.keys()])
+	main.load_map("cidadela", "from_escadaria_ceu")
+	await _wait_map(main, "cidadela")
+	await _frames(6)
+	var boss: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "vaelor":
+			boss = n as Enemy
+	check(boss != null and boss.model != null and boss.model.character_id == "boss_vaelor", "Vaelor waits in the citadel")
+	if boss:
+		var forms: Array[String] = []
+		for target: float in [0.6, 0.3]:
+			boss.hp = boss.max_hp * target
+			boss.take_damage(1, false)
+			for i: int in 600:
+				await _frames(1)
+				if main.hud.is_in_dialogue():
+					await _finish_dialogue(main)
+				if not boss.invulnerable and boss.enemy_id != (forms.back() if not forms.is_empty() else "vaelor") and boss.enemy_id != "vaelor":
+					break
+			forms.append(boss.enemy_id)
+		check(forms == ["vaelor_desmascarado", "vaelor_corrompido"], "Vaelor changes form twice (got %s)" % [forms])
+	for i: int in [1, 2, 3, 4, 5]:
+		check(ResourceLoader.exists("res://assets/story/sto_final_%d.webp" % i), "ending panel %d exists" % i)
+	for m: String in ["escadaria_ceu", "cidadela"]:
+		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
+	var roll: CreditsRoll = CreditsRoll.play(get_tree())
+	await _frames(3)
+	check(get_tree().paused, "the credits pause the game")
+	roll._finish()
+	await _frames(2)
+	check(not is_instance_valid(roll) or roll.is_queued_for_deletion(), "the credits can be skipped")
 	get_tree().paused = false
 	main.queue_free()
 	await _frames(2)
@@ -1659,6 +1769,12 @@ func _smith_test() -> void:
 	var boots: int = int(Session.inventory.slots.back()["uid"])
 	Session.gear.equip(Session.inventory, boots, p.stats.level)
 	check(not smith.disassemble(boots)["ok"], "a worn piece must be taken off first")
+	Session.add_item("eq_luvas_comum", 1)
+	var gl: int = int(Session.inventory.slots.back()["uid"])
+	Session.gear.equip(Session.inventory, gl, p.stats.level)
+	check(smith.disassemble(gl, true)["ok"] and Session.gear.get_piece("gloves").is_empty(), "a worn piece can be taken apart after confirming")
+	Session.inventory.remove("mat_couro_orc", 1)
+	Session.inventory.remove("mat_osso_velho", 1)
 	Session.gear.unequip(Session.inventory, "boots")
 	smith.disassemble(boots)
 	check(Session.inventory.count("mat_couro_orc") == 1 and Session.inventory.count("mat_osso_velho") == 1, "worn piece gives back half")

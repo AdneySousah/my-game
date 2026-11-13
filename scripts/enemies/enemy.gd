@@ -484,7 +484,7 @@ func _clear_telegraph() -> void:
 func _has_pending_phase() -> bool:
 	var phases: Array = data.get("phases", [])
 	for i: int in phases.size():
-		if not _phase_done.has(i):
+		if not _phase_done.has("%s:%d" % [enemy_id, i]):
 			return true
 	return false
 
@@ -493,9 +493,11 @@ func _check_phases() -> void:
 	var phases: Array = data.get("phases", [])
 	for i: int in phases.size():
 		var ph: Dictionary = phases[i]
-		if _phase_done.has(i) or hp_ratio() > float(ph.get("hp_below", 0.5)):
+		# Keyed by form, so a second form can change again (e.g. Vaelor's three phases).
+		var key: String = "%s:%d" % [enemy_id, i]
+		if _phase_done.has(key) or hp_ratio() > float(ph.get("hp_below", 0.5)):
 			continue
-		_phase_done[i] = true
+		_phase_done[key] = true
 		_start_transform(str(ph.get("become", "")))
 		return
 

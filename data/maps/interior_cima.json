@@ -1,0 +1,37 @@
+{
+  "_comment": "Casa de dois andares por dentro, andar de cima: o quarto. A escada desce para o térreo.",
+  "id": "interior_cima",
+  "name": "MAP_INTERIOR_CIMA",
+  "safe": true,
+  "indoor": true,
+  "size": [14, 10.5],
+  "seed": 401,
+  "ground": "#a07548",
+  "sky": "#1a120c",
+  "ambient": 0.75,
+  "ambient_color": "#ffe2bf",
+  "sun": 0.55,
+  "sun_color": "#ffd9a8",
+  "patches": {"color": "#8d6540", "count": 18},
+  "spawns": {"from_terreo": [3.6, -1.6, 180]},
+  "exits": [
+    {"to": "interior_terreo", "spawn": "from_cima", "pos": [5.3, -3.4], "size": [1.8, 1.8], "label": "MAP_INTERIOR_CASA"}
+  ],
+  "walls": [
+    {"id": "env_parede_casa", "from": [-6.5, -4.5], "to": [6.5, -4.5]},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-6.5, -4.5]},
+    {"id": "env_parede_casa", "from": [6.5, -4.5], "to": [6.5, 4.5]}
+  ],
+  "barriers": [[[-6.5, 4.5], [6.5, 4.5]]],
+  "props": [
+    {"id": "prp_cama", "pos": [-4.8, -2.6], "rot": 90},
+    {"id": "prp_cama", "pos": [-1.9, -2.6], "rot": 90},
+    {"id": "prp_tapete", "pos": [-3.0, 0.7]},
+    {"id": "prp_estante", "pos": [1.2, -3.7], "rot": 0},
+    {"id": "prp_armario", "pos": [-5.8, 1.6], "rot": 90},
+    {"id": "prp_sofa", "pos": [1.4, 2.6], "rot": 180},
+    {"id": "prp_escada_interna", "pos": [5.2, -3.2], "rot": 180},
+    {"id": "prp_lampiao", "pos": [3.3, -3.7]}
+  ],
+  "vases": [[-5.6, 3.5], [5.6, 3.5], [3.0, 0.9]]
+}

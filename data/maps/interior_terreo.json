@@ -1,0 +1,38 @@
+{
+  "_comment": "Casa de dois andares por dentro, térreo (pedido do dono): cozinha e sala; a escada leva ao quarto em cima (interior_cima).",
+  "id": "interior_terreo",
+  "name": "MAP_INTERIOR_CASA",
+  "safe": true,
+  "indoor": true,
+  "size": [14, 10.5],
+  "seed": 401,
+  "ground": "#a07548",
+  "sky": "#1a120c",
+  "ambient": 0.75,
+  "ambient_color": "#ffe2bf",
+  "sun": 0.55,
+  "sun_color": "#ffd9a8",
+  "patches": {"color": "#8d6540", "count": 18},
+  "spawns": {"door": [0, 3.3, 0], "from_cima": [3.6, -1.6, 180]},
+  "exits": [
+    {"to": "__return", "spawn": "", "pos": [0, 4.9], "size": [3.0, 1.2], "label": "MAP_EXIT_HOUSE"},
+    {"to": "interior_cima", "spawn": "from_terreo", "pos": [5.3, -3.4], "size": [1.8, 1.8], "label": "MAP_INTERIOR_CIMA"}
+  ],
+  "walls": [
+    {"id": "env_parede_casa", "from": [-6.5, -4.5], "to": [6.5, -4.5]},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-6.5, -4.5]},
+    {"id": "env_parede_casa", "from": [6.5, -4.5], "to": [6.5, 4.5]}
+  ],
+  "barriers": [[[-6.5, 4.5], [6.5, 4.5]]],
+  "props": [
+    {"id": "prp_fogao", "pos": [-5.3, -3.5], "rot": 0},
+    {"id": "prp_armario", "pos": [-3.3, -3.7], "rot": 0},
+    {"id": "prp_mesa", "pos": [-3.7, -0.6], "rot": 20},
+    {"id": "prp_tapete", "pos": [1.2, 0.3]},
+    {"id": "prp_sofa", "pos": [1.2, -3.5], "rot": 0},
+    {"id": "prp_estante", "pos": [-1.2, -3.7], "rot": 0},
+    {"id": "prp_escada_interna", "pos": [5.2, -3.2], "rot": 180},
+    {"id": "prp_lampiao", "pos": [3.3, -3.7]}
+  ],
+  "vases": [[-5.6, 3.3], [5.6, 3.3], [-2.0, 2.6]]
+}

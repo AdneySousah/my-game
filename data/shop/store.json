@@ -2,12 +2,25 @@
   "_comment": "Loja com dinheiro real (GDD 6.6). Os 'id' têm que ser iguais aos produtos criados no Google Play Console (Fase 7). price_brl = preço mostrado enquanto o Google Play não responde (no celular aparece o preço da loja). grants: o que o jogador recebe. Todos são consumíveis (dá para comprar de novo).",
   "products": [
     {
+      "id": "premium_7d_oferta",
+      "name": "STORE_PREMIUM_OFFER",
+      "desc": "STORE_PREMIUM_OFFER_DESC",
+      "price_brl": 4.99,
+      "icon": "trevo_real",
+      "first_purchase_only": true,
+      "grants": {
+        "premium_days": 7
+      }
+    },
+    {
       "id": "premium_7d",
       "name": "STORE_PREMIUM_7",
       "desc": "STORE_PREMIUM_DESC",
       "price_brl": 15.0,
       "icon": "trevo_real",
-      "grants": {"premium_days": 7}
+      "grants": {
+        "premium_days": 7
+      }
     },
     {
       "id": "premium_14d",
@@ -15,7 +28,9 @@
       "desc": "STORE_PREMIUM_DESC",
       "price_brl": 20.0,
       "icon": "trevo_real",
-      "grants": {"premium_days": 14}
+      "grants": {
+        "premium_days": 14
+      }
     },
     {
       "id": "premium_30d",
@@ -23,7 +38,9 @@
       "desc": "STORE_PREMIUM_DESC",
       "price_brl": 25.0,
       "icon": "trevo_real",
-      "grants": {"premium_days": 30}
+      "grants": {
+        "premium_days": 30
+      }
     },
     {
       "id": "skin_sol",
@@ -31,7 +48,9 @@
       "desc": "STORE_SKIN_SOL_DESC",
       "price_brl": 9.9,
       "icon": "eq_espada_epico",
-      "grants": {"skin": "hero_skin_sol"}
+      "grants": {
+        "skin": "hero_skin_sol"
+      }
     },
     {
       "id": "skin_tempestade",
@@ -39,7 +58,9 @@
       "desc": "STORE_SKIN_TEMPESTADE_DESC",
       "price_brl": 9.9,
       "icon": "eq_espada_epico",
-      "grants": {"skin": "hero_skin_tempestade"}
+      "grants": {
+        "skin": "hero_skin_tempestade"
+      }
     },
     {
       "id": "ouro_5000",
@@ -47,7 +68,9 @@
       "desc": "STORE_OURO_5000_DESC",
       "price_brl": 4.9,
       "icon": "ouro",
-      "grants": {"gold": 5000}
+      "grants": {
+        "gold": 5000
+      }
     },
     {
       "id": "ouro_30000",
@@ -55,7 +78,9 @@
       "desc": "STORE_OURO_30000_DESC",
       "price_brl": 24.9,
       "icon": "ouro",
-      "grants": {"gold": 30000}
+      "grants": {
+        "gold": 30000
+      }
     },
     {
       "id": "xp_boost_1h",
@@ -63,7 +88,9 @@
       "desc": "STORE_XP_BOOST_DESC",
       "price_brl": 3.9,
       "icon": "pergaminho_retorno",
-      "grants": {"xp_boost_seconds": 3600}
+      "grants": {
+        "xp_boost_seconds": 3600
+      }
     },
     {
       "id": "kit_pocoes",
@@ -72,7 +99,13 @@
       "price_brl": 4.9,
       "icon": "pot_vida_m",
       "grants": {
-        "items": {"pot_vida_m": 10, "pot_folego_m": 10, "pot_forca": 1, "pot_pedra": 1, "pot_vento": 1}
+        "items": {
+          "pot_vida_m": 10,
+          "pot_folego_m": 10,
+          "pot_forca": 1,
+          "pot_pedra": 1,
+          "pot_vento": 1
+        }
       }
     },
     {
@@ -81,7 +114,11 @@
       "desc": "ITEM_TREVO_REAL_DESC",
       "price_brl": 6.9,
       "icon": "trevo_real",
-      "grants": {"items": {"trevo_real": 1}}
+      "grants": {
+        "items": {
+          "trevo_real": 1
+        }
+      }
     },
     {
       "id": "broca_real",
@@ -89,7 +126,11 @@
       "desc": "ITEM_BROCA_REAL_DESC",
       "price_brl": 4.9,
       "icon": "broca_real",
-      "grants": {"items": {"broca_real": 1}}
+      "grants": {
+        "items": {
+          "broca_real": 1
+        }
+      }
     },
     {
       "id": "amuleto",
@@ -97,10 +138,18 @@
       "desc": "ITEM_AMULETO_DESC",
       "price_brl": 3.9,
       "icon": "amuleto",
-      "grants": {"items": {"amuleto": 1}}
+      "grants": {
+        "items": {
+          "amuleto": 1
+        }
+      }
     }
   ],
   "xp_boost": 0.5,
   "_premium": "Passe premium (pedido do dono, 12/11/2026): enquanto dura, XP x2, ouro dos inimigos e baús x2 e +10% em todos os atributos.",
-  "premium": {"xp": 2.0, "gold": 2.0, "attributes": 1.1}
+  "premium": {
+    "xp": 2.0,
+    "gold": 2.0,
+    "attributes": 1.1
+  }
 }

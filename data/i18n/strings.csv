@@ -559,6 +559,51 @@ ENEMY_CASSIAN,"Cassian, Arauto da Lei","Cassian, Herald of the Law"
 ENEMY_CASSIAN_COLOSSO,Colosso de Armadura,Armored Colossus
 REST_CASTELO_ARAUTO_PORTAO,Portão do Castelo,Castle Gate
 REST_CASTELO_ARAUTO_PATIO,Pátio das Correntes,Courtyard of Chains
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+SMITH_CONFIRM_WORN,Esta peça está equipada. Tem certeza que quer desmontar? Ela sai do corpo e deixa de existir.,This piece is being worn. Are you sure you want to take it apart? It comes off and will be gone.
+SMITH_CONFIRM_YES,"Sim, desmontar","Yes, take apart"
+SMITH_CONFIRM_NO,Cancelar,Cancel
+MAP_INTERIOR_CASA,Casa,House
+MAP_INTERIOR_CIMA,Andar de cima,Upstairs
+MAP_EXIT_HOUSE,Sair,Leave
+HUD_ENTER,Entrar (E),Enter (E)
+HUD_ENTER_TAP,Entrar,Enter
+HOUSE_VASE_GOLD,Dentro do vaso: %d de ouro,Inside the pot: %d gold
+MAP_ESCADARIA_CEU,Escadaria do Céu,Stairway to the Sky
+MAP_CIDADELA,Cidadela Celeste,Celestial Citadel
+REST_ESCADARIA_DEGRAU,Degrau de Luz,Step of Light
+REST_ESCADARIA_MIRANTE,Mirante das Nuvens,Cloud Lookout
+REST_CIDADELA_PORTAL,Portal da Cidadela,Citadel Gate
+ENEMY_SENTINELA_CELESTE,Sentinela Celeste,Celestial Sentinel
+ENEMY_VIGIA_CELESTE,Vigia Celeste,Celestial Watcher
+ENEMY_VAELOR,"Vaelor, Senhor dos Céus","Vaelor, Lord of the Skies"
+ENEMY_VAELOR_DESMASCARADO,Vaelor Desmascarado,Vaelor Unmasked
+ENEMY_VAELOR_CORROMPIDO,Vaelor Corrompido,Vaelor Corrupted
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -612,6 +657,22 @@ QUEST_MAIN_14,O vigia e o segredo,The Watcher and the Secret
 QUEST_MAIN_15,A Arauta do Silêncio,The Herald of Silence
 QUEST_MAIN_16,A Lei de Ferro,The Iron Law
 QUEST_MAIN_17,O portão e o juiz,The Gate and the Judge
+QUEST_MAIN_18,O Herdeiro dos Céus,The Heir of the Skies
+QUEST_THE_END,Fim... por enquanto. Obrigado por jogar! As masmorras e a forja continuam esperando por você.,The end... for now. Thanks for playing! The dungeons and the forge are still waiting for you.
+OBJ_CLIMB_STAIRWAY,Suba a Escadaria do Céu (portal atrás do trono do castelo),Climb the Stairway to the Sky (portal behind the castle throne)
+OBJ_KILL_SENTINELS,Derrote as sentinelas celestes,Defeat the celestial sentinels
+OBJ_REACH_CITADEL,Entre na Cidadela Celeste,Enter the Celestial Citadel
+OBJ_KILL_VAELOR,Enfrente o Vaelor,Face Vaelor
+OBJ_TALK_MARTA_END,Volte para Pradoluz e fale com a Marta,Return to Pradoluz and talk to Marta
+NPC_VAELOR,Vaelor,Vaelor
+NPC_DORAN,Doran,Doran
+NPC_SEM_ROSTO,O Sem-Rosto,The Faceless
+STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
+STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
+STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
+STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
+STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
+STO_FINAL_END,A história continua...,The story continues...
 QUEST_ACT5_SOON3,A Escadaria do Céu e a Cidadela Celeste chegam na próxima versão,The Stairway to the Sky and the Celestial Citadel arrive in the next version
 OBJ_TALK_ISOLDA_PLAN,Fale com a Isolda sobre o plano,Talk to Isolda about the plan
 OBJ_TALK_SEVERIN_GATE,Fale com o cavaleiro no portão do castelo,Talk to the knight at the castle gate
@@ -782,6 +843,16 @@ OPT_OFF,Desligado,Off
 OPT_CREDITS_TEXT,"Música (CC-BY 3.0), série RPG Orchestral Essentials: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" e ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nEfeitos sonoros (CC0): Kenney (www.kenney.nl), artisticdude e rubberduck (opengameart.org).\nModelos, interface e ilustrações gerados com Meshy. Fonte: Open Sans (OFL).","Music (CC-BY 3.0), RPG Orchestral Essentials series: ""A Dream of First Flight"", ""Visions of Freedom"", ""Morning Frost"", ""The World At Your Door"", ""A Bitter Hope"", ""A Slave To No One"" and ""Can't Stop Winning"" Composed by Jonathan Shaw (www.jshaw.co.uk).\nSound effects (CC0): Kenney (www.kenney.nl), artisticdude and rubberduck (opengameart.org).\nModels, interface and illustrations made with Meshy. Font: Open Sans (OFL)."
 TITLE_YES,"Sim, começar de novo","Yes, start over"
 TITLE_NO,Voltar,Back
+TITLE_DEFENSOR,Defensor de Pradoluz,Defender of Pradoluz
+TITLE_CACADOR_ORCS,Caçador de Orcs,Orc Hunter
+TITLE_QUEBRA_OSSOS,Quebra-ossos,Bonebreaker
+TITLE_DESPERTA_PEDRAS,Desperta-pedras,Stonewaker
+TITLE_FIM_DO_TRIBUTO,Fim do Tributo,End of the Tribute
+TITLE_APRENDIZ_HEROI,Aprendiz de herói,Hero's Apprentice
+TITLE_MAO_FERREIRO,Mão de ferreiro,Smith's Hand
+TITLE_MESTRE_FORJA,Mestre da forja,Forge Master
+TITLE_FIEL,Fiel,Faithful
+TITLE_TRABALHADOR,Trabalhador,Hard Worker
 ITEM_POT_VIDA_P,Poção de vida pequena,Small health potion
 ITEM_POT_VIDA_M,Poção de vida média,Medium health potion
 ITEM_POT_VIDA_G,Poção de vida grande,Large health potion
@@ -1221,6 +1292,27 @@ DLG_MAIN_17_END_3,"Segurou o portão a noite inteira. Nenhum guarda passou. Agor
 DLG_MAIN_17_END_4,"Quando o Cassian caiu, uma escada de luz apareceu sobre o castelo. Ela sobe até uma cidade nas nuvens.","When Cassian fell, a stairway of light appeared over the castle. It climbs up to a city in the clouds."
 DLG_MAIN_17_END_5,A Cidadela Celeste. É lá que está o Vaelor... o deus que mandou todos os Arautos.,The Celestial Citadel. That's where Vaelor is... the god who sent all the Heralds.
 DLG_MAIN_17_END_6,Então vá. Altaréa fica te devendo uma. E o meu irmão também.,Then go. Altaréa owes you one. And so does my brother.
+DLG_MAIN_18_STAIRS_1,"Uma escada de luz até o céu... Bento, se você visse isso, ia dizer que era coisa de livro.","A stairway of light up to the sky... Bento, if you saw this, you'd say it came out of a book."
+DLG_MAIN_18_STAIRS_2,Cinco Arautos. Cinco cidades livres. Agora falta quem mandou todos eles.,Five Heralds. Five free cities. Now only the one who sent them all remains.
+DLG_MAIN_18_CITADEL_1,A Cidadela Celeste. Tão bonita... e tão vazia. Até o chão está rachado de escuridão.,The Celestial Citadel. So beautiful... and so empty. Even the floor is cracked with darkness.
+DLG_VAELOR_INTRO_1,O garoto de Pradoluz. Subiste toda a escada só para se ajoelhar diante de mim?,The boy from Pradoluz. You climbed the whole stairway just to kneel before me?
+DLG_VAELOR_INTRO_2,"Você mandou os Arautos. A colheita, a água, o calor, o canto, a liberdade... tirou tudo das pessoas.","You sent the Heralds. The harvest, the water, the warmth, the song, the freedom... you took it all from people."
+DLG_VAELOR_INTRO_3,Eu trouxe ordem. Um mundo que obedece não sofre.,I brought order. A world that obeys does not suffer.
+DLG_VAELOR_INTRO_4,Um mundo que obedece também não vive. Desce desse trono.,A world that obeys doesn't live either. Come down from that throne.
+DLG_VAELOR_REVEAL_1,A máscara... ela rachou. Esse rosto...,The mask... it cracked. That face...
+DLG_VAELOR_REVEAL_2,"Não olhe... Não olhe para mim, menino.","Don't look... Don't look at me, boy."
+DLG_VAELOR_REVEAL_3,A sua mão. Falta um dedo. Igual ao que acharam na neve na noite em que eu nasci...,Your hand. A finger is missing. Just like the one they found in the snow the night I was born...
+DLG_VAELOR_REVEAL_4,Pai?!,Father?!
+DLG_VAELOR_DORAN_1,Lio... meu filho... Corra. Ele está dentro de mim. Eu não consigo segurá-lo por muito tempo.,Lio... my son... Run. He's inside me. I can't hold him for long.
+DLG_VAELOR_DORAN_2,"Não vou fugir. Não de novo, pai. Eu vim até aqui por você também.","I won't run. Not again, father. I came all this way for you too."
+DLG_VAELOR_VOID_1,CHEGA DE SENTIMENTOS. ESTE CORPO É MEU. ESTE CÉU É MEU.,ENOUGH FEELINGS. THIS BODY IS MINE. THIS SKY IS MINE.
+DLG_VAELOR_VOID_LIO_1,"Então é você, Sem-Rosto. Quem puxava as cordas o tempo todo.","So it's you, Faceless. The one pulling the strings all along."
+DLG_VAELOR_VOID_LIO_2,"Um escudo de escuridão, e esses cristais roxos dão força pra ele. Quebro os cristais, quebro o escudo... e trago meu pai de volta.","A shield of darkness, and those purple crystals feed it. I break the crystals, I break the shield... and I bring my father back."
+DLG_MAIN_18_END_1,Lio! Você voltou! A vila inteira viu a luz no céu e ninguém dormiu esperando você.,Lio! You're back! The whole village saw the light in the sky and nobody slept waiting for you.
+DLG_MAIN_18_END_2,"Marta... meu pai está vivo. Ele está lá em casa, descansando. Ainda não acredito.","Marta... my father is alive. He's at home, resting. I still can't believe it."
+DLG_MAIN_18_END_3,O Doran... depois de tantos anos. Você trouxe ele de volta.,Doran... after so many years. You brought him back.
+DLG_MAIN_18_END_4,Mas o Sem-Rosto fugiu para além do céu. Ele vai voltar. Eu sinto isso.,But the Faceless fled beyond the sky. He'll be back. I can feel it.
+DLG_MAIN_18_END_5,"Então hoje você descansa e come direito, como o Bento pedia. Amanhã o céu ainda vai estar lá em cima.","Then today you rest and eat properly, like Bento asked. Tomorrow the sky will still be up there."
 DLG_SIDE_DECRETOS_OFFER_1,Os decretos novos estão pregados nos postes dos Arredores. Quem lê fica com medo e não vem mais à cidade comprar nada.,The new decrees are nailed to the posts in the Outskirts. Whoever reads them gets scared and stops coming to the city to buy anything.
 DLG_SIDE_DECRETOS_OFFER_2,Arranca uns cinco para mim? Eu guardo como prova. Um dia alguém vai ter que responder por cada linha.,Tear down about five for me? I'll keep them as evidence. One day someone will have to answer for every line.
 DLG_SIDE_DECRETOS_OFFER_3,Rasgar papel de tirano. Esse trabalho eu faço até de graça.,Tearing up a tyrant's paper. I'd do that job for free.
@@ -1267,3 +1359,13 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+CREDITS_THANKS,Obrigado por jogar!,Thank you for playing!
+CREDITS_STORY,"Uma história de um herdeiro, cinco cidades e um céu que precisava ser libertado.","A story of an heir, five cities and a sky that needed to be set free."
+CREDITS_ENGINE,Feito com Godot Engine.,Made with Godot Engine.
+CREDITS_TO_BE_CONTINUED,A história continua...,The story continues...
+STORE_PREMIUM_OFFER,Oferta de boas-vindas: passe premium 7 dias,Welcome offer: 7-day premium pass
+STORE_PREMIUM_OFFER_DESC,"Só na primeira compra! Experiência em dobro, ouro em dobro e +10% em todos os atributos por 7 dias.","First purchase only! Double experience, double gold and +10% on every attribute for 7 days."
+OFFER_TITLE,Oferta de boas-vindas!,Welcome offer!
+OFFER_TEXT,"Passe premium de 7 dias por %s, só na sua primeira compra: experiência em dobro, ouro em dobro e +10%% em todos os atributos.","7-day premium pass for %s, only on your first purchase: double experience, double gold and +10%% on every attribute."
+OFFER_BUY,Quero! (%s),I want it! (%s)
+OFFER_LATER,Agora não,Not now

@@ -1,0 +1,73 @@
+{
+  "_comment": "Cidadela Celeste (Fase 6.5c, nível 65): plataforma de nuvens e mármore no alto da Escadaria do Céu. O Vaelor luta em 3 fases (deus de máscara dourada; desmascarado, o Doran; corrompido pelo Sem-Rosto, com escudo e cristais do vazio). Depois: a cena final, os créditos e a volta a Pradoluz.",
+  "id": "cidadela",
+  "name": "MAP_CIDADELA",
+  "size": [70, 76],
+  "seed": 321,
+  "ground": "#d6cce6",
+  "indoor": true,
+  "sky": "#e6d2ff",
+  "ambient": 0.6,
+  "ambient_color": "#fff0e0",
+  "sun": 0.8,
+  "sun_color": "#fff2d6",
+  "patches": {"color": "#c4b8d8", "count": 80},
+  "spawns": {"from_escadaria_ceu": [0, 26, 0]},
+  "exits": [
+    {"to": "escadaria_ceu", "spawn": "from_cidadela", "pos": [0, 29.5], "size": [6, 2], "label": "MAP_ESCADARIA_CEU"}
+  ],
+  "rest_points": [
+    {"id": "cidadela_portal", "name": "REST_CIDADELA_PORTAL", "pos": [2.5, 24], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 30], [0, 16], [0, -10]], "width": 2.6, "color": "#f2d27a"}
+  ],
+  "lines": [
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[20.33, 4.42], [8.42, 16.33]], "seed": 330, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[8.42, 16.33], [5.0, 16.33]], "seed": 331, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[-5.0, 16.33], [-8.42, 16.33]], "seed": 341, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[-8.42, 16.33], [-20.33, 4.42]], "seed": 332, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[-20.33, 4.42], [-20.33, -12.42]], "seed": 333, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[-20.33, -12.42], [-8.42, -24.33]], "seed": 334, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[-8.42, -24.33], [8.42, -24.33]], "seed": 335, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[8.42, -24.33], [20.33, -12.42]], "seed": 336, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.9, 1.2], "jitter": 0.3, "points": [[20.33, -12.42], [20.33, 4.42]], "seed": 337, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.8, 1.0], "jitter": 0.2, "points": [[5.0, 16.33], [5.0, 31.0]], "seed": 360, "solid": true},
+    {"ids": ["prp_nuvem"], "spacing": 2.6, "scale": [0.8, 1.0], "jitter": 0.2, "points": [[-5.0, 16.33], [-5.0, 31.0]], "seed": 361, "solid": true}
+  ],
+  "props": [
+    {"id": "env_coluna_celeste", "pos": [17.09, 3.08]},
+    {"id": "env_coluna_celeste", "pos": [7.08, 13.09]},
+    {"id": "env_coluna_celeste", "pos": [-7.08, 13.09]},
+    {"id": "env_coluna_celeste", "pos": [-17.09, 3.08]},
+    {"id": "env_coluna_celeste", "pos": [-17.09, -11.08]},
+    {"id": "env_coluna_celeste", "pos": [-7.08, -21.09]},
+    {"id": "env_coluna_celeste", "pos": [7.08, -21.09]},
+    {"id": "env_coluna_celeste", "pos": [17.09, -11.08]},
+    {"id": "env_portal_celeste", "pos": [-3.5, 17.5]},
+    {"id": "env_portal_celeste", "pos": [3.5, 17.5]},
+    {"id": "prp_estatua_alada", "pos": [-14, -18], "rot": 40},
+    {"id": "prp_estatua_alada", "pos": [14, -18], "rot": -40},
+    {"id": "prp_nuvem", "pos": [29.78, -0.34], "rot": 0},
+    {"id": "prp_nuvem", "pos": [25.24, 12.21], "rot": 53},
+    {"id": "prp_nuvem", "pos": [15.71, 21.56], "rot": 106},
+    {"id": "prp_nuvem", "pos": [-21.42, 17.0], "rot": 265},
+    {"id": "prp_nuvem", "pos": [-28.41, 5.63], "rot": 318},
+    {"id": "prp_nuvem", "pos": [-29.78, -7.66], "rot": 11},
+    {"id": "prp_nuvem", "pos": [-25.24, -20.21], "rot": 64},
+    {"id": "prp_nuvem", "pos": [-15.71, -29.56], "rot": 117},
+    {"id": "prp_nuvem", "pos": [-3.06, -33.84], "rot": 170},
+    {"id": "prp_nuvem", "pos": [10.19, -32.22], "rot": 223},
+    {"id": "prp_nuvem", "pos": [21.42, -25.0], "rot": 276},
+    {"id": "prp_nuvem", "pos": [28.41, -13.63], "rot": 329}
+  ],
+  "scatter": [
+    {"ids": ["prp_flores", "prp_pedrinhas"], "count": 16, "rect": [-17, -22, 17, 12], "spacing": 4, "seed": 322}
+  ],
+  "enemy_zones": [],
+  "arena": {"gate": [[-5, 16.33], [5, 16.33]]},
+  "bosses": [
+    {"id": "vaelor", "pos": [0, -10], "level": 65, "yaw": 0, "unless_flag": "vaelor_defeated", "flag_on_death": "vaelor_defeated", "intro": "vaelor_intro", "power_spots": [[-12, -4], [12, -4], [-9, -17], [9, -17], [0, 6]]}
+  ],
+  "reset_sign": [-3, 22]
+}

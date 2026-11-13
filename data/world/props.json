@@ -1,230 +1,62 @@
 {
   "_comment": "Peças de cenário do Meshy. 'scale' corrige o tamanho estimado pelo Meshy (personagens ~1,9 m no jogo). 'collision': cylinder (raio em metros, já com a escala) ou box (caixa do modelo); null = sem colisão. 'light' acende uma luz. Peças com mais de 2,2 m ficam transparentes quando escondem o herói. 'wind' faz a planta balançar com o vento (sway = metros que a copa anda, flutter = tremor das folhas). 'night': true na luz = lampião que acende mais à noite.",
   "props": {
-    "prp_arvore": {
-      "scene": "res://assets/props/prp_arvore/prp_arvore.glb",
-      "wind": { "sway": 0.26, "flutter": 0.03 },
-      "scale": 0.55,
-      "collision": { "type": "cylinder", "radius": 0.45}
-    },
-    "prp_arbusto": { "scene": "res://assets/props/prp_arbusto/prp_arbusto.glb", "wind": { "sway": 0.1, "flutter": 0.025 }, "scale": 3.0, "collision": null},
-    "prp_pedra": {
-      "scene": "res://assets/props/prp_pedra/prp_pedra.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.6}
-    },
-    "prp_cerca": {
-      "scene": "res://assets/props/prp_cerca/prp_cerca.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" }
-    },
-    "prp_barril": {
-      "scene": "res://assets/props/prp_barril/prp_barril.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.42}
-    },
-    "prp_caixa": {
-      "scene": "res://assets/props/prp_caixa/prp_caixa.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" }
-    },
-    "prp_feno": {
-      "scene": "res://assets/props/prp_feno/prp_feno.glb",
-      "scale": 2.5,
-      "collision": { "type": "box" }
-    },
-    "prp_carroca": {
-      "scene": "res://assets/props/prp_carroca/prp_carroca.glb",
-      "scale": 1.15,
-      "collision": { "type": "box" }
-    },
-    "prp_poco": {
-      "scene": "res://assets/props/prp_poco/prp_poco.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 1.0}
-    },
-    "env_casa_pequena": {
-      "scene": "res://assets/environment/env_casa_pequena/env_casa_pequena.glb",
-      "scale": 0.7,
-      "collision": { "type": "box" }
-    },
-    "env_casa_media": {
-      "scene": "res://assets/environment/env_casa_media/env_casa_media.glb",
-      "scale": 0.8,
-      "collision": { "type": "box" }
-    },
-    "env_moinho": {
-      "scene": "res://assets/environment/env_moinho/env_moinho.glb",
-      "scale": 0.5,
-      "collision": { "type": "cylinder", "radius": 2.2}
-    },
-    "env_ferraria": {
-      "scene": "res://assets/environment/env_ferraria/env_ferraria.glb",
-      "scale": 1.4,
-      "collision": { "type": "box" },
-      "light": { "color": "#ff8a3d", "energy": 1.6, "range": 5.0, "y": 1.0}
-    },
-    "prp_barraca_mercado": {
-      "scene": "res://assets/props/prp_barraca_mercado/prp_barraca_mercado.glb",
-      "scale": 1.1,
-      "collision": { "type": "box" }
-    },
-    "prp_trigo": { "scene": "res://assets/props/prp_trigo/prp_trigo.glb", "wind": { "sway": 0.32, "flutter": 0.02 }, "scale": 0.6, "collision": null},
-    "prp_espantalho": {
-      "scene": "res://assets/props/prp_espantalho/prp_espantalho.glb",
-      "scale": 1.1,
-      "collision": { "type": "cylinder", "radius": 0.25}
-    },
-    "prp_pedra_passagem": {
-      "scene": "res://assets/props/prp_pedra_passagem/prp_pedra_passagem.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.7},
-      "light": { "color": "#4fe3ff", "energy": 1.4, "range": 5.0, "y": 1.6}
-    },
-    "prp_fogueira": {
-      "scene": "res://assets/props/prp_fogueira/prp_fogueira.glb",
-      "scale": 1.6,
-      "collision": null,
-      "light": { "color": "#ff9a3c", "energy": 2.0, "range": 6.0, "y": 0.8}
-    },
-    "prp_placa": {
-      "scene": "res://assets/props/prp_placa/prp_placa.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.2}
-    },
-    "prp_lampiao": {
-      "scene": "res://assets/props/prp_lampiao/prp_lampiao.glb",
-      "scale": 3.0,
-      "collision": { "type": "cylinder", "radius": 0.2},
-      "light": { "color": "#ffd27a", "energy": 1.2, "range": 5.0, "y": 2.0, "night": true}
-    },
-    "prp_banco": {
-      "scene": "res://assets/props/prp_banco/prp_banco.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" }
-    },
-    "prp_bigorna": {
-      "scene": "res://assets/props/prp_bigorna/prp_bigorna.glb",
-      "scale": 1.1,
-      "collision": { "type": "cylinder", "radius": 0.45}
-    },
-    "prp_pinheiro": {
-      "scene": "res://assets/props/prp_pinheiro/prp_pinheiro.glb",
-      "wind": { "sway": 0.18, "flutter": 0.012 },
-      "scale": 0.38,
-      "collision": { "type": "cylinder", "radius": 0.5}
-    },
-    "prp_arvore_torta": {
-      "scene": "res://assets/props/prp_arvore_torta/prp_arvore_torta.glb",
-      "wind": { "sway": 0.22, "flutter": 0.025 },
-      "scale": 0.9,
-      "collision": { "type": "cylinder", "radius": 0.45}
-    },
-    "prp_tronco_caido": {
-      "scene": "res://assets/props/prp_tronco_caido/prp_tronco_caido.glb",
-      "scale": 2.2,
-      "collision": { "type": "box" }
-    },
-    "prp_toco": {
-      "scene": "res://assets/props/prp_toco/prp_toco.glb",
-      "scale": 1.2,
-      "collision": { "type": "cylinder", "radius": 0.5}
-    },
-    "prp_cogumelos": { "scene": "res://assets/props/prp_cogumelos/prp_cogumelos.glb", "scale": 5.0, "collision": null},
-    "prp_flores": { "scene": "res://assets/props/prp_flores/prp_flores.glb", "wind": { "sway": 0.13, "flutter": 0.015 }, "scale": 2.5, "collision": null},
-    "prp_pedrinhas": { "scene": "res://assets/props/prp_pedrinhas/prp_pedrinhas.glb", "scale": 4.0, "collision": null},
-    "prp_cerca_quebrada": {
-      "scene": "res://assets/props/prp_cerca_quebrada/prp_cerca_quebrada.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" }
-    },
-    "env_entrada_mina": {
-      "scene": "res://assets/environment/env_entrada_mina/env_entrada_mina.glb",
-      "scale": 1.5,
-      "collision": null
-    },
-    "env_parede_mina": {
-      "scene": "res://assets/environment/env_parede_mina/env_parede_mina.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" },
-      "tile_length": 8.6
-    },
-    "env_viga_mina": {
-      "scene": "res://assets/environment/env_viga_mina/env_viga_mina.glb",
-      "scale": 2.5,
-      "collision": null
-    },
-    "env_portao_mina": {
-      "scene": "res://assets/environment/env_portao_mina/env_portao_mina.glb",
-      "scale": 1.4,
-      "collision": { "type": "box" }
-    },
-    "prp_trilho": { "scene": "res://assets/props/prp_trilho/prp_trilho.glb", "scale": 1.0, "collision": null},
-    "prp_carrinho_mina": {
-      "scene": "res://assets/props/prp_carrinho_mina/prp_carrinho_mina.glb",
-      "scale": 1.0,
-      "collision": { "type": "box" }
-    },
-    "prp_minerio": {
-      "scene": "res://assets/props/prp_minerio/prp_minerio.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.6}
-    },
-    "prp_cristal": {
-      "scene": "res://assets/props/prp_cristal/prp_cristal.glb",
-      "scale": 6.0,
-      "collision": { "type": "cylinder", "radius": 0.4},
-      "light": { "color": "#b46bff", "energy": 1.3, "range": 4.5, "y": 0.8}
-    },
-    "prp_lampiao_mina": {
-      "scene": "res://assets/props/prp_lampiao_mina/prp_lampiao_mina.glb",
-      "scale": 2.5,
-      "collision": { "type": "cylinder", "radius": 0.2},
-      "light": { "color": "#ffc46b", "energy": 1.6, "range": 6.5, "y": 1.1}
-    },
-    "prp_barril_polvora": {
-      "scene": "res://assets/props/prp_barril_polvora/prp_barril_polvora.glb",
-      "scale": 1.0,
-      "collision": { "type": "cylinder", "radius": 0.42}
-    },
-    "env_muralha": {
-      "scene": "res://assets/environment/env_muralha/env_muralha.glb",
-      "scale": 1.6,
-      "collision": { "type": "box" },
-      "tile_length": 5.9
-    },
-    "env_muralha_torre": {
-      "scene": "res://assets/environment/env_muralha_torre/env_muralha_torre.glb",
-      "scale": 0.6,
-      "collision": { "type": "cylinder", "radius": 1.8}
-    },
-    "env_portao_cidade": {
-      "scene": "res://assets/environment/env_portao_cidade/env_portao_cidade.glb",
-      "scale": 1.4,
-      "collision": null
-    },
-    "prp_portal": {
-      "scene": "res://assets/props/prp_portal/prp_portal.glb",
-      "scale": 1.3,
-      "collision": null,
-      "light": { "color": "#5fe8ff", "energy": 1.8, "range": 6.0, "y": 1.8}
-    },
-    "prp_junco": { "scene": "res://assets/props/prp_junco/prp_junco.glb", "wind": { "sway": 0.26, "flutter": 0.012 }, "scale": 0.7, "collision": null},
-    "prp_rochedo": {
-      "scene": "res://assets/props/prp_rochedo/prp_rochedo.glb",
-      "scale": 0.2,
-      "collision": { "type": "cylinder", "radius": 1.3}
-    },
-    "prp_arvore_seca": { "scene": "res://assets/props/prp_arvore_seca/prp_arvore_seca.glb", "wind": { "sway": 0.08, "flutter": 0.0 }, "scale": 0.6, "collision": { "type": "cylinder", "radius": 0.35}},
-    "prp_arbusto_seco": { "scene": "res://assets/props/prp_arbusto_seco/prp_arbusto_seco.glb", "wind": { "sway": 0.08, "flutter": 0.02 }, "scale": 3.7, "collision": null},
-    "prp_capim_seco": { "scene": "res://assets/props/prp_capim_seco/prp_capim_seco.glb", "wind": { "sway": 0.2, "flutter": 0.02 }, "scale": 1.5, "collision": null},
-    "prp_arenito": { "scene": "res://assets/props/prp_arenito/prp_arenito.glb", "scale": 8.7, "collision": { "type": "cylinder", "radius": 1.0}},
-    "prp_arenito_pequeno": { "scene": "res://assets/props/prp_arenito_pequeno/prp_arenito_pequeno.glb", "scale": 1.1, "collision": { "type": "box"}},
-    "prp_carroca_quebrada": { "scene": "res://assets/props/prp_carroca_quebrada/prp_carroca_quebrada.glb", "scale": 1.1, "collision": { "type": "box"}},
-    "prp_tenda": { "scene": "res://assets/props/prp_tenda/prp_tenda.glb", "scale": 2.0, "collision": { "type": "box"}},
-    "prp_placa_estrada": { "scene": "res://assets/props/prp_placa_estrada/prp_placa_estrada.glb", "scale": 1.0, "collision": { "type": "cylinder", "radius": 0.15}},
-    "env_casa_adobe": {"scene": "res://assets/environment/env_casa_adobe/env_casa_adobe.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "box"}},
-    "env_casa_adobe_alta": {"scene": "res://assets/environment/env_casa_adobe_alta/env_casa_adobe_alta.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}},
+    "prp_arvore": {"scene": "res://assets/props/prp_arvore/prp_arvore.glb", "wind": {"sway": 0.26, "flutter": 0.03}, "scale": 0.55, "collision": {"type": "cylinder", "radius": 0.45}},
+    "prp_arbusto": {"scene": "res://assets/props/prp_arbusto/prp_arbusto.glb", "wind": {"sway": 0.1, "flutter": 0.025}, "scale": 3.0, "collision": null},
+    "prp_pedra": {"scene": "res://assets/props/prp_pedra/prp_pedra.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.6}},
+    "prp_cerca": {"scene": "res://assets/props/prp_cerca/prp_cerca.glb", "scale": 1.0, "collision": {"type": "box"}},
+    "prp_barril": {"scene": "res://assets/props/prp_barril/prp_barril.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.42}},
+    "prp_caixa": {"scene": "res://assets/props/prp_caixa/prp_caixa.glb", "scale": 1.0, "collision": {"type": "box"}},
+    "prp_feno": {"scene": "res://assets/props/prp_feno/prp_feno.glb", "scale": 2.5, "collision": {"type": "box"}},
+    "prp_carroca": {"scene": "res://assets/props/prp_carroca/prp_carroca.glb", "scale": 1.15, "collision": {"type": "box"}},
+    "prp_poco": {"scene": "res://assets/props/prp_poco/prp_poco.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 1.0}},
+    "env_casa_pequena": {"scene": "res://assets/environment/env_casa_pequena/env_casa_pequena.glb", "scale": 0.84, "collision": {"type": "box"}, "interior": 1},
+    "env_casa_media": {"scene": "res://assets/environment/env_casa_media/env_casa_media.glb", "scale": 0.96, "collision": {"type": "box"}, "interior": 2},
+    "env_moinho": {"scene": "res://assets/environment/env_moinho/env_moinho.glb", "scale": 0.5, "collision": {"type": "cylinder", "radius": 2.2}},
+    "env_ferraria": {"scene": "res://assets/environment/env_ferraria/env_ferraria.glb", "scale": 1.4, "collision": {"type": "box"}, "light": {"color": "#ff8a3d", "energy": 1.6, "range": 5.0, "y": 1.0}},
+    "prp_barraca_mercado": {"scene": "res://assets/props/prp_barraca_mercado/prp_barraca_mercado.glb", "scale": 1.1, "collision": {"type": "box"}},
+    "prp_trigo": {"scene": "res://assets/props/prp_trigo/prp_trigo.glb", "wind": {"sway": 0.32, "flutter": 0.02}, "scale": 0.6, "collision": null},
+    "prp_espantalho": {"scene": "res://assets/props/prp_espantalho/prp_espantalho.glb", "scale": 1.1, "collision": {"type": "cylinder", "radius": 0.25}},
+    "prp_pedra_passagem": {"scene": "res://assets/props/prp_pedra_passagem/prp_pedra_passagem.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#4fe3ff", "energy": 1.4, "range": 5.0, "y": 1.6}},
+    "prp_fogueira": {"scene": "res://assets/props/prp_fogueira/prp_fogueira.glb", "scale": 1.6, "collision": null, "light": {"color": "#ff9a3c", "energy": 2.0, "range": 6.0, "y": 0.8}},
+    "prp_placa": {"scene": "res://assets/props/prp_placa/prp_placa.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.2}},
+    "prp_lampiao": {"scene": "res://assets/props/prp_lampiao/prp_lampiao.glb", "scale": 3.0, "collision": {"type": "cylinder", "radius": 0.2}, "light": {"color": "#ffd27a", "energy": 1.2, "range": 5.0, "y": 2.0, "night": true}},
+    "prp_banco": {"scene": "res://assets/props/prp_banco/prp_banco.glb", "scale": 1.0, "collision": {"type": "box"}},
+    "prp_bigorna": {"scene": "res://assets/props/prp_bigorna/prp_bigorna.glb", "scale": 1.1, "collision": {"type": "cylinder", "radius": 0.45}},
+    "prp_pinheiro": {"scene": "res://assets/props/prp_pinheiro/prp_pinheiro.glb", "wind": {"sway": 0.18, "flutter": 0.012}, "scale": 0.38, "collision": {"type": "cylinder", "radius": 0.5}},
+    "prp_arvore_torta": {"scene": "res://assets/props/prp_arvore_torta/prp_arvore_torta.glb", "wind": {"sway": 0.22, "flutter": 0.025}, "scale": 0.9, "collision": {"type": "cylinder", "radius": 0.45}},
+    "prp_tronco_caido": {"scene": "res://assets/props/prp_tronco_caido/prp_tronco_caido.glb", "scale": 2.2, "collision": {"type": "box"}},
+    "prp_toco": {"scene": "res://assets/props/prp_toco/prp_toco.glb", "scale": 1.2, "collision": {"type": "cylinder", "radius": 0.5}},
+    "prp_cogumelos": {"scene": "res://assets/props/prp_cogumelos/prp_cogumelos.glb", "scale": 5.0, "collision": null},
+    "prp_flores": {"scene": "res://assets/props/prp_flores/prp_flores.glb", "wind": {"sway": 0.13, "flutter": 0.015}, "scale": 2.5, "collision": null},
+    "prp_pedrinhas": {"scene": "res://assets/props/prp_pedrinhas/prp_pedrinhas.glb", "scale": 4.0, "collision": null},
+    "prp_cerca_quebrada": {"scene": "res://assets/props/prp_cerca_quebrada/prp_cerca_quebrada.glb", "scale": 1.0, "collision": {"type": "box"}},
+    "env_entrada_mina": {"scene": "res://assets/environment/env_entrada_mina/env_entrada_mina.glb", "scale": 1.5, "collision": null},
+    "env_parede_mina": {"scene": "res://assets/environment/env_parede_mina/env_parede_mina.glb", "scale": 1.0, "collision": {"type": "box"}, "tile_length": 8.6},
+    "env_viga_mina": {"scene": "res://assets/environment/env_viga_mina/env_viga_mina.glb", "scale": 2.5, "collision": null},
+    "env_portao_mina": {"scene": "res://assets/environment/env_portao_mina/env_portao_mina.glb", "scale": 1.4, "collision": {"type": "box"}},
+    "prp_trilho": {"scene": "res://assets/props/prp_trilho/prp_trilho.glb", "scale": 1.0, "collision": null},
+    "prp_carrinho_mina": {"scene": "res://assets/props/prp_carrinho_mina/prp_carrinho_mina.glb", "scale": 1.0, "collision": {"type": "box"}},
+    "prp_minerio": {"scene": "res://assets/props/prp_minerio/prp_minerio.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.6}},
+    "prp_cristal": {"scene": "res://assets/props/prp_cristal/prp_cristal.glb", "scale": 6.0, "collision": {"type": "cylinder", "radius": 0.4}, "light": {"color": "#b46bff", "energy": 1.3, "range": 4.5, "y": 0.8}},
+    "prp_lampiao_mina": {"scene": "res://assets/props/prp_lampiao_mina/prp_lampiao_mina.glb", "scale": 2.5, "collision": {"type": "cylinder", "radius": 0.2}, "light": {"color": "#ffc46b", "energy": 1.6, "range": 6.5, "y": 1.1}},
+    "prp_barril_polvora": {"scene": "res://assets/props/prp_barril_polvora/prp_barril_polvora.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.42}},
+    "env_muralha": {"scene": "res://assets/environment/env_muralha/env_muralha.glb", "scale": 1.6, "collision": {"type": "box"}, "tile_length": 5.9},
+    "env_muralha_torre": {"scene": "res://assets/environment/env_muralha_torre/env_muralha_torre.glb", "scale": 0.6, "collision": {"type": "cylinder", "radius": 1.8}},
+    "env_portao_cidade": {"scene": "res://assets/environment/env_portao_cidade/env_portao_cidade.glb", "scale": 1.4, "collision": null},
+    "prp_portal": {"scene": "res://assets/props/prp_portal/prp_portal.glb", "scale": 1.3, "collision": null, "light": {"color": "#5fe8ff", "energy": 1.8, "range": 6.0, "y": 1.8}},
+    "prp_junco": {"scene": "res://assets/props/prp_junco/prp_junco.glb", "wind": {"sway": 0.26, "flutter": 0.012}, "scale": 0.7, "collision": null},
+    "prp_rochedo": {"scene": "res://assets/props/prp_rochedo/prp_rochedo.glb", "scale": 0.2, "collision": {"type": "cylinder", "radius": 1.3}},
+    "prp_arvore_seca": {"scene": "res://assets/props/prp_arvore_seca/prp_arvore_seca.glb", "wind": {"sway": 0.08, "flutter": 0.0}, "scale": 0.6, "collision": {"type": "cylinder", "radius": 0.35}},
+    "prp_arbusto_seco": {"scene": "res://assets/props/prp_arbusto_seco/prp_arbusto_seco.glb", "wind": {"sway": 0.08, "flutter": 0.02}, "scale": 3.7, "collision": null},
+    "prp_capim_seco": {"scene": "res://assets/props/prp_capim_seco/prp_capim_seco.glb", "wind": {"sway": 0.2, "flutter": 0.02}, "scale": 1.5, "collision": null},
+    "prp_arenito": {"scene": "res://assets/props/prp_arenito/prp_arenito.glb", "scale": 8.7, "collision": {"type": "cylinder", "radius": 1.0}},
+    "prp_arenito_pequeno": {"scene": "res://assets/props/prp_arenito_pequeno/prp_arenito_pequeno.glb", "scale": 1.1, "collision": {"type": "box"}},
+    "prp_carroca_quebrada": {"scene": "res://assets/props/prp_carroca_quebrada/prp_carroca_quebrada.glb", "scale": 1.1, "collision": {"type": "box"}},
+    "prp_tenda": {"scene": "res://assets/props/prp_tenda/prp_tenda.glb", "scale": 2.0, "collision": {"type": "box"}},
+    "prp_placa_estrada": {"scene": "res://assets/props/prp_placa_estrada/prp_placa_estrada.glb", "scale": 1.0, "collision": {"type": "cylinder", "radius": 0.15}},
+    "env_casa_adobe": {"scene": "res://assets/environment/env_casa_adobe/env_casa_adobe.glb", "scale": 6.6, "center_origin": true, "collision": {"type": "box"}, "interior": 1},
+    "env_casa_adobe_alta": {"scene": "res://assets/environment/env_casa_adobe_alta/env_casa_adobe_alta.glb", "scale": 7.2, "center_origin": true, "collision": {"type": "box"}, "interior": 2},
     "env_muralha_adobe": {"scene": "res://assets/environment/env_muralha_adobe/env_muralha_adobe.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}, "tile_length": 5.9},
     "env_portao_adobe": {"scene": "res://assets/environment/env_portao_adobe/env_portao_adobe.glb", "scale": 8.0, "center_origin": true, "collision": null},
     "prp_palmeira": {"scene": "res://assets/props/prp_palmeira/prp_palmeira.glb", "wind": {"sway": 0.22, "flutter": 0.03}, "scale": 5.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.35}},
@@ -246,7 +78,7 @@
     "prp_jarro_agua": {"scene": "res://assets/props/prp_jarro_agua/prp_jarro_agua.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.5}},
     "prp_poco_selado": {"scene": "res://assets/props/prp_poco_selado/prp_poco_selado.glb", "scale": 2.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.0}},
     "env_escada_areia": {"scene": "res://assets/environment/env_escada_areia/env_escada_areia.glb", "scale": 5.0, "center_origin": true, "collision": null},
-    "env_casa_nordica": {"scene": "res://assets/environment/env_casa_nordica/env_casa_nordica.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}},
+    "env_casa_nordica": {"scene": "res://assets/environment/env_casa_nordica/env_casa_nordica.glb", "scale": 7.2, "center_origin": true, "collision": {"type": "box"}, "interior": 1},
     "env_torre_madeira": {"scene": "res://assets/environment/env_torre_madeira/env_torre_madeira.glb", "scale": 6.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.4}},
     "prp_lenha_trancada": {"scene": "res://assets/props/prp_lenha_trancada/prp_lenha_trancada.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "box"}},
     "prp_braseiro_frio": {"scene": "res://assets/props/prp_braseiro_frio/prp_braseiro_frio.glb", "scale": 1.3, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}},
@@ -256,7 +88,7 @@
     "env_trono_gelo": {"scene": "res://assets/environment/env_trono_gelo/env_trono_gelo.glb", "scale": 3.6, "center_origin": true, "collision": {"type": "box"}},
     "prp_tumulo_bento": {"scene": "res://assets/props/prp_tumulo_bento/prp_tumulo_bento.glb", "scale": 1.8, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.8}, "light": {"color": "#ffb060", "energy": 0.8, "range": 3.0, "y": 0.5}},
     "prp_estandarte_gelo": {"scene": "res://assets/props/prp_estandarte_gelo/prp_estandarte_gelo.glb", "scale": 3.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.3}},
-    "env_casa_arvore": {"scene": "res://assets/environment/env_casa_arvore/env_casa_arvore.glb", "scale": 8.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 2.2}},
+    "env_casa_arvore": {"scene": "res://assets/environment/env_casa_arvore/env_casa_arvore.glb", "scale": 9.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 2.6}, "interior": 1},
     "env_arvore_mae": {"scene": "res://assets/environment/env_arvore_mae/env_arvore_mae.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}},
     "prp_lanterna_elfica": {"scene": "res://assets/props/prp_lanterna_elfica/prp_lanterna_elfica.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.2}, "light": {"color": "#b8ffb0", "energy": 1.4, "range": 6.0, "y": 2.2}},
     "env_cerca_elfica": {"scene": "res://assets/environment/env_cerca_elfica/env_cerca_elfica.glb", "scale": 3.0, "center_origin": true, "collision": {"type": "box"}, "tile_length": 2.9},
@@ -266,13 +98,27 @@
     "env_torre_vigia": {"scene": "res://assets/environment/env_torre_vigia/env_torre_vigia.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}},
     "prp_flor_espinho": {"scene": "res://assets/props/prp_flor_espinho/prp_flor_espinho.glb", "scale": 1.8, "center_origin": true, "collision": null, "light": {"color": "#d36bff", "energy": 1.0, "range": 4.0, "y": 1.0}},
     "env_arvore_mae_florida": {"scene": "res://assets/environment/env_arvore_mae_florida/env_arvore_mae_florida.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}, "light": {"color": "#ffd1ec", "energy": 1.4, "range": 14.0, "y": 8.0}},
-    "env_casa_capital_a": {"scene": "res://assets/environment/env_casa_capital_a/env_casa_capital_a.glb", "scale": 11.0, "center_origin": true, "collision": {"type": "box"}},
-    "env_casa_capital_b": {"scene": "res://assets/environment/env_casa_capital_b/env_casa_capital_b.glb", "scale": 12.0, "center_origin": true, "collision": {"type": "box"}},
+    "env_casa_capital_a": {"scene": "res://assets/environment/env_casa_capital_a/env_casa_capital_a.glb", "scale": 13.2, "center_origin": true, "collision": {"type": "box"}, "interior": 2},
+    "env_casa_capital_b": {"scene": "res://assets/environment/env_casa_capital_b/env_casa_capital_b.glb", "scale": 14.4, "center_origin": true, "collision": {"type": "box"}, "interior": 2},
     "prp_estandarte_lei": {"scene": "res://assets/props/prp_estandarte_lei/prp_estandarte_lei.glb", "scale": 3.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.3}},
     "prp_quadro_decreto": {"scene": "res://assets/props/prp_quadro_decreto/prp_quadro_decreto.glb", "scale": 2.4, "center_origin": true, "collision": {"type": "box"}},
     "prp_fonte_capital": {"scene": "res://assets/props/prp_fonte_capital/prp_fonte_capital.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 2.6}},
     "prp_barricada": {"scene": "res://assets/props/prp_barricada/prp_barricada.glb", "scale": 4.2, "center_origin": true, "collision": {"type": "box"}},
     "env_trono_lei": {"scene": "res://assets/environment/env_trono_lei/env_trono_lei.glb", "scale": 6.0, "center_origin": true, "collision": {"type": "box"}},
-    "prp_pilar_lei": {"scene": "res://assets/props/prp_pilar_lei/prp_pilar_lei.glb", "scale": 1.9, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "light": {"color": "#ffd86b", "energy": 1.1, "range": 4.5, "y": 1.2}}
+    "prp_pilar_lei": {"scene": "res://assets/props/prp_pilar_lei/prp_pilar_lei.glb", "scale": 1.9, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "light": {"color": "#ffd86b", "energy": 1.1, "range": 4.5, "y": 1.2}},
+    "prp_cama": {"scene": "res://assets/props/prp_cama/prp_cama.glb", "scale": 2.9, "center_origin": true, "collision": {"type": "box"}},
+    "prp_mesa": {"scene": "res://assets/props/prp_mesa/prp_mesa.glb", "scale": 2.6, "center_origin": true, "collision": {"type": "box"}},
+    "prp_fogao": {"scene": "res://assets/props/prp_fogao/prp_fogao.glb", "scale": 2.9, "center_origin": true, "collision": {"type": "box"}, "light": {"color": "#ffae5a", "energy": 1.2, "range": 5.0, "y": 0.6}},
+    "prp_armario": {"scene": "res://assets/props/prp_armario/prp_armario.glb", "scale": 2.9, "center_origin": true, "collision": {"type": "box"}},
+    "prp_estante": {"scene": "res://assets/props/prp_estante/prp_estante.glb", "scale": 2.9, "center_origin": true, "collision": {"type": "box"}},
+    "prp_sofa": {"scene": "res://assets/props/prp_sofa/prp_sofa.glb", "scale": 2.5, "center_origin": true, "collision": {"type": "box"}},
+    "prp_tapete": {"scene": "res://assets/props/prp_tapete/prp_tapete.glb", "scale": 3.4, "center_origin": true, "collision": null},
+    "prp_escada_interna": {"scene": "res://assets/props/prp_escada_interna/prp_escada_interna.glb", "scale": 3.0, "center_origin": true, "collision": null},
+    "prp_vaso": {"scene": "res://assets/props/prp_vaso/prp_vaso.glb", "scale": 1.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.35}},
+    "env_parede_casa": {"scene": "res://assets/environment/env_parede_casa/env_parede_casa.glb", "scale": 4.2, "center_origin": true, "collision": {"type": "box"}, "tile_length": 4.1},
+    "env_portal_celeste": {"scene": "res://assets/environment/env_portal_celeste/env_portal_celeste.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "box"}, "light": {"color": "#9fe8ff", "energy": 1.2, "range": 6.0, "y": 2.0}},
+    "prp_cristal_vazio": {"scene": "res://assets/props/prp_cristal_vazio/prp_cristal_vazio.glb", "scale": 1.9, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "light": {"color": "#c45bff", "energy": 1.1, "range": 4.5, "y": 1.0}},
+    "prp_nuvem": {"scene": "res://assets/props/prp_nuvem/prp_nuvem.glb", "scale": 3.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.2}},
+    "env_coluna_celeste": {"scene": "res://assets/environment/env_coluna_celeste/env_coluna_celeste.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#ffd27a", "energy": 0.9, "range": 5.0, "y": 4.5}}
   }
 }

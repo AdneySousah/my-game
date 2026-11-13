@@ -68,5 +68,31 @@
         "text": "STO_CASSIAN_3"
       }
     ]
+  },
+  "final": {
+    "music": "vitoria",
+    "panels": [
+      {
+        "image": "sto_final_1",
+        "text": "STO_FINAL_1"
+      },
+      {
+        "image": "sto_final_2",
+        "text": "STO_FINAL_2"
+      },
+      {
+        "image": "sto_final_3",
+        "text": "STO_FINAL_3"
+      },
+      {
+        "image": "sto_final_4",
+        "text": "STO_FINAL_4"
+      },
+      {
+        "image": "sto_final_5",
+        "text": "STO_FINAL_5"
+      }
+    ],
+    "end_text": "STO_FINAL_END"
   }
 }

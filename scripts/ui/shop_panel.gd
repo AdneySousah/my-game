@@ -142,7 +142,8 @@ func open() -> void:
 	_result = ""
 	if store_only:
 		_tab = "special"
-	elif _was_store_only or (_tab == "special" and not Store.available()):
+	elif _was_store_only or _tab == "special":
+		# Merchants sell for gold only; the special shop opens from the top menu.
 		_tab = "buy"
 	_was_store_only = store_only
 	_refresh()
@@ -168,9 +169,9 @@ func _refresh() -> void:
 	_title.text = tr("SHOP_TAB_SPECIAL") if store_only else tr(str((Data.shop.get("merchants", {}) as Dictionary).get(merchant, {}).get("name", "SHOP_TITLE")))
 	_tabs_row.visible = not store_only
 	_gold.text = tr("SMITH_GOLD") % (player.gold if player else 0)
-	(_tab_btns["special"] as Button).visible = Store.available()
-	if _tab == "special" and not Store.available():
-		_tab = "buy"
+	(_tab_btns["special"] as Button).visible = false
+	if _tab == "special" and not (store_only and Store.available()):
+		_tab = "buy" if not store_only else "special"
 	for t: String in _tab_btns:
 		var tb: Button = _tab_btns[t]
 		tb.modulate = Color.WHITE if t == _tab else Color(0.55, 0.48, 0.42)
@@ -317,6 +318,9 @@ func _show_special() -> void:
 	list.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	scroll.add_child(list)
 	for p: Dictionary in Store.products:
+		# The welcome offer disappears after the first purchase.
+		if bool(p.get("first_purchase_only", false)) and not Store.first_purchase_open():
+			continue
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation", 10)
 		list.add_child(row)

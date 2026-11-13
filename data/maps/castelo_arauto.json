@@ -11,9 +11,10 @@
   "sun": 1.0,
   "sun_color": "#fff0d6",
   "patches": {"color": "#b4ad9c", "count": 120},
-  "spawns": {"from_altarea": [0, 42, 0]},
+  "spawns": {"from_altarea": [0, 42, 0], "from_escadaria_ceu": [-14, -36, 180]},
   "exits": [
-    {"to": "altarea", "spawn": "from_castelo_arauto", "pos": [0, 48], "size": [6, 2], "label": "MAP_ALTAREA", "model": "env_portao_cidade", "model_pos": [0, 50], "model_rot": 180}
+    {"to": "altarea", "spawn": "from_castelo_arauto", "pos": [0, 48], "size": [6, 2], "label": "MAP_ALTAREA", "model": "env_portao_cidade", "model_pos": [0, 50], "model_rot": 180},
+    {"to": "escadaria_ceu", "spawn": "from_castelo_arauto", "pos": [-14, -40], "size": [4, 2], "label": "MAP_ESCADARIA_CEU", "model": "env_portal_celeste", "model_pos": [-14, -42.5], "if_flag": "cassian_defeated", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "npcs": [
     {"id": "severin", "pos": [-4, 40], "yaw": 180, "if_flag": "act5_city"}

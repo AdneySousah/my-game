@@ -198,6 +198,19 @@
       "rewards": { "xp": 32000, "gold": 9000, "items": { "pot_vida_g": 10, "mat_insignia_chefe": 5, "eq_espada_lendario": 1 } }
     },
     {
+      "id": "main_18", "type": "main", "name": "QUEST_MAIN_18", "auto": true,
+      "requires": ["main_17"], "min_level": 62,
+      "steps": [
+        { "type": "reach", "map": "escadaria_ceu", "pos": [0, 40], "radius": 8, "text": "OBJ_CLIMB_STAIRWAY", "dialogue": "main_18_stairs" },
+        { "type": "kill", "enemy": "sentinela_celeste", "count": 8, "map": "escadaria_ceu", "pos": [-18, 22], "text": "OBJ_KILL_SENTINELS" },
+        { "type": "reach", "map": "cidadela", "pos": [0, 20], "radius": 7, "text": "OBJ_REACH_CITADEL", "dialogue": "main_18_citadel" },
+        { "type": "kill", "enemy": "vaelor", "count": 1, "map": "cidadela", "pos": [0, -10], "text": "OBJ_KILL_VAELOR", "skip_if_flag": "vaelor_defeated" },
+        { "type": "talk", "npc": "marta", "dialogue": "main_18_end", "text": "OBJ_TALK_MARTA_END" }
+      ],
+      "set_flag": "game_complete", "end_note": "QUEST_THE_END",
+      "rewards": { "xp": 40000, "gold": 15000, "items": { "trevo_real": 3, "broca_real": 2, "mat_insignia_chefe": 10 } }
+    },
+    {
       "id": "side_decretos", "type": "side", "name": "QUEST_SIDE_DECRETOS", "giver": "aurelio", "offer": "side_decretos_offer",
       "requires": ["main_15"], "min_level": 57,
       "steps": [

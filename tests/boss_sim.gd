@@ -39,6 +39,9 @@ func _ready() -> void:
 	elif boss_id == "cassian":
 		Main.start_map = "castelo_arauto"
 		Main.start_spawn = "pos:0:-17:180"
+	elif boss_id == "vaelor":
+		Main.start_map = "cidadela"
+		Main.start_spawn = "pos:0:8:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	if boss_id == "golem":
 		Session.flags.erase("golem_defeated")
@@ -54,7 +57,7 @@ func _ready() -> void:
 		player.stats.spend_point("str" if n % 5 < 3 else "vit")
 		n += 1
 	player.rest()
-	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra", "cassian"]:
+	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra", "cassian", "vaelor"]:
 		Session.add_item("pot_vida_m", 6)
 		Session.add_item("pot_vida_g", 3)
 		Session.add_item("pot_folego_m", 3)

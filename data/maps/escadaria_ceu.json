@@ -1,0 +1,59 @@
+{
+  "_comment": "Escadaria do Céu (Fase 6.5c, níveis 63-64): degraus de luz dourada entre nuvens, colunas brancas e as sentinelas celestes do Vaelor. Sul: Castelo do Arauto. Norte: Cidadela Celeste.",
+  "id": "escadaria_ceu",
+  "name": "MAP_ESCADARIA_CEU",
+  "size": [104, 104],
+  "seed": 311,
+  "ground": "#cfd9ee",
+  "grass": {"count": 200, "root": "#cdd8ef", "tip": "#ffffff"},
+  "sky": "#a9c4ff",
+  "ambient": 0.6,
+  "sun": 1.0,
+  "sun_color": "#fff6e0",
+  "patches": {"color": "#b9c4e0", "count": 120},
+  "spawns": {"from_castelo_arauto": [0, 46, 0], "from_cidadela": [0, -46, 180]},
+  "exits": [
+    {"to": "castelo_arauto", "spawn": "from_escadaria_ceu", "pos": [0, 52], "size": [10, 2], "label": "MAP_CASTELO_ARAUTO", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "cidadela", "spawn": "from_escadaria_ceu", "pos": [0, -52], "size": [10, 2], "label": "MAP_CIDADELA", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "escadaria_ceu_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 5400, "items": {"pot_vida_g": 6, "trevo_real": 1, "mat_insignia_chefe": 3}},
+    {"id": "escadaria_ceu_bau_2", "pos": [31, -24], "yaw": -90, "gold": 5600, "items": {"pot_folego_g": 4, "broca_real": 1, "gema_topazio_3": 1}}
+  ],
+  "rest_points": [
+    {"id": "escadaria_ceu_degrau", "name": "REST_ESCADARIA_DEGRAU", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "escadaria_ceu_mirante", "name": "REST_ESCADARIA_MIRANTE", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#f2d27a"}
+  ],
+  "props": [
+    {"id": "env_portal_celeste", "pos": [-5, 44], "rot": 0},
+    {"id": "env_portal_celeste", "pos": [5, 44], "rot": 0},
+    {"id": "env_coluna_celeste", "pos": [-8, 20]},
+    {"id": "env_coluna_celeste", "pos": [8, 16]},
+    {"id": "env_coluna_celeste", "pos": [-6, -8]},
+    {"id": "env_coluna_celeste", "pos": [14, -18]},
+    {"id": "prp_estatua_alada", "pos": [-16, 2], "rot": 60},
+    {"id": "prp_estatua_alada", "pos": [18, 4], "rot": -60},
+    {"id": "env_portal_celeste", "pos": [-5, -44], "rot": 0},
+    {"id": "env_portal_celeste", "pos": [5, -44], "rot": 0}
+  ],
+  "lines": [
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 3110, "solid": true},
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 3111, "solid": true},
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 3112, "solid": true},
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 3113, "solid": true},
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 3114, "solid": true},
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 3115, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_nuvem", "prp_nuvem", "env_coluna_celeste", "prp_nuvem"], "count": 55, "rect": [-45, -47, 45, 47], "spacing": 6, "seed": 312},
+    {"ids": ["prp_flores", "prp_nuvem", "prp_pedrinhas"], "count": 30, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 313}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"sentinela_celeste": 3, "vigia_celeste": 2}, "level": [63, 64], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"sentinela_celeste": 3, "vigia_celeste": 2}, "level": [63, 64], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"sentinela_celeste": 3, "vigia_celeste": 2}, "level": [64, 64], "respawn": 25}
+  ]
+}

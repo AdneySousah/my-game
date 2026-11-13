@@ -6394,6 +6394,558 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "prp_cama",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_cama/prp_cama.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_mesa",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_mesa/prp_mesa.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_fogao",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_fogao/prp_fogao.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_armario",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_armario/prp_armario.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_estante",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_estante/prp_estante.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_sofa",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_sofa/prp_sofa.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_tapete",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_tapete/prp_tapete.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_escada_interna",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_escada_interna/prp_escada_interna.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_vaso",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/props/prp_vaso/prp_vaso.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_parede_casa",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "móvel das casas por dentro",
+      "file": "assets/environment/env_parede_casa/env_parede_casa.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_vaelor",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Vaelor, deus de máscara dourada (animações do Brannoc)",
+      "file": "assets/enemies/boss_vaelor/boss_vaelor.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_vaelor_desmascarado",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Vaelor desmascarado (Retexture: o Doran)",
+      "file": "assets/enemies/boss_vaelor_desmascarado/boss_vaelor_desmascarado.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "boss_vaelor_corrompido",
+      "category": "boss",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Vaelor corrompido pelo Sem-Rosto (animações do Gigante de Gelo)",
+      "file": "assets/enemies/boss_vaelor_corrompido/boss_vaelor_corrompido.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_sentinela_celeste",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "sentinela celeste",
+      "file": "assets/enemies/enm_sentinela_celeste/enm_sentinela_celeste.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_vigia_celeste",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "vigia celeste (Retexture do arqueiro da Lei)",
+      "file": "assets/enemies/enm_vigia_celeste/enm_vigia_celeste.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_espada_vaelor",
+      "category": "wpn",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "espada do sol",
+      "file": "assets/weapons/wpn_espada_vaelor/wpn_espada_vaelor.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_portal_celeste",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "portal celeste",
+      "file": "assets/environment/env_portal_celeste/env_portal_celeste.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_coluna_celeste",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "coluna celeste",
+      "file": "assets/environment/env_coluna_celeste/env_coluna_celeste.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_cristal_vazio",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "cristal do vazio (arena do Vaelor)",
+      "file": "assets/props/prp_cristal_vazio/prp_cristal_vazio.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_nuvem",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "nuvem",
+      "file": "assets/props/prp_nuvem/prp_nuvem.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "pro_final",
+      "category": "pro",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "cena final (5 painéis)",
+      "file": "assets/story/pro_final/pro_final.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 30,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato5c",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "telas da Escadaria e da Cidadela",
+      "file": "assets/ui/ui_loading_ato5c/ui_loading_ato5c.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 12,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retratos_final",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "retratos Vaelor e Doran",
+      "file": "assets/ui/ui_retratos_final/ui_retratos_final.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

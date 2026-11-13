@@ -44,6 +44,10 @@ const STARTER_WEAPON: String = "eq_espada_aprendiz"
 var quick_slots: Dictionary = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
 ## Dungeons whose boss was called back by the entrance sign: {map_id: true}.
 var dungeon_resets: Dictionary = {}
+## Where the hero went into a house ({"map", "x", "z", "yaw", "key"}) and when each
+## emptied pot fills up again ({key: unix time}).
+var house_return: Dictionary = {}
+var vase_ready_at: Dictionary = {}
 
 
 func reset() -> void:
@@ -53,6 +57,8 @@ func reset() -> void:
 	quests.clear()
 	flags.clear()
 	dungeon_resets.clear()
+	house_return = {}
+	vase_ready_at.clear()
 	tracked_quest = ""
 	inventory.clear()
 	gear.clear()
@@ -127,7 +133,7 @@ func to_dict() -> Dictionary:
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
-		"day_hour": day_hour, "dungeon_resets": dungeon_resets,
+		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
 
@@ -139,6 +145,8 @@ func from_dict(d: Dictionary) -> void:
 	quests = d.get("quests", {})
 	flags = d.get("flags", {})
 	dungeon_resets = (d.get("dungeon_resets", {}) as Dictionary).duplicate()
+	house_return = (d.get("house_return", {}) as Dictionary).duplicate()
+	vase_ready_at = (d.get("vase_ready_at", {}) as Dictionary).duplicate()
 	tracked_quest = str(d.get("tracked_quest", ""))
 	inventory.from_array(d.get("inventory", []))
 	# Saves from before the bag (4.x) kept materials apart: move them in.

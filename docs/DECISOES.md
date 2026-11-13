@@ -534,3 +534,40 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   5. Isolda (o irmão livre e a escada no céu).
   - Liga `act5_stairs`.
 - **Próximo:** 6.5c, Escadaria do Céu, Cidadela Celeste, Vaelor em 3 fases e o final.
+
+## Correções do dono, casas por dentro e oferta de boas-vindas (12–13/11/2026)
+- **Títulos das conquistas** apareciam como código ("TITLE_FIEL"...). Eram mais 10 textos que o gerador de falas apagava; agora ficam nele. O teste de nomes passou a varrer também a rotina, as lojas e a loja especial.
+- **Forja:**
+  - o desmontar mostra também as peças **equipadas** (marca verde, "Equipado"); ao desmontar uma delas o jogo pergunta "Tem certeza?" antes;
+  - chances menores para gastar mais: +19 em 5% e +20 em 3% (eram 10% e 5%); o 3º encaixe com a Broca comum em 5% (era 25%). A Broca Real continua sempre dando certo.
+- **Loja dos comerciantes** sem a aba "Especial": a loja especial fica só no botão do topo.
+- **Casas por dentro:**
+  - as residências das cidades ficaram 20% maiores;
+  - perto de uma casa aparece o botão **"Entrar"**;
+  - casa de 1 andar: cozinha, sala e quarto juntos (`interior_casa`);
+  - casa de 2 andares: cozinha e sala embaixo (`interior_terreo`), escada para o quarto em cima (`interior_cima`);
+  - **vasos** dão poções ou moedas (pouca quantidade, pela faixa de nível) e enchem de novo em 30 minutos, separados por casa (`data/world/houses.json`);
+  - a saída volta para a rua, no ponto onde o herói entrou (`Session.house_return`);
+  - entrar e sair usa o escurecer rápido, sem tela de carregamento.
+  - Móveis novos do Meshy: cama, mesa, fogão, armário, estante, sofá, tapete, escada, vaso e parede de madeira.
+- **Oferta de boas-vindas:** produto novo `premium_7d_oferta` (passe premium de 7 dias por R$ 4,99).
+  - Só para quem nunca comprou: some depois de qualquer compra (marcador `store_bought`).
+  - Aparece num banner quando o jogo abre pela tela inicial (nunca nos testes) e no topo da loja especial.
+  - Lista completa dos produtos com os textos reais para o Play Console: `docs/loja/produtos_play.md`.
+
+## Fase 6.5c: a Escadaria do Céu, o Vaelor e o final (13/11/2026)
+- **Caminho:** um portal atrás do trono do Castelo do Arauto (abre com `cassian_defeated`) leva à **Escadaria do Céu** (63–64, degraus de luz entre nuvens, sentinelas e vigias celestes). De lá se sobe à **Cidadela Celeste** (65), uma plataforma de nuvens.
+- **Vaelor em 3 fases** (as formas agora podem trocar mais de uma vez; as falas de cada troca ficam na forma nova, em enemies.json):
+  1. **Vaelor, Senhor dos Céus:** deus de máscara dourada com a espada do sol. Usa as animações do Brannoc.
+  2. **Vaelor Desmascarado** (66% da vida): a máscara cai e aparece o rosto do **Doran**, a mão sem um dedo. O Lio entende que o deus é o pai dele. O Doran pede que ele fuja; o Lio não foge.
+  3. **Vaelor Corrompido** (33%): o Sem-Rosto toma o corpo. Gigante de armadura negra e roxa, com as animações do Gigante de Gelo. Escudo de quebra, **cristais do vazio** que o curam e raízes do vazio que prendem.
+- **Final:** cena ilustrada (5 painéis):
+  1. a máscara cai;
+  2. o Doran abraça o filho e pede perdão;
+  3. o Sem-Rosto arranca o resto do poder e foge por uma fenda além do céu;
+  4. as cinco cidades livres;
+  5. em Pradoluz, algo enorme abre os olhos entre as estrelas.
+  - Depois vêm os **créditos** (`CreditsRoll`, dá para pular tocando) e a volta a Pradoluz.
+  - A missão 18 termina falando com a Marta e liga `game_complete`. O jogo continua: masmorras, forja, rotina.
+- **Simulação** (nível 65, peças lendárias): vence em ~160 s, vida mínima 37%, sem mortes. A vida foi de 3000 para 2700.
+- **Pós-jogo** (Fase 6.6, ainda não feito): Modo Infernal nas masmorras e conjuntos lendários com visual.

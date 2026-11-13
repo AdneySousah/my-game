@@ -89,6 +89,7 @@ func _layout() -> void:
 func _continue() -> void:
 	SaveGame.load_game()
 	SaveGame.active = true
+	Main.welcome_offer = true
 	var ls: LoadingScreen = LoadingScreen.open(get_tree(), str(SaveGame.pending.get("map", Main.start_map)))
 	await ls.wait_shown()
 	get_tree().change_scene_to_file(Game.MAIN_SCENE)
@@ -115,6 +116,7 @@ func _start_new(difficulty: String = "normal") -> void:
 	Session.reset()
 	Session.difficulty = difficulty
 	SaveGame.active = true
+	Main.welcome_offer = true
 	Main.start_map = "pradoluz"
 	Main.start_spawn = "start"
 	get_tree().change_scene_to_file(PROLOGUE_SCENE)

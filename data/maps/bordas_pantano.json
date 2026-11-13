@@ -53,7 +53,7 @@
     {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"morto_pantano": 3, "cultista": 2}, "level": [49, 50], "respawn": 25}
   ],
   "rivers": [
-    {"points": [[-30, 4], [-20, 0], [-12, -6]], "width": 7, "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0},
-    {"points": [[18, 26], [28, 22], [36, 14]], "width": 6, "bank_ids": ["prp_junco"], "bank_spacing": 2.5}
+    {"points": [[-30, 4], [-20, 0], [-12, -6]], "width": 7, "deep": "#2f5a3c", "shallow": "#6f9a55", "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0},
+    {"points": [[18, 26], [28, 22], [36, 14]], "width": 6, "deep": "#2f5a3c", "shallow": "#6f9a55", "bank_ids": ["prp_junco"], "bank_spacing": 2.5}
   ]
 }

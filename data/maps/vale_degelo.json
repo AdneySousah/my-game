@@ -53,6 +53,6 @@
     {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"cultista": 2, "lagarto_pantano": 2}, "level": [45, 46], "respawn": 25}
   ],
   "rivers": [
-    {"points": [[-40, -10], [-24, -4], [-14, 6], [-20, 20]], "width": 4, "bank_ids": ["prp_junco", "prp_flores"], "bank_spacing": 3.0}
+    {"points": [[-40, -10], [-24, -4], [-14, 6], [-20, 20]], "width": 4, "deep": "#3f86c0", "shallow": "#a8e4f0", "bank_ids": ["prp_junco", "prp_flores"], "bank_spacing": 3.0}
   ]
 }

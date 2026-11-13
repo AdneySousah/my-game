@@ -963,6 +963,14 @@ func _owner_1311_test() -> void:
 	add_child(main)
 	await _frames(8)
 	var p: Player = main.player
+	# Water (owner, 13/11): smooth ribbons with life on them.
+	var lilies: int = 0
+	var frogs: int = 0
+	for c: Node in main.map.get_children():
+		if c is PondLife:
+			lilies += (c.get("_lilies") as Array).size()
+			frogs += (c.get("_frogs") as Array).size()
+	check(main.map.water_paths.size() == 2 and lilies > 0 and frogs > 0, "the forest rivers have water lilies and frogs (%d, %d)" % [lilies, frogs])
 	# Bento's orc hunt: the camp the arrow points at keeps orcs around, and the arrow
 	# points at the nearest one.
 	Session.quests["main_03"] = {"step": 1, "count": 0, "picked": [], "done": false}

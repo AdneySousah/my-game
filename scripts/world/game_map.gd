@@ -22,6 +22,8 @@ var vases: Array[Node3D] = []
 var reset_sign: DungeonSign
 ## Dungeon difficulty signs, quest boards and wanted posters in this map (DungeonSign).
 var signs: Array[DungeonSign] = []
+## Water in this map: [{"path": smoothed points, "half": half width}] (fish and frogs use it).
+var water_paths: Array[Dictionary] = []
 ## Today's wanted boss, when it is in this map.
 var wanted_boss: Enemy
 ## "Modo Infernal" sign next to it (only after the game is finished), or null.
@@ -461,21 +463,42 @@ func _build_rivers() -> void:
 		var width: float = float(r.get("width", 6.0))
 		var mat := ShaderMaterial.new()
 		mat.shader = shader
+		# Colours per river ("deep", "shallow"), e.g. murky green in the swamp.
+		if r.has("deep"):
+			mat.set_shader_parameter("deep_color", Color(str(r["deep"])))
+		if r.has("shallow"):
+			mat.set_shader_parameter("shallow_color", Color(str(r["shallow"])))
+		# One smooth ribbon along the points, with round ends and a wet bank under it
+		# (owner, 13/11: the old water was rectangles stuck together).
+		var line: Array[Vector3] = []
+		for q: Array in pts:
+			line.append(_v(q))
+		var path: Array[Vector3] = _smooth_path(line, 0.8)
+		var bank := MeshInstance3D.new()
+		bank.mesh = _water_ribbon(path, width * 0.5, 1.3, true)
+		var bank_mat := StandardMaterial3D.new()
+		bank_mat.vertex_color_use_as_albedo = true
+		bank_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		bank_mat.shading_mode = BaseMaterial3D.SHADING_MODE_PER_PIXEL
+		bank_mat.roughness = 0.9
+		bank_mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+		bank.material_override = bank_mat
+		bank.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		bank.position.y = 0.025
+		add_child(bank)
+		var water := MeshInstance3D.new()
+		water.mesh = _water_ribbon(path, width * 0.5, 0.0, false)
+		water.material_override = mat
+		water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		water.position.y = 0.06
+		add_child(water)
+		water_paths.append({"path": path, "half": width * 0.5})
 		for i: int in range(pts.size() - 1):
 			var a: Vector3 = _v(pts[i])
 			var b: Vector3 = _v(pts[i + 1])
 			var length: float = a.distance_to(b) + width * 0.5
 			var mid: Vector3 = (a + b) * 0.5
 			var yaw: float = atan2(b.x - a.x, b.z - a.z)
-			var water := MeshInstance3D.new()
-			var plane := PlaneMesh.new()
-			plane.size = Vector2(width, length)
-			water.mesh = plane
-			water.material_override = mat
-			water.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-			water.position = mid + Vector3(0, 0.05, 0)
-			water.rotation.y = yaw
-			add_child(water)
 			var body := StaticBody3D.new()
 			body.collision_layer = Game.LAYER_WORLD
 			var shape := CollisionShape3D.new()
@@ -489,6 +512,86 @@ func _build_rivers() -> void:
 			add_child(body)
 			_path_segments.append([a, b, width + 1.5])
 			_river_banks(r, a, b, width)
+		if r.get("life", true):
+			var life := PondLife.new()
+			var cold: bool = float((data.get("biome", {}) as Dictionary).get("snow", 0.0)) > 0.0
+			life.setup(path, width * 0.5, int(data.get("seed", 1)) + water_paths.size(), not cold)
+			add_child(life)
+
+
+## Catmull-Rom through the points, one sample about every `step` metres.
+func _smooth_path(pts: Array[Vector3], step: float) -> Array[Vector3]:
+	var out: Array[Vector3] = []
+	if pts.size() < 2:
+		return pts.duplicate()
+	for i: int in range(pts.size() - 1):
+		var p0: Vector3 = pts[maxi(i - 1, 0)]
+		var p1: Vector3 = pts[i]
+		var p2: Vector3 = pts[i + 1]
+		var p3: Vector3 = pts[mini(i + 2, pts.size() - 1)]
+		var n: int = maxi(1, ceili(p1.distance_to(p2) / step))
+		for k: int in n:
+			var t: float = float(k) / n
+			var t2: float = t * t
+			var t3: float = t2 * t
+			out.append(0.5 * ((2.0 * p1) + (p2 - p0) * t + (2.0 * p0 - 5.0 * p1 + 4.0 * p2 - p3) * t2 + (3.0 * p1 - p0 - 3.0 * p2 + p3) * t3))
+	out.append(pts.back())
+	return out
+
+
+## A flat strip along `path`, `half` metres to each side (a little wider here and there),
+## with round ends. UV.x goes 0..1 across, UV.y is metres along. With `bank`, the strip is
+## `extra` metres wider and fades out at its outer edge (vertex colour alpha).
+func _water_ribbon(path: Array[Vector3], half: float, extra: float, bank: bool) -> ArrayMesh:
+	var rows: Array[Array] = []
+	var n: int = path.size()
+	var t0: Vector3 = (path[1] - path[0]).normalized()
+	var t1: Vector3 = (path[n - 1] - path[n - 2]).normalized()
+	var cap: int = 6
+	for k: int in range(cap, 0, -1):
+		var s: float = float(k) / cap
+		rows.append([path[0] - t0 * half * s, t0, sqrt(1.0 - s * s)])
+	for i: int in n:
+		var tan: Vector3 = (path[mini(i + 1, n - 1)] - path[maxi(i - 1, 0)]).normalized()
+		rows.append([path[i], tan, 1.0 + 0.08 * sin(float(i) * 0.9)])
+	for k: int in range(1, cap + 1):
+		var s: float = float(k) / cap
+		rows.append([path[n - 1] + t1 * half * s, t1, sqrt(1.0 - s * s)])
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
+	var ground: Color = Color(str(data.get("ground", "#7BC950")))
+	var wet: Color = ground.darkened(0.35).lerp(Color("#6b5236"), 0.35)
+	var along: float = 0.0
+	var prev: Vector3 = rows[0][0]
+	var cols: int = 4 if bank else 2
+	for ri: int in rows.size():
+		var c: Vector3 = rows[ri][0]
+		along += c.distance_to(prev)
+		prev = c
+		var tan: Vector3 = rows[ri][1]
+		var side := Vector3(-tan.z, 0, tan.x)
+		var w: float = half * float(rows[ri][2])
+		var offsets: Array = [-(w + extra), -w, w, w + extra] if bank else [-w, w]
+		for j: int in cols:
+			var o: float = offsets[j]
+			st.set_uv(Vector2(float(j) / (cols - 1), along))
+			st.set_normal(Vector3.UP)
+			if bank:
+				st.set_color(Color(wet, 0.0 if j == 0 or j == 3 else 0.85))
+			st.add_vertex(c + side * o)
+	for ri: int in range(rows.size() - 1):
+		for j: int in cols - 1:
+			var a: int = ri * cols + j
+			var b: int = a + 1
+			var c2: int = a + cols
+			var d: int = c2 + 1
+			st.add_index(a)
+			st.add_index(c2)
+			st.add_index(b)
+			st.add_index(b)
+			st.add_index(c2)
+			st.add_index(d)
+	return st.commit()
 
 
 ## Plants along both banks of a river segment: "bank_ids" + optional "bank_spacing".

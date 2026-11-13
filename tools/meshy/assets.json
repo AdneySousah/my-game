@@ -7126,6 +7126,84 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "prp_peixe",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Peixe que pula nos lagos (animado por código)",
+      "file": "assets/props/prp_peixe/prp_peixe.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d4c2-bd16-713b-af11-a39277564a33",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d4c5-1950-755e-b22a-9a53118542b4",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d4c5-ebe4-713b-993a-3afe185a4422",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_vitoria_regia",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Vitória-régia com flor para os lagos",
+      "file": "assets/props/prp_vitoria_regia/prp_vitoria_regia.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d4c2-c229-7532-8411-8fb1fef7a02b",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d4c5-1edd-715d-92ea-04ce9809b88e",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_sapo",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Sapo dos lagos (pulos por código)",
+      "file": "assets/props/prp_sapo/prp_sapo.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d4c2-c4c2-7079-820f-faade68a524c",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d4c5-221b-7076-8c70-4cbc0b31d981",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

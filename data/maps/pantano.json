@@ -59,8 +59,8 @@
     {"pos": [-20, -4], "radius": 10, "max": 5, "types": {"cultista": 3, "lagarto_pantano": 2}, "level": [52, 53], "respawn": 25}
   ],
   "rivers": [
-    {"points": [[-32, 30], [-22, 26], [-14, 30]], "width": 6, "bank_ids": ["prp_junco"], "bank_spacing": 2.5},
-    {"points": [[20, -8], [30, -12], [38, -6]], "width": 6, "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0}
+    {"points": [[-32, 30], [-22, 26], [-14, 30]], "width": 6, "deep": "#2f5a3c", "shallow": "#6f9a55", "bank_ids": ["prp_junco"], "bank_spacing": 2.5},
+    {"points": [[20, -8], [30, -12], [38, -6]], "width": 6, "deep": "#2f5a3c", "shallow": "#6f9a55", "bank_ids": ["prp_junco", "prp_arvore_pantano"], "bank_spacing": 3.0}
   ],
   "arena": {"gate": [[-8, -20], [8, -20]]},
   "bosses": [

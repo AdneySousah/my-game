@@ -625,3 +625,9 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - "Seguir" no cartaz faz a seta levar até ele.
   - Prêmio: 120 × o nível em ouro, 6 Insígnias, 2 gemas, Trevo e Broca (e 2 Essências Infernais depois do final).
   - 4 conquistas novas: Procurados 1 e 10, quadros 10 e 50.
+- **Lagos e rios (pedido do dono, 13/11):** a água agora é uma faixa curva e suave (Catmull-Rom), com pontas arredondadas, margem molhada que se mistura ao chão e um shader novo (`water.gdshader`): fundo azul no meio, raso turquesa nas bordas, linha de espuma, ondinhas e brilhos. Cada rio pode ter cor própria (`deep`/`shallow`; pântano verde-escuro, vale gelado mais claro).
+  - **Vida na água** (`PondLife`, tudo animado por código): vitórias-régias boiando, sapos sobre elas que pulam de vez em quando e mergulham quando o herói chega perto, e peixes que saltam da água perto do herói, com respingo.
+  - Mapas de neve têm só peixes.
+  - Modelos novos do Meshy: peixe, vitória-régia e sapo (54 créditos).
+  - Fotos: `res://tests/pond_capture.tscn -- <pasta> [mapa ...]`.
+- **Áudio com o ElevenLabs:** plano em `docs/AUDIO.md`.

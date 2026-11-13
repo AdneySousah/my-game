@@ -21,6 +21,7 @@
   "npcs": [
     {"id": "isolda", "pos": [-12, -10], "yaw": 60},
     {"id": "aurelio", "pos": [-13, 12], "yaw": 50},
+    {"id": "andarilho", "pos": [11.5, 9.0], "yaw": 52},
     {"id": "matias", "pos": [14, 11], "yaw": -50}
   ],
   "rest_points": [

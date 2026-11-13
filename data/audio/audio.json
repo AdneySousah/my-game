@@ -794,7 +794,7 @@
     "castelo": "masmorra_castelo",
     "castelo_arauto": "masmorra_castelo",
     "escadaria_ceu": "ceu",
-    "cidadela": "ceu"
+    "cidadela": "ceu", "covil_gorvan": "masmorra_mina", "covil_sahra": "masmorra_ruinas", "covil_brannoc": "masmorra_castelo", "covil_velyra": "masmorra_ruinas", "covil_vaelor": "ceu"
   },
   "skill_sfx": {
     "corte_giratorio": "swing",

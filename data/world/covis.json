@@ -1,0 +1,123 @@
+{
+  "_comment": "Covis do Ferreiro Andarilho (Fase 8B). Gerado por tools/content/gen_covis.py; não editar à mão. Abertos nos dias open_weekdays (0 = domingo); free_per_day entradas por dia somando todos os covis, depois cada entrada gasta 1 license_item. Prêmio do chefe: frag fragmentos (min-max) e uma essência com ess_chance. Peça rara = frag_cost fragmentos (arma: frag_cost_weapon) + ouro (gold_rare × nível); épica = a rara + ess_cost essências + ouro (gold_epic × nível). Combos épicos ficam epic_combo_mult mais fortes.",
+  "open_weekdays": [1, 3, 5, 0],
+  "free_per_day": 10,
+  "license_item": "licenca_covil",
+  "frag": [2, 4],
+  "ess_chance": 0.5,
+  "frag_cost": 8,
+  "frag_cost_weapon": 12,
+  "ess_cost": 10,
+  "gold_rare": 30,
+  "gold_epic": 90,
+  "rare_mult": 0.95,
+  "epic_mult": 1.25,
+  "epic_combo_mult": 1.5,
+  "covis": {
+    "gorvan": {
+      "city": "pradoluz",
+      "boss": "gorvan",
+      "level": 10,
+      "unlock": "gorvan_defeated",
+      "set": "colheita_rubra",
+      "map": "covil_gorvan",
+      "color": "#c0392b",
+      "frag": "mat_frag_gorvan",
+      "ess": "mat_ess_gorvan",
+      "pieces": {
+        "weapon": ["eq_arma_gorvan_raro", "eq_arma_gorvan_epico"],
+        "helmet": ["eq_elmo_gorvan_raro", "eq_elmo_gorvan_epico"],
+        "chest": ["eq_peitoral_gorvan_raro", "eq_peitoral_gorvan_epico"],
+        "gloves": ["eq_luvas_gorvan_raro", "eq_luvas_gorvan_epico"],
+        "pants": ["eq_calca_gorvan_raro", "eq_calca_gorvan_epico"],
+        "boots": ["eq_botas_gorvan_raro", "eq_botas_gorvan_epico"],
+        "bracelet": ["eq_pulseira_gorvan_raro", "eq_pulseira_gorvan_epico"],
+        "belt": ["eq_cinto_gorvan_raro", "eq_cinto_gorvan_epico"]
+      }
+    },
+    "sahra": {
+      "city": "qaressa",
+      "boss": "sahra",
+      "level": 25,
+      "unlock": "sahra_defeated",
+      "set": "tempestade_areia",
+      "map": "covil_sahra",
+      "color": "#e0a640",
+      "frag": "mat_frag_sahra",
+      "ess": "mat_ess_sahra",
+      "pieces": {
+        "weapon": ["eq_arma_sahra_raro", "eq_arma_sahra_epico"],
+        "helmet": ["eq_elmo_sahra_raro", "eq_elmo_sahra_epico"],
+        "chest": ["eq_peitoral_sahra_raro", "eq_peitoral_sahra_epico"],
+        "gloves": ["eq_luvas_sahra_raro", "eq_luvas_sahra_epico"],
+        "pants": ["eq_calca_sahra_raro", "eq_calca_sahra_epico"],
+        "boots": ["eq_botas_sahra_raro", "eq_botas_sahra_epico"],
+        "bracelet": ["eq_pulseira_sahra_raro", "eq_pulseira_sahra_epico"],
+        "belt": ["eq_cinto_sahra_raro", "eq_cinto_sahra_epico"]
+      }
+    },
+    "brannoc": {
+      "city": "hrimvald",
+      "boss": "brannoc",
+      "level": 40,
+      "unlock": "brannoc_defeated",
+      "set": "coroa_gelo",
+      "map": "covil_brannoc",
+      "color": "#7fc8ff",
+      "frag": "mat_frag_brannoc",
+      "ess": "mat_ess_brannoc",
+      "pieces": {
+        "weapon": ["eq_arma_brannoc_raro", "eq_arma_brannoc_epico"],
+        "helmet": ["eq_elmo_brannoc_raro", "eq_elmo_brannoc_epico"],
+        "chest": ["eq_peitoral_brannoc_raro", "eq_peitoral_brannoc_epico"],
+        "gloves": ["eq_luvas_brannoc_raro", "eq_luvas_brannoc_epico"],
+        "pants": ["eq_calca_brannoc_raro", "eq_calca_brannoc_epico"],
+        "boots": ["eq_botas_brannoc_raro", "eq_botas_brannoc_epico"],
+        "bracelet": ["eq_pulseira_brannoc_raro", "eq_pulseira_brannoc_epico"],
+        "belt": ["eq_cinto_brannoc_raro", "eq_cinto_brannoc_epico"]
+      }
+    },
+    "velyra": {
+      "city": "lysthael",
+      "boss": "velyra",
+      "level": 55,
+      "unlock": "velyra_defeated",
+      "set": "coracao_espinhos",
+      "map": "covil_velyra",
+      "color": "#9b59b6",
+      "frag": "mat_frag_velyra",
+      "ess": "mat_ess_velyra",
+      "pieces": {
+        "weapon": ["eq_arma_velyra_raro", "eq_arma_velyra_epico"],
+        "helmet": ["eq_elmo_velyra_raro", "eq_elmo_velyra_epico"],
+        "chest": ["eq_peitoral_velyra_raro", "eq_peitoral_velyra_epico"],
+        "gloves": ["eq_luvas_velyra_raro", "eq_luvas_velyra_epico"],
+        "pants": ["eq_calca_velyra_raro", "eq_calca_velyra_epico"],
+        "boots": ["eq_botas_velyra_raro", "eq_botas_velyra_epico"],
+        "bracelet": ["eq_pulseira_velyra_raro", "eq_pulseira_velyra_epico"],
+        "belt": ["eq_cinto_velyra_raro", "eq_cinto_velyra_epico"]
+      }
+    },
+    "vaelor": {
+      "city": "altarea",
+      "boss": "vaelor",
+      "level": 60,
+      "unlock": "vaelor_defeated",
+      "set": "juramento_celeste",
+      "map": "covil_vaelor",
+      "color": "#a8d8ff",
+      "frag": "mat_frag_vaelor",
+      "ess": "mat_ess_vaelor",
+      "pieces": {
+        "weapon": ["eq_arma_vaelor_raro", "eq_arma_vaelor_epico"],
+        "helmet": ["eq_elmo_vaelor_raro", "eq_elmo_vaelor_epico"],
+        "chest": ["eq_peitoral_vaelor_raro", "eq_peitoral_vaelor_epico"],
+        "gloves": ["eq_luvas_vaelor_raro", "eq_luvas_vaelor_epico"],
+        "pants": ["eq_calca_vaelor_raro", "eq_calca_vaelor_epico"],
+        "boots": ["eq_botas_vaelor_raro", "eq_botas_vaelor_epico"],
+        "bracelet": ["eq_pulseira_vaelor_raro", "eq_pulseira_vaelor_epico"],
+        "belt": ["eq_cinto_vaelor_raro", "eq_cinto_vaelor_epico"]
+      }
+    }
+  }
+}

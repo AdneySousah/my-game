@@ -81,6 +81,33 @@ const SHEETS: Dictionary = {
 		"", "", "", "",
 	],
 	# 13/11: the extra backpacks and the special shop's looks.
+	# Fase 8B: the five boss sets (two per sheet, weapon/helmet/chest/gloves then
+	# pants/boots/bracelet/belt), their shards and essences, the lair license, the six
+	# skill runes (8C) and seven fish (8D).
+	"ui_itens_covis_1": [
+		"eq_arma_gorvan", "eq_elmo_gorvan", "eq_peitoral_gorvan", "eq_luvas_gorvan",
+		"eq_calca_gorvan", "eq_botas_gorvan", "eq_pulseira_gorvan", "eq_cinto_gorvan",
+		"eq_arma_sahra", "eq_elmo_sahra", "eq_peitoral_sahra", "eq_luvas_sahra",
+		"eq_calca_sahra", "eq_botas_sahra", "eq_pulseira_sahra", "eq_cinto_sahra",
+	],
+	"ui_itens_covis_2": [
+		"eq_arma_brannoc", "eq_elmo_brannoc", "eq_peitoral_brannoc", "eq_luvas_brannoc",
+		"eq_calca_brannoc", "eq_botas_brannoc", "eq_pulseira_brannoc", "eq_cinto_brannoc",
+		"eq_arma_velyra", "eq_elmo_velyra", "eq_peitoral_velyra", "eq_luvas_velyra",
+		"eq_calca_velyra", "eq_botas_velyra", "eq_pulseira_velyra", "eq_cinto_velyra",
+	],
+	"ui_itens_covis_3": [
+		"eq_arma_vaelor", "eq_elmo_vaelor", "eq_peitoral_vaelor", "eq_luvas_vaelor",
+		"eq_calca_vaelor", "eq_botas_vaelor", "eq_pulseira_vaelor", "eq_cinto_vaelor",
+		"mat_frag_gorvan", "mat_ess_gorvan", "mat_frag_sahra", "mat_ess_sahra",
+		"mat_frag_brannoc", "mat_ess_brannoc", "mat_frag_velyra", "mat_ess_velyra",
+	],
+	"ui_itens_covis_4": [
+		"mat_frag_vaelor", "mat_ess_vaelor", "licenca_covil", "runa_fogo",
+		"runa_gelo", "runa_raio", "runa_sangue", "runa_luz",
+		"runa_eco", "peixe_tilapia", "peixe_truta", "peixe_lua",
+		"peixe_bagre", "peixe_carpa", "peixe_gelo", "peixe_sol",
+	],
 	"ui_itens_mochilas": [
 		"mochila_couro", "mochila_real", "ui_skin_anjo", "ui_skin_sol",
 		"ui_skin_tempestade", "", "", "",
@@ -93,7 +120,7 @@ const SHEETS: Dictionary = {
 		"store", "routine", "bag", "quests",
 		"talk", "", "", "",
 		"", "", "", "",
-		"", "", "", "",
+		"", "", "forge", "",
 	],
 }
 

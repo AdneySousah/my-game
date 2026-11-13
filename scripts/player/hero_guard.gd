@@ -76,6 +76,8 @@ func add_fury(amount: float) -> void:
 	if amount <= 0.0 or is_awakened() or not unlocked():
 		return
 	_calm = 0.0
+	if player.combos:
+		amount *= player.combos.fury_mult()
 	var before: float = fury
 	fury = minf(float(awaken_rules().get("max", 100.0)), fury + amount)
 	if fury != before:

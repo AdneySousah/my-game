@@ -1,0 +1,64 @@
+{
+  "_comment": "Covil do Ferreiro Andarilho (Fase 8B). Gerado por tools/content/gen_covis.py; não editar à mão.",
+  "id": "covil_gorvan",
+  "name": "CV_MAP_GORVAN",
+  "size": [40, 44],
+  "seed": 306,
+  "covil": "gorvan",
+  "loading": "load_celeiro",
+  "ground": "#56463a",
+  "indoor": true,
+  "sky": "#100c10",
+  "ambient": 0.5,
+  "ambient_color": "#9a8a7a",
+  "sun": 0.3,
+  "sun_color": "#ffd7a0",
+  "patches": {"color": "#6b5638", "count": 50},
+  "spawns": {"start": [0, 15, 0]},
+  "exits": [
+    {"to": "__return", "spawn": "start", "pos": [0, 19.5], "size": [6, 2], "label": "CV_EXIT"}
+  ],
+  "walls": [
+    {"from": [-6, 18], "to": [-14, 12]},
+    {"from": [-14, 12], "to": [-17, 0]},
+    {"from": [-17, 0], "to": [-14, -12]},
+    {"from": [-14, -12], "to": [-6, -17]},
+    {"from": [-6, -17], "to": [6, -17]},
+    {"from": [6, -17], "to": [14, -12]},
+    {"from": [14, -12], "to": [17, 0]},
+    {"from": [17, 0], "to": [14, 12]},
+    {"from": [14, 12], "to": [6, 18]},
+    {"from": [-6, 18], "to": [-3, 18]},
+    {"from": [3, 18], "to": [6, 18]}
+  ],
+  "arena": {"gate": [[-3, 17.4], [3, 17.4]]},
+  "props": [
+    {"id": "prp_feno", "pos": [-12, -8]},
+    {"id": "prp_trigo", "pos": [12, -8]},
+    {"id": "prp_barril", "pos": [-12, 6]},
+    {"id": "prp_caixa", "pos": [12, 6]},
+    {"id": "prp_lampiao_mina", "pos": [-7, -13]},
+    {"id": "prp_feno", "pos": [7, -13]},
+    {"id": "prp_trigo", "pos": [-13, -1]},
+    {"id": "prp_barril", "pos": [13, -1]},
+    {"id": "prp_caixa", "pos": [-10, 12]},
+    {"id": "prp_lampiao_mina", "pos": [10, 12]},
+    {"id": "prp_feno", "pos": [-3, -15]},
+    {"id": "prp_trigo", "pos": [3, -15]},
+    {"id": "prp_barril", "pos": [-14.5, 3]},
+    {"id": "prp_caixa", "pos": [14.5, 3]},
+    {"id": "prp_lampiao_mina", "pos": [-14.5, -5]},
+    {"id": "prp_feno", "pos": [14.5, -5]},
+    {"id": "prp_trigo", "pos": [-4, -10]},
+    {"id": "prp_barril", "pos": [4, -10]}
+  ],
+  "paths": [
+    {"points": [[0, 19], [0, -6]], "width": 2.6, "color": "#6b5638"}
+  ],
+  "bosses": [
+    {"id": "gorvan", "pos": [0, -7], "level": 12, "yaw": 0, "covil": "gorvan"}
+  ],
+  "enemy_zones": [
+    {"pos": [0, -4], "radius": 6, "max": 3, "types": {"orc": 1, "bandido": 1}, "level": [10, 11], "respawn": 3600}
+  ]
+}

@@ -9,7 +9,7 @@ Tudo é feito por dados em `data/` como o resto do jogo. Cada parte tem seus tes
 | # | Parte | O que entra | Meshy (estimado) |
 |---|---|---|---|
 | A | Combate | Defesa e aparar, monstro tonto com estrelinhas, Despertar com história | 42 cr (feito) |
-| B | Covis do Ferreiro Andarilho | NPC novo em cada cidade, 5 covis de chefe, 5 conjuntos com combos, licenças | ~90 cr |
+| B | Covis do Ferreiro Andarilho | NPC novo em cada cidade, 5 covis de chefe, 5 conjuntos com combos, licenças | 89 cr (feito) |
 | C | Runas e elementos | 1 runa por skill, fogo/gelo/raio/sangue/luz, fraquezas dos monstros | ~15 cr |
 | D | Pesca e fogueira | Pescar nos lagos e rios, peixes por lugar e hora, cozinhar comidas com bônus | ~55 cr |
 | E | Bestiário e Maestria | Ficha de cada monstro com bônus por abates; pontos depois do nível 100 | ~10 cr |
@@ -83,7 +83,7 @@ Tudo é feito por dados em `data/` como o resto do jogo. Cada parte tem seus tes
 - **Peça rara:** fragmentos + ouro. A arma pede 12 fragmentos, as outras peças 8 cada.
 - **Promover a épica:** a peça rara forjada + **10 Essências do chefe** + ouro.
 - **Conjunto completo:** 8 peças (arma, elmo, peitoral, luvas, calça, botas, pulseira e cinto).
-- **Arma do conjunto:** a arma do próprio chefe (a foice do Gorvan, o khopesh da Sahra, o machado do Brannoc, a lâmina de espinhos da Velyra e a espada do Vaelor), ajustada na mão do Lio.
+- **Arma do conjunto:** a arma do próprio chefe (a foice do Gorvan, o khopesh da Sahra, o machado do Brannoc e a espada do Vaelor), ajustada na mão do Lio. A Velyra usa arco, então o conjunto dela ganhou uma Lâmina de Espinhos nova.
 
 ### Combos (bônus de conjunto)
 Os combos são feitos para o guerreiro e ligados às skills dele. Vestindo 2, 4, 6 e 8 peças do mesmo chefe:

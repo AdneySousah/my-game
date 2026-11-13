@@ -1489,6 +1489,18 @@
         ]
       ]
     },
+    "andarilho_idle": {
+      "lines": [
+        [
+          "andarilho",
+          "DLG_ANDARILHO_IDLE_1"
+        ],
+        [
+          "andarilho",
+          "DLG_ANDARILHO_IDLE_2"
+        ]
+      ]
+    },
     "matias_idle": {
       "lines": [
         [

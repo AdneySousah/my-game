@@ -36,6 +36,7 @@ func _ready() -> void:
 	await _owner_1311_test()
 	await _packs_looks_test()
 	await _guard_awaken_test()
+	await _covis_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1123,6 +1124,146 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8B: the Wandering Smith's lairs — open days, 10 free entries a day and licenses,
+## the boss's shards and essences, forging rare and epic pieces, the set combos, the NPC
+## in each city, the window and the trip into a lair and back.
+func _covis_test() -> void:
+	Session.reset()
+	Covis.weekday_override = 1
+	var ids: Array = Covis.ids()
+	check(ids.size() == 5, "five lairs, one per city")
+	var data_ok: bool = true
+	for id: String in ids:
+		var cv: Dictionary = Covis.covil(id)
+		data_ok = data_ok and not GameMap.load_data(str(cv["map"])).is_empty() and Data.item(str(cv["frag"])).size() > 0 and Data.item(str(cv["ess"])).size() > 0
+		for slot: String in ["weapon", "helmet", "chest", "gloves", "pants", "boots", "bracelet", "belt"]:
+			for r: String in ["rare", "epic"]:
+				var it: Dictionary = Data.item(Covis.piece_id(id, slot, r))
+				data_ok = data_ok and str(it.get("set", "")) == str(cv["set"]) and ResourceLoader.exists("res://assets/ui/items/%s.png" % it.get("icon", ""))
+		var w: Dictionary = Data.item(Covis.piece_id(id, "weapon", "rare")).get("weapon", {})
+		data_ok = data_ok and ResourceLoader.exists(str(w.get("scene", "")))
+	check(data_ok, "every lair has its arena, shards, essence and 16 pieces with icons and a weapon model")
+	var p: Dictionary = Store.product("licenca_covil_10")
+	check(is_equal_approx(float(p.get("price_brl", 0.0)), 3.99) and int((p.get("grants", {}) as Dictionary).get("items", {}).get("licenca_covil", 0)) == 10, "10 lair licenses cost R$ 3,99 in the special shop")
+	# Open days, unlock and entries.
+	check(Covis.block_reason("gorvan") == "CV_LOCKED", "a lair stays shut until its boss falls in the story")
+	Session.set_flag("gorvan_defeated")
+	Covis.weekday_override = 2
+	check(Covis.block_reason("gorvan") == "CV_CLOSED", "lairs are closed on Tuesday")
+	var open_days: Array = []
+	for d: int in 7:
+		Covis.weekday_override = d
+		if Covis.open_today():
+			open_days.append(d)
+	check(open_days == [0, 1, 3, 5], "lairs open on Monday, Wednesday, Friday and Sunday")
+	Covis.weekday_override = 1
+	check(Covis.free_left() == 10 and Covis.block_reason("gorvan") == "", "10 free entries a day")
+	for i: int in 10:
+		Covis.pay_entry("gorvan")
+	check(Covis.free_left() == 0 and Covis.block_reason("gorvan") == "CV_NO_ENTRIES", "after 10 entries the lair asks for a license")
+	Session.add_item("licenca_covil", 2)
+	check(Covis.pay_entry("gorvan") and Covis.licenses() == 1, "a license pays one more entry")
+	Session.covil_day = "1999-01-01"
+	check(Covis.free_left() == 10, "the free entries come back the next day")
+	# The boss's prize.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 7
+	var frags: int = 0
+	var ess: int = 0
+	for i: int in 40:
+		var prize: Dictionary = Covis.reward("gorvan", rng)
+		frags += int(prize.get("mat_frag_gorvan", 0))
+		ess += int(prize.get("mat_ess_gorvan", 0))
+	check(frags >= 80 and frags <= 160 and ess > 8 and ess < 32, "the lair boss drops 2-4 shards and an essence about every other win (%d, %d)" % [frags, ess])
+	# Forge: rare with shards + gold, epic with the rare + 10 essences (keeps its +level).
+	Session.add_item("mat_frag_gorvan", 8)
+	check(Covis.forge_block("gorvan", "helmet", "rare", 10) == "CV_NEED_GOLD", "forging asks for gold")
+	var paid: int = Covis.forge("gorvan", "helmet", "rare", 99999)
+	check(paid > 0 and Session.inventory.count("eq_elmo_gorvan_raro") == 1 and Session.inventory.count("mat_frag_gorvan") == 0, "8 shards and gold forge the rare helmet")
+	check(Covis.forge_block("gorvan", "helmet", "epic", 99999) == "CV_NEED_ITEMS", "making it epic needs 10 essences")
+	for sl: Dictionary in Session.inventory.slots:
+		if str(sl.get("id", "")) == "eq_elmo_gorvan_raro":
+			sl["plus"] = 3
+	Session.add_item("mat_ess_gorvan", 10)
+	Covis.forge("gorvan", "helmet", "epic", 99999)
+	var epic_plus: int = -1
+	for sl: Dictionary in Session.inventory.slots:
+		if str(sl.get("id", "")) == "eq_elmo_gorvan_epico":
+			epic_plus = int(sl.get("plus", 0))
+	check(Session.inventory.count("eq_elmo_gorvan_raro") == 0 and epic_plus == 3, "the rare piece becomes epic and keeps its +3")
+	# The NPC, the window and the trip.
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	var pl: Player = main.player
+	var smith_found: bool = false
+	for n: Node in main.map.find_children("*", "", true, false):
+		if str(n.get("npc_id")) == "andarilho":
+			smith_found = true
+	check(smith_found and str(Data.npc("andarilho").get("service", "")) == "covil", "the Wandering Smith stands in Pradoluz and opens the lair")
+	main.hud.open_covil("gorvan")
+	await _frames(3)
+	check(main.hud.covil_panel().visible, "talking to him opens his window")
+	main.hud.covil_panel().hide()
+	main.hud.call("_on_panel_closed")
+	# Combos: worn pieces of the same set.
+	while pl.stats.level < 12:
+		pl.stats.add_xp(pl.stats.xp_needed() - pl.stats.xp)
+	var order: Array[String] = ["weapon", "chest", "gloves", "pants", "boots", "bracelet", "belt", "helmet"]
+	var worn: int = 0
+	var seen: Dictionary = {}
+	for slot: String in order:
+		var pid: String = Covis.piece_id("gorvan", slot, "rare")
+		if slot == "helmet":
+			pid = Covis.piece_id("gorvan", slot, "epic")
+		else:
+			Session.add_item(pid, 1)
+		var uid: int = 0
+		for sl: Dictionary in Session.inventory.slots:
+			if str(sl.get("id", "")) == pid:
+				uid = int(sl["uid"])
+		Session.gear.equip(Session.inventory, uid, pl.stats.level)
+		worn += 1
+		await _frames(1)
+		if worn == 2:
+			seen["two"] = float(Session.gear.bonuses().get("atk_pct", 0.0))
+		if worn == 4:
+			seen["four"] = pl.combos.has("reap")
+		if worn == 6:
+			seen["six"] = pl.combos.has("heal_on_kill")
+	check(is_equal_approx(float(seen.get("two", 0.0)), 0.08), "2 pieces: +8%% attack")
+	check(bool(seen.get("four", false)) and bool(seen.get("six", false)) and pl.combos.has("skill_boost:corte_giratorio"), "4, 6 and 8 pieces turn on the reap, the heal and the Whirling Cut combo")
+	check(float(pl.combos.get_effect("reap").get("chance", 0.0)) > 0.15, "epic pieces make the combos stronger")
+	check(pl.combos.skill_mult("corte_giratorio") > 1.3, "the 8-piece combo makes Whirling Cut hit harder")
+	pl.hp = pl.max_hp() * 0.5
+	var hp_mid: float = pl.hp
+	var weak: Enemy = main.spawn_enemy("bandido", pl.global_position + Vector3(0, 0, -1.5))
+	await _frames(2)
+	weak.hp = 1.0
+	pl.deal_damage(weak, 5.0, false)
+	check(weak.is_dead() and pl.hp > hp_mid, "the 6-piece combo heals on a kill")
+	# Into the lair and back.
+	Covis.weekday_override = 1
+	Session.covil_day = ""
+	check(main.enter_covil("gorvan"), "the hero goes into the lair")
+	await _wait_map(main, "covil_gorvan")
+	var boss: Enemy = null
+	for b: Node in get_tree().get_nodes_in_group("bosses"):
+		boss = b as Enemy
+	check(main.map.map_id == "covil_gorvan" and boss != null and str(boss.get_meta("covil", "")) == "gorvan" and bool(boss.get_meta("replay", false)), "the lair has Gorvan waiting, without the story talks")
+	var before_frag: int = Session.inventory.count("mat_frag_gorvan")
+	main.call("_covil_prize", boss)
+	check(Session.inventory.count("mat_frag_gorvan") >= before_frag + 2, "beating the lair boss gives its shards")
+	main.load_map("__return", "start")
+	await _wait_map(main, "pradoluz")
+	check(main.map.map_id == "pradoluz", "the lair's way out goes back to the city")
+	Covis.weekday_override = -1
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8: Defend (block), parry (enemy pushed back and dizzy with stars), the Awakening
 ## (opened by the story scene after Sahra; holding Attack 3 s; +50% stats, golden hair and
 ## aura; the Attack button's rim) and the compact HUD.
@@ -1648,7 +1789,7 @@ func _quest_test() -> void:
 
 	# Start: the first quest begins by itself and points at Marta.
 	check(q.is_active("main_01"), "first main quest starts by itself")
-	check(main.map.npcs.has("marta") and main.map.npcs.has("bram") and main.map.npcs.size() == 6, "Pradoluz has its 6 villagers (got %d)" % main.map.npcs.size())
+	check(main.map.npcs.has("marta") and main.map.npcs.has("bram") and main.map.npcs.size() == 7, "Pradoluz has its 6 villagers and the Wandering Smith (got %d)" % main.map.npcs.size())
 	check(not main.map.npcs.has("bento"), "Bento is not in the village yet")
 	check(q.npc_marker("marta") == "main_step", "Marta shows the quest marker")
 	check(q.npc_marker("juca") == "", "a villager without quests has no marker")

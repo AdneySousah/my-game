@@ -420,6 +420,7 @@
   "enm_carcereiro": {"base": "enm_orc", "texture": "res://assets/enemies/enm_carcereiro/enm_carcereiro.png"},
   "npc_isolda": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_isolda/npc_isolda.glb", "height": 1.7},
   "npc_aurelio": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_aurelio/npc_aurelio.glb", "height": 1.7},
+  "npc_ferreiro_andarilho": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_ferreiro_andarilho/npc_ferreiro_andarilho.glb", "height": 1.75},
   "npc_matias": {"base": "npc_morador_fazendeiro", "scene": "res://assets/npcs/npc_matias/npc_matias.glb", "height": 1.8},
   "boss_vaelor": {"base": "boss_brannoc", "scene": "res://assets/enemies/boss_vaelor/boss_vaelor.glb", "height": 2.2, "weapon": {"scene": "res://assets/weapons/wpn_espada_vaelor/wpn_espada_vaelor.glb", "bone": "RightHand", "length": 1.6, "grip": 0.35, "rotation_deg": [0, 89.4, 90.9], "offset": [-0.027, 0.127, -0.017], "two_hand": {"actions": ["attack", "spin", "heavy"], "bone": "LeftHand", "offset": [0.02, 0.124, -0.041], "base": 0.05, "spacing": 0.2}}},
   "boss_vaelor_desmascarado": {"base": "boss_vaelor", "texture": "res://assets/enemies/boss_vaelor_desmascarado/boss_vaelor_desmascarado.png"},

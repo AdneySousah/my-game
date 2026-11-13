@@ -62,7 +62,7 @@ Os créditos são estimativas e serão revistos a cada fase. A regra é gerar s�
 ## Fase 8 — Novas mecânicas (pedido do dono, 13/11/2026)
 Plano completo, custos do Meshy e ordem em [FASE8.md](FASE8.md).
 - [x] 8A Combate: Defesa e aparar (inimigo empurrado e tonto com estrelinhas), Despertar liberado pela cena depois da Sahra (segurar Atacar 3 s: cabelo dourado, aura, +50% por 12 s), HUD mais compacto; 42 créditos
-- [ ] 8B Covis do Ferreiro Andarilho: 5 conjuntos de chefe com combos, licenças (`licenca_covil_10`)
+- [x] 8B Covis do Ferreiro Andarilho: NPC nas 5 cidades, 5 covis (seg/qua/sex/dom, 10 entradas grátis por dia + licenças `licenca_covil_10`), 5 conjuntos rara/épica com combos; 89 créditos
 - [ ] 8C Runas e elementos
 - [ ] 8D Pesca e fogueira
 - [ ] 8E Bestiário e Maestria

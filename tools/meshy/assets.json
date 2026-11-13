@@ -7318,7 +7318,7 @@
       "category": "hero",
       "phase": 8,
       "method": "mcp",
-      "status": "generating",
+      "status": "imported",
       "prompt": "Block1, Block3, Hit_Reaction_1, Mummy_Stagger_inplace, Charged_Spell_Cast, Kneel_on_One_Knee_and_Stand",
       "file": "assets/characters/hero_lio_anims_fase8/hero_lio_anims_fase8.glb",
       "tasks": [
@@ -7362,6 +7362,114 @@
           "type": "image-to-image",
           "credits": 6,
           "task_id": "01a1d649-5ee3-772c-84b7-0dd1b53284e2",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_ferreiro_andarilho",
+      "category": "npc",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Ferreiro Andarilho: velho ferreiro viajante com chapéu de aba larga, barba grisalha, capa de viagem e mochila com bigorna pequena e martelos",
+      "file": "assets/npcs/npc_ferreiro_andarilho/npc_ferreiro_andarilho.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d658-46ac-75eb-975f-c1eba5778783",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d658-d5b9-738b-b49a-ec38b8dacd89",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": "01a1d65a-8c4d-7763-8da0-3bc6340a1175",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "animation",
+          "credits": 6,
+          "task_id": "01a1d65e-2681-7182-8510-1036db3c82c9",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d660-1648-75b8-9b61-0bdab056459f",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_itens_covis",
+      "category": "ui",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "4 folhas 4x4: conjuntos dos 5 chefes (Gorvan, Sahra, Brannoc, Velyra, Vaelor), fragmentos, essências, licença do covil, 6 runas e 7 peixes",
+      "file": "assets/ui/ui_itens_covis/ui_itens_covis.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d659-b01d-7283-a2f9-270a230f0bd1",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d659-b610-72e8-b906-a9d6b1fff83d",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d659-b96f-7128-8b9a-a67256f45f28",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d659-bd02-73d4-8202-e55808ebbffb",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d65a-6936-7751-9b48-70073d27f7dc",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "wpn_lamina_espinhos",
+      "category": "wpn",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Lâmina de Espinhos do conjunto da Velyra (madeira escura, espinhos e flores roxas)",
+      "file": "assets/weapons/wpn_lamina_espinhos/wpn_lamina_espinhos.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d65f-c21a-76c8-b54e-c4d2b9120695",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d660-339e-7039-9bed-e2bf3a33a7df",
           "date": "2026-11-13"
         }
       ],

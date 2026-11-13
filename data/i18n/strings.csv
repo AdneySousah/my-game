@@ -606,6 +606,8 @@ BAG_PACK_NO_ROOM,Esvazie espaço antes de tirar esta mochila.,Free some space be
 ITEMTYPE_BACKPACK,Mochila,Backpack
 STORE_MOCHILA_30,Mochila Real (+30 espaços),Royal Backpack (+30 slots)
 STORE_MOCHILA_30_DESC,Uma mochila grande que aumenta a mochila do herói em 30 espaços. Dá para vestir até 6 mochilas.,A big backpack that adds 30 slots to the hero's bag. Up to 6 backpacks can be worn.
+STORE_LICENCA_COVIL,10 Licenças do Covil,10 Lair Licenses
+STORE_LICENCA_COVIL_DESC,"Mais 10 entradas nos covis do Ferreiro Andarilho, além das 10 grátis de cada dia.","10 more entries to the Wandering Smith's lairs, on top of the 10 free ones each day."
 EQ_LOOKS_TITLE,Escolha o visual,Choose a look
 EQ_LOOK_NONE,Sem visual (roupa do Lio),No look (Lio's own clothes)
 STORE_SKIN_ANJO,Visual: Anjo Dourado,Look: Golden Angel
@@ -708,6 +710,8 @@ ITEM_DECRETO,Decreto do Arauto,Herald's decree
 NPC_ISOLDA,Isolda,Isolda
 NPC_AURELIO,Aurélio,Aurélio
 NPC_MATIAS,Matias,Matias
+NPC_ANDARILHO,Ferreiro Andarilho,Wandering Smith
+BARK_ANDARILHO_1,Fragmentos de Arauto... isso dá uma bela lâmina.,Herald shards... that makes a fine blade.
 BARK_ISOLDA_1,Aqui não...,Not here...
 BARK_AURELIO_1,"Entre, entre!","Come in, come in!"
 BARK_MATIAS_1,Mais grilhões...,More shackles...
@@ -1314,6 +1318,8 @@ DLG_MAIN_16_ISOLDA_6,Então a gente tira ele de lá. E tira o Cassian do trono.,
 DLG_MAIN_16_ISOLDA_7,O portão do castelo é guardado dia e noite. Precisamos de um plano... e de mais gente. Me dê um tempo para reunir o pessoal.,The castle gate is guarded day and night. We need a plan... and more people. Give me some time to gather everyone.
 DLG_ISOLDA_IDLE_1,Fala baixo. As paredes desta cidade têm ouvidos e todos usam capacete.,"Keep your voice down. The walls of this city have ears, and they all wear helmets."
 DLG_AURELIO_IDLE_1,"Bem-vindo, bem-vindo! Só não fique mais de três minutos parado na porta. Tem lei para isso também.","Welcome, welcome! Just don't stand at the door for more than three minutes. There's a law for that too."
+DLG_ANDARILHO_IDLE_1,"Ando de cidade em cidade com a minha bigorna nas costas. Onde tem um Arauto caído, tem o que forjar.","I walk from town to town with my anvil on my back. Wherever a Herald has fallen, there is something to forge."
+DLG_ANDARILHO_IDLE_2,"O covil do chefe daqui abre segunda, quarta, sexta e domingo. Traga os fragmentos que ele largar e eu faço uma peça que ninguém mais faz.","The lair of this land's boss opens on Monday, Wednesday, Friday and Sunday. Bring me the shards it drops and I will make a piece nobody else can."
 DLG_MATIAS_IDLE_1,"Eu forjava arados. Agora o Castelo só encomenda grilhões. Mas para você, eu afio o que precisar.","I used to forge plows. Now the Castle only orders shackles. But for you, I'll sharpen whatever you need."
 DLG_MAIN_17_ISOLDA_1,"Reuni o pessoal. Padeiros, estudantes, até o velho Aurélio. Hoje à noite a gente abre o portão norte.","I gathered everyone. Bakers, students, even old Aurélio. Tonight we open the north gate."
 DLG_MAIN_17_ISOLDA_2,Só tem um problema: um cavaleiro de armadura azul chegou de manhã e está parado na frente do castelo. Ninguém tem coragem de passar por ele.,There's just one problem: a knight in blue armor arrived this morning and is standing in front of the castle. Nobody dares to pass him.
@@ -1405,3 +1411,118 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
+CV_ITEM_FRAG_GORVAN,Fragmento da Foice,Scythe Shard
+CV_ITEM_ESS_GORVAN,Essência Rubra,Crimson Essence
+CV_ITEM_ARMA_GORVAN,Foice Colheita Rubra,Crimson Harvest Scythe
+CV_ITEM_ELMO_GORVAN,Elmo Colheita Rubra,Crimson Harvest Helm
+CV_ITEM_PEITORAL_GORVAN,Peitoral Colheita Rubra,Crimson Harvest Chestplate
+CV_ITEM_LUVAS_GORVAN,Luvas Colheita Rubra,Crimson Harvest Gauntlets
+CV_ITEM_CALCA_GORVAN,Calça Colheita Rubra,Crimson Harvest Leg Guards
+CV_ITEM_BOTAS_GORVAN,Botas Colheita Rubra,Crimson Harvest Boots
+CV_ITEM_PULSEIRA_GORVAN,Pulseira Colheita Rubra,Crimson Harvest Bracelet
+CV_ITEM_CINTO_GORVAN,Cinto Colheita Rubra,Crimson Harvest Belt
+CV_SET_GORVAN,Conjunto Colheita Rubra,Crimson Harvest Set
+CV_COMBO_GORVAN_2,+8% de ataque,+8% attack
+CV_COMBO_GORVAN_4,Golpe comum: 15% de chance de ceifar em volta,Basic hit: 15% chance to reap around you
+CV_COMBO_GORVAN_6,Matar um inimigo cura 3% da vida,Each kill heals 3% of your health
+CV_COMBO_GORVAN_8,Corte Giratório puxa os inimigos e bate 40% mais forte,Whirling Cut pulls enemies in and hits 40% harder
+CV_ITEM_FRAG_SAHRA,Cristal de Areia Viva,Living Sand Crystal
+CV_ITEM_ESS_SAHRA,Essência da Tempestade,Storm Essence
+CV_ITEM_ARMA_SAHRA,Khopesh Tempestade de Areia,Sandstorm Khopesh
+CV_ITEM_ELMO_SAHRA,Elmo Tempestade de Areia,Sandstorm Helm
+CV_ITEM_PEITORAL_SAHRA,Peitoral Tempestade de Areia,Sandstorm Chestplate
+CV_ITEM_LUVAS_SAHRA,Luvas Tempestade de Areia,Sandstorm Gauntlets
+CV_ITEM_CALCA_SAHRA,Calça Tempestade de Areia,Sandstorm Leg Guards
+CV_ITEM_BOTAS_SAHRA,Botas Tempestade de Areia,Sandstorm Boots
+CV_ITEM_PULSEIRA_SAHRA,Pulseira Tempestade de Areia,Sandstorm Bracelet
+CV_ITEM_CINTO_SAHRA,Cinto Tempestade de Areia,Sandstorm Belt
+CV_SET_SAHRA,Conjunto Tempestade de Areia,Sandstorm Set
+CV_COMBO_SAHRA_2,+6% de velocidade de ataque,+6% attack speed
+CV_COMBO_SAHRA_4,Todo 4º golpe comum solta uma onda de areia,Every 4th basic hit sends out a sand wave
+CV_COMBO_SAHRA_6,A esquiva deixa um redemoinho que deixa os inimigos lentos,Dodging leaves a whirlwind that slows enemies
+CV_COMBO_SAHRA_8,Investida bate 35% mais forte e deixa os inimigos lentos,Charge hits 35% harder and slows enemies
+CV_ITEM_FRAG_BRANNOC,Lasca de Gelo Eterno,Everfrost Shard
+CV_ITEM_ESS_BRANNOC,Essência do Inverno,Winter Essence
+CV_ITEM_ARMA_BRANNOC,Machado Coroa de Gelo,Ice Crown Axe
+CV_ITEM_ELMO_BRANNOC,Elmo Coroa de Gelo,Ice Crown Helm
+CV_ITEM_PEITORAL_BRANNOC,Peitoral Coroa de Gelo,Ice Crown Chestplate
+CV_ITEM_LUVAS_BRANNOC,Luvas Coroa de Gelo,Ice Crown Gauntlets
+CV_ITEM_CALCA_BRANNOC,Calça Coroa de Gelo,Ice Crown Leg Guards
+CV_ITEM_BOTAS_BRANNOC,Botas Coroa de Gelo,Ice Crown Boots
+CV_ITEM_PULSEIRA_BRANNOC,Pulseira Coroa de Gelo,Ice Crown Bracelet
+CV_ITEM_CINTO_BRANNOC,Cinto Coroa de Gelo,Ice Crown Belt
+CV_SET_BRANNOC,Conjunto Coroa de Gelo,Ice Crown Set
+CV_COMBO_BRANNOC_2,+10% de defesa,+10% defense
+CV_COMBO_BRANNOC_4,"Aparar congela o inimigo por mais 1,5 s",Parrying freezes the enemy for 1.5 s more
+CV_COMBO_BRANNOC_6,"Tomar dano diminui 0,5 s a recarga das skills",Taking damage cuts skill cooldowns by 0.5 s
+CV_COMBO_BRANNOC_8,Golpe Sísmico vira avalanche: 30% mais forte e deixa lento,Seismic Strike becomes an avalanche: 30% harder and slows
+CV_ITEM_FRAG_VELYRA,Semente de Espinho,Thorn Seed
+CV_ITEM_ESS_VELYRA,Seiva da Dríade,Dryad Sap
+CV_ITEM_ARMA_VELYRA,Lâmina de Espinhos Coração de Espinhos,Thorn Heart Thorn Blade
+CV_ITEM_ELMO_VELYRA,Elmo Coração de Espinhos,Thorn Heart Helm
+CV_ITEM_PEITORAL_VELYRA,Peitoral Coração de Espinhos,Thorn Heart Chestplate
+CV_ITEM_LUVAS_VELYRA,Luvas Coração de Espinhos,Thorn Heart Gauntlets
+CV_ITEM_CALCA_VELYRA,Calça Coração de Espinhos,Thorn Heart Leg Guards
+CV_ITEM_BOTAS_VELYRA,Botas Coração de Espinhos,Thorn Heart Boots
+CV_ITEM_PULSEIRA_VELYRA,Pulseira Coração de Espinhos,Thorn Heart Bracelet
+CV_ITEM_CINTO_VELYRA,Cinto Coração de Espinhos,Thorn Heart Belt
+CV_SET_VELYRA,Conjunto Coração de Espinhos,Thorn Heart Set
+CV_COMBO_VELYRA_2,+8% de vida máxima,+8% max health
+CV_COMBO_VELYRA_4,Devolve 20% do dano corpo a corpo recebido,Returns 20% of melee damage taken
+CV_COMBO_VELYRA_6,Golpes críticos fazem sangrar,Critical hits make enemies bleed
+CV_COMBO_VELYRA_8,Salto Devastador deixa espinhos: 35% mais forte e deixa lento,Devastating Leap leaves thorns: 35% harder and slows
+CV_ITEM_FRAG_VAELOR,Pena Celeste,Celestial Feather
+CV_ITEM_ESS_VAELOR,Essência Estelar,Starlight Essence
+CV_ITEM_ARMA_VAELOR,Espada Celeste Juramento Celeste,Celestial Oath Celestial Sword
+CV_ITEM_ELMO_VAELOR,Elmo Juramento Celeste,Celestial Oath Helm
+CV_ITEM_PEITORAL_VAELOR,Peitoral Juramento Celeste,Celestial Oath Chestplate
+CV_ITEM_LUVAS_VAELOR,Luvas Juramento Celeste,Celestial Oath Gauntlets
+CV_ITEM_CALCA_VAELOR,Calça Juramento Celeste,Celestial Oath Leg Guards
+CV_ITEM_BOTAS_VAELOR,Botas Juramento Celeste,Celestial Oath Boots
+CV_ITEM_PULSEIRA_VAELOR,Pulseira Juramento Celeste,Celestial Oath Bracelet
+CV_ITEM_CINTO_VAELOR,Cinto Juramento Celeste,Celestial Oath Belt
+CV_SET_VAELOR,Conjunto Juramento Celeste,Celestial Oath Set
+CV_COMBO_VAELOR_2,+5% em todos os status,+5% to every stat
+CV_COMBO_VAELOR_4,A luz do Despertar enche 30% mais rápido,The Awakening light fills 30% faster
+CV_COMBO_VAELOR_6,"No Despertar, cada golpe solta raios de luz em volta","While awakened, each hit sends rays of light around"
+CV_COMBO_VAELOR_8,Julgamento chama mais 3 colunas de luz e bate 40% mais forte,Judgment calls 3 more pillars of light and hits 40% harder
+CV_ITEM_LICENCA,Licença do Covil,Lair License
+CV_ITEM_LICENCA_DESC,"Uma entrada a mais num covil, depois das 10 do dia.",One more lair entry after the 10 of the day.
+CV_ITEM_FRAG_DESC,Cai do chefe do covil. O Ferreiro Andarilho forja peças raras com ele.,Dropped by the lair's boss. The Wandering Smith forges rare pieces with it.
+CV_ITEM_ESS_DESC,"Rara, cai do chefe do covil. Com 10, o Ferreiro Andarilho promove uma peça a épica.","Rare, dropped by the lair's boss. With 10, the Wandering Smith makes a piece epic."
+CV_ITEM_PIECE_DESC,"Peça de chefe forjada pelo Ferreiro Andarilho. Vestindo várias do mesmo conjunto, ganha combos.",A boss piece forged by the Wandering Smith. Wear several of the same set to unlock combos.
+CV_MAP_GORVAN,Covil do Gorvan,Gorvan's Lair
+CV_MAP_SAHRA,Covil da Sahra,Sahra's Lair
+CV_MAP_BRANNOC,Covil do Brannoc,Brannoc's Lair
+CV_MAP_VELYRA,Covil da Velyra,Velyra's Lair
+CV_MAP_VAELOR,Covil do Vaelor,Vaelor's Lair
+CV_EXIT,Sair do covil,Leave the lair
+CV_DAY_0,domingo,Sunday
+CV_DAY_1,segunda,Monday
+CV_DAY_2,terça,Tuesday
+CV_DAY_3,quarta,Wednesday
+CV_DAY_4,quinta,Thursday
+CV_DAY_5,sexta,Friday
+CV_DAY_6,sábado,Saturday
+CV_AND,e,and
+CV_NO_LAIR,Esta cidade não tem covil.,This city has no lair.
+CV_LOCKED,Covil fechado,Lair locked
+CV_CLOSED,Fechado hoje,Closed today
+CV_NO_ENTRIES,Sem entradas hoje,No entries left today
+CV_NEED_ITEMS,Faltam materiais,Missing materials
+CV_NEED_GOLD,Falta ouro,Not enough gold
+CV_NEED_RARE,Precisa da peça rara,Needs the rare piece
+CV_LEVEL,nível %d,level %d
+CV_LOCKED_TEXT,Vença %s na história para o Andarilho abrir este covil.,Beat %s in the story so the Wanderer opens this lair.
+CV_CLOSED_TEXT,O covil está fechado hoje. Abre %s.,The lair is closed today. It opens on %s.
+CV_OPEN_TEXT,Aberto hoje! Entradas grátis: %d de %d · Licenças: %d,Open today! Free entries: %d of %d · Licenses: %d
+CV_ENTER,Entrar no covil,Enter the lair
+CV_COMBOS,Combos do conjunto (vestindo %d peças):,Set combos (wearing %d pieces):
+CV_PIECES,%d peças:,%d pieces:
+CV_FORGE,Forjar peças,Forge pieces
+CV_THE_RARE,a peça rara,the rare piece
+CV_GOLD,%d de ouro,%d gold
+CV_FORGE_RARE,Forjar rara,Forge rare
+CV_FORGE_EPIC,Promover a épica,Make it epic
+CV_WON,Covil vencido!,Lair cleared!
+CV_BLEED,Sangrando,Bleeding

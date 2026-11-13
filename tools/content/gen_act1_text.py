@@ -497,6 +497,10 @@ DIALOGUES = {
     "aurelio_idle": [
         ("aurelio", "Bem-vindo, bem-vindo! Só não fique mais de três minutos parado na porta. Tem lei para isso também.", "Welcome, welcome! Just don't stand at the door for more than three minutes. There's a law for that too."),
     ],
+    "andarilho_idle": [
+        ("andarilho", "Ando de cidade em cidade com a minha bigorna nas costas. Onde tem um Arauto caído, tem o que forjar.", "I walk from town to town with my anvil on my back. Wherever a Herald has fallen, there is something to forge."),
+        ("andarilho", "O covil do chefe daqui abre segunda, quarta, sexta e domingo. Traga os fragmentos que ele largar e eu faço uma peça que ninguém mais faz.", "The lair of this land's boss opens on Monday, Wednesday, Friday and Sunday. Bring me the shards it drops and I will make a piece nobody else can."),
+    ],
     "matias_idle": [
         ("matias", "Eu forjava arados. Agora o Castelo só encomenda grilhões. Mas para você, eu afio o que precisar.", "I used to forge plows. Now the Castle only orders shackles. But for you, I'll sharpen whatever you need."),
     ],
@@ -783,6 +787,8 @@ TEXTS = {
     "NPC_ISOLDA": ("Isolda", "Isolda"),
     "NPC_AURELIO": ("Aurélio", "Aurélio"),
     "NPC_MATIAS": ("Matias", "Matias"),
+    "NPC_ANDARILHO": ("Ferreiro Andarilho", "Wandering Smith"),
+    "BARK_ANDARILHO_1": ("Fragmentos de Arauto... isso dá uma bela lâmina.", "Herald shards... that makes a fine blade."),
     "BARK_ISOLDA_1": ("Aqui não...", "Not here..."),
     "BARK_AURELIO_1": ("Entre, entre!", "Come in, come in!"),
     "BARK_MATIAS_1": ("Mais grilhões...", "More shackles..."),

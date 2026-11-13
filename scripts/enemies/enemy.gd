@@ -558,9 +558,9 @@ func _land_hit(a: Dictionary, dmg: float, parryable: bool, blockable: bool) -> b
 	if g == 2:
 		return true
 	if g == 1:
-		target.receive_attack(dmg * (1.0 - HeroGuard.block_reduction()))
+		target.receive_attack(dmg * (1.0 - HeroGuard.block_reduction()), self)
 		return false
-	if target.receive_attack(dmg):
+	if target.receive_attack(dmg, self):
 		_hit_status(a)
 	return false
 
@@ -581,6 +581,11 @@ func on_parried() -> void:
 		_knockback += away.normalized() * float(r.get("push", 6.0)) * (0.35 if is_boss else 1.0)
 	status.apply("stun", t)
 	Audio.play_sfx("dizzy", global_position + Vector3(0, 2.0, 0))
+	# Ice Crown combo: frozen a while longer.
+	if target.combos:
+		target.combos.on_parry(self)
+		t = status.time_left("stun")
+		_timer = t
 	if model == null:
 		return
 	var d: float = model.play_action("stagger")

@@ -69,12 +69,25 @@ static func set_lines(set_id: String) -> PackedStringArray:
 	var out: PackedStringArray = []
 	var def: Dictionary = (Data.items_config.get("sets", {}) as Dictionary).get(set_id, {})
 	var total: int = 0
+	var kinds: Dictionary = {}
 	for id: String in Data.items:
 		if str(Data.items[id].get("set", "")) == set_id:
 			total += 1
+			kinds[str(Data.items[id].get("gear_slot", ""))] = true
+	# Boss sets come in rare and epic versions of the same 8 pieces: count kinds of piece.
+	if def.has("combo_text"):
+		total = kinds.size()
 	var worn: int = int(Session.gear.set_counts().get(set_id, 0))
 	out.append("[color=#ffd23f]%s[/color]" % (TranslationServer.translate("EQ_SET") % [
 		TranslationServer.translate(str(def.get("name", set_id))), worn, total]))
+	# The Wandering Smith's sets: the four combos (2, 4, 6 and 8 pieces).
+	if def.has("combo_text"):
+		var needs: Array[int] = [2, 4, 6, 8]
+		var lines: Array = def["combo_text"]
+		for i: int in mini(needs.size(), lines.size()):
+			var t: String = TranslationServer.translate("CV_PIECES") % needs[i] + " " + TranslationServer.translate(str(lines[i]))
+			out.append("[color=%s]%s[/color]" % [UP if worn >= needs[i] else DIM, t])
+		return out
 	var bonus: Dictionary = def.get("bonus", {})
 	for need: String in bonus:
 		var parts: PackedStringArray = []

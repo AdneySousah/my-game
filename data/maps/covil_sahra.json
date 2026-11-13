@@ -1,0 +1,68 @@
+{
+  "_comment": "Covil do Ferreiro Andarilho (Fase 8B). Gerado por tools/content/gen_covis.py; não editar à mão.",
+  "id": "covil_sahra",
+  "name": "CV_MAP_SAHRA",
+  "size": [40, 44],
+  "seed": 305,
+  "covil": "sahra",
+  "loading": "load_torre",
+  "ground": "#d9a865",
+  "sky": "#e7a27c",
+  "ambient": 0.56,
+  "sun": 1.15,
+  "patches": {"color": "#c99550", "count": 60},
+  "spawns": {"start": [0, 15, 0]},
+  "exits": [
+    {"to": "__return", "spawn": "start", "pos": [0, 19.5], "size": [6, 2], "label": "CV_EXIT"}
+  ],
+  "walls": [
+    {"from": [-6, 18], "to": [-14, 12]},
+    {"from": [-14, 12], "to": [-17, 0]},
+    {"from": [-17, 0], "to": [-14, -12]},
+    {"from": [-14, -12], "to": [-6, -17]},
+    {"from": [-6, -17], "to": [6, -17]},
+    {"from": [6, -17], "to": [14, -12]},
+    {"from": [14, -12], "to": [17, 0]},
+    {"from": [17, 0], "to": [14, 12]},
+    {"from": [14, 12], "to": [6, 18]},
+    {"from": [-6, 18], "to": [-3, 18]},
+    {"from": [3, 18], "to": [6, 18]}
+  ],
+  "arena": {"gate": [[-3, 17.4], [3, 17.4]]},
+  "props": [
+    {"id": "env_coluna_ruina", "pos": [-12, -8]},
+    {"id": "prp_jarro_agua", "pos": [12, -8]},
+    {"id": "prp_braseiro", "pos": [-12, 6]},
+    {"id": "prp_estatua_alada", "pos": [12, 6]},
+    {"id": "env_coluna_ruina", "pos": [-7, -13]},
+    {"id": "prp_jarro_agua", "pos": [7, -13]},
+    {"id": "prp_braseiro", "pos": [-13, -1]},
+    {"id": "prp_estatua_alada", "pos": [13, -1]},
+    {"id": "env_coluna_ruina", "pos": [-10, 12]},
+    {"id": "prp_jarro_agua", "pos": [10, 12]},
+    {"id": "prp_braseiro", "pos": [-3, -15]},
+    {"id": "prp_estatua_alada", "pos": [3, -15]},
+    {"id": "env_coluna_ruina", "pos": [-14.5, 3]},
+    {"id": "prp_jarro_agua", "pos": [14.5, 3]},
+    {"id": "prp_braseiro", "pos": [-14.5, -5]},
+    {"id": "prp_estatua_alada", "pos": [14.5, -5]},
+    {"id": "env_coluna_ruina", "pos": [-4, -10]},
+    {"id": "prp_jarro_agua", "pos": [4, -10]}
+  ],
+  "paths": [
+    {"points": [[0, 19], [0, -6]], "width": 2.6, "color": "#c99550"}
+  ],
+  "bosses": [
+    {"id": "sahra", "pos": [0, -7], "level": 28, "yaw": 0, "covil": "sahra"}
+  ],
+  "enemy_zones": [
+    {
+      "pos": [0, -4],
+      "radius": 6,
+      "max": 3,
+      "types": {"homem_lagarto": 1, "bandido_deserto": 1},
+      "level": [26, 27],
+      "respawn": 3600
+    }
+  ]
+}

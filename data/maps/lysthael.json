@@ -22,6 +22,7 @@
   ],
   "npcs": [
     {"id": "elarion", "pos": [-11, 10], "yaw": 40},
+    {"id": "andarilho", "pos": [9.4, 7.1], "yaw": 53},
     {"id": "faenor", "pos": [12, 9], "yaw": -40},
     {"id": "bram", "pos": [-5, 2], "yaw": 160, "if_flag": "severin_duel_3"}
   ],

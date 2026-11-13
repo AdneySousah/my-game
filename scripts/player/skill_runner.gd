@@ -8,6 +8,8 @@ signal skill_unlocked(skill_id: String)
 
 var player: Player
 var equipped: Array[String] = ["", "", "", ""]
+## The skill used last (its hits get the boss-set combo of that skill, Fase 8B).
+var last_skill: String = ""
 
 var _cooldowns: Dictionary = {}
 var _known: Dictionary = {}
@@ -52,6 +54,12 @@ func equip(slot: int, id: String) -> void:
 	equipped_changed.emit()
 
 
+## Takes `seconds` off every skill waiting to come back (a boss-set combo).
+func reduce_cooldowns(seconds: float) -> void:
+	for id: String in _cooldowns.keys():
+		_cooldowns[id] = maxf(0.0, float(_cooldowns[id]) - seconds)
+
+
 func cooldown_left(slot: int) -> float:
 	return float(_cooldowns.get(equipped[slot], 0.0))
 
@@ -79,12 +87,14 @@ func use_slot(slot: int) -> bool:
 		return false
 	_cooldowns[id] = float(s.get("cooldown", 1.0)) * player.stats.cooldown_mult()
 	_execute(s)
+	player.combos.on_skill_used(id)
 	if str(s.get("type", "")) != "buff":
 		player.struck.emit(player.global_position, float(s.get("radius", 2.5)))
 	return true
 
 
 func _execute(s: Dictionary) -> void:
+	last_skill = str(s.get("id", ""))
 	player.play_skill_anim(str(s.get("id", "")))
 	Audio.play_sfx(Audio.skill_sfx(str(s.get("id", ""))), player.global_position)
 	match str(s.get("type", "")):

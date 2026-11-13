@@ -75,6 +75,7 @@ func _changed() -> void:
 # --- Create -----------------------------------------------------------------------
 
 static func craftable_ids() -> Array[String]:
+	# Boss-set pieces ("covil") are the Wandering Smith's, not this forge's.
 	var order: Array[String] = RARITY_ORDER
 	var slots: Array[String] = ["weapon", "helmet", "chest", "gloves", "pants", "boots", "bracelet", "belt"]
 	var out: Array[String] = []
@@ -83,7 +84,7 @@ static func craftable_ids() -> Array[String]:
 			for id: String in Data.items:
 				var it: Dictionary = Data.items[id]
 				if str(it.get("type", "")) == "equipment" and str(it.get("rarity", "")) == r \
-						and str(it.get("gear_slot", "")) == s and id != Session.STARTER_WEAPON:
+						and str(it.get("gear_slot", "")) == s and id != Session.STARTER_WEAPON and not it.has("covil"):
 					out.append(id)
 	return out
 
@@ -102,7 +103,7 @@ static func base_piece_id(item_id: String) -> String:
 	for id: String in Data.items:
 		var it: Dictionary = Data.items[id]
 		if str(it.get("type", "")) == "equipment" and str(it.get("gear_slot", "")) == slot \
-				and str(it.get("rarity", "")) == base and id != Session.STARTER_WEAPON:
+				and str(it.get("rarity", "")) == base and id != Session.STARTER_WEAPON and not it.has("covil"):
 			return id
 	return ""
 

@@ -21,6 +21,7 @@ O arquivo do jogo (`data/shop/store.json`) guarda só chaves de tradução (`STO
 | `broca_real` | Broca Real | Abre um encaixe sempre (até 3). | R$ 4,90 |
 | `amuleto` | Amuleto de Proteção | Se o fortalecimento falhar, o equipamento não quebra nem some. | R$ 3,90 |
 | `mochila_30` | Mochila Real (+30 espaços) | Uma mochila grande que aumenta a mochila do herói em 30 espaços. Dá para vestir até 6 mochilas. | R$ 1,99 |
+| `licenca_covil_10` | 10 Licenças do Covil | Mais 10 entradas nos covis do Ferreiro Andarilho, além das 10 grátis de cada dia. | R$ 3,99 |
 
 ## Oferta de boas-vindas (`premium_7d_oferta`)
 - É um produto separado do `premium_7d`, com o mesmo efeito (7 dias de premium) e preço de R$ 4,99.
@@ -33,3 +34,6 @@ Hoje o jogo tem **3 visuais**, todos na lista acima: `skin_sol` (Cavaleiro do So
 
 ## Mochila Real (`mochila_30`)
 Produto consumível novo (13/11): cada compra dá 1 Mochila Real (+30 espaços). Dá para vestir até 6 mochilas. A Mochila de Couro (+10) é vendida por ouro nos comerciantes e não entra no Play Console.
+
+## Licenças do Covil (`licenca_covil_10`)
+Produto consumível novo (13/11, Fase 8B): cada compra dá 10 Licenças do Covil. Os covis do Ferreiro Andarilho abrem segunda, quarta, sexta e domingo, com 10 entradas grátis por dia. Depois delas, cada entrada gasta 1 licença.

@@ -271,6 +271,16 @@
       "barks": ["BARK_AURELIO_1"],
       "model": "npc_aurelio"
     },
+    "andarilho": {
+      "name": "NPC_ANDARILHO",
+      "service": "covil",
+      "color": "#5b7a4a",
+      "voice": 0.75,
+      "portrait": "ui_retrato_andarilho",
+      "talk": [{"dialogue": "andarilho_idle"}],
+      "barks": ["BARK_ANDARILHO_1"],
+      "model": "npc_ferreiro_andarilho"
+    },
     "matias": {
       "name": "NPC_MATIAS",
       "service": "smith",

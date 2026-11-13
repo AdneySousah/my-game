@@ -1,0 +1,70 @@
+{
+  "_comment": "Covil do Ferreiro Andarilho (Fase 8B). Gerado por tools/content/gen_covis.py; não editar à mão.",
+  "id": "covil_brannoc",
+  "name": "CV_MAP_BRANNOC",
+  "size": [40, 44],
+  "seed": 307,
+  "covil": "brannoc",
+  "loading": "load_castelo",
+  "ground": "#cdd6df",
+  "sky": "#6f7f9c",
+  "ambient": 0.55,
+  "sun": 0.9,
+  "sun_color": "#cfdcff",
+  "patches": {"color": "#e9eef3", "count": 80},
+  "biome": {"snow": 1.0},
+  "spawns": {"start": [0, 15, 0]},
+  "exits": [
+    {"to": "__return", "spawn": "start", "pos": [0, 19.5], "size": [6, 2], "label": "CV_EXIT"}
+  ],
+  "walls": [
+    {"from": [-6, 18], "to": [-14, 12], "id": "env_muralha"},
+    {"from": [-14, 12], "to": [-17, 0], "id": "env_muralha"},
+    {"from": [-17, 0], "to": [-14, -12], "id": "env_muralha"},
+    {"from": [-14, -12], "to": [-6, -17], "id": "env_muralha"},
+    {"from": [-6, -17], "to": [6, -17], "id": "env_muralha"},
+    {"from": [6, -17], "to": [14, -12], "id": "env_muralha"},
+    {"from": [14, -12], "to": [17, 0], "id": "env_muralha"},
+    {"from": [17, 0], "to": [14, 12], "id": "env_muralha"},
+    {"from": [14, 12], "to": [6, 18], "id": "env_muralha"},
+    {"from": [-6, 18], "to": [-3, 18], "id": "env_muralha"},
+    {"from": [3, 18], "to": [6, 18], "id": "env_muralha"}
+  ],
+  "arena": {"gate": [[-3, 17.4], [3, 17.4]]},
+  "props": [
+    {"id": "prp_estandarte_gelo", "pos": [-12, -8]},
+    {"id": "prp_braseiro_frio", "pos": [12, -8]},
+    {"id": "prp_cristal_gelo", "pos": [-12, 6]},
+    {"id": "prp_estatua_alada", "pos": [12, 6]},
+    {"id": "prp_estandarte_gelo", "pos": [-7, -13]},
+    {"id": "prp_braseiro_frio", "pos": [7, -13]},
+    {"id": "prp_cristal_gelo", "pos": [-13, -1]},
+    {"id": "prp_estatua_alada", "pos": [13, -1]},
+    {"id": "prp_estandarte_gelo", "pos": [-10, 12]},
+    {"id": "prp_braseiro_frio", "pos": [10, 12]},
+    {"id": "prp_cristal_gelo", "pos": [-3, -15]},
+    {"id": "prp_estatua_alada", "pos": [3, -15]},
+    {"id": "prp_estandarte_gelo", "pos": [-14.5, 3]},
+    {"id": "prp_braseiro_frio", "pos": [14.5, 3]},
+    {"id": "prp_cristal_gelo", "pos": [-14.5, -5]},
+    {"id": "prp_estatua_alada", "pos": [14.5, -5]},
+    {"id": "prp_estandarte_gelo", "pos": [-4, -10]},
+    {"id": "prp_braseiro_frio", "pos": [4, -10]}
+  ],
+  "paths": [
+    {"points": [[0, 19], [0, -6]], "width": 2.6, "color": "#e9eef3"}
+  ],
+  "bosses": [
+    {"id": "brannoc", "pos": [0, -7], "level": 44, "yaw": 0, "covil": "brannoc"}
+  ],
+  "enemy_zones": [
+    {
+      "pos": [0, -4],
+      "radius": 6,
+      "max": 3,
+      "types": {"morto_gelo": 1, "orc_neve": 1},
+      "level": [42, 43],
+      "respawn": 3600
+    }
+  ]
+}

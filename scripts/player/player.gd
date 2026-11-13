@@ -35,6 +35,8 @@ var status: StatusEffects
 var skills: SkillRunner
 ## Defend button, parry and the Awakening (Fase 8).
 var guard: HeroGuard
+## Combos of the Wandering Smith's boss sets (Fase 8B).
+var combos: HeroCombos
 
 var _lock: float = 0.0
 var _combo_step: int = 0
@@ -120,6 +122,9 @@ func _ready() -> void:
 	guard = HeroGuard.new()
 	guard.player = self
 	add_child(guard)
+	combos = HeroCombos.new()
+	combos.player = self
+	add_child(combos)
 	hp = max_hp()
 	stamina = max_stamina()
 	mp = max_mp()
@@ -548,6 +553,7 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var m: float = mult * (1.0 - clampf(status.value("weaken"), 0.0, 0.8))
 	if is_skill:
 		m *= 1.0 + stats.get_stat("skill_dmg")
+		m *= combos.skill_mult(skills.last_skill)
 	# Dizzy (parried) or stunned enemies take more (Fase 8).
 	if enemy.status and enemy.status.has("stun"):
 		m *= float(HeroGuard.rules().get("dizzy_damage_mult", 1.3))
@@ -556,6 +562,9 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var push: Vector3 = enemy.global_position - global_position
 	push.y = 0.0
 	enemy.take_damage(res["amount"], res["crit"], push.normalized() * knockback)
+	combos.on_hit(enemy, int(res["amount"]), bool(res["crit"]))
+	if is_skill:
+		combos.on_skill_hit(skills.last_skill, enemy)
 	var ar: Dictionary = HeroGuard.awaken_rules()
 	guard.add_fury(float(ar.get("gain_skill_hit" if is_skill else "gain_hit", 0.4)))
 	if enemy.is_dead():
@@ -574,7 +583,8 @@ var min_hp_ratio: float = 0.0
 
 
 ## Takes an enemy hit. True when it landed (not dodged, evaded or invulnerable).
-func receive_attack(atk_value: float) -> bool:
+## `attacker`: who hit (for the thorns combo), when known.
+func receive_attack(atk_value: float, attacker: Node3D = null) -> bool:
 	if _dead or _invulnerable > 0.0:
 		return false
 	if _rng.randf() < stats.get_stat("evade"):
@@ -588,6 +598,7 @@ func receive_attack(atk_value: float) -> bool:
 	ProtoVisuals.damage_number(get_parent(), global_position, str(res["amount"]), Color("#ff5a5a"))
 	_combat_time = 3.0
 	guard.add_fury(float(HeroGuard.awaken_rules().get("gain_hurt", 0.5)))
+	combos.on_hurt(attacker, float(res["amount"]))
 	if model:
 		model.flash(Color("#ff5a5a"))
 		# Blocking: he stays in guard (no flinch).
@@ -762,6 +773,7 @@ func _try_dodge(dir: Vector3) -> void:
 	_queued_attack = false
 	_dodge_cd = DODGE_COOLDOWN
 	set_invulnerable(DODGE_TIME + 0.05)
+	combos.on_dodge(global_position)
 	start_forced_move(d * DODGE_SPEED, DODGE_TIME)
 	Audio.play_sfx("dodge", global_position)
 	if model:
@@ -794,8 +806,10 @@ func _do_attack() -> void:
 	await get_tree().create_timer(t * 0.4, false).timeout
 	if _dead:
 		return
-	for e: Enemy in enemies_in_cone(ATTACK_RADIUS, ATTACK_HALF_ANGLE):
+	var hit: Array[Enemy] = enemies_in_cone(ATTACK_RADIUS, ATTACK_HALF_ANGLE)
+	for e: Enemy in hit:
 		deal_damage(e, COMBO_MULTS[step], false, COMBO_KNOCKBACK[step])
+	combos.on_basic_swing(not hit.is_empty())
 	struck.emit(global_position + forward() * ATTACK_RADIUS * 0.5, ATTACK_RADIUS * 0.6)
 	if step == COMBO_MULTS.size() - 1 and camera_rig:
 		camera_rig.shake(0.08, 0.1)

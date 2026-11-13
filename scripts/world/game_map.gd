@@ -1010,7 +1010,8 @@ func _build_enemy_zones() -> void:
 ## With "arena": {"gate": [[x,z], [x,z]]} the entrance closes while the boss fights.
 func _build_bosses() -> void:
 	for b: Dictionary in data.get("bosses", []):
-		var replay: bool = false
+		# A lair's boss (Fase 8B) is always there and fights as a replay (no story talks).
+		var replay: bool = b.has("covil")
 		if b.has("unless_flag") and Session.has_flag(str(b["unless_flag"])):
 			# Beaten already: back only after the dungeon sign was used (not duels).
 			if not Session.dungeon_resets.has(map_id) or not _resettable(b):
@@ -1028,6 +1029,8 @@ func _build_bosses() -> void:
 		e.set_meta("reborn_line", str(b.get("reborn_line", "")))
 		e.set_meta("power_spots", b.get("power_spots", []))
 		e.set_meta("replay", replay)
+		if b.has("covil"):
+			e.set_meta("covil", str(b["covil"]))
 		add_child(e)
 		var flag: String = str(b.get("flag_on_death", ""))
 		e.died.connect(func(dead: Enemy) -> void:

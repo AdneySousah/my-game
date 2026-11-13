@@ -28,6 +28,7 @@
   ],
   "npcs": [
     {"id": "zahir", "pos": [-9, 6], "yaw": 40},
+    {"id": "andarilho", "pos": [8.0, 2.9], "yaw": 70},
     {"id": "nadira", "pos": [11, 4], "yaw": -50}
   ],
   "rest_points": [

@@ -346,6 +346,7 @@ func talk_to_nearby() -> void:
 		match str(Data.npc(npc.npc_id).get("service", "")):
 			"smith": hud.open_smith()
 			"shop": hud.open_shop(npc.npc_id)
+			"covil": hud.open_covil(Covis.of_city(Session.current_map))
 
 
 ## The hero pets an animal: crouches for small ones, stays standing for big ones.
@@ -424,7 +425,11 @@ func _on_enemy_killed(e: Enemy) -> void:
 	Session.routine.on_event("kill", e.base_id)
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
-	_drop_loot(e)
+	# A lair's boss gives its shards and essence instead of its story drops (Fase 8B).
+	if e.has_meta("covil"):
+		_covil_prize(e)
+	else:
+		_drop_loot(e)
 	_bounty_kill(e)
 	# The story scene plays the first time only (not after a dungeon reset).
 	var after_flag: String = str(e.data.get("after_flag", ""))
@@ -455,6 +460,27 @@ func _bounty_kill(e: Enemy) -> void:
 		if follow_wanted_city == city:
 			follow_wanted_city = ""
 		save_now()
+
+
+## Goes into a lair through its Wandering Smith (Fase 8B): pays the entry (a free one of
+## the day or a license) and goes; the lair's way out brings the hero back here.
+func enter_covil(id: String) -> bool:
+	if not Covis.pay_entry(id):
+		return false
+	var out: Vector3 = player.global_position
+	Session.house_return = {"map": map.map_id, "x": out.x, "z": out.z, "yaw": player.rotation_degrees.y + 180.0, "key": ""}
+	save_now()
+	load_map(str(Covis.covil(id).get("map", "")), "start")
+	return true
+
+
+func _covil_prize(e: Enemy) -> void:
+	var prize: Dictionary = Covis.reward(str(e.get_meta("covil")))
+	for id: String in prize:
+		give_item(id, int(prize[id]))
+	hud.banner(tr("CV_WON"))
+	Audio.play_sfx("quest")
+	save_now()
 
 
 ## Walks into a town house: one floor = "interior_casa", two = "interior_terreo" (with the

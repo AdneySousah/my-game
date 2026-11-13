@@ -165,6 +165,18 @@
           "mochila_real": 1
         }
       }
+    },
+    {
+      "id": "licenca_covil_10",
+      "name": "STORE_LICENCA_COVIL",
+      "desc": "STORE_LICENCA_COVIL_DESC",
+      "price_brl": 3.99,
+      "icon": "licenca_covil",
+      "grants": {
+        "items": {
+          "licenca_covil": 10
+        }
+      }
     }
   ],
   "xp_boost": 0.5,

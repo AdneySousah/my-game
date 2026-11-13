@@ -725,3 +725,43 @@ Pedido do dono: novas mecânicas (plano completo em `docs/FASE8.md`). A parte A 
 - **Gerador de textos** (`gen_act1_text.py`): duplicava as falas das cenas a cada vez que rodava e apagava as chaves `OPT_` feitas à mão, como "Gráficos". Agora só troca as chaves dele e tira as repetidas.
 - **Sons novos** do ElevenLabs: aparar, defesa, despertar e tontura.
 - **Teclado:** Q = Defesa; segurar J (Atacar) 3 s = Despertar.
+
+## Fase 8B — Covis do Ferreiro Andarilho (13/11/2026)
+Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, a partir de materiais que caem em masmorras próprias.
+- **Ferreiro Andarilho:**
+  - NPC novo, ao lado do ferreiro de cada uma das 5 cidades (`service: "covil"`).
+  - Modelo, retrato e as mesmas animações dos moradores.
+  - Abre a janela `CovilPanel`.
+- **Covis:**
+  - Uma arena por cidade, com o visual do mapa do chefe: Pradoluz/Gorvan, Qaressa/Sahra, Hrimvald/Brannoc, Lysthael/Velyra, Altarea/Vaelor.
+  - O chefe sempre está lá e luta sem as falas da história, com alguns ajudantes. A entrada fecha durante a luta e a saída volta para a cidade.
+  - Abrem só depois de vencer aquele chefe na história.
+- **Dias e entradas:**
+  - Abrem segunda, quarta, sexta e domingo, pelo relógio do aparelho.
+  - **10 entradas grátis por dia**, somando todos os covis.
+  - Depois disso, cada entrada gasta 1 **Licença do Covil**, item vendido na loja especial: `licenca_covil_10`, 10 licenças por R$ 3,99.
+- **Prêmio do chefe do covil:**
+  - 2 a 4 **fragmentos** daquele chefe e, em metade das vitórias, 1 **essência**. Em vez dos drops da história, para não inflar as Insígnias.
+  - Ouro e XP normais.
+- **Forja:**
+  - **Peça rara:** 8 fragmentos (a arma pede 12) + ouro (30 × nível).
+  - **Épica:** a rara + 10 essências + ouro (90 × nível). A épica herda o +nível, os encaixes e as gemas da rara.
+  - **Nível das peças:** o do mapa (10, 25, 40, 55 e 60).
+  - **Atributos:** saem da peça épica de nível 40 de cada encaixe, ajustada ao nível; a épica tem 25% a mais que a rara.
+- **Conjuntos:** 8 peças cada (arma, elmo, peitoral, luvas, calça, botas, pulseira e cinto).
+  - **Armas:** a dos chefes (foice, khopesh, machado, espada de Vaelor) e a **Lâmina de Espinhos**, nova, para a Velyra. As pegadas foram conferidas em fotos.
+  - **Combos com 2, 4, 6 e 8 peças**, feitos para o guerreiro (`HeroCombos`; números em `items.json` → `sets` → `effects`):
+    - **Colheita Rubra:** +8% ataque · ceifar em volta (15%) · matar cura 3% · Corte Giratório puxa e +40%.
+    - **Tempestade de Areia:** +6% velocidade de ataque · onda de areia a cada 4º golpe · esquiva deixa redemoinho que deixa lento · Investida +35% e deixa lento.
+    - **Coroa de Gelo:** +10% defesa · aparar congela mais 1,5 s · tomar dano tira 0,5 s das recargas · Golpe Sísmico +30% e deixa lento.
+    - **Coração de Espinhos:** +8% vida · devolve 20% do dano corpo a corpo · críticos fazem sangrar · Salto Devastador +35% e deixa lento.
+    - **Juramento Celeste:** +5% em tudo · luz do Despertar enche 30% mais rápido · no Despertar, golpes soltam raios de luz · Julgamento chama mais 3 colunas e +40%.
+  - **Combos épicos:** quanto mais peças épicas do conjunto, mais fortes, até +50%.
+- **Gerador:** tudo sai de `tools/content/gen_covis.py`: itens, conjuntos, mapas `covil_*`, `data/world/covis.json` e as chaves `CV_*`.
+- **Meshy:** 89 créditos.
+  - Ferreiro: conceito, 3D, rig, animações e retrato.
+  - 4 folhas de ícones: as 80 peças, os materiais e a licença, mais as 6 runas e os 7 peixes que já ficam guardados para as partes C e D.
+  - A Lâmina de Espinhos.
+- **Correções no caminho:**
+  - O ferreiro antigo não usa as peças de chefe nas receitas dele.
+  - A tela de equipamento mostra os combos e conta 8 peças por conjunto.

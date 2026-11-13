@@ -21,6 +21,7 @@
   ],
   "npcs": [
     {"id": "osk", "pos": [-10, 5], "yaw": 50},
+    {"id": "andarilho", "pos": [8.9, 2.2], "yaw": 76},
     {"id": "brunhild", "pos": [12, 3], "yaw": -50},
     {"id": "bento", "pos": [-3, 10], "yaw": 160, "if_flag": "act2_done", "unless_flag": "brannoc_defeated"}
   ],

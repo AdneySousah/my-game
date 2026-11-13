@@ -100,6 +100,12 @@ func get_stat(stat: String) -> float:
 	for a: String in ATTRIBUTES:
 		value += float(effects.get(a, {}).get(stat, 0.0)) * attr_total(a)
 	value += float(gear.get(stat, 0.0))
+	# Shares from boss-set combos (Fase 8B): "atk_pct": 0.08 = +8% attack; "all_pct" = every stat.
+	var pct: float = float(gear.get(stat + "_pct", 0.0))
+	if stat in AWAKEN_STATS:
+		pct += float(gear.get("all_pct", 0.0))
+	if pct != 0.0:
+		value *= 1.0 + pct
 	if stat == "atk":
 		value *= 1.0 + atk_buff + buff("atk")
 	elif stat == "def":

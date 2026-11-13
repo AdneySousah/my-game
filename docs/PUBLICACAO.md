@@ -41,8 +41,13 @@ Menu do app: **Monetizar com o Google Play** → **Produtos** → **Produtos ún
 | `premium_30d` | Passe premium — 30 dias | O mesmo passe, por 30 dias. | R$ 25,00 |
 | `skin_sol` | Visual: Cavaleiro do Sol | Armadura branca e dourada, cabelo novo e a Lâmina Solar (só aparência). | R$ 9,90 |
 | `skin_tempestade` | Visual: Lâmina da Tempestade | Couro azul com raios, cabelo prateado e a Lâmina da Tempestade (só aparência). | R$ 9,90 |
+| `skin_anjo` | Visual: Anjo Dourado | Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar (só aparência). | R$ 19,90 |
+| `premium_7d_oferta` | Oferta de boas-vindas: passe premium 7 dias | Só na primeira compra! XP em dobro, ouro em dobro e +10% em todos os atributos por 7 dias. | R$ 4,99 |
+| `mochila_30` | Mochila Real (+30 espaços) | Aumenta a mochila do herói em 30 espaços. Dá para vestir até 6 mochilas. | R$ 1,99 |
 
-Se o Console pedir a versão em inglês, use: Bag of gold / Chest of gold / Scroll of learning / Potion kit / Royal Clover / Royal Drill / Protection Amulet / Premium pass — 7 days / Premium pass — 14 days / Premium pass — 30 days / Look: Sun Knight / Look: Storm Blade.
+Se o Console pedir a versão em inglês, use: Bag of gold / Chest of gold / Scroll of learning / Potion kit / Royal Clover / Royal Drill / Protection Amulet / Premium pass — 7 days / Premium pass — 14 days / Premium pass — 30 days / Look: Sun Knight / Look: Storm Blade / Look: Golden Angel / Welcome offer: 7-day premium pass / Royal Backpack (+30 slots).
+
+**Novos em 13/11 (versão 0.3.5):** `skin_anjo` (R$ 19,90), `premium_7d_oferta` (R$ 4,99) e `mochila_30` (R$ 1,99). Lista completa e atualizada também em `docs/loja/produtos_play.md`.
 
 Os 5 últimos (passe e visuais) entraram na 0.2.0. Todos são do mesmo tipo dos outros ("Comprar", consumível); o jogo guarda o passe e os visuais no save.
 
@@ -84,7 +89,7 @@ Tudo o que a ficha pede está em `docs/loja/`: textos em `ficha.md` (português 
 1. **Testar e lançar → Testes → Teste fechado → Alpha → Gerenciar faixa**.
 2. Aba **Testadores** → **Criar lista de e-mails** → nome "Testadores" → os e-mails Google das 12 pessoas (ou mais, por garantia) → salvar e marcar a lista.
 3. Aba **Países/regiões** → **Brasil**.
-4. Aba **Versões** → **Criar nova versão** → **Adicionar da biblioteca** → escolha a versão 3 (0.1.2) → notas "Teste fechado" → **Próxima** → **Salvar** → **Enviar para revisão**. O teste fechado passa pela revisão do Google (algumas horas ou dias).
+4. Aba **Versões** → **Criar nova versão** → **Enviar** o `build/android/herdeiro.aab` mais novo (versão **0.3.5**, código 26) → notas "Teste fechado" → **Próxima** → **Salvar** → **Enviar para revisão**. O teste fechado passa pela revisão do Google (algumas horas ou dias).
 5. Aprovado, copie o **link de participação** na aba Testadores e mande para as 12 pessoas. Cada uma abre o link no celular, aceita e instala pela Play Store. Elas precisam continuar inscritas por **14 dias seguidos**; abrir o jogo de vez em quando ajuda.
 6. Depois dos 14 dias: **Painel → Solicitar acesso à produção** e responder às perguntas sobre o teste.
 

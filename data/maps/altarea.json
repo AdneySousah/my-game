@@ -1,0 +1,84 @@
+{
+  "_comment": "Altaréa (Ato 5): a capital branca sob a lei de ferro do Arauto Cassian. Toque de recolher, decretos em cada esquina, a estátua do juiz na praça. Isolda lidera a revolta; Aurélio (loja) e Matias (ferreiro). Ao norte, o Castelo do Arauto (Fase 6.5b).",
+  "id": "altarea",
+  "name": "MAP_ALTAREA",
+  "safe": true,
+  "size": [92, 92],
+  "seed": 291,
+  "ground": "#b9b2a2",
+  "grass": {"count": 260, "root": "#6f8a4a", "tip": "#b7c27a"},
+  "sky": "#c9d6e8",
+  "ambient": 0.62,
+  "sun": 1.05,
+  "sun_color": "#fff0d6",
+  "patches": {"color": "#a8a090", "count": 90},
+  "spawns": {"start": [0, 30, 0], "from_arredores": [0, 34, 0], "from_castelo_arauto": [0, -32, 180]},
+  "exits": [
+    {"to": "arredores", "spawn": "from_altarea", "pos": [0, 41], "size": [8, 2], "label": "MAP_ARREDORES", "model": "env_portao_cidade", "model_pos": [0, 38], "model_rot": 180},
+    {"to": "castelo_arauto", "spawn": "from_altarea", "pos": [0, -40], "size": [8, 2], "label": "MAP_CASTELO_ARAUTO", "model": "env_portao_cidade", "model_pos": [0, -38], "if_flag": "act5_castle", "locked_label": "MAP_ROAD_CLOSED"}
+  ],
+  "npcs": [
+    {"id": "isolda", "pos": [-12, -10], "yaw": 60},
+    {"id": "aurelio", "pos": [-13, 12], "yaw": 50},
+    {"id": "matias", "pos": [14, 11], "yaw": -50}
+  ],
+  "rest_points": [
+    {"id": "altarea_pedra", "name": "REST_ALTAREA_PEDRA", "pos": [0, 24], "kind": "pedra"}
+  ],
+  "paths": [
+    {"points": [[0, 41], [0, 20], [0, 6]], "width": 4.4, "color": "#d8d0bc"},
+    {"points": [[-26, 0], [-8, 0], [8, 0], [26, 0]], "width": 3.6, "color": "#d8d0bc"},
+    {"points": [[0, -6], [0, -40]], "width": 4.0, "color": "#d8d0bc"}
+  ],
+  "props": [
+    {"id": "prp_fonte_capital", "pos": [0, 0], "rot": 180},
+    {"id": "env_casa_capital_a", "pos": [-22, 20], "rot": 90},
+    {"id": "env_casa_capital_b", "pos": [-22, 8], "rot": 90},
+    {"id": "env_casa_capital_a", "pos": [22, 20], "rot": -90},
+    {"id": "env_casa_capital_b", "pos": [22, 8], "rot": -90},
+    {"id": "env_casa_capital_b", "pos": [-22, -10], "rot": 90},
+    {"id": "env_casa_capital_a", "pos": [-22, -22], "rot": 90},
+    {"id": "env_casa_capital_a", "pos": [22, -10], "rot": -90},
+    {"id": "env_casa_capital_b", "pos": [22, -22], "rot": -90},
+    {"id": "env_casa_capital_a", "pos": [-10, 30], "rot": 180},
+    {"id": "env_casa_capital_b", "pos": [10, 30], "rot": 180},
+    {"id": "env_casa_capital_b", "pos": [-11, -30], "rot": 0},
+    {"id": "env_casa_capital_a", "pos": [11, -30], "rot": 0},
+    {"id": "env_casa_capital_b", "pos": [-31, 30], "rot": 135},
+    {"id": "env_casa_capital_a", "pos": [31, 30], "rot": -135},
+    {"id": "env_casa_capital_a", "pos": [-31, -31], "rot": 45},
+    {"id": "env_casa_capital_b", "pos": [31, -31], "rot": -45},
+    {"id": "prp_estandarte_lei", "pos": [-5, 33]},
+    {"id": "prp_estandarte_lei", "pos": [5, 33]},
+    {"id": "prp_estandarte_lei", "pos": [-7, -5]},
+    {"id": "prp_estandarte_lei", "pos": [7, -5]},
+    {"id": "prp_estandarte_lei", "pos": [-5, -34]},
+    {"id": "prp_estandarte_lei", "pos": [5, -34]},
+    {"id": "prp_quadro_decreto", "pos": [-8, 18], "rot": 90},
+    {"id": "prp_quadro_decreto", "pos": [8, -16], "rot": -90},
+    {"id": "prp_barricada", "pos": [-16, -16], "rot": 45},
+    {"id": "prp_barril", "pos": [-14, -13]},
+    {"id": "prp_caixa", "pos": [-10, -14]},
+    {"id": "prp_barraca_mercado", "pos": [-15, 15], "rot": 60},
+    {"id": "prp_bigorna", "pos": [15.5, 8.5], "rot": 20},
+    {"id": "prp_lampiao", "pos": [-4, 12]},
+    {"id": "prp_lampiao", "pos": [4, 12]},
+    {"id": "prp_lampiao", "pos": [-12, 3]},
+    {"id": "prp_lampiao", "pos": [12, 3]},
+    {"id": "prp_banco", "pos": [-6, 6], "rot": 90},
+    {"id": "prp_banco", "pos": [6, 6], "rot": -90}
+  ],
+  "walls": [
+    {"id": "env_muralha", "from": [-36, 40], "to": [-5, 40]},
+    {"id": "env_muralha", "from": [5, 40], "to": [36, 40]},
+    {"id": "env_muralha", "from": [38, 38], "to": [38, -38]},
+    {"id": "env_muralha", "from": [36, -40], "to": [5, -40]},
+    {"id": "env_muralha", "from": [-5, -40], "to": [-36, -40]},
+    {"id": "env_muralha", "from": [-38, -38], "to": [-38, 38]}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore", "prp_flores", "prp_arbusto"], "count": 14, "rect": [-34, -34, 34, 36], "spacing": 7, "seed": 292},
+    {"ids": ["prp_flores", "prp_barril", "prp_caixa"], "count": 18, "rect": [-34, -34, 34, 36], "spacing": 4, "seed": 293}
+  ],
+  "ambience": {"villagers": 4, "spots": [[0, 12], [-8, 8], [8, 8], [-14, 0], [14, 0], [0, 22], [-16, 12], [16, 12]], "homes": [[-19, 20], [19, 20], [-19, -10], [19, -10]], "animals": [{"kind": "gato", "pos": [-10, 20]}], "flocks": [[-28, 32, 3]]}
+}

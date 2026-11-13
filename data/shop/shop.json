@@ -123,7 +123,123 @@
         }
       ]
     },
-    "elarion": {"name": "SHOP_ELARION", "goods": [{"id": "pot_vida_m", "buy": 80}, {"id": "pot_vida_g", "buy": 200}, {"id": "pot_folego_m", "buy": 80}, {"id": "pot_folego_g", "buy": 200}, {"id": "pot_forca", "buy": 120}, {"id": "pot_pedra", "buy": 120}, {"id": "pot_vento", "buy": 120}, {"id": "mat_lingote_aco", "buy": 60}, {"id": "trevo", "buy": 350}, {"id": "broca", "buy": 300}, {"id": "amuleto", "buy": 600}, {"id": "eq_espada_raro", "buy": 450}, {"id": "eq_elmo_raro", "buy": 450}, {"id": "eq_peitoral_raro", "buy": 450}, {"id": "eq_luvas_raro", "buy": 450}, {"id": "eq_calca_raro", "buy": 450}, {"id": "eq_botas_raro", "buy": 450}, {"id": "eq_pulseira_raro", "buy": 450}, {"id": "eq_cinto_raro", "buy": 450}, {"id": "gema_topazio_1", "buy": 400}, {"id": "eq_espada_epico", "buy": 1500}, {"id": "eq_elmo_epico", "buy": 1500}, {"id": "eq_peitoral_epico", "buy": 1500}, {"id": "eq_luvas_epico", "buy": 1500}, {"id": "eq_calca_epico", "buy": 1500}, {"id": "eq_botas_epico", "buy": 1500}, {"id": "eq_pulseira_epico", "buy": 1500}, {"id": "eq_cinto_epico", "buy": 1500}]},
+    "elarion": {
+      "name": "SHOP_ELARION",
+      "goods": [
+        {
+          "id": "pot_vida_m",
+          "buy": 80
+        },
+        {
+          "id": "pot_vida_g",
+          "buy": 200
+        },
+        {
+          "id": "pot_folego_m",
+          "buy": 80
+        },
+        {
+          "id": "pot_folego_g",
+          "buy": 200
+        },
+        {
+          "id": "pot_forca",
+          "buy": 120
+        },
+        {
+          "id": "pot_pedra",
+          "buy": 120
+        },
+        {
+          "id": "pot_vento",
+          "buy": 120
+        },
+        {
+          "id": "mat_lingote_aco",
+          "buy": 60
+        },
+        {
+          "id": "trevo",
+          "buy": 350
+        },
+        {
+          "id": "broca",
+          "buy": 300
+        },
+        {
+          "id": "amuleto",
+          "buy": 600
+        },
+        {
+          "id": "eq_espada_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_elmo_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_peitoral_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_luvas_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_calca_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_botas_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_pulseira_raro",
+          "buy": 450
+        },
+        {
+          "id": "eq_cinto_raro",
+          "buy": 450
+        },
+        {
+          "id": "gema_topazio_1",
+          "buy": 400
+        },
+        {
+          "id": "eq_espada_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_elmo_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_peitoral_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_luvas_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_calca_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_botas_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_pulseira_epico",
+          "buy": 1500
+        },
+        {
+          "id": "eq_cinto_epico",
+          "buy": 1500
+        }
+      ]
+    },
     "zahir": {
       "name": "SHOP_ZAHIR",
       "goods": [
@@ -238,6 +354,99 @@
         {
           "id": "gema_topazio_1",
           "buy": 400
+        }
+      ]
+    },
+    "aurelio": {
+      "name": "SHOP_AURELIO",
+      "goods": [
+        {
+          "id": "pot_vida_m",
+          "buy": 80
+        },
+        {
+          "id": "pot_vida_g",
+          "buy": 200
+        },
+        {
+          "id": "pot_folego_m",
+          "buy": 80
+        },
+        {
+          "id": "pot_folego_g",
+          "buy": 200
+        },
+        {
+          "id": "pot_forca",
+          "buy": 120
+        },
+        {
+          "id": "pot_pedra",
+          "buy": 120
+        },
+        {
+          "id": "pot_vento",
+          "buy": 120
+        },
+        {
+          "id": "mat_lingote_aco",
+          "buy": 60
+        },
+        {
+          "id": "trevo",
+          "buy": 350
+        },
+        {
+          "id": "trevo_real",
+          "buy": 1200
+        },
+        {
+          "id": "broca",
+          "buy": 300
+        },
+        {
+          "id": "broca_real",
+          "buy": 1100
+        },
+        {
+          "id": "amuleto",
+          "buy": 600
+        },
+        {
+          "id": "gema_topazio_1",
+          "buy": 400
+        },
+        {
+          "id": "eq_espada_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_elmo_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_peitoral_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_luvas_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_calca_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_botas_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_pulseira_epico",
+          "buy": 1700
+        },
+        {
+          "id": "eq_cinto_epico",
+          "buy": 1700
         }
       ]
     }

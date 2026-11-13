@@ -265,6 +265,12 @@
     "prp_raiz_gigante": {"scale": 8.0, "scene": "res://assets/props/prp_raiz_gigante/prp_raiz_gigante.glb", "center_origin": true, "collision": {"type": "box"}},
     "env_torre_vigia": {"scene": "res://assets/environment/env_torre_vigia/env_torre_vigia.glb", "scale": 18.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}},
     "prp_flor_espinho": {"scene": "res://assets/props/prp_flor_espinho/prp_flor_espinho.glb", "scale": 1.8, "center_origin": true, "collision": null, "light": {"color": "#d36bff", "energy": 1.0, "range": 4.0, "y": 1.0}},
-    "env_arvore_mae_florida": {"scene": "res://assets/environment/env_arvore_mae_florida/env_arvore_mae_florida.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}, "light": {"color": "#ffd1ec", "energy": 1.4, "range": 14.0, "y": 8.0}}
+    "env_arvore_mae_florida": {"scene": "res://assets/environment/env_arvore_mae_florida/env_arvore_mae_florida.glb", "scale": 20.0, "center_origin": true, "collision": {"type": "cylinder", "radius": 4.0}, "wind": {"sway": 0.03, "flutter": 0.004}, "light": {"color": "#ffd1ec", "energy": 1.4, "range": 14.0, "y": 8.0}},
+    "env_casa_capital_a": {"scene": "res://assets/environment/env_casa_capital_a/env_casa_capital_a.glb", "scale": 11.0, "center_origin": true, "collision": {"type": "box"}},
+    "env_casa_capital_b": {"scene": "res://assets/environment/env_casa_capital_b/env_casa_capital_b.glb", "scale": 12.0, "center_origin": true, "collision": {"type": "box"}},
+    "prp_estandarte_lei": {"scene": "res://assets/props/prp_estandarte_lei/prp_estandarte_lei.glb", "scale": 3.6, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.3}},
+    "prp_quadro_decreto": {"scene": "res://assets/props/prp_quadro_decreto/prp_quadro_decreto.glb", "scale": 2.4, "center_origin": true, "collision": {"type": "box"}},
+    "prp_fonte_capital": {"scene": "res://assets/props/prp_fonte_capital/prp_fonte_capital.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 2.6}},
+    "prp_barricada": {"scene": "res://assets/props/prp_barricada/prp_barricada.glb", "scale": 4.2, "center_origin": true, "collision": {"type": "box"}}
   }
 }

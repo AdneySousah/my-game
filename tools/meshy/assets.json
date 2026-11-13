@@ -5788,6 +5788,360 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "enm_guarda_lei",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "guarda da Lei (animações do bandido)",
+      "file": "assets/enemies/enm_guarda_lei/enm_guarda_lei.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_arqueiro_lei",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "arqueiro da Lei (animações do arqueiro)",
+      "file": "assets/enemies/enm_arqueiro_lei/enm_arqueiro_lei.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "enm_carcereiro",
+      "category": "enm",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "carcereiro (Retexture do orc)",
+      "file": "assets/enemies/enm_carcereiro/enm_carcereiro.glb",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "retexture",
+          "credits": 10,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_isolda",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Isolda, líder da resistência",
+      "file": "assets/npcs/npc_isolda/npc_isolda.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_aurelio",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Aurélio, comerciante",
+      "file": "assets/npcs/npc_aurelio/npc_aurelio.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "npc_matias",
+      "category": "npc",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "Matias, ferreiro",
+      "file": "assets/npcs/npc_matias/npc_matias.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "rigging",
+          "credits": 5,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_casa_capital_a",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "casa branca da capital",
+      "file": "assets/environment/env_casa_capital_a/env_casa_capital_a.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "env_casa_capital_b",
+      "category": "env",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "casa alta da capital",
+      "file": "assets/environment/env_casa_capital_b/env_casa_capital_b.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_estandarte_lei",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "estandarte da Lei",
+      "file": "assets/props/prp_estandarte_lei/prp_estandarte_lei.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_quadro_decreto",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "quadro de decretos",
+      "file": "assets/props/prp_quadro_decreto/prp_quadro_decreto.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_fonte_capital",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "fonte com estátua do juiz",
+      "file": "assets/props/prp_fonte_capital/prp_fonte_capital.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "prp_barricada",
+      "category": "prp",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "barricada da resistência",
+      "file": "assets/props/prp_barricada/prp_barricada.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": null,
+          "date": "2026-11-12"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_loading_ato5a",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "telas de carregamento do Ato 5a",
+      "file": "assets/ui/ui_loading_ato5a/ui_loading_ato5a.png",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 30,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_retratos_ato5a",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "generating",
+      "prompt": "retratos Isolda, Aurélio, Matias",
+      "file": "assets/ui/ui_retratos_ato5a/ui_retratos_ato5a.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 9,
+          "task_id": null,
+          "date": "2026-11-12"
+        }
+      ],
+      "notes": []
     }
   ]
 }

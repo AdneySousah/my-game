@@ -473,6 +473,52 @@ DIALOGUES = {
         ("lio", "Mais um Arauto. Então é para lá que eu vou.", "Another Herald. Then that's where I'm going."),
         ("elarion", "Leve isto, com a gratidão de todo o povo de Lys'Thaël. E volte para ouvir a gente cantar.", "Take this, with the gratitude of all of Lys'Thaël. And come back to hear us sing."),
     ],
+    # --- Ato 5, missão 16: A Lei de Ferro ---
+    "main_16_road": [
+        ("lio", "A Estrada Real... e guardas da Lei até no meio do trigo. O Cassian não deixa nem o vento passar sem carimbo.", "The Royal Road... and Law guards even in the middle of the wheat. Cassian won't let even the wind pass without a stamp."),
+        ("lio", "Bento, você ia adorar essa estrada. Reta, lisa, cheia de lugar pra cochilar.", "Bento, you'd love this road. Straight, smooth, full of places to nap."),
+    ],
+    "main_16_city": [
+        ("lio", "Altaréa. Ruas brancas, bandeiras douradas... e ninguém na rua. Toque de recolher em plena luz do dia.", "Altaréa. White streets, golden banners... and nobody outside. A curfew in broad daylight."),
+        ("lio", "Aquela estátua na praça deve ser ele. O Juiz. O Arauto da Lei.", "That statue in the square must be him. The Judge. The Herald of the Law."),
+    ],
+    "main_16_isolda": [
+        ("isolda", "Você é o rapaz que derrubou a Velyra? Pensei que fosse mais alto.", "You're the boy who brought down Velyra? I thought you'd be taller."),
+        ("lio", "Todo mundo pensa. E você é...?", "Everyone does. And you are...?"),
+        ("isolda", "Isolda. Eu cuido da resistência, se dá para chamar assim um punhado de padeiros e estudantes com raiva.", "Isolda. I run the resistance, if you can call a handful of angry bakers and students that."),
+        ("isolda", "O Cassian escreve uma lei nova por dia. Ontem proibiu reuniões de mais de três pessoas. Hoje, proibiu rir na praça.", "Cassian writes a new law every day. Yesterday he banned gatherings of more than three people. Today, he banned laughing in the square."),
+        ("isolda", "Quem desobedece vai para as minas do castelo, com os carcereiros. Meu irmão está lá há um ano.", "Whoever disobeys goes to the castle mines, with the jailers. My brother has been there for a year."),
+        ("lio", "Então a gente tira ele de lá. E tira o Cassian do trono.", "Then we get him out of there. And get Cassian off the throne."),
+        ("isolda", "O portão do castelo é guardado dia e noite. Precisamos de um plano... e de mais gente. Me dê um tempo para reunir o pessoal.", "The castle gate is guarded day and night. We need a plan... and more people. Give me some time to gather everyone."),
+    ],
+    "isolda_idle": [
+        ("isolda", "Fala baixo. As paredes desta cidade têm ouvidos e todos usam capacete.", "Keep your voice down. The walls of this city have ears, and they all wear helmets."),
+    ],
+    "aurelio_idle": [
+        ("aurelio", "Bem-vindo, bem-vindo! Só não fique mais de três minutos parado na porta. Tem lei para isso também.", "Welcome, welcome! Just don't stand at the door for more than three minutes. There's a law for that too."),
+    ],
+    "matias_idle": [
+        ("matias", "Eu forjava arados. Agora o Castelo só encomenda grilhões. Mas para você, eu afio o que precisar.", "I used to forge plows. Now the Castle only orders shackles. But for you, I'll sharpen whatever you need."),
+    ],
+    # --- Secundária: Decretos rasgados (Arredores, Aurélio) ---
+    "side_decretos_offer": [
+        ("aurelio", "Os decretos novos estão pregados nos postes dos Arredores. Quem lê fica com medo e não vem mais à cidade comprar nada.", "The new decrees are nailed to the posts in the Outskirts. Whoever reads them gets scared and stops coming to the city to buy anything."),
+        ("aurelio", "Arranca uns cinco para mim? Eu guardo como prova. Um dia alguém vai ter que responder por cada linha.", "Tear down about five for me? I'll keep them as evidence. One day someone will have to answer for every line."),
+        ("lio", "Rasgar papel de tirano. Esse trabalho eu faço até de graça.", "Tearing up a tyrant's paper. I'd do that job for free."),
+    ],
+    "side_decretos_done": [
+        ("aurelio", "\"Fica proibido assobiar\"... \"Fica proibido usar azul às quintas\"... Que homem pequeno, para uma cidade tão grande.", "\"Whistling is forbidden\"... \"Wearing blue on Thursdays is forbidden\"... What a small man, for such a big city."),
+        ("aurelio", "Toma, com desconto de herói. Quer dizer, de graça.", "Here, with a hero's discount. Meaning, free."),
+    ],
+    # --- Secundária: Correntes partidas (Arredores, Matias) ---
+    "side_correntes_offer": [
+        ("matias", "Os carcereiros levam gente dos sítios para as minas do castelo, presa em correntes que eu fui obrigado a forjar.", "The jailers take people from the farms to the castle mines, chained with links I was forced to forge."),
+        ("matias", "Derrote seis deles nos Arredores e me traga as correntes. Eu derreto tudo e faço algo que proteja em vez de prender.", "Defeat six of them in the Outskirts and bring me the chains. I'll melt them all down and make something that protects instead of binds."),
+    ],
+    "side_correntes_done": [
+        ("matias", "Seis correntes a menos no mundo. Isso aqui era grilhão. Agora é seu.", "Six fewer chains in the world. This used to be a shackle. Now it's yours."),
+        ("lio", "Pesa menos do que parece. Igual a esperança, eu acho.", "It weighs less than it looks. Like hope, I guess."),
+    ],
     # --- Secundária: Os cantos escondidos (Mata Úmida, Elarion) ---
     "side_cantos_offer": [
         ("elarion", "Antes da proibição, os bardos esconderam as partituras mais antigas na Mata Úmida. Se a Velyra achar, queima tudo.", "Before the ban, the bards hid the oldest sheet music in the Damp Woods. If Velyra finds it, she'll burn it all."),
@@ -618,6 +664,25 @@ TEXTS = {
     "QUEST_MAIN_13": ("A floresta em silêncio", "The Silent Forest"),
     "QUEST_MAIN_14": ("O vigia e o segredo", "The Watcher and the Secret"),
     "QUEST_MAIN_15": ("A Arauta do Silêncio", "The Herald of Silence"),
+    "QUEST_MAIN_16": ("A Lei de Ferro", "The Iron Law"),
+    "QUEST_ACT5_SOON2": ("O Castelo do Arauto e o Cassian chegam na próxima versão", "The Herald's Castle and Cassian arrive in the next version"),
+    "QUEST_SIDE_DECRETOS": ("Decretos rasgados", "Torn Decrees"),
+    "QUEST_SIDE_CORRENTES": ("Correntes partidas", "Broken Chains"),
+    "OBJ_REACH_ROYAL_ROAD": ("Siga pelo portão leste de Lys'Thaël até a Estrada Real", "Take Lys'Thaël's east gate to the Royal Road"),
+    "OBJ_KILL_LAW_GUARDS": ("Derrote guardas da Lei nos Arredores", "Defeat Law guards in the Outskirts"),
+    "OBJ_REACH_ALTAREA": ("Entre em Altaréa, a capital", "Enter Altaréa, the capital"),
+    "OBJ_TALK_ISOLDA": ("Encontre a Isolda perto da barricada", "Find Isolda near the barricade"),
+    "OBJ_COLLECT_DECREES": ("Arranque decretos nos Arredores: %d/%d", "Tear down decrees in the Outskirts: %d/%d"),
+    "OBJ_RETURN_AURELIO": ("Leve os decretos para o Aurélio", "Bring the decrees to Aurélio"),
+    "OBJ_KILL_JAILERS": ("Derrote carcereiros nos Arredores", "Defeat jailers in the Outskirts"),
+    "OBJ_RETURN_MATIAS": ("Leve as correntes para o Matias", "Bring the chains to Matias"),
+    "ITEM_DECRETO": ("Decreto do Arauto", "Herald's decree"),
+    "NPC_ISOLDA": ("Isolda", "Isolda"),
+    "NPC_AURELIO": ("Aurélio", "Aurélio"),
+    "NPC_MATIAS": ("Matias", "Matias"),
+    "BARK_ISOLDA_1": ("Aqui não...", "Not here..."),
+    "BARK_AURELIO_1": ("Entre, entre!", "Come in, come in!"),
+    "BARK_MATIAS_1": ("Mais grilhões...", "More shackles..."),
     "QUEST_ACT5_SOON": ("Altaréa, a capital do Arauto Cassian, chega na próxima versão", "Altaréa, the capital of the Herald Cassian, arrives in the next version"),
     "OBJ_CLIMB_TOWER": ("Suba ao topo da Torre do Vigia", "Climb to the top of the Watcher's Tower"),
     "OBJ_KILL_VELYRA": ("Derrote a Velyra, Arauta do Silêncio", "Defeat Velyra, Herald of Silence"),
@@ -848,6 +913,12 @@ TEXTS = {
     "ITEM_MAT_FRAGMENTO_RUINA": ("Fragmento de ruína", "Ruin shard"),
     "ITEM_MAT_ESCAMA_DUNA": ("Escama de duna", "Dune scale"),
     "ITEM_MAT_CRISTAL_AREIA": ("Cristal de areia", "Sand crystal"),
+    "ITEM_MAT_PELE_NEVE": ("Pele da neve", "Snow pelt"),
+    "ITEM_MAT_CRISTAL_GELO": ("Cristal de gelo", "Ice crystal"),
+    "ITEM_MAT_ESCAMA_PANTANO": ("Escama do pântano", "Swamp scale"),
+    "ITEM_MAT_SEIVA_AMARGA": ("Seiva amarga", "Bitter sap"),
+    "ITEM_MAT_SELO_LEI": ("Selo da Lei", "Seal of the Law"),
+    "ITEM_MAT_CORRENTE": ("Corrente de ferro", "Iron chain"),
     "ITEM_MAT_LINGOTE_ACO_DESC": ("O ferreiro usa para fortalecer e restaurar equipamentos.", "The smith uses it to strengthen and restore gear."),
     "ITEM_GEMA_RUBI_1": ("Rubi I", "Ruby I"),
     "ITEM_GEMA_RUBI_2": ("Rubi II", "Ruby II"),

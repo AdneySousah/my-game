@@ -1,0 +1,58 @@
+{
+  "_comment": "Estrada Real (Fase 6.5a, níveis 56-58): a grande estrada de pedra entre campos de trigo e colinas; ao longe, as torres brancas de Altaréa. Guardas da Lei vigiam a estrada. Oeste: Lys'Thaël. Norte: Arredores da Capital.",
+  "id": "estrada_real",
+  "name": "MAP_ESTRADA_REAL",
+  "size": [104, 104],
+  "seed": 271,
+  "ground": "#8fb35e",
+  "grass": {"count": 1500, "root": "#5c7f3a", "tip": "#d8d77a"},
+  "sky": "#bcd8f0",
+  "ambient": 0.62,
+  "sun": 1.25,
+  "sun_color": "#fff2d0",
+  "patches": {"color": "#d2b866", "count": 150},
+  "spawns": {"from_lysthael": [0, 46, 0], "from_arredores": [0, -46, 180]},
+  "exits": [
+    {"to": "lysthael", "spawn": "from_estrada_real", "pos": [0, 52], "size": [10, 2], "label": "MAP_LYSTHAEL", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "arredores", "spawn": "from_estrada_real", "pos": [0, -52], "size": [10, 2], "label": "MAP_ARREDORES", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "estrada_real_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 3900, "items": {"pot_vida_g": 5, "pot_forca": 1, "gema_topazio_3": 1}},
+    {"id": "estrada_real_bau_2", "pos": [31, -24], "yaw": -90, "gold": 4000, "items": {"pot_folego_g": 3, "trevo_real": 1, "eq_pulseira_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "estrada_real_marco", "name": "REST_ESTRADA_MARCO", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "estrada_real_moinho", "name": "REST_ESTRADA_MOINHO", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#c9b98e"}
+  ],
+  "props": [
+    {"id": "env_moinho", "pos": [24, -30], "rot": 200},
+    {"id": "prp_carroca_quebrada", "pos": [-12, 6], "rot": -30},
+    {"id": "prp_estandarte_lei", "pos": [-5, 24]},
+    {"id": "prp_estandarte_lei", "pos": [5, 24]},
+    {"id": "prp_espantalho", "pos": [-22, -12]},
+    {"id": "prp_feno", "pos": [20, 10]},
+    {"id": "prp_feno", "pos": [23, 12], "rot": 40},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2710, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2711, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2712, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2713, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2714, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_rochedo"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2715, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_trigo", "prp_trigo", "prp_arvore", "prp_rochedo"], "count": 70, "rect": [-45, -47, 45, 47], "spacing": 5, "seed": 272},
+    {"ids": ["prp_flores", "prp_arbusto", "prp_feno", "prp_pedrinhas"], "count": 50, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 273}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"guarda_lei": 3, "arqueiro_lei": 2}, "level": [56, 57], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"guarda_lei": 2, "cultista": 2, "arqueiro_lei": 1}, "level": [57, 58], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"guarda_lei": 3, "arqueiro_lei": 2}, "level": [57, 58], "respawn": 25}
+  ]
+}

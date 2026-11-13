@@ -13,10 +13,11 @@
   "sun": 1.0,
   "sun_color": "#fff2c8",
   "patches": {"color": "#8aae6a", "count": 110},
-  "spawns": {"start": [0, 28, 0], "from_bordas_pantano": [0, 32, 0], "from_pantano": [0, -30, 180]},
+  "spawns": {"start": [0, 28, 0], "from_bordas_pantano": [0, 32, 0], "from_pantano": [0, -30, 180], "from_estrada_real": [30, 0, -90]},
   "exits": [
     {"to": "bordas_pantano", "spawn": "from_lysthael", "pos": [0, 38], "size": [8, 2], "label": "MAP_BORDAS_PANTANO", "model": "prp_portal", "model_pos": [0, 39.5]},
-    {"to": "pantano", "spawn": "from_lysthael", "pos": [0, -38], "size": [8, 2], "label": "MAP_PANTANO", "model": "prp_portal", "model_pos": [0, -39.5], "if_flag": "act4_lysthael", "locked_label": "MAP_ROAD_CLOSED"}
+    {"to": "pantano", "spawn": "from_lysthael", "pos": [0, -38], "size": [8, 2], "label": "MAP_PANTANO", "model": "prp_portal", "model_pos": [0, -39.5], "if_flag": "act4_lysthael", "locked_label": "MAP_ROAD_CLOSED"},
+    {"to": "estrada_real", "spawn": "from_lysthael", "pos": [37, 0], "size": [2, 8], "label": "MAP_ESTRADA_REAL", "model": "prp_portal", "model_pos": [38.5, 0], "model_rot": 90, "if_flag": "act4_done", "locked_label": "MAP_ROAD_CLOSED"}
   ],
   "npcs": [
     {"id": "elarion", "pos": [-11, 10], "yaw": 40},
@@ -29,7 +30,8 @@
   "paths": [
     {"points": [[0, 38], [0, 20], [0, 8]], "width": 3.4, "color": "#b9a27a"},
     {"points": [[-22, 12], [-8, 12], [8, 12], [22, 12]], "width": 2.8, "color": "#b9a27a"},
-    {"points": [[0, -14], [0, -38]], "width": 3.0, "color": "#b9a27a"}
+    {"points": [[0, -14], [0, -38]], "width": 3.0, "color": "#b9a27a"},
+    {"points": [[22, 12], [30, 4], [37, 0]], "width": 2.8, "color": "#b9a27a"}
   ],
   "props": [
     {"id": "env_arvore_mae", "pos": [0, -6], "rot": 0, "unless_flag": "velyra_defeated"},
@@ -57,7 +59,8 @@
   "walls": [
     {"id": "env_cerca_elfica", "from": [-32, 36], "to": [-4.5, 36]},
     {"id": "env_cerca_elfica", "from": [4.5, 36], "to": [32, 36]},
-    {"id": "env_cerca_elfica", "from": [34, 34], "to": [34, -34]},
+    {"id": "env_cerca_elfica", "from": [34, 34], "to": [34, 4.5]},
+    {"id": "env_cerca_elfica", "from": [34, -4.5], "to": [34, -34]},
     {"id": "env_cerca_elfica", "from": [32, -36], "to": [4.5, -36]},
     {"id": "env_cerca_elfica", "from": [-4.5, -36], "to": [-32, -36]},
     {"id": "env_cerca_elfica", "from": [-34, -34], "to": [-34, 34]}

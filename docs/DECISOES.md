@@ -432,3 +432,31 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
   - vida: 3000 (Velyra) e 3300 (Dríade).
 - **Nomes que sumiam:** o gerador de falas é dono das chaves `NPC_`, e os nomes postos à mão no strings.csv (Sahra, Osk, Brunhild, Brannoc, Elarion, Faenor) eram apagados a cada rodada. Por isso a caixa de fala mostrava o código no lugar do nome. Agora ficam no `gen_act1_text.py`, e um teste confere que todo personagem tem nome.
 - `add_fingers.py`: plano B para mãos em que um dedo não recebe vértices (usa o dedo vizinho).
+
+## Fase 6.5a: a estrada para Altaréa e a capital (12/11/2026)
+- **Ato 5 em 3 etapas:**
+  - 6.5a (esta): estrada e capital;
+  - 6.5b: Castelo do Arauto, Cassian em 2 formas e o Severin do lado do Lio;
+  - 6.5c: Escadaria do Céu, Cidadela Celeste, Vaelor e o final.
+- **Caminho:** o portão leste de Lys'Thaël (abre com `act4_done`) leva à **Estrada Real** (56–58, trigo, moinho, estandartes da Lei). Dela se chega aos **Arredores da Capital** (58–60, sítios fechados, postos de controle, decretos nos postes) e depois a **Altaréa**.
+- **Altaréa:** capital branca dentro de muralhas.
+  - Casas brancas de telhado azul e casas altas de enxaimel.
+  - Na praça, a fonte com a estátua do juiz (o Cassian); estandartes e quadros de decretos por toda parte.
+  - Uma barricada da resistência num canto.
+  - Moram lá:
+    - **Isolda**: líder da resistência, quem dá a missão;
+    - **Aurélio**: loja, com o melhor do jogo até aqui (épicos, trevo e broca reais);
+    - **Matias**: ferreiro.
+  - O portão norte, para o Castelo do Arauto, abre com `act5_castle` (6.5b).
+- **Inimigos novos:**
+  - **guarda da Lei**: modelo novo com as animações do bandido e uma espada comum;
+  - **arqueiro da Lei**: modelo novo com as animações e o arco do arqueiro;
+  - **carcereiro**: Retexture do orc; a pancada com corrente deixa lento.
+  - Materiais novos: **Selo da Lei** e **corrente de ferro**.
+  - Os Arredores são o 2º mapa depois de uma cidade, então têm 50% mais mobs.
+- **Missões:**
+  - **16 "A Lei de Ferro"**: Estrada Real → 8 guardas nos Arredores → Altaréa → Isolda (o irmão dela está preso nas minas do castelo). Liga `act5_city`.
+  - Secundárias:
+    - **"Decretos rasgados"** (5 decretos nos Arredores, para o Aurélio);
+    - **"Correntes partidas"** (6 carcereiros, para o Matias).
+- **Mais nomes que sumiam:** os materiais pele da neve, cristal de gelo, escama do pântano e seiva amarga apareciam como código; agora ficam no gerador. O teste de nomes passou a conferir NPCs, itens, inimigos e missões.

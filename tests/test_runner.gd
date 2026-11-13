@@ -27,6 +27,7 @@ func _ready() -> void:
 	await _swamp_test()
 	await _status_test()
 	await _velyra_test()
+	await _capital_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -814,11 +815,18 @@ func _status_test() -> void:
 ## 6.4c: Velyra on top of the Watcher's Tower (archer, then the Thorn Dryad with a shield
 ## and thorn flowers), the Mother Tree in bloom afterwards and quest 15.
 func _velyra_test() -> void:
-	# Every speaker's name has a text (the dialogue generator owns the NPC_ keys).
-	for id: String in Data.npcs:
-		var key: String = str((Data.npcs[id] as Dictionary).get("name", ""))
-		if key != "":
-			check(tr(key) != key, "%s has a name text (%s)" % [id, key])
+	# Every name shown to the player has a text (the dialogue generator owns the NPC_ and
+	# ITEM_ keys and wipes hand-added ones).
+	var missing: Array = []
+	for src: Dictionary in [Data.npcs, Data.items, Data.enemies]:
+		for id: String in src:
+			var key: String = str((src[id] as Dictionary).get("name", "")) if src[id] is Dictionary else ""
+			if key != "" and tr(key) == key:
+				missing.append(key)
+	for q: Dictionary in Data.quests:
+		if tr(str(q.get("name", ""))) == str(q.get("name", "")):
+			missing.append(str(q.get("name", "")))
+	check(missing.is_empty(), "every name has a text (missing %s)" % [missing])
 	Session.reset()
 	Session.set_flag("act4_tower")
 	check(Data.quest("main_15").get("requires", []) == ["main_14"], "quest 15 follows the watcher's secret")
@@ -857,6 +865,50 @@ func _velyra_test() -> void:
 	var bloom: bool = names.any(func(s: String) -> bool: return s.contains("env_arvore_mae_florida"))
 	var dry: bool = names.any(func(s: String) -> bool: return s.begins_with("env_arvore_mae") and not s.contains("florida"))
 	check(bloom and not dry, "the Mother Tree blooms after Velyra (bloom %s, withered %s)" % [bloom, dry])
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
+## 6.5a: Lys'Thaël's east gate opens after Act 4; the Royal Road and the Outskirts have
+## Cassian's law guards (more of them on the second map); Altaréa with Isolda, Aurélio and Matias.
+func _capital_test() -> void:
+	Session.reset()
+	Session.set_flag("act4_done")
+	check(Data.quest("main_16").get("requires", []) == ["main_15"], "quest 16 follows the Mother Tree")
+	Main.start_map = "estrada_real"
+	Main.start_spawn = "from_lysthael"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var kinds: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("guarda_lei"), "law guards patrol the Royal Road (got %s)" % [kinds.keys()])
+	main.load_map("arredores", "from_estrada_real")
+	await _wait_map(main, "arredores")
+	await _frames(6)
+	kinds.clear()
+	var zone_max: int = 0
+	for z: Node in main.map.find_children("*", "EnemyZone", true, false):
+		zone_max = maxi(zone_max, int(z.get("max_alive")))
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		kinds[(n as Enemy).base_id] = true
+	check(kinds.has("carcereiro"), "jailers in the Outskirts (got %s)" % [kinds.keys()])
+	check(zone_max >= 8, "the Outskirts are the second map after a city (max per zone %d)" % zone_max)
+	main.load_map("altarea", "from_arredores")
+	await _wait_map(main, "altarea")
+	await _frames(4)
+	var ids: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("npcs"):
+		ids[str(n.get("npc_id"))] = true
+	check(ids.has("isolda") and ids.has("aurelio") and ids.has("matias"), "Isolda, Aurélio and Matias live in Altaréa (got %s)" % [ids.keys()])
+	check(str(Data.npc("aurelio").get("service", "")) == "shop" and str(Data.npc("matias").get("service", "")) == "smith", "Aurélio sells and Matias forges")
+	check(not Shop.goods("aurelio").is_empty(), "Aurélio has goods")
+	for m: String in ["estrada_real", "arredores", "altarea"]:
+		check(ResourceLoader.exists("res://assets/loading/load_%s.webp" % m), "%s has loading art" % m)
 	get_tree().paused = false
 	main.queue_free()
 	await _frames(2)

@@ -1,0 +1,62 @@
+{
+  "_comment": "Arredores da Capital (Fase 6.5a, níveis 58-60): sítios fechados, postos de controle com estandartes da Lei e decretos pregados nos postes; os carcereiros levam gente para o trabalho forçado. Sul: Estrada Real. Norte: Altaréa.",
+  "id": "arredores",
+  "name": "MAP_ARREDORES",
+  "size": [104, 104],
+  "seed": 281,
+  "ground": "#8aa060",
+  "grass": {"count": 1100, "root": "#5a7038", "tip": "#c8c27a"},
+  "sky": "#c6b9a6",
+  "ambient": 0.58,
+  "sun": 1.05,
+  "sun_color": "#ffe0c0",
+  "patches": {"color": "#b8a070", "count": 140},
+  "spawns": {"from_estrada_real": [0, 46, 0], "from_altarea": [0, -46, 180]},
+  "exits": [
+    {"to": "estrada_real", "spawn": "from_arredores", "pos": [0, 52], "size": [10, 2], "label": "MAP_ESTRADA_REAL", "model": "prp_portal", "model_pos": [0, 53.5]},
+    {"to": "altarea", "spawn": "from_arredores", "pos": [0, -52], "size": [10, 2], "label": "MAP_ALTAREA", "model": "prp_portal", "model_pos": [0, -53.5]}
+  ],
+  "chests": [
+    {"id": "arredores_bau_1", "pos": [30, 16], "yaw": -90, "gold": 4200, "items": {"pot_vida_g": 5, "pot_pedra": 1, "gema_rubi_3": 1}},
+    {"id": "arredores_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 4300, "items": {"pot_folego_g": 3, "broca_real": 1, "eq_cinto_epico": 1}}
+  ],
+  "rest_points": [
+    {"id": "arredores_posto", "name": "REST_ARREDORES_POSTO", "pos": [-6, 32], "kind": "fogueira"},
+    {"id": "arredores_muralha", "name": "REST_ARREDORES_MURALHA", "pos": [6, -36], "kind": "fogueira"}
+  ],
+  "paths": [
+    {"points": [[0, 52], [0, 38], [-10, 22], [-6, 4], [10, -10], [12, -26], [2, -40], [0, -52]], "width": 3.6, "color": "#b9a77e"}
+  ],
+  "props": [
+    {"id": "prp_barricada", "pos": [-6, 8], "rot": 20},
+    {"id": "prp_quadro_decreto", "pos": [6, 30], "rot": 180},
+    {"id": "prp_quadro_decreto", "pos": [-12, -18], "rot": 60},
+    {"id": "prp_estandarte_lei", "pos": [-5, -40]},
+    {"id": "prp_estandarte_lei", "pos": [5, -40]},
+    {"id": "prp_estandarte_lei", "pos": [-4, 14]},
+    {"id": "prp_estandarte_lei", "pos": [16, 14]},
+    {"id": "env_casa_media", "pos": [-24, 18], "rot": 70},
+    {"id": "env_casa_pequena", "pos": [24, -8], "rot": -100},
+    {"id": "prp_carroca", "pos": [18, -24], "rot": 30},
+    {"id": "prp_tenda", "pos": [-22, -32], "rot": 120},
+    {"id": "prp_placa_estrada", "pos": [4, 47], "rot": 10},
+    {"id": "prp_placa_estrada", "pos": [5, -46], "rot": 180}
+  ],
+  "lines": [
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-48, -50], [-48, 50]], "seed": 2810, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[48, -50], [48, 50]], "seed": 2811, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, -50], [-6, -50]], "seed": 2812, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, -50], [46, -50]], "seed": 2813, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[-46, 50], [-6, 50]], "seed": 2814, "solid": true},
+    {"ids": ["prp_cerca", "prp_arvore", "prp_cerca_quebrada"], "spacing": 2.8, "scale": [1.5, 2.1], "jitter": 0.5, "points": [[6, 50], [46, 50]], "seed": 2815, "solid": true}
+  ],
+  "scatter": [
+    {"ids": ["prp_arvore", "prp_rochedo", "prp_trigo", "prp_cerca_quebrada"], "count": 55, "rect": [-45, -47, 45, 47], "spacing": 6, "seed": 282},
+    {"ids": ["prp_feno", "prp_barril", "prp_caixa", "prp_arbusto"], "count": 45, "rect": [-45, -47, 45, 47], "spacing": 4, "seed": 283}
+  ],
+  "enemy_zones": [
+    {"pos": [-18, 22], "radius": 11, "max": 5, "types": {"guarda_lei": 3, "carcereiro": 2}, "level": [58, 59], "respawn": 25},
+    {"pos": [20, 2], "radius": 11, "max": 5, "types": {"arqueiro_lei": 2, "guarda_lei": 2, "carcereiro": 1}, "level": [59, 60], "respawn": 25},
+    {"pos": [-14, -26], "radius": 10, "max": 5, "types": {"carcereiro": 2, "guarda_lei": 3}, "level": [59, 60], "respawn": 25}
+  ]
+}

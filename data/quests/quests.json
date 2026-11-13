@@ -173,6 +173,36 @@
       "rewards": { "xp": 24000, "gold": 6500, "items": { "pot_vida_g": 8, "eq_espada_epico": 1, "trevo_real": 2, "broca_real": 1 } }
     },
     {
+      "id": "main_16", "type": "main", "name": "QUEST_MAIN_16", "auto": true,
+      "requires": ["main_15"], "min_level": 55,
+      "steps": [
+        { "type": "reach", "map": "estrada_real", "pos": [0, 40], "radius": 8, "text": "OBJ_REACH_ROYAL_ROAD", "dialogue": "main_16_road" },
+        { "type": "kill", "enemy": "guarda_lei", "count": 8, "map": "arredores", "pos": [-18, 22], "text": "OBJ_KILL_LAW_GUARDS" },
+        { "type": "reach", "map": "altarea", "pos": [0, 26], "radius": 7, "text": "OBJ_REACH_ALTAREA", "dialogue": "main_16_city" },
+        { "type": "talk", "npc": "isolda", "dialogue": "main_16_isolda", "text": "OBJ_TALK_ISOLDA" }
+      ],
+      "set_flag": "act5_city", "end_note": "QUEST_ACT5_SOON2",
+      "rewards": { "xp": 27000, "gold": 7200, "items": { "pot_vida_g": 8, "eq_peitoral_epico": 1, "gema_topazio_3": 1 } }
+    },
+    {
+      "id": "side_decretos", "type": "side", "name": "QUEST_SIDE_DECRETOS", "giver": "aurelio", "offer": "side_decretos_offer",
+      "requires": ["main_15"], "min_level": 57,
+      "steps": [
+        { "type": "collect", "map": "arredores", "item": "ITEM_DECRETO", "points": [[-30, 30], [28, 24], [-30, -6], [30, -18], [-8, -40]], "text": "OBJ_COLLECT_DECREES" },
+        { "type": "talk", "npc": "aurelio", "dialogue": "side_decretos_done", "text": "OBJ_RETURN_AURELIO" }
+      ],
+      "rewards": { "gold": 2400, "items": { "pot_vida_g": 6, "trevo_real": 1 } }
+    },
+    {
+      "id": "side_correntes", "type": "side", "name": "QUEST_SIDE_CORRENTES", "giver": "matias", "offer": "side_correntes_offer",
+      "requires": ["main_15"], "min_level": 58,
+      "steps": [
+        { "type": "kill", "enemy": "carcereiro", "count": 6, "map": "arredores", "pos": [-14, -26], "text": "OBJ_KILL_JAILERS" },
+        { "type": "talk", "npc": "matias", "dialogue": "side_correntes_done", "text": "OBJ_RETURN_MATIAS" }
+      ],
+      "rewards": { "xp": 6800, "gold": 2600, "items": { "broca_real": 1, "eq_luvas_epico": 1 } }
+    },
+    {
       "id": "side_cantos", "type": "side", "name": "QUEST_SIDE_CANTOS", "giver": "elarion", "offer": "side_cantos_offer",
       "requires": ["main_13"], "min_level": 46,
       "steps": [

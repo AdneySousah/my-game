@@ -1417,6 +1417,138 @@
         ]
       ]
     },
+    "main_16_road": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_16_ROAD_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_16_ROAD_2"
+        ]
+      ]
+    },
+    "main_16_city": {
+      "lines": [
+        [
+          "lio",
+          "DLG_MAIN_16_CITY_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_16_CITY_2"
+        ]
+      ]
+    },
+    "main_16_isolda": {
+      "lines": [
+        [
+          "isolda",
+          "DLG_MAIN_16_ISOLDA_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_16_ISOLDA_2"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_16_ISOLDA_3"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_16_ISOLDA_4"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_16_ISOLDA_5"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_16_ISOLDA_6"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_16_ISOLDA_7"
+        ]
+      ]
+    },
+    "isolda_idle": {
+      "lines": [
+        [
+          "isolda",
+          "DLG_ISOLDA_IDLE_1"
+        ]
+      ]
+    },
+    "aurelio_idle": {
+      "lines": [
+        [
+          "aurelio",
+          "DLG_AURELIO_IDLE_1"
+        ]
+      ]
+    },
+    "matias_idle": {
+      "lines": [
+        [
+          "matias",
+          "DLG_MATIAS_IDLE_1"
+        ]
+      ]
+    },
+    "side_decretos_offer": {
+      "lines": [
+        [
+          "aurelio",
+          "DLG_SIDE_DECRETOS_OFFER_1"
+        ],
+        [
+          "aurelio",
+          "DLG_SIDE_DECRETOS_OFFER_2"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_DECRETOS_OFFER_3"
+        ]
+      ]
+    },
+    "side_decretos_done": {
+      "lines": [
+        [
+          "aurelio",
+          "DLG_SIDE_DECRETOS_DONE_1"
+        ],
+        [
+          "aurelio",
+          "DLG_SIDE_DECRETOS_DONE_2"
+        ]
+      ]
+    },
+    "side_correntes_offer": {
+      "lines": [
+        [
+          "matias",
+          "DLG_SIDE_CORRENTES_OFFER_1"
+        ],
+        [
+          "matias",
+          "DLG_SIDE_CORRENTES_OFFER_2"
+        ]
+      ]
+    },
+    "side_correntes_done": {
+      "lines": [
+        [
+          "matias",
+          "DLG_SIDE_CORRENTES_DONE_1"
+        ],
+        [
+          "lio",
+          "DLG_SIDE_CORRENTES_DONE_2"
+        ]
+      ]
+    },
     "side_cantos_offer": {
       "lines": [
         [

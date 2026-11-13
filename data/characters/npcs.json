@@ -252,6 +252,35 @@
       "voice": 0.65,
       "portrait": "ui_retrato_brannoc"
     },
+    "isolda": {
+      "name": "NPC_ISOLDA",
+      "color": "#c0392b",
+      "voice": 1.1,
+      "portrait": "ui_retrato_isolda",
+      "talk": [{"dialogue": "isolda_idle"}],
+      "barks": ["BARK_ISOLDA_1"],
+      "model": "npc_isolda"
+    },
+    "aurelio": {
+      "name": "NPC_AURELIO",
+      "service": "shop",
+      "color": "#2c4f8c",
+      "voice": 0.85,
+      "portrait": "ui_retrato_aurelio",
+      "talk": [{"dialogue": "aurelio_idle"}],
+      "barks": ["BARK_AURELIO_1"],
+      "model": "npc_aurelio"
+    },
+    "matias": {
+      "name": "NPC_MATIAS",
+      "service": "smith",
+      "color": "#5a6470",
+      "voice": 0.95,
+      "portrait": "ui_retrato_matias",
+      "talk": [{"dialogue": "matias_idle"}],
+      "barks": ["BARK_MATIAS_1"],
+      "model": "npc_matias"
+    },
     "velyra": {
       "name": "NPC_VELYRA",
       "color": "#9b4fd0",

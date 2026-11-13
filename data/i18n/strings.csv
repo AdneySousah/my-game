@@ -149,10 +149,10 @@ STAT_EVADE,Esquiva,Evasion
 STAT_CDR,Recarga das skills,Skill cooldown
 STAT_SKILL_DMG,Dano das skills,Skill damage
 STAT_STAMINA_REGEN,Recuperação de fôlego,Stamina recovery
-SMITH_TITLE,Forja do Tobias,Tobias's Forge
+SMITH_TITLE,Forja,Forge
 SMITH_GOLD,%d de ouro,%d gold
 SMITH_TAB_ENHANCE,Fortalecer,Strengthen
-SMITH_TAB_GEMS,Encaixes e gemas,Sockets and gems
+SMITH_TAB_GEMS,Gemas,Gems
 SMITH_TAB_CRAFT,Criar,Craft
 SMITH_TAB_DISASSEMBLE,Desmontar,Disassemble
 SMITH_PICK_PIECE,Suas peças (equipadas primeiro),Your pieces (worn first)
@@ -176,8 +176,8 @@ SMITH_GEM_REMOVE,Toque numa gema encaixada para tirar (%d de ouro).,Tap a set ge
 SMITH_OPEN_SOCKET,Abrir encaixe: %s (você tem %d) · %d%%,Open socket: %s (you have %d) · %d%%
 SMITH_NEED_DRILL,"Para abrir encaixes, precisa de uma Broca de Engaste.",To open sockets you need a Socket Drill.
 SMITH_NO_GEMS,Você não tem gemas na mochila.,You have no gems in the bag.
-SMITH_GEM_SET_BTN,Encaixar gema,Set gem
-SMITH_GEM_MERGE,Juntar %d → 1 (%d de ouro),Merge %d → 1 (%d gold)
+SMITH_GEM_SET_BTN,Encaixar,Set
+SMITH_GEM_MERGE,Juntar %d→1 · %d ouro,Merge %d→1 · %d gold
 SMITH_RANDOM_SOCKETS,Encaixes: sorteados ao criar (0 a 3).,Sockets: rolled when made (0 to 3).
 SMITH_CRAFT,Criar,Craft
 SMITH_FULL,Nunca foi usada: devolve todos os materiais.,Never worn: gives back all materials.
@@ -523,6 +523,42 @@ ENEMY_GUARDA_LEI,Guarda da Lei,Law guard
 ENEMY_ARQUEIRO_LEI,Arqueiro da Lei,Law marksman
 ENEMY_CARCEREIRO,Carcereiro,Jailer
 SHOP_AURELIO,Loja do Aurélio,Aurélio's Shop
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+RARITY_MYTHIC,Mítico,Mythic
+RARITY_CELESTIAL,Celestial,Celestial
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+SMITH_USE_SHORT,Usar (%d),Use (%d)
+SMITH_OPEN_SOCKET_SHORT,Abrir encaixe · %d%%,Open socket · %d%%
+SMITH_NEEDS,Precisa:,Needs:
+SMITH_GIVES,Você recebe:,You get:
+SMITH_NEED_BASE,Precisa de %s na mochila (sem estar equipada).,Needs %s in the bag (not worn).
+SMITH_NO_BASE,Falta a peça de base na mochila.,The base piece is missing from the bag.
+HUD_RESET,Resetar (E),Reset (E)
+HUD_RESET_TAP,Resetar,Reset
+DUNGEON_RESET_SIGN,Resetar masmorra,Reset dungeon
+DUNGEON_RESET_DONE,O chefe voltou! A masmorra foi resetada.,The boss is back! The dungeon was reset.
+ENEMY_CASSIAN,"Cassian, Arauto da Lei","Cassian, Herald of the Law"
+ENEMY_CASSIAN_COLOSSO,Colosso de Armadura,Armored Colossus
+REST_CASTELO_ARAUTO_PORTAO,Portão do Castelo,Castle Gate
+REST_CASTELO_ARAUTO_PATIO,Pátio das Correntes,Courtyard of Chains
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -575,6 +611,17 @@ QUEST_MAIN_13,A floresta em silêncio,The Silent Forest
 QUEST_MAIN_14,O vigia e o segredo,The Watcher and the Secret
 QUEST_MAIN_15,A Arauta do Silêncio,The Herald of Silence
 QUEST_MAIN_16,A Lei de Ferro,The Iron Law
+QUEST_MAIN_17,O portão e o juiz,The Gate and the Judge
+QUEST_ACT5_SOON3,A Escadaria do Céu e a Cidadela Celeste chegam na próxima versão,The Stairway to the Sky and the Celestial Citadel arrive in the next version
+OBJ_TALK_ISOLDA_PLAN,Fale com a Isolda sobre o plano,Talk to Isolda about the plan
+OBJ_TALK_SEVERIN_GATE,Fale com o cavaleiro no portão do castelo,Talk to the knight at the castle gate
+OBJ_FREE_PRISONERS,Derrote carcereiros e liberte os presos,Defeat jailers and free the prisoners
+OBJ_KILL_CASSIAN,"Derrote o Cassian, Arauto da Lei","Defeat Cassian, Herald of the Law"
+OBJ_TALK_ISOLDA_FREE,Fale com a Isolda em Altaréa,Talk to Isolda in Altaréa
+NPC_CASSIAN,Cassian,Cassian
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
 QUEST_ACT5_SOON2,O Castelo do Arauto e o Cassian chegam na próxima versão,The Herald's Castle and Cassian arrive in the next version
 QUEST_SIDE_DECRETOS,Decretos rasgados,Torn Decrees
 QUEST_SIDE_CORRENTES,Correntes partidas,Broken Chains
@@ -799,6 +846,26 @@ ITEM_EQ_CALCA_LENDARIO,Calça do Sol Alado,Winged Sun Trousers
 ITEM_EQ_BOTAS_LENDARIO,Botas do Sol Alado,Winged Sun Boots
 ITEM_EQ_PULSEIRA_LENDARIO,Pulseira do Sol Alado,Winged Sun Bracelet
 ITEM_EQ_CINTO_LENDARIO,Cinto do Sol Alado,Winged Sun Belt
+ITEM_EQ_ESPADA_MITICO,Espada da Chama Rubra,Crimson Flame Sword
+ITEM_EQ_ELMO_MITICO,Elmo da Chama Rubra,Crimson Flame Helmet
+ITEM_EQ_PEITORAL_MITICO,Peitoral da Chama Rubra,Crimson Flame Breastplate
+ITEM_EQ_LUVAS_MITICO,Manoplas da Chama Rubra,Crimson Flame Gauntlets
+ITEM_EQ_CALCA_MITICO,Calça da Chama Rubra,Crimson Flame Trousers
+ITEM_EQ_BOTAS_MITICO,Botas da Chama Rubra,Crimson Flame Boots
+ITEM_EQ_PULSEIRA_MITICO,Pulseira da Chama Rubra,Crimson Flame Bracelet
+ITEM_EQ_CINTO_MITICO,Cinto da Chama Rubra,Crimson Flame Belt
+ITEM_EQ_ESPADA_CELESTIAL,Espada do Herdeiro Celeste,Celestial Heir Sword
+ITEM_EQ_ELMO_CELESTIAL,Elmo do Herdeiro Celeste,Celestial Heir Helmet
+ITEM_EQ_PEITORAL_CELESTIAL,Peitoral do Herdeiro Celeste,Celestial Heir Breastplate
+ITEM_EQ_LUVAS_CELESTIAL,Manoplas do Herdeiro Celeste,Celestial Heir Gauntlets
+ITEM_EQ_CALCA_CELESTIAL,Calça do Herdeiro Celeste,Celestial Heir Trousers
+ITEM_EQ_BOTAS_CELESTIAL,Botas do Herdeiro Celeste,Celestial Heir Boots
+ITEM_EQ_PULSEIRA_CELESTIAL,Pulseira do Herdeiro Celeste,Celestial Heir Bracelet
+ITEM_EQ_CINTO_CELESTIAL,Cinto do Herdeiro Celeste,Celestial Heir Belt
+ITEM_EQ_MITICO_DESC,O metal ainda pulsa como brasa viva.,The metal still pulses like a living ember.
+ITEM_EQ_CELESTIAL_DESC,Forjada para quem ousa desafiar os céus.,Forged for those who dare to defy the heavens.
+ITEM_MAT_INSIGNIA_CHEFE,Insígnia de Chefe,Boss Insignia
+ITEM_MAT_INSIGNIA_CHEFE_DESC,Cai dos chefes das masmorras. O ferreiro pede 10 para cada peça épica ou melhor.,Dropped by dungeon bosses. The smith asks for 10 for each epic or better piece.
 ITEM_EQ_ESPADA_APRENDIZ_DESC,A espada de treino que o Mestre Bram te deu.,The training sword Master Bram gave you.
 ITEM_EQ_COMUM_DESC,"Peça simples, feita por qualquer ferreiro.",A simple piece any smith can make.
 ITEM_EQ_RARO_DESC,"Aço bem trabalhado, com detalhes azuis.",Well-worked steel with blue trims.
@@ -1131,6 +1198,29 @@ DLG_MAIN_16_ISOLDA_7,O portão do castelo é guardado dia e noite. Precisamos de
 DLG_ISOLDA_IDLE_1,Fala baixo. As paredes desta cidade têm ouvidos e todos usam capacete.,"Keep your voice down. The walls of this city have ears, and they all wear helmets."
 DLG_AURELIO_IDLE_1,"Bem-vindo, bem-vindo! Só não fique mais de três minutos parado na porta. Tem lei para isso também.","Welcome, welcome! Just don't stand at the door for more than three minutes. There's a law for that too."
 DLG_MATIAS_IDLE_1,"Eu forjava arados. Agora o Castelo só encomenda grilhões. Mas para você, eu afio o que precisar.","I used to forge plows. Now the Castle only orders shackles. But for you, I'll sharpen whatever you need."
+DLG_MAIN_17_ISOLDA_1,"Reuni o pessoal. Padeiros, estudantes, até o velho Aurélio. Hoje à noite a gente abre o portão norte.","I gathered everyone. Bakers, students, even old Aurélio. Tonight we open the north gate."
+DLG_MAIN_17_ISOLDA_2,Só tem um problema: um cavaleiro de armadura azul chegou de manhã e está parado na frente do castelo. Ninguém tem coragem de passar por ele.,There's just one problem: a knight in blue armor arrived this morning and is standing in front of the castle. Nobody dares to pass him.
+DLG_MAIN_17_ISOLDA_3,Armadura azul? Deixa esse comigo.,Blue armor? Leave that one to me.
+DLG_MAIN_17_SEVERIN_1,Eu sabia que você viria. Você sempre vem.,I knew you'd come. You always do.
+DLG_MAIN_17_SEVERIN_2,"Vai me impedir de novo, Severin?","Going to stop me again, Severin?"
+DLG_MAIN_17_SEVERIN_3,Não. Desde o pântano eu não durmo. Vi o que a Velyra quase fez. Vi as correntes desta cidade. Isso não é a ordem dos deuses... é medo.,No. Since the swamp I haven't slept. I saw what Velyra almost did. I saw the chains of this city. That isn't the gods' order... it's fear.
+DLG_MAIN_17_SEVERIN_4,"Vá até o Cassian. Os guardas vão vir atrás de você, e eu vou segurar este portão. Ninguém passa.","Go to Cassian. The guards will come after you, and I'll hold this gate. No one gets through."
+DLG_MAIN_17_SEVERIN_5,"Bem-vindo ao lado certo, Severin.","Welcome to the right side, Severin."
+DLG_MAIN_17_SEVERIN_6,Não se acostume. E liberte os presos no caminho. Os carcereiros guardam as chaves.,Don't get used to it. And free the prisoners on the way. The jailers carry the keys.
+DLG_SEVERIN_GATE_1,Vá. Ninguém passa por este portão enquanto eu estiver de pé.,Go. No one passes this gate while I'm standing.
+DLG_CASSIAN_INTRO_1,"Entrar no salão do trono sem ser chamado. Mais um crime para a sua lista, garoto.","Entering the throne hall without being summoned. One more crime for your list, boy."
+DLG_CASSIAN_INTRO_2,Fala dos presos nas minas? Ou das crianças proibidas de rir?,You mean the prisoners in the mines? Or the children forbidden to laugh?
+DLG_CASSIAN_INTRO_3,"A lei não ri, não chora e não perdoa. Por isso funciona. Os deuses me deram esta cidade para que ela obedecesse.","The law doesn't laugh, doesn't cry and doesn't forgive. That's why it works. The gods gave me this city so it would obey."
+DLG_CASSIAN_INTRO_4,Então vou te dar uma sentença: culpado.,Then here's your sentence: guilty.
+DLG_CASSIAN_TRANSFORM_1,"Basta! Se a carne é fraca, a lei veste aço!","Enough! If the flesh is weak, the law wears steel!"
+DLG_CASSIAN_REBORN_1,"Uma armadura vazia, movida só pela lei dele... e esses pilares dourados dão força para ela. Quebro os pilares e depois o escudo.","An empty armor, moved only by his law... and those golden pillars are feeding it. I break the pillars, then the shield."
+DLG_CASSIAN_REBORN_2,"E se as correntes me prenderem, uma investida ou um salto me solta.","And if the chains grab me, a charge or a leap will set me free."
+DLG_MAIN_17_END_1,"Ele saiu! Meu irmão saiu das minas, Lio! E as pessoas estão rasgando os decretos na praça!","He's out! My brother got out of the mines, Lio! And people are tearing up the decrees in the square!"
+DLG_MAIN_17_END_2,E o Severin?,And Severin?
+DLG_MAIN_17_END_3,"Segurou o portão a noite inteira. Nenhum guarda passou. Agora está lá em cima, olhando para o céu, como todo mundo.","He held the gate all night. Not a single guard got through. Now he's up there, looking at the sky, like everyone else."
+DLG_MAIN_17_END_4,"Quando o Cassian caiu, uma escada de luz apareceu sobre o castelo. Ela sobe até uma cidade nas nuvens.","When Cassian fell, a stairway of light appeared over the castle. It climbs up to a city in the clouds."
+DLG_MAIN_17_END_5,A Cidadela Celeste. É lá que está o Vaelor... o deus que mandou todos os Arautos.,The Celestial Citadel. That's where Vaelor is... the god who sent all the Heralds.
+DLG_MAIN_17_END_6,Então vá. Altaréa fica te devendo uma. E o meu irmão também.,Then go. Altaréa owes you one. And so does my brother.
 DLG_SIDE_DECRETOS_OFFER_1,Os decretos novos estão pregados nos postes dos Arredores. Quem lê fica com medo e não vem mais à cidade comprar nada.,The new decrees are nailed to the posts in the Outskirts. Whoever reads them gets scared and stops coming to the city to buy anything.
 DLG_SIDE_DECRETOS_OFFER_2,Arranca uns cinco para mim? Eu guardo como prova. Um dia alguém vai ter que responder por cada linha.,Tear down about five for me? I'll keep them as evidence. One day someone will have to answer for every line.
 DLG_SIDE_DECRETOS_OFFER_3,Rasgar papel de tirano. Esse trabalho eu faço até de graça.,Tearing up a tyrant's paper. I'd do that job for free.

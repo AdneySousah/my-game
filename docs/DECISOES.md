@@ -460,3 +460,77 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
     - **"Decretos rasgados"** (5 decretos nos Arredores, para o Aurélio);
     - **"Correntes partidas"** (6 carcereiros, para o Matias).
 - **Mais nomes que sumiam:** os materiais pele da neve, cristal de gelo, escama do pântano e seiva amarga apareciam como código; agora ficam no gerador. O teste de nomes passou a conferir NPCs, itens, inimigos e missões.
+
+## Forja, níveis dos equipamentos e masmorras (pedido do dono, 12/11/2026)
+- **Janela da forja:**
+  - tamanho fixo em todas as abas (antes encolhia ao abrir um encaixe e cada aba tinha um tamanho);
+  - abas curtas com ícone: Fortalecer, Gemas, Criar, Desmontar;
+  - custos como ícones com "tenho/preciso" embaixo (ouro, lingote, materiais e a peça de base); o que falta fica **cinza** e com o número em vermelho;
+  - na criação, a lista inteira fica cinza no que ainda não dá para fazer;
+  - Trevo e Amuleto viram "Usar (34)" com o ícone; a broca mostra o ícone e quantas você tem;
+  - desmontar mostra os ícones do que você recebe;
+  - título só "Forja", porque agora há vários ferreiros.
+- **Nível para usar** (antes 1/4/8/11):
+
+  | Raridade | Cor | Nível |
+  |---|---|---|
+  | Comum | branco | 10 |
+  | Raro | azul | 20 |
+  | Épico | roxo | 40 |
+  | Lendário | dourado | 60 |
+  | **Mítico** (novo, "da Chama Rubra") | vermelho | 80 |
+  | **Celestial** (novo, "do Herdeiro Celeste") | ciano | 100 |
+
+  - As duas raridades novas têm 8 peças cada (atributos do lendário ×1,6 e ×2,4), ícones e espada 3D próprios. Só saem da forja.
+- **Criação em degraus:**
+  - criar uma peça rara gasta a peça comum do mesmo tipo; a épica gasta a rara, e assim até a celestial;
+  - a peça de base precisa estar na mochila, sem estar equipada; vai a de menor "+", e as gemas dela voltam para a mochila;
+  - do épico para cima, cada peça pede também **10 Insígnias de Chefe**;
+  - desmontar devolve os materiais (e as insígnias), mas não a peça de baixo.
+- **Insígnia de Chefe:** cai do chefe final de cada masmorra:
+
+  | Chefe | Insígnias |
+  |---|---|
+  | Golem | 2 |
+  | Gorvan | 3 |
+  | Sahra | 4 |
+  | Guardião de Gelo | 4 |
+  | Brannoc | 5 |
+  | Guardião de Espinhos | 5 |
+  | Velyra | 6 |
+  | Cassian | 7 |
+
+- **Placa "Resetar masmorra"** na entrada das 8 masmorras com chefe:
+  - aparece quando o chefe já foi derrotado;
+  - apertar traz o chefe de volta (`Session.dungeon_resets`, salvo no save);
+  - o reset é sempre manual;
+  - na repetição não tocam a fala de abertura, as falas da troca de forma nem a cena ilustrada, e o herói não é levado para outro mapa;
+  - duelos (Severin) não têm placa.
+- **Equilíbrio com as regras novas:** o robô do boss_sim usa a melhor raridade que o nível permite. A Sahra no nível 28 (só peças raras) continua vencível: 110 s, vida mínima 36%.
+
+## Fase 6.5b: o Castelo do Arauto e o Cassian (12/11/2026)
+- **Castelo do Arauto** (60–63): o portão norte de Altaréa abre na missão 17 (`act5_castle`). Usa a planta do Castelo Ermo em pedra branca e ouro: trono da Lei, estandartes, braseiros, guardas, arqueiros e carcereiros.
+- **O Severin muda de lado:** espera no portão do castelo, conta que não dorme desde o pântano e segura o portão para o Lio passar ("Bem-vindo ao lado certo").
+- **Cassian, Arauto da Lei** (forma 1): juiz de toga com um martelo de julgamento. Usa as animações de duas mãos do Brannoc.
+  - Golpes:
+    - veredito (enfraquece);
+    - rodopio do martelo;
+    - sentença em linha (atordoa);
+    - chama 2 guardas.
+- **Colosso de Armadura** (forma verdadeira): armadura vazia movida pela lei. Usa as animações do Gigante de Gelo.
+  - Golpes:
+    - soco (enfraquece);
+    - pancada (atordoa);
+    - correntes que prendem;
+    - édito (deixa lento).
+  - Regra dos Arautos: escudo de quebra e **Pilares da Lei**, que o curam em 10%; o herói os quebra atacando.
+- **Simulação** (nível 63, peças lendárias): vence em 130–230 s, vida mínima 38%, sem mortes. A vida foi de 3400 para 2800 nas duas formas.
+- **Depois:** cena ilustrada "cassian" (o Colosso cai e o Severin segura o portão; Altaréa rasga os decretos; a escada de luz até a Cidadela Celeste) e volta para Altaréa.
+- **Missão 17 "O portão e o juiz":**
+  1. Isolda (o plano);
+  2. Severin no portão;
+  3. 6 carcereiros (libertar os presos);
+  4. Cassian;
+  5. Isolda (o irmão livre e a escada no céu).
+  - Liga `act5_stairs`.
+- **Próximo:** 6.5c, Escadaria do Céu, Cidadela Celeste, Vaelor em 3 fases e o final.

@@ -15,6 +15,8 @@ var rest_points: Dictionary = {}
 ## npc_id -> Npc placed in this map.
 var npcs: Dictionary = {}
 var chests: Array[Chest] = []
+## "Resetar masmorra" sign (dungeons with a boss), or null.
+var reset_sign: DungeonSign
 ## Exits waiting for a story flag: index in data.exits -> wall that blocks them.
 var _locked_exits: Dictionary = {}
 ## True once the walkable area is baked (enemies then walk around obstacles).
@@ -120,6 +122,7 @@ func _ready() -> void:
 	_build_exits()
 	_build_enemy_zones()
 	_build_bosses.call_deferred()
+	_build_reset_sign()
 	_bake_navigation.call_deferred()
 
 
@@ -685,8 +688,12 @@ func _build_enemy_zones() -> void:
 ## With "arena": {"gate": [[x,z], [x,z]]} the entrance closes while the boss fights.
 func _build_bosses() -> void:
 	for b: Dictionary in data.get("bosses", []):
+		var replay: bool = false
 		if b.has("unless_flag") and Session.has_flag(str(b["unless_flag"])):
-			continue
+			# Beaten already: back only after the dungeon sign was used (not duels).
+			if not Session.dungeon_resets.has(map_id) or not _resettable(b):
+				continue
+			replay = true
 		var e := Enemy.new()
 		e.setup(str(b["id"]), int(b.get("level", 1)), player)
 		e.position = _v(b["pos"])
@@ -695,18 +702,63 @@ func _build_bosses() -> void:
 		e.set_meta("transform_line", str(b.get("transform_line", "")))
 		e.set_meta("reborn_line", str(b.get("reborn_line", "")))
 		e.set_meta("power_spots", b.get("power_spots", []))
+		e.set_meta("replay", replay)
 		add_child(e)
 		var flag: String = str(b.get("flag_on_death", ""))
 		e.died.connect(func(dead: Enemy) -> void:
 			if flag != "":
 				Session.set_flag(flag)
+			Session.dungeon_resets.erase(map_id)
 			_open_arena()
+			refresh_reset_sign()
 			enemy_killed.emit(dead))
 		e.summoned.connect(func(add: Enemy) -> void:
 			add.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead)))
 		if data.has("arena"):
 			e.engaged.connect(func(_e: Enemy) -> void: _close_arena())
 		boss_spawned.emit(e)
+
+
+## A dungeon boss the sign can bring back: has a death flag and is not a duel.
+func _resettable(b: Dictionary) -> bool:
+	return str(b.get("flag_on_death", "")) != "" and not (Data.enemies.get(str(b.get("id", "")), {}) as Dictionary).has("duel")
+
+
+## The "Resetar masmorra" sign next to the entrance (first spawn of the map), or at
+## "reset_sign": [x, z]. Only in maps with a dungeon boss.
+func _build_reset_sign() -> void:
+	var boss: Dictionary = {}
+	for b: Dictionary in data.get("bosses", []):
+		if _resettable(b):
+			boss = b
+	if boss.is_empty():
+		return
+	var at: Vector3
+	if data.has("reset_sign"):
+		at = _v(data["reset_sign"])
+	else:
+		var spawns: Dictionary = data.get("spawns", {})
+		var first: Array = spawns.values()[0] if not spawns.is_empty() else [0, 0]
+		at = Vector3(float(first[0]) + 2.6, 0, float(first[1]) - 1.5)
+	reset_sign = DungeonSign.new()
+	reset_sign.set_meta("flag", str(boss["flag_on_death"]))
+	add_child(reset_sign)
+	reset_sign.position = at
+	refresh_reset_sign()
+
+
+## The sign shows while the boss is down and not yet called back.
+func refresh_reset_sign() -> void:
+	if not is_instance_valid(reset_sign):
+		return
+	reset_sign.visible = Session.has_flag(str(reset_sign.get_meta("flag", ""))) and not Session.dungeon_resets.has(map_id)
+
+
+## Brings the boss back for another run.
+func reset_dungeon() -> void:
+	Session.dungeon_resets[map_id] = true
+	refresh_reset_sign()
+	_build_bosses()
 
 
 ## The hero fell: bosses go back to full health and their first form, the arena opens.

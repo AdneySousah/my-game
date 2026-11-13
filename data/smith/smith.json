@@ -1,31 +1,8 @@
 {
-  "_comment": "Ferreiro (GDD 6.5). enhance: chance (em %) de chegar a cada +nível (1 a 20), com e sem Trevo; custo em ouro (vezes rarity_mult) e Lingotes de aço por tentativa. Falha: até +10 perde só o custo; +11 a +15 quebra; +16 a +20 some (o Amuleto evita as duas coisas). sockets: chance de abrir o 1º, 2º e 3º encaixe. recipes: custo para criar uma peça de cada raridade (todas as peças da mesma raridade custam igual). Desmontar devolve os materiais da receita: 100% se nunca foi usada, 50% se já foi.",
-  "enhance": {
-    "chance": [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5],
-    "chance_trevo": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 75, 60, 50, 45, 35, 30, 25, 20, 15],
-    "gold": [20, 30, 40, 50, 65, 80, 100, 125, 150, 180, 220, 270, 330, 400, 480, 600, 700, 850, 1000, 1200],
-    "material": "mat_lingote_aco",
-    "material_count": [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 12],
-    "rarity_mult": {"common": 1.0, "rare": 1.5, "epic": 2.5, "legendary": 4.0},
-    "break_from": 11,
-    "vanish_from": 16
-  },
+  "_comment": "Ferreiro (GDD 6.5). enhance: chance (em %) de chegar a cada +nível (1 a 20), com e sem Trevo; custo em ouro (vezes rarity_mult) e Lingotes de aço por tentativa. Falha: até +10 perde só o custo; +11 a +15 quebra; +16 a +20 some (o Amuleto evita as duas coisas). sockets: chance de abrir o 1º, 2º e 3º encaixe. recipes: custo para criar uma peça de cada raridade; 'base' = a raridade de baixo: criar uma peça rara gasta a peça comum do mesmo tipo (e assim por diante, pedido do dono 12/11). Do épico para cima, 10 Insígnias de Chefe (drop dos chefes das masmorras). Desmontar devolve os materiais da receita: 100% se nunca foi usada, 50% se já foi (a peça de baixo não volta).",
+  "enhance": {"chance": [100, 95, 90, 85, 80, 75, 70, 65, 60, 55, 50, 45, 40, 35, 30, 25, 20, 15, 10, 5], "chance_trevo": [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 75, 60, 50, 45, 35, 30, 25, 20, 15], "gold": [20, 30, 40, 50, 65, 80, 100, 125, 150, 180, 220, 270, 330, 400, 480, 600, 700, 850, 1000, 1200], "material": "mat_lingote_aco", "material_count": [1, 1, 1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 8, 9, 10, 12], "rarity_mult": {"common": 1.0, "rare": 1.5, "epic": 2.5, "legendary": 4.0, "mythic": 6.0, "celestial": 9.0}, "break_from": 11, "vanish_from": 16},
   "restore": {"gold_per_plus": 60, "material": "mat_lingote_aco", "count": 3},
   "sockets": {"broca": [1.0, 0.5, 0.25], "broca_real": [1.0, 1.0, 1.0], "max": 3},
   "gems": {"remove_gold": 50, "merge_count": 3, "merge_gold": [20, 60, 180, 500, 0]},
-  "recipes": {
-    "common": {"gold": 60, "mats": {"mat_couro_orc": 3, "mat_osso_velho": 2}},
-    "rare": {
-      "gold": 200,
-      "mats": {"mat_couro_orc": 4, "mat_osso_velho": 3, "mat_fragmento_pedra": 2, "mat_lingote_aco": 1}
-    },
-    "epic": {
-      "gold": 700,
-      "mats": {"mat_fragmento_pedra": 4, "mat_lingote_aco": 4, "mat_palha_dourada": 2}
-    },
-    "legendary": {
-      "gold": 2000,
-      "mats": {"mat_fragmento_pedra": 6, "mat_lingote_aco": 8, "mat_palha_dourada": 5}
-    }
-  }
+  "recipes": {"common": {"gold": 60, "mats": {"mat_couro_orc": 3, "mat_osso_velho": 2}}, "rare": {"gold": 200, "base": "common", "mats": {"mat_couro_orc": 4, "mat_osso_velho": 3, "mat_fragmento_pedra": 2, "mat_lingote_aco": 1}}, "epic": {"gold": 700, "base": "rare", "mats": {"mat_fragmento_pedra": 4, "mat_lingote_aco": 4, "mat_palha_dourada": 2, "mat_insignia_chefe": 10}}, "legendary": {"gold": 2000, "base": "epic", "mats": {"mat_fragmento_pedra": 6, "mat_lingote_aco": 8, "mat_cristal_gelo": 4, "mat_insignia_chefe": 10}}, "mythic": {"gold": 5000, "base": "legendary", "mats": {"mat_lingote_aco": 12, "mat_seiva_amarga": 6, "mat_selo_lei": 6, "mat_insignia_chefe": 10}}, "celestial": {"gold": 12000, "base": "mythic", "mats": {"mat_lingote_aco": 16, "mat_selo_lei": 10, "mat_corrente": 8, "mat_insignia_chefe": 10}}}
 }

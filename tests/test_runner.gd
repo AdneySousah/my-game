@@ -28,6 +28,8 @@ func _ready() -> void:
 	await _status_test()
 	await _velyra_test()
 	await _capital_test()
+	await _dungeon_reset_test()
+	await _herald_castle_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -872,6 +874,81 @@ func _velyra_test() -> void:
 	Session.reset()
 
 
+## 6.5b: the Herald's Castle with Severin at the gate, Cassian in two forms (the Armored
+## Colossus with a shield and the Pillars of the Law) and quest 17.
+func _herald_castle_test() -> void:
+	Session.reset()
+	Session.set_flag("act5_city")
+	check(Data.quest("main_17").get("requires", []) == ["main_16"], "quest 17 follows the Iron Law")
+	var c: Dictionary = Data.enemies.get("cassian", {})
+	var col: Dictionary = Data.enemies.get("cassian_colosso", {})
+	check(str((c.get("phases", [{}]) as Array)[0].get("become", "")) == "cassian_colosso", "Cassian becomes the Armored Colossus")
+	check(col.has("shield") and str(col.get("power_ground", {}).get("prop", "")) == "prp_pilar_lei", "the Colossus has a shield and the Pillars of the Law")
+	Main.start_map = "castelo_arauto"
+	Main.start_spawn = "from_altarea"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var ids: Dictionary = {}
+	for n: Node in get_tree().get_nodes_in_group("npcs"):
+		ids[str(n.get("npc_id"))] = true
+	check(ids.has("severin"), "Severin holds the castle gate (got %s)" % [ids.keys()])
+	var boss: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("bosses"):
+		if (n as Enemy).base_id == "cassian":
+			boss = n as Enemy
+	check(boss != null and boss.model != null and boss.model.character_id == "boss_cassian", "Cassian waits on his throne")
+	check(main.map.reset_sign != null and not main.map.reset_sign.visible, "the castle has a reset sign (hidden while Cassian lives)")
+	check(ResourceLoader.exists("res://assets/loading/load_castelo_arauto.webp"), "the castle has loading art")
+	for i: int in [1, 2, 3]:
+		check(ResourceLoader.exists("res://assets/story/sto_cassian_%d.webp" % i), "panel sto_cassian_%d exists" % i)
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
+## A beaten dungeon boss can be called back with the sign at the entrance (owner, 12/11):
+## the sign shows only while the boss is down, the boss comes back without its story
+## scene, and the sign returns after it falls again.
+func _dungeon_reset_test() -> void:
+	Session.reset()
+	Session.set_flag("golem_defeated")
+	Main.start_map = "mina"
+	Main.start_spawn = "from_floresta"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var sign: DungeonSign = main.map.reset_sign
+	check(sign != null and sign.visible, "a beaten dungeon shows the reset sign")
+	var count := func() -> int:
+		var n: int = 0
+		for b: Node in get_tree().get_nodes_in_group("bosses"):
+			if main.map.is_ancestor_of(b):
+				n += 1
+		return n
+	check(count.call() == 0, "no boss before the reset")
+	main.map.reset_dungeon()
+	await _frames(3)
+	check(count.call() == 1 and not sign.visible, "the reset brings the boss back and hides the sign")
+	var boss: Enemy = null
+	for b: Node in get_tree().get_nodes_in_group("bosses"):
+		boss = b as Enemy
+	if boss:
+		check(bool(boss.get_meta("replay", false)), "the boss knows it is a replay")
+		boss.take_damage(10_000_000, false)
+		await _frames(30)
+	check(Session.has_flag("golem_defeated") and sign.visible and not Session.dungeon_resets.has("mina"), "after the replay the sign is back")
+	var saved: Dictionary = Session.to_dict()
+	check(saved.has("dungeon_resets"), "resets are saved")
+	get_tree().paused = false
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
 ## 6.5a: Lys'Thaël's east gate opens after Act 4; the Royal Road and the Outskirts have
 ## Cassian's law guards (more of them on the second map); Altaréa with Isolda, Aurélio and Matias.
 func _capital_test() -> void:
@@ -1450,6 +1527,9 @@ func _gear_test() -> void:
 	await _frames(5)
 	var p: Player = main.player
 	check(Session.gear.get_piece("weapon").get("id", "") == "eq_espada_aprendiz", "a new hero holds the apprentice sword")
+	# Common gear needs level 10 (owner, 12/11).
+	while p.stats.level < 10:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
 	var atk0: float = p.stats.get_stat("atk")
 
 	# Wearing a sword raises attack; the old one goes back to the bag.
@@ -1463,17 +1543,21 @@ func _gear_test() -> void:
 	# Level requirement.
 	Session.add_item("eq_peitoral_raro", 1)
 	var chest_uid: int = int(Session.inventory.slots.back()["uid"])
-	check(Session.gear.equip(Session.inventory, chest_uid, 1) == "EQ_NEED_LEVEL", "level 1 cannot wear level 4 armour")
+	check(Session.gear.equip(Session.inventory, chest_uid, 19) == "EQ_NEED_LEVEL", "level 19 cannot wear rare armour (level 20)")
 	var hp0: float = p.max_hp()
 	var def0: float = p.stats.get_stat("def")
-	check(Session.gear.equip(Session.inventory, chest_uid, 4) == "", "level 4 can")
+	check(Session.gear.equip(Session.inventory, chest_uid, 20) == "", "level 20 can")
+	var lv: Dictionary = {}
+	for r: String in ["comum", "raro", "epico", "lendario", "mitico", "celestial"]:
+		lv[r] = int(Data.item("eq_espada_" + r).get("level", 0))
+	check(lv == {"comum": 10, "raro": 20, "epico": 40, "lendario": 60, "mitico": 80, "celestial": 100}, "gear levels 10/20/40/60/80/100 (got %s)" % [lv])
 	check(is_equal_approx(p.max_hp(), hp0 + 90.0) and is_equal_approx(p.stats.get_stat("def"), def0 + 12.0), "armour adds health and defence")
 
 	# Two bracelets fit side by side.
 	Session.add_item("eq_pulseira_comum", 2)
 	var n: int = Session.inventory.slots.size()
-	Session.gear.equip(Session.inventory, int(Session.inventory.slots[n - 2]["uid"]), 1)
-	Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), 1)
+	Session.gear.equip(Session.inventory, int(Session.inventory.slots[n - 2]["uid"]), 10)
+	Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), 10)
 	check(not Session.gear.get_piece("bracelet_1").is_empty() and not Session.gear.get_piece("bracelet_2").is_empty(), "both bracelet slots are used")
 
 	# New pieces light the "!" until the equipment screen is opened.
@@ -1498,7 +1582,7 @@ func _gear_test() -> void:
 	var bag := Inventory.new()
 	for id: String in ["eq_elmo_lendario", "eq_peitoral_lendario", "eq_luvas_lendario"]:
 		bag.add(id, 1)
-		gear.equip(bag, int(bag.slots.back()["uid"]), 20)
+		gear.equip(bag, int(bag.slots.back()["uid"]), 60)
 	check(is_equal_approx(float(gear.bonuses().get("max_hp", 0.0)), 110.0 + 220.0 + 150.0), "3 set pieces add the set bonus")
 
 	# Save keeps worn gear and the bag pieces with their ids.
@@ -1532,9 +1616,29 @@ func _smith_test() -> void:
 	add_child(main)
 	await _frames(5)
 	var p: Player = main.player
+	while p.stats.level < 10:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
 	var smith := Smith.new(p)
 	smith.rng.seed = 12345
 	p.add_gold(100000)
+
+	# Each rarity is crafted from the piece below it; epic and up also need 10 boss insignias.
+	check(Smith.base_piece_id("eq_elmo_raro") == "eq_elmo_comum" and Smith.base_piece_id("eq_elmo_celestial") == "eq_elmo_mitico", "recipes go up one rarity at a time")
+	for m: String in (Smith.recipe("eq_elmo_raro").get("mats", {}) as Dictionary):
+		Session.add_item(m, int(Smith.recipe("eq_elmo_raro")["mats"][m]))
+	check(not smith.craft("eq_elmo_raro")["ok"], "no common helmet, no rare helmet")
+	Session.add_item("eq_elmo_comum", 1)
+	check(smith.craft("eq_elmo_raro")["ok"] and Session.inventory.count("eq_elmo_comum") == 0 and Session.inventory.count("eq_elmo_raro") == 1, "the rare helmet uses up the common one")
+	check(int((Smith.recipe("eq_elmo_epico").get("mats", {}) as Dictionary).get("mat_insignia_chefe", 0)) == 10, "epic pieces need 10 boss insignias")
+	for m: String in (Smith.recipe("eq_elmo_epico").get("mats", {}) as Dictionary):
+		if m != "mat_insignia_chefe":
+			Session.add_item(m, int(Smith.recipe("eq_elmo_epico")["mats"][m]))
+	check(not Smith.can_craft("eq_elmo_epico", p.gold), "no insignias, no epic helmet")
+	Session.add_item("mat_insignia_chefe", 10)
+	check(smith.craft("eq_elmo_epico")["ok"] and Session.inventory.count("eq_elmo_raro") == 0, "with insignias and the rare helmet, the epic one is made")
+	var keep_uid: int = Session.inventory.next_uid
+	Session.inventory.clear()
+	Session.inventory.next_uid = keep_uid
 
 	# Craft: pays gold and materials, gives a new piece.
 	check(not smith.craft("eq_elmo_comum")["ok"], "no materials, no crafting")
@@ -1629,6 +1733,14 @@ func _smith_test() -> void:
 		await _talk(main, "tobias")
 		await _frames(2)
 		check(main.hud.smith_panel().visible, "talking to Tobias opens the forge")
+		# The forge keeps one size in every tab.
+		var sp: SmithPanel = main.hud.smith_panel()
+		var sizes: Array = []
+		for t: String in SmithPanel.TABS:
+			sp.select(t)
+			await _frames(3)
+			sizes.append(sp.size)
+		check(sizes.all(func(v: Vector2) -> bool: return v.is_equal_approx(sizes[0])), "the forge has the same size in every tab (%s)" % [sizes])
 		main.hud.smith_panel().hide()
 		main.hud.call("_on_panel_closed")
 	main.queue_free()

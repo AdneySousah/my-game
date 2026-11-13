@@ -1,13 +1,30 @@
 class_name SmithPanel
 extends PanelContainer
-## Tobias's forge (GDD 6.5), in four tabs: Fortalecer (+1 to +20, restore), Encaixes e
-## gemas (open sockets, set/remove/merge gems), Criar (recipes) and Desmontar.
+## The forge (GDD 6.5), in four tabs: Fortalecer (+1 to +20, restore), Gemas (open
+## sockets, set/remove/merge gems), Criar (recipes) and Desmontar.
 ## Left: the pieces (worn first) or the recipes; right: the chosen one and its action.
+## Costs and returns show as item icons with "have/need" under each one; what the hero
+## lacks is drawn in grey. The panel keeps one fixed size in every tab.
 
 signal closed
 
 const TABS: Array[String] = ["enhance", "gems", "craft", "disassemble"]
+## Icon of each tab (an item picture).
+const TAB_ICONS: Dictionary = {"enhance": "mat_lingote_aco", "gems": "gema_rubi_1", "craft": "eq_espada_comum", "disassemble": "broca"}
 const SLOT_PX: float = 62.0
+const CHIP_PX: float = 52.0
+const PANEL_SIZE: Vector2 = Vector2(960, 660)
+const RIGHT_W: float = 450.0
+const GREY_SHADER: String = """
+shader_type canvas_item;
+void fragment() {
+	vec4 c = texture(TEXTURE, UV) * COLOR;
+	float l = dot(c.rgb, vec3(0.299, 0.587, 0.114));
+	COLOR = vec4(vec3(l * 0.75), c.a * 0.85);
+}
+"""
+
+static var _grey: ShaderMaterial
 
 var player: Player
 var smith: Smith
@@ -33,9 +50,22 @@ var _actions: VBoxContainer
 var _result_label: Label
 
 
+## Material that draws a control in grey (something the hero does not have).
+static func grey_material() -> ShaderMaterial:
+	if _grey == null:
+		var sh := Shader.new()
+		sh.code = GREY_SHADER
+		_grey = ShaderMaterial.new()
+		_grey.shader = sh
+	return _grey
+
+
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	custom_minimum_size = PANEL_SIZE
 	hide()
+	for id: String in TAB_ICONS.values() + ["ouro", "trevo", "trevo_real", "amuleto", "broca", "broca_real"]:
+		ItemIcon.texture(id)
 	var root := VBoxContainer.new()
 	root.add_theme_constant_override("separation", 8)
 	add_child(root)
@@ -60,13 +90,15 @@ func _ready() -> void:
 			_result = ""
 			_refresh())
 		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_set_icon(b, str(TAB_ICONS[t]))
 		tabs.add_child(b)
 		_tab_btns[t] = b
 
 	# Fixed height, so the forge keeps the same size in every tab.
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 16)
-	row.custom_minimum_size = Vector2(0, 400)
+	row.custom_minimum_size = Vector2(0, 470)
+	row.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(row)
 	var left := VBoxContainer.new()
 	row.add_child(left)
@@ -75,7 +107,7 @@ func _ready() -> void:
 	_list_title.add_theme_color_override("font_color", Color(GearText.DIM))
 	left.add_child(_list_title)
 	var scroll := ScrollContainer.new()
-	scroll.custom_minimum_size = Vector2(5 * (SLOT_PX + 6) + 14, 5 * (SLOT_PX + 6))
+	scroll.custom_minimum_size = Vector2(5 * (SLOT_PX + 6) + 18, 6 * (SLOT_PX + 6))
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
 	left.add_child(scroll)
 	_grid = GridContainer.new()
@@ -84,10 +116,15 @@ func _ready() -> void:
 	_grid.add_theme_constant_override("v_separation", 6)
 	scroll.add_child(_grid)
 
+	var right_scroll := ScrollContainer.new()
+	right_scroll.custom_minimum_size = Vector2(RIGHT_W + 12, 0)
+	right_scroll.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	right_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	row.add_child(right_scroll)
 	var right := VBoxContainer.new()
-	right.custom_minimum_size = Vector2(430, 0)
-	right.add_theme_constant_override("separation", 4)
-	row.add_child(right)
+	right.custom_minimum_size = Vector2(RIGHT_W, 0)
+	right.add_theme_constant_override("separation", 6)
+	right_scroll.add_child(right)
 	_name = Label.new()
 	_name.add_theme_font_size_override("font_size", 21)
 	right.add_child(_name)
@@ -99,17 +136,17 @@ func _ready() -> void:
 	_info.bbcode_enabled = true
 	_info.fit_content = true
 	_info.scroll_active = false
-	_info.custom_minimum_size = Vector2(430, 0)
+	_info.custom_minimum_size = Vector2(RIGHT_W, 0)
 	_info.add_theme_font_size_override("normal_font_size", 16)
 	_info.add_theme_font_size_override("italics_font_size", 15)
 	right.add_child(_info)
 	_actions = VBoxContainer.new()
-	_actions.add_theme_constant_override("separation", 6)
+	_actions.add_theme_constant_override("separation", 8)
 	right.add_child(_actions)
 	_result_label = Label.new()
 	_result_label.add_theme_font_size_override("font_size", 18)
 	_result_label.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	_result_label.custom_minimum_size = Vector2(430, 0)
+	_result_label.custom_minimum_size = Vector2(RIGHT_W, 0)
 	right.add_child(_result_label)
 
 	root.add_child(_button(tr("PANEL_CLOSE"), func() -> void:
@@ -127,6 +164,7 @@ func open() -> void:
 
 
 func _center() -> void:
+	size = PANEL_SIZE
 	GameTheme.place_center(self)
 
 
@@ -213,7 +251,9 @@ func _fill_recipes() -> void:
 	for id: String in ids:
 		var b := _slot(id)
 		b.selected = id == _recipe
-		b.blocked = not Smith.missing(Smith.recipe(id).get("mats", {})).is_empty()
+		# What the hero cannot make yet is drawn in grey.
+		if not Smith.can_craft(id, player.gold if player else 0):
+			b.material = grey_material()
 		b.pressed.connect(func() -> void:
 			_recipe = id
 			_result = ""
@@ -250,7 +290,8 @@ func _show_enhance() -> void:
 	_show_piece_head(piece)
 	if bool(piece.get("broken", false)):
 		var c: Dictionary = Smith.restore_cost(piece)
-		_info.text = tr("SMITH_BROKEN_INFO") + "\n" + _cost_text(int(c["gold"]), c["mats"])
+		_info.text = tr("SMITH_BROKEN_INFO")
+		_cost_row(tr("SMITH_NEEDS"), int(c["gold"]), c["mats"])
 		_action(tr("SMITH_RESTORE"), func() -> void: _do(smith.restore(_uid)),
 			player.gold < int(c["gold"]) or not Smith.missing(c["mats"]).is_empty())
 		return
@@ -270,21 +311,21 @@ func _show_enhance() -> void:
 	for k: String in then:
 		lines.append("%s %s → %s" % [GearText.stat_name(k), GearText.value_text(k, float(now.get(k, 0.0))), GearText.value_text(k, float(then[k]))])
 	lines.append(tr("SMITH_CHANCE") % roundi(float(info["chance"]) * 100.0))
-	lines.append(_cost_text(int(info["gold"]), info["mats"]))
 	var risk: String = str(info["risk"])
 	if risk != "":
 		lines.append("[color=%s]%s[/color]" % [GearText.DOWN, tr("SMITH_RISK_" + risk.to_upper())])
 	_info.text = "\n".join(lines)
-	# Clover and amulet toggles (only when the hero has them).
+	_cost_row(tr("SMITH_NEEDS"), int(info["gold"]), info["mats"])
+	# Clover and amulet toggles, each with its picture and how many the hero has.
 	for clover: String in ["trevo", "trevo_real"]:
 		var n: int = Session.inventory.count(clover)
 		if n > 0:
-			var t := _toggle(tr("SMITH_USE") % [tr(str(Data.item(clover).get("name", clover))), n], _clover == clover)
+			var t := _toggle(clover, n, _clover == clover)
 			t.toggled.connect(func(on: bool) -> void:
 				_clover = clover if on else ""
 				_refresh())
 	if risk != "" and Session.inventory.has("amuleto"):
-		var t2 := _toggle(tr("SMITH_USE") % [tr(str(Data.item("amuleto").get("name", ""))), Session.inventory.count("amuleto")], _amulet)
+		var t2 := _toggle("amuleto", Session.inventory.count("amuleto"), _amulet)
 		t2.toggled.connect(func(on: bool) -> void:
 			_amulet = on
 			_refresh())
@@ -326,13 +367,19 @@ func _show_gems() -> void:
 	if gems.size() > 0:
 		_actions.add_child(_small(tr("SMITH_GEM_REMOVE") % int(Smith.cfg("gems").get("remove_gold", 50))))
 	if sockets < 3:
+		# One line per drill: its picture with how many the hero has, and the button.
 		for drill: String in ["broca", "broca_real"]:
 			var n: int = Session.inventory.count(drill)
-			if n > 0:
-				_action(tr("SMITH_OPEN_SOCKET") % [tr(str(Data.item(drill).get("name", drill))), n,
-					roundi(Smith.socket_chance(piece, drill) * 100.0)], func() -> void: _do(smith.open_socket(_uid, drill)))
-		if not Session.inventory.has("broca") and not Session.inventory.has("broca_real"):
-			_actions.add_child(_small(tr("SMITH_NEED_DRILL")))
+			var line := HBoxContainer.new()
+			line.add_theme_constant_override("separation", 10)
+			_actions.add_child(line)
+			line.add_child(_chip(drill, n, 1))
+			var b := _button(tr("SMITH_OPEN_SOCKET_SHORT") % roundi(Smith.socket_chance(piece, drill) * 100.0),
+				func() -> void: _do(smith.open_socket(_uid, drill)))
+			b.disabled = n <= 0
+			b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			b.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			line.add_child(b)
 	# Gems in the bag: set one in a free socket, or merge three.
 	var bag_gems: Array[String] = []
 	for s: Dictionary in Session.inventory.slots:
@@ -343,12 +390,13 @@ func _show_gems() -> void:
 		return
 	if not bag_gems.has(_gem):
 		_gem = bag_gems[0]
-	var grid := HBoxContainer.new()
-	grid.add_theme_constant_override("separation", 6)
+	var grid := HFlowContainer.new()
+	grid.add_theme_constant_override("h_separation", 6)
+	grid.add_theme_constant_override("v_separation", 6)
 	_actions.add_child(grid)
 	for g: String in bag_gems:
 		var b := ItemSlot.new()
-		b.custom_minimum_size = Vector2(52, 52)
+		b.custom_minimum_size = Vector2(CHIP_PX, CHIP_PX)
 		b.item_id = g
 		b.amount = Session.inventory.count(g)
 		b.selected = g == _gem
@@ -363,6 +411,7 @@ func _show_gems() -> void:
 	var set_btn := _button(tr("SMITH_GEM_SET_BTN"), func() -> void: _do(smith.insert_gem(_uid, _gem)))
 	set_btn.disabled = gems.size() >= sockets
 	set_btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_set_icon(set_btn, _gem)
 	buttons.add_child(set_btn)
 	var up: String = Smith.next_gem(_gem)
 	if up != "":
@@ -370,6 +419,7 @@ func _show_gems() -> void:
 			func() -> void: _do(smith.merge_gems(_gem)))
 		merge.disabled = Session.inventory.count(_gem) < int(Smith.cfg("gems").get("merge_count", 3)) or player.gold < Smith.merge_cost(_gem)
 		merge.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		_set_icon(merge, up)
 		buttons.add_child(merge)
 
 
@@ -382,9 +432,12 @@ func _show_recipe() -> void:
 	_kind.text = tr("RARITY_" + str(item.get("rarity", "common")).to_upper()) + " · " + tr("EQ_SLOT_" + Session.gear.slot_for(_recipe).to_upper())
 	var preview: Dictionary = {"id": _recipe, "plus": 0, "sockets": 0, "gems": []}
 	var r: Dictionary = Smith.recipe(_recipe)
-	_info.text = GearText.describe(preview, player.stats.level if player else 1) + "\n" + tr("SMITH_RANDOM_SOCKETS") + "\n" + _cost_text(int(r.get("gold", 0)), r.get("mats", {}))
-	_action(tr("SMITH_CRAFT"), func() -> void: _do(smith.craft(_recipe)),
-		player.gold < int(r.get("gold", 0)) or not Smith.missing(r.get("mats", {})).is_empty())
+	_info.text = GearText.describe(preview, player.stats.level if player else 1) + "\n" + tr("SMITH_RANDOM_SOCKETS")
+	var base: String = Smith.base_piece_id(_recipe)
+	_cost_row(tr("SMITH_NEEDS"), int(r.get("gold", 0)), r.get("mats", {}), base)
+	if base != "" and Smith.base_uid(_recipe) == 0:
+		_actions.add_child(_small(tr("SMITH_NEED_BASE") % tr(str(Data.item(base).get("name", base)))))
+	_action(tr("SMITH_CRAFT"), func() -> void: _do(smith.craft(_recipe)), not Smith.can_craft(_recipe, player.gold))
 
 
 func _show_disassemble() -> void:
@@ -394,28 +447,79 @@ func _show_disassemble() -> void:
 		return
 	_show_piece_head(piece)
 	var back: Dictionary = Smith.disassemble_returns(piece)
-	var parts: PackedStringArray = []
-	for id: String in back:
-		parts.append("%d %s" % [int(back[id]), tr(str(Data.item(id).get("name", id)))])
 	var rate: String = tr("SMITH_HALF") if bool(piece.get("worn", false)) else tr("SMITH_FULL")
-	_info.text = "%s\n%s\n[color=%s]%s[/color]" % [rate, tr("SMITH_RETURNS") % (", ".join(parts) if not parts.is_empty() else "—"), GearText.DOWN, tr("SMITH_GONE_WARN")]
+	_info.text = "%s\n[color=%s]%s[/color]" % [rate, GearText.DOWN, tr("SMITH_GONE_WARN")]
+	# What comes back, as pictures with the amount.
+	var title := _small(tr("SMITH_GIVES"))
+	_actions.add_child(title)
+	var flow := HFlowContainer.new()
+	flow.add_theme_constant_override("h_separation", 8)
+	flow.add_theme_constant_override("v_separation", 8)
+	_actions.add_child(flow)
+	if back.is_empty():
+		flow.add_child(_small("—"))
+	for id: String in back:
+		var b := ItemSlot.new()
+		b.custom_minimum_size = Vector2(CHIP_PX, CHIP_PX)
+		b.item_id = id
+		b.amount = int(back[id])
+		b.tooltip_text = tr(str(Data.item(id).get("name", id)))
+		flow.add_child(_with_caption(b, "x%d" % int(back[id]), "#fff3d6"))
 	_action(tr("SMITH_DISASSEMBLE"), func() -> void:
 		var res: Dictionary = smith.disassemble(_uid)
 		_uid = 0
 		_do(res))
 
 
-## "Custo: 80 de ouro · 2 Lingote de aço (você tem 1)" with what is missing in red.
-func _cost_text(gold_cost: int, mats: Dictionary) -> String:
-	var parts: PackedStringArray = []
-	var g_col: String = GearText.DOWN if player and player.gold < gold_cost else "#ffd23f"
+## A row "Precisa:" with the gold and each material as a picture with "have/need" under
+## it (red and grey when the hero does not have enough). `base` = piece used up.
+func _cost_row(caption: String, gold_cost: int, mats: Dictionary, base: String = "") -> void:
+	_actions.add_child(_small(caption))
+	var flow := HFlowContainer.new()
+	flow.add_theme_constant_override("h_separation", 8)
+	flow.add_theme_constant_override("v_separation", 8)
+	_actions.add_child(flow)
 	if gold_cost > 0:
-		parts.append("[color=%s]%s[/color]" % [g_col, tr("SMITH_GOLD_COST") % gold_cost])
+		var gold_now: int = player.gold if player else 0
+		var g := ItemSlot.new()
+		g.custom_minimum_size = Vector2(CHIP_PX, CHIP_PX)
+		g.item_id = "ouro"
+		g.tooltip_text = tr("SMITH_GOLD_COST") % gold_cost
+		if gold_now < gold_cost:
+			g.material = grey_material()
+		flow.add_child(_with_caption(g, str(gold_cost), GearText.DOWN if gold_now < gold_cost else "#ffd23f"))
+	if base != "":
+		var have: int = 1 if Smith.base_uid(_recipe) != 0 else 0
+		flow.add_child(_chip(base, have, 1))
 	for id: String in mats:
-		var have: int = Session.inventory.count(id)
-		var col: String = GearText.DOWN if have < int(mats[id]) else "#fff3d6"
-		parts.append("[color=%s]%d %s (%d)[/color]" % [col, int(mats[id]), tr(str(Data.item(id).get("name", id))), have])
-	return tr("SMITH_COST") + " " + " · ".join(parts)
+		flow.add_child(_chip(id, Session.inventory.count(id), int(mats[id])))
+
+
+## One cost picture: the item with "have/need" under it, grey when there are not enough.
+func _chip(id: String, have: int, need: int) -> Control:
+	var b := ItemSlot.new()
+	b.custom_minimum_size = Vector2(CHIP_PX, CHIP_PX)
+	b.item_id = id
+	b.tooltip_text = tr(str(Data.item(id).get("name", id)))
+	if have < need:
+		b.material = grey_material()
+	return _with_caption(b, "%d/%d" % [have, need], GearText.DOWN if have < need else "#fff3d6")
+
+
+func _with_caption(slot: Control, text: String, color: String) -> Control:
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 0)
+	box.add_child(slot)
+	var l := Label.new()
+	l.text = text
+	l.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	l.custom_minimum_size = Vector2(CHIP_PX + 8, 0)
+	l.add_theme_font_size_override("font_size", 14)
+	l.add_theme_color_override("font_color", Color(color))
+	l.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
+	l.add_theme_constant_override("outline_size", 4)
+	box.add_child(l)
+	return box
 
 
 func _do(res: Dictionary) -> void:
@@ -432,14 +536,26 @@ func _action(text: String, cb: Callable, disabled: bool = false) -> Button:
 	return b
 
 
-func _toggle(text: String, on: bool) -> CheckBox:
+## Use-it toggle with the item's picture: "[x] (icon) Usar (34)".
+func _toggle(id: String, count: int, on: bool) -> CheckBox:
 	var t := CheckBox.new()
-	t.text = text
+	t.text = tr("SMITH_USE_SHORT") % count
 	t.button_pressed = on
 	t.focus_mode = Control.FOCUS_NONE
+	t.tooltip_text = tr(str(Data.item(id).get("name", id)))
 	t.add_theme_font_size_override("font_size", 17)
+	_set_icon(t, id)
 	_actions.add_child(t)
 	return t
+
+
+func _set_icon(b: Button, id: String) -> void:
+	var tex: Texture2D = ItemIcon.texture(id)
+	if tex == null:
+		return
+	b.icon = tex
+	b.expand_icon = true
+	b.add_theme_constant_override("icon_max_width", 30)
 
 
 func _small(text: String) -> Label:
@@ -448,7 +564,7 @@ func _small(text: String) -> Label:
 	l.add_theme_font_size_override("font_size", 15)
 	l.add_theme_color_override("font_color", Color(GearText.DIM))
 	l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	l.custom_minimum_size = Vector2(430, 0)
+	l.custom_minimum_size = Vector2(RIGHT_W, 0)
 	return l
 
 

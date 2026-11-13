@@ -42,6 +42,8 @@ var day_hour: float = 9.0
 const STARTER_WEAPON: String = "eq_espada_aprendiz"
 ## Potion chosen for each quick slot on the screen (data/items "quick_slots").
 var quick_slots: Dictionary = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
+## Dungeons whose boss was called back by the entrance sign: {map_id: true}.
+var dungeon_resets: Dictionary = {}
 
 
 func reset() -> void:
@@ -50,6 +52,7 @@ func reset() -> void:
 	last_rest.clear()
 	quests.clear()
 	flags.clear()
+	dungeon_resets.clear()
 	tracked_quest = ""
 	inventory.clear()
 	gear.clear()
@@ -124,7 +127,7 @@ func to_dict() -> Dictionary:
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
-		"day_hour": day_hour,
+		"day_hour": day_hour, "dungeon_resets": dungeon_resets,
 	}.duplicate(true)
 
 
@@ -135,6 +138,7 @@ func from_dict(d: Dictionary) -> void:
 	last_rest = d.get("last_rest", {})
 	quests = d.get("quests", {})
 	flags = d.get("flags", {})
+	dungeon_resets = (d.get("dungeon_resets", {}) as Dictionary).duplicate()
 	tracked_quest = str(d.get("tracked_quest", ""))
 	inventory.from_array(d.get("inventory", []))
 	# Saves from before the bag (4.x) kept materials apart: move them in.

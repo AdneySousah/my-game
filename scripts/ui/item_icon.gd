@@ -6,6 +6,7 @@ extends RefCounted
 const RARITY_COLORS: Dictionary = {
 	"common": Color("#e8e8e8"), "rare": Color("#4fa3ff"),
 	"epic": Color("#b46bff"), "legendary": Color("#ffc83d"),
+	"mythic": Color("#ff4a4a"), "celestial": Color("#7ff6ff"),
 }
 
 static var _cache: Dictionary = {}

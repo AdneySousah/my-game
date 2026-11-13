@@ -97,6 +97,7 @@
   ],
   "enemy_zones": [],
   "arena": {"gate": [[-5, 16.33], [5, 16.33]]},
+  "reset_sign": [-3, 22],
   "bosses": [
     {"id": "velyra", "pos": [0, -10], "level": 56, "yaw": 0, "unless_flag": "velyra_defeated", "flag_on_death": "velyra_defeated", "intro": "velyra_intro", "transform_line": "velyra_transform", "reborn_line": "velyra_reborn", "power_spots": [[-12, -4], [12, -4], [-9, -17], [9, -17], [0, 6]]}
   ]

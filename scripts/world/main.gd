@@ -24,6 +24,7 @@ var _changing: bool = false
 var _at_point: RestPoint
 var _near_npc: Npc
 var _near_chest: Chest
+var _near_sign: DungeonSign
 var _near_animal: Animal
 var _petting: bool = false
 var _interact_kind: String = ""
@@ -205,6 +206,13 @@ func talk_to_nearby() -> void:
 	if _near_chest and not _talking and not _changing:
 		_open_chest(_near_chest)
 		return
+	if _near_sign and not _talking and not _changing:
+		map.reset_dungeon()
+		_near_sign = null
+		Audio.play_sfx("skill_big")
+		hud.toast(tr("DUNGEON_RESET_DONE"), 2.0)
+		save_now()
+		return
 	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
 		_pet(_near_animal)
 		return
@@ -300,7 +308,9 @@ func _on_enemy_killed(e: Enemy) -> void:
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
 	_drop_loot(e)
-	if str(e.data.get("after_story", "")) != "":
+	# The story scene plays the first time only (not after a dungeon reset).
+	var after_flag: String = str(e.data.get("after_flag", ""))
+	if str(e.data.get("after_story", "")) != "" and not (after_flag != "" and Session.has_flag(after_flag)) and not bool(e.get_meta("replay", false)):
 		_after_story.call_deferred(e.data.duplicate())
 
 
@@ -390,6 +400,9 @@ func _update_quest_contacts() -> void:
 		if not c.opened and c.in_range(pos):
 			_near_chest = c
 			break
+	_near_sign = null
+	if is_instance_valid(map.reset_sign) and map.reset_sign.in_range(pos):
+		_near_sign = map.reset_sign
 	_near_animal = null
 	if nearest == null and _near_chest == null:
 		for n: Node in get_tree().get_nodes_in_group("animals"):
@@ -397,7 +410,7 @@ func _update_quest_contacts() -> void:
 			if an and an.is_inside_tree() and an.can_pet(pos):
 				_near_animal = an
 				break
-	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("talk" if nearest else ("pet" if _near_animal else "")))
+	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("reset" if _near_sign else ("talk" if nearest else ("pet" if _near_animal else ""))))
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)
@@ -501,10 +514,12 @@ func _on_boss_spawned(e: Enemy) -> void:
 		e.engaged.connect(func(_b: Enemy) -> void:
 			Session.set_flag("seen_" + intro)
 			_boss_line(intro), CONNECT_ONE_SHOT)
-	var line: String = str(e.get_meta("transform_line", ""))
+	# A boss fought again after a dungeon reset skips the talks.
+	var replay: bool = bool(e.get_meta("replay", false))
+	var line: String = "" if replay else str(e.get_meta("transform_line", ""))
 	if line != "":
 		e.transforming.connect(func(_b: Enemy) -> void: _boss_line(line), CONNECT_ONE_SHOT)
-	var reborn: String = str(e.get_meta("reborn_line", ""))
+	var reborn: String = "" if replay else str(e.get_meta("reborn_line", ""))
 	if reborn != "":
 		e.transformed.connect(func(_b: Enemy) -> void: _boss_line(reborn), CONNECT_ONE_SHOT)
 	var duel: Dictionary = e.data.get("duel", {})

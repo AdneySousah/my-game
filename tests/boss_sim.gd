@@ -36,6 +36,9 @@ func _ready() -> void:
 	elif boss_id == "velyra":
 		Main.start_map = "topo_torre"
 		Main.start_spawn = "pos:0:8:180"
+	elif boss_id == "cassian":
+		Main.start_map = "castelo_arauto"
+		Main.start_spawn = "pos:0:-17:180"
 	var main: Main = load(Game.MAIN_SCENE).instantiate()
 	if boss_id == "golem":
 		Session.flags.erase("golem_defeated")
@@ -51,7 +54,7 @@ func _ready() -> void:
 		player.stats.spend_point("str" if n % 5 < 3 else "vit")
 		n += 1
 	player.rest()
-	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra"]:
+	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra", "cassian"]:
 		Session.add_item("pot_vida_m", 6)
 		Session.add_item("pot_vida_g", 3)
 		Session.add_item("pot_folego_m", 3)
@@ -62,18 +65,14 @@ func _ready() -> void:
 		Session.add_item("pot_folego_p", 3)
 		Session.add_item("pot_forca", 1)
 	if with_gear:
-		var pieces: Array[String] = ["eq_espada_comum", "eq_elmo_comum", "eq_peitoral_comum", "eq_luvas_comum",
-			"eq_calca_comum", "eq_botas_comum", "eq_cinto_comum", "eq_pulseira_comum"]
-		if boss_id == "gorvan":
-			pieces[0] = "eq_espada_raro"
-			pieces[2] = "eq_peitoral_raro"
-		elif boss_id in ["guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra"]:
-			pieces = ["eq_espada_epico", "eq_elmo_epico", "eq_peitoral_epico", "eq_luvas_epico",
-				"eq_calca_epico", "eq_botas_epico", "eq_cinto_epico", "eq_pulseira_epico"]
-		elif boss_id == "sahra":
-			# By the Sunken Tower: rare set from the road quests, epic sword, chest and gloves.
-			pieces = ["eq_espada_epico", "eq_elmo_raro", "eq_peitoral_epico", "eq_luvas_epico",
-				"eq_calca_raro", "eq_botas_raro", "eq_cinto_raro", "eq_pulseira_raro"]
+		# The best rarity the hero's level allows (common 10, rare 20, epic 40, legendary 60...).
+		var tier: String = "comum"
+		for step: Array in [[20, "raro"], [40, "epico"], [60, "lendario"], [80, "mitico"], [100, "celestial"]]:
+			if lvl >= int(step[0]):
+				tier = str(step[1])
+		var pieces: Array[String] = []
+		for w: String in ["espada", "elmo", "peitoral", "luvas", "calca", "botas", "cinto", "pulseira"]:
+			pieces.append("eq_%s_%s" % [w, tier])
 		for id: String in pieces:
 			Session.add_item(id, 1)
 			Session.gear.equip(Session.inventory, int(Session.inventory.slots.back()["uid"]), player.stats.level)

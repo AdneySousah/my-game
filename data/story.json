@@ -51,5 +51,22 @@
         "text": "STO_VELYRA_3"
       }
     ]
+  },
+  "cassian": {
+    "music": "vitoria",
+    "panels": [
+      {
+        "image": "sto_cassian_1",
+        "text": "STO_CASSIAN_1"
+      },
+      {
+        "image": "sto_cassian_2",
+        "text": "STO_CASSIAN_2"
+      },
+      {
+        "image": "sto_cassian_3",
+        "text": "STO_CASSIAN_3"
+      }
+    ]
   }
 }

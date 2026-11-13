@@ -5,6 +5,9 @@ extends RefCounted
 ## data/smith/smith.json. Every action checks and pays its cost, then returns
 ## {"ok": bool, "msg": key of data/i18n, ...}. Pieces can be in the bag or worn.
 
+## Rarities from weakest to strongest (each one is crafted from the one before).
+const RARITY_ORDER: Array[String] = ["common", "rare", "epic", "legendary", "mythic", "celestial"]
+
 ## Owner of the gold (the Player); the bag and the worn gear are in Session.
 var player: Player
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
@@ -72,7 +75,7 @@ func _changed() -> void:
 # --- Create -----------------------------------------------------------------------
 
 static func craftable_ids() -> Array[String]:
-	var order: Array[String] = ["common", "rare", "epic", "legendary"]
+	var order: Array[String] = RARITY_ORDER
 	var slots: Array[String] = ["weapon", "helmet", "chest", "gloves", "pants", "boots", "bracelet", "belt"]
 	var out: Array[String] = []
 	for r: String in order:
@@ -89,6 +92,40 @@ static func recipe(item_id: String) -> Dictionary:
 	return (cfg("recipes").get(_rarity(item_id), {}) as Dictionary)
 
 
+## The piece a recipe uses up: the same kind of piece one rarity below ("base" in the
+## recipe; e.g. a rare sword needs a common sword). "" = no piece needed.
+static func base_piece_id(item_id: String) -> String:
+	var base: String = str(recipe(item_id).get("base", ""))
+	if base == "":
+		return ""
+	var slot: String = str(Data.item(item_id).get("gear_slot", ""))
+	for id: String in Data.items:
+		var it: Dictionary = Data.items[id]
+		if str(it.get("type", "")) == "equipment" and str(it.get("gear_slot", "")) == slot \
+				and str(it.get("rarity", "")) == base and id != Session.STARTER_WEAPON:
+			return id
+	return ""
+
+
+## A bag piece (not worn) that can be used up for `item_id`, the one with the lowest +level.
+static func base_uid(item_id: String) -> int:
+	var need: String = base_piece_id(item_id)
+	if need == "":
+		return 0
+	var best: Dictionary = {}
+	for s: Dictionary in Session.inventory.slots:
+		if s.has("uid") and str(s["id"]) == need and (best.is_empty() or int(s.get("plus", 0)) < int(best.get("plus", 0))):
+			best = s
+	return int(best.get("uid", 0))
+
+
+## True when the hero has the gold, the materials and the piece below it.
+static func can_craft(item_id: String, gold_now: int) -> bool:
+	var r: Dictionary = recipe(item_id)
+	return not r.is_empty() and gold_now >= int(r.get("gold", 0)) and missing(r.get("mats", {})).is_empty() \
+		and (base_piece_id(item_id) == "" or base_uid(item_id) != 0)
+
+
 func craft(item_id: String) -> Dictionary:
 	var r: Dictionary = recipe(item_id)
 	if r.is_empty() or Data.item(item_id).is_empty():
@@ -98,9 +135,17 @@ func craft(item_id: String) -> Dictionary:
 		return {"ok": false, "msg": "SMITH_NO_GOLD"}
 	if not missing(r.get("mats", {})).is_empty():
 		return {"ok": false, "msg": "SMITH_NO_MATS"}
-	if Session.inventory.free_slots() <= 0:
+	var base: int = base_uid(item_id)
+	if base_piece_id(item_id) != "" and base == 0:
+		return {"ok": false, "msg": "SMITH_NO_BASE"}
+	if Session.inventory.free_slots() <= 0 and base == 0:
 		return {"ok": false, "msg": "HUD_BAG_FULL"}
 	_pay(cost, r.get("mats", {}))
+	if base != 0:
+		# The piece below is used up; its gems go back to the bag.
+		var old: Dictionary = Session.inventory.take_uid(base)
+		for g: Variant in old.get("gems", []):
+			Session.inventory.add(str(g), 1)
 	Session.inventory.add(item_id, 1)
 	var piece: Dictionary = Session.inventory.slots.back()
 	piece["crafted"] = true

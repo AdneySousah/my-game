@@ -1,0 +1,83 @@
+{
+  "_comment": "Castelo do Arauto (Fase 6.5b, níveis 60-63): o castelo branco e dourado do Cassian, no alto de Altaréa. Pátio com guardas da Lei e carcereiros (as minas onde estão os presos ficam atrás dele); no salão do trono, o Cassian em 2 formas (Juiz e Colosso de Armadura) com os Pilares da Lei. O Severin segura o portão.",
+  "id": "castelo_arauto",
+  "name": "MAP_CASTELO_ARAUTO",
+  "size": [84, 100],
+  "seed": 301,
+  "ground": "#c9c2b0",
+  "grass": {"count": 120, "root": "#6f8a4a", "tip": "#b7c27a"},
+  "sky": "#b7c3dc",
+  "ambient": 0.6,
+  "sun": 1.0,
+  "sun_color": "#fff0d6",
+  "patches": {"color": "#b4ad9c", "count": 120},
+  "spawns": {"from_altarea": [0, 42, 0]},
+  "exits": [
+    {"to": "altarea", "spawn": "from_castelo_arauto", "pos": [0, 48], "size": [6, 2], "label": "MAP_ALTAREA", "model": "env_portao_cidade", "model_pos": [0, 50], "model_rot": 180}
+  ],
+  "npcs": [
+    {"id": "severin", "pos": [-4, 40], "yaw": 180, "if_flag": "act5_city"}
+  ],
+  "rest_points": [
+    {"id": "castelo_arauto_portao", "name": "REST_CASTELO_ARAUTO_PORTAO", "pos": [7, 38], "kind": "fogueira"},
+    {"id": "castelo_arauto_patio", "name": "REST_CASTELO_ARAUTO_PATIO", "pos": [-8, -2], "kind": "fogueira"}
+  ],
+  "chests": [
+    {"id": "castelo_arauto_bau_1", "pos": [-32, 22], "yaw": 90, "gold": 4800, "items": {"pot_vida_g": 6, "trevo_real": 1, "gema_topazio_3": 1}},
+    {"id": "castelo_arauto_bau_2", "pos": [32, 4], "yaw": -90, "gold": 5000, "items": {"pot_folego_g": 4, "broca_real": 1, "mat_insignia_chefe": 3}}
+  ],
+  "paths": [
+    {"points": [[0, 48], [0, 30], [-8, 16], [4, 2], [0, -12], [0, -26]], "width": 3.8, "color": "#e2dbc8"}
+  ],
+  "props": [
+    {"id": "env_trono_lei", "pos": [0, -42], "rot": 0},
+    {"id": "prp_estandarte_lei", "pos": [-7, -40]},
+    {"id": "prp_estandarte_lei", "pos": [7, -40]},
+    {"id": "prp_estandarte_lei", "pos": [-8, -15]},
+    {"id": "prp_estandarte_lei", "pos": [8, -15]},
+    {"id": "prp_estandarte_lei", "pos": [-6, 30]},
+    {"id": "prp_estandarte_lei", "pos": [6, 30]},
+    {"id": "prp_braseiro", "pos": [-16, -26]},
+    {"id": "prp_braseiro", "pos": [16, -26]},
+    {"id": "prp_braseiro", "pos": [-14, 10]},
+    {"id": "prp_braseiro", "pos": [14, 10]},
+    {"id": "env_muralha_torre", "pos": [-40, -46]},
+    {"id": "env_muralha_torre", "pos": [40, -46]},
+    {"id": "env_muralha_torre", "pos": [-40, 44]},
+    {"id": "env_muralha_torre", "pos": [40, 44]},
+    {"id": "env_muralha_torre", "pos": [-40, -14]},
+    {"id": "env_muralha_torre", "pos": [40, -14]},
+    {"id": "prp_estatua_alada", "pos": [-24, 20], "rot": 90},
+    {"id": "prp_estatua_alada", "pos": [24, 20], "rot": -90},
+    {"id": "prp_pilar_lei", "pos": [-26, 34]},
+    {"id": "prp_pilar_lei", "pos": [26, -4], "rot": 120},
+    {"id": "prp_quadro_decreto", "pos": [-10, 30], "rot": 90},
+    {"id": "prp_quadro_decreto", "pos": [10, 30], "rot": -90},
+    {"id": "prp_barricada", "pos": [-24, 18], "rot": 30},
+    {"id": "prp_barril", "pos": [22, 26]},
+    {"id": "prp_caixa", "pos": [24, 24]}
+  ],
+  "walls": [
+    {"id": "env_muralha", "from": [-38, 46], "to": [-4, 46]},
+    {"id": "env_muralha", "from": [4, 46], "to": [38, 46]},
+    {"id": "env_muralha", "from": [41, 42], "to": [41, -44]},
+    {"id": "env_muralha", "from": [38, -48], "to": [-38, -48]},
+    {"id": "env_muralha", "from": [-41, -44], "to": [-41, 42]},
+    {"id": "env_muralha", "from": [-38, -14], "to": [-8, -14]},
+    {"id": "env_muralha", "from": [8, -14], "to": [38, -14]}
+  ],
+  "scatter": [
+    {"ids": ["prp_barril", "prp_caixa", "prp_pedra", "prp_flores"], "count": 18, "rect": [-36, -10, 36, 42], "spacing": 7, "seed": 302},
+    {"ids": ["prp_pedrinhas", "prp_flores"], "count": 24, "rect": [-36, -10, 36, 42], "spacing": 4, "seed": 303}
+  ],
+  "enemy_zones": [
+    {"pos": [-16, 26], "radius": 10, "max": 6, "types": {"guarda_lei": 3, "arqueiro_lei": 2}, "level": [60, 61], "respawn": 25},
+    {"pos": [18, 12], "radius": 10, "max": 5, "types": {"carcereiro": 3, "guarda_lei": 2}, "level": [61, 62], "respawn": 25},
+    {"pos": [-18, 0], "radius": 8, "max": 5, "types": {"guarda_lei": 2, "carcereiro": 2, "arqueiro_lei": 1}, "level": [61, 62], "respawn": 25}
+  ],
+  "arena": {"gate": [[-8, -14], [8, -14]]},
+  "bosses": [
+    {"id": "cassian", "pos": [0, -28], "level": 63, "yaw": 0, "unless_flag": "cassian_defeated", "flag_on_death": "cassian_defeated", "intro": "cassian_intro", "transform_line": "cassian_transform", "reborn_line": "cassian_reborn", "power_spots": [[-10, -22], [10, -22], [-12, -34], [12, -34], [0, -38]]}
+  ],
+  "reset_sign": [4, 40]
+}

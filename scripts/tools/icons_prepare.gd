@@ -49,6 +49,20 @@ const SHEETS: Dictionary = {
 		"eq_espada_lendario", "eq_elmo_lendario", "eq_peitoral_lendario", "eq_luvas_lendario",
 		"eq_calca_lendario", "eq_botas_lendario", "eq_pulseira_lendario", "eq_cinto_lendario",
 	],
+	"ui_itens_equip_3": [
+		"eq_espada_mitico", "eq_elmo_mitico", "eq_peitoral_mitico", "eq_luvas_mitico",
+		"eq_calca_mitico", "eq_botas_mitico", "eq_pulseira_mitico", "eq_cinto_mitico",
+		"eq_espada_celestial", "eq_elmo_celestial", "eq_peitoral_celestial", "eq_luvas_celestial",
+		"eq_calca_celestial", "eq_botas_celestial", "eq_pulseira_celestial", "eq_cinto_celestial",
+	],
+	# Act 3-5 materials; the rest are kept for later (thorn, feather, ember, star, decree,
+	# root, key, mushroom, weight).
+	"ui_itens_materiais_2": [
+		"mat_pele_neve", "mat_cristal_gelo", "mat_escama_pantano", "mat_seiva_amarga",
+		"mat_selo_lei", "mat_corrente", "mat_insignia_chefe", "",
+		"", "", "", "",
+		"", "", "", "",
+	],
 	# "" = not used yet (map, options, skills, attributes, equipment, achievements,
 	# travel, gift, title, forge, portal); the anvil and the portal need a better cut.
 	"ui_menu": [

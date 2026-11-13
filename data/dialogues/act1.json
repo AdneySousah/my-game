@@ -1497,6 +1497,126 @@
         ]
       ]
     },
+    "main_17_isolda": {
+      "lines": [
+        [
+          "isolda",
+          "DLG_MAIN_17_ISOLDA_1"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_17_ISOLDA_2"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_17_ISOLDA_3"
+        ]
+      ]
+    },
+    "main_17_severin": {
+      "lines": [
+        [
+          "severin",
+          "DLG_MAIN_17_SEVERIN_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_17_SEVERIN_2"
+        ],
+        [
+          "severin",
+          "DLG_MAIN_17_SEVERIN_3"
+        ],
+        [
+          "severin",
+          "DLG_MAIN_17_SEVERIN_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_17_SEVERIN_5"
+        ],
+        [
+          "severin",
+          "DLG_MAIN_17_SEVERIN_6"
+        ]
+      ]
+    },
+    "severin_gate": {
+      "lines": [
+        [
+          "severin",
+          "DLG_SEVERIN_GATE_1"
+        ]
+      ]
+    },
+    "cassian_intro": {
+      "lines": [
+        [
+          "cassian",
+          "DLG_CASSIAN_INTRO_1"
+        ],
+        [
+          "lio",
+          "DLG_CASSIAN_INTRO_2"
+        ],
+        [
+          "cassian",
+          "DLG_CASSIAN_INTRO_3"
+        ],
+        [
+          "lio",
+          "DLG_CASSIAN_INTRO_4"
+        ]
+      ]
+    },
+    "cassian_transform": {
+      "lines": [
+        [
+          "cassian",
+          "DLG_CASSIAN_TRANSFORM_1"
+        ]
+      ]
+    },
+    "cassian_reborn": {
+      "lines": [
+        [
+          "lio",
+          "DLG_CASSIAN_REBORN_1"
+        ],
+        [
+          "lio",
+          "DLG_CASSIAN_REBORN_2"
+        ]
+      ]
+    },
+    "main_17_end": {
+      "lines": [
+        [
+          "isolda",
+          "DLG_MAIN_17_END_1"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_17_END_2"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_17_END_3"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_17_END_4"
+        ],
+        [
+          "lio",
+          "DLG_MAIN_17_END_5"
+        ],
+        [
+          "isolda",
+          "DLG_MAIN_17_END_6"
+        ]
+      ]
+    },
     "side_decretos_offer": {
       "lines": [
         [

@@ -185,6 +185,19 @@
       "rewards": { "xp": 27000, "gold": 7200, "items": { "pot_vida_g": 8, "eq_peitoral_epico": 1, "gema_topazio_3": 1 } }
     },
     {
+      "id": "main_17", "type": "main", "name": "QUEST_MAIN_17", "auto": true,
+      "requires": ["main_16"], "min_level": 58,
+      "steps": [
+        { "type": "talk", "npc": "isolda", "dialogue": "main_17_isolda", "text": "OBJ_TALK_ISOLDA_PLAN", "set_flag": "act5_castle" },
+        { "type": "talk", "npc": "severin", "dialogue": "main_17_severin", "text": "OBJ_TALK_SEVERIN_GATE" },
+        { "type": "kill", "enemy": "carcereiro", "count": 6, "map": "castelo_arauto", "pos": [18, 12], "text": "OBJ_FREE_PRISONERS" },
+        { "type": "kill", "enemy": "cassian", "count": 1, "map": "castelo_arauto", "pos": [0, -28], "text": "OBJ_KILL_CASSIAN", "skip_if_flag": "cassian_defeated" },
+        { "type": "talk", "npc": "isolda", "dialogue": "main_17_end", "text": "OBJ_TALK_ISOLDA_FREE" }
+      ],
+      "set_flag": "act5_stairs", "end_note": "QUEST_ACT5_SOON3",
+      "rewards": { "xp": 32000, "gold": 9000, "items": { "pot_vida_g": 10, "mat_insignia_chefe": 5, "eq_espada_lendario": 1 } }
+    },
+    {
       "id": "side_decretos", "type": "side", "name": "QUEST_SIDE_DECRETOS", "giver": "aurelio", "offer": "side_decretos_offer",
       "requires": ["main_15"], "min_level": 57,
       "steps": [

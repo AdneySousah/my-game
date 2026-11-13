@@ -1,0 +1,47 @@
+{
+  "_comment": "Runas e elementos (Fase 8C). Gerado por tools/content/gen_runes.py; não editar à mão. Cada skill tem 1 encaixe de runa (Session.skill_runes). merge runas iguais viram 1 do nível seguinte. Elemento da skill = o da runa: em inimigo com 'weak' igual, dano × weak_mult; com 'resist' igual, × resist_mult. Quedas: chance de 1 runa nível 1 (level2_chance de vir nível 2) por chefe da história (boss), chefe de covil (covil), Procurado (wanted), missão do quadro (board) e monstro comum (mob).",
+  "merge": 3,
+  "weak_mult": 1.5,
+  "resist_mult": 0.6,
+  "drops": {"boss": 0.6, "covil": 0.3, "wanted": 1.0, "board": 0.3, "mob": 0.004, "level2_chance": 0.12},
+  "runes": {
+    "fogo": {
+      "element": "fogo",
+      "color": "#ff7a2a",
+      "levels": [
+        {"dps": 0.12, "radius": 2.4, "time": 3.0},
+        {"dps": 0.18, "radius": 2.6, "time": 3.5},
+        {"dps": 0.25, "radius": 2.8, "time": 4.0}
+      ]
+    },
+    "gelo": {
+      "element": "gelo",
+      "color": "#8fd8ff",
+      "levels": [
+        {"slow": 0.4, "time": 3.0, "freeze": 0.15},
+        {"slow": 0.45, "time": 3.0, "freeze": 0.25},
+        {"slow": 0.5, "time": 3.5, "freeze": 0.35}
+      ]
+    },
+    "raio": {
+      "element": "raio",
+      "color": "#ffe04a",
+      "levels": [
+        {"chains": 2, "mult": 0.3, "range": 5.0},
+        {"chains": 3, "mult": 0.4, "range": 5.5},
+        {"chains": 4, "mult": 0.5, "range": 6.0}
+      ]
+    },
+    "sangue": {"element": "", "color": "#d0304a", "levels": [{"heal": 0.06}, {"heal": 0.09}, {"heal": 0.12}]},
+    "luz": {"element": "luz", "color": "#fff2b0", "levels": [{"bonus": 0.25}, {"bonus": 0.4}, {"bonus": 0.6}]},
+    "eco": {
+      "element": "",
+      "color": "#b07aff",
+      "levels": [
+        {"mult": 0.4, "delay": 0.5},
+        {"mult": 0.55, "delay": 0.5},
+        {"mult": 0.7, "delay": 0.5}
+      ]
+    }
+  }
+}

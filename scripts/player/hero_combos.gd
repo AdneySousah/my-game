@@ -180,7 +180,7 @@ func _hit_list(list: Array, mult: float) -> void:
 	_busy = true
 	for en: Enemy in list:
 		if is_instance_valid(en) and not en.is_dead():
-			player.deal_damage(en, mult, false, 1.5)
+			player.deal_damage(en, mult, false, 1.5, true)
 	_busy = false
 
 

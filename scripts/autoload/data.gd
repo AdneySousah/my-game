@@ -33,6 +33,8 @@ var world_map: Dictionary = {}
 var boards: Dictionary = {}
 ## Covis do Ferreiro Andarilho (Fase 8B): rules and the five lairs (see Covis).
 var covis: Dictionary = {}
+## Skill runes and elements (Fase 8C, see Runes).
+var runes: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -45,6 +47,7 @@ func _ready() -> void:
 	world_map = _load_json("res://data/world/world_map.json")
 	boards = _load_json("res://data/world/boards.json")
 	covis = _load_json("res://data/world/covis.json")
+	runes = _load_json("res://data/skills/runes.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])

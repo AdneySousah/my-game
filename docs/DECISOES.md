@@ -765,3 +765,35 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 - **Correções no caminho:**
   - O ferreiro antigo não usa as peças de chefe nas receitas dele.
   - A tela de equipamento mostra os combos e conta 8 peças por conjunto.
+
+## Fase 8C — Runas e elementos (13/11/2026)
+- **Encaixe:** cada skill tem 1 encaixe de runa, mesmo fora dos botões. Fica na própria tela de skills: o encaixe, a descrição da runa e as runas da mochila. Tocar numa runa encaixa e a que estava volta para a mochila. "Tirar runa" também devolve. Salvo em `Session.skill_runes`.
+- **6 runas, cada uma em 3 níveis (I, II, III):**
+
+| Runa | Efeito | Elemento |
+|---|---|---|
+| Fogo | Chão queimando na frente do herói (`RuneFire`) | fogo |
+| Gelo | Deixa lento e às vezes congela por 1 s (chefes não congelam) | gelo |
+| Raio | Salta para mais 2, 3 ou 4 inimigos | raio |
+| Sangue | Cura uma parte do dano causado | — |
+| Luz | Mais dano em chefes e mortos-vivos | luz |
+| Eco | A skill acerta de novo com parte do dano | — |
+
+- **Fusão:** 3 runas iguais viram 1 do nível seguinte, com o botão "Fundir 3" embaixo de cada runa.
+- **Elementos:**
+  - cada um dos 44 inimigos tem `weak` e `resist`, por região: gelo e mortos fracos a fogo, deserto fraco a gelo, mortos-vivos e cultistas fracos a luz, guardas da lei e celestes fracos a raio;
+  - na fraqueza: ×1,5 e "Fraco!" amarelo;
+  - na resistência: ×0,6 e "Resiste" cinza.
+- **Golpes extras sem repetição sem fim:** os golpes extras das runas e dos combos não dão MP, não enchem a luz do Despertar e não disparam outros efeitos (`deal_damage(..., proc = true)`).
+- **Quedas (1 runa nível I, às vezes II):**
+
+| Origem | Chance |
+|---|---|
+| Procurado | 100% |
+| Chefe da história | 60% |
+| Chefe de covil | 30% |
+| Missão do quadro | 30% |
+| Monstro comum | 0,4% |
+
+- **Gerador:** tudo sai de `tools/content/gen_runes.py`: itens, `data/skills/runes.json`, elementos dos inimigos e chaves `RN_*`.
+- **Meshy:** nenhum crédito novo; os ícones vieram na folha da parte B.

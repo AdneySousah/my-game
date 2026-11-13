@@ -37,6 +37,7 @@ func _ready() -> void:
 	await _packs_looks_test()
 	await _guard_awaken_test()
 	await _covis_test()
+	await _runes_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1124,6 +1125,108 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8C: skill runes (set, take off, merge, save) and elements (weak / resist), the
+## six rune effects and the rune socket in the skills window.
+func _runes_test() -> void:
+	Session.reset()
+	check(Runes.kinds().size() == 6, "six kinds of rune")
+	var all_ok: bool = true
+	for k: String in Runes.kinds():
+		for l: int in [1, 2, 3]:
+			var it: Dictionary = Data.item(Runes.item_id(k, l))
+			all_ok = all_ok and str(it.get("type", "")) == "rune" and ResourceLoader.exists("res://assets/ui/items/%s.png" % it.get("icon", "")) \
+				and tr(str(it.get("desc", ""))) != str(it.get("desc", ""))
+	check(all_ok, "18 runes (6 kinds x 3 levels) with icon and description")
+	var no_el: Array[String] = []
+	for eid: String in Data.enemies:
+		if not Data.enemies[eid].has("weak"):
+			no_el.append(eid)
+	check(no_el.is_empty(), "every enemy has its weakness and resistance (missing: %s)" % [no_el])
+	# Set, take off, merge, save.
+	Session.add_item("runa_fogo_1", 4)
+	check(Runes.equip("corte_giratorio", "runa_fogo_1") and Session.inventory.count("runa_fogo_1") == 3, "setting a rune takes it out of the bag")
+	check(str(Runes.on_skill("corte_giratorio").get("element", "")) == "fogo", "the Fire rune gives the skill the fire element")
+	check(Runes.can_merge("runa_fogo_1") and Runes.merge("runa_fogo_1") == "runa_fogo_2" and Session.inventory.count("runa_fogo_2") == 1, "3 equal runes merge into one of the next level")
+	Runes.equip("corte_giratorio", "runa_fogo_2")
+	check(Session.inventory.count("runa_fogo_1") == 1 and str(Session.skill_runes["corte_giratorio"]) == "runa_fogo_2", "a new rune swaps the old one back into the bag")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(str(Session.skill_runes.get("corte_giratorio", "")) == "runa_fogo_2", "runes on skills are saved")
+	check(Runes.unequip("corte_giratorio") and Session.inventory.count("runa_fogo_2") == 1, "taking a rune off puts it back in the bag")
+	# Drops.
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 3
+	var got: int = 0
+	for i: int in 100:
+		if Runes.roll_drop("wanted", rng) != "":
+			got += 1
+	check(got == 100 and Runes.roll_drop("nothing", rng) == "", "wanted bosses always drop a rune")
+	# In a fight: elements and effects.
+	Main.start_map = "campos"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		n.queue_free()
+	await _frames(2)
+	var p: Player = main.player
+	while p.stats.level < 20:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
+	p.skills.last_skill = "corte_giratorio"
+	var orc: Enemy = main.spawn_enemy("orc", p.global_position + Vector3(0, 0, -1.5))
+	await _frames(2)
+	check(str(orc.data.get("weak", "")) == "fogo", "orcs are weak to fire")
+	Session.skill_runes["corte_giratorio"] = "runa_fogo_1"
+	check(is_equal_approx(float(p.runes.hit_mult("corte_giratorio", orc)["mult"]), 1.5) and str(p.runes.hit_mult("corte_giratorio", orc)["tag"]) == "weak", "a skill with the enemy's weak element hits 50%% harder")
+	Session.skill_runes["corte_giratorio"] = "runa_gelo_1"
+	var lizard: Enemy = main.spawn_enemy("homem_lagarto", p.global_position + Vector3(3, 0, 0))
+	await _frames(2)
+	Session.skill_runes["corte_giratorio"] = "runa_fogo_1"
+	check(float(p.runes.hit_mult("corte_giratorio", lizard)["mult"]) < 1.0, "a resisted element hits softer")
+	# Ice slows.
+	Session.skill_runes["corte_giratorio"] = "runa_gelo_1"
+	orc.hp = orc.max_hp
+	p.deal_damage(orc, 0.1, true)
+	check(orc.status.has("slow"), "the Ice rune slows the enemy")
+	# Blood heals.
+	Session.skill_runes["corte_giratorio"] = "runa_sangue_3"
+	p.hp = p.max_hp() * 0.5
+	var hp0: float = p.hp
+	p.deal_damage(orc, 0.5, true)
+	check(p.hp > hp0, "the Blood rune heals part of the damage")
+	# Lightning jumps.
+	Session.skill_runes["corte_giratorio"] = "runa_raio_1"
+	lizard.global_position = orc.global_position + Vector3(1.5, 0, 0)
+	var lz_hp: float = lizard.hp
+	p.deal_damage(orc, 0.3, true)
+	check(lizard.hp < lz_hp, "the Lightning rune jumps to a nearby enemy")
+	# Fire leaves burning ground.
+	Session.skill_runes["corte_giratorio"] = "runa_fogo_1"
+	p.runes.on_skill_used("corte_giratorio")
+	await _frames(2)
+	var fires: Array = main.map.get_parent().find_children("*", "", true, false).filter(func(n: Node) -> bool: return n is RuneFire)
+	check(not fires.is_empty(), "the Fire rune leaves the ground burning")
+	# Light: more on bosses.
+	Session.skill_runes["corte_giratorio"] = "runa_luz_1"
+	var boss: Enemy = main.spawn_enemy("gorvan", p.global_position + Vector3(-4, 0, 0))
+	await _frames(2)
+	check(float(p.runes.hit_mult("corte_giratorio", boss)["mult"]) > 1.2, "the Light rune hits bosses harder")
+	# The skills window shows the socket.
+	Session.add_item("runa_eco_1", 1)
+	main.hud.call("_open_panel", main.hud.get("_skills_panel"))
+	await _frames(2)
+	var sp: SkillsPanel = main.hud.get("_skills_panel")
+	sp.call("_select", "corte_giratorio")
+	await _frames(2)
+	check((sp.get("_rune_box") as Control).visible and (sp.get("_rune_list") as Control).get_child_count() > 0, "the skills window shows the rune socket and the runes in the bag")
+	sp.hide()
+	main.hud.call("_on_panel_closed")
+	Session.skill_runes.clear()
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8B: the Wandering Smith's lairs — open days, 10 free entries a day and licenses,
 ## the boss's shards and essences, forging rare and epic pieces, the set combos, the NPC
 ## in each city, the window and the trip into a lair and back.

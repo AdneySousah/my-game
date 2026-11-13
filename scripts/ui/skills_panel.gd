@@ -4,6 +4,8 @@ extends PanelContainer
 ## Top: the 8 skills as round pictures with a "+" (locked ones show the level they open at).
 ## Tapping one shows its description below and the 4 buttons; tapping a button puts the
 ## skill there (if it was on another button, the two swap).
+## Fase 8C: under the description, the skill's rune socket and the runes in the bag (tap
+## one to set it; "Fundir 3" merges three equal runes into one of the next level).
 
 signal closed
 
@@ -22,12 +24,17 @@ var _cost: Label
 var _slots: Array[SkillIconView] = []
 var _pick: HBoxContainer
 var _selected: String = ""
+var _rune_box: VBoxContainer
+var _rune_slot: ItemSlot
+var _rune_text: Label
+var _rune_remove: Button
+var _rune_list: HFlowContainer
 
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	hide()
-	custom_minimum_size = Vector2(900, 640)
+	custom_minimum_size = Vector2(900, 0)
 
 	var box := VBoxContainer.new()
 	box.add_theme_constant_override("separation", 10)
@@ -96,6 +103,7 @@ func _ready() -> void:
 	_cost.add_theme_font_size_override("font_size", 14)
 	_cost.add_theme_color_override("font_color", Color(0.8, 0.82, 0.88))
 	text.add_child(_cost)
+	_build_runes()
 	var pick := HBoxContainer.new()
 	_pick = pick
 	pick.alignment = BoxContainer.ALIGNMENT_CENTER
@@ -121,6 +129,97 @@ func _ready() -> void:
 		hide()
 		closed.emit())
 	box.add_child(close)
+
+
+func _build_runes() -> void:
+	_rune_box = VBoxContainer.new()
+	_rune_box.add_theme_constant_override("separation", 4)
+	_detail.add_child(_rune_box)
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	_rune_box.add_child(row)
+	var cap := Label.new()
+	cap.text = tr("RN_SOCKET")
+	cap.add_theme_font_size_override("font_size", 17)
+	cap.add_theme_color_override("font_color", GameTheme.GOLD)
+	row.add_child(cap)
+	_rune_slot = ItemSlot.new()
+	_rune_slot.custom_minimum_size = Vector2(54, 54)
+	_rune_slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	row.add_child(_rune_slot)
+	_rune_text = Label.new()
+	_rune_text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_rune_text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	_rune_text.add_theme_font_size_override("font_size", 15)
+	row.add_child(_rune_text)
+	_rune_remove = Button.new()
+	_rune_remove.text = tr("RN_REMOVE")
+	_rune_remove.focus_mode = Control.FOCUS_NONE
+	_rune_remove.custom_minimum_size = Vector2(150, 44)
+	_rune_remove.add_theme_font_size_override("font_size", 16)
+	_rune_remove.pressed.connect(func() -> void:
+		Runes.unequip(_selected)
+		_refresh())
+	row.add_child(_rune_remove)
+	_rune_list = HFlowContainer.new()
+	_rune_list.add_theme_constant_override("h_separation", 8)
+	_rune_list.add_theme_constant_override("v_separation", 4)
+	_rune_box.add_child(_rune_list)
+
+
+func _refresh_runes() -> void:
+	var inf: Dictionary = Runes.on_skill(_selected)
+	_rune_slot.item_id = str(Session.skill_runes.get(_selected, ""))
+	_rune_slot.queue_redraw()
+	_rune_remove.visible = not inf.is_empty()
+	if inf.is_empty():
+		_rune_text.text = tr("RN_EMPTY")
+		_rune_text.add_theme_color_override("font_color", Color(0.8, 0.78, 0.7))
+	else:
+		var iid: String = str(Session.skill_runes[_selected])
+		var t: String = tr(str(Data.item(iid).get("desc", "")))
+		if str(inf["element"]) != "":
+			t += "  " + tr("RN_ELEMENT") % tr("RN_EL_" + str(inf["element"]).to_upper())
+		_rune_text.text = t
+		_rune_text.add_theme_color_override("font_color", inf["color"])
+	for c: Node in _rune_list.get_children():
+		_rune_list.remove_child(c)
+		c.queue_free()
+	var owned: Array[String] = Runes.owned()
+	if owned.is_empty():
+		var none := Label.new()
+		none.text = tr("RN_NONE_OWNED")
+		none.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		none.custom_minimum_size = Vector2(820, 0)
+		none.add_theme_font_size_override("font_size", 14)
+		none.add_theme_color_override("font_color", Color(0.7, 0.68, 0.6))
+		_rune_list.add_child(none)
+		return
+	for iid: String in owned:
+		var col := VBoxContainer.new()
+		col.add_theme_constant_override("separation", 2)
+		var s := ItemSlot.new()
+		s.custom_minimum_size = Vector2(54, 54)
+		s.item_id = iid
+		s.amount = Session.inventory.count(iid)
+		s.tooltip_text = tr(str(Data.item(iid).get("name", iid)))
+		s.pressed.connect(func() -> void:
+			Runes.equip(_selected, iid)
+			Audio.play_sfx("ui_click")
+			_refresh())
+		col.add_child(s)
+		if Runes.can_merge(iid):
+			var m := Button.new()
+			m.text = tr("RN_MERGE")
+			m.focus_mode = Control.FOCUS_NONE
+			m.add_theme_font_size_override("font_size", 12)
+			m.custom_minimum_size = Vector2(54, 26)
+			m.pressed.connect(func() -> void:
+				Runes.merge(iid)
+				Audio.play_sfx("metal")
+				_refresh())
+			col.add_child(m)
+		_rune_list.add_child(col)
 
 
 func open() -> void:
@@ -178,6 +277,9 @@ func _refresh() -> void:
 	_desc.text = tr(str(sk["desc"]))
 	_cost.text = tr("SKILL_COST") % [int(sk.get("mp_cost", 0)), int(sk.get("cooldown", 0))]
 	_pick.visible = open
+	_rune_box.visible = open
+	if open:
+		_refresh_runes()
 	if not open:
 		_cost.text += "   ·   " + tr("SKILLS_LOCKED_AT") % int(sk["unlock_level"])
 	for slot: int in _slots.size():

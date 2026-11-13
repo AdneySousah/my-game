@@ -37,6 +37,8 @@ var skills: SkillRunner
 var guard: HeroGuard
 ## Combos of the Wandering Smith's boss sets (Fase 8B).
 var combos: HeroCombos
+## Skill runes (Fase 8C).
+var runes: HeroRunes
 
 var _lock: float = 0.0
 var _combo_step: int = 0
@@ -125,6 +127,9 @@ func _ready() -> void:
 	combos = HeroCombos.new()
 	combos.player = self
 	add_child(combos)
+	runes = HeroRunes.new()
+	runes.player = self
+	add_child(runes)
 	hp = max_hp()
 	stamina = max_stamina()
 	mp = max_mp()
@@ -549,11 +554,17 @@ func enemies_in_cone(radius: float, half_angle_deg: float) -> Array[Enemy]:
 
 
 ## Hits one enemy with the hero's attack. Returns the damage dealt.
-func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0.0) -> int:
+## `proc`: an extra hit made by a rune or a combo (no MP, no Awakening light, no procs).
+func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0.0, proc: bool = false) -> int:
 	var m: float = mult * (1.0 - clampf(status.value("weaken"), 0.0, 0.8))
+	var tag: String = ""
 	if is_skill:
 		m *= 1.0 + stats.get_stat("skill_dmg")
 		m *= combos.skill_mult(skills.last_skill)
+		# The skill's rune: its element against the enemy, and the Light rune (Fase 8C).
+		var em: Dictionary = runes.hit_mult(skills.last_skill, enemy)
+		m *= float(em["mult"])
+		tag = str(em["tag"])
 	# Dizzy (parried) or stunned enemies take more (Fase 8).
 	if enemy.status and enemy.status.has("stun"):
 		m *= float(HeroGuard.rules().get("dizzy_damage_mult", 1.3))
@@ -562,9 +573,15 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var push: Vector3 = enemy.global_position - global_position
 	push.y = 0.0
 	enemy.take_damage(res["amount"], res["crit"], push.normalized() * knockback)
+	if tag != "":
+		ProtoVisuals.damage_number(get_parent(), enemy.global_position + Vector3(0, 0.7, 0),
+			tr("RN_WEAK" if tag == "weak" else "RN_RESIST"), Color("#ffe066") if tag == "weak" else Color("#a8a8a8"))
+	if proc:
+		return res["amount"]
 	combos.on_hit(enemy, int(res["amount"]), bool(res["crit"]))
 	if is_skill:
 		combos.on_skill_hit(skills.last_skill, enemy)
+		runes.on_skill_hit(skills.last_skill, enemy, int(res["amount"]))
 	var ar: Dictionary = HeroGuard.awaken_rules()
 	guard.add_fury(float(ar.get("gain_skill_hit" if is_skill else "gain_hit", 0.4)))
 	if enemy.is_dead():
@@ -690,6 +707,14 @@ func _tick_potions(delta: float) -> void:
 
 
 ## Gradual healing (rest points): fractions of the maximum health and stamina.
+## Heals a number of health points (the Blood rune).
+func heal_amount(amount: float) -> void:
+	if _dead or amount <= 0.0:
+		return
+	hp = minf(max_hp(), hp + amount)
+	hp_changed.emit(hp, max_hp())
+
+
 func heal_fraction(f: float) -> void:
 	hp = minf(max_hp(), hp + max_hp() * f)
 	stamina = minf(max_stamina(), stamina + max_stamina() * f)

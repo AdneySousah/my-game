@@ -10,7 +10,7 @@ Tudo é feito por dados em `data/` como o resto do jogo. Cada parte tem seus tes
 |---|---|---|---|
 | A | Combate | Defesa e aparar, monstro tonto com estrelinhas, Despertar com história | 42 cr (feito) |
 | B | Covis do Ferreiro Andarilho | NPC novo em cada cidade, 5 covis de chefe, 5 conjuntos com combos, licenças | 89 cr (feito) |
-| C | Runas e elementos | 1 runa por skill, fogo/gelo/raio/sangue/luz, fraquezas dos monstros | ~15 cr |
+| C | Runas e elementos | 1 runa por skill, fogo/gelo/raio/sangue/luz/eco, fraquezas dos monstros | 0 cr (feito; ícones na folha da B) |
 | D | Pesca e fogueira | Pescar nos lagos e rios, peixes por lugar e hora, cozinhar comidas com bônus | ~55 cr |
 | E | Bestiário e Maestria | Ficha de cada monstro com bônus por abates; pontos depois do nível 100 | ~10 cr |
 | F | Casa do herói | Casa em Pradoluz com baú, troféus, armas expostas e cama (bônus de XP) | ~25 cr |
@@ -117,7 +117,7 @@ Os combos são feitos para o guerreiro e ligados às skills dele. Vestindo 2, 4,
 | **Luz** | Mais dano em chefes e em mortos-vivos |
 | **Eco** | A skill repete com metade da força |
 
-- **Níveis:** cada runa tem 3 níveis. 3 runas iguais viram 1 do nível seguinte, no Ferreiro.
+- **Níveis:** cada runa tem 3 níveis. 3 runas iguais viram 1 do nível seguinte, na própria tela de skills.
 - **Elementos:** cada monstro tem fraqueza e resistência em `enemies.json`.
   - Exemplos: mortos de gelo fracos a fogo; criaturas do deserto fracas a gelo; cultistas fracos a luz.
   - No acerto aparece **"Fraco!"** em amarelo ou **"Resiste"** em cinza.

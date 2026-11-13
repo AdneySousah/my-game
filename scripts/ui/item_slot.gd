@@ -46,7 +46,7 @@ func _draw() -> void:
 		var p2 := Vector2(5, 18)
 		draw_string_outline(font, p2, "+%d" % plus, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color.BLACK)
 		draw_string(font, p2, "+%d" % plus, HORIZONTAL_ALIGNMENT_LEFT, -1, 15, Color("#ffe27a"))
-	var tier: int = int(Data.item(item_id).get("gem_level", 0))
+	var tier: int = int(Data.item(item_id).get("gem_level", Data.item(item_id).get("rune_level", 0)))
 	if tier > 0:
 		var p3 := Vector2(5, size.y - 6)
 		draw_string_outline(font, p3, ROMAN[tier], HORIZONTAL_ALIGNMENT_LEFT, -1, 15, 5, Color.BLACK)

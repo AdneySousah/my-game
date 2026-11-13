@@ -430,6 +430,11 @@ func _on_enemy_killed(e: Enemy) -> void:
 		_covil_prize(e)
 	else:
 		_drop_loot(e)
+	# A rune now and then (Fase 8C): story bosses, lair bosses, wanted bosses, monsters.
+	var source: String = "covil" if e.has_meta("covil") else ("wanted" if e.has_meta("wanted_city") else ("boss" if e.is_boss else "mob"))
+	var rune: String = Runes.roll_drop(source)
+	if rune != "":
+		give_item(rune, 1)
 	_bounty_kill(e)
 	# The story scene plays the first time only (not after a dungeon reset).
 	var after_flag: String = str(e.data.get("after_flag", ""))
@@ -445,6 +450,9 @@ func _bounty_kill(e: Enemy) -> void:
 		player.add_gold(int(job["gold"]))
 		hud.loot_gold(int(job["gold"]))
 		give_item(str(job["item"]), int(job["count"]))
+		var rune: String = Runes.roll_drop("board")
+		if rune != "":
+			give_item(rune, 1)
 		hud.banner(tr("BOARD_JOB_DONE"))
 		Audio.play_sfx("quest")
 		Session.routine.on_event("board", Session.current_map)

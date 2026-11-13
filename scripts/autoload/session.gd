@@ -39,6 +39,8 @@ var wanted: Dictionary = {}
 ## Covis (Fase 8B): the day of the count and the free entries used that day.
 var covil_day: String = ""
 var covil_used: int = 0
+## Runes on the skills (Fase 8C): skill id -> rune item id.
+var skill_runes: Dictionary = {}
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
 ## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
@@ -92,6 +94,7 @@ func reset() -> void:
 	wanted = {}
 	covil_day = ""
 	covil_used = 0
+	skill_runes = {}
 	day_hour = float(Data.daynight.get("start_hour", 9.0))
 
 
@@ -155,7 +158,7 @@ func to_dict() -> Dictionary:
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "play_seconds": play_seconds,
-		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "rest_ready_at": rest_ready_at,
+		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "skill_runes": skill_runes, "rest_ready_at": rest_ready_at,
 		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
@@ -210,6 +213,7 @@ func from_dict(d: Dictionary) -> void:
 	wanted = (d.get("wanted", {}) as Dictionary).duplicate(true)
 	covil_day = str(d.get("covil_day", ""))
 	covil_used = int(d.get("covil_used", 0))
+	skill_runes = (d.get("skill_runes", {}) as Dictionary).duplicate()
 	if not ["easy", "normal", "hard", "extreme"].has(difficulty):
 		difficulty = "normal"
 	# JSON brings numbers back as floats; quest counters are ints.

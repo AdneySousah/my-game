@@ -210,6 +210,8 @@ func _make_model() -> void:
 		_model.queue_free()
 	_model = CharacterModel.create(Player.current_look())
 	if _model:
+		_model.float_in_place = false
+	if _model:
 		_model.ready.connect(func() -> void:
 			_model.set_weapon(Player.current_weapon_look())
 			_model.play_loop("combat_idle")

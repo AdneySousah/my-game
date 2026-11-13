@@ -13,6 +13,8 @@ signal struck(center: Vector3, reach: float)
 
 const MOVE_SPEED: float = 6.0
 const DODGE_SPEED: float = 15.0
+## How fast the hero turns to face the stick (higher = snappier).
+const TURN_RATE: float = 13.0
 const DODGE_TIME: float = 0.3
 const DODGE_COOLDOWN: float = 0.9
 const COMBO_MULTS: Array[float] = [1.0, 1.1, 1.6]
@@ -52,6 +54,8 @@ var stamina: float = 0.0
 var mp: float = 0.0
 ## Footstep sound of the current map (Main sets it: grass, stone, sand, snow).
 var step_sfx: String = "step"
+## Sideways lean while turning (radians), eased back to 0 on straight lines.
+var _lean: float = 0.0
 var _mp_pause: float = 0.0
 var _mp_left: float = 0.0
 var _mp_rate: float = 0.0
@@ -172,13 +176,18 @@ func _physics_process(delta: float) -> void:
 			speed *= 1.0 - clampf(status.value("slow"), 0.0, 0.8)
 			velocity = Vector3.ZERO if rooted else dir * speed
 			if dir.length_squared() > 0.01:
-				face_direction(dir)
+				_turn_towards(dir, delta)
 	else:
 		_sprinting = false
 		velocity = Vector3.ZERO
 	velocity.y = 0.0
 	move_and_slide()
 	global_position.y = 0.0
+	# The lean of the turn fades on straight lines and when standing.
+	if velocity.length() < 0.5:
+		_lean = lerpf(_lean, 0.0, 1.0 - exp(-8.0 * delta))
+	if model:
+		model.rotation.z = _lean
 	if model and _lock <= 0.0:
 		# At a campfire, standing still for a moment: sit down facing the fire.
 		_still_time = _still_time + delta if velocity.length() < 0.2 and _combat_time <= 0.0 else 0.0
@@ -411,6 +420,16 @@ func set_invulnerable(seconds: float) -> void:
 
 func forward() -> Vector3:
 	return -global_basis.z
+
+
+## Turns the body towards where the stick points, quickly but not in one jump, and leans
+## a little into the turn (owner, 13/11: changing direction looked stiff).
+func _turn_towards(dir: Vector3, delta: float) -> void:
+	var target: float = atan2(-dir.x, -dir.z)
+	var before: float = rotation.y
+	rotation.y = lerp_angle(rotation.y, target, 1.0 - exp(-TURN_RATE * delta))
+	var turn_speed: float = angle_difference(before, rotation.y) / maxf(delta, 0.0001)
+	_lean = lerpf(_lean, clampf(turn_speed * 0.035, -0.16, 0.16), 1.0 - exp(-10.0 * delta))
 
 
 func face_direction(dir: Vector3) -> void:

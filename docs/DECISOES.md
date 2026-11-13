@@ -678,3 +678,7 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - **flutua no lugar de andar:** fica uns 30 cm acima do chão, balançando, e inclina para a frente ao se mover (`float` no visual).
   - Custo no Meshy: ~74 créditos, somando modelo, esqueleto, asa, retratos e ícones.
 - Fotos: `res://tests/looks_capture.tscn -- <pasta>`.
+- **Ajustes do anjo e da virada (dono, 13/11, versão 0.3.5):**
+  - nas telas de equipamento e atributos o anjo não flutua, para não sair cortado (`float_in_place`);
+  - pose de voo: ação `float` só do anjo (`extra_actions`), com uma perna dobrada para trás, a outra esticada para baixo e os pés apontados;
+  - **virada de direção suave:** o herói gira até a direção do controle em vez de virar de uma vez (`TURN_RATE`), e inclina um pouco para dentro da curva.

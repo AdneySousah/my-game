@@ -465,6 +465,8 @@ func _ensure_model() -> void:
 		if _model:
 			_model.queue_free()
 		_model = CharacterModel.create(id)
+		if _model:
+			_model.float_in_place = false
 		_model_id = id
 		if _model:
 			_model.ready.connect(func() -> void:

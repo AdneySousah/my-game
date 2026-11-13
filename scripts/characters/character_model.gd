@@ -30,6 +30,8 @@ var _tweak: PoseTweak
 var _root: Node3D
 ## "float" in characters.json: the look flies instead of walking.
 var _float: Dictionary = {}
+## Off in the menus' 3D portraits (the floating look would leave the picture).
+var float_in_place: bool = true
 var _wings: AngelWings
 ## 0..1: how fast the character moves (for the flying lean and the wing beats).
 var _move_ratio: float = 0.0
@@ -77,6 +79,12 @@ static func config_for(id: String) -> Dictionary:
 		for k: String in cfg:
 			if k != "base":
 				merged[k] = cfg[k]
+		# "extra_actions": actions added to (or replacing) the base's ones, e.g. the
+		# angel's "float" pose.
+		if cfg.has("extra_actions"):
+			var acts: Dictionary = (merged.get("actions", {}) as Dictionary).duplicate(true)
+			acts.merge(cfg["extra_actions"], true)
+			merged["actions"] = acts
 		return merged
 	return cfg
 
@@ -194,7 +202,7 @@ func _attach_wings(model: Node3D) -> void:
 
 func _process(delta: float) -> void:
 	_clock += delta
-	if not _float.is_empty() and _root:
+	if not _float.is_empty() and _root and float_in_place:
 		# Floating look: hovers above the ground, bobbing, leaning forward when moving.
 		_root.position.y = float(_float.get("height", 0.3)) + sin(_clock * 2.4) * float(_float.get("bob", 0.06))
 		_root.rotation.x = lerpf(_root.rotation.x, _move_ratio * float(_float.get("lean", 0.22)), minf(1.0, delta * 6.0))

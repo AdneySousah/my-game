@@ -41,7 +41,7 @@
       "pos": [30, -6],
       "yaw": -90,
       "gold": 800,
-      "items": {"pot_folego_g": 2, "trevo": 1, "eq_espada_epico": 1}
+      "items": {"pot_mana_g": 2, "trevo": 1, "eq_espada_raro": 1, "mat_insignia_chefe": 10}
     }
   ],
   "paths": [

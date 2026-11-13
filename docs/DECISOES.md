@@ -583,3 +583,45 @@ Registro do que já foi decidido. Quando algo mudar, atualize aqui com a data.
 - **Visual do conjunto:** com as 5 peças de um conjunto, o Lio veste a armadura dele (3 modelos novos do Meshy, com o mesmo esqueleto e as animações do herói). Um visual comprado continua tendo prioridade; tirando uma peça, ele volta à roupa normal.
 - **17 conquistas novas:** os chefes Sahra, Brannoc, Velyra, Cassian e Vaelor, terminar o jogo, níveis 40/65/80/100, 1/10/30 chefes no Modo Infernal, o Vaelor nível 100, criar uma peça mítica e uma celestial, e chegar ao +20. Cada uma dá um título com bônus.
 - Fotos: `res://tests/postgame_capture.tscn -- <pasta>`.
+
+## Fase 6.7: correções do teste no celular e conteúdo diário (13/11/2026)
+O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
+- **Bugs corrigidos:**
+  - **Missão dos orcs (Bento):** o acampamento marcado às vezes só sorteava bandidos. Agora as zonas perto de uma caçada mantêm pelo menos 2 monstros do tipo pedido (aparecem do lado longe do herói), e a seta aponta para o mais perto (`QuestLog.wanted_kills`, `EnemyZone._keep_quest_targets`).
+  - **Não dava para sair da casa:** a parede invisível da frente ficava antes da saída. Agora a frente tem uma mureta com uma abertura de porta.
+  - **Joystick travado depois da fala do Arauto:** o dedo era solto enquanto o joystick estava escondido. Agora ele solta sozinho quando some.
+  - **Espantalho travado / andando parado:** um monstro que quer andar mas quase não sai do lugar contorna o obstáculo por um instante; a animação de andar segue a velocidade de verdade.
+- **Casas por dentro:** chão de tábuas (shader `wood_floor`), paredes com o dobro da altura e nada em volta (fundo escuro). Campo `room` e `height` nas paredes do mapa.
+- **Bordas das cidades** (campo `town_edge`): mata fechada fora dos muros (MultiMesh, sem colisão, longe das saídas e trilhas), chão mais escuro por baixo, sem grama fora dos muros e algumas árvores por dentro, junto do muro. Pradoluz, Qaressa (palmeiras), Hrimvald (pinheiros), Lysthael e Altaréa.
+- **Corrida:** o botão Correr usa a animação de corrida de verdade (`Lean_Forward_Sprint`, já existia) e ficou mais lenta: 1,35× em vez de 1,6×.
+- **Vasos:** não pegam mais só de passar por cima. Aparece "Pegar", o Lio se abaixa, e o vaso continua lá (um brilho dourado mostra os que têm algo).
+- **Itens recebidos:** lista com o ícone, a quantidade e o nome na cor da raridade, embaixo dos atalhos do topo (`LootFeed`).
+- **MP:** as skills gastam **MP** (`mp_cost` em skills.json), não fôlego. O fôlego fica para a esquiva e a corrida.
+  - 100 de MP, +2 por nível e +2 por ponto de Foco; recupera 3/s, e cada golpe básico que acerta devolve 3.
+  - Barra azul ao lado da verde.
+  - Poções de MP pequena, média e grande. Nos baús, prêmios, vasos e drops elas substituíram as de fôlego; as de fôlego continuam nas lojas.
+  - Simulação com MP: Gorvan (nível 12) 96 s, Brannoc (44) 166 s, Velyra (56) 159 s, sem mortes, vida mínima 33–39%.
+- **Atalhos de poção:** são 3 e qualquer poção vai em qualquer um ("Atalho: 1 2 3" na mochila), como nas skills. Pensado para a colheita de ervas de depois. Saves antigos ficam com vida, MP e o tônico que tinham.
+- **Dificuldade não dá mais XP nem itens:** o Difícil só deixa os inimigos mais fortes.
+- **Drops:** equipamento épico e lendário não cai mais, porque eles são feitos na forja. No lugar, cai uma peça rara e as Insígnias de Chefe que a forja pede (10 por épica, 20 por lendária). Os baús com peças épicas ficaram com uma rara + 10 Insígnias.
+- **Poções no começo:** as chances de cair poção dos monstros iniciais caíram pela metade, e as dos outros monstros em 25%.
+- **Missões na lateral:** até 3 ao mesmo tempo (a seguida primeiro), cada uma com "Seguir", e um cabeçalho "Missões (n)" que esconde ou mostra a lista (`QuestTracker`). A janela de missões ficou grande, com rolagem, e as concluídas foram para uma coluna à direita.
+- **Viagem:** a janela mostra o mapa-múndi ilustrado (Meshy) com um botão em cada mapa que tem ponto ativado; com dois pontos, abre uma listinha. "Você está aqui" marca o mapa atual (`data/world/world_map.json`).
+- **Imagens novas (Meshy, 21 créditos):**
+  - banner da oferta (o Lio fazendo força com o braço);
+  - o mapa-múndi;
+  - as 4 cartas da escolha de dificuldade;
+  - uma folha de ícones: poções de MP, quadro, procurado, troféu e caveira, e ervas guardadas para depois.
+- **Dificuldade Extrema:** inimigos 80% mais fortes, perder custa 50% mais e **o mundo não espera**. Os monstros de todo o mundo têm pelo menos o "nível do mundo", que sobe com o tempo jogado na metade do ritmo médio do herói (a curva do `gen_xp.py`). Exemplos: 2 h → nível 13, 4 h → 22, 8 h → 35, 15 h → 50. Quem demora encontra até as áreas do começo mais fortes. Um aviso aparece quando o nível do mundo sobe.
+- **Placa de dificuldade na frente de cada masmorra** (no mapa de onde se entra): Normal, Desafio (vida +50%, dano +30%, drops +50%, ouro +40%) ou Pesadelo (vida ×2,2, dano +70%, drops ×2, ouro +80%). Fica guardada por masmorra (`boards.json` → `tiers`).
+- **Quadro de missões na frente de cada masmorra:** 3 missões por dia em cada quadro, uma de cada vez. As opções são derrotar 15 monstros lá, derrotar 8 de um tipo (muda a cada dia) ou derrotar o chefe de novo (ele volta ao aceitar). O prêmio é ouro (30 × o nível da masmorra) e 1 item extra (poção, Trevo, Broca, Insígnias ou gema).
+- **Procurado em cada cidade:** um chefe do mundo por dia, num dos campos da região da cidade, em lugar sorteado. Por exemplo, o de Pradoluz fica na Floresta ou nos Campos.
+  - São versões pintadas e mais fortes de chefes (vida ×3, dano +25%, escudo de quebra), sempre 3 níveis acima do herói:
+    - Colosso Musgoso;
+    - Rainha Rubra das Dunas;
+    - Titã do Gelo Eterno;
+    - Fera dos Espinhos Antigos;
+    - Juiz Sem Nome.
+  - "Seguir" no cartaz faz a seta levar até ele.
+  - Prêmio: 120 × o nível em ouro, 6 Insígnias, 2 gemas, Trevo e Broca (e 2 Essências Infernais depois do final).
+  - 4 conquistas novas: Procurados 1 e 10, quadros 10 e 50.

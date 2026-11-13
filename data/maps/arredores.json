@@ -18,7 +18,7 @@
   ],
   "chests": [
     {"id": "arredores_bau_1", "pos": [30, 16], "yaw": -90, "gold": 4200, "items": {"pot_vida_g": 5, "pot_pedra": 1, "gema_rubi_3": 1}},
-    {"id": "arredores_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 4300, "items": {"pot_folego_g": 3, "broca_real": 1, "eq_cinto_epico": 1}}
+    {"id": "arredores_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 4300, "items": {"pot_mana_g": 3, "broca_real": 1, "eq_cinto_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "arredores_posto", "name": "REST_ARREDORES_POSTO", "pos": [-6, 32], "kind": "fogueira"},

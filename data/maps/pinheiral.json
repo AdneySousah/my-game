@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "pinheiral_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 1500, "items": {"pot_vida_g": 4, "amuleto": 1, "gema_rubi_2": 2}},
-    {"id": "pinheiral_bau_2", "pos": [30, -24], "yaw": -90, "gold": 1600, "items": {"pot_folego_g": 3, "broca": 1, "eq_calca_epico": 1}}
+    {"id": "pinheiral_bau_2", "pos": [30, -24], "yaw": -90, "gold": 1600, "items": {"pot_mana_g": 3, "broca": 1, "eq_calca_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "pinheiral_trilha", "name": "REST_PINHEIRAL_TRILHA", "pos": [-6, 32], "kind": "fogueira"},

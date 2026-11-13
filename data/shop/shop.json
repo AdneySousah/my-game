@@ -18,12 +18,24 @@
           "buy": 200
         },
         {
+          "id": "pot_mana_p",
+          "buy": 35
+        },
+        {
           "id": "pot_folego_p",
           "buy": 30
         },
         {
+          "id": "pot_mana_m",
+          "buy": 90
+        },
+        {
           "id": "pot_folego_m",
           "buy": 80
+        },
+        {
+          "id": "pot_mana_g",
+          "buy": 230
         },
         {
           "id": "pot_folego_g",
@@ -135,8 +147,16 @@
           "buy": 200
         },
         {
+          "id": "pot_mana_m",
+          "buy": 90
+        },
+        {
           "id": "pot_folego_m",
           "buy": 80
+        },
+        {
+          "id": "pot_mana_g",
+          "buy": 230
         },
         {
           "id": "pot_folego_g",
@@ -252,8 +272,16 @@
           "buy": 200
         },
         {
+          "id": "pot_mana_m",
+          "buy": 90
+        },
+        {
           "id": "pot_folego_m",
           "buy": 80
+        },
+        {
+          "id": "pot_mana_g",
+          "buy": 230
         },
         {
           "id": "pot_folego_g",
@@ -369,8 +397,16 @@
           "buy": 200
         },
         {
+          "id": "pot_mana_m",
+          "buy": 90
+        },
+        {
           "id": "pot_folego_m",
           "buy": 80
+        },
+        {
+          "id": "pot_mana_g",
+          "buy": 230
         },
         {
           "id": "pot_folego_g",

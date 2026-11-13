@@ -16,6 +16,8 @@ var quests: Dictionary = {}
 var flags: Dictionary = {}
 ## Quest shown in the HUD tracker.
 var tracked_quest: String = ""
+## The quest list on the side of the screen is folded away (header tapped).
+var tracker_hidden: bool = false
 ## Rest point id -> unix time when it heals again (real time, so it also counts offline).
 var rest_ready_at: Dictionary = {}
 ## The hero's bag (potions, materials, items).
@@ -26,6 +28,14 @@ var gear: Equipment = Equipment.new()
 var routine: Routine = Routine.new()
 ## "easy", "normal" or "hard" (GDD 6.10); chosen on Novo jogo, can only go down in town.
 var difficulty: String = "normal"
+## Seconds actually played (the Extreme difficulty's monsters grow with it).
+var play_seconds: float = 0.0
+## Difficulty picked on the sign in front of each dungeon (0 normal, 1, 2; see Bounties).
+var dungeon_tier: Dictionary = {}
+## Quest boards in front of the dungeons: {map: {"day", "done", "active"}}.
+var boards: Dictionary = {}
+## Wanted bosses of the cities: {city: {"day", "map", "pos", "done"}}.
+var wanted: Dictionary = {}
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
 ## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
@@ -40,8 +50,9 @@ var store_tokens: Array = []
 var day_hour: float = 9.0
 ## Sword every new hero starts with.
 const STARTER_WEAPON: String = "eq_espada_aprendiz"
-## Potion chosen for each quick slot on the screen (data/items "quick_slots").
-var quick_slots: Dictionary = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
+## Potion put in each of the 3 shortcuts on the screen (any potion in any slot, chosen in
+## the bag; owner, 13/11). "" = empty.
+var potion_slots: Array[String] = ["pot_vida_p", "pot_mana_p", "pot_folego_p"]
 ## Dungeons whose boss was called back by the entrance sign: {map_id: true}.
 var dungeon_resets: Dictionary = {}
 ## Where the hero went into a house ({"map", "x", "z", "yaw", "key"}) and when each
@@ -60,9 +71,10 @@ func reset() -> void:
 	house_return = {}
 	vase_ready_at.clear()
 	tracked_quest = ""
+	tracker_hidden = false
 	inventory.clear()
 	gear.clear()
-	quick_slots = {"vida": "pot_vida_p", "folego": "pot_folego_p", "reforco": "pot_forca"}
+	potion_slots.assign(Data.items_config.get("potion_slots", ["pot_vida_p", "pot_mana_p", "pot_folego_p"]))
 	rest_ready_at.clear()
 	xp_boost_until = 0.0
 	premium_until = 0.0
@@ -71,6 +83,10 @@ func reset() -> void:
 	store_tokens = []
 	routine.reset()
 	difficulty = "normal"
+	play_seconds = 0.0
+	dungeon_tier = {}
+	boards = {}
+	wanted = {}
 	day_hour = float(Data.daynight.get("start_hour", 9.0))
 
 
@@ -127,12 +143,13 @@ func add_item(id: String, amount: int = 1) -> int:
 func to_dict() -> Dictionary:
 	return {
 		"current_map": current_map, "activated": activated, "last_rest": last_rest,
-		"quests": quests, "flags": flags, "tracked_quest": tracked_quest,
+		"quests": quests, "flags": flags, "tracked_quest": tracked_quest, "tracker_hidden": tracker_hidden,
 		"inventory": inventory.to_array(), "gear": gear.to_dict(), "next_uid": inventory.next_uid,
-		"quick_slots": quick_slots, "xp_boost_until": xp_boost_until,
+		"potion_slots": potion_slots, "xp_boost_until": xp_boost_until,
 		"premium_until": premium_until, "skins_owned": skins_owned, "skin": skin,
 		"store_tokens": store_tokens,
-		"routine": routine.to_dict(), "difficulty": difficulty, "rest_ready_at": rest_ready_at,
+		"routine": routine.to_dict(), "difficulty": difficulty, "play_seconds": play_seconds,
+		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "rest_ready_at": rest_ready_at,
 		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
@@ -148,6 +165,7 @@ func from_dict(d: Dictionary) -> void:
 	house_return = (d.get("house_return", {}) as Dictionary).duplicate()
 	vase_ready_at = (d.get("vase_ready_at", {}) as Dictionary).duplicate()
 	tracked_quest = str(d.get("tracked_quest", ""))
+	tracker_hidden = bool(d.get("tracker_hidden", false))
 	inventory.from_array(d.get("inventory", []))
 	# Saves from before the bag (4.x) kept materials apart: move them in.
 	for key: String in (d.get("materials", {}) as Dictionary):
@@ -160,7 +178,13 @@ func from_dict(d: Dictionary) -> void:
 	# Saves from before equipment (5.2 and older) get the apprentice sword.
 	if not d.has("gear"):
 		give_starter_gear()
-	quick_slots.merge(d.get("quick_slots", {}), true)
+	var ps: Array = d.get("potion_slots", [])
+	if ps.is_empty() and d.has("quick_slots"):
+		# Saves from before 0.3.1: health and tonic stay, the middle one becomes MP.
+		var old: Dictionary = d["quick_slots"]
+		ps = [str(old.get("vida", "pot_vida_p")), "pot_mana_p", str(old.get("reforco", "pot_forca"))]
+	if ps.size() == 3:
+		potion_slots.assign(ps.map(func(x: Variant) -> String: return str(x)))
 	rest_ready_at = d.get("rest_ready_at", {})
 	xp_boost_until = float(d.get("xp_boost_until", 0.0))
 	premium_until = float(d.get("premium_until", 0.0))
@@ -172,7 +196,11 @@ func from_dict(d: Dictionary) -> void:
 	routine.from_dict(d.get("routine", {}))
 	day_hour = fposmod(float(d.get("day_hour", day_hour)), 24.0)
 	difficulty = str(d.get("difficulty", "normal"))
-	if not ["easy", "normal", "hard"].has(difficulty):
+	play_seconds = float(d.get("play_seconds", 0.0))
+	dungeon_tier = (d.get("dungeon_tier", {}) as Dictionary).duplicate(true)
+	boards = (d.get("boards", {}) as Dictionary).duplicate(true)
+	wanted = (d.get("wanted", {}) as Dictionary).duplicate(true)
+	if not ["easy", "normal", "hard", "extreme"].has(difficulty):
 		difficulty = "normal"
 	# JSON brings numbers back as floats; quest counters are ints.
 	for id: String in quests:
@@ -183,6 +211,34 @@ func from_dict(d: Dictionary) -> void:
 		for i: Variant in q.get("picked", []):
 			picked.append(int(i))
 		q["picked"] = picked
+
+
+func dungeon_tier_of(map_id: String) -> int:
+	return int(dungeon_tier.get(map_id, 0))
+
+
+## Extreme difficulty: monsters everywhere are at least this level. It is the level an
+## average hero reaches in half the time played (progression.json "world_growth").
+func world_level() -> int:
+	if not bool(((Data.progression.get("difficulty", {}) as Dictionary).get(difficulty, {}) as Dictionary).get("world_growth", false)):
+		return 1
+	var g: Dictionary = Data.progression.get("world_growth", {})
+	var cap: int = int(Data.progression.get("level_cap", 100))
+	var minutes: float = play_seconds / 60.0 * float(g.get("rate", 0.5))
+	var base: float = float(g.get("base_min", 4.0))
+	var power: float = float(g.get("power", 1.5))
+	var sum_pow: float = 0.0
+	for l: int in range(1, cap):
+		sum_pow += pow(l, power)
+	var c: float = (float(g.get("total_hours", 30)) * 60.0 - base * (cap - 1)) / sum_pow
+	var level: int = 1
+	while level < cap:
+		var need: float = base + c * pow(level, power)
+		if minutes < need:
+			break
+		minutes -= need
+		level += 1
+	return level
 
 
 ## Multipliers of the chosen difficulty: hp, atk, xp, drops, death.

@@ -72,6 +72,14 @@ const SHEETS: Dictionary = {
 		"", "", "", "",
 		"", "", "", "",
 	],
+	# 13/11: MP potions, the quest board and the wanted poster (icons for the boards);
+	# the herbs and the mortar are kept for the herb gathering planned for later.
+	"ui_itens_pocoes_mp": [
+		"pot_mana_p", "pot_mana_m", "pot_mana_g", "ui_quadro",
+		"ui_procurado", "ui_trofeu", "ui_extrema", "",
+		"", "", "", "",
+		"", "", "", "",
+	],
 	# "" = not used yet (map, options, skills, attributes, equipment, achievements,
 	# travel, gift, title, forge, portal); the anvil and the portal need a better cut.
 	"ui_menu": [

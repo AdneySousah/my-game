@@ -51,7 +51,7 @@
       "pos": [-34, -10],
       "yaw": 70,
       "gold": 520,
-      "items": {"pot_vida_m": 3, "pot_folego_m": 3, "gema_topazio_1": 2}
+      "items": {"pot_vida_m": 3, "pot_mana_m": 3, "gema_topazio_1": 2}
     },
     {
       "id": "dunas_bau_2",

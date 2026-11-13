@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cefcg8w0jp07e"
-path="res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.ctex"
+path.s3tc="res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.s3tc.ctex"
+path.etc2="res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "ab4e074090a2fea76138e970bda341e5"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/weapons/wpn_khopesh/wpn_khopesh_0.png"
-dest_files=["res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.ctex"]
+dest_files=["res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.s3tc.ctex", "res://.godot/imported/wpn_khopesh_0.png-9fcb5da3576ab1cdd091eaab251e0d73.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

@@ -176,7 +176,7 @@ func _refresh() -> void:
 	_name.text = tr(str(sk["name"]))
 	_name.add_theme_color_override("font_color", Color(str(sk.get("color", "#ffffff"))))
 	_desc.text = tr(str(sk["desc"]))
-	_cost.text = tr("SKILL_COST") % [int(sk.get("stamina_cost", 0)), int(sk.get("cooldown", 0))]
+	_cost.text = tr("SKILL_COST") % [int(sk.get("mp_cost", 0)), int(sk.get("cooldown", 0))]
 	_pick.visible = open
 	if not open:
 		_cost.text += "   ·   " + tr("SKILLS_LOCKED_AT") % int(sk["unlock_level"])

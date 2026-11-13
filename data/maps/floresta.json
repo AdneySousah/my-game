@@ -56,7 +56,7 @@
       "pos": [30, -30],
       "yaw": -30,
       "gold": 60,
-      "items": {"pot_vida_p": 3, "pot_folego_p": 2, "eq_botas_comum": 1}
+      "items": {"pot_vida_p": 3, "pot_mana_p": 2, "eq_botas_comum": 1}
     },
     {
       "id": "floresta_bau_2",

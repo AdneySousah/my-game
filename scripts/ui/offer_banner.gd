@@ -7,6 +7,7 @@ extends CanvasLayer
 signal closed
 
 const PRODUCT: String = "premium_7d_oferta"
+const ART: String = "res://assets/ui/art/oferta_banner.webp"
 
 var _was_paused: bool = false
 
@@ -32,39 +33,59 @@ func _ready() -> void:
 	add_child(dim)
 	var center := CenterContainer.new()
 	center.set_anchors_preset(Control.PRESET_FULL_RECT)
+	center.theme = GameTheme.get_theme()
 	add_child(center)
+	# The picture fills the panel (Lio showing his strength, owner 13/11); the words sit on
+	# its calmer left side.
 	var panel := PanelContainer.new()
-	panel.custom_minimum_size = Vector2(620, 0)
 	center.add_child(panel)
+	var stack := Control.new()
+	stack.custom_minimum_size = Vector2(960, 535)
+	panel.add_child(stack)
+	var art := TextureRect.new()
+	art.texture = load(ART)
+	art.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	art.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	art.set_anchors_preset(Control.PRESET_FULL_RECT)
+	stack.add_child(art)
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 12)
-	panel.add_child(box)
+	box.position = Vector2(34, 34)
+	box.size = Vector2(480, 470)
+	box.add_theme_constant_override("separation", 14)
+	stack.add_child(box)
 	var title := Label.new()
 	title.text = tr("OFFER_TITLE")
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	title.add_theme_font_size_override("font_size", 30)
+	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	title.add_theme_font_size_override("font_size", 42)
 	title.add_theme_color_override("font_color", Color("#ffd23f"))
+	title.add_theme_color_override("font_outline_color", Color(0.15, 0.08, 0.0))
+	title.add_theme_constant_override("outline_size", 12)
 	box.add_child(title)
-	var row := HBoxContainer.new()
-	row.add_theme_constant_override("separation", 14)
-	box.add_child(row)
-	var icon := ItemSlot.new()
-	icon.item_id = str(Store.product(PRODUCT).get("icon", "trevo_real"))
-	icon.custom_minimum_size = Vector2(84, 84)
-	icon.disabled = true
-	row.add_child(icon)
 	var text := Label.new()
 	text.text = tr("OFFER_TEXT") % Store.price_text(PRODUCT)
 	text.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	text.custom_minimum_size = Vector2(480, 0)
-	text.add_theme_font_size_override("font_size", 19)
-	row.add_child(text)
+	text.add_theme_font_size_override("font_size", 22)
+	text.add_theme_color_override("font_outline_color", Color(0, 0, 0, 0.85))
+	text.add_theme_constant_override("outline_size", 8)
+	box.add_child(text)
+	var price := Label.new()
+	price.text = Store.price_text(PRODUCT)
+	price.add_theme_font_size_override("font_size", 54)
+	price.add_theme_color_override("font_color", Color("#7cff6b"))
+	price.add_theme_color_override("font_outline_color", Color(0, 0.12, 0))
+	price.add_theme_constant_override("outline_size", 14)
+	box.add_child(price)
+	var spacer := Control.new()
+	spacer.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	box.add_child(spacer)
 	var buttons := HBoxContainer.new()
 	buttons.add_theme_constant_override("separation", 12)
 	box.add_child(buttons)
 	var yes := Button.new()
 	yes.text = tr("OFFER_BUY") % Store.price_text(PRODUCT)
-	yes.custom_minimum_size = Vector2(0, 52)
+	yes.custom_minimum_size = Vector2(0, 60)
+	yes.add_theme_font_size_override("font_size", 24)
+	yes.add_theme_color_override("font_color", Color("#ffe36a"))
 	yes.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	yes.pressed.connect(func() -> void:
 		Store.buy(PRODUCT)
@@ -72,7 +93,7 @@ func _ready() -> void:
 	buttons.add_child(yes)
 	var no := Button.new()
 	no.text = tr("OFFER_LATER")
-	no.custom_minimum_size = Vector2(0, 52)
+	no.custom_minimum_size = Vector2(0, 60)
 	no.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	no.pressed.connect(_close)
 	buttons.add_child(no)

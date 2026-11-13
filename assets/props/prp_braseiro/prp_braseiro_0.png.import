@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dodo58qp6lon"
-path="res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.ctex"
+path.s3tc="res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "f82436a2d4eb63bc20180b9bcb1eacd4"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_braseiro/prp_braseiro_0.png"
-dest_files=["res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.ctex"]
+dest_files=["res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.s3tc.ctex", "res://.godot/imported/prp_braseiro_0.png-b7a83ecca52c3f264fad3af8c641e88e.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

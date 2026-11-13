@@ -37,7 +37,7 @@
       "pos": [27, -14],
       "yaw": -60,
       "gold": 40,
-      "items": {"pot_vida_p": 3, "pot_folego_p": 2, "eq_cinto_comum": 1}
+      "items": {"pot_vida_p": 3, "pot_mana_p": 2, "eq_cinto_comum": 1}
     }
   ],
   "rest_points": [

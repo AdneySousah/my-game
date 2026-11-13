@@ -6,7 +6,7 @@ HUD_ATTACK,Atacar,Attack
 HUD_DODGE,Esquiva,Dodge
 HUD_SPRINT,Correr,Run
 HUD_NO_STAMINA,Sem fôlego!,Out of stamina!
-SKILL_COST,%d de fôlego · recarga %ds,%d stamina · %ds cooldown
+SKILL_COST,%d de MP · recarga %ds,%d MP · %ds cooldown
 HUD_ATTRIBUTES,Atributos (C),Attributes (C)
 HUD_SKILLS,Skills (K),Skills (K)
 HUD_DEBUG_LEVEL,+1 nível (F1),+1 level (F1)
@@ -27,7 +27,7 @@ ATTR_FOC,Foco,Focus
 ATTR_STR_DESC,+2 de ataque e +0.3% de dano crítico,+2 attack and +0.3% critical damage
 ATTR_VIT_DESC,"+15 de vida, +1 de defesa e +1 de fôlego máximo","+15 health, +1 defense and +1 max stamina"
 ATTR_AGI_DESC,"+0.3% de velocidade de ataque, +0.1% de crítico e de esquiva, +0.1/s de fôlego","+0.3% attack speed, +0.1% critical and evade chance, +0.1/s stamina"
-ATTR_FOC_DESC,-0.15% de recarga das skills e +0.2% de dano delas,-0.15% skill cooldown and +0.2% skill damage
+ATTR_FOC_DESC,"-0.15% de recarga das skills, +0.2% de dano delas, +2 de MP e +0.03/s de MP","-0.15% skill cooldown, +0.2% skill damage, +2 MP and +0.03/s MP"
 STAT_SUMMARY,Vida %d · Ataque %d · Defesa %d · Crítico %.1f%%,Health %d · Attack %d · Defense %d · Crit %.1f%%
 SKILL_CORTE_GIRATORIO,Corte Giratório,Whirling Slash
 SKILL_CORTE_GIRATORIO_DESC,Gira a espada e acerta tudo ao redor duas vezes.,Spins the sword and hits everything around twice.
@@ -51,7 +51,7 @@ CHECKPOINT,Ponto de descanso,Rest point
 HUD_TRAVEL,Viajar,Travel
 PANEL_TRAVEL,Viajar para…,Travel to…
 HUD_REST_ACTIVATED,Ponto de descanso ativado: %s,Rest point activated: %s
-HUD_RESTED,Vida e fôlego recuperados,Health and stamina restored
+HUD_RESTED,"Vida, MP e fôlego recuperados","Health, MP and stamina restored"
 MAP_ARENA,Arena de treino,Training arena
 MAP_PRADOLUZ,Pradoluz,Pradoluz
 MAP_FLORESTA,Floresta Sussurrante,Whispering Forest
@@ -97,7 +97,7 @@ HUD_BAG,Mochila (B),Bag (B)
 HUD_BAG_FULL,Mochila cheia!,Bag full!
 BAG_TITLE,Mochila  %d/%d   ·   %d de ouro,Bag  %d/%d   ·   %d gold
 BAG_USE,Usar,Use
-BAG_QUICK,Pôr no atalho,Put on shortcut
+BAG_QUICK,Atalho:,Shortcut:
 BAG_QUICK_ON,No atalho,On shortcut
 BAG_PICK,Toque num item,Tap an item
 BAG_OWNED,Você tem: %d,You have: %d
@@ -280,8 +280,8 @@ DIFF_NORMAL,Normal,Normal
 DIFF_HARD,Difícil,Hard
 DIFF_EASY_DESC,Inimigos com 25% menos vida e dano; perder uma luta custa metade.,Enemies have 25% less health and damage; losing a fight costs half.
 DIFF_NORMAL_DESC,Como o jogo foi pensado.,As the game was designed.
-DIFF_HARD_DESC,Inimigos 40% mais fortes; 25% mais XP e mais itens.,Enemies 40% stronger; 25% more XP and more items.
-DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumentar.","You can lower it later (in Options, in a town), but not raise it."
+DIFF_HARD_DESC,Inimigos 40% mais fortes. Só mais difícil: sem XP ou itens a mais.,Enemies 40% stronger. Just harder: no extra XP or items.
+DIFF_NOTE,"Dá para diminuir depois (em Opções, numa cidade), mas não aumentar. A dificuldade não muda a XP nem os itens.","You can lower it later (in Options, in a town), but not raise it. Difficulty does not change XP or items."
 DIFF_NOW,Dificuldade: %s,Difficulty: %s
 DIFF_LOWER,Mudar para %s,Change to %s
 DIFF_ONLY_TOWN,Só dá para mudar numa cidade,Only in a town
@@ -364,7 +364,7 @@ LOAD_TIP_5,Dica: o ferreiro melhora suas armas e encaixa gemas nas peças.,Tip: 
 LOAD_TIP_6,Dica: inimigos muito abaixo do seu nível dão menos experiência.,Tip: enemies far below your level give less experience.
 LOAD_TIP_7,Dica: as missões diárias renovam todo dia e dão ouro e itens.,Tip: daily missions renew every day and give gold and items.
 LOAD_TIP_8,"Dica: poções de reforço aumentam ataque, defesa ou velocidade por um tempo.","Tip: boost potions raise attack, defense or speed for a while."
-LOAD_TIP_9,"Dica: segure Correr para ir mais rápido, mas fique de olho no fôlego.","Tip: hold Run to go faster, but keep an eye on your stamina."
+LOAD_TIP_9,Dica: as skills gastam MP; cada golpe básico que acerta devolve um pouco.,Tip: skills cost MP; every basic hit that lands gives some back.
 LOAD_TIP_10,Dica: converse com os moradores. Alguns têm missões e histórias para contar.,Tip: talk to the villagers. Some have quests and stories to tell.
 LOAD_TIP_11,Dica: você pode fazer carinho nos animais da cidade.,Tip: you can pet the animals in town.
 LOAD_TIP_12,Dica: os ícones ao lado do retrato mostram os efeitos ativos e quanto tempo falta. Toque neles!,Tip: the icons next to the portrait show active effects and how long they last. Tap them!
@@ -633,6 +633,72 @@ OFFER_TITLE,Oferta de boas-vindas!,Welcome offer!
 OFFER_TEXT,"Passe premium de 7 dias por %s, só na sua primeira compra: experiência em dobro, ouro em dobro e +10%% em todos os atributos.","7-day premium pass for %s, only on your first purchase: double experience, double gold and +10%% on every attribute."
 OFFER_BUY,Quero! (%s),I want it! (%s)
 OFFER_LATER,Agora não,Not now
+STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
+STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
+STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
+STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
+STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
+STO_FINAL_END,A história continua...,The story continues...
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+DUNGEON_INFERNAL_SIGN,Modo Infernal,Infernal Mode
+DUNGEON_INFERNAL_DONE,Modo Infernal! O chefe voltou no nível %d.,Infernal Mode! The boss is back at level %d.
+HUD_INFERNAL,Infernal (E),Infernal (E)
+HUD_INFERNAL_TAP,Infernal,Infernal
+SET_CHAMA_RUBRA,Conjunto da Chama Rubra,Crimson Flame Set
+SET_HERDEIRO_CELESTE,Conjunto do Herdeiro Celeste,Celestial Heir Set
+SET_LOOK_HINT,"Com as 5 peças, o Lio veste a armadura do conjunto.","With all 5 pieces, Lio wears the set's armor."
+ACH_FLAG_SAHRA_DEFEATED,Derrote a Sahra no alto da Torre,Defeat Sahra at the top of the Tower
+ACH_FLAG_BRANNOC_DEFEATED,Derrote o Brannoc no Castelo,Defeat Brannoc in the Castle
+ACH_FLAG_VELYRA_DEFEATED,Derrote a Velyra no Topo da Torre,Defeat Velyra at the Top of the Tower
+ACH_FLAG_CASSIAN_DEFEATED,Derrote o Cassian no Castelo do Arauto,Defeat Cassian in the Herald's Castle
+ACH_FLAG_VAELOR_DEFEATED,Derrote o Vaelor na Cidadela Celeste,Defeat Vaelor in the Celestial Citadel
+ACH_FLAG_GAME_COMPLETE,Termine a história do jogo,Finish the game's story
+ACH_INFERNAL,Vença %d chefes no Modo Infernal,Beat %d bosses in Infernal Mode
+ACH_INFERNAL_CIDADELA,Vença o Vaelor no Modo Infernal (nível 100),Beat Vaelor in Infernal Mode (level 100)
+ACH_CRAFT_MYTHIC,Crie uma peça mítica na forja,Craft a mythic piece at the forge
+ACH_CRAFT_CELESTIAL,Crie uma peça celestial na forja,Craft a celestial piece at the forge
+HUD_LOOT_GOLD,%d de ouro,%d gold
+HUD_NO_MP,Sem MP!,Out of MP!
+HUD_MP,MP,MP
+STAT_MAX_MP,MP,MP
+STAT_MP_REGEN,Recuperação de MP,MP recovery
+ATTRS_MAX_MP,MP máximo,Max MP
+STO_FINAL_1,A máscara dourada caiu. Por baixo dela estava o rosto que Lio nunca tinha visto: o do pai.,The golden mask fell. Beneath it was the face Lio had never seen: his father's.
+STO_FINAL_2,"Livre por um instante, Doran abraçou o filho e pediu perdão por cada ano perdido.","Free for a moment, Doran embraced his son and asked forgiveness for every lost year."
+STO_FINAL_3,Mas o Sem-Rosto arrancou o que restava do poder de Vaelor e fugiu por uma fenda além do céu.,But the Faceless tore away what was left of Vaelor's power and fled through a rift beyond the sky.
+STO_FINAL_4,"Lá embaixo, as cinco cidades acordaram livres: trigo, água, calor, canto e riso de novo.","Far below, the five cities woke up free: wheat, water, warmth, song and laughter once more."
+STO_FINAL_5,"E, numa noite tranquila em Pradoluz, algo muito maior abriu os olhos entre as estrelas e olhou para Varenthia.","And on a quiet night in Pradoluz, something much greater opened its eyes among the stars and looked at Varenthia."
+STO_FINAL_END,A história continua...,The story continues...
+STO_CASSIAN_1,"O Colosso se partiu em mil pedaços de luz dourada. No portão, o Severin ainda segurava a porta.","The Colossus broke into a thousand pieces of golden light. At the gate, Severin was still holding the door."
+STO_CASSIAN_2,"Ao amanhecer, Altaréa rasgou cada decreto. Pela primeira vez em anos, a praça riu alto.","At dawn, Altaréa tore down every decree. For the first time in years, the square laughed out loud."
+STO_CASSIAN_3,"E sobre o castelo surgiu uma escada de luz, subindo até a Cidadela Celeste. O caminho até o Vaelor estava aberto.","And above the castle a stairway of light appeared, climbing up to the Celestial Citadel. The way to Vaelor was open."
+STO_VELYRA_1,"Os espinhos da Dríade viraram pó. Velyra caiu de joelhos, e as flores roxas murcharam com ela.","The Dryad's thorns turned to dust. Velyra fell to her knees, and the purple flowers withered with her."
+STO_VELYRA_2,"Lá embaixo, uma onda de luz subiu pelas raízes da Árvore-Mãe. Os galhos cinzentos se encheram de flores.","Far below, a wave of light rose through the roots of the Mother Tree. The grey branches filled with blossoms."
+STO_VELYRA_3,"Naquela noite, Lys'Thaël cantou de novo. E ninguém pediu silêncio.","That night, Lys'Thaël sang again. And no one asked for silence."
+STO_SEVERIN_1,"Na beira da água, três crianças élficas cantavam baixinho. A Velyra ergueu o chicote de espinhos. Lio se jogou na frente.","By the water, three elf children were singing softly. Velyra raised her whip of thorns. Lio threw himself in front of them."
+STO_SEVERIN_2,"Severin ficou de joelhos na lama, olhando para as próprias mãos. Pela primeira vez, a ordem dos deuses pareceu errada.","Severin knelt in the mud, staring at his own hands. For the first time, the gods' order seemed wrong."
+STO_BENTO_1,"No último golpe do gigante, Lio caiu na neve. E Bento, que tinha medo até de lagartixa, correu para a frente dele.","With the giant's last blow, Lio fell in the snow. And Bento, who was afraid of even a lizard, ran in front of him."
+STO_BENTO_2,"""Não chora, Lio... come direito, tá? E guarda o meu cachecol."" O gelo do Arauto se partiu. O coração de Bento parou.","""Don't cry, Lio... eat properly, okay? And keep my scarf."" The Herald's ice shattered. Bento's heart stopped."
+STO_BENTO_3,"Naquela noite, todas as chaminés de Hrimvald voltaram a soltar fumaça. Só uma panela ficou fria, ao pé de uma cruz na colina.","That night, every chimney in Hrimvald smoked again. Only one pot stayed cold, at the foot of a cross on the hill."
+STO_BENTO_4,"Lio subiu as montanhas sozinho. Treinou com a neve, com o sol e com as folhas caindo. Nunca mais seria lento demais.","Lio climbed the mountains alone. He trained through snow, sun and falling leaves. He would never be too slow again."
+STO_BENTO_LATER,Dois anos depois...,Two years later...
+HUD_QUESTS_HEADER,Missões (%d),Quests (%d)
+TRAVEL_YOU_ARE_HERE,Você está aqui,You are here
+DIFF_EXTREME,Extrema,Extreme
+DIFF_EXTREME_DESC,Inimigos 80% mais fortes e o mundo não espera: os monstros sobem de nível com o tempo de jogo (na metade do ritmo médio do herói).,Enemies 80% stronger and the world won't wait: monsters level up with the time played (at half the hero's average pace).
+EXTREME_WORLD_UP,O mundo ficou mais perigoso: monstros agora no nível %d ou mais.,The world grew more dangerous: monsters are now level %d or higher.
 NPC_LIO,Lio,Lio
 NPC_MARTA,Marta,Marta
 NPC_BRAM,Mestre Bram,Master Bram
@@ -895,6 +961,10 @@ TITLE_LENDA_VIVA,Lenda viva,Living Legend
 TITLE_DESAFIANTE_INFERNO,Desafiante do Inferno,Hell Challenger
 TITLE_CACADOR_INFERNAL,Caçador infernal,Infernal Hunter
 TITLE_SENHOR_INFERNO,Senhor do Inferno,Lord of Hell
+TITLE_CACADOR_RECOMPENSAS,Caçador de Recompensas,Bounty Hunter
+TITLE_TERROR_PROCURADOS,Terror dos Procurados,Terror of the Wanted
+TITLE_PRESTATIVO,Prestativo,Helpful
+TITLE_HEROI_DO_POVO,Herói do Povo,Hero of the People
 TITLE_ALEM_DOS_CEUS,Além dos Céus,Beyond the Heavens
 TITLE_FORJA_RUBRA,Forja rubra,Crimson Forge
 TITLE_FORJA_CELESTE,Forja celeste,Celestial Forge
@@ -906,7 +976,11 @@ ITEM_POT_VIDA_DESC,"Recupera vida aos poucos, em 2 segundos.",Restores health ov
 ITEM_POT_FOLEGO_P,Poção de fôlego pequena,Small stamina potion
 ITEM_POT_FOLEGO_M,Poção de fôlego média,Medium stamina potion
 ITEM_POT_FOLEGO_G,Poção de fôlego grande,Large stamina potion
-ITEM_POT_FOLEGO_DESC,Recupera o fôlego para esquivas e skills.,Restores stamina for dodges and skills.
+ITEM_POT_FOLEGO_DESC,Recupera o fôlego para esquivas e corrida.,Restores stamina for dodges and running.
+ITEM_POT_MANA_P,Poção de MP pequena,Small MP potion
+ITEM_POT_MANA_M,Poção de MP média,Medium MP potion
+ITEM_POT_MANA_G,Poção de MP grande,Large MP potion
+ITEM_POT_MANA_DESC,Recupera o MP para usar as skills.,Restores MP to use skills.
 ITEM_POT_FORCA,Tônico da força,Tonic of strength
 ITEM_POT_FORCA_DESC,+20% de ataque por 90 segundos.,+20% attack for 90 seconds.
 ITEM_POT_PEDRA,Tônico da pedra,Tonic of stone
@@ -1407,20 +1481,43 @@ DLG_TOBIAS_IDLE_1,A f-forja está fria. Um ferreiro sem fogo é só um homem com
 DLG_NINA_IDLE_1,"Não conta para ninguém do trigo, tá?","Don't tell anyone about the wheat, okay?"
 DLG_NINA_IDLE_HAPPY_1,"A vó parou de tossir! Ela disse que você é um herói. Eu disse que você é meio bobo, mas é herói.","Grandma stopped coughing! She said you're a hero. I said you're a bit silly, but a hero."
 DLG_JUCA_IDLE_1,No meu tempo o tributo era um saco de trigo por ano. Agora levam até o saco.,Back in my day the tribute was one sack of wheat a year. Now they take the sack too.
-DUNGEON_INFERNAL_SIGN,Modo Infernal,Infernal Mode
-DUNGEON_INFERNAL_DONE,Modo Infernal! O chefe voltou no nível %d.,Infernal Mode! The boss is back at level %d.
-HUD_INFERNAL,Infernal (E),Infernal (E)
-HUD_INFERNAL_TAP,Infernal,Infernal
-SET_CHAMA_RUBRA,Conjunto da Chama Rubra,Crimson Flame Set
-SET_HERDEIRO_CELESTE,Conjunto do Herdeiro Celeste,Celestial Heir Set
-SET_LOOK_HINT,"Com as 5 peças, o Lio veste a armadura do conjunto.","With all 5 pieces, Lio wears the set's armor."
-ACH_FLAG_SAHRA_DEFEATED,Derrote a Sahra no alto da Torre,Defeat Sahra at the top of the Tower
-ACH_FLAG_BRANNOC_DEFEATED,Derrote o Brannoc no Castelo,Defeat Brannoc in the Castle
-ACH_FLAG_VELYRA_DEFEATED,Derrote a Velyra no Topo da Torre,Defeat Velyra at the Top of the Tower
-ACH_FLAG_CASSIAN_DEFEATED,Derrote o Cassian no Castelo do Arauto,Defeat Cassian in the Herald's Castle
-ACH_FLAG_VAELOR_DEFEATED,Derrote o Vaelor na Cidadela Celeste,Defeat Vaelor in the Celestial Citadel
-ACH_FLAG_GAME_COMPLETE,Termine a história do jogo,Finish the game's story
-ACH_INFERNAL,Vença %d chefes no Modo Infernal,Beat %d bosses in Infernal Mode
-ACH_INFERNAL_CIDADELA,Vença o Vaelor no Modo Infernal (nível 100),Beat Vaelor in Infernal Mode (level 100)
-ACH_CRAFT_MYTHIC,Crie uma peça mítica na forja,Craft a mythic piece at the forge
-ACH_CRAFT_CELESTIAL,Crie uma peça celestial na forja,Craft a celestial piece at the forge
+DTIER_0,Normal,Normal
+DTIER_1,Desafio,Challenge
+DTIER_2,Pesadelo,Nightmare
+DTIER_0_DESC,Como a masmorra é.,The dungeon as it is.
+DTIER_1_DESC,Monstros com 50% mais vida e 30% mais dano. Itens caem 50% mais e o ouro rende 40% mais.,Monsters with 50% more health and 30% more damage. Items drop 50% more often and gold is 40% higher.
+DTIER_2_DESC,Monstros com mais que o dobro de vida e 70% mais dano. Itens caem o dobro e o ouro rende 80% mais.,Monsters with over double health and 70% more damage. Items drop twice as often and gold is 80% higher.
+DTIER_SIGN,Dificuldade: %s,Difficulty: %s
+DTIER_TITLE,Dificuldade: %s,Difficulty: %s
+DTIER_INFO,Escolha como a masmorra vai estar quando você entrar. Mais difícil = mais chance de itens.,Choose how the dungeon will be when you go in. Harder = better chance of items.
+BOARD_SIGN,Quadro de missões,Quest board
+BOARD_TITLE,Quadro: %s,Board: %s
+BOARD_LEFT,Missões que ainda dá para fazer hoje: %d,Jobs you can still do today: %d
+BOARD_ACTIVE,Missão em andamento:,Job in progress:
+BOARD_DONE_TODAY,Por hoje é só. Volte amanhã para novas missões.,That's all for today. Come back tomorrow for new jobs.
+BOARD_REWARD,Prêmio: %d de ouro e um item extra.,Reward: %d gold and one extra item.
+BOARD_ACCEPT,Aceitar,Accept
+BOARD_JOB_HUNT,Derrote %d monstros em %s,Defeat %d monsters in %s
+BOARD_JOB_HUNT_KIND,Derrote %d × %s em %s,Defeat %d × %s in %s
+BOARD_JOB_BOSS,Derrote %s em %s (o chefe volta ao aceitar),Defeat %s in %s (the boss comes back when you accept)
+BOARD_JOB_DONE,Missão do quadro concluída!,Board job done!
+WANTED_SIGN,Procurado,Wanted
+WANTED_TITLE,Procurado em %s,Wanted in %s
+WANTED_INFO,"Visto hoje em: %s. Mais forte que os Arautos, e fica mais forte junto com você. Um por dia.","Seen today in: %s. Stronger than the Heralds, and grows stronger with you. One a day."
+WANTED_REWARD,"Prêmio: muito ouro, Insígnias de Chefe, gemas, Trevo e Broca.","Reward: lots of gold, Boss Insignias, gems, a Clover and a Drill."
+WANTED_DONE,Você já derrotou o Procurado de hoje. Amanhã aparece outro.,You already beat today's wanted boss. Another shows up tomorrow.
+WANTED_BEATEN,Procurado derrotado!,Wanted boss defeated!
+WANTED_FOLLOWING,A seta agora leva ao Procurado.,The arrow now leads to the wanted boss.
+HUD_TIER,Dificuldade (E),Difficulty (E)
+HUD_TIER_TAP,Dificuldade,Difficulty
+HUD_BOARD,Quadro (E),Board (E)
+HUD_BOARD_TAP,Quadro,Board
+HUD_WANTED,Procurado (E),Wanted (E)
+HUD_WANTED_TAP,Procurado,Wanted
+ACH_WANTED,Derrote %d Procurados,Defeat %d wanted bosses
+ACH_BOARD,Conclua %d missões de quadro,Complete %d board jobs
+ENEMY_PROCURADO_PRADOLUZ,Colosso Musgoso,Mossy Colossus
+ENEMY_PROCURADO_QARESSA,Rainha Rubra das Dunas,Crimson Dune Queen
+ENEMY_PROCURADO_HRIMVALD,Titã do Gelo Eterno,Titan of Eternal Ice
+ENEMY_PROCURADO_LYSTHAEL,Fera dos Espinhos Antigos,Beast of the Ancient Thorns
+ENEMY_PROCURADO_ALTAREA,Juiz Sem Nome,The Nameless Judge

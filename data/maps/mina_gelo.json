@@ -95,7 +95,7 @@
     {"id": "guardiao_gelo", "pos": [0, -35], "level": 42, "yaw": 180, "unless_flag": "guardiao_gelo_defeated", "flag_on_death": "guardiao_gelo_defeated"}
   ],
   "chests": [
-    {"id": "mina_gelo_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 1900, "items": {"pot_vida_g": 4, "pot_forca": 1, "eq_pulseira_epico": 1, "mat_lingote_aco": 6}},
-    {"id": "mina_gelo_bau_2", "pos": [16, -34], "yaw": -90, "gold": 2100, "items": {"trevo_real": 1, "mat_cristal_gelo": 4, "eq_espada_epico": 1, "gema_ametista_3": 1}}
+    {"id": "mina_gelo_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 1900, "items": {"pot_vida_g": 4, "pot_forca": 1, "eq_pulseira_raro": 1, "mat_insignia_chefe": 10, "mat_lingote_aco": 6}},
+    {"id": "mina_gelo_bau_2", "pos": [16, -34], "yaw": -90, "gold": 2100, "items": {"trevo_real": 1, "mat_cristal_gelo": 4, "eq_espada_raro": 1, "mat_insignia_chefe": 10, "gema_ametista_3": 1}}
   ]
 }

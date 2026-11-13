@@ -11,13 +11,13 @@ signal closed
 const PANEL_SIZE: Vector2 = Vector2(1256, 696)
 ## Derived stats in the order the player reads them.
 const DERIVED: Array[String] = ["max_hp", "atk", "def", "crit_chance", "crit_dmg", "atk_speed",
-	"evade", "cdr", "skill_dmg", "max_stamina", "stamina_regen"]
+	"evade", "cdr", "skill_dmg", "max_mp", "mp_regen", "max_stamina", "stamina_regen"]
 ## Stored as fractions, shown as percentages.
 const PERCENT: Array[String] = ["crit_chance", "crit_dmg", "atk_speed", "evade", "cdr", "skill_dmg"]
 ## Bonuses over the normal value (shown with "+").
 const SIGNED: Array[String] = ["atk_speed", "skill_dmg"]
 ## Names that read better here than the short gear ones (STAT_*).
-const NAME_KEYS: Dictionary = {"max_stamina": "ATTRS_MAX_STAMINA", "cdr": "ATTRS_CDR"}
+const NAME_KEYS: Dictionary = {"max_stamina": "ATTRS_MAX_STAMINA", "max_mp": "ATTRS_MAX_MP", "cdr": "ATTRS_CDR"}
 const BAR_COLORS: Dictionary = {"str": Color("#e0663c"), "vit": Color("#58c45a"),
 	"agi": Color("#f0c33c"), "foc": Color("#5aa2ff")}
 const UP: Color = Color("#7ee07e")
@@ -512,7 +512,7 @@ func _fmt(stat: String, v: float, signed: bool = false) -> String:
 	var t: String
 	if stat in PERCENT:
 		t = "%.1f%%" % (v * 100.0)
-	elif stat == "stamina_regen":
+	elif stat == "stamina_regen" or stat == "mp_regen":
 		t = "%.1f/s" % v
 	else:
 		t = str(roundi(v))

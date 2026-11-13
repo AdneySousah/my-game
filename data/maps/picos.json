@@ -20,7 +20,7 @@
   ],
   "chests": [
     {"id": "picos_bau_1", "pos": [-32, 18], "yaw": 90, "gold": 1700, "items": {"pot_vida_g": 4, "pot_pedra": 1, "gema_safira_3": 1}},
-    {"id": "picos_bau_2", "pos": [32, 2], "yaw": -90, "gold": 1800, "items": {"pot_folego_g": 3, "trevo": 1, "eq_cinto_epico": 1}}
+    {"id": "picos_bau_2", "pos": [32, 2], "yaw": -90, "gold": 1800, "items": {"pot_mana_g": 3, "trevo": 1, "eq_cinto_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "picos_base", "name": "REST_PICOS_BASE", "pos": [-6, 34], "kind": "fogueira"},

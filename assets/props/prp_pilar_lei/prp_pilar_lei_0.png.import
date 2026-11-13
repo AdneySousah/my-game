@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cw1x44d1n1m57"
-path="res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.ctex"
+path.s3tc="res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "ef989e51b40e98fb265da7188d64b796"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_pilar_lei/prp_pilar_lei_0.png"
-dest_files=["res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.ctex"]
+dest_files=["res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.s3tc.ctex", "res://.godot/imported/prp_pilar_lei_0.png-54e16be701b7257c01d526d22e447510.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

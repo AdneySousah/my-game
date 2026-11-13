@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cc1rywqi6ohca"
-path="res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.ctex"
+path.s3tc="res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.s3tc.ctex"
+path.etc2="res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "ecca6a9f462748eeae27514cd07d5e51"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/enemies/enm_sentinela_celeste/enm_sentinela_celeste_Image_0.png"
-dest_files=["res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.ctex"]
+dest_files=["res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.s3tc.ctex", "res://.godot/imported/enm_sentinela_celeste_Image_0.png-cad87608b4b3a400c901adc3f3ba96a5.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

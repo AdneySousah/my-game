@@ -77,6 +77,11 @@ var _visual: Node3D
 var _rng := RandomNumberGenerator.new()
 var _path: PackedVector3Array = PackedVector3Array()
 var _path_timer: float = 0.0
+## Getting around something it got stuck on (see _check_stuck).
+var _stuck_time: float = 0.0
+var _detour: Vector3 = Vector3.ZERO
+var _detour_time: float = 0.0
+var _detour_side: float = 1.0
 ## Meshy model (null = grey-box capsule).
 var model: CharacterModel
 ## Final bosses: break shield and the arena on their side (see BreakShield, BossGround).
@@ -89,7 +94,8 @@ var _seek_time: float = 0.0
 func setup(id: String, lvl: int, player: Player) -> void:
 	enemy_id = id
 	base_id = id
-	level = maxi(1, lvl)
+	# Extreme difficulty: never below the world level, which rises with the time played.
+	level = maxi(maxi(1, lvl), Session.world_level())
 	target = player
 	data = Data.enemies.get(id, {})
 	var sc: Dictionary = Data.enemy_scaling
@@ -99,11 +105,14 @@ func setup(id: String, lvl: int, player: Player) -> void:
 	if not bool(data.get("boss", false)):
 		# Field and dungeon monsters hit harder than the base numbers (owner's request).
 		atk *= float(sc.get("mob_atk_mult", 1.0))
+	# The difficulty picked on the sign in front of this dungeon (Bounties).
+	max_hp *= Bounties.dungeon_mult("hp")
+	atk *= Bounties.dungeon_mult("atk")
 	defense = float(data.get("def", 0)) * (1.0 + float(sc.get("def", 0.0)) * l)
 	speed = float(data.get("speed", 3.0))
 	is_boss = bool(data.get("boss", false))
 	hp = max_hp
-	var gold_mult: float = 1.0 + float(sc.get("gold", 0.0)) * l
+	var gold_mult: float = (1.0 + float(sc.get("gold", 0.0)) * l) * Bounties.dungeon_mult("gold")
 	gold_reward = roundi(randi_range(int(data.get("gold_min", 1)), int(data.get("gold_max", 2))) * gold_mult)
 	xp_reward = roundi(Data.mob_xp_for(level) * float(data.get("xp_mult", 1.0)))
 
@@ -253,14 +262,23 @@ func _physics_process(delta: float) -> void:
 					_state = State.CHASE
 	elif not _target_alive() and _state == State.WINDUP:
 		_cancel_attack()
+	# Stuck on something (a fence, a house corner, the wheat field's edge): go around it
+	# for a moment instead of pushing the same way (owner, 13/11: the Scarecrow got stuck).
+	if _detour_time > 0.0 and move.length() > 0.1:
+		_detour_time -= delta
+		move = _detour * move.length()
 	velocity = move + _knockback
 	velocity.y = 0.0
 	_knockback = _knockback.move_toward(Vector3.ZERO, 25.0 * delta)
 	move_and_slide()
 	global_position.y = 0.0
+	var real: Vector3 = get_real_velocity()
+	real.y = 0.0
+	_check_stuck(move, real, delta)
 	if model and _state != State.WINDUP and not stunned:
 		var backward: bool = move.length() > 0.2 and move.normalized().dot(_forward()) < -0.3
-		model.update_locomotion(move.length(), _state != State.IDLE, backward)
+		# The walk follows how fast it really goes, so it never walks on the spot.
+		model.update_locomotion(minf(move.length(), real.length()), _state != State.IDLE, backward)
 
 
 # --- Movement and attack choice -----------------------------------------------------
@@ -272,6 +290,35 @@ func _notice() -> void:
 		if is_boss:
 			Audio.play_sfx("roar", global_position)
 		engaged.emit(self)
+
+
+## Wanted to move but barely moved for a while: slide along the wall it hit (or turn
+## aside, changing sides each time) and ask for a fresh path.
+func _check_stuck(move: Vector3, real: Vector3, delta: float) -> void:
+	if move.length() < 0.5 or _detour_time > 0.0:
+		_stuck_time = maxf(0.0, _stuck_time - delta)
+		return
+	if real.length() < move.length() * 0.3:
+		_stuck_time += delta
+	else:
+		_stuck_time = maxf(0.0, _stuck_time - delta * 2.0)
+	if _stuck_time < 0.35:
+		return
+	_stuck_time = 0.0
+	_detour_side = -_detour_side
+	var side: Vector3 = Vector3(-move.z, 0, move.x).normalized() * _detour_side
+	var hit: KinematicCollision3D = get_last_slide_collision()
+	if hit:
+		var n: Vector3 = hit.get_normal()
+		n.y = 0.0
+		var along: Vector3 = move - n * move.dot(n)
+		if along.length() > 0.1:
+			side = along.normalized()
+		side = (side + n.normalized() * 0.4).normalized()
+	_detour = side
+	_detour_time = 0.8
+	_path.clear()
+	_path_timer = 0.0
 
 
 ## Walks to melee range, or keeps a distance band for archers ("keep_distance": [min, max]).
@@ -576,7 +623,7 @@ func _swap_form() -> void:
 	speed = float(data.get("speed", speed))
 	var l: int = level - 1
 	var sc: Dictionary = Data.enemy_scaling
-	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l) * Session.diff("atk")
+	atk = float(data.get("atk", 5)) * (1.0 + float(sc.get("atk", 0.0)) * l) * Session.diff("atk") * Bounties.dungeon_mult("atk")
 	defense = float(data.get("def", 0)) * (1.0 + float(sc.get("def", 0.0)) * l)
 	hp = max_hp * keep_ratio
 	_attack_cds.clear()
@@ -839,7 +886,7 @@ func _build_body() -> void:
 		var body: MeshInstance3D = _visual.get_node("Body")
 		_body_mat = body.material_override
 	_bar.position.y = 2.2 * s
-	if infernal:
+	if infernal or data.has("tint"):
 		_on_status_changed.call_deferred()
 
 
@@ -891,6 +938,9 @@ func _status_color() -> Color:
 		return _base_color.darkened(0.4)
 	if infernal:
 		return _infernal_color()
+	if data.has("tint"):
+		# A boss variant painted in its own colour (the wanted world bosses).
+		return Color(str(data["tint"]))
 	return _base_color
 
 
@@ -899,6 +949,11 @@ func _on_status_changed() -> void:
 		return
 	if model:
 		var c: Color = _status_color()
-		model.set_tint(c, 0.0 if c == _base_color else (0.55 if infernal and c == _infernal_color() else 0.35))
+		var strength: float = 0.35
+		if infernal and c == _infernal_color():
+			strength = 0.55
+		elif data.has("tint") and c == Color(str(data["tint"])):
+			strength = float(data.get("tint_strength", 0.45))
+		model.set_tint(c, 0.0 if c == _base_color else strength)
 		return
 	_body_mat.albedo_color = _status_color()

@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c2pm2r7x85g2v"
-path="res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.ctex"
+path.s3tc="res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.s3tc.ctex"
+path.etc2="res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "81f330b374d516da6b1fbbca6618f16f"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/npcs/npc_nadira/npc_nadira_Image_0.png"
-dest_files=["res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.ctex"]
+dest_files=["res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.s3tc.ctex", "res://.godot/imported/npc_nadira_Image_0.png-4690eec5449702d6e4272ab2fa9a25cd.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

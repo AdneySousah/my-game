@@ -91,7 +91,7 @@ func _refresh_difficulty() -> void:
 	if not in_game:
 		return
 	_diff_label.text = tr("DIFF_NOW") % tr("DIFF_" + Session.difficulty.to_upper())
-	var lower: String = {"hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
+	var lower: String = {"extreme": "hard", "hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
 	var in_town: bool = bool(GameMap.load_data(Session.current_map).get("safe", false))
 	_diff_btn.visible = lower != ""
 	_diff_btn.disabled = not in_town
@@ -99,7 +99,7 @@ func _refresh_difficulty() -> void:
 
 
 func _lower_difficulty() -> void:
-	var lower: String = {"hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
+	var lower: String = {"extreme": "hard", "hard": "normal", "normal": "easy"}.get(Session.difficulty, "")
 	if lower != "" and bool(GameMap.load_data(Session.current_map).get("safe", false)):
 		Session.difficulty = lower
 		_refresh_difficulty()

@@ -33,6 +33,7 @@ func _ready() -> void:
 	await _houses_test()
 	await _final_test()
 	await _postgame_test()
+	await _owner_1311_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -257,7 +258,7 @@ func _stamina_tests(player: Player) -> void:
 	for i: int in 30:
 		await get_tree().physics_frame
 
-	# Not enough fôlego: no dodge, no skill.
+	# Not enough fôlego: no dodge. Not enough MP: no skill.
 	player.stamina = 5.0
 	var pos: Vector3 = player.global_position
 	Input.action_press("dodge")
@@ -266,8 +267,10 @@ func _stamina_tests(player: Player) -> void:
 	for i: int in 10:
 		await get_tree().physics_frame
 	check(player.global_position.distance_to(pos) < 0.5, "no dodge without fôlego")
-	player.stamina = 5.0
-	check(not player.skills.use_slot(0), "no skill without fôlego")
+	player.stamina = player.max_stamina()
+	player.mp = 5.0
+	check(not player.skills.use_slot(0), "no skill without MP")
+	player.mp = player.max_mp()
 
 	# Running is faster and drains fôlego; regen brings it back.
 	player.stamina = player.max_stamina()
@@ -287,7 +290,7 @@ func _stamina_tests(player: Player) -> void:
 	check(player.is_sprinting(), "holding run + moving = sprinting")
 	Input.action_release("sprint")
 	Input.action_release("move_right")
-	check(run > walk * 1.4, "running is faster (walk %.2f m, run %.2f m)" % [walk, run])
+	check(run > walk * 1.25 and run < walk * 1.5, "running is faster, but not too fast (walk %.2f m, run %.2f m)" % [walk, run])
 	check(player.stamina < full - 5.0, "running drains fôlego (%.1f -> %.1f)" % [full, player.stamina])
 	player.stamina = 20.0
 	for i: int in 120:
@@ -907,14 +910,31 @@ func _houses_test() -> void:
 		var vase: Node3D = main.map.vases[0]
 		var gold0: int = main.player.gold
 		var bag0: int = Session.inventory.slots.size()
-		main.player.global_position = vase.global_position + Vector3(0.5, 0, 0)
+		main.player.global_position = vase.global_position + Vector3(0.8, 0, 0)
 		await _frames(4)
-		check(not vase.visible and (main.player.gold > gold0 or Session.inventory.slots.size() > bag0), "touching a pot gives something small")
+		check(main._interact_kind == "pick" and main.player.gold == gold0, "at a pot the hero gets a Pick up button (walking over it takes nothing)")
+		main.talk_to_nearby()
+		for i: int in 200:
+			await _frames(1)
+			if not main._petting:
+				break
+		check(vase.visible and not main.vase_ready(vase) and (main.player.gold > gold0 or Session.inventory.slots.size() > bag0), "picking from a pot gives something small and the pot stays there")
+		check(not (vase.get_node("Spark") as Node3D).visible, "an emptied pot stops sparkling")
 		main.load_map("interior_cima", "from_terreo")
 		await _wait_map(main, "interior_cima")
 		await _frames(3)
 		check(Session.current_map == "interior_cima", "the stairs lead to the bedroom upstairs")
-		main.load_map("__return", "")
+		main.load_map("interior_terreo", "from_cima")
+		await _wait_map(main, "interior_terreo")
+		await _frames(30)
+		# Walk out of the door (owner, 13/11: "não consigo sair").
+		main.player.global_position = Vector3(0, 0, 2.5)
+		for i: int in 150:
+			_press_towards(Vector3(0, 0, 1), main.player.camera_rig.rotation.y)
+			await _frames(1)
+			if Session.current_map == "pradoluz":
+				break
+		_release_all()
 		await _wait_map(main, "pradoluz")
 		await _frames(3)
 		check(Session.current_map == "pradoluz" and main.player.global_position.distance_to(outside) < 1.0, "leaving puts the hero back on the street")
@@ -931,6 +951,155 @@ func _houses_test() -> void:
 
 ## 6.6 post-game: Infernal Mode at the dungeon sign (after the ending), Infernal Essences
 ## for the mythic and celestial recipes, sets with their own look on Lio, new achievements.
+## The owner's playtest on the phone (13/11): quest hunts always have their monsters, the
+## loot list with pictures, up to 3 quests on the side, the Extreme difficulty, the
+## difficulty sign and the quest board in front of the dungeons, the wanted posters and
+## the illustrated travel map.
+func _owner_1311_test() -> void:
+	Session.reset()
+	Main.start_map = "floresta"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var p: Player = main.player
+	# Bento's orc hunt: the camp the arrow points at keeps orcs around, and the arrow
+	# points at the nearest one.
+	Session.quests["main_03"] = {"step": 1, "count": 0, "picked": [], "done": false}
+	for i: int in 300:
+		await _frames(1)
+	var orcs: int = 0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e := n as Enemy
+		if e.base_id == "orc" and e.global_position.distance_to(Vector3(-2, 0, 14)) < 16.0:
+			orcs += 1
+	check(orcs >= 2, "the camp of the orc hunt has orcs (%d)" % orcs)
+	var t: Dictionary = main.quests.target_of("main_03", p.global_position, "floresta")
+	var nearest: Enemy = null
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e := n as Enemy
+		if e.base_id == "orc" and (nearest == null or e.global_position.distance_to(p.global_position) < nearest.global_position.distance_to(p.global_position)):
+			nearest = e
+	var tpos: Vector3 = t["pos"]
+	check(nearest != null and Vector2(tpos.x, tpos.z).distance_to(Vector2(nearest.global_position.x, nearest.global_position.z)) < 0.5, "the hunt arrow points at the nearest orc")
+	Session.quests.erase("main_03")
+	# Loot list: picture, amount, name.
+	main.give_item("pot_vida_p", 2)
+	main.give_item("pot_vida_p", 1)
+	var rows: Array[Dictionary] = main.hud.loot_feed().rows()
+	check(rows.size() >= 1 and str(rows[0]["id"]) == "pot_vida_p" and int(rows[0]["n"]) == 3, "the loot list shows the item with its amount (%s)" % [rows])
+	check(ItemIcon.texture("pot_mana_p") != null, "MP potions have a picture")
+	# Up to 3 quests on the side, with "Seguir", and a header that folds them away.
+	for id: String in ["side_ferro", "side_trigo", "main_04"]:
+		Session.quests[id] = {"step": 0, "count": 0, "picked": [], "done": false}
+	var trk: QuestTracker = main.hud.quest_tracker()
+	trk.quests = main.quests
+	trk.refresh()
+	check(trk.shown_ids().size() == 3, "three quests on the side (%s)" % [trk.shown_ids()])
+	main.quests.track("side_ferro")
+	trk.refresh()
+	check(trk.shown_ids()[0] == "side_ferro", "the followed quest comes first")
+	for id: String in ["side_ferro", "side_trigo", "main_04"]:
+		Session.quests.erase(id)
+	Session.tracked_quest = ""
+	# The difficulty sign and the quest board in front of the Crow Mine.
+	var tier_sign: DungeonSign = null
+	var board: DungeonSign = null
+	for sg: DungeonSign in main.map.signs:
+		if sg.target == "mina":
+			if sg.kind == "tier":
+				tier_sign = sg
+			elif sg.kind == "board":
+				board = sg
+	check(tier_sign != null and board != null, "the forest has a difficulty sign and a quest board in front of the mine")
+	if board:
+		p.global_position = board.global_position + Vector3(0.6, 0, 0)
+		await _frames(3)
+		check(main._interact_kind == "board", "standing at the board shows its button")
+		main.talk_to_nearby()
+		await _frames(2)
+		check(main.hud.board_panel().visible, "the board opens its window")
+		main.hud.board_panel().hide()
+		main.hud._on_panel_closed()
+	var offers: Array[Dictionary] = Bounties.board_offers("mina")
+	check(offers.size() >= 2 and str(offers[0]["type"]) == "hunt", "the board offers hunts in the mine")
+	check(Bounties.accept("mina", offers[0]) and not Bounties.accept("mina", offers[1]), "one job at a time")
+	var prize: Dictionary = {}
+	for i: int in int(offers[0]["count"]):
+		prize = Bounties.on_kill("bandido", "mina")
+	check(not prize.is_empty() and int(prize["gold"]) > 0 and str(prize["item"]) != "", "finishing the job pays gold and an item (%s)" % [prize])
+	check(Bounties.jobs_left("mina") == 2, "3 jobs a day: 2 left")
+	Session.boards["mina"]["done"] = 3
+	check(not Bounties.accept("mina", offers[0]), "no more jobs after 3 in a day")
+	Session.boards["mina"]["day"] = "2000-01-01"
+	check(Bounties.jobs_left("mina") == 3, "a new day brings the jobs back")
+	# Dungeon difficulty: monsters in the mine get stronger.
+	Session.current_map = "mina"
+	var e0 := Enemy.new()
+	e0.setup("bandido", 10, p)
+	Session.dungeon_tier["mina"] = 2
+	var e2 := Enemy.new()
+	e2.setup("bandido", 10, p)
+	check(is_equal_approx(e2.max_hp, e0.max_hp * 2.2) and Bounties.dungeon_mult("drops") > 1.9, "Nightmare: more health and better drops")
+	Session.current_map = "floresta"
+	check(is_equal_approx(Bounties.dungeon_mult("hp"), 1.0), "outside a dungeon nothing changes")
+	e0.free()
+	e2.free()
+	Session.dungeon_tier.clear()
+	# Extreme: monsters never below the world level, which grows with the time played.
+	check(is_equal_approx(float(Data.progression["difficulty"]["hard"]["xp"]), 1.0), "harder difficulties give no extra XP")
+	Session.difficulty = "extreme"
+	Session.play_seconds = 4.0 * 3600.0
+	var w: int = Session.world_level()
+	var e3 := Enemy.new()
+	e3.setup("bandido", 3, p)
+	check(w >= 18 and w <= 26 and e3.level == w, "Extreme: after 4 h the monsters are level %d (got %d)" % [w, e3.level])
+	e3.free()
+	Session.difficulty = "normal"
+	check(Session.world_level() == 1, "other difficulties have no world level")
+	Session.play_seconds = 0.0
+	# Wanted: Pradoluz's poster and today's boss in one of its fields.
+	var st: Dictionary = Bounties.wanted_today("pradoluz")
+	check(str(st["map"]) in ["floresta", "campos"], "the wanted boss of Pradoluz is in one of its fields (%s)" % st["map"])
+	main.load_map(str(st["map"]), "from_pradoluz")
+	await _wait_map(main, str(st["map"]))
+	await _frames(6)
+	var wb: Enemy = main.map.wanted_boss
+	check(wb != null and wb.level == Bounties.wanted_level(p.stats.level) and wb.max_hp > float(Data.enemies["golem"]["hp"]) * 2.5, "the wanted boss waits there, stronger than a Herald")
+	main.follow_wanted_city = "pradoluz"
+	var aim: Variant = main.quest_target()
+	check(aim is Vector3 and wb != null and (aim as Vector3).distance_to(Vector3(wb.global_position.x, 0, wb.global_position.z)) < 3.0, "the arrow leads to the wanted boss")
+	if wb:
+		var gold0: int = p.gold
+		# The first hit breaks the shield, the next ones land.
+		for i: int in 4:
+			if is_instance_valid(wb) and not wb.is_dead():
+				wb.take_damage(int(wb.max_hp * 10.0) + 99999, false)
+			await _frames(2)
+		await _frames(4)
+		check(bool(Bounties.wanted_today("pradoluz")["done"]) and p.gold >= gold0 + 120 * wb.level and Session.inventory.count("mat_insignia_chefe") >= 6, "beating it pays a lot and closes the poster for the day")
+	main.load_map("pradoluz", "start")
+	await _wait_map(main, "pradoluz")
+	await _frames(4)
+	var poster: bool = false
+	for sg: DungeonSign in main.map.signs:
+		poster = poster or sg.kind == "wanted"
+	check(poster, "Pradoluz has a wanted poster")
+	# Travel window: the world map with a button on every activated place.
+	Session.activate_point("pradoluz_pedra", "pradoluz", "REST_PRADOLUZ_PEDRA")
+	Session.activate_point("floresta_entrada", "floresta", "REST_FLORESTA_ENTRADA")
+	main.hud._open_panel(main.hud._travel_panel)
+	await _frames(2)
+	var tp: TravelPanel = main.hud._travel_panel
+	check(tp.visible and tp.pins().has("pradoluz") and tp.pins().has("floresta"), "the travel window shows the world map with its places")
+	tp.hide()
+	main.hud._on_panel_closed()
+	main.queue_free()
+	await _frames(2)
+	Main.start_spawn = "start"
+	Session.reset()
+
+
 func _postgame_test() -> void:
 	Session.reset()
 	Session.set_flag("golem_defeated")
@@ -1639,7 +1808,7 @@ func _items_test() -> void:
 	# Quest rewards give items (Marta and Bram's first quest: potions).
 	main.quests.finish_talk(main.quests.talk_plan("marta"))
 	main.quests.finish_talk(main.quests.talk_plan("bram"))
-	check(Session.inventory.count("pot_vida_p") == 3 and Session.inventory.count("pot_folego_p") == 2, "first quest rewards potions")
+	check(Session.inventory.count("pot_vida_p") == 3 and Session.inventory.count("pot_mana_p") == 2, "first quest rewards potions (health and MP)")
 
 	# Health potion heals over time, then the slot waits.
 	p.hp = p.max_hp() * 0.3
@@ -1649,17 +1818,32 @@ func _items_test() -> void:
 	check(right_after < p.max_hp() * 0.35 and p.hp >= p.max_hp() * 0.59, "the potion heals over a couple of seconds (%.0f -> %.0f)" % [right_after, p.hp])
 	check(not hud.use_quick_potion(0), "the health slot waits before the next potion")
 	check(Session.inventory.count("pot_vida_p") == 2, "drinking uses one potion")
-	# Stamina potion.
-	p.stamina = 0.0
-	check(hud.use_quick_potion(1), "quick slot 2 drinks a stamina potion")
+	# MP potion (skills cost MP since 13/11).
+	p.mp = 0.0
+	check(hud.use_quick_potion(1), "quick slot 2 drinks an MP potion")
 	await _frames(120)
-	check(p.stamina >= p.max_stamina() * 0.35, "stamina potion refills fôlego")
-	# Buff potion: no tonic yet -> nothing; with one -> attack goes up.
-	check(not hud.use_quick_potion(2), "no tonic in the bag, nothing happens")
+	check(p.mp >= p.max_mp() * 0.3, "MP potion refills MP (%.0f)" % p.mp)
+	# Skills spend MP, not fôlego; basic hits give MP back.
+	p.mp = 0.0
+	var st0: float = p.stamina
+	check(not p.skills.use_slot(0) and is_equal_approx(p.stamina, st0), "no MP, no skill (and no fôlego spent)")
+	p.mp = p.max_mp()
+	await _frames(30)
+	check(p.skills.use_slot(0) and p.mp < p.max_mp() - 10.0 and p.stamina >= st0 - 0.01, "a skill spends MP, not fôlego")
+	# Any potion can go in any shortcut (the bag's "Atalho: 1 2 3").
+	check(not hud.use_quick_potion(2), "no stamina potion in the bag, nothing happens")
 	Session.add_item("pot_forca", 1)
+	Session.potion_slots[2] = "pot_forca"
 	var atk_before: float = p.stats.get_stat("atk")
-	check(hud.use_quick_potion(2), "quick slot 3 drinks a tonic")
+	check(hud.use_quick_potion(2), "a tonic put in shortcut 3 is drunk from there")
 	check(p.stats.get_stat("atk") > atk_before * 1.15, "tonic of strength raises attack")
+	var saved_slots: Dictionary = Session.to_dict()
+	Session.potion_slots[2] = ""
+	Session.from_dict(saved_slots)
+	check(Session.potion_slots[2] == "pot_forca", "the chosen shortcuts are saved_slots")
+	Session.from_dict({"quick_slots": {"vida": "pot_vida_m", "folego": "pot_folego_p", "reforco": "pot_pedra"}})
+	check(Session.potion_slots == ["pot_vida_m", "pot_mana_p", "pot_pedra"], "an old save gets health, MP and its tonic (%s)" % [Session.potion_slots])
+	Session.from_dict(saved_slots)
 	# Quick slot falls back to another potion of the same kind.
 	Session.inventory.remove("pot_vida_p", Session.inventory.count("pot_vida_p"))
 	Session.add_item("pot_vida_m", 1)
@@ -1680,7 +1864,7 @@ func _items_test() -> void:
 	check(Session.inventory.count("pot_vida_p") >= 3, "the chest's potions go to the bag")
 	var saved: Dictionary = Session.to_dict()
 	Session.from_dict(saved)
-	check(Session.inventory.count("pot_folego_p") >= 2 and Session.has_flag("chest:" + chest.chest_id), "bag and opened chests survive the save")
+	check(Session.inventory.count("pot_mana_p") >= 2 and Session.has_flag("chest:" + chest.chest_id), "bag and opened chests survive the save")
 	main.queue_free()
 	await _frames(2)
 

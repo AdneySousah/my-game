@@ -48,6 +48,12 @@ var _scripted: bool = false
 var _dead: bool = false
 var _buff_time: float = 0.0
 var stamina: float = 0.0
+## MP: what the skills cost (owner, 13/11). Fôlego stays for the dodge and the run.
+var mp: float = 0.0
+var _mp_pause: float = 0.0
+var _mp_left: float = 0.0
+var _mp_rate: float = 0.0
+var _no_mp_cd: float = 0.0
 var _regen_pause: float = 0.0
 var _sprinting: bool = false
 var _no_stamina_cd: float = 0.0
@@ -105,6 +111,7 @@ func _ready() -> void:
 	add_child(skills)
 	hp = max_hp()
 	stamina = max_stamina()
+	mp = max_mp()
 	_last_hp_max = hp
 	_last_stamina_max = stamina
 
@@ -120,6 +127,7 @@ func _physics_process(delta: float) -> void:
 	_tick_premium()
 	_tick_potions(delta)
 	_tick_stamina(delta)
+	_tick_mp(delta)
 	_tick_poison(delta)
 	if _dead or _scripted:
 		return
@@ -176,7 +184,7 @@ func _physics_process(delta: float) -> void:
 		if sit and not model.is_sitting():
 			face_towards(_rest_spot)
 		model.set_sitting(sit)
-		model.update_locomotion(velocity.length(), _combat_time > 0.0)
+		model.update_locomotion(velocity.length(), _combat_time > 0.0, false, _sprinting)
 	# Footsteps: faster when running.
 	var spd: float = velocity.length()
 	if spd > 0.5:
@@ -275,6 +283,40 @@ func max_hp() -> float:
 
 func max_stamina() -> float:
 	return stats.get_stat("max_stamina")
+
+
+func max_mp() -> float:
+	return stats.get_stat("max_mp")
+
+
+## Pays a skill's MP. False (and a short "Sem MP" over the hero) when there is not enough.
+func spend_mp(cost: float) -> bool:
+	if mp < cost:
+		if _no_mp_cd <= 0.0:
+			_no_mp_cd = 1.0
+			ProtoVisuals.damage_number(get_parent(), global_position, tr("HUD_NO_MP"), Color("#5aa8ff"))
+		return false
+	mp -= cost
+	_mp_pause = float(_mana_rules().get("regen_delay", 1.0))
+	return true
+
+
+func _mana_rules() -> Dictionary:
+	return Data.progression.get("mana", {})
+
+
+func _tick_mp(delta: float) -> void:
+	_no_mp_cd -= delta
+	if _dead:
+		return
+	if _mp_left > 0.0:
+		var step: float = minf(delta, _mp_left)
+		_mp_left -= step
+		mp = minf(max_mp(), mp + _mp_rate * step)
+	if _mp_pause > 0.0:
+		_mp_pause -= delta
+		return
+	mp = minf(max_mp(), mp + stats.get_stat("mp_regen") * delta)
 
 
 ## Hit something or was hit in the last few seconds.
@@ -448,6 +490,9 @@ func deal_damage(enemy: Enemy, mult: float, is_skill: bool, knockback: float = 0
 	var push: Vector3 = enemy.global_position - global_position
 	push.y = 0.0
 	enemy.take_damage(res["amount"], res["crit"], push.normalized() * knockback)
+	# Basic attacks bring MP back, so the skills keep coming in a long fight.
+	if not is_skill:
+		mp = minf(max_mp(), mp + float(_mana_rules().get("hit_gain", 3.0)))
 	Audio.play_sfx("crit" if res["crit"] else "hit", enemy.global_position)
 	return res["amount"]
 
@@ -489,7 +534,7 @@ func receive_attack(atk_value: float) -> bool:
 
 ## Hero progress for the save file (position is saved by Main).
 func save_state() -> Dictionary:
-	return {"stats": stats.to_dict(), "gold": gold, "hp": hp, "stamina": stamina,
+	return {"stats": stats.to_dict(), "gold": gold, "hp": hp, "stamina": stamina, "mp": mp,
 		"equipped": Array(skills.equipped)}
 
 
@@ -504,6 +549,7 @@ func load_state(d: Dictionary) -> void:
 	skills.equipped_changed.emit()
 	hp = clampf(float(d.get("hp", max_hp())), 1.0, max_hp())
 	stamina = clampf(float(d.get("stamina", max_stamina())), 0.0, max_stamina())
+	mp = clampf(float(d.get("mp", max_mp())), 0.0, max_mp())
 	hp_changed.emit(hp, max_hp())
 	gold_changed.emit(gold)
 
@@ -527,6 +573,9 @@ func use_potion(item_id: String) -> bool:
 		"stamina":
 			_stamina_left = seconds
 			_stamina_rate = max_stamina() * float(e.get("amount", 0.4)) / seconds
+		"mana":
+			_mp_left = seconds
+			_mp_rate = max_mp() * float(e.get("amount", 0.4)) / seconds
 		"buff":
 			stats.add_buff(str(e.get("stat", "atk")), float(e.get("amount", 0.1)), seconds)
 	Audio.play_sfx("pickup", global_position, 0.8)
@@ -561,6 +610,7 @@ func _tick_potions(delta: float) -> void:
 func heal_fraction(f: float) -> void:
 	hp = minf(max_hp(), hp + max_hp() * f)
 	stamina = minf(max_stamina(), stamina + max_stamina() * f)
+	mp = minf(max_mp(), mp + max_mp() * f)
 	hp_changed.emit(hp, max_hp())
 
 
@@ -568,6 +618,7 @@ func heal_fraction(f: float) -> void:
 func rest() -> void:
 	hp = max_hp()
 	stamina = max_stamina()
+	mp = max_mp()
 	hp_changed.emit(hp, max_hp())
 
 
@@ -585,6 +636,7 @@ func respawn() -> void:
 	global_position = respawn_point
 	hp = max_hp()
 	stamina = max_stamina()
+	mp = max_mp()
 	status.clear()
 	set_invulnerable(2.0)
 	hp_changed.emit(hp, max_hp())

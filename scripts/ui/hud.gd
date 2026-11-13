@@ -11,6 +11,8 @@ const POTION_RADIUS: float = 32.0
 signal travel_requested(point_id: String)
 ## The "Falar"/"Pegar" button (or E) was pressed.
 signal interact_pressed
+## The wanted poster's "Seguir": the arrow leads to that city's wanted boss.
+signal follow_wanted(city: String)
 
 var player: Player
 var _travel_btn: Button
@@ -25,6 +27,7 @@ var _full_map: FullMapPanel
 var _status: PortraitStatus
 var _buffs: BuffBar
 var _stamina_bar: FramedBar
+var _mp_bar: FramedBar
 var _character_menu: CharacterMenu
 ## Skills unlocked since the skills panel was last opened (drives the "!" alert).
 var _new_skills: bool = false
@@ -32,6 +35,8 @@ var _toast: Label
 var _toast_tween: Tween
 var _controls: Control
 var _joystick: TouchJoystick
+var _loot: LootFeed
+var _board_panel: BoardPanel
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
@@ -59,9 +64,7 @@ var _talk_on_attack: bool = false
 ## Shortcuts at the top of the screen: "store", "routine", "bag", "quests".
 var _menu_btns: Dictionary = {}
 var _top_menu: HBoxContainer
-var _tracker_title: Label
-var _tracker_goal: Label
-var _tracker_bg: TrackerBackdrop
+var _tracker: QuestTracker
 var _main: Main
 var _tracker_timer: float = 0.0
 var _boss_bar: FramedBar
@@ -91,6 +94,11 @@ func _ready() -> void:
 	_toast.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_toast.modulate.a = 0.0
 	root.add_child(_toast)
+	_loot = LootFeed.new()
+	_loot.set_anchors_preset(Control.PRESET_BOTTOM_WIDE)
+	_loot.offset_bottom = -142
+	_loot.offset_top = -142 - LootFeed.ROW_H * LootFeed.MAX_ROWS
+	root.add_child(_loot)
 
 	_attributes_panel = AttributesPanel.new()
 	root.add_child(_attributes_panel)
@@ -118,6 +126,10 @@ func _ready() -> void:
 	_equip_panel.closed.connect(_on_panel_closed)
 	_smith_panel = SmithPanel.new()
 	root.add_child(_smith_panel)
+	_board_panel = BoardPanel.new()
+	root.add_child(_board_panel)
+	_board_panel.closed.connect(_on_panel_closed)
+	_board_panel.follow_wanted.connect(func(city: String) -> void: follow_wanted.emit(city))
 	_routine_panel = RoutinePanel.new()
 	root.add_child(_routine_panel)
 	_routine_panel.closed.connect(func() -> void:
@@ -238,6 +250,19 @@ func bind(p: Player) -> void:
 	_refresh_skill_buttons()
 
 
+## Items the hero just got, with their pictures (see LootFeed).
+func loot(id: String, n: int) -> void:
+	_loot.add_item(id, n)
+
+
+func loot_gold(n: int) -> void:
+	_loot.add_gold(n)
+
+
+func loot_feed() -> LootFeed:
+	return _loot
+
+
 func toast(text: String, seconds: float = 1.8) -> void:
 	_toast.text = text
 	# Under the top shortcuts; lower still while a boss bar is on screen.
@@ -319,7 +344,8 @@ func show_interact_button(kind: String) -> void:
 	_interact_shown = kind != ""
 	_talk_btn.visible = kind != "" and kind != "talk" and kind != "pet"
 	if _talk_btn.visible:
-		var key: String = "HUD_OPEN" if kind == "open" else ("HUD_RESET" if kind == "reset" else ("HUD_INFERNAL" if kind == "infernal" else ("HUD_ENTER" if kind == "enter" else "HUD_PICK_UP")))
+		var key: String = {"open": "HUD_OPEN", "reset": "HUD_RESET", "infernal": "HUD_INFERNAL", "enter": "HUD_ENTER",
+			"tier": "HUD_TIER", "board": "HUD_BOARD", "wanted": "HUD_WANTED"}.get(kind, "HUD_PICK_UP")
 		# Phones have no E key: the button shows just the word.
 		_talk_btn.text = tr(key + "_TAP") if Game.is_mobile() else tr(key)
 	_update_talk_mode()
@@ -358,6 +384,16 @@ func dialogue_box() -> DialogueBox:
 
 func is_in_dialogue() -> bool:
 	return _dialogue.visible
+
+
+## Dungeon difficulty sign, quest board or wanted poster ("tier", "board", "wanted").
+func open_board(mode: String, target: String) -> void:
+	_open_panel(_board_panel)
+	_board_panel.open_for(mode, target)
+
+
+func board_panel() -> BoardPanel:
+	return _board_panel
 
 
 func open_quests() -> void:
@@ -427,13 +463,15 @@ func use_quick_potion(i: int) -> bool:
 	return id != "" and player.use_potion(id)
 
 
-## Potion that quick slot `i` would use now ("" when the bag has none of that kind).
+## Potion that shortcut `i` would use now: the one put there, or another of the same kind
+## when that one ran out (e.g. a medium health potion after the small ones).
 func quick_potion(i: int) -> String:
-	var kinds: Array = Data.items_config.get("quick_slots", ["vida", "folego", "reforco"])
-	var kind: String = str(kinds[i])
-	var chosen: String = str(Session.quick_slots.get(kind, ""))
-	if chosen != "" and Session.inventory.has(chosen):
+	if i < 0 or i >= Session.potion_slots.size():
+		return ""
+	var chosen: String = Session.potion_slots[i]
+	if chosen == "" or Session.inventory.has(chosen):
 		return chosen
+	var kind: String = str(Data.item(chosen).get("slot", ""))
 	for s: Dictionary in Session.inventory.slots:
 		if str(Data.item(s["id"]).get("slot", "")) == kind:
 			return str(s["id"])
@@ -521,6 +559,9 @@ func _process(delta: float) -> void:
 	_stamina_bar.max_value = player.max_stamina()
 	_stamina_bar.value = player.stamina
 	_stamina_bar.text = "%d / %d" % [floori(player.stamina), roundi(player.max_stamina())]
+	_mp_bar.max_value = player.max_mp()
+	_mp_bar.value = player.mp
+	_mp_bar.text = "%s %d / %d" % [tr("HUD_MP"), floori(player.mp), roundi(player.max_mp())]
 	_dodge_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("dodge_cost", 25))
 	_sprint_btn.dimmed = player.stamina < float(Data.progression.get("stamina", {}).get("sprint_min_to_start", 15)) and not player.is_sprinting()
 	for i: int in _skill_btns.size():
@@ -550,36 +591,22 @@ func _build_status(root: Control) -> void:
 	_buffs.position = _status.position + Vector2(PortraitStatus.CENTER.x + PortraitStatus.ARC_R + 16.0, 104.0)
 	root.add_child(_buffs)
 	_buffs.tapped.connect(func(t: String) -> void: toast(t, 1.6))
-	# Tracked quest: title and current objective under the portrait.
-	_tracker_bg = TrackerBackdrop.new()
-	_tracker_bg.position = Vector2(0, 172)
-	_tracker_bg.size = Vector2(380, 60)
-	root.add_child(_tracker_bg)
-	var tracker := VBoxContainer.new()
-	tracker.position = Vector2(18, 178)
-	tracker.add_theme_constant_override("separation", 0)
-	tracker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	root.add_child(tracker)
-	_tracker_title = Label.new()
-	_tracker_title.add_theme_font_size_override("font_size", 19)
-	_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD)
-	tracker.add_child(_tracker_title)
-	_tracker_goal = Label.new()
-	_tracker_goal.add_theme_font_size_override("font_size", 17)
-	tracker.add_child(_tracker_goal)
-	# Tapping the tracker opens the quest journal (to pick which quest to follow).
-	var tracker_tap := Button.new()
-	tracker_tap.flat = true
-	tracker_tap.focus_mode = Control.FOCUS_NONE
-	tracker_tap.position = Vector2(0, 172)
-	tracker_tap.size = Vector2(380, 60)
-	tracker_tap.pressed.connect(open_quests)
-	root.add_child(tracker_tap)
+	# Up to 3 quests under the portrait, each with "Seguir"; the header hides them.
+	_tracker = QuestTracker.new()
+	_tracker.position = Vector2(0, 172)
+	_tracker.where_text = _tracker_where
+	_tracker.open_journal.connect(open_quests)
+	root.add_child(_tracker)
 	# Stamina ("fôlego") centered at the bottom of the screen.
 	_stamina_bar = FramedBar.new()
 	_stamina_bar.fill_color = Color("#c6e04a")
-	_stamina_bar.size = Vector2(380, 36)
+	_stamina_bar.size = Vector2(300, 36)
 	root.add_child(_stamina_bar)
+	# MP for the skills, next to the fôlego (owner, 13/11).
+	_mp_bar = FramedBar.new()
+	_mp_bar.fill_color = Color("#4f8fff")
+	_mp_bar.size = Vector2(300, 36)
+	root.add_child(_mp_bar)
 	# Debug-only shortcut; exported release builds don't show it.
 	if OS.is_debug_build():
 		_debug_btn = _button(tr("HUD_DEBUG_LEVEL"), _debug_level_up)
@@ -633,8 +660,8 @@ func _build_controls(root: Control) -> void:
 
 func _layout() -> void:
 	var vp: Vector2 = get_viewport().get_visible_rect().size
-	_joystick.position = Vector2(0, vp.y * 0.35)
-	_joystick.size = Vector2(vp.x * 0.45, vp.y * 0.65)
+	_joystick.position = Vector2(0, vp.y * 0.52)
+	_joystick.size = Vector2(vp.x * 0.45, vp.y * 0.48)
 	if _minimap:
 		_minimap.position = Vector2(vp.x - Minimap.FRAME_SIZE - 6, 50)
 	if _clock:
@@ -658,7 +685,9 @@ func _layout() -> void:
 	if _boss_bar:
 		_boss_bar.position = Vector2((vp.x - _boss_bar.size.x) * 0.5, 122)
 	if _stamina_bar:
-		_stamina_bar.position = Vector2((vp.x - _stamina_bar.size.x) * 0.5, vp.y - _stamina_bar.size.y - 14)
+		var bars_w: float = _mp_bar.size.x + 12.0 + _stamina_bar.size.x
+		_mp_bar.position = Vector2((vp.x - bars_w) * 0.5, vp.y - _mp_bar.size.y - 14)
+		_stamina_bar.position = Vector2(_mp_bar.position.x + _mp_bar.size.x + 12.0, vp.y - _stamina_bar.size.y - 14)
 	if _debug_btn:
 		_debug_btn.position = Vector2(vp.x - _debug_btn.custom_minimum_size.x - 20, Minimap.FRAME_SIZE + 60)
 	if _debug_kit_btn:
@@ -755,6 +784,7 @@ func _open_panel(panel: Control) -> void:
 	_smith_panel.hide()
 	_shop_panel.hide()
 	_routine_panel.hide()
+	_board_panel.hide()
 	_talk_btn.hide()
 	_interact_shown = false
 	_update_talk_mode()
@@ -769,7 +799,7 @@ func _open_panel(panel: Control) -> void:
 
 
 func _on_panel_closed() -> void:
-	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible and not _equip_panel.visible and not _smith_panel.visible and not _shop_panel.visible and not _routine_panel.visible:
+	if not _attributes_panel.visible and not _skills_panel.visible and not _travel_panel.visible 			and not _full_map.visible and not _character_menu.visible and not _quest_panel.visible 			and not _dialogue.visible and not _options_panel.visible and not _bag_panel.visible and not _equip_panel.visible and not _smith_panel.visible and not _shop_panel.visible and not _routine_panel.visible and not _board_panel.visible:
 		_controls.show()
 		get_tree().paused = false
 
@@ -787,12 +817,12 @@ func _on_character_choice(what: String) -> void:
 
 
 func _refresh_tracker() -> void:
-	var id: String = quests.tracked() if quests else ""
-	_tracker_title.text = tr(str(Data.quest(id).get("name", id))) if id != "" else ""
-	_tracker_goal.text = ("› " + quests.objective_text(id) + _tracker_where(id)) if id != "" else ""
-	_tracker_bg.visible = id != ""
-	if id != "":
-		_tracker_title.add_theme_color_override("font_color", GameTheme.GOLD if str(Data.quest(id).get("type", "")) == "main" else Color("#7fd1ff"))
+	_tracker.quests = quests
+	_tracker.refresh()
+
+
+func quest_tracker() -> QuestTracker:
+	return _tracker
 
 
 ## Test builds only: gold and forge materials to try the blacksmith quickly.
@@ -830,7 +860,6 @@ func _tracker_where(id: String) -> String:
 
 
 func _update_potion_buttons() -> void:
-	var kinds: Array = Data.items_config.get("quick_slots", ["vida", "folego", "reforco"])
 	var cd_total: float = float(Data.items_config.get("potion_cooldown", 8.0))
 	for i: int in _potion_btns.size():
 		var b: TouchActionButton = _potion_btns[i]
@@ -842,6 +871,6 @@ func _update_potion_buttons() -> void:
 		b.color = Color(Color(str(item.get("color", "#777777"))), 0.9)
 		b.badge = str(n)
 		b.dimmed = n <= 0
-		var cd: float = player.potion_cooldown(str(kinds[i]))
+		var cd: float = player.potion_cooldown(str(item.get("slot", ""))) if id != "" else 0.0
 		b.cooldown_ratio = cd / cd_total if cd > 0.0 else 0.0
 		b.sub_text = "%.0f" % ceilf(cd) if cd > 0.0 else ""

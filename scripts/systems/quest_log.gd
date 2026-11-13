@@ -163,6 +163,28 @@ func on_enemy_killed(enemy_id: String, map_id: String) -> void:
 			quest_updated.emit(id)
 
 
+## Hunts going on in `map_id`: Array of {"enemy", "pos": Vector3, "left"}. Enemy zones near
+## "pos" make sure some of these monsters are there (owner, 13/11: the arrow pointed at a
+## camp that had no orcs).
+static func wanted_kills(map_id: String) -> Array[Dictionary]:
+	var out: Array[Dictionary] = []
+	for id: String in Session.quests:
+		var st: Dictionary = Session.quests[id]
+		if bool(st.get("done", false)):
+			continue
+		var steps: Array = Data.quest(id).get("steps", [])
+		var i: int = int(st.get("step", 0))
+		if i >= steps.size():
+			continue
+		var step: Dictionary = steps[i]
+		if str(step.get("type", "")) != "kill" or str(step.get("map", "")) != map_id:
+			continue
+		var p: Array = step.get("pos", [0, 0])
+		out.append({"enemy": str(step.get("enemy", "")), "pos": Vector3(float(p[0]), 0, float(p[1])),
+			"left": int(step.get("count", 1)) - int(st.get("count", 0))})
+	return out
+
+
 ## Pickups still to collect in `map_id`: Array of {"quest", "index", "pos": Vector3, "item"}.
 func pickups_in(map_id: String) -> Array[Dictionary]:
 	var out: Array[Dictionary] = []
@@ -220,7 +242,19 @@ func target_of(id: String, from: Vector3 = Vector3.ZERO, current_map: String = "
 			return GameMap.find_npc(str(step.get("npc", "")))
 		"kill", "reach":
 			var p: Array = step.get("pos", [0, 0])
-			return {"map": str(step.get("map", "")), "pos": Vector3(float(p[0]), 0, float(p[1]))}
+			var at := Vector3(float(p[0]), 0, float(p[1]))
+			# In the map of a hunt: point at the nearest monster of that kind, if any is alive.
+			if str(step.get("type", "")) == "kill" and current_map == str(step.get("map", "")) and is_inside_tree():
+				var best_d: float = INF
+				for n: Node in get_tree().get_nodes_in_group("enemies"):
+					var e := n as Enemy
+					if e == null or e.is_dead() or e.base_id != str(step.get("enemy", "")):
+						continue
+					var d: float = e.global_position.distance_to(from)
+					if d < best_d:
+						best_d = d
+						at = Vector3(e.global_position.x, 0, e.global_position.z)
+			return {"map": str(step.get("map", "")), "pos": at}
 		"collect":
 			var best: Dictionary = {}
 			var best_d: float = INF

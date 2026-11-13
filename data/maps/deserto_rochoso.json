@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "deserto_rochoso_bau_1", "pos": [-30, 12], "yaw": 90, "gold": 1100, "items": {"pot_vida_g": 3, "pot_vento": 1, "gema_ametista_2": 2}},
-    {"id": "deserto_rochoso_bau_2", "pos": [32, -28], "yaw": -90, "gold": 1200, "items": {"pot_folego_g": 2, "broca": 1, "eq_botas_epico": 1}}
+    {"id": "deserto_rochoso_bau_2", "pos": [32, -28], "yaw": -90, "gold": 1200, "items": {"pot_mana_g": 2, "broca": 1, "eq_botas_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "deserto_rochoso_pilar", "name": "REST_DESERTO_PILAR", "pos": [-6, 32], "kind": "fogueira"},

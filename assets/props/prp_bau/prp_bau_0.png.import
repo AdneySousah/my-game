@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbx0xoxhf6m4m"
-path="res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.ctex"
+path.s3tc="res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "8b3bb85095d7ff3fdb93afc2ace0d940"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_bau/prp_bau_0.png"
-dest_files=["res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.ctex"]
+dest_files=["res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.s3tc.ctex", "res://.godot/imported/prp_bau_0.png-8239673c4253bbe7867cef299d57a397.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

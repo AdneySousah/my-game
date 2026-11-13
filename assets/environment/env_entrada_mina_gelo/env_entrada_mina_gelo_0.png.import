@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bef4pgv7uegag"
-path="res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.ctex"
+path.s3tc="res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.s3tc.ctex"
+path.etc2="res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "4f1b64c0fb8658b6c31c9f9a787c8d81"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/environment/env_entrada_mina_gelo/env_entrada_mina_gelo_0.png"
-dest_files=["res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.ctex"]
+dest_files=["res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.s3tc.ctex", "res://.godot/imported/env_entrada_mina_gelo_0.png-3bca1cd6289831fd7fe82358c808b1a1.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

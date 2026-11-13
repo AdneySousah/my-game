@@ -15,10 +15,13 @@ var player: Player
 ## Infernal Mode: levels go up by this much and the monsters turn red.
 var level_bonus: int = 0
 var infernal: bool = false
+## Map this zone is in (for the hunts of the quests, see QuestLog.wanted_kills).
+var map_id: String = ""
 
 var _alive: Array[Enemy] = []
 var _timer: float = 0.0
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
+var _quest_check: float = 0.5
 
 
 func _ready() -> void:
@@ -38,6 +41,10 @@ func _physics_process(delta: float) -> void:
 	_alive.assign(_alive.filter(func(e: Variant) -> bool: return is_instance_valid(e) and not (e as Enemy).is_dead()))
 	if player == null or player.is_dead():
 		return
+	_quest_check -= delta
+	if _quest_check <= 0.0:
+		_quest_check = 1.5
+		_keep_quest_targets()
 	_timer -= delta
 	if _timer <= 0.0 and _alive.size() < max_alive:
 		_timer = respawn_time
@@ -81,6 +88,31 @@ func set_infernal(on: bool, bonus: int) -> void:
 			(e as Enemy).queue_free()
 	_alive.clear()
 	_fill.call_deferred()
+
+
+## A quest hunt points here: keep a couple of those monsters around (even if the zone
+## is full, or never rolled that kind), appearing on the far side from the hero.
+func _keep_quest_targets() -> void:
+	if follow_player or map_id == "":
+		return
+	for w: Dictionary in QuestLog.wanted_kills(map_id):
+		var p: Vector3 = w["pos"]
+		if Vector2(p.x - global_position.x, p.z - global_position.z).length() > radius + 6.0:
+			continue
+		var id: String = str(w["enemy"])
+		if not Data.enemies.has(id):
+			continue
+		var have: int = 0
+		for e: Enemy in _alive:
+			if e.base_id == id:
+				have += 1
+		if have >= mini(int(w["left"]), 2) or _alive.size() >= max_alive + 2:
+			continue
+		var away: Vector3 = global_position - player.global_position
+		away.y = 0.0
+		var at: Vector3 = global_position + (away.normalized() if away.length() > 0.5 else Vector3.FORWARD) * radius * 0.8
+		spawn(id, at)
+		return
 
 
 func _pick() -> String:

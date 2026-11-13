@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmhs1mi3s7jq4"
-path="res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.ctex"
+path.s3tc="res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.s3tc.ctex"
+path.etc2="res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "a49a056863b13a10762e4e5f7a48c6b7"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/weapons/wpn_espada_raro/wpn_espada_raro_0.png"
-dest_files=["res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.ctex"]
+dest_files=["res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.s3tc.ctex", "res://.godot/imported/wpn_espada_raro_0.png-3406a93a527233a292b2e4f068fc041a.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

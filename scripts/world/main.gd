@@ -34,6 +34,11 @@ static var _houses_cfg: Dictionary = {}
 var _near_animal: Animal
 var _petting: bool = false
 var _interact_kind: String = ""
+var _near_vase: Node3D
+## The arrow leads to this city's wanted boss (the poster's "Seguir"), until it falls.
+var follow_wanted_city: String = ""
+var _world_check: float = 0.0
+var _world_level_seen: int = 0
 var _autosave_timer: float = 0.0
 ## Seconds of healing left at the current rest point.
 var _healing: float = 0.0
@@ -64,6 +69,9 @@ func _ready() -> void:
 	add_child(quests)
 	hud.set_quests(quests)
 	hud.interact_pressed.connect(talk_to_nearby)
+	hud.follow_wanted.connect(func(city: String) -> void:
+		follow_wanted_city = city
+		hud.toast(tr("WANTED_FOLLOWING"), 2.0))
 	quests.changed.connect(_refresh_quest_world)
 	quests.reached_dialogue.connect(func(d: String) -> void: _boss_line(d))
 	quests.quest_completed.connect(func(id: String) -> void:
@@ -192,12 +200,26 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 		OfferBanner.show_on(get_tree())
 
 
+## Extreme difficulty: a short warning each time the monsters of the world level up.
+func _check_world_level(delta: float) -> void:
+	_world_check -= delta
+	if _world_check > 0.0 or Session.difficulty != "extreme":
+		return
+	_world_check = 5.0
+	var w: int = Session.world_level()
+	if _world_level_seen > 0 and w > _world_level_seen:
+		hud.toast(tr("EXTREME_WORLD_UP") % w, 2.4)
+	_world_level_seen = w
+
+
 ## Rest points: entering one activates it; leaving hides the travel button.
 ## Also: NPC in talk range, quest pickups under the hero, "reach" objectives.
 func _physics_process(delta: float) -> void:
 	if map == null or _changing or player.is_dead():
 		return
 	Session.advance_time(delta)
+	Session.play_seconds += delta
+	_check_world_level(delta)
 	_autosave_timer += delta
 	if _autosave_timer >= 30.0:
 		save_now()
@@ -224,8 +246,14 @@ func talk_to_nearby() -> void:
 	if _near_chest and not _talking and not _changing:
 		_open_chest(_near_chest)
 		return
+	if _near_vase and not _talking and not _changing and not _petting:
+		pick_vase(_near_vase)
+		return
 	if not _near_house.is_empty() and _near_npc == null and not _talking and not _changing:
 		enter_house(_near_house)
+		return
+	if _near_sign and _near_sign.kind in ["tier", "board", "wanted"] and not _talking and not _changing:
+		hud.open_board(_near_sign.kind, _near_sign.target)
 		return
 	if _near_sign and not _talking and not _changing:
 		var hell: bool = _near_sign.infernal
@@ -280,6 +308,16 @@ func _pet(an: Animal) -> void:
 func quest_target() -> Variant:
 	if map == null or quests == null:
 		return null
+	# The wanted poster's "Seguir" wins until that boss falls.
+	if follow_wanted_city != "":
+		var w: Dictionary = Bounties.wanted_today(follow_wanted_city)
+		if bool(w.get("done", false)):
+			follow_wanted_city = ""
+		elif str(w.get("map", "")) == map.map_id:
+			var wp: Array = w.get("pos", [0, 0])
+			return Vector3(float(wp[0]), 0, float(wp[1]))
+		else:
+			return GameMap.exit_towards(map.map_id, str(w.get("map", "")))
 	var id: String = quests.tracked()
 	if id == "":
 		return null
@@ -330,10 +368,36 @@ func _on_enemy_killed(e: Enemy) -> void:
 	player.stats.add_xp(xp_for_kill(e))
 	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
 	_drop_loot(e)
+	_bounty_kill(e)
 	# The story scene plays the first time only (not after a dungeon reset).
 	var after_flag: String = str(e.data.get("after_flag", ""))
 	if str(e.data.get("after_story", "")) != "" and not (after_flag != "" and Session.has_flag(after_flag)) and not bool(e.get_meta("replay", false)):
 		_after_story.call_deferred(e.data.duplicate())
+
+
+## Quest boards and wanted bosses (Bounties): a finished board job pays gold and one
+## item; the wanted boss pays a lot and closes the city's poster for the day.
+func _bounty_kill(e: Enemy) -> void:
+	var job: Dictionary = Bounties.on_kill(e.base_id, Session.current_map)
+	if not job.is_empty():
+		player.add_gold(int(job["gold"]))
+		hud.loot_gold(int(job["gold"]))
+		give_item(str(job["item"]), int(job["count"]))
+		hud.banner(tr("BOARD_JOB_DONE"))
+		Audio.play_sfx("quest")
+		Session.routine.on_event("board", Session.current_map)
+	if e.has_meta("wanted_city"):
+		var city: String = str(e.get_meta("wanted_city"))
+		var prize: Dictionary = Bounties.wanted_done(city, e.level)
+		player.add_gold(int(prize["gold"]))
+		hud.loot_gold(int(prize["gold"]))
+		for id: String in prize["items"]:
+			give_item(id, int(prize["items"][id]))
+		hud.banner(tr("WANTED_BEATEN"))
+		Session.routine.on_event("wanted", city)
+		if follow_wanted_city == city:
+			follow_wanted_city = ""
+		save_now()
 
 
 ## Walks into a town house: one floor = "interior_casa", two = "interior_terreo" (with the
@@ -357,18 +421,52 @@ func _vase_key(vase: Node3D) -> String:
 	return "%s#%s#%d" % [str(Session.house_return.get("key", "")), map.map_id, int(vase.get_meta("index", 0))]
 
 
-## Pots already emptied stay hidden until they fill up again.
+func vase_ready(vase: Node3D) -> bool:
+	return float(Session.vase_ready_at.get(_vase_key(vase), 0.0)) <= Time.get_unix_time_from_system()
+
+
+## Pots stay in place; a little gold sparkle floats over the ones with something inside.
 func _sync_vases() -> void:
-	var now: float = Time.get_unix_time_from_system()
 	for vase: Node3D in map.vases:
-		vase.visible = float(Session.vase_ready_at.get(_vase_key(vase), 0.0)) <= now
+		var spark: Label3D = vase.get_node_or_null("Spark")
+		if spark == null:
+			spark = Label3D.new()
+			spark.name = "Spark"
+			spark.text = "✦"
+			spark.font_size = 64
+			spark.outline_size = 12
+			spark.modulate = Color("#ffd75a")
+			spark.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+			spark.pixel_size = 0.006
+			spark.position.y = 1.15
+			vase.add_child(spark)
+			var tw := spark.create_tween().set_loops()
+			tw.tween_property(spark, "position:y", 1.3, 0.8).set_trans(Tween.TRANS_SINE)
+			tw.tween_property(spark, "position:y", 1.15, 0.8).set_trans(Tween.TRANS_SINE)
+		spark.visible = vase_ready(vase)
+
+
+## The "Pegar" button at a pot: the hero crouches and picks something up (owner, 13/11).
+func pick_vase(vase: Node3D) -> void:
+	if not player.can_act() or not vase_ready(vase):
+		return
+	_petting = true
+	player.face_towards(vase.global_position)
+	var seconds: float = player.model.play_action("pet_low") if player.model else 1.2
+	seconds = maxf(seconds, 1.0)
+	player.lock(seconds)
+	await get_tree().create_timer(seconds * 0.45, false).timeout
+	if is_instance_valid(vase):
+		_take_vase(vase)
+	await get_tree().create_timer(seconds * 0.55, false).timeout
+	_petting = false
 
 
 ## Something small from a pot: potions or a few coins, by the hero's level.
 func _take_vase(vase: Node3D) -> void:
 	var cfg: Dictionary = houses_cfg()
-	vase.visible = false
 	Session.vase_ready_at[_vase_key(vase)] = Time.get_unix_time_from_system() + float(cfg.get("vase_refill_minutes", 30)) * 60.0
+	_sync_vases()
 	Audio.play_sfx("pickup", vase.global_position)
 	var table: Array = []
 	for tier: Dictionary in cfg.get("loot", []):
@@ -381,7 +479,7 @@ func _take_vase(vase: Node3D) -> void:
 	if str(pick.get("item", "")) == "gold":
 		var g: int = randi_range(int(pick.get("min", 10)), int(pick.get("max", 30)))
 		player.add_gold(g)
-		hud.toast(tr("HOUSE_VASE_GOLD") % g, 1.4)
+		hud.loot_gold(g)
 	else:
 		give_item(str(pick["item"]), randi_range(int(pick.get("min", 1)), int(pick.get("max", 1))))
 
@@ -477,13 +575,17 @@ func _update_quest_contacts() -> void:
 			_near_chest = c
 			break
 	_near_sign = null
-	for sign: DungeonSign in [map.reset_sign, map.infernal_sign]:
+	var all_signs: Array[DungeonSign] = [map.reset_sign, map.infernal_sign]
+	all_signs.append_array(map.signs)
+	for sign: DungeonSign in all_signs:
 		if is_instance_valid(sign) and sign.in_range(pos) and (_near_sign == null or pos.distance_to(sign.global_position) < pos.distance_to(_near_sign.global_position)):
 			_near_sign = sign
 	_near_house = map.house_near(pos) if not map.houses.is_empty() else {}
+	_near_vase = null
 	for vase: Node3D in map.vases:
-		if vase.visible and Vector2(vase.global_position.x - pos.x, vase.global_position.z - pos.z).length() < 1.4:
-			_take_vase(vase)
+		if Vector2(vase.global_position.x - pos.x, vase.global_position.z - pos.z).length() < 1.6 and vase_ready(vase):
+			_near_vase = vase
+			break
 	_near_animal = null
 	if nearest == null and _near_chest == null:
 		for n: Node in get_tree().get_nodes_in_group("animals"):
@@ -491,7 +593,7 @@ func _update_quest_contacts() -> void:
 			if an and an.is_inside_tree() and an.can_pet(pos):
 				_near_animal = an
 				break
-	var kind: String = "" if _talking or _petting else ("open" if _near_chest else (("infernal" if _near_sign.infernal else "reset") if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else "")))))
+	var kind: String = "" if _talking or _petting else ("open" if _near_chest else ("pick" if _near_vase else (_near_sign.kind if _near_sign else ("talk" if nearest else ("enter" if not _near_house.is_empty() else ("pet" if _near_animal else ""))))))
 	if kind != _interact_kind or (kind != "") != hud.interact_button_visible():
 		_interact_kind = kind
 		hud.show_interact_button(kind)
@@ -531,7 +633,7 @@ func _drop_loot(e: Enemy) -> void:
 			rolled.append_array(drops)
 		drops = rolled
 	for d: Dictionary in drops:
-		if randf() > float(d.get("chance", 1.0)) * Session.diff("drops"):
+		if randf() > float(d.get("chance", 1.0)) * Session.diff("drops") * Bounties.dungeon_mult("drops"):
 			continue
 		if d.has("gem"):
 			for i: int in int(d.get("count", 1)):
@@ -594,7 +696,7 @@ func give_item(id: String, n: int = 1) -> void:
 	if left < n and str(Data.item(id).get("type", "")) == "material":
 		Session.routine.on_event("gather", id, n - left)
 	if left < n:
-		hud.toast(tr("HUD_MATERIAL_GOT") % [n - left, tr(str(Data.item(id).get("name", id)))], 1.4)
+		hud.loot(id, n - left)
 	if left > 0:
 		hud.toast(tr("HUD_BAG_FULL"), 1.8)
 
@@ -742,7 +844,7 @@ func _open_chest(c: Chest) -> void:
 	if c.gold > 0:
 		var gold: int = roundi(c.gold * Session.premium_mult("gold"))
 		player.add_gold(gold)
-		hud.toast(tr("HUD_GOLD_GOT") % gold, 1.4)
+		hud.loot_gold(gold)
 	for id: String in c.items:
 		give_item(id, int(c.items[id]))
 	_near_chest = null

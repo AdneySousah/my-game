@@ -22,7 +22,7 @@
   ],
   "chests": [
     {"id": "castelo_bau_1", "pos": [-32, 22], "yaw": 90, "gold": 2400, "items": {"pot_vida_g": 4, "trevo": 1, "gema_rubi_3": 1}},
-    {"id": "castelo_bau_2", "pos": [32, 4], "yaw": -90, "gold": 2600, "items": {"pot_folego_g": 3, "broca_real": 1, "eq_botas_epico": 1}}
+    {"id": "castelo_bau_2", "pos": [32, 4], "yaw": -90, "gold": 2600, "items": {"pot_mana_g": 3, "broca_real": 1, "eq_botas_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "paths": [
     {"points": [[0, 48], [0, 30], [-8, 16], [4, 2], [0, -12], [0, -26]], "width": 3.6, "color": "#aeb8c4"}

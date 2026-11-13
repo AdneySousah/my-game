@@ -2,10 +2,15 @@
   "rest": { "_comment": "Pontos de descanso: cura aos poucos e só volta a curar depois da espera (segundos de tempo real).", "heal_seconds": 3.0, "cooldown_seconds": 600 },
   "_comment": "Regras de progressão do herói (GDD 6.1, 6.2, 6.9, 6.13). Valores de protótipo; ajustar nos testes.",
   "difficulty": {
-    "_comment": "GDD 6.10. hp/atk = vida e dano dos inimigos; xp e drops = multiplicador; death = penalidade de morte (ouro e XP perdidos).",
+    "_comment": "GDD 6.10. hp/atk = vida e dano dos inimigos; xp e drops = multiplicador (o dono pediu: dificuldade não dá mais XP nem itens, 13/11); death = penalidade de morte (ouro e XP perdidos).",
     "easy": {"hp": 0.75, "atk": 0.75, "xp": 1.0, "drops": 1.0, "death": 0.5},
     "normal": {"hp": 1.0, "atk": 1.0, "xp": 1.0, "drops": 1.0, "death": 1.0},
-    "hard": {"hp": 1.4, "atk": 1.4, "xp": 1.25, "drops": 1.25, "death": 1.0}
+    "hard": {"hp": 1.4, "atk": 1.4, "xp": 1.0, "drops": 1.0, "death": 1.0},
+    "extreme": {"hp": 1.8, "atk": 1.8, "xp": 1.0, "drops": 1.0, "death": 1.5, "world_growth": true}
+  },
+  "world_growth": {
+    "_comment": "Dificuldade Extrema (pedido do dono, 13/11/2026): os monstros do mundo todo ganham nível com o tempo de jogo, na metade (rate) da velocidade média do herói. A curva média é a do gen_xp.py (total_hours até o nível 100, base_min + c * L^power minutos por nível). Um monstro nunca fica abaixo desse 'nível do mundo'.",
+    "total_hours": 30, "base_min": 4.0, "power": 1.5, "rate": 0.5
   },
   "infernal": {
     "_comment": "Modo Infernal (pós-jogo, abre com game_complete): a placa da masmorra chama o chefe nesse nível; os monstros do mapa sobem a mesma diferença. Prêmios: drops rolados 2 vezes, ouro x2 e Essências Infernais (chefe: essence do mapa; monstro: mob_essence_chance).",
@@ -35,13 +40,16 @@
     "cdr": 0.0,
     "skill_dmg": 0.0,
     "max_stamina": 100,
-    "stamina_regen": 18.0
+    "stamina_regen": 18.0,
+    "max_mp": 100,
+    "mp_regen": 3.0
   },
   "growth_per_level": {
     "max_hp": 20,
     "atk": 2,
     "def": 1,
-    "max_stamina": 1
+    "max_stamina": 1,
+    "max_mp": 2
   },
   "attribute_effects": {
     "str": {
@@ -61,7 +69,9 @@
     },
     "foc": {
       "cdr": 0.0015,
-      "skill_dmg": 0.002
+      "skill_dmg": 0.002,
+      "max_mp": 2,
+      "mp_regen": 0.03
     }
   },
   "stat_caps": {
@@ -78,11 +88,16 @@
   "xp_level_diff_penalty": 0.1,
   "enemy_density": {"_comment": "Mais monstros longe das cidades (pedido do dono): o 1º campo depois de cada cidade fica como está; os seguintes e as masmorras têm 50% mais por zona.", "floresta": 1.5, "mina": 1.3, "bosque_seco": 1.5, "estepe": 1.5, "ruinas": 1.4, "torre": 1.4, "planalto": 1.5, "pinheiral": 1.5, "picos": 1.5, "mina_gelo": 1.3, "castelo": 1.3, "mata_umida": 1.5, "bordas_pantano": 1.5, "pantano": 1.5, "torre_vigia": 1.3, "arredores": 1.5, "castelo_arauto": 1.3, "escadaria_ceu": 1.4},
   "xp_min_mult": 0.1,
+  "mana": {
+    "_comment": "MP (pedido do dono em 13/11/2026): as skills gastam MP (mp_cost em skills.json); o fôlego fica para a esquiva e a corrida. Cada golpe básico que acerta devolve hit_gain de MP.",
+    "hit_gain": 3.0,
+    "regen_delay": 1.0
+  },
   "stamina": {
-    "_comment": "Fôlego (pedido do dono em 11/11/2026). Ataque básico não gasta.",
+    "_comment": "Fôlego (pedido do dono em 11/11/2026). Ataque básico não gasta. Desde 13/11 as skills gastam MP, não fôlego.",
     "dodge_cost": 25,
     "sprint_cost_per_sec": 18,
-    "sprint_speed_mult": 1.6,
+    "sprint_speed_mult": 1.35,
     "sprint_min_to_start": 15,
     "regen_delay": 0.8
   }

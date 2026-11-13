@@ -20,6 +20,10 @@ var houses: Array[Dictionary] = []
 var vases: Array[Node3D] = []
 ## "Resetar masmorra" sign (dungeons with a boss), or null.
 var reset_sign: DungeonSign
+## Dungeon difficulty signs, quest boards and wanted posters in this map (DungeonSign).
+var signs: Array[DungeonSign] = []
+## Today's wanted boss, when it is in this map.
+var wanted_boss: Enemy
 ## "Modo Infernal" sign next to it (only after the game is finished), or null.
 var infernal_sign: DungeonSign
 var zones: Array[EnemyZone] = []
@@ -36,6 +40,8 @@ static var _data_cache: Dictionary = {}
 
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var _clear_spots: Array[Vector3] = []
+## Inside of the town walls ("town_edge"); no grass outside it (the wood is there).
+var _edge_rect: Rect2 = Rect2()
 var _path_segments: Array = []
 
 
@@ -123,6 +129,8 @@ func _ready() -> void:
 	_build_lines()
 	_build_props()
 	_keep_quest_spots_clear()
+	_build_town_edge()
+	_build_boards()
 	_build_scatter()
 	_build_grass()
 	_build_exits()
@@ -223,6 +231,8 @@ func _build_grass() -> void:
 
 
 func _grass_free(p: Vector3) -> bool:
+	if _edge_rect.size != Vector2.ZERO and not _edge_rect.grow(0.5).has_point(Vector2(p.x, p.z)):
+		return false
 	for seg: Array in _path_segments:
 		if _dist_to_segment(p, seg[0], seg[1]) < float(seg[2]) * 0.5 + 0.3:
 			return false
@@ -251,7 +261,21 @@ func _build_ground() -> void:
 	ground.add_child(shape)
 	var plane := PlaneMesh.new()
 	plane.size = Vector2(w + 60, d + 60)
-	ground.add_child(ProtoVisuals.mesh_instance(plane, Color(str(data.get("ground", "#7BC950")))))
+	# Rooms inside houses ("room" in the map): a plank floor only as big as the room, and
+	# nothing around it (the dark background), so it feels like being inside.
+	var room: Dictionary = data.get("room", {})
+	if not room.is_empty():
+		var rs: Array = room.get("floor_size", [w, d])
+		plane.size = Vector2(float(rs[0]), float(rs[1]))
+		var floor_mat := ShaderMaterial.new()
+		floor_mat.shader = load("res://assets/shaders/wood_floor.gdshader")
+		floor_mat.set_shader_parameter("base_color", Color(str(room.get("floor", "#8a5a34"))))
+		var fm := MeshInstance3D.new()
+		fm.mesh = plane
+		fm.material_override = floor_mat
+		ground.add_child(fm)
+	else:
+		ground.add_child(ProtoVisuals.mesh_instance(plane, Color(str(data.get("ground", "#7BC950")))))
 	add_child(ground)
 	# Walls around the playable area.
 	for side: Vector3 in [Vector3(1, 0, 0), Vector3(-1, 0, 0), Vector3(0, 0, 1), Vector3(0, 0, -1)]:
@@ -540,9 +564,16 @@ func _build_walls() -> void:
 		var n: int = maxi(1, ceili(length / PropFactory.tile_length(id)))
 		var step: float = length / n
 		var rot: float = rad_to_deg(atan2(-dir.z, dir.x)) + float(w.get("rot", 0))
+		# "height": stretch the wall up (rooms inside houses, so only the room shows).
+		var tall: float = float(w.get("height", 1.0))
 		for i: int in n:
 			var pos: Vector3 = a + dir * step * (i + 0.5)
-			PropFactory.spawn(self, id, pos, rot)
+			var body: StaticBody3D = PropFactory.spawn(self, id, pos, rot)
+			if body != null and tall != 1.0:
+				for c: Node in body.get_children():
+					if c is Node3D and not (c is CollisionShape3D):
+						(c as Node3D).scale.y *= tall
+						(c as Node3D).position.y *= tall
 		# Keep scatter away from walls.
 		for i: int in n + 1:
 			_clear_spots.append(a + dir * step * i)
@@ -599,6 +630,118 @@ func house_near(pos: Vector3, margin: float = 1.3) -> Dictionary:
 				if Vector2(lp.x, lp.z).length() <= (cs.shape as CylinderShape3D).radius + margin:
 					return h
 	return {}
+
+
+## Towns ("town_edge" in the map): a thick wood all around outside the city walls, so the
+## bare field beyond them never shows, and trees here and there along the inside of the
+## walls (owner, 13/11). {"rect": [x0, z0, x1, z1] (the walls), "ids": [outside trees],
+## "inner_ids": [inside], "depth", "spacing", "inner_spacing", "seed"}.
+func _build_town_edge() -> void:
+	var cfg: Dictionary = data.get("town_edge", {})
+	if cfg.is_empty():
+		return
+	var r: Array = cfg.get("rect", [-30, -30, 30, 30])
+	var x0: float = float(r[0])
+	var z0: float = float(r[1])
+	var x1: float = float(r[2])
+	var z1: float = float(r[3])
+	_edge_rect = Rect2(x0, z0, x1 - x0, z1 - z0)
+	var depth: float = float(cfg.get("depth", 12.0))
+	var spacing: float = float(cfg.get("spacing", 3.2))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = int(cfg.get("seed", 77))
+	# Darker forest floor under the wood.
+	var floor_col: Color = Color(str(data.get("ground", "#7BC950"))).darkened(0.28)
+	var big: float = depth + 30.0
+	for q: Array in [[x0 - big, z0 - big, x1 + big, z0 - 1.2], [x0 - big, z1 + 1.2, x1 + big, z1 + big],
+			[x0 - big, z0 - 1.2, x0 - 1.2, z1 + 1.2], [x1 + 1.2, z0 - 1.2, x1 + big, z1 + 1.2]]:
+		var pm := PlaneMesh.new()
+		pm.size = Vector2(float(q[2]) - float(q[0]), float(q[3]) - float(q[1]))
+		var mi: MeshInstance3D = ProtoVisuals.mesh_instance(pm, floor_col)
+		mi.position = Vector3((float(q[0]) + float(q[2])) * 0.5, 0.006, (float(q[1]) + float(q[3])) * 0.5)
+		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		add_child(mi)
+	# Outside: a jittered grid of trees, drawn as one MultiMesh per kind (hundreds of trees).
+	var ids: Array = cfg.get("ids", ["prp_arvore", "prp_pinheiro"])
+	var per_id: Dictionary = {}
+	var x: float = x0 - depth
+	while x <= x1 + depth:
+		var z: float = z0 - depth
+		while z <= z1 + depth:
+			var p := Vector3(x + rng.randf_range(-0.9, 0.9) * spacing * 0.4, 0, z + rng.randf_range(-0.9, 0.9) * spacing * 0.4)
+			z += spacing
+			if _edge_rect.grow(1.8).has_point(Vector2(p.x, p.z)) or not _wood_free(p):
+				continue
+			var id: String = str(ids[rng.randi() % ids.size()])
+			if not per_id.has(id):
+				per_id[id] = []
+			var t := Transform3D(Basis(Vector3.UP, rng.randf() * TAU).scaled(Vector3.ONE * rng.randf_range(0.9, 1.35)), p)
+			(per_id[id] as Array).append(t)
+		x += spacing
+	for id: String in per_id:
+		_multimesh_prop(id, per_id[id])
+	# Inside: a tree every few metres along the walls (kept off gates, paths and houses).
+	var inner: Array = cfg.get("inner_ids", [])
+	if inner.is_empty():
+		return
+	var gap: float = float(cfg.get("inner_spacing", 6.0))
+	var inset: float = float(cfg.get("inset", 2.2))
+	var edges: Array = [[Vector3(x0 + inset, 0, z0 + inset), Vector3(x1 - inset, 0, z0 + inset)],
+		[Vector3(x0 + inset, 0, z1 - inset), Vector3(x1 - inset, 0, z1 - inset)],
+		[Vector3(x0 + inset, 0, z0 + inset), Vector3(x0 + inset, 0, z1 - inset)],
+		[Vector3(x1 - inset, 0, z0 + inset), Vector3(x1 - inset, 0, z1 - inset)]]
+	for e: Array in edges:
+		var a: Vector3 = e[0]
+		var b: Vector3 = e[1]
+		var n: int = maxi(1, floori(a.distance_to(b) / gap))
+		for i: int in n + 1:
+			var p: Vector3 = a.lerp(b, float(i) / n) + Vector3(rng.randf_range(-0.6, 0.6), 0, rng.randf_range(-0.6, 0.6))
+			if not _is_free(p, 3.0):
+				continue
+			PropFactory.spawn(self, str(inner[rng.randi() % inner.size()]), p, rng.randf_range(0, 360), rng.randf_range(0.9, 1.2))
+			_clear_spots.append(p)
+
+
+## The wood keeps away from the roads out of town (exits, portals and paths).
+func _wood_free(p: Vector3) -> bool:
+	for e: Dictionary in data.get("exits", []):
+		if _v(e["pos"]).distance_to(p) < 6.0 or (e.has("model_pos") and _v(e["model_pos"]).distance_to(p) < 5.0):
+			return false
+	for seg: Array in _path_segments:
+		if _dist_to_segment(p, seg[0], seg[1]) < float(seg[2]) * 0.5 + 2.0:
+			return false
+	return true
+
+
+## Many copies of one prop with no collision (the wood around a town), as MultiMeshes.
+func _multimesh_prop(id: String, transforms: Array) -> void:
+	var holder := Node3D.new()
+	add_child(holder)
+	var body: StaticBody3D = PropFactory.spawn(holder, id, Vector3.ZERO, 0.0)
+	if body == null:
+		holder.queue_free()
+		return
+	var to_body: Transform3D = body.global_transform.affine_inverse()
+	for n: Node in body.find_children("*", "MeshInstance3D", true, false):
+		var src := n as MeshInstance3D
+		if src.mesh == null:
+			continue
+		var mesh: Mesh = src.mesh.duplicate()
+		if mesh is ArrayMesh:
+			for s: int in mesh.get_surface_count():
+				(mesh as ArrayMesh).surface_set_material(s, src.get_active_material(s))
+		var local: Transform3D = to_body * src.global_transform
+		var mm := MultiMesh.new()
+		mm.transform_format = MultiMesh.TRANSFORM_3D
+		mm.mesh = mesh
+		mm.instance_count = transforms.size()
+		for i: int in transforms.size():
+			mm.set_instance_transform(i, (transforms[i] as Transform3D) * local)
+		var mmi := MultiMeshInstance3D.new()
+		mmi.multimesh = mm
+		mmi.name = "Wood_" + id
+		add_child(mmi)
+	holder.queue_free()
 
 
 ## Random props in a rectangle, kept off paths, spawns, exits and placed props.
@@ -723,6 +866,7 @@ func _build_enemy_zones() -> void:
 		zone.respawn_time = float(z.get("respawn", 15))
 		zone.follow_player = bool(z.get("follow_player", false))
 		zone.player = player
+		zone.map_id = map_id
 		if infernal():
 			zone.infernal = true
 			zone.level_bonus = infernal_bonus()
@@ -777,6 +921,25 @@ func _build_bosses() -> void:
 		if data.has("arena"):
 			e.engaged.connect(func(_e: Enemy) -> void: _close_arena())
 		boss_spawned.emit(e)
+	_build_wanted_boss()
+
+
+## Today's wanted boss of a city, if it waits in this map (Bounties): a stronger, painted
+## version of a boss, a few levels over the hero. Main gives the reward when it falls.
+func _build_wanted_boss() -> void:
+	var w: Dictionary = Bounties.wanted_in(map_id)
+	if w.is_empty() or player == null:
+		return
+	var e := Enemy.new()
+	e.setup(str(w["enemy"]), Bounties.wanted_level(player.stats.level), player)
+	e.position = w["pos"]
+	e.set_meta("wanted_city", str(w["city"]))
+	add_child(e)
+	e.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead))
+	e.summoned.connect(func(add: Enemy) -> void:
+		add.died.connect(func(dead: Enemy) -> void: enemy_killed.emit(dead)))
+	wanted_boss = e
+	boss_spawned.emit(e)
 
 
 ## A dungeon boss the sign can bring back: has a death flag and is not a duel.
@@ -810,6 +973,41 @@ func _build_reset_sign() -> void:
 		add_child(infernal_sign)
 		infernal_sign.position = at + Vector3(3.6, 0, 0)
 	refresh_reset_sign()
+
+
+## In front of each dungeon (in the map you enter it from): the difficulty sign and the
+## quest board. In each city: the wanted poster, next to the waystone.
+func _build_boards() -> void:
+	var dungeons: Dictionary = Data.boards.get("dungeons", {})
+	for e: Dictionary in data.get("exits", []):
+		var to: String = str(e.get("to", ""))
+		if not dungeons.has(to) or str((dungeons[to] as Dictionary).get("from", "")) != map_id:
+			continue
+		var at: Vector3 = _v(e["pos"])
+		var inward: Vector3 = -at
+		inward.y = 0.0
+		inward = inward.normalized() if inward.length() > 0.1 else Vector3.BACK
+		var side: Vector3 = Vector3(-inward.z, 0, inward.x)
+		for k: Array in [["tier", -3.2], ["board", 3.2]]:
+			var sign := DungeonSign.new()
+			sign.kind = str(k[0])
+			sign.target = to
+			add_child(sign)
+			sign.position = at + inward * 4.5 + side * float(k[1])
+			signs.append(sign)
+			_clear_spots.append(sign.position)
+	if (Data.boards.get("wanted", {}) as Dictionary).get(map_id, null) is Dictionary:
+		var stone: Vector3 = Vector3.ZERO
+		for rp: Dictionary in data.get("rest_points", []):
+			stone = _v(rp["pos"])
+			break
+		var poster := DungeonSign.new()
+		poster.kind = "wanted"
+		poster.target = map_id
+		add_child(poster)
+		poster.position = stone + Vector3(3.4, 0, 2.2)
+		signs.append(poster)
+		_clear_spots.append(poster.position)
 
 
 ## The sign shows while the boss is down and not yet called back.

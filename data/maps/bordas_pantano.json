@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "bordas_bau_1", "pos": [-30, 16], "yaw": 90, "gold": 3000, "items": {"pot_vida_g": 5, "amuleto": 1, "gema_rubi_3": 1}},
-    {"id": "bordas_bau_2", "pos": [30, -24], "yaw": -90, "gold": 3100, "items": {"pot_folego_g": 3, "broca": 1, "eq_luvas_epico": 1}}
+    {"id": "bordas_bau_2", "pos": [30, -24], "yaw": -90, "gold": 3100, "items": {"pot_mana_g": 3, "broca": 1, "eq_luvas_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "bordas_passarela", "name": "REST_BORDAS_PASSARELA", "pos": [-6, 32], "kind": "fogueira"},

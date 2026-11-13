@@ -5,6 +5,7 @@
   "safe": true,
   "size": [92, 92],
   "seed": 291,
+  "town_edge": {"rect": [-38, -40, 38, 40], "ids": ["prp_arvore", "prp_pinheiro", "prp_arvore", "prp_arvore_torta"], "inner_ids": ["prp_arvore", "prp_arbusto"], "depth": 14, "spacing": 3.4, "seed": 74},
   "ground": "#b9b2a2",
   "grass": {"count": 260, "root": "#6f8a4a", "tip": "#b7c27a"},
   "sky": "#c9d6e8",

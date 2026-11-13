@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cshr0vkb01a3f"
-path="res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.ctex"
+path.s3tc="res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "62189b818cf1c88f3eedf25ce18ff32c"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_pedra_passagem/prp_pedra_passagem_Image_0.png"
-dest_files=["res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.ctex"]
+dest_files=["res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.s3tc.ctex", "res://.godot/imported/prp_pedra_passagem_Image_0.png-4138353d8af21c7c86b4fb1eadf42c5f.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

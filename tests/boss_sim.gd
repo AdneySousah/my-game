@@ -60,13 +60,16 @@ func _ready() -> void:
 	if potions and boss_id in ["sahra", "guardiao_gelo", "brannoc", "guardiao_espinhos", "velyra", "cassian", "vaelor"]:
 		Session.add_item("pot_vida_m", 6)
 		Session.add_item("pot_vida_g", 3)
-		Session.add_item("pot_folego_m", 3)
+		Session.add_item("pot_mana_m", 3)
 		Session.add_item("pot_forca", 1)
 	elif potions:
 		Session.add_item("pot_vida_p", 6)
 		Session.add_item("pot_vida_m", 3)
-		Session.add_item("pot_folego_p", 3)
+		Session.add_item("pot_mana_p", 3)
 		Session.add_item("pot_forca", 1)
+	if potions:
+		# Shortcuts: health, MP, tonic.
+		Session.potion_slots.assign(["pot_vida_p", "pot_mana_p", "pot_forca"])
 	if with_gear:
 		# The best rarity the hero's level allows (common 10, rare 20, epic 40, legendary 60...).
 		var tier: String = "comum"
@@ -119,7 +122,7 @@ func _ready() -> void:
 			if potions:
 				if player.hp < player.max_hp() * 0.4:
 					main.hud.use_quick_potion(0)
-				if player.stamina < 15.0:
+				if player.mp < 25.0:
 					main.hud.use_quick_potion(1)
 				if player.stats.buff("atk") <= 0.0:
 					main.hud.use_quick_potion(2)

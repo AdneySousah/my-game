@@ -209,7 +209,7 @@ func play_loop(action: String, speed: float = 1.0) -> void:
 ## Call every frame with the character's ground speed. Movement interrupts the tail
 ## of an action; standing still lets the action finish first. `backward` = walking away
 ## while facing forward (archers keeping distance): uses "walk_back" when it exists.
-func update_locomotion(ground_speed: float, in_combat: bool = false, backward: bool = false) -> void:
+func update_locomotion(ground_speed: float, in_combat: bool = false, backward: bool = false, sprint: bool = false) -> void:
 	var moving: bool = ground_speed > 0.2
 	if is_busy() and not moving:
 		return
@@ -224,6 +224,9 @@ func update_locomotion(ground_speed: float, in_combat: bool = false, backward: b
 			play_loop("combat_idle" if in_combat else "idle")
 	elif backward and not _action("walk_back").is_empty():
 		play_loop("walk_back", clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
+	elif sprint and not _action("sprint").is_empty():
+		# The run button: a real sprint, leaning forward (owner, 13/11).
+		play_loop("sprint", clampf(ground_speed / float(speeds.get("sprint", 7.0)), 0.7, 1.6))
 	elif ground_speed < 3.0:
 		play_loop(_pick(prefix + "walk", "walk"), clampf(ground_speed / float(speeds.get("walk", 1.6)), 0.6, 2.0))
 	else:

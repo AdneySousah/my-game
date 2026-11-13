@@ -3,55 +3,55 @@
   "skills": [
     {
       "id": "corte_giratorio", "name": "SKILL_CORTE_GIRATORIO", "desc": "SKILL_CORTE_GIRATORIO_DESC",
-      "unlock_level": 1, "cooldown": 6.0, "stamina_cost": 20, "type": "spin",
+      "unlock_level": 1, "cooldown": 6.0, "mp_cost": 20, "type": "spin",
       "radius": 3.2, "dmg_mult": 1.6, "hits": 2, "hit_interval": 0.18, "lock_time": 0.5,
       "color": "#7FD1FF"
     },
     {
       "id": "investida", "name": "SKILL_INVESTIDA", "desc": "SKILL_INVESTIDA_DESC",
-      "unlock_level": 4, "cooldown": 8.0, "stamina_cost": 25, "type": "dash",
+      "unlock_level": 4, "cooldown": 8.0, "mp_cost": 25, "type": "dash",
       "distance": 6.0, "duration": 0.25, "width": 1.4, "dmg_mult": 1.4,
       "status": "stun", "status_time": 1.0, "lock_time": 0.3,
       "color": "#F2C14E"
     },
     {
       "id": "golpe_sismico", "name": "SKILL_GOLPE_SISMICO", "desc": "SKILL_GOLPE_SISMICO_DESC",
-      "unlock_level": 8, "cooldown": 9.0, "stamina_cost": 25, "type": "cone",
+      "unlock_level": 8, "cooldown": 9.0, "mp_cost": 25, "type": "cone",
       "radius": 5.0, "angle": 70.0, "dmg_mult": 2.0, "windup": 0.25,
       "status": "slow", "status_time": 3.0, "status_value": 0.5, "lock_time": 0.55,
       "color": "#D9733F", "vfx": "seismic"
     },
     {
       "id": "quebra_guarda", "name": "SKILL_QUEBRA_GUARDA", "desc": "SKILL_QUEBRA_GUARDA_DESC",
-      "unlock_level": 12, "cooldown": 10.0, "stamina_cost": 25, "type": "cone",
+      "unlock_level": 12, "cooldown": 10.0, "mp_cost": 25, "type": "cone",
       "radius": 2.8, "angle": 100.0, "dmg_mult": 2.4, "windup": 0.3,
       "status": "def_break", "status_time": 6.0, "status_value": 0.3, "lock_time": 0.6,
       "color": "#C8323C", "vfx": "guard_break"
     },
     {
       "id": "brado_de_guerra", "name": "SKILL_BRADO_DE_GUERRA", "desc": "SKILL_BRADO_DE_GUERRA_DESC",
-      "unlock_level": 16, "cooldown": 20.0, "stamina_cost": 30, "type": "buff",
+      "unlock_level": 16, "cooldown": 20.0, "mp_cost": 30, "type": "buff",
       "radius": 6.0, "buff_atk": 0.25, "buff_time": 8.0,
       "status": "weaken", "status_time": 8.0, "status_value": 0.15, "lock_time": 0.5,
       "color": "#FF8C42"
     },
     {
       "id": "onda_de_corte", "name": "SKILL_ONDA_DE_CORTE", "desc": "SKILL_ONDA_DE_CORTE_DESC",
-      "unlock_level": 20, "cooldown": 7.0, "stamina_cost": 20, "type": "projectile",
+      "unlock_level": 20, "cooldown": 7.0, "mp_cost": 20, "type": "projectile",
       "speed": 18.0, "range": 12.0, "width": 1.4, "dmg_mult": 1.8,
       "status": "stun", "status_time": 0.6, "lock_time": 0.35,
       "color": "#2EC4B6"
     },
     {
       "id": "salto_devastador", "name": "SKILL_SALTO_DEVASTADOR", "desc": "SKILL_SALTO_DEVASTADOR_DESC",
-      "unlock_level": 25, "cooldown": 14.0, "stamina_cost": 35, "type": "leap",
+      "unlock_level": 25, "cooldown": 14.0, "mp_cost": 35, "type": "leap",
       "distance": 7.0, "duration": 0.45, "radius": 3.5, "dmg_mult": 2.2,
       "status": "stun", "status_time": 1.5, "lock_time": 0.6,
       "color": "#9B5DE5"
     },
     {
       "id": "julgamento", "name": "SKILL_JULGAMENTO", "desc": "SKILL_JULGAMENTO_DESC",
-      "unlock_level": 30, "cooldown": 16.0, "stamina_cost": 40, "type": "single",
+      "unlock_level": 30, "cooldown": 16.0, "mp_cost": 40, "type": "single",
       "range": 3.5, "dmg_mult": 4.5, "windup": 0.4,
       "execute_below": 0.3, "execute_bonus": 0.5, "lock_time": 0.7,
       "color": "#E6B325"

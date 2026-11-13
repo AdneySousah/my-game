@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://7f025l7t5tb"
-path="res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.ctex"
+path.s3tc="res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "3b5c3cef0100e8317843b6ae9921f93f"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_vaso/prp_vaso_0.png"
-dest_files=["res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.ctex"]
+dest_files=["res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.s3tc.ctex", "res://.godot/imported/prp_vaso_0.png-c3f1de0d92c0f7940c1a86f2adb7d81b.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

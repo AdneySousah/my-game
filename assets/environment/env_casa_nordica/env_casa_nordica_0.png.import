@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bmfl0e6cpk3x6"
-path="res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.ctex"
+path.s3tc="res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.s3tc.ctex"
+path.etc2="res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "51cb7a2af00337507ea292563b397a25"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/environment/env_casa_nordica/env_casa_nordica_0.png"
-dest_files=["res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.ctex"]
+dest_files=["res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.s3tc.ctex", "res://.godot/imported/env_casa_nordica_0.png-9bcda12fb21862acc24b369e964241b1.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

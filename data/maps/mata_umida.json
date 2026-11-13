@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "mata_bau_1", "pos": [30, 14], "yaw": -90, "gold": 2800, "items": {"pot_vida_g": 4, "pot_pedra": 1, "gema_safira_3": 1}},
-    {"id": "mata_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 2900, "items": {"pot_folego_g": 3, "trevo": 1, "eq_cinto_epico": 1}}
+    {"id": "mata_bau_2", "pos": [-32, -24], "yaw": 45, "gold": 2900, "items": {"pot_mana_g": 3, "trevo": 1, "eq_cinto_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "mata_raiz", "name": "REST_MATA_RAIZ", "pos": [-6, 32], "kind": "fogueira"},

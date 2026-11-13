@@ -1,0 +1,15 @@
+{
+  "_comment": "Mapa-múndi da janela de viagem (pedido do dono, 13/11/2026): imagem ilustrada e onde fica cada mapa nela (x, y de 0 a 1). Os pontos de descanso ativados aparecem como botões no lugar do mapa deles.",
+  "image": "res://assets/ui/art/mapa_mundo.webp",
+  "pins": {
+    "pradoluz": [0.205, 0.78], "campos": [0.30, 0.86], "floresta": [0.11, 0.66], "mina": [0.15, 0.585], "celeiro": [0.285, 0.67],
+    "bosque_seco": [0.45, 0.66], "estepe": [0.52, 0.76], "ruinas": [0.585, 0.70],
+    "deserto_rochoso": [0.70, 0.67], "qaressa": [0.80, 0.78], "dunas": [0.86, 0.88], "torre": [0.895, 0.655],
+    "hrimvald": [0.31, 0.47], "planalto": [0.40, 0.57], "vale_degelo": [0.17, 0.43], "pinheiral": [0.09, 0.36],
+    "picos": [0.33, 0.30], "mina_gelo": [0.41, 0.40], "castelo": [0.225, 0.19],
+    "mata_umida": [0.575, 0.45], "lysthael": [0.73, 0.40], "bordas_pantano": [0.64, 0.585], "pantano": [0.75, 0.59],
+    "torre_vigia": [0.86, 0.48], "topo_torre": [0.905, 0.42],
+    "estrada_real": [0.53, 0.35], "arredores": [0.475, 0.25], "altarea": [0.58, 0.20], "castelo_arauto": [0.68, 0.16],
+    "escadaria_ceu": [0.83, 0.26], "cidadela": [0.875, 0.13]
+  }
+}

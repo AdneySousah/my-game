@@ -39,7 +39,7 @@
       "pos": [-30, -6],
       "yaw": 90,
       "gold": 260,
-      "items": {"pot_vida_m": 3, "pot_folego_m": 2, "broca": 1, "gema_safira_1": 1}
+      "items": {"pot_vida_m": 3, "pot_mana_m": 2, "broca": 1, "gema_safira_1": 1}
     },
     {
       "id": "bosque_bau_2",

@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cvhb8iyorxqba"
-path="res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.ctex"
+path.s3tc="res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.s3tc.ctex"
+path.etc2="res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "671ea828d78b9d8d3a1df1c90b960b7c"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/environment/env_casa_adobe/env_casa_adobe_0.png"
-dest_files=["res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.ctex"]
+dest_files=["res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.s3tc.ctex", "res://.godot/imported/env_casa_adobe_0.png-939337ba08c2f97ed155928b13151593.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

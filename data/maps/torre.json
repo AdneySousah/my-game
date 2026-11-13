@@ -21,7 +21,7 @@
   ],
   "chests": [
     {"id": "torre_bau_1", "pos": [-32, 26], "yaw": 90, "gold": 900, "items": {"pot_vida_g": 3, "broca": 1, "gema_rubi_2": 2}},
-    {"id": "torre_bau_2", "pos": [32, -2], "yaw": -90, "gold": 1000, "items": {"pot_folego_g": 2, "trevo": 1, "eq_peitoral_epico": 1}}
+    {"id": "torre_bau_2", "pos": [32, -2], "yaw": -90, "gold": 1000, "items": {"pot_mana_g": 2, "trevo": 1, "eq_peitoral_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "paths": [
     {"points": [[0, 48], [0, 32], [-6, 18], [2, 4], [0, -10], [0, -24]], "width": 3.6, "color": "#bf9258"}

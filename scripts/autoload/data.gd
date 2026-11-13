@@ -27,6 +27,10 @@ var routine: Dictionary = {}
 var daynight: Dictionary = {}
 ## Villagers, animals and birds that bring the maps to life (data/world/ambience.json).
 var ambience: Dictionary = {}
+## The illustrated world map of the travel window and where each map sits on it.
+var world_map: Dictionary = {}
+## Dungeon difficulty signs, quest boards and the cities' wanted bosses.
+var boards: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -36,6 +40,8 @@ func _ready() -> void:
 	progression = _load_json("res://data/progression/progression.json")
 	daynight = _load_json("res://data/world/daynight.json")
 	ambience = _load_json("res://data/world/ambience.json")
+	world_map = _load_json("res://data/world/world_map.json")
+	boards = _load_json("res://data/world/boards.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])

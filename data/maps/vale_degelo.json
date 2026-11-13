@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "vale_bau_1", "pos": [-30, 12], "yaw": 90, "gold": 2600, "items": {"pot_vida_g": 4, "pot_vento": 1, "gema_ametista_3": 1}},
-    {"id": "vale_bau_2", "pos": [32, -26], "yaw": -90, "gold": 2700, "items": {"pot_folego_g": 3, "broca": 1, "eq_pulseira_epico": 1}}
+    {"id": "vale_bau_2", "pos": [32, -26], "yaw": -90, "gold": 2700, "items": {"pot_mana_g": 3, "broca": 1, "eq_pulseira_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "vale_ponte", "name": "REST_VALE_PONTE", "pos": [-6, 32], "kind": "fogueira"},

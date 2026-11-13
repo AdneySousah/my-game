@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ceajy2j6jbqed"
-path="res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.ctex"
+path.s3tc="res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "2356d15e388a0b515ee1ec8c5774d75b"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_cerca/prp_cerca_Image_0.png"
-dest_files=["res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.ctex"]
+dest_files=["res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.s3tc.ctex", "res://.godot/imported/prp_cerca_Image_0.png-82302331b92c9ed0c0db58cfb9fe2d6a.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

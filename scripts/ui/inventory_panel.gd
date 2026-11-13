@@ -19,7 +19,9 @@ var _kind: Label
 var _desc: Label
 var _owned: Label
 var _use_btn: Button
-var _quick_btn: Button
+## "Atalho: [1] [2] [3]": puts the chosen potion in one of the 3 shortcuts on the screen.
+var _quick_row: HBoxContainer
+var _quick_btns: Array[Button] = []
 ## Id of the chosen item ("" = none) and its position in the bag.
 var _selected: String = ""
 var _selected_index: int = -1
@@ -83,8 +85,17 @@ func _ready() -> void:
 	detail.add_child(_owned)
 	_use_btn = _button(tr("BAG_USE"), _use_selected)
 	detail.add_child(_use_btn)
-	_quick_btn = _button(tr("BAG_QUICK"), _set_quick)
-	detail.add_child(_quick_btn)
+	_quick_row = HBoxContainer.new()
+	_quick_row.add_theme_constant_override("separation", 6)
+	var ql: Label = _label(17)
+	ql.text = tr("BAG_QUICK")
+	_quick_row.add_child(ql)
+	for i: int in 3:
+		var qb: Button = _button(str(i + 1), _set_quick.bind(i))
+		qb.custom_minimum_size = Vector2(56, 46)
+		_quick_row.add_child(qb)
+		_quick_btns.append(qb)
+	detail.add_child(_quick_row)
 	_equip_btn = _button(tr("EQ_EQUIP"), _equip_chosen)
 	detail.add_child(_equip_btn)
 	_gear_btn = _button(tr("EQ_TITLE"), func() -> void:
@@ -166,11 +177,11 @@ func _show_details() -> void:
 		_equip_btn.disabled = Equipment.block_reason(piece, _level()) != ""
 	var potion: bool = has and str(item.get("type", "")) == "potion"
 	_use_btn.visible = potion
-	_quick_btn.visible = potion
+	_quick_row.visible = potion
 	if potion:
-		var slot_kind: String = str(item.get("slot", ""))
-		_quick_btn.disabled = Session.quick_slots.get(slot_kind, "") == _selected
-		_quick_btn.text = tr("BAG_QUICK_ON") if _quick_btn.disabled else tr("BAG_QUICK")
+		for i: int in _quick_btns.size():
+			# The shortcut that already has this potion shows as pressed (disabled).
+			_quick_btns[i].disabled = i < Session.potion_slots.size() and Session.potion_slots[i] == _selected
 	_detail_icon.queue_redraw()
 
 
@@ -197,11 +208,16 @@ func _use_selected() -> void:
 		player.use_potion(_selected)
 
 
-func _set_quick() -> void:
-	var slot_kind: String = str(Data.item(_selected).get("slot", ""))
-	if slot_kind != "":
-		Session.quick_slots[slot_kind] = _selected
-		_show_details()
+func _set_quick(i: int) -> void:
+	if _selected == "" or i >= Session.potion_slots.size():
+		return
+	# The same potion is never in two shortcuts: the old one becomes empty.
+	for k: int in Session.potion_slots.size():
+		if Session.potion_slots[k] == _selected:
+			Session.potion_slots[k] = ""
+	Session.potion_slots[i] = _selected
+	Audio.play_sfx("ui_open")
+	_show_details()
 
 
 func _label(size: int) -> Label:

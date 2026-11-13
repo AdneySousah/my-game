@@ -18,7 +18,7 @@
   ],
   "chests": [
     {"id": "escadaria_ceu_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 5400, "items": {"pot_vida_g": 6, "trevo_real": 1, "mat_insignia_chefe": 3}},
-    {"id": "escadaria_ceu_bau_2", "pos": [31, -24], "yaw": -90, "gold": 5600, "items": {"pot_folego_g": 4, "broca_real": 1, "gema_topazio_3": 1}}
+    {"id": "escadaria_ceu_bau_2", "pos": [31, -24], "yaw": -90, "gold": 5600, "items": {"pot_mana_g": 4, "broca_real": 1, "gema_topazio_3": 1}}
   ],
   "rest_points": [
     {"id": "escadaria_ceu_degrau", "name": "REST_ESCADARIA_DEGRAU", "pos": [-6, 32], "kind": "fogueira"},

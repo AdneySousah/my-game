@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dxuvlmbk4b5iv"
-path="res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.ctex"
+path.s3tc="res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.s3tc.ctex"
+path.etc2="res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "7c56125e74f0b3d4974c54eef957cec1"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/environment/env_torre_madeira/env_torre_madeira_0.png"
-dest_files=["res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.ctex"]
+dest_files=["res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.s3tc.ctex", "res://.godot/imported/env_torre_madeira_0.png-66b7c8fe58b169cee0437e390dfd057f.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

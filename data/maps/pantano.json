@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "pantano_bau_1", "pos": [-32, 18], "yaw": 90, "gold": 3300, "items": {"pot_vida_g": 5, "pot_forca": 1, "gema_ametista_3": 1}},
-    {"id": "pantano_bau_2", "pos": [32, 2], "yaw": -90, "gold": 3400, "items": {"pot_folego_g": 3, "trevo_real": 1, "eq_peitoral_epico": 1}}
+    {"id": "pantano_bau_2", "pos": [32, 2], "yaw": -90, "gold": 3400, "items": {"pot_mana_g": 3, "trevo_real": 1, "eq_peitoral_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "pantano_raiz", "name": "REST_PANTANO_RAIZ", "pos": [-6, 32], "kind": "fogueira"},

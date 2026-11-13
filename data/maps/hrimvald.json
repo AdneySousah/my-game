@@ -5,6 +5,7 @@
   "safe": true,
   "size": [80, 80],
   "seed": 161,
+  "town_edge": {"rect": [-30, -30, 30, 32], "ids": ["prp_pinheiro", "prp_pinheiro", "prp_pinheiro", "prp_arvore_seca"], "inner_ids": ["prp_pinheiro"], "depth": 14, "spacing": 3.2, "seed": 73},
   "biome": {"snow": 1.0},
   "ground": "#e8eef3",
   "grass": {"count": 160, "root": "#a9b8a8", "tip": "#f2f6f8"},

@@ -19,7 +19,7 @@
   ],
   "chests": [
     {"id": "planalto_bau_1", "pos": [30, 16], "yaw": -90, "gold": 1300, "items": {"pot_vida_g": 3, "pot_pedra": 1, "gema_safira_2": 2}},
-    {"id": "planalto_bau_2", "pos": [-32, -26], "yaw": 45, "gold": 1400, "items": {"pot_folego_g": 2, "trevo": 1, "eq_elmo_epico": 1}}
+    {"id": "planalto_bau_2", "pos": [-32, -26], "yaw": 45, "gold": 1400, "items": {"pot_mana_g": 2, "trevo": 1, "eq_elmo_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "planalto_marco", "name": "REST_PLANALTO_MARCO", "pos": [-6, 32], "kind": "fogueira"},

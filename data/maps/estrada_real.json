@@ -18,7 +18,7 @@
   ],
   "chests": [
     {"id": "estrada_real_bau_1", "pos": [-30, 14], "yaw": 90, "gold": 3900, "items": {"pot_vida_g": 5, "pot_forca": 1, "gema_topazio_3": 1}},
-    {"id": "estrada_real_bau_2", "pos": [31, -24], "yaw": -90, "gold": 4000, "items": {"pot_folego_g": 3, "trevo_real": 1, "eq_pulseira_epico": 1}}
+    {"id": "estrada_real_bau_2", "pos": [31, -24], "yaw": -90, "gold": 4000, "items": {"pot_mana_g": 3, "trevo_real": 1, "eq_pulseira_raro": 1, "mat_insignia_chefe": 10}}
   ],
   "rest_points": [
     {"id": "estrada_real_marco", "name": "REST_ESTRADA_MARCO", "pos": [-6, 32], "kind": "fogueira"},

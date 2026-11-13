@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://do2ayh7vjc51f"
-path="res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.ctex"
+path.s3tc="res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "ef1cbf550337de89d4f88cec17ef2efb"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_cama/prp_cama_0.png"
-dest_files=["res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.ctex"]
+dest_files=["res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.s3tc.ctex", "res://.godot/imported/prp_cama_0.png-13ae288566edf04bc7c8b24c60ec883f.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

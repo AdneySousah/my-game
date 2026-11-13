@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dngxo7y6v1df5"
-path="res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.ctex"
+path.s3tc="res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "b421a38b68d4a887a4507c0b519cb078"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_palmeira/prp_palmeira_0.png"
-dest_files=["res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.ctex"]
+dest_files=["res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.s3tc.ctex", "res://.godot/imported/prp_palmeira_0.png-e24d3356ee08f6a6f916d05f0225f875.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

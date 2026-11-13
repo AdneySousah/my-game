@@ -7054,6 +7054,78 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "ui_oferta_banner",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Banner da oferta: Lio fazendo força com o braço",
+      "file": "assets/ui/ui_oferta_banner/ui_oferta_banner.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d49f-e4e6-7032-8c00-01eb9d7944a6",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_mapa_mundo",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Mapa-múndi ilustrado da janela de viagem",
+      "file": "assets/ui/ui_mapa_mundo/ui_mapa_mundo.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d49f-ebec-70fc-88fa-e9a3023385a1",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_dificuldades",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "4 cartas da escolha de dificuldade (Fácil, Normal, Difícil, Extrema)",
+      "file": "assets/ui/ui_dificuldades/ui_dificuldades.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 6,
+          "task_id": "01a1d49f-f3fe-733a-bdfa-387a51817a2b",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
+    },
+    {
+      "id": "ui_itens_pocoes_mp",
+      "category": "ui",
+      "phase": 6,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "Folha de ícones 4x4: poções de MP, quadros e procurado",
+      "file": "assets/ui/ui_itens_pocoes_mp/ui_itens_pocoes_mp.png",
+      "tasks": [
+        {
+          "type": "image-to-image",
+          "credits": 3,
+          "task_id": "01a1d49f-f892-77fe-8bfe-0066051a8ec8",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

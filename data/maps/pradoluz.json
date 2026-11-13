@@ -5,6 +5,7 @@
   "safe": true,
   "size": [72, 72],
   "seed": 11,
+  "town_edge": {"rect": [-30, -30, 30, 30], "ids": ["prp_arvore", "prp_arvore", "prp_pinheiro", "prp_arvore_torta"], "inner_ids": ["prp_arvore", "prp_arbusto", "prp_arvore_torta"], "depth": 14, "spacing": 3.4, "seed": 71},
   "ground": "#7BC950",
   "grass": {"count": 3500, "root": "#62ad44", "tip": "#b4e679"},
   "patches": {"color": "#6cbc45", "count": 70},

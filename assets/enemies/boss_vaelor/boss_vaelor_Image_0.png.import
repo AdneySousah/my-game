@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bbq7twwh3bbke"
-path="res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.ctex"
+path.s3tc="res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.s3tc.ctex"
+path.etc2="res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "8e4a446d796a82a9e85afb352a97c683"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/enemies/boss_vaelor/boss_vaelor_Image_0.png"
-dest_files=["res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.ctex"]
+dest_files=["res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.s3tc.ctex", "res://.godot/imported/boss_vaelor_Image_0.png-33994eb2242f048f36bace892cf95978.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

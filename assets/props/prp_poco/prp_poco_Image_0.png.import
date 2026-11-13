@@ -3,9 +3,11 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://sqyabby7o8pf"
-path="res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.ctex"
+path.s3tc="res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.s3tc.ctex"
+path.etc2="res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.etc2.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
+"vram_texture": true
 }
 generator_parameters={
 "md5": "d84fc0b8631e10352d74c375d5d8186f"
@@ -14,11 +16,11 @@ generator_parameters={
 [deps]
 
 source_file="res://assets/props/prp_poco/prp_poco_Image_0.png"
-dest_files=["res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.ctex"]
+dest_files=["res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.s3tc.ctex", "res://.godot/imported/prp_poco_Image_0.png-1b90d33f4d9dc13c34faf9bcde8db2ef.etc2.ctex"]
 
 [params]
 
-compress/mode=0
+compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/uastc_level=0
@@ -39,5 +41,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=0
+process/size_limit=1024
 detect_3d/compress_to=1

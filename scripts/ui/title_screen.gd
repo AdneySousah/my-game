@@ -4,6 +4,7 @@ extends Control
 
 const PROLOGUE_SCENE: String = "res://scenes/ui/prologue.tscn"
 const BACKGROUND: String = "res://assets/story/pro_08_torre.webp"
+const DIFFICULTIES: Array[String] = ["easy", "normal", "hard", "extreme"]
 
 var _buttons: VBoxContainer
 var _confirm: PanelContainer
@@ -142,38 +143,61 @@ func _build_confirm() -> PanelContainer:
 	return panel
 
 
+## Four illustrated cards (owner, 13/11): Fácil, Normal, Difícil and Extrema. Tapping the
+## picture or the name starts the game in that difficulty.
 func _build_difficulty() -> PanelContainer:
 	var panel := PanelContainer.new()
 	panel.hide()
-	panel.custom_minimum_size = Vector2(620, 0)
 	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 10)
+	box.add_theme_constant_override("separation", 8)
 	panel.add_child(box)
 	var msg := Label.new()
 	msg.text = tr("DIFF_CHOOSE")
 	msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	msg.add_theme_font_size_override("font_size", 24)
+	msg.add_theme_font_size_override("font_size", 26)
 	box.add_child(msg)
-	for d: String in ["easy", "normal", "hard"]:
-		box.add_child(_button(tr("DIFF_" + d.to_upper()), func() -> void: _start_new(d)))
+	var cards := HBoxContainer.new()
+	cards.add_theme_constant_override("separation", 12)
+	box.add_child(cards)
+	for i: int in DIFFICULTIES.size():
+		var d: String = DIFFICULTIES[i]
+		var card := VBoxContainer.new()
+		card.custom_minimum_size = Vector2(272, 0)
+		card.add_theme_constant_override("separation", 6)
+		cards.add_child(card)
+		var art := TextureButton.new()
+		art.texture_normal = load("res://assets/ui/art/dif_%d.webp" % i)
+		art.ignore_texture_size = true
+		art.stretch_mode = TextureButton.STRETCH_KEEP_ASPECT_COVERED
+		art.custom_minimum_size = Vector2(272, 330)
+		art.focus_mode = Control.FOCUS_NONE
+		art.pressed.connect(_start_new.bind(d))
+		card.add_child(art)
+		var b: Button = _button(tr("DIFF_" + d.to_upper()), _start_new.bind(d))
+		b.custom_minimum_size = Vector2(0, 54)
+		if d == "extreme":
+			b.add_theme_color_override("font_color", Color("#7a0d05"))
+		card.add_child(b)
 		var info := Label.new()
 		info.text = tr("DIFF_" + d.to_upper() + "_DESC")
 		info.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-		info.custom_minimum_size = Vector2(560, 0)
+		info.custom_minimum_size = Vector2(272, 64)
 		info.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		info.add_theme_font_size_override("font_size", 15)
-		box.add_child(info)
+		info.add_theme_font_size_override("font_size", 14)
+		card.add_child(info)
 	var note := Label.new()
 	note.text = tr("DIFF_NOTE")
 	note.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	note.custom_minimum_size = Vector2(560, 0)
+	note.custom_minimum_size = Vector2(1100, 0)
 	note.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	note.add_theme_font_size_override("font_size", 14)
 	note.add_theme_color_override("font_color", Color("#c8b89a"))
 	box.add_child(note)
-	box.add_child(_button(tr("TITLE_NO"), func() -> void:
+	var back: Button = _button(tr("TITLE_NO"), func() -> void:
 		panel.hide()
-		_buttons.show()))
+		_buttons.show())
+	back.custom_minimum_size = Vector2(0, 48)
+	box.add_child(back)
 	return panel
 
 

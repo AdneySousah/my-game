@@ -7,7 +7,7 @@
         { "type": "talk", "npc": "marta", "dialogue": "main_01_marta", "text": "OBJ_TALK_MARTA" },
         { "type": "talk", "npc": "bram", "dialogue": "main_01_bram", "text": "OBJ_TALK_BRAM" }
       ],
-      "rewards": { "xp": 60, "gold": 15, "items": { "pot_vida_p": 3, "pot_folego_p": 2 } }
+      "rewards": { "xp": 60, "gold": 15, "items": { "pot_vida_p": 3, "pot_mana_p": 2 } }
     },
     {
       "id": "main_02", "type": "main", "name": "QUEST_MAIN_02", "giver": "bram", "offer": "main_02_offer",
@@ -301,7 +301,7 @@
         { "type": "collect", "map": "campos", "item": "ITEM_SACO_FARINHA", "points": [[-10, -13], [10, 30], [-20, -38]], "text": "OBJ_COLLECT_FLOUR" },
         { "type": "talk", "npc": "celeste", "dialogue": "side_farinha_done", "text": "OBJ_RETURN_CELESTE" }
       ],
-      "rewards": { "xp": 120, "gold": 60, "items": { "pot_folego_p": 3, "pot_vida_p": 2 } }
+      "rewards": { "xp": 120, "gold": 60, "items": { "pot_mana_p": 3, "pot_vida_p": 2 } }
     },
     {
       "id": "side_estrada", "type": "side", "name": "QUEST_SIDE_ESTRADA", "giver": "bram", "offer": "side_estrada_offer",

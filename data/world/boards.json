@@ -1,0 +1,192 @@
+{
+  "_comment": "Quadros e placas (pedido do dono, 13/11/2026). tiers: a placa de dificuldade na frente de cada masmorra (hp/atk dos monstros, drops = chance dos itens, gold = ouro). dungeons: de qual mapa se entra (from: lá ficam a placa e o quadro), nível, monstros e chefe. board: o quadro de missões (3 por dia em cada masmorra; prêmio = ouro + 1 item extra). wanted: o Procurado de cada cidade (um chefe do mundo por dia, num dos campos da região, mais forte que os Arautos).",
+  "tiers": [
+    {
+      "name": "DTIER_0",
+      "desc": "DTIER_0_DESC",
+      "hp": 1.0,
+      "atk": 1.0,
+      "drops": 1.0,
+      "gold": 1.0
+    },
+    {
+      "name": "DTIER_1",
+      "desc": "DTIER_1_DESC",
+      "hp": 1.5,
+      "atk": 1.3,
+      "drops": 1.5,
+      "gold": 1.4
+    },
+    {
+      "name": "DTIER_2",
+      "desc": "DTIER_2_DESC",
+      "hp": 2.2,
+      "atk": 1.7,
+      "drops": 2.0,
+      "gold": 1.8
+    }
+  ],
+  "dungeons": {
+    "mina": {
+      "from": "floresta",
+      "level": 11,
+      "mobs": [
+        "arqueiro",
+        "bandido",
+        "esqueleto",
+        "orc"
+      ],
+      "boss": "golem",
+      "boss_flag": "golem_defeated"
+    },
+    "celeiro": {
+      "from": "mina",
+      "level": 12,
+      "mobs": [],
+      "boss": "gorvan",
+      "boss_flag": "gorvan_defeated"
+    },
+    "torre": {
+      "from": "ruinas",
+      "level": 28,
+      "mobs": [
+        "bandido_deserto",
+        "esqueleto_antigo",
+        "homem_lagarto"
+      ],
+      "boss": "sahra",
+      "boss_flag": "sahra_defeated"
+    },
+    "mina_gelo": {
+      "from": "picos",
+      "level": 42,
+      "mobs": [
+        "golem_gelo",
+        "morto_gelo",
+        "orc_neve"
+      ],
+      "boss": "guardiao_gelo",
+      "boss_flag": "guardiao_gelo_defeated"
+    },
+    "castelo": {
+      "from": "mina_gelo",
+      "level": 44,
+      "mobs": [
+        "golem_gelo",
+        "morto_gelo",
+        "orc_neve"
+      ],
+      "boss": "brannoc",
+      "boss_flag": "brannoc_defeated"
+    },
+    "torre_vigia": {
+      "from": "pantano",
+      "level": 55,
+      "mobs": [
+        "cultista",
+        "lagarto_pantano",
+        "morto_pantano"
+      ],
+      "boss": "guardiao_espinhos",
+      "boss_flag": "guardiao_espinhos_defeated"
+    },
+    "topo_torre": {
+      "from": "torre_vigia",
+      "level": 56,
+      "mobs": [],
+      "boss": "velyra",
+      "boss_flag": "velyra_defeated"
+    },
+    "castelo_arauto": {
+      "from": "altarea",
+      "level": 62,
+      "mobs": [
+        "arqueiro_lei",
+        "carcereiro",
+        "guarda_lei"
+      ],
+      "boss": "cassian",
+      "boss_flag": "cassian_defeated"
+    },
+    "cidadela": {
+      "from": "escadaria_ceu",
+      "level": 65,
+      "mobs": [],
+      "boss": "vaelor",
+      "boss_flag": "vaelor_defeated"
+    }
+  },
+  "board": {
+    "per_day": 3,
+    "hunt_count": 15,
+    "hunt_type_count": 8,
+    "gold_per_level": 30,
+    "items": [
+      [
+        "pot_vida_m",
+        2
+      ],
+      [
+        "pot_mana_m",
+        2
+      ],
+      [
+        "trevo",
+        1
+      ],
+      [
+        "broca",
+        1
+      ],
+      [
+        "mat_insignia_chefe",
+        2
+      ],
+      [
+        "gem",
+        1
+      ]
+    ]
+  },
+  "wanted": {
+    "pradoluz": {
+      "enemy": "procurado_pradoluz",
+      "maps": [
+        "floresta",
+        "campos"
+      ]
+    },
+    "qaressa": {
+      "enemy": "procurado_qaressa",
+      "maps": [
+        "dunas",
+        "deserto_rochoso"
+      ]
+    },
+    "hrimvald": {
+      "enemy": "procurado_hrimvald",
+      "maps": [
+        "pinheiral",
+        "planalto"
+      ]
+    },
+    "lysthael": {
+      "enemy": "procurado_lysthael",
+      "maps": [
+        "mata_umida",
+        "bordas_pantano"
+      ]
+    },
+    "altarea": {
+      "enemy": "procurado_altarea",
+      "maps": [
+        "estrada_real",
+        "arredores"
+      ]
+    },
+    "level_over_hero": 3,
+    "gold_per_level": 120,
+    "insignias": 6,
+    "gems": 2
+  }
+}

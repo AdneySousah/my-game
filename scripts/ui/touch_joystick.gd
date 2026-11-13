@@ -16,8 +16,25 @@ func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 
+## Hidden while a talk or a panel is open (e.g. the boss line when a Herald changes form):
+## the finger is let go there, so drop it now or the stick stays stuck on the old touch.
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_VISIBILITY_CHANGED and not is_visible_in_tree():
+		release()
+
+
+func release() -> void:
+	if _touch_index != -1:
+		_touch_index = -1
+		_apply(Vector2.ZERO)
+		queue_redraw()
+
+
 func _input(event: InputEvent) -> void:
 	if not is_visible_in_tree():
+		# A finger lifted while hidden still frees the stick.
+		if event is InputEventScreenTouch and not (event as InputEventScreenTouch).pressed:
+			release()
 		return
 	if event is InputEventScreenTouch:
 		var t := event as InputEventScreenTouch

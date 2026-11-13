@@ -98,7 +98,7 @@
     {"id": "guardiao_espinhos", "pos": [0, -35], "level": 55, "yaw": 180, "unless_flag": "guardiao_espinhos_defeated", "flag_on_death": "guardiao_espinhos_defeated"}
   ],
   "chests": [
-    {"id": "torre_vigia_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 3600, "items": {"pot_vida_g": 5, "pot_pedra": 1, "eq_botas_epico": 1, "gema_rubi_3": 1}},
-    {"id": "torre_vigia_bau_2", "pos": [16, -34], "yaw": -90, "gold": 3800, "items": {"trevo_real": 1, "broca_real": 1, "eq_espada_epico": 1}}
+    {"id": "torre_vigia_bau_1", "pos": [-15, 7], "yaw": 90, "gold": 3600, "items": {"pot_vida_g": 5, "pot_pedra": 1, "eq_botas_raro": 1, "mat_insignia_chefe": 10, "gema_rubi_3": 1}},
+    {"id": "torre_vigia_bau_2", "pos": [16, -34], "yaw": -90, "gold": 3800, "items": {"trevo_real": 1, "broca_real": 1, "eq_espada_raro": 1, "mat_insignia_chefe": 10}}
   ]
 }

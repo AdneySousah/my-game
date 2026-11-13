@@ -1,5 +1,5 @@
 {
-  "_comment": "Casa térrea por dentro (pedido do dono): cozinha, sala e quarto no mesmo andar. Vasos com itens básicos. A saída volta para a rua, onde o herói entrou (Session.house_return).",
+  "_comment": "Casa térrea por dentro (pedido do dono): cozinha, sala e quarto no mesmo andar. Vasos com itens básicos. A saída volta para a rua, onde o herói entrou (Session.house_return). Chão de tábuas, paredes altas e nada em volta (pedido do dono, 13/11); a porta é a abertura na mureta da frente.",
   "id": "interior_casa",
   "name": "MAP_INTERIOR_CASA",
   "safe": true,
@@ -7,22 +7,23 @@
   "size": [14, 10.5],
   "seed": 401,
   "ground": "#a07548",
-  "sky": "#1a120c",
+  "sky": "#050302",
   "ambient": 0.75,
   "ambient_color": "#ffe2bf",
   "sun": 0.55,
   "sun_color": "#ffd9a8",
-  "patches": {"color": "#8d6540", "count": 18},
   "spawns": {"door": [0, 3.3, 0]},
   "exits": [
-    {"to": "__return", "spawn": "", "pos": [0, 4.9], "size": [3.0, 1.2], "label": "MAP_EXIT_HOUSE"}
+    {"to": "__return", "spawn": "", "pos": [0, 4.9], "size": [4.4, 1.2], "label": "MAP_EXIT_HOUSE"}
   ],
   "walls": [
-    {"id": "env_parede_casa", "from": [-6.5, -4.5], "to": [6.5, -4.5]},
-    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-6.5, -4.5]},
-    {"id": "env_parede_casa", "from": [6.5, -4.5], "to": [6.5, 4.5]}
+    {"id": "env_parede_casa", "from": [-6.5, -4.5], "to": [6.5, -4.5], "height": 2.0},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-6.5, -4.5], "height": 2.0},
+    {"id": "env_parede_casa", "from": [6.5, -4.5], "to": [6.5, 4.5], "height": 2.0},
+    {"id": "env_parede_casa", "from": [-6.5, 4.5], "to": [-2.4, 4.5], "height": 0.35},
+    {"id": "env_parede_casa", "from": [2.4, 4.5], "to": [6.5, 4.5], "height": 0.35}
   ],
-  "barriers": [[[-6.5, 4.5], [6.5, 4.5]]],
+  "barriers": [],
   "props": [
     {"id": "prp_fogao", "pos": [-5.3, -3.5], "rot": 0},
     {"id": "prp_armario", "pos": [-3.3, -3.7], "rot": 0},
@@ -33,5 +34,7 @@
     {"id": "prp_cama", "pos": [5.0, -2.4], "rot": 90},
     {"id": "prp_lampiao", "pos": [-1.3, -3.7]}
   ],
-  "vases": [[-5.6, 3.3], [5.6, 3.3], [5.6, 0.4], [-1.9, -3.6]]
+  "vases": [[-5.6, 3.3], [5.6, 3.3], [5.6, 0.4], [-1.9, -3.6]],
+  "patches": {"color": "#000000", "count": 0},
+  "room": {"floor": "#9a6438", "floor_size": [13.2, 9.4]}
 }

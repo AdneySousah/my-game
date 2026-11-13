@@ -238,6 +238,38 @@
       "bonus": {"crit_dmg": 0.2}
     },
     {
+      "id": "procurado_1",
+      "kind": "wanted",
+      "target": "",
+      "amount": 1,
+      "title": "TITLE_CACADOR_RECOMPENSAS",
+      "bonus": {"atk": 15}
+    },
+    {
+      "id": "procurado_10",
+      "kind": "wanted",
+      "target": "",
+      "amount": 10,
+      "title": "TITLE_TERROR_PROCURADOS",
+      "bonus": {"max_hp": 250}
+    },
+    {
+      "id": "quadro_10",
+      "kind": "board",
+      "target": "",
+      "amount": 10,
+      "title": "TITLE_PRESTATIVO",
+      "bonus": {"def": 15}
+    },
+    {
+      "id": "quadro_50",
+      "kind": "board",
+      "target": "",
+      "amount": 50,
+      "title": "TITLE_HEROI_DO_POVO",
+      "bonus": {"crit_chance": 0.03}
+    },
+    {
       "id": "infernal_vaelor",
       "kind": "infernal",
       "target": "cidadela",

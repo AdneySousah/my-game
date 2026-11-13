@@ -102,11 +102,22 @@ func _keep_quest_targets() -> void:
 		var id: String = str(w["enemy"])
 		if not Data.enemies.has(id):
 			continue
-		# Only the ones really near the quest spot count (a monster may have wandered off).
+		# Bosses and duels come from the map's "bosses", never from a zone (owner, 13/11:
+		# the quest "beat the Golem" made the mine's zone add Golem after Golem).
+		var def: Dictionary = Data.enemies[id]
+		if bool(def.get("boss", false)) or def.has("duel"):
+			continue
+		# Only the ones really near the quest spot count (a monster may have wandered off),
+		# but never more than 2 of the kind from this zone in all.
 		var have: int = 0
+		var of_kind: int = 0
 		for e: Enemy in _alive:
-			if e.base_id == id and Vector2(e.global_position.x - p.x, e.global_position.z - p.z).length() <= radius + 4.0:
+			if e.base_id != id:
+				continue
+			of_kind += 1
+			if Vector2(e.global_position.x - p.x, e.global_position.z - p.z).length() <= radius + 4.0:
 				have += 1
+		have = maxi(have, of_kind)
 		var away: Vector3 = global_position - player.global_position
 		away.y = 0.0
 		var dir: Vector3 = away.normalized() if away.length() > 0.5 else Vector3.FORWARD

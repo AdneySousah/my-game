@@ -47,6 +47,7 @@ func _ready() -> void:
 	await _covis_test()
 	await _runes_test()
 	await _fishing_test()
+	await _boss_zone_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1134,6 +1135,28 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Owner, 13/11: on the quest "beat the Golem" the mine's monster zone kept adding Golems
+## (4 at the fight). Zones never add a boss, and never more than 2 of a hunted kind.
+func _boss_zone_test() -> void:
+	Session.reset()
+	Session.quests["main_05"] = {"step": 0, "count": 0, "done": false, "picked": []}
+	Main.start_map = "mina"
+	Main.start_spawn = ""
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(6)
+	main.player.global_position = Vector3(0, 0, -20)
+	await _frames(420)
+	var golems: int = 0
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		if (n as Enemy).base_id == "golem":
+			golems += 1
+	check(golems == 1, "only the one Golem in the mine while its quest is on (got %d)" % golems)
+	main.queue_free()
+	await _frames(3)
+	Main.start_spawn = "start"
+
+
 ## Fase 8D: fishing at the water (the button, the float, hooking, reeling, the catch and
 ## the snapped line), which fish bite where and when, and the campfire meals.
 func _fishing_test() -> void:

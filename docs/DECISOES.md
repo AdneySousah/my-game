@@ -672,7 +672,7 @@ O dono jogou até o primeiro Arauto (o Espantalho) e pediu estas mudanças.
   - A mochila base continua com 60 espaços.
 - **Visual na tela de equipamentos:** o encaixe "Visual" mostra o que está vestido. Tocar abre a lista dos visuais comprados (com o retrato de cada um) e "Sem visual". A loja especial continua vendendo; a troca agora fica aqui.
 - **Retratos por visual:** o retrato do HUD e o das falas do Lio mudam com o visual (campo `portrait` do visual em characters.json). Retratos novos do Sol, da Tempestade e do Anjo.
-- **Visual Anjo Dourado** (`skin_anjo`, R$ 9,90):
+- **Visual Anjo Dourado** (`skin_anjo`, R$ 19,90; o dono subiu o preço em 13/11):
   - armadura dourada e branca, com a Lâmina Solar;
   - **asas separadas** (um modelo de asa do Meshy, espelhado), presas ao peito e batendo por código, douradas e brilhantes; batem mais rápido em movimento (`AngelWings`);
   - **flutua no lugar de andar:** fica uns 30 cm acima do chão, balançando, e inclina para a frente ao se mover (`float` no visual).

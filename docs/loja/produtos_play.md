@@ -12,7 +12,7 @@ O arquivo do jogo (`data/shop/store.json`) guarda só chaves de tradução (`STO
 | `premium_30d` | Passe premium — 30 dias | Experiência em dobro, ouro dos inimigos e baús em dobro e +10% em todos os atributos. Comprar de novo soma os dias. | R$ 25,00 |
 | `skin_sol` | Visual: Cavaleiro do Sol | Armadura branca e dourada, cabelo novo e a Lâmina Solar. Só muda a aparência; fica guardado para sempre. | R$ 9,90 |
 | `skin_tempestade` | Visual: Lâmina da Tempestade | Couro azul com raios, cabelo prateado e a Lâmina da Tempestade. Só muda a aparência; fica guardado para sempre. | R$ 9,90 |
-| `skin_anjo` | Visual: Anjo Dourado | Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre. | R$ 9,90 |
+| `skin_anjo` | Visual: Anjo Dourado | Armadura dourada que brilha, asas que batem de verdade e o Lio flutuando no lugar de andar. Só muda a aparência; fica guardado para sempre. | R$ 19,90 |
 | `ouro_5000` | Saco de ouro | 5.000 de ouro. | R$ 4,90 |
 | `ouro_30000` | Baú de ouro | 30.000 de ouro (20% a mais). | R$ 24,90 |
 | `xp_boost_1h` | Pergaminho do saber | +50% de XP dos inimigos por 1 hora (o tempo corre mesmo com o jogo fechado). | R$ 3,90 |

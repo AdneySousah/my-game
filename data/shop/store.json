@@ -66,7 +66,7 @@
       "id": "skin_anjo",
       "name": "STORE_SKIN_ANJO",
       "desc": "STORE_SKIN_ANJO_DESC",
-      "price_brl": 9.9,
+      "price_brl": 19.9,
       "icon": "ui_skin_anjo",
       "grants": {
         "skin": "hero_skin_anjo"

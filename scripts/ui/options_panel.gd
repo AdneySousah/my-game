@@ -10,6 +10,8 @@ var _credits: ScrollContainer
 var in_game: bool = false
 var _diff_label: Label
 var _diff_btn: Button
+## The "Novidades" window, made the first time it opens.
+var notes: NotesPanel
 
 
 func _ready() -> void:
@@ -78,6 +80,13 @@ func _ready() -> void:
 	credits_btn.pressed.connect(func() -> void:
 		_credits.visible = not _credits.visible
 		_center())
+	# What's new in each version (owner, 14/11): opens next to this panel, which comes back on close.
+	var notes_btn := Button.new()
+	notes_btn.text = tr("NOTES_BUTTON")
+	notes_btn.focus_mode = Control.FOCUS_NONE
+	notes_btn.custom_minimum_size = Vector2(0, 44)
+	notes_btn.pressed.connect(open_notes)
+	box.add_child(notes_btn)
 	var close := Button.new()
 	close.text = tr("PANEL_CLOSE")
 	close.focus_mode = Control.FOCUS_NONE
@@ -86,6 +95,18 @@ func _ready() -> void:
 		hide()
 		closed.emit())
 	box.add_child(close)
+
+
+## Shows the "Novidades" window in place of this one.
+func open_notes() -> void:
+	if notes == null:
+		notes = NotesPanel.new()
+		get_parent().add_child(notes)
+		notes.closed.connect(func() -> void:
+			show()
+			_center())
+	hide()
+	notes.open()
 
 
 func open() -> void:

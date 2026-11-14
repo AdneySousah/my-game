@@ -913,3 +913,12 @@ Pedido do dono: dos 6 testadores, só o celular dele roda bem, e de vez em quand
 - **"Baixo" mais leve:** 640 linhas de resolução 3D (antes 720), sem sombras, 20% da grama, metade dos moradores, animais e pássaros, sem os riscos de vento no ar e sem a vida dos lagos (sapos, peixes, vitórias-régias).
 - **Render:** continua o Mobile. O Compatibility (OpenGL) foi mais lento no teste e travou ao compilar shaders. O Godot já troca sozinho para ele num celular sem Vulkan, e o jogo funciona nele, sem erros de shader.
 - **Celulares de 32 bits:** a exportação Android agora inclui `armeabi-v7a`. Antes, só celulares com Android de 64 bits conseguiam instalar, e muitos celulares baratos usam Android de 32 bits. A Play entrega só a versão de cada aparelho, então o download não aumenta.
+
+## Novidades e atualização pela Google Play (14/11/2026)
+Pedido do dono: um menu com as notas de cada versão e o jogo conferir se a versão da Google Play é mais nova, para atualizar.
+- **Novidades:** tela `NotesPanel` com as notas de cada versão, a mais nova primeiro. Abre sozinha na tela inicial na primeira vez depois de uma atualização (quem acabou de instalar não vê). Fica também no botão "Novidades", ao lado de Opções, e dentro das Opções durante o jogo. Os textos ficam em `tools/content/gen_notes.py` (pt_BR e en), que gera `data/updates/notes.json` e as chaves `NOTES_*`/`UPD_*`. O teste `notes` falha se a versão do jogo não tiver nota, para nenhuma versão sair sem elas.
+- **Versão nova na Play:** usa a "atualização no app" oficial da Google Play (Play In-App Updates 2.1.0) por um plugin Android nosso, `addons/HerdeiroUpdates`. O código fica em `tools/android/updates` e é compilado com `bash tools/android/build_updates_plugin.sh`.
+  - Ao abrir o jogo, a tela inicial pergunta à Play se há versão mais nova. Se houver, aparece "Versão nova!" com "Atualizar agora" e "Depois".
+  - "Atualizar agora" abre a tela da própria Play, que baixa, instala e abre o jogo de novo. O save fica intacto.
+  - O jogo continua offline: quem conversa com a Play é o app da Play Store no celular, e sem internet nada aparece. No PC não há checagem.
+  - Só funciona com o jogo instalado pela Play (teste interno vale; apk por cabo não). A Play pode levar algumas horas para oferecer uma versão recém-enviada.

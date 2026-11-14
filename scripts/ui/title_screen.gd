@@ -1,6 +1,8 @@
 extends Control
 ## Title screen: Continue (when there is a save), New game (asks before erasing a
 ## save) and Quit (PC only). New game plays the prologue, then the game starts.
+## Also "Novidades" (opens by itself after an update) and, on Android, the notice that a
+## newer version is on Google Play (owner, 14/11).
 
 const PROLOGUE_SCENE: String = "res://scenes/ui/prologue.tscn"
 const BACKGROUND: String = "res://assets/story/pro_08_torre.webp"
@@ -10,6 +12,12 @@ var _buttons: VBoxContainer
 var _confirm: PanelContainer
 var _difficulty: PanelContainer
 var _options: OptionsPanel
+var _notes: NotesPanel
+var _update_panel: PanelContainer
+var _update_msg: Label
+var updater: AppUpdate
+## The notes were waiting to open when the update notice came first.
+var _notes_pending: bool = false
 
 
 func _ready() -> void:
@@ -54,9 +62,18 @@ func _ready() -> void:
 		info.add_theme_font_size_override("font_size", 18)
 		_buttons.add_child(info)
 	_buttons.add_child(_button(tr("TITLE_NEW"), _on_new))
-	_buttons.add_child(_button(tr("TITLE_OPTIONS"), func() -> void:
-		_buttons.hide()
-		_options.open()))
+	# Options and What's New side by side, so the menu still fits on the screen.
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 12)
+	_buttons.add_child(row)
+	for b: Button in [_button(tr("TITLE_OPTIONS"), func() -> void:
+			_buttons.hide()
+			_options.open()), _button(tr("NOTES_BUTTON"), func() -> void:
+			_buttons.hide()
+			_notes.open())]:
+		b.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		b.add_theme_font_size_override("font_size", 22)
+		row.add_child(b)
 	if not Game.is_mobile():
 		_buttons.add_child(_button(tr("TITLE_QUIT"), func() -> void: get_tree().quit()))
 
@@ -74,15 +91,28 @@ func _ready() -> void:
 	_options = OptionsPanel.new()
 	add_child(_options)
 	_options.closed.connect(func() -> void: _buttons.show())
+	_notes = NotesPanel.new()
+	add_child(_notes)
+	_notes.closed.connect(func() -> void: _buttons.show())
+	_update_panel = _build_update()
+	add_child(_update_panel)
 	get_viewport().size_changed.connect(_layout)
 	_layout.call_deferred()
+	if NotesPanel.should_auto_open(SaveGame.has_save()):
+		_buttons.hide()
+		_notes.open.call_deferred()
+	updater = AppUpdate.new()
+	add_child(updater)
+	updater.update_found.connect(func(_code: int) -> void: show_update())
+	updater.update_failed.connect(func() -> void: show_update(true))
+	updater.check()
 
 
 func _layout() -> void:
 	var vp: Vector2 = get_viewport_rect().size
 	_buttons.reset_size()
 	_buttons.position = Vector2((vp.x - _buttons.size.x) * 0.5, vp.y * 0.52)
-	for p: Control in [_confirm, _difficulty]:
+	for p: Control in [_confirm, _difficulty, _update_panel, _notes]:
 		if p and p.visible:
 			GameTheme.place_center(p)
 
@@ -198,6 +228,59 @@ func _build_difficulty() -> PanelContainer:
 		_buttons.show())
 	back.custom_minimum_size = Vector2(0, 48)
 	box.add_child(back)
+	return panel
+
+
+## "Versão nova!": Update now opens Play's update page; Later goes back to the menu (or to
+## the notes that were about to open). `failed`: Play's page closed without updating.
+func show_update(failed: bool = false) -> void:
+	if _notes.visible:
+		_notes.hide()
+		_notes_pending = true
+	for p: Control in [_confirm, _difficulty, _options]:
+		p.hide()
+	_buttons.hide()
+	_update_msg.text = tr("UPD_FAILED") if failed else tr("UPD_TEXT")
+	_update_panel.show()
+	_update_panel.reset_size()
+	_layout()
+
+
+func _close_update() -> void:
+	_update_panel.hide()
+	if _notes_pending:
+		_notes_pending = false
+		_notes.open()
+	else:
+		_buttons.show()
+
+
+func _build_update() -> PanelContainer:
+	var panel := PanelContainer.new()
+	panel.hide()
+	panel.custom_minimum_size = Vector2(560, 0)
+	var box := VBoxContainer.new()
+	box.add_theme_constant_override("separation", 12)
+	panel.add_child(box)
+	var head := Label.new()
+	head.text = tr("UPD_TITLE")
+	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	head.add_theme_font_size_override("font_size", 30)
+	head.add_theme_color_override("font_color", Color("#ffd86b"))
+	head.add_theme_color_override("font_outline_color", Color("#3b2410"))
+	head.add_theme_constant_override("outline_size", 8)
+	box.add_child(head)
+	_update_msg = Label.new()
+	_update_msg.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	_update_msg.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_update_msg.custom_minimum_size = Vector2(520, 0)
+	_update_msg.add_theme_font_size_override("font_size", 20)
+	box.add_child(_update_msg)
+	box.add_child(_button(tr("UPD_NOW"), func() -> void:
+		_update_panel.hide()
+		_buttons.show()
+		updater.start()))
+	box.add_child(_button(tr("UPD_LATER"), _close_update))
 	return panel
 
 

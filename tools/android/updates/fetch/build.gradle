@@ -1,0 +1,7 @@
+// Downloads the Play In-App Update library (and what it needs) only to compile the plugin
+// against it. The game's own Gradle build adds the same library to the app by itself
+// (addons/HerdeiroUpdates/export_plugin.gd).
+repositories { google(); mavenCentral() }
+configurations { fetch { transitive = true } }
+dependencies { fetch 'com.google.android.play:app-update:2.1.0' }
+tasks.register('grab', Copy) { from configurations.fetch; into 'libs' }

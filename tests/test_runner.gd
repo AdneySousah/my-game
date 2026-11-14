@@ -53,6 +53,7 @@ func _ready() -> void:
 	await _events_test()
 	await _rift_test()
 	await _perf_test()
+	await _notes_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1140,6 +1141,73 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## What's new and the Google Play update notice (owner, 14/11): every version has notes
+## (the test fails if a new version has none), the notes open by themselves once after an
+## update (never for a new player), and the title screen shows "Versão nova!" when Play has one.
+func _notes_test() -> void:
+	var all: Array = NotesPanel.versions()
+	check(not all.is_empty() and str((all[0] as Dictionary).get("name", "")) == Game.version(), "the newest notes are for this version (%s): write them in tools/content/gen_notes.py" % Game.version())
+	var presets := ConfigFile.new()
+	presets.load("res://export_presets.cfg")
+	check(str(presets.get_value("preset.0.options", "version/name", "")) == Game.version(), "the Android version name matches project.godot")
+	var missing: Array[String] = []
+	for v: Variant in all:
+		for k: Variant in (v as Dictionary).get("items", []):
+			if tr(str(k)) == str(k):
+				missing.append(str(k))
+	check(missing.is_empty(), "every note has its text %s" % [missing])
+	var keep_settings: String = Game.settings_file
+	var keep_path: String = SaveGame.path
+	Game.settings_file = "user://test_notes_settings.cfg"
+	SaveGame.path = "user://test_notes_save.dat"
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.settings_file))
+	check(not NotesPanel.should_auto_open(false) and NotesPanel.seen_version() == Game.version(), "a new player does not get the notes (marked as seen)")
+	var cfg := ConfigFile.new()
+	cfg.set_value("notes", "seen", "0.0.1")
+	cfg.save(Game.settings_file)
+	check(NotesPanel.should_auto_open(true), "after an update the notes open by themselves")
+	# The title screen: notes open, the update notice takes their place, Later brings them back.
+	var title: Control = load("res://scenes/ui/title.tscn").instantiate()
+	add_child(title)
+	await _frames(5)
+	var notes: NotesPanel = title.get("_notes")
+	check(notes.visible and notes._list.get_child_count() > 3, "the title screen opens the notes")
+	check(not AppUpdate.available() and not title.updater.check(), "no Play plugin on the PC: nothing to check")
+	title.updater._on_checked(AppUpdate.UPDATE_AVAILABLE, 99, true, 2, 0)
+	await _frames(2)
+	var upd: PanelContainer = title.get("_update_panel")
+	check(upd.visible and not notes.visible and title.updater.found_code == 99, "Play has a new version: the title screen shows \"Versão nova!\"")
+	title.call("_close_update")
+	await _frames(2)
+	check(not upd.visible and notes.visible, "Later brings the notes back")
+	notes.close_panel()
+	await _frames(2)
+	check(NotesPanel.seen_version() == Game.version() and not NotesPanel.should_auto_open(true) and (title.get("_buttons") as Control).visible, "closed: they do not open again until the next update")
+	title.updater._on_checked(1, 0, false, -1, 0)
+	title.updater._on_result(1)
+	await _frames(2)
+	check(upd.visible and (title.get("_update_msg") as Label).text == tr("UPD_FAILED"), "Play's page failed: the player is told")
+	title.queue_free()
+	await _frames(2)
+	# From Options (in the game too).
+	var opts := OptionsPanel.new()
+	var holder := Control.new()
+	add_child(holder)
+	holder.add_child(opts)
+	await _frames(2)
+	opts.open()
+	opts.open_notes()
+	await _frames(2)
+	check(not opts.visible and opts.notes.visible, "Options has a What's New button")
+	opts.notes.close_panel()
+	check(opts.visible, "and closing the notes goes back to Options")
+	holder.queue_free()
+	DirAccess.remove_absolute(ProjectSettings.globalize_path(Game.settings_file))
+	Game.settings_file = keep_settings
+	SaveGame.path = keep_path
+	await _frames(2)
+
+
 ## Performance (owner, 13/11: weak phones lagged and the game hitched): the first guess
 ## from the phone (memory, cores, graphics chip, renderer), the frame-rate watch that steps
 ## the quality down while playing (only while "Automático"), fewer villagers and animals on

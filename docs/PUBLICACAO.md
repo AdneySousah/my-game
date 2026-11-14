@@ -99,6 +99,6 @@ Tudo o que a ficha pede está em `docs/loja/`: textos em `ficha.md` (português 
 - Recebimentos: confirmar o depósito de teste do Google na conta do Itaú; inscrição na taxa de 15% (grupo de contas).
 
 ## Para mim (como gerar uma versão nova)
-1. Aumentar `version/code` (e `version/name`) do preset Android em `export_presets.cfg`.
+1. Aumentar `version/code` (e `version/name`) do preset Android em `export_presets.cfg` e `config/version` no `project.godot`, e escrever as notas da versão em `tools/content/gen_notes.py` (rodar o script). O jogo mostra essas notas na tela "Novidades" e, para quem tem a versão antiga instalada pela Play, avisa "Versão nova!" na tela inicial.
 2. `bash tools/build/build_android.sh` (aab) e `bash tools/build/build_android.sh apk` (apk). Se outra sessão estiver com trabalho pela metade, gerar a partir de um `git worktree` limpo.
 3. Imagens da loja: `--path . res://tests/store_art.tscn -- <pasta>` (ícone, destaque, ícones do app) e `--path . --fixed-fps 60 --resolution 1920x1080 res://tests/store_shots.tscn -- <pasta>` (fotos).

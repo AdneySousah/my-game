@@ -1759,3 +1759,28 @@ RF_BLESS_COMBO_FX,+25% de dano das skills.,+25% skill damage.
 OPT_Q_AUTO,Automático (%s),Automatic (%s)
 OPT_AUTO_LOWERED,O celular estava pesando: gráficos em %s.,The phone was struggling: graphics set to %s.
 OPT_AUTO_FPS30,O celular estava pesando: limite de 30 quadros.,The phone was struggling: frame limit set to 30.
+NOTES_TITLE,Novidades,What's New
+NOTES_VERSION,Versão %s  •  %s,Version %s  •  %s
+NOTES_BUTTON,Novidades,What's New
+UPD_TITLE,Versão nova!,New version!
+UPD_TEXT,Uma versão nova do jogo está na Google Play. Atualize para ter as novidades e correções; seu progresso continua salvo.,A new version of the game is on Google Play. Update to get the news and fixes; your progress stays saved.
+UPD_NOW,Atualizar agora,Update now
+UPD_LATER,Depois,Later
+UPD_FAILED,Não deu para atualizar agora. Tente de novo mais tarde ou pela Google Play.,Couldn't update right now. Try again later or through Google Play.
+NOTES_0_4_1_1,Tela de Novidades: mostra o que mudou em cada versão e abre sozinha depois de uma atualização. Fica também em Opções.,What's New screen: shows what changed in each version and opens by itself after an update. Also in Options.
+NOTES_0_4_1_2,"Quando sair uma versão nova na Google Play, o jogo avisa na tela inicial e atualiza sem você precisar abrir a loja.","When a new version is out on Google Play, the title screen tells you and updates the game without opening the store."
+NOTES_0_4_0_1,Botão Defesa: segure para bloquear e toque na hora certa para aparar. Inimigos empurrados ficam tontos.,Guard button: hold to block and tap at the right moment to parry. Knocked-back enemies get dizzy.
+NOTES_0_4_0_2,"O Despertar: depois da Sahra, encha a luz e segure Atacar por 3 segundos para lutar mais forte.","The Awakening: after Sahra, fill the light and hold Attack for 3 seconds to fight stronger."
+NOTES_0_4_0_3,"Covis do Ferreiro Andarilho (seg, qua, sex e dom): chefes com conjuntos próprios e combos.","The Wandering Smith's Lairs (Mon, Wed, Fri and Sun): bosses with their own gear sets and combos."
+NOTES_0_4_0_4,Runas nas skills e elementos: cada monstro tem fraquezas e resistências.,Runes for your skills and elements: every monster has weaknesses and resistances.
+NOTES_0_4_0_5,Pesca nos rios e lagos e comidas na fogueira com bônus.,"Fishing in rivers and lakes, and campfire food with bonuses."
+NOTES_0_4_0_6,Bestiário com marcos de abates e Maestria depois do nível 100.,"Bestiary with kill milestones, and Mastery after level 100."
+NOTES_0_4_0_7,"Casa do herói em Pradoluz: baú, cama para descansar, suporte de armas e troféus.","The hero's house in Pradoluz: chest, a bed to rest, a weapon rack and trophies."
+NOTES_0_4_0_8,"Eventos nos campos: horda, caravana, chefe errante e chuva de estrelas.","Field events: horde, caravan, wandering boss and star shower."
+NOTES_0_4_0_9,"Fenda sem fim (a partir do nível 30): andares sorteados, bênçãos e recorde.","Endless Rift (from level 30): random floors, blessings and your best record."
+NOTES_0_4_0_10,Gráficos no Automático: o jogo escolhe a qualidade pelo celular e baixa sozinho se pesar. Menos travadinhas e suporte a celulares de 32 bits.,Automatic graphics: the game picks the quality for your phone and lowers it if it gets slow. Fewer stutters and support for 32-bit phones.
+NOTES_0_3_6_1,"Pós-jogo: Modo Infernal, conjuntos que mudam o visual do Lio e títulos novos.","Post-game: Infernal Mode, gear sets that change Lio's look and new titles."
+NOTES_0_3_6_2,"Skills gastam MP, 3 atalhos de poção, até 3 missões na lateral e viagem pelo mapa-múndi.","Skills use MP, 3 potion shortcuts, up to 3 quests on the side and travel through the world map."
+NOTES_0_3_6_3,Dificuldade Extrema e Procurado diário em cada cidade.,Extreme difficulty and a daily Wanted bounty in every town.
+NOTES_0_3_6_4,"Lagos e rios novos com vitórias-régias, sapos e peixes; músicas e sons novos.","New lakes and rivers with water lilies, frogs and fish; new music and sounds."
+NOTES_0_3_6_5,"Mochilas extras, o visual Anjo Dourado e gráficos Baixo, Médio e Alto.","Extra backpacks, the Golden Angel look and Low, Medium and High graphics."

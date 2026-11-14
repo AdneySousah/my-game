@@ -1,0 +1,27 @@
+{
+  "_comment": "Notas de atualização (tela Novidades). Gerado por tools/content/gen_notes.py; não editar à mão. A mais nova primeiro; 'items' são chaves do strings.csv.",
+  "versions": [
+    {"name": "0.4.1", "date": "2026-11-14", "items": ["NOTES_0_4_1_1", "NOTES_0_4_1_2"]},
+    {
+      "name": "0.4.0",
+      "date": "2026-11-13",
+      "items": [
+        "NOTES_0_4_0_1",
+        "NOTES_0_4_0_2",
+        "NOTES_0_4_0_3",
+        "NOTES_0_4_0_4",
+        "NOTES_0_4_0_5",
+        "NOTES_0_4_0_6",
+        "NOTES_0_4_0_7",
+        "NOTES_0_4_0_8",
+        "NOTES_0_4_0_9",
+        "NOTES_0_4_0_10"
+      ]
+    },
+    {
+      "name": "0.3.6",
+      "date": "2026-11-13",
+      "items": ["NOTES_0_3_6_1", "NOTES_0_3_6_2", "NOTES_0_3_6_3", "NOTES_0_3_6_4", "NOTES_0_3_6_5"]
+    }
+  ]
+}

@@ -52,6 +52,9 @@ var _talking: bool = false
 
 
 func _ready() -> void:
+	# The frame-rate watch only counts while a game is on (Game._watch).
+	add_to_group("game_main")
+	Game.quality_lowered.connect(_on_quality_lowered)
 	player = Player.new()
 	player.name = "Player"
 	add_child(player)
@@ -174,6 +177,7 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	if map:
 		map.queue_free()
 		remove_child(map)
+	CharacterModel.clear_cache()
 	_at_point = null
 	_near_npc = null
 	hud.show_travel_button(false)
@@ -297,7 +301,7 @@ func _physics_process(delta: float) -> void:
 	_tick_audio(delta)
 	_autosave_timer += delta
 	if _autosave_timer >= 30.0:
-		save_now()
+		save_now(true)
 	_update_quest_contacts()
 	_tick_rest(delta)
 	var inside: RestPoint = null
@@ -596,6 +600,14 @@ func descend_rift() -> void:
 	Rift.next_floor()
 	save_now()
 	load_map(Rift.MAP, "start")
+
+
+## The phone could not keep up: the quality went down by itself (Game._watch).
+func _on_quality_lowered(what: String) -> void:
+	if what == "fps30":
+		hud.toast(tr("OPT_AUTO_FPS30"), 3.5)
+	else:
+		hud.toast(tr("OPT_AUTO_LOWERED") % tr("OPT_Q_" + what.to_upper()), 3.5)
 
 
 ## Buys the hero's house (the "Comprar" of the sale window).
@@ -1067,7 +1079,8 @@ func exit_to_title() -> void:
 
 
 ## Saves the game (only in a real game started from the title screen).
-func save_now() -> void:
+## Saves the game; `background` (the timed autosave) writes the file on a worker thread.
+func save_now(background: bool = false) -> void:
 	_autosave_timer = 0.0
 	if not SaveGame.active or map == null or _changing or player.is_dead():
 		return
@@ -1076,7 +1089,7 @@ func save_now() -> void:
 		"session": Session.to_dict(), "player": player.save_state(),
 		"map": map.map_id, "pos": [snappedf(p.x, 0.01), snappedf(p.z, 0.01)],
 		"yaw": snappedf(player.rotation_degrees.y, 0.1),
-	})
+	}, background)
 
 
 ## Phones close apps from the background without warning: save when we lose focus.

@@ -55,6 +55,46 @@ static var _configs: Dictionary = {}
 
 ## Returns null when the character has no config or its files are missing,
 ## so callers can fall back to the grey-box shapes.
+## Scenes, textures and weapons of the characters in use, kept loaded while the map
+## lasts: without this a monster coming back after its kind was all gone read its files
+## again (20+ ms on a PC, a visible hitch on phones; owner, 13/11).
+static var _cache: Dictionary = {}
+
+
+static func cached(path: String) -> Resource:
+	if path == "":
+		return null
+	if not _cache.has(path):
+		if not ResourceLoader.exists(path):
+			return null
+		_cache[path] = load(path)
+	return _cache[path]
+
+
+## A new map: let go of the last map's characters.
+static func clear_cache() -> void:
+	_cache.clear()
+
+
+## Loads a character's files and builds its clips ahead of time (during a loading card).
+static func warm(id: String) -> void:
+	var cfg: Dictionary = config_for(id)
+	if cfg.is_empty():
+		return
+	cached(str(cfg.get("scene", "")))
+	if cfg.has("texture"):
+		cached(str(cfg["texture"]))
+	var w: Dictionary = cfg.get("weapon", {})
+	if w.has("scene"):
+		cached(str(w["scene"]))
+	if not _libraries.has(id):
+		var m := CharacterModel.new()
+		m.character_id = id
+		m.config = cfg
+		m._library()
+		m.free()
+
+
 static func create(id: String) -> CharacterModel:
 	var cfg: Dictionary = config_for(id)
 	if cfg.is_empty() or not ResourceLoader.exists(str(cfg.get("scene", ""))):
@@ -224,7 +264,7 @@ func _swap_texture(tex: Texture2D) -> void:
 
 
 func _ready() -> void:
-	var scene: PackedScene = load(str(config["scene"]))
+	var scene: PackedScene = cached(str(config["scene"]))
 	var model: Node3D = scene.instantiate()
 	add_child(model)
 	# Meshy characters face +Z; the game's forward is -Z.
@@ -239,7 +279,7 @@ func _ready() -> void:
 	# Variant made with Meshy Retexture (same UVs): only the picture changes, so the
 	# skeleton, animations, fingers and weapon grip are the original's.
 	if config.has("texture"):
-		_swap_texture(load(str(config["texture"])) as Texture2D)
+		_swap_texture(cached(str(config["texture"])) as Texture2D)
 	ToonStyle.apply(model)
 	if not recolor.is_empty():
 		_apply_recolor()
@@ -665,7 +705,7 @@ func _mount_weapon(w: Dictionary, bone: String, rot: Array, off: Array) -> Node3
 	pivot.scale = Vector3.ONE / world_scale * float(config.get("scale", 1.0))
 	pivot.rotation_degrees = Vector3(float(rot[0]), float(rot[1]), float(rot[2]))
 	pivot.position = Vector3(float(off[0]), float(off[1]), float(off[2])) / world_scale * float(config.get("scale", 1.0))
-	var weapon: Node3D = (load(str(w["scene"])) as PackedScene).instantiate()
+	var weapon: Node3D = (cached(str(w["scene"])) as PackedScene).instantiate()
 	var length: float = float(w.get("length", 0.8))
 	weapon.scale = Vector3.ONE * length
 	if w.has("hold_point"):

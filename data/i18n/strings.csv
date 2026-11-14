@@ -1756,3 +1756,6 @@ RF_BLESS_OURO,Bolsa Cheia,Full Purse
 RF_BLESS_OURO_FX,+50% de ouro na Fenda.,+50% gold in the Rift.
 RF_BLESS_COMBO,Golpes Afiados,Sharp Strikes
 RF_BLESS_COMBO_FX,+25% de dano das skills.,+25% skill damage.
+OPT_Q_AUTO,Automático (%s),Automatic (%s)
+OPT_AUTO_LOWERED,O celular estava pesando: gráficos em %s.,The phone was struggling: graphics set to %s.
+OPT_AUTO_FPS30,O celular estava pesando: limite de 30 quadros.,The phone was struggling: frame limit set to 30.

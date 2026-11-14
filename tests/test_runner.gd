@@ -52,6 +52,7 @@ func _ready() -> void:
 	await _home_test()
 	await _events_test()
 	await _rift_test()
+	await _perf_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1139,6 +1140,84 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Performance (owner, 13/11: weak phones lagged and the game hitched): the first guess
+## from the phone (memory, cores, graphics chip, renderer), the frame-rate watch that steps
+## the quality down while playing (only while "Automático"), fewer villagers and animals on
+## "low", the map's monster models kept loaded, and the autosave written in the background.
+func _perf_test() -> void:
+	check(Game.guess_quality(8.0, 8, "Adreno (TM) 740", "mobile") == "high" and Game.guess_quality(4.5, 8, "Adreno (TM) 740", "mobile") == "medium" and Game.guess_quality(2.8, 8, "Adreno (TM) 740", "mobile") == "low", "the first guess follows the phone's memory")
+	check(Game.guess_quality(8.0, 8, "Mali-G52 MC2", "mobile") == "low" and Game.guess_quality(8.0, 8, "Adreno (TM) 619", "mobile") == "medium" and Game.guess_quality(8.0, 8, "PowerVR Rogue GE8320", "mobile") == "low" and Game.guess_quality(8.0, 8, "Mali-G78", "mobile") == "high", "and its graphics chip (weak chips start on low)")
+	check(Game.guess_quality(8.0, 8, "Adreno (TM) 740", "gl_compatibility") == "low" and Game.guess_quality(8.0, 4, "Adreno (TM) 740", "mobile") == "low", "a phone without Vulkan or with few cores starts on low")
+	# The watch (a test settings file, never the player's).
+	var keep: Array = [Game.quality, Game.quality_auto, Game.fps_limit, Game.watch_enabled, Game.settings_file]
+	Game.settings_file = "user://test_settings.cfg"
+	Session.reset()
+	Main.start_map = "campos"
+	Main.start_spawn = "from_pradoluz"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	Game.quality = "high"
+	Game.quality_auto = true
+	Game.fps_limit = 60
+	Game.watch_enabled = true
+	var lowered: Array[String] = []
+	var on_low := func(w: String) -> void: lowered.append(w)
+	Game.quality_lowered.connect(on_low)
+	for i: int in 400:
+		Game.call("_watch", 0.05)
+	check(lowered.size() >= 1 and lowered[0] == "medium" and Game.quality != "high", "a phone stuck at 20 FPS on high gets medium by itself")
+	for i: int in 1200:
+		Game.call("_watch", 0.05)
+	check(Game.quality == "low" and Game.fps_limit == 30 and lowered.has("fps30"), "and then low, then a steady 30")
+	Game.quality = "high"
+	Game.fps_limit = 60
+	lowered.clear()
+	Game.call("set_quality", "high")
+	for i: int in 400:
+		Game.call("_watch", 0.05)
+	check(lowered.is_empty() and Game.quality == "high", "a quality picked in Options is never changed")
+	for i: int in 400:
+		Game.call("_watch", 0.016)
+	Game.quality_lowered.disconnect(on_low)
+	# Fewer villagers, animals and birds on low; the map's monster models already loaded.
+	main.queue_free()
+	await _frames(3)
+	var counts: Array[int] = []
+	for q: String in ["high", "low"]:
+		Game.quality = q
+		Main.start_map = "pradoluz"
+		Main.start_spawn = "start"
+		main = load(Game.MAIN_SCENE).instantiate()
+		add_child(main)
+		await _frames(8)
+		counts.append(main.map.find_children("*", "Villager", true, false).size() + main.map.find_children("*", "Animal", true, false).size())
+		if q == "high":
+			main.queue_free()
+			await _frames(3)
+	check(counts[1] < counts[0], "low quality has fewer villagers and animals (%d -> %d)" % [counts[0], counts[1]])
+	var cfg: Dictionary = CharacterModel.config_for(str(Data.enemies["bandido"]["model"]))
+	await main.load_map("campos", "from_pradoluz")
+	await _frames(10)
+	check(CharacterModel.cached(str(cfg["scene"])) != null and CharacterModel._cache.has(str(cfg["scene"])), "the monsters of the map are loaded with it (no hitch when one comes back)")
+	# The autosave in the background.
+	var real_path: String = SaveGame.path
+	SaveGame.path = "user://test_bg_save.dat"
+	check(SaveGame.save_game({"x": 7}, true), "the autosave starts in the background")
+	SaveGame.flush()
+	check(int(SaveGame.load_game().get("x", 0)) == 7, "and the file is there afterwards")
+	SaveGame.delete_save()
+	SaveGame.path = real_path
+	main.queue_free()
+	await _frames(3)
+	Game.quality = str(keep[0])
+	Game.quality_auto = bool(keep[1])
+	Game.fps_limit = int(keep[2])
+	Game.watch_enabled = bool(keep[3])
+	Game.settings_file = str(keep[4])
+	DirAccess.remove_absolute(ProjectSettings.globalize_path("user://test_settings.cfg"))
+
+
 ## Fase 8H: the Endless Rift — opens at level 30 from the portal in Pradoluz; floors with
 ## the look of other maps and monsters growing stronger; beating a floor opens the way
 ## down and moves the record; a blessing every 5 floors (lasts the run); a boss every 10;

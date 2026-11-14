@@ -39,9 +39,16 @@ func _ready() -> void:
 	diff_row.add_child(_diff_btn)
 	# Graphics quality: Baixo / Médio / Alto (owner, 13/11). Grass and the town wood
 	# change on the next map; resolution and shadows right away.
+	# "Automático" (the default) follows the phone and its frame rate; then Baixo, Médio, Alto.
 	_toggle_row(box, "OPT_QUALITY", func() -> String:
-		return tr("OPT_Q_" + Game.quality.to_upper()),
-		func() -> void: Game.set_quality({"high": "low", "low": "medium", "medium": "high"}.get(Game.quality, "high")))
+		return tr("OPT_Q_AUTO") % tr("OPT_Q_" + Game.quality.to_upper()) if Game.quality_auto else tr("OPT_Q_" + Game.quality.to_upper()),
+		func() -> void:
+			if Game.quality_auto:
+				Game.set_quality("low")
+			elif Game.quality == "high":
+				Game.set_quality_auto()
+			else:
+				Game.set_quality("medium" if Game.quality == "low" else "high"))
 	# Video: FPS counter (to check how smooth the game runs) and, on phones, 60 or 30.
 	_toggle_row(box, "OPT_SHOW_FPS", func() -> String:
 		return tr("OPT_ON") if Game.show_fps else tr("OPT_OFF"),

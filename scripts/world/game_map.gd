@@ -151,6 +151,7 @@ func _ready() -> void:
 	_build_reset_sign()
 	_build_home()
 	_build_rift()
+	_warm_models()
 	_bake_navigation.call_deferred()
 
 
@@ -234,10 +235,12 @@ func is_indoor() -> bool:
 func _build_grass() -> void:
 	if is_indoor():
 		return
-	var streaks := WindStreaks.new()
-	streaks.name = "WindStreaks"
-	streaks.target = player
-	add_child(streaks)
+	# The wind streaks in the air are left out on "low".
+	if Game.q("streaks") > 0.0:
+		var streaks := WindStreaks.new()
+		streaks.name = "WindStreaks"
+		streaks.target = player
+		add_child(streaks)
 	var cfg: Variant = data.get("grass")
 	if not (cfg is Dictionary):
 		return
@@ -404,7 +407,8 @@ func _build_ambience() -> void:
 		spots.append(_v(pt))
 	var homes: Array = amb.get("homes", [])
 	var fish: Array = amb.get("fish", [])
-	for i: int in int(amb.get("villagers", 0)):
+	var life: float = Game.q("life")
+	for i: int in roundi(int(amb.get("villagers", 0)) * life):
 		if models.is_empty() or spots.is_empty():
 			break
 		var vname: String = str(names.pop_at(rng.randi() % names.size())) if not names.is_empty() else "?"
@@ -420,18 +424,23 @@ func _build_ambience() -> void:
 		v.position = spots[rng.randi() % spots.size()]
 		add_child(v)
 		_clear_spots.append(v.position)
-	for a: Dictionary in amb.get("animals", []):
+	var animals: Array = amb.get("animals", [])
+	for ai: int in animals.size():
+		# Lower quality: every other animal.
+		if life < 1.0 and ai % roundi(1.0 / maxf(1.0 - life, 0.25)) == 1:
+			continue
+		var a: Dictionary = animals[ai]
 		var an := Animal.new()
 		an.setup(str(a["kind"]), _v(a["pos"]), rng.randi(), player, self)
 		add_child(an)
-	for f: Array in amb.get("flocks", []):
+	for f: Array in (amb.get("flocks", []) if life >= 0.75 else []):
 		var flock := BirdFlock.new()
 		add_child(flock)
 		flock.setup(Vector3(float(f[0]), 0, float(f[1])), int(f[2]) if f.size() > 2 else 4, rng.randi(), player)
 	var perches: Array[Vector3] = []
 	for pt: Array in amb.get("perches", []):
 		perches.append(Vector3(float(pt[0]), float(pt[1]), float(pt[2])))
-	for i: int in mini(int(amb.get("perch_birds", 0)), perches.size()):
+	for i: int in mini(roundi(int(amb.get("perch_birds", 0)) * life), perches.size()):
 		var b := Bird.new()
 		b.setup(perches[i], rng.randi(), player)
 		b.perches = perches
@@ -531,7 +540,7 @@ func _build_rivers() -> void:
 			add_child(body)
 			_path_segments.append([a, b, width + 1.5])
 			_river_banks(r, a, b, width)
-		if r.get("life", true):
+		if r.get("life", true) and Game.q("pond") > 0.0:
 			var life := PondLife.new()
 			var cold: bool = float((data.get("biome", {}) as Dictionary).get("snow", 0.0)) > 0.0
 			life.setup(path, width * 0.5, int(data.get("seed", 1)) + water_paths.size(), not cold)
@@ -733,6 +742,30 @@ func _build_props() -> void:
 	# Invisible walls ("barriers": [[[x, z], [x, z]], ...]), e.g. the open side of a room.
 	for bar: Array in data.get("barriers", []):
 		_invisible_wall(_v(bar[0]), _v(bar[1]), 1.0)
+
+
+## Loads now (while the loading card shows) the models of every monster that can appear
+## here, so one coming back later never stops the game to read its files.
+func _warm_models() -> void:
+	var ids: Dictionary = {}
+	for z: Dictionary in data.get("enemy_zones", []):
+		for id: String in (z.get("types", {}) as Dictionary):
+			ids[id] = true
+	for b: Dictionary in data.get("bosses", []):
+		ids[str(b.get("id", ""))] = true
+	var w: Dictionary = Bounties.wanted_in(map_id)
+	if not w.is_empty():
+		ids[str(w["enemy"])] = true
+	if data.has("rift"):
+		for id: String in Rift.theme_monsters(Rift.theme_of(Rift.floor_no())):
+			ids[id] = true
+		ids[Rift.boss_of(Rift.floor_no())] = true
+	for id: Variant in ids:
+		var e: Dictionary = Data.enemies.get(str(id), {})
+		CharacterModel.warm(str(e.get("model", "")))
+		for form: Variant in e.get("phases", []):
+			if form is Dictionary:
+				CharacterModel.warm(str(Data.enemies.get(str((form as Dictionary).get("become", "")), {}).get("model", "")))
 
 
 ## The Endless Rift (Fase 8H): a floor's monsters and way down, or the portal in the city

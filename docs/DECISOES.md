@@ -900,3 +900,16 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 - **Fim da corrida:** sair, morrer ou viajar encerra a corrida; um aviso mostra os andares vencidos e o recorde. O recorde (`Session.rift_best`) aparece no topo da aba Diárias da Rotina.
 - **Dados:** `data/world/rift.json`. Lógica em `Rift`; cada andar é montado na hora (`GameMap.load_data("fenda")` → `Rift.floor_data()`) e conduzido por `RiftFloor`. A janela das bênçãos é a `BlessingPanel`.
 - **Meshy:** `env_portal_fenda`, 18 créditos (imagem 3 + modelo 15). Os ícones vieram na folha da parte G. A arte de carregamento é a de cada mapa sorteado.
+
+## Desempenho em celulares fracos e travadinhas (13/11/2026)
+Pedido do dono: dos 6 testadores, só o celular dele roda bem, e de vez em quando o jogo dá uma travadinha.
+- **Medição** (`res://tests/hitch_bench.tscn -- <mapa> <low|medium|high> <segundos>`): o FPS se manteve em 60. O que travava era outra coisa:
+  - **Monstro voltando:** o modelo 3D era lido do disco de novo sempre que um monstro renascia depois de todos daquele tipo terem morrido. Isso custava 12 a 23 ms no PC, e num celular vira uma travada de 50 a 100 ms. Agora os modelos, texturas e armas dos monstros do mapa ficam guardados e são carregados durante a tela de carregamento (`CharacterModel.warm`/`cached`, limpos a cada troca de mapa). Um monstro voltando passou de 12 ms para 2 ms.
+  - **Salvamento automático (a cada 30 s):** o arquivo agora é gravado numa thread separada (`SaveGame.save_game(estado, true)`). Os outros salvamentos (sair, trocar de mapa, minimizar) continuam gravando na hora.
+- **Qualidade "Automático"** (o padrão):
+  - Na primeira vez, o jogo escolhe a qualidade pelo celular: memória, núcleos, o chip gráfico (Mali-G31/G51/G52/G57, PowerVR e Adreno abaixo de 610 começam no Baixo; Adreno 610 a 639 no Médio) e se o celular não tem Vulkan.
+  - Durante o jogo, se o FPS fica abaixo de 78% do limite por 12 s, o jogo desce um nível sozinho e avisa ("O celular estava pesando: gráficos em Médio"). Já no Baixo, troca o limite para 30 quadros, que fica mais estável que um 45 tremido.
+  - Nas Opções, "Gráficos" alterna entre Automático, Baixo, Médio e Alto. Escolher um nível desliga o ajuste automático.
+- **"Baixo" mais leve:** 640 linhas de resolução 3D (antes 720), sem sombras, 20% da grama, metade dos moradores, animais e pássaros, sem os riscos de vento no ar e sem a vida dos lagos (sapos, peixes, vitórias-régias).
+- **Render:** continua o Mobile. O Compatibility (OpenGL) foi mais lento no teste e travou ao compilar shaders. O Godot já troca sozinho para ele num celular sem Vulkan, e o jogo funciona nele, sem erros de shader.
+- **Celulares de 32 bits:** a exportação Android agora inclui `armeabi-v7a`. Antes, só celulares com Android de 64 bits conseguiam instalar, e muitos celulares baratos usam Android de 32 bits. A Play entrega só a versão de cada aparelho, então o download não aumenta.

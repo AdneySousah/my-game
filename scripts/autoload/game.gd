@@ -14,6 +14,8 @@ const TITLE_SCENE: String = "res://scenes/ui/title.tscn"
 
 ## Saved with the sound volumes (section "video").
 const SETTINGS: String = "user://settings.cfg"
+## Where the video settings are written (tests point it elsewhere).
+var settings_file: String = SETTINGS
 ## Phones draw the 3D world at most this many pixels tall (the HUD stays sharp).
 const MOBILE_3D_HEIGHT: float = 1080.0
 
@@ -26,12 +28,26 @@ var show_fps: bool = false
 var quality: String = "high"
 const QUALITY: Dictionary = {
 	# 3D pixels tall on phones, sun shadows (atlas size, 0 = off), grass and town-wood
-	# amounts, and how far small props are still drawn.
-	"low": {"height": 720.0, "shadow": 0, "grass": 0.3, "wood": 0.45, "draw": 38.0},
-	"medium": {"height": 900.0, "shadow": 1024, "grass": 0.65, "wood": 0.75, "draw": 55.0},
-	"high": {"height": 1080.0, "shadow": 2048, "grass": 1.0, "wood": 1.0, "draw": 0.0},
+	# amounts, how far small props are still drawn, how many villagers, animals and birds
+	# ("life"), wind streaks in the air and the frogs, fish and lily pads of the water.
+	"low": {"height": 640.0, "shadow": 0, "grass": 0.2, "wood": 0.4, "draw": 34.0, "life": 0.5, "streaks": 0.0, "pond": 0.0},
+	"medium": {"height": 900.0, "shadow": 1024, "grass": 0.6, "wood": 0.75, "draw": 55.0, "life": 0.75, "streaks": 1.0, "pond": 1.0},
+	"high": {"height": 1080.0, "shadow": 2048, "grass": 1.0, "wood": 1.0, "draw": 0.0, "life": 1.0, "streaks": 1.0, "pond": 1.0},
 }
 signal quality_changed
+## Automatic quality (owner, 13/11: on weak phones the game lagged): until the player
+## picks a quality in Options, the game watches the frame rate while playing and, when
+## the phone cannot keep up, steps the quality down (and then the frame limit to 30).
+var quality_auto: bool = true
+## The watch runs on phones (tests turn it on to check it).
+var watch_enabled: bool = false
+signal quality_lowered(what: String)
+const WATCH_SECONDS: float = 12.0
+## Below this share of the frame limit for a whole watch, the quality steps down.
+const WATCH_MIN_SHARE: float = 0.78
+var _watch_time: float = 0.0
+var _watch_frames: int = 0
+var _watch_grace: float = 6.0
 
 var _fps_layer: CanvasLayer
 var _fps_label: Label
@@ -39,6 +55,7 @@ var _fps_timer: float = 0.0
 
 
 func _ready() -> void:
+	watch_enabled = is_mobile()
 	_register_inputs()
 	_load_video()
 	apply_video()
@@ -46,6 +63,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
+	_watch(delta)
 	if _fps_label == null or not _fps_label.visible:
 		return
 	_fps_timer -= delta
@@ -83,11 +101,62 @@ func set_fps_limit(v: int) -> void:
 	_save_video()
 
 
+## The player picked a quality in Options: from now on it stays as chosen.
 func set_quality(q: String) -> void:
+	quality_auto = false
+	_change_quality(q)
+
+
+## Back to "Automático": the phone's guess, then the frame-rate watch.
+func set_quality_auto() -> void:
+	quality_auto = true
+	_watch_grace = 6.0
+	_change_quality(_auto_quality())
+
+
+func _change_quality(q: String) -> void:
 	quality = q if QUALITY.has(q) else "high"
 	apply_video()
 	_save_video()
 	quality_changed.emit()
+
+
+## Counts frames while the game is really being played (not paused, no loading card)
+## and steps the quality down when the phone keeps falling behind the frame limit.
+func _watch(delta: float) -> void:
+	if not watch_enabled or not quality_auto:
+		return
+	var tree: SceneTree = get_tree()
+	if tree.paused or tree.get_first_node_in_group("game_main") == null or LoadingScreen.is_open():
+		_watch_time = 0.0
+		_watch_frames = 0
+		return
+	# A long frame is a loading or a pause, not the phone's speed.
+	if delta > 0.25:
+		return
+	if _watch_grace > 0.0:
+		_watch_grace -= delta
+		return
+	_watch_time += delta
+	_watch_frames += 1
+	if _watch_time < WATCH_SECONDS:
+		return
+	var fps: float = _watch_frames / _watch_time
+	_watch_time = 0.0
+	_watch_frames = 0
+	var target: float = float(fps_limit if fps_limit > 0 else 60)
+	if fps >= target * WATCH_MIN_SHARE:
+		return
+	_watch_grace = 6.0
+	if quality != "low":
+		_change_quality("medium" if quality == "high" else "low")
+		quality_lowered.emit(quality)
+	elif fps_limit == 60:
+		# Even "low" cannot hold 60: a steady 30 feels smoother than a shaky 45.
+		fps_limit = 30
+		apply_video()
+		_save_video()
+		quality_lowered.emit("fps30")
 
 
 ## A number of the current quality ("height", "shadow", "grass", "wood", "draw").
@@ -95,17 +164,56 @@ func q(key: String) -> float:
 	return float((QUALITY[quality] as Dictionary).get(key, 1.0))
 
 
-## First run: a guess from the phone's memory and cores (PC: high).
+## First run: a guess from the phone's memory, cores and graphics chip (PC: high). The
+## frame-rate watch corrects it while playing.
 func _auto_quality() -> String:
 	if not is_mobile():
 		return "high"
 	var ram_gb: float = float(OS.get_memory_info().get("physical", 0)) / 1073741824.0
-	var cores: int = OS.get_processor_count()
-	if (ram_gb > 0.0 and ram_gb < 3.5) or cores < 6:
+	return guess_quality(ram_gb, OS.get_processor_count(), RenderingServer.get_video_adapter_name(), RenderingServer.get_current_rendering_method())
+
+
+## The quality for a phone with this memory (GB, 0 = unknown), cores, graphics chip name
+## and renderer. The weaker of the memory/cores guess and the chip guess wins.
+static func guess_quality(ram_gb: float, cores: int, gpu: String, method: String) -> String:
+	# The light renderer only runs when the phone has no Vulkan: an old phone.
+	if method == "gl_compatibility":
 		return "low"
-	if ram_gb > 0.0 and ram_gb < 5.5:
-		return "medium"
-	return "high"
+	var by_mem: int = 2
+	if (ram_gb > 0.0 and ram_gb < 3.5) or cores < 6:
+		by_mem = 0
+	elif ram_gb > 0.0 and ram_gb < 5.5:
+		by_mem = 1
+	return ["low", "medium", "high"][mini(by_mem, gpu_tier(gpu))]
+
+
+## 0 weak, 1 middle, 2 strong graphics chip (by its name; unknown chips count as strong
+## and are left to the memory guess and the frame-rate watch).
+static func gpu_tier(gpu: String) -> int:
+	var g: String = gpu.to_lower()
+	if g.contains("powervr") or g.contains("mali-4") or g.contains("mali-t") or g.contains("vivante"):
+		return 0
+	var re := RegEx.new()
+	re.compile("adreno[^0-9]*([0-9]{3})")
+	var m: RegExMatch = re.search(g)
+	if m:
+		var n: int = int(m.get_string(1))
+		if n < 610:
+			return 0
+		if n < 640 or (n >= 700 and n < 720):
+			return 1
+		return 2
+	re.compile("mali-g([0-9]+)")
+	m = re.search(g)
+	if m:
+		var n: int = int(m.get_string(1))
+		# G31, G51, G52, G57 (cheap phones) / G68, G72, G76 (middle) / G77, G78, G610+ (strong).
+		if n in [31, 51, 52, 57]:
+			return 0
+		if n in [68, 71, 72, 76]:
+			return 1
+		return 2
+	return 2
 
 
 func set_show_fps(on: bool) -> void:
@@ -128,9 +236,10 @@ func _apply_3d_scale() -> void:
 
 func _load_video() -> void:
 	var cfg := ConfigFile.new()
-	if cfg.load(SETTINGS) == OK:
+	if cfg.load(settings_file) == OK:
 		fps_limit = int(cfg.get_value("video", "fps_limit", fps_limit))
 		show_fps = bool(cfg.get_value("video", "show_fps", show_fps))
+		quality_auto = bool(cfg.get_value("video", "quality_auto", true))
 	var saved_q: String = str(cfg.get_value("video", "quality", "")) if cfg.has_section("video") else ""
 	quality = saved_q if QUALITY.has(saved_q) else _auto_quality()
 	if saved_q == "" and quality == "low":
@@ -142,11 +251,12 @@ func _load_video() -> void:
 
 func _save_video() -> void:
 	var cfg := ConfigFile.new()
-	cfg.load(SETTINGS)
+	cfg.load(settings_file)
 	cfg.set_value("video", "fps_limit", fps_limit)
 	cfg.set_value("video", "show_fps", show_fps)
 	cfg.set_value("video", "quality", quality)
-	cfg.save(SETTINGS)
+	cfg.set_value("video", "quality_auto", quality_auto)
+	cfg.save(settings_file)
 
 
 func version() -> String:

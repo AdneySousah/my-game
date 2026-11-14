@@ -15,6 +15,12 @@ var path: String = "user://save.dat"
 var active: bool = false
 ## State read by load_game(), waiting for Main to apply it.
 var pending: Dictionary = {}
+## The autosave writes the file on a worker thread (owner, 13/11: the game hitched now
+## and then; slow phone storage made the write + backup copy stall a frame).
+var _task: int = -1
+var _queued: String = ""
+var _paths: Array[String] = []
+var _mutex := Mutex.new()
 
 
 func backup_path() -> String:
@@ -22,29 +28,72 @@ func backup_path() -> String:
 
 
 func has_save() -> bool:
+	flush()
 	return not _read(path).is_empty() or not _read(backup_path()).is_empty()
 
 
 ## Writes the state. Keeps the previous save as the backup. Returns true on success.
-func save_game(state: Dictionary) -> bool:
+## `background`: the file is written on a worker thread (the periodic autosave); a later
+## save or a read waits for it. Every other save is written right away.
+func save_game(state: Dictionary, background: bool = false) -> bool:
 	var payload: String = JSON.stringify({"v": VERSION, "saved_at": Time.get_unix_time_from_system(), "state": state})
 	var wrapper: String = JSON.stringify({"v": VERSION, "payload": payload, "hash": _hash(payload)})
-	var tmp: String = path + ".tmp"
+	if background:
+		_mutex.lock()
+		_queued = wrapper
+		_paths = [path, backup_path()]
+		_mutex.unlock()
+		if _task < 0:
+			_task = WorkerThreadPool.add_task(_write_queued, false, "save")
+		return true
+	flush()
+	return _write(wrapper, path, backup_path())
+
+
+## Waits for a save being written in the background.
+func flush() -> void:
+	if _task >= 0:
+		WorkerThreadPool.wait_for_task_completion(_task)
+		_task = -1
+
+
+func _process(_delta: float) -> void:
+	if _task >= 0 and WorkerThreadPool.is_task_completed(_task):
+		WorkerThreadPool.wait_for_task_completion(_task)
+		_task = -1
+
+
+## Worker thread: writes the newest queued save (a newer one may come in meanwhile).
+func _write_queued() -> void:
+	while true:
+		_mutex.lock()
+		var w: String = _queued
+		var paths: Array[String] = _paths.duplicate()
+		_queued = ""
+		_mutex.unlock()
+		if w == "":
+			return
+		_write(w, paths[0], paths[1])
+
+
+func _write(wrapper: String, to: String, backup: String) -> bool:
+	var tmp: String = to + ".tmp"
 	var f := FileAccess.open_encrypted_with_pass(tmp, FileAccess.WRITE, _key())
 	if f == null:
 		push_error("SaveGame: não consegui gravar (%s)" % error_string(FileAccess.get_open_error()))
 		return false
 	f.store_string(wrapper)
 	f.close()
-	var dir := DirAccess.open(path.get_base_dir())
-	if FileAccess.file_exists(path):
-		dir.copy(path, backup_path())
-	dir.rename(tmp, path)
+	var dir := DirAccess.open(to.get_base_dir())
+	if FileAccess.file_exists(to):
+		dir.copy(to, backup)
+	dir.rename(tmp, to)
 	return true
 
 
 ## Reads the save (or the backup if the save is damaged) into `pending`. Returns it.
 func load_game() -> Dictionary:
+	flush()
 	var data: Dictionary = _read(path)
 	if data.is_empty():
 		data = _read(backup_path())
@@ -53,6 +102,7 @@ func load_game() -> Dictionary:
 
 
 func delete_save() -> void:
+	flush()
 	for p: String in [path, backup_path()]:
 		if FileAccess.file_exists(p):
 			DirAccess.remove_absolute(ProjectSettings.globalize_path(p))

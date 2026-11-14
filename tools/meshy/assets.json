@@ -7534,6 +7534,30 @@
         }
       ],
       "notes": []
+    },
+    {
+      "id": "env_portal_fenda",
+      "category": "env",
+      "phase": 8,
+      "method": "mcp",
+      "status": "imported",
+      "prompt": "portal da Fenda sem fim em Pradoluz (Fase 8H)",
+      "file": "assets/environment/env_portal_fenda/env_portal_fenda.glb",
+      "tasks": [
+        {
+          "type": "text-to-image",
+          "credits": 3,
+          "task_id": "01a1d756-d916-7241-a0fe-baaaa0f14186",
+          "date": "2026-11-13"
+        },
+        {
+          "type": "image-to-3d",
+          "credits": 15,
+          "task_id": "01a1d757-2c1d-772c-b9f9-00ca77bc09e2",
+          "date": "2026-11-13"
+        }
+      ],
+      "notes": []
     }
   ]
 }

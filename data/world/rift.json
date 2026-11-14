@@ -1,0 +1,41 @@
+{
+  "_comment": "Fenda sem fim (Fase 8H). Abre no nível min_level pelo portal de Pradoluz (campo 'rift_portal' do mapa). Cada andar é uma arena sorteada com o visual de um mapa (themes: 'from' = mapa de onde vêm chão, céu, luz, arte de carregamento e monstros; 'props' = peças em volta). Monstros: nível do herói - 2 + andar/2 (até 100), vida e ataque crescem por andar (hp_per_floor, atk_per_floor), quantidade count_base + andar/2 até count_max. A cada boss_every andares um chefe (bosses, em ordem) com adds; a cada blessing_every andares o jogador escolhe 1 de 3 bênçãos, que valem até sair da Fenda. Sair (pelo portal de trás, morrendo ou trocando de mapa) encerra a corrida; o recorde (andares vencidos) fica no save. Recompensas: ouro por andar vencido (gold_per_level) e prêmio dos andares de chefe (boss_reward).",
+  "map": "fenda",
+  "min_level": 30,
+  "arena_radius": 15.0,
+  "hp_per_floor": 0.06,
+  "atk_per_floor": 0.035,
+  "count_base": 5,
+  "count_max": 12,
+  "boss_every": 10,
+  "blessing_every": 5,
+  "boss_hp_mult": 0.7,
+  "boss_adds": 2,
+  "bosses": ["procurado_pradoluz", "procurado_qaressa", "procurado_hrimvald", "procurado_lysthael", "procurado_altarea"],
+  "gold_per_level": 8,
+  "boss_reward": {"items": {"mat_insignia_chefe": 3}, "gems": 2, "rune_chance": 0.5},
+  "themes": [
+    {"from": "campos", "props": ["prp_arvore", "prp_arbusto", "prp_pedra"]},
+    {"from": "floresta", "props": ["prp_arvore", "prp_pinheiro", "prp_tronco_caido"]},
+    {"from": "dunas", "props": ["prp_rocha_duna", "prp_cacto", "prp_palmeira"]},
+    {"from": "deserto_rochoso", "props": ["prp_arenito", "prp_arenito_pequeno", "prp_arvore_seca"]},
+    {"from": "ruinas", "props": ["env_coluna_ruina", "prp_arenito_pequeno", "prp_jarro"]},
+    {"from": "pinheiral", "props": ["prp_pinheiro", "env_rocha_gelo", "prp_cristal_gelo"]},
+    {"from": "picos", "props": ["env_rocha_gelo", "prp_pinheiro", "prp_cristal_gelo"]},
+    {"from": "mata_umida", "props": ["prp_arvore_pantano", "prp_cogumelo_gigante", "prp_raiz_gigante"]},
+    {"from": "estepe", "props": ["prp_rochedo", "prp_arbusto_seco", "prp_capim_seco"]},
+    {"from": "estrada_real", "props": ["prp_arvore", "prp_barricada", "prp_estandarte_lei"]}
+  ],
+  "blessings": [
+    {"id": "mana", "icon": "ui_bless_mana", "special": "mp_half"},
+    {"id": "vampiro", "icon": "ui_bless_vampiro", "special": "heal_kill", "value": 0.05},
+    {"id": "furia", "icon": "ui_bless_furia", "bonus": {"atk_pct": 0.2}},
+    {"id": "escudo", "icon": "ui_bless_escudo", "bonus": {"def_pct": 0.25}},
+    {"id": "vento", "icon": "ui_bless_vento", "bonus": {"atk_speed": 0.2}},
+    {"id": "tempo", "icon": "ui_bless_tempo", "bonus": {"cdr": 0.2}},
+    {"id": "critico", "icon": "ui_bless_critico", "bonus": {"crit_chance": 0.1}},
+    {"id": "vida", "icon": "ui_bless_vida", "bonus": {"max_hp_pct": 0.25}},
+    {"id": "ouro", "icon": "ui_bless_ouro", "special": "gold", "value": 0.5},
+    {"id": "combo", "icon": "ui_bless_combo", "bonus": {"skill_dmg": 0.25}}
+  ]
+}

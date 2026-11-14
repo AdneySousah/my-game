@@ -21,6 +21,7 @@
       "model_pos": [0, -30]
     }
   ],
+  "rift_portal": [21, 21],
   "npcs": [
     {"id": "marta", "pos": [-10, -3.4], "yaw": -60},
     {"id": "bram", "pos": [-15, 2], "yaw": -90, "unless_flag": "severin_duel_3"},
@@ -70,6 +71,7 @@
     {"id": "prp_lampiao", "pos": [1.6, 14]},
     {"id": "prp_placa", "pos": [3, -25], "rot": 180},
     {"id": "prp_carroca", "pos": [8, 17], "rot": 30},
+    {"id": "env_portal_fenda", "pos": [21, 21], "rot": 225},
     {"id": "env_moinho", "pos": [-23, -22], "rot": 30},
     {"id": "prp_feno", "pos": [-17, -25], "rot": 20},
     {"id": "prp_feno", "pos": [-18.4, -26.6], "rot": 70},

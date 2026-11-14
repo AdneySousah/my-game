@@ -100,6 +100,21 @@ func _show_daily() -> void:
 	var r: Routine = Session.routine
 	if r.clock_ok():
 		_note.text = tr("ROUTINE_DAILY_NOTE")
+	# The Endless Rift's record (Fase 8H).
+	var rift := HBoxContainer.new()
+	rift.add_theme_constant_override("separation", 10)
+	var pic := TextureRect.new()
+	pic.texture = ItemIcon.texture("ui_fenda")
+	pic.custom_minimum_size = Vector2(40, 40)
+	pic.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	pic.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	rift.add_child(pic)
+	var rl := Label.new()
+	rl.text = tr("RF_RECORD") % Session.rift_best if Session.rift_best > 0 else tr("RF_RECORD_NONE") % Rift.min_level()
+	rl.add_theme_font_size_override("font_size", 18)
+	rl.add_theme_color_override("font_color", Color("#e2c4ff"))
+	rift.add_child(rl)
+	_body.add_child(rift)
 	var list: Array = r.state["daily"]
 	for i: int in list.size():
 		var d: Dictionary = list[i]

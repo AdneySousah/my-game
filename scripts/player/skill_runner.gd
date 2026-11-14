@@ -67,7 +67,7 @@ func cooldown_left(slot: int) -> float:
 ## True when the hero has enough fôlego for the skill in `slot`.
 func affordable(slot: int) -> bool:
 	var id: String = equipped[slot]
-	return id == "" or player.mp >= float(Data.skill(id).get("mp_cost", 0))
+	return id == "" or player.mp >= float(Data.skill(id).get("mp_cost", 0)) * Rift.mp_mult()
 
 
 func cooldown_ratio(slot: int) -> float:
@@ -83,7 +83,7 @@ func use_slot(slot: int) -> bool:
 	if id == "" or cooldown_left(slot) > 0.0 or not player.can_act():
 		return false
 	var s: Dictionary = Data.skill(id)
-	if not player.spend_mp(float(s.get("mp_cost", 0))):
+	if not player.spend_mp(float(s.get("mp_cost", 0)) * Rift.mp_mult()):
 		return false
 	_cooldowns[id] = float(s.get("cooldown", 1.0)) * player.stats.cooldown_mult()
 	_execute(s)

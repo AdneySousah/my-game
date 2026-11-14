@@ -51,6 +51,7 @@ func _ready() -> void:
 	await _bestiary_test()
 	await _home_test()
 	await _events_test()
+	await _rift_test()
 	await _premium_skin_test()
 	await _quest_test()
 	await _boss_test()
@@ -1138,6 +1139,83 @@ func _owner_1311_test() -> void:
 ## Owner, 13/11: extra backpacks (up to 6; +10 for gold at the merchants, +30 in the
 ## special shop), the look slot with its list, portraits that follow the look, and the
 ## golden angel look that flies with beating wings.
+## Fase 8H: the Endless Rift — opens at level 30 from the portal in Pradoluz; floors with
+## the look of other maps and monsters growing stronger; beating a floor opens the way
+## down and moves the record; a blessing every 5 floors (lasts the run); a boss every 10;
+## leaving ends the run and keeps the record (saved).
+func _rift_test() -> void:
+	Session.reset()
+	check(Rift.hp_mult(20) > Rift.hp_mult(2) and Rift.atk_mult(20) > Rift.atk_mult(2) and Rift.monster_count(20) > Rift.monster_count(1), "monsters grow stronger and more numerous floor by floor")
+	check(Rift.is_boss_floor(10) and not Rift.is_boss_floor(9) and Rift.boss_of(10) == "procurado_pradoluz" and Rift.boss_of(20) == "procurado_qaressa", "a boss every 10 floors, a different one each time")
+	Main.start_map = "pradoluz"
+	Main.start_spawn = "start"
+	var main: Main = load(Game.MAIN_SCENE).instantiate()
+	add_child(main)
+	await _frames(8)
+	var p: Player = main.player
+	check(main.map.rift_portal != Vector3.INF, "Pradoluz has the Rift's portal")
+	check(not main.enter_rift() and not Rift.in_run(), "the Rift stays closed before level 30")
+	while p.stats.level < 35:
+		p.stats.add_xp(p.stats.xp_needed() - p.stats.xp)
+	p.min_hp_ratio = 1.0
+	p.global_position = main.map.rift_portal + Vector3(-2.2, 0, -2.2)
+	check(main.enter_rift() and Rift.in_run() and Rift.floor_no() == 1, "from level 30 the portal starts a run on floor 1")
+	await _frames(40)
+	check(Session.current_map == Rift.MAP and main.map.rift_floor != null and main.map.data.has("loading"), "the floor is an arena with the look of another map")
+	await _frames(120)
+	var mobs: Array[Enemy] = []
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e := n as Enemy
+		if e and e.has_meta("rift"):
+			mobs.append(e)
+	check(mobs.size() == Rift.monster_count(1), "the floor's monsters come (got %d)" % mobs.size())
+	var gold0: int = p.gold
+	for e: Enemy in mobs:
+		e.take_damage(int(e.max_hp) + 10, false)
+	await _frames(10)
+	check(main.map.rift_floor.gate != null and Session.rift_best == 1 and p.gold > gold0, "beating them opens the way down, moves the record and pays")
+	p.global_position = main.map.rift_floor.gate.global_position + Vector3(0, 0, 2.2)
+	await _frames(4)
+	check(str(main.get("_interact_kind")) == "rift_down", "the portal in the middle offers to go down")
+	main.descend_rift()
+	await _frames(40)
+	check(Rift.floor_no() == 2 and main.map.rift_floor != null and main.map.rift_floor.gate == null, "going down starts the next floor")
+	# Floor 5: a blessing.
+	Session.rift_run["floor"] = 4
+	main.descend_rift()
+	await _frames(160)
+	for n: Node in get_tree().get_nodes_in_group("enemies"):
+		var e := n as Enemy
+		if e and not e.is_dead():
+			e.take_damage(int(e.max_hp) + 10, false)
+	await _frames(10)
+	check(bool(Session.rift_run.get("pending", false)) and (Session.rift_run.get("offer", []) as Array).size() == 3 and main.hud.blessing_panel().visible, "on floor 5 three blessings are offered")
+	main.hud.blessing_panel().hide()
+	main.hud.call("_on_panel_closed")
+	Session.rift_run["offer"] = ["furia", "mana", "vida"]
+	var atk0: float = p.stats.get_stat("atk")
+	var floor5: int = Rift.floor_no()
+	main.descend_rift()
+	await _frames(4)
+	check(Rift.floor_no() == floor5 and main.hud.blessing_panel().visible, "the way down waits for the blessing")
+	main.hud.blessing_panel().hide()
+	main.hud.call("_on_panel_closed")
+	check(Rift.choose("furia") and not Rift.choose("mana"), "one blessing per choice")
+	p.refresh_bonuses()
+	check(p.stats.get_stat("atk") > atk0 * 1.15 and Rift.mp_mult() == 1.0, "the blessing works while in the Rift")
+	# Leaving.
+	await main.load_map("__return")
+	await _frames(20)
+	check(not Rift.in_run() and Session.current_map == "pradoluz" and Session.rift_best == 5, "leaving ends the run and keeps the record")
+	p.refresh_bonuses()
+	check(p.stats.get_stat("atk") < atk0 * 1.05, "the blessings end with the run")
+	var saved: Dictionary = Session.to_dict()
+	Session.from_dict(saved)
+	check(Session.rift_best == 5, "the record is saved")
+	main.queue_free()
+	await _frames(3)
+
+
 ## Fase 8G: world events — only in fields, horde and stars only at night, never drawn by
 ## themselves outside the real game; the horde's waves and chest, the caravan that walks
 ## only with the hero near and pays at the road's end, the wandering boss and its prize,

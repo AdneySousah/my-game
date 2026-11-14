@@ -953,6 +953,10 @@ func _bonuses() -> Dictionary:
 	var ms: Dictionary = Bestiary.bonuses()
 	for k: String in ms:
 		b[k] = float(b.get(k, 0.0)) + float(ms[k])
+	# Blessings of the Endless Rift (Fase 8H), while the run lasts.
+	var rb: Dictionary = Rift.bonuses()
+	for k: String in rb:
+		b[k] = float(b.get(k, 0.0)) + float(rb[k])
 	# The meal eaten at a campfire (Fase 8D).
 	if Session.food_id != "" and Session.food_left > 0.0:
 		var f: Dictionary = (Data.item(Session.food_id).get("food", {}) as Dictionary).get("bonus", {})

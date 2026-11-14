@@ -22,6 +22,9 @@ var vases: Array[Node3D] = []
 ## floating over the house for sale.
 var home_decor: HomeDecor
 var home_sign: Label3D
+## The Endless Rift (Fase 8H): the floor running here, and the portal to it in the city.
+var rift_floor: RiftFloor
+var rift_portal: Vector3 = Vector3.INF
 ## "Resetar masmorra" sign (dungeons with a boss), or null.
 var reset_sign: DungeonSign
 ## Dungeon difficulty signs, quest boards and wanted posters in this map (DungeonSign).
@@ -52,6 +55,9 @@ var _path_segments: Array = []
 
 
 static func load_data(id: String) -> Dictionary:
+	# The Endless Rift (Fase 8H): each floor is made on the spot.
+	if id == Rift.MAP:
+		return Rift.floor_data() if Rift.in_run() else {}
 	if not _data_cache.has(id):
 		# A map that is not built yet (e.g. the dunes behind a "coming soon" exit) is empty.
 		var path: String = "res://data/maps/%s.json" % id
@@ -144,6 +150,7 @@ func _ready() -> void:
 	_build_bosses.call_deferred()
 	_build_reset_sign()
 	_build_home()
+	_build_rift()
 	_bake_navigation.call_deferred()
 
 
@@ -726,6 +733,27 @@ func _build_props() -> void:
 	# Invisible walls ("barriers": [[[x, z], [x, z]], ...]), e.g. the open side of a room.
 	for bar: Array in data.get("barriers", []):
 		_invisible_wall(_v(bar[0]), _v(bar[1]), 1.0)
+
+
+## The Endless Rift (Fase 8H): a floor's monsters and way down, or the portal in the city
+## ("rift_portal": [x, z]; the model is one of the map's props) with its sign.
+func _build_rift() -> void:
+	if data.has("rift"):
+		rift_floor = RiftFloor.new()
+		rift_floor.map = self
+		add_child(rift_floor)
+	if data.has("rift_portal"):
+		rift_portal = _v(data["rift_portal"])
+		var label := Label3D.new()
+		label.text = tr("RF_PORTAL_SIGN") % Rift.min_level()
+		label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		label.pixel_size = 0.007
+		label.font_size = 48
+		label.outline_size = 12
+		label.modulate = Color("#e2c4ff")
+		label.no_depth_test = true
+		add_child(label)
+		label.position = rift_portal + Vector3(0, 4.3, 0)
 
 
 ## The hero's house (Fase 8F): the chest, the rack and the trophies inside.

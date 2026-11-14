@@ -28,6 +28,8 @@ func _ready() -> void:
 	_skill_tex["brado_de_guerra"] = GameTheme.skill_icon("brado_de_guerra")
 	for id: String in ["pot_forca", "pot_pedra", "pot_vento", "pergaminho_retorno"]:
 		ItemIcon.texture(id)
+	for b: Dictionary in Data.rift.get("blessings", []):
+		ItemIcon.texture(str(b.get("icon", "")))
 
 
 func _process(delta: float) -> void:
@@ -59,6 +61,10 @@ func _collect() -> void:
 	if Session.food_id != "" and Session.food_left > 0.0:
 		var fi: Dictionary = Data.item(Session.food_id)
 		_items.append({"name": str(fi.get("name", "")), "time": Session.food_left, "item": Session.food_id, "color": Color("#e0a050")})
+	# Blessings of the Endless Rift (no timer: until the run ends).
+	if Rift.in_run():
+		for id: Variant in Session.rift_run.get("blessings", []):
+			_items.append({"name": "RF_BLESS_" + str(id).to_upper(), "time": -1.0, "item": str(Rift.blessing(str(id)).get("icon", "")), "color": Color("#b45cff")})
 	# A night in the hero's bed (Fase 8F).
 	if Session.rested_left > 0.0:
 		_items.append({"name": "HM_RESTED", "time": Session.rested_left, "glyph": "Zz", "color": Color("#7fa8ff")})
@@ -71,6 +77,8 @@ func _collect() -> void:
 
 ## "45 s", "12 min", "3 h", "6 d" — short enough for under an icon.
 static func time_text(seconds: float) -> String:
+	if seconds < 0.0:
+		return ""
 	if seconds < 60.0:
 		return "%d s" % ceili(seconds)
 	if seconds < 3600.0:
@@ -118,6 +126,7 @@ func _gui_input(event: InputEvent) -> void:
 	for i: int in _items.size():
 		if _rect(i).grow(4.0).has_point(pos):
 			var it: Dictionary = _items[i]
-			tapped.emit("%s — %s" % [tr(str(it["name"])), time_text(float(it["time"]))])
+			var tt: String = time_text(float(it["time"]))
+			tapped.emit(tr(str(it["name"])) + (" — " + tt if tt != "" else ""))
 			accept_event()
 			return

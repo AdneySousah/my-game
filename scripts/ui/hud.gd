@@ -47,6 +47,7 @@ var _bestiary_panel: BestiaryPanel
 var _mastery_panel: MasteryPanel
 var _storage_panel: StoragePanel
 var _home_buy_panel: HomeBuyPanel
+var _blessing_panel: BlessingPanel
 var _attack_btn: TouchActionButton
 var _dodge_btn: TouchActionButton
 var _sprint_btn: TouchActionButton
@@ -160,6 +161,14 @@ func _ready() -> void:
 		if _main:
 			if _main.map and _main.map.home_decor:
 				_main.map.home_decor.refresh_rack()
+			_main.save_now())
+	_blessing_panel = BlessingPanel.new()
+	root.add_child(_blessing_panel)
+	_blessing_panel.closed.connect(func() -> void:
+		_on_panel_closed()
+		if player:
+			player.refresh_bonuses()
+		if _main:
 			_main.save_now())
 	_home_buy_panel = HomeBuyPanel.new()
 	root.add_child(_home_buy_panel)
@@ -407,7 +416,7 @@ func show_interact_button(kind: String) -> void:
 	if _talk_btn.visible:
 		var key: String = {"open": "HUD_OPEN", "reset": "HUD_RESET", "infernal": "HUD_INFERNAL", "enter": "HUD_ENTER",
 			"tier": "HUD_TIER", "board": "HUD_BOARD", "wanted": "HUD_WANTED", "home_buy": "HUD_HOME_BUY",
-			"storage": "HUD_STORAGE", "sleep": "HUD_SLEEP"}.get(kind, "HUD_PICK_UP")
+			"storage": "HUD_STORAGE", "sleep": "HUD_SLEEP", "rift": "HUD_RIFT", "rift_down": "HUD_RIFT_DOWN"}.get(kind, "HUD_PICK_UP")
 		# Phones have no E key: the button shows just the word.
 		_talk_btn.text = tr(key + "_TAP") if Game.is_mobile() else tr(key)
 	_update_talk_mode()
@@ -519,6 +528,15 @@ func event_status(icon_id: String, text: String, ratio: float) -> void:
 
 func event_bar() -> EventBar:
 	return _event_bar
+
+
+## The Endless Rift's blessing choice (Fase 8H).
+func open_blessing() -> void:
+	_open_panel(_blessing_panel)
+
+
+func blessing_panel() -> BlessingPanel:
+	return _blessing_panel
 
 
 ## The chest of the hero's house (Fase 8F).
@@ -978,6 +996,7 @@ func _open_panel(panel: Control) -> void:
 	_mastery_panel.hide()
 	_storage_panel.hide()
 	_home_buy_panel.hide()
+	_blessing_panel.hide()
 	_talk_btn.hide()
 	_interact_shown = false
 	_update_talk_mode()

@@ -141,11 +141,19 @@ func load_map(map_id: String, spawn: String = "start", with_fade: bool = true) -
 	_changing = true
 	if events:
 		events.on_map_left()
+	# The Rift with no run going (e.g. a save from inside it): back to where the hero went in.
+	if map_id == Rift.MAP and not Rift.in_run():
+		map_id = "__return"
 	# Leaving a house: back to the street, where the hero went in.
 	if map_id == "__return":
 		var r: Dictionary = Session.house_return
 		map_id = str(r.get("map", "pradoluz"))
 		spawn = "pos:%f:%f:%f" % [float(r.get("x", 0.0)), float(r.get("z", 0.0)), float(r.get("yaw", 0.0))]
+	# Out of the Endless Rift (the way back, dying, travelling): the run ends, the record stays.
+	if Session.current_map == Rift.MAP and map_id != Rift.MAP and Rift.in_run():
+		var cleared: int = Rift.end_run()
+		player.refresh_bonuses()
+		hud.toast(tr("RF_RUN_END") % [cleared, Session.rift_best], 4.0)
 	# Going in or out of a house is a quick fade, no loading card.
 	var quick: bool = map_id.begins_with("interior_") or Session.current_map.begins_with("interior_") or map_id == Home.map_id() or Session.current_map == Home.map_id()
 	# A duel's "cannot die" only lasts in its own map.
@@ -337,6 +345,13 @@ func talk_to_nearby() -> void:
 	if _near_npc == null and _interact_kind == "sleep" and not _talking and not _changing:
 		sleep_in_bed()
 		return
+	# Fase 8H: the Rift's portal in the city, and the way down after a floor.
+	if _near_npc == null and _interact_kind == "rift" and not _talking and not _changing:
+		enter_rift()
+		return
+	if _near_npc == null and _interact_kind == "rift_down" and not _talking and not _changing:
+		descend_rift()
+		return
 	if _near_npc == null and _near_animal and not _talking and not _changing and not _petting:
 		_pet(_near_animal)
 		return
@@ -449,7 +464,11 @@ func _on_enemy_killed(e: Enemy) -> void:
 	quests.on_enemy_killed(e.base_id, Session.current_map)
 	Session.routine.on_event("kill", e.base_id)
 	player.stats.add_xp(xp_for_kill(e))
-	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold")))
+	var in_rift: bool = e.has_meta("rift")
+	player.add_gold(roundi(e.gold_reward * Session.premium_mult("gold") * (Rift.gold_mult() if in_rift else 1.0)))
+	# The "vampiro" blessing of the Rift heals a bit on every kill.
+	if in_rift and Rift.kill_heal() > 0.0:
+		player.heal_fraction(Rift.kill_heal())
 	# A lair's boss gives its shards and essence instead of its story drops (Fase 8B).
 	if e.has_meta("covil"):
 		_covil_prize(e)
@@ -553,6 +572,30 @@ func enter_house(h: Dictionary) -> void:
 		load_map(Home.map_id(), "door")
 		return
 	load_map("interior_terreo" if int(h.get("floors", 1)) >= 2 else "interior_casa", "door")
+
+
+## Goes into the Endless Rift (Fase 8H) from its portal: a new run from floor 1. The way
+## back behind the start returns here.
+func enter_rift() -> bool:
+	if player.stats.level < Rift.min_level():
+		hud.toast(tr("RF_LOCKED") % Rift.min_level(), 2.5)
+		return false
+	Rift.start_run()
+	var out: Vector3 = player.global_position
+	Session.house_return = {"map": map.map_id, "x": out.x, "z": out.z, "yaw": player.rotation_degrees.y + 180.0, "key": ""}
+	save_now()
+	load_map(Rift.MAP, "start")
+	return true
+
+
+## Down to the next floor (the blessing is chosen first, every 5 floors).
+func descend_rift() -> void:
+	if bool(Session.rift_run.get("pending", false)):
+		hud.open_blessing()
+		return
+	Rift.next_floor()
+	save_now()
+	load_map(Rift.MAP, "start")
 
 
 ## Buys the hero's house (the "Comprar" of the sale window).
@@ -780,6 +823,11 @@ func _update_quest_contacts() -> void:
 	# Inside the hero's house: the chest and the bed.
 	if kind == "" and not _talking and not _petting and map.home_decor:
 		kind = map.home_decor.spot_near(pos)
+	# The Endless Rift: its portal in the city, and the way down once a floor is beaten.
+	if kind == "" and not _talking and map.rift_portal != Vector3.INF and Vector2(pos.x - map.rift_portal.x, pos.z - map.rift_portal.z).length() < 3.2:
+		kind = "rift"
+	if kind == "" and not _talking and map.rift_floor and map.rift_floor.gate_near(pos):
+		kind = "rift_down"
 	# Fase 8D: nothing else near — a campfire to cook at, or water to fish in.
 	if kind == "" and not _talking and not _petting and not is_instance_valid(fishing) and not player.in_combat():
 		if _at_point and _at_point.kind == "fogueira":

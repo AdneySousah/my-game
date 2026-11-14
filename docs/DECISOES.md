@@ -877,3 +877,26 @@ Pedido do dono: um ferreiro andarilho que faz equipamentos de chefe com combos, 
 - **Chuva de estrelas:** por 90 s caem 14 fragmentos brilhantes perto do herói, que ficam 40 s no chão. Passar por cima pega um **Fragmento Estelar**. Na mochila, **"Fundir (10)"** transforma 10 fragmentos numa runa aleatória de nível I.
 - **Dados:** `data/world/events.json`. Lógica em `WorldEvents` (no `Main`) e nos eventos `HordeEvent`, `CaravanEvent`, `ErrantEvent` e `StarEvent` (`scripts/world/events/`). A faixa é a `EventBar`. O monstro errante usa `Enemy.make_errant` e `roam_points`.
 - **Meshy:** 1 folha de ícones (6 créditos) com o fragmento, os 4 eventos e, já prontos para a parte H, 10 ícones de bênçãos e o portal da Fenda.
+
+## Fase 8H — Fenda sem fim (13/11/2026)
+- **Entrada:** um portal novo (modelo do Meshy) no canto sudeste de Pradoluz, com a placa "Fenda sem fim (nível 30)". Abaixo do nível 30, o botão "Entrar na Fenda" só avisa.
+- **Andares:**
+  - **Arena:** cada andar é uma arena redonda com o chão, o céu, a luz e a arte de carregamento de um dos 10 mapas (campos, floresta, dunas, deserto, ruínas, pinheiral, picos, mata úmida, estepe, estrada real), sorteados por corrida. As peças do mapa ficam em volta.
+  - **Monstros:** vêm os monstros daquele mapa, de 5 (andar 1) até 12. O nível é o do herói - 2 + andar/2, e a vida (+6% por andar) e o ataque (+3,5% por andar) também sobem.
+  - **Fim do andar:** derrotados todos, aparece no meio o portal para o próximo andar ("Descer"). O andar paga 8 de ouro por nível.
+  - **Saída:** o portal de trás ("Sair da Fenda") volta para Pradoluz.
+- **Chefe a cada 10 andares:** um dos Procurados (em ordem, com 70% da vida de andar) e 2 monstros. O prêmio é 3 Insígnias de Chefe, 2 gemas e 50% de chance de runa.
+- **Bênçãos a cada 5 andares:** 3 cartas para escolher 1 (pode escolher depois; o portal de descer pede antes). Valem até sair da Fenda e aparecem como ícones ao lado do retrato:
+  - Fonte Arcana: skills pela metade do MP.
+  - Sede de Sangue: cada monstro derrotado cura 5%.
+  - Lâmina Ardente: +20% de ataque.
+  - Muralha: +25% de defesa.
+  - Passo do Vento: +20% de velocidade de ataque.
+  - Ampulheta: skills recarregam 20% mais rápido.
+  - Olho Certeiro: +10% de crítico.
+  - Coração Dourado: +25% de vida.
+  - Bolsa Cheia: +50% de ouro na Fenda.
+  - Golpes Afiados: +25% de dano das skills.
+- **Fim da corrida:** sair, morrer ou viajar encerra a corrida; um aviso mostra os andares vencidos e o recorde. O recorde (`Session.rift_best`) aparece no topo da aba Diárias da Rotina.
+- **Dados:** `data/world/rift.json`. Lógica em `Rift`; cada andar é montado na hora (`GameMap.load_data("fenda")` → `Rift.floor_data()`) e conduzido por `RiftFloor`. A janela das bênçãos é a `BlessingPanel`.
+- **Meshy:** `env_portal_fenda`, 18 créditos (imagem 3 + modelo 15). Os ícones vieram na folha da parte G. A arte de carregamento é a de cada mapa sorteado.

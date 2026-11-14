@@ -57,6 +57,10 @@ var home_chest: Inventory = _new_chest()
 var trophies: Dictionary = {}
 var rested_day: String = ""
 var rested_left: float = 0.0
+## The Endless Rift (Fase 8H): the run going on ({} = none; see Rift) and the best number
+## of floors cleared.
+var rift_run: Dictionary = {}
+var rift_best: int = 0
 ## Unix time when the bought XP bonus ends (real time, counts while the game is closed).
 var xp_boost_until: float = 0.0
 ## Unix time when the bought premium pass ends (2x XP, 2x gold, +10% attributes).
@@ -123,6 +127,8 @@ func reset() -> void:
 	trophies = {}
 	rested_day = ""
 	rested_left = 0.0
+	rift_run = {}
+	rift_best = 0
 	day_hour = float(Data.daynight.get("start_hour", 9.0))
 
 
@@ -193,7 +199,7 @@ func to_dict() -> Dictionary:
 		"store_tokens": store_tokens,
 		"routine": routine.to_dict(), "difficulty": difficulty, "play_seconds": play_seconds,
 		"dungeon_tier": dungeon_tier, "boards": boards, "wanted": wanted, "covil_day": covil_day, "covil_used": covil_used, "skill_runes": skill_runes, "food_id": food_id, "food_left": food_left, "kills": kills, "mastery_xp": mastery_xp, "mastery_points": mastery_points, "mastery_spent": mastery_spent, "rest_ready_at": rest_ready_at,
-		"home_owned": home_owned, "home_chest": home_chest.to_array(), "trophies": trophies, "rested_day": rested_day, "rested_left": rested_left,
+		"home_owned": home_owned, "home_chest": home_chest.to_array(), "trophies": trophies, "rested_day": rested_day, "rested_left": rested_left, "rift_run": rift_run, "rift_best": rift_best,
 		"day_hour": day_hour, "dungeon_resets": dungeon_resets, "house_return": house_return, "vase_ready_at": vase_ready_at,
 	}.duplicate(true)
 
@@ -227,6 +233,8 @@ func from_dict(d: Dictionary) -> void:
 	trophies = (d.get("trophies", {}) as Dictionary).duplicate()
 	rested_day = str(d.get("rested_day", ""))
 	rested_left = float(d.get("rested_left", 0.0))
+	rift_run = (d.get("rift_run", {}) as Dictionary).duplicate(true)
+	rift_best = int(d.get("rift_best", 0))
 	# Saves from before equipment (5.2 and older) get the apprentice sword.
 	if not d.has("gear"):
 		give_starter_gear()

@@ -121,6 +121,7 @@
     "prp_sapo": {"scene": "res://assets/props/prp_sapo/prp_sapo.glb", "scale": 0.32, "center_origin": true},
     "env_parede_casa": {"scene": "res://assets/environment/env_parede_casa/env_parede_casa.glb", "scale": 4.2, "center_origin": true, "collision": {"type": "box"}, "tile_length": 4.1},
     "env_portal_celeste": {"scene": "res://assets/environment/env_portal_celeste/env_portal_celeste.glb", "scale": 5.0, "center_origin": true, "collision": {"type": "box"}, "light": {"color": "#9fe8ff", "energy": 1.2, "range": 6.0, "y": 2.0}},
+    "env_portal_fenda": {"scene": "res://assets/environment/env_portal_fenda/env_portal_fenda.glb", "scale": 3.6, "center_origin": true, "collision": {"type": "box"}, "light": {"color": "#b45cff", "energy": 1.6, "range": 6.0, "y": 1.8}},
     "prp_cristal_vazio": {"scene": "res://assets/props/prp_cristal_vazio/prp_cristal_vazio.glb", "scale": 1.9, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.6}, "light": {"color": "#c45bff", "energy": 1.1, "range": 4.5, "y": 1.0}},
     "prp_nuvem": {"scene": "res://assets/props/prp_nuvem/prp_nuvem.glb", "scale": 3.4, "center_origin": true, "collision": {"type": "cylinder", "radius": 1.2}},
     "env_coluna_celeste": {"scene": "res://assets/environment/env_coluna_celeste/env_coluna_celeste.glb", "scale": 5.5, "center_origin": true, "collision": {"type": "cylinder", "radius": 0.7}, "light": {"color": "#ffd27a", "energy": 0.9, "range": 5.0, "y": 4.5}}

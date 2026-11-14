@@ -43,6 +43,8 @@ var bestiary: Dictionary = {}
 var home: Dictionary = {}
 ## World events (Fase 8G).
 var events: Dictionary = {}
+## The Endless Rift (Fase 8H).
+var rift: Dictionary = {}
 
 var _skills_by_id: Dictionary = {}
 var _quests_by_id: Dictionary = {}
@@ -60,6 +62,7 @@ func _ready() -> void:
 	bestiary = _load_json("res://data/world/bestiary.json")
 	home = _load_json("res://data/world/home.json")
 	events = _load_json("res://data/world/events.json")
+	rift = _load_json("res://data/world/rift.json")
 	var xp_table: Dictionary = _load_json("res://data/progression/xp_table.json")
 	xp_to_next = xp_table.get("xp_to_next", [])
 	mob_xp = xp_table.get("mob_xp", [])
